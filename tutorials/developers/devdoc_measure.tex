@@ -468,7 +468,24 @@ The parts of the code that are modified are highlighted.
 	caption={
 		{\bf Triangles element header.}
 		The \code{header} section of generator code for \fn{\_Triangles.gen.m} provides the general information about the \code{Triangles} element.
-		\expand{cd:m:degree:header}
+		\expand{cd:m:triangles:header}
+	}
+]
+
+¤%% ¡header!¤
+Triangles ¤< Measure (m, ¤triangls¤) ¤is the triangles.
+
+¤%%% ¡description!¤
+The triangles are calculated as the number of neighbours of a node that are also neighbours of each other within a layer. 
+In weighted graphs, the triangles are calculated as geometric mean of the weights of the edges forming the triangle.
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label=cd:m:triangles:calculate,
+	caption={
+		{\bf Triangles element calculate.}
+		The \code{calculate} section of \fn{\_Triangles.gen.m} utilizes the rule property to select which algorithm it will use to calculate the \code{Triangles} element.
+		\expand{cd:m:triangles:calculate}
 	}
 ]
 
@@ -484,54 +501,18 @@ DESCRIPTION (constant, string) is the description of the ¤triangles¤.
 %%%% ¡default!
 ¤'The triangles are calculated as the number of neighbours of a node that are also neighbours of each other within a layer. In weighted graphs, the triangles are calculated as geometric mean of the weights of the edges forming the triangle.'¤
 
-%%% ¡prop!
-TEMPLATE (parameter, item) is the template of the ¤triangles¤.
-
-%%% ¡prop!
-ID (data, string) is a few-letter code of the ¤triangles¤.
-%%%% ¡default!
-¤'Triangles ID'¤
-
-%%% ¡prop!
-LABEL (metadata, string) is an extended label of the ¤triangles¤.
-%%%% ¡default!
-¤'Triangles label'¤
-
-%%% ¡prop!
-NOTES (metadata, string) are some specific notes about the ¤triangles¤.
-%%%% ¡default!
-¤'Triangles notes'¤
-
-%%% ¡prop!
-SHAPE (constant, scalar) is the measure shape ¤__Measure.NODAL__¤.
-%%%% ¡default!
-¤Measure.NODAL¤
-
-%%% ¡prop!
-SCOPE (constant, scalar) is the measure scope ¤__Measure.UNILAYER__¤.
-%%%% ¡default!
-¤Measure.UNILAYER¤
-
-%%% ¡prop!
-PARAMETRICITY (constant, scalar) is the parametricity of the measure ¤__Measure.NONPARAMETRIC__¤.
-%%%% ¡default!
-¤Measure.NONPARAMETRIC¤
-
-%%% ¡prop!
-COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-%%%% ¡default!
-¤{'GraphWU' 'GraphWD' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'GraphBD' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'MultiplexBD' 'OrdMxWU' 'OrdMxBU'}¤
+...
 
 %%% ¡prop!
 M (result, cell) is the ¤triangles¤.
-%%%% ¡calculate!
+%%% ¡calculate!
 ¤g = m.get('G');  % graph from measure class
 A = g.get('A');  % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.) 
 L = g.get('LAYERNUMBER');
 
 triangles = cell(L, 1);
 
-directionality_type =   g.get('DIRECTIONALITY_TYPE', L);
+directionality\_type =   g.get('DIRECTIONALITY\_TYPE', L);
 for li = 1:1:L        
 Aii = A{li, li};    
 
@@ -567,6 +548,8 @@ rule (parameter, OPTION) is the rule to determine what is a triangle in directed
 {'all' 'middleman' 'in' 'out' 'cycle'}
 %%%% ¡default!
 'cycle'¤
+\end{lstlisting}
+
 
 
 %\bibliography{biblio}
