@@ -61,12 +61,12 @@ M (result, cell) is the triangles.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
 A = g.get('A');  % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.) 
-L = g.layernumber();
+L = g.get('LAYERNUMBER');
 
-triangles = cell(g.layernumber(), 1);
+triangles = cell(L, 1);
             
-directionality_type =  g.getDirectionalityType(g.layernumber());
-parfor li = 1:1:L        
+directionality_type =   g.get('DIRECTIONALITY_TYPE', L);
+for li = 1:1:L        
     Aii = A{li, li};    
     
     if directionality_type == Graph.UNDIRECTED  % undirected graphs
@@ -75,7 +75,7 @@ parfor li = 1:1:L
         triangles(li) = {triangles_layer};
         
     else  % directed graphs
-        directed_triangles_rule = m.get('rule');
+        directed_triangles_rule = m.get('RULE');
         switch lower(directed_triangles_rule)
             case 'all'  % all rule
                 triangles_layer = diag((Aii.^(1/3) + transpose(Aii).^(1/3))^3) / 2;
@@ -112,21 +112,23 @@ rule (parameter, OPTION) is the rule to determine what is a triangle in directed
 GraphWU
 %%%% ¡code!
 B = [
-    0 2 3 4;
-    2 0 5 0;
-    3 5 0 6;
-    4 0 6 0
+    0 .2 .3 .4;
+    .2 0 .5 0;
+    .3 .5 0 .6;
+    .4 0 .6 0
     ];
 
-known_triangles = {[2 1 2 1]'};
-g = GraphBU('B', B);
+known_triangles = diag((B.^(1/3))^3); % formula for cycle triangles
+known_triangles = known_triangles / 2  ; % because since its undirected we only need the upper or lower connections of the matrix
+g = GraphWU('B', B);
 m_outside_g = Triangles('G', g);
-assert(isequal(m_outside_g.get('M'), known_triangles), ...
+assert(isequal(cell2mat(m_outside_g.get('M')), known_triangles), ...
     [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('Measure', 'Triangles');
-assert(isequal(m_inside_g.get('M'), known_triangles), ...
+m_inside_g = g.get('MEASURE', 'Triangles');
+m_inside_g = cell2mat(m_inside_g.get('M'));
+assert(isequal(m_inside_g, known_triangles), ...
     [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
@@ -150,7 +152,7 @@ assert(isequal(m_outside_g.get('M'), known_triangles), ...
     [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('Measure', 'Triangles');
+m_inside_g = g.get('MEASURE', 'Triangles');
 assert(isequal(m_inside_g.get('M'), known_triangles), ...
     [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g)  ' is not being calculated correctly for ' class(g) '.'])
@@ -175,11 +177,16 @@ known_triangles = { ...
 
 
 g = MultigraphBUT('B', B, 'THRESHOLDS', thresholds);
-triangles = Triangles('G', g);
+m_outside_g = Triangles('G', g).get('M');
+assert(isequal(m_outside_g, known_triangles), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
-assert(isequal(triangles.get('M'), known_triangles), ...
-    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
-    'Triangles is not being calculated correctly for MultigraphBUT.')
+
+m_inside_g = g.get('MEASURE', 'Triangles');
+assert(isequal(m_inside_g.get('M'), known_triangles), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
@@ -195,11 +202,17 @@ B = [
 known_triangles_default_cycle = {[1 1 1]'};
 
 g = GraphBD('B', B);
-triangles = Triangles('G', g);
+m_outside_g = Triangles('G', g);
+assert(isequal(m_outside_g.get('M'), known_triangles_default_cycle), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
-assert(isequal(triangles.get('M'), known_triangles_default_cycle), ...
-    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
-    'Triangles is not being calculated correctly for GraphBD.')
+
+m_inside_g = g.get('MEASURE', 'Triangles');
+assert(isequal(m_inside_g.get('M'), known_triangles_default_cycle), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g)  ' is not being calculated correctly for ' class(g) '.'])
+
 
 % in rule 
 B = [
@@ -210,11 +223,17 @@ B = [
 known_triangles_in = {[0 1 0]'};
 
 g = GraphBD('B', B);
-triangles = Triangles('G', g, 'rule', 'in');
+m_outside_g = Triangles('G', g, 'RULE', 'in');
+assert(isequal(m_outside_g.get('M'), known_triangles_in), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
-assert(isequal(triangles.get('M'), known_triangles_in), ...
-    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
-    'Triangles is not being calculated correctly for GraphBD.')
+
+m_inside_g = g.get('MEASURE', 'Triangles');
+m_inside_g.set('RULE', 'in');
+assert(isequal(m_inside_g.get('M'), known_triangles_in), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
 % out rule 
 B = [
@@ -225,11 +244,17 @@ B = [
 known_triangles_out = {[0 0 1]'};
 
 g = GraphBD('B', B);
-triangles = Triangles('G', g, 'rule',  'out');
+m_outside_g = Triangles('G', g, 'RULE', 'out');
+assert(isequal(m_outside_g.get('M'), known_triangles_out), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
-assert(isequal(triangles.get('M'), known_triangles_out), ...
-    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
-    'Triangles is not being calculated correctly for GraphBD.')
+
+m_inside_g = g.get('MEASURE', 'Triangles');
+m_inside_g.set('RULE', 'out');
+assert(isequal(m_inside_g.get('M'), known_triangles_out), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
 % middleman rule
 
@@ -240,11 +265,17 @@ B = [
     1 1 0 
     ];
 g = GraphBD('B', B);
-triangles = Triangles('G', g, 'rule', 'middleman');
+m_outside_g = Triangles('G', g, 'RULE', 'middleman');
+assert(isequal(m_outside_g.get('M'), known_triangles_middleman), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
-assert(isequal(triangles.get('M'), known_triangles_middleman), ...
-    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
-    'Triangles is not being calculated correctly for GraphBD.')
+
+m_inside_g = g.get('MEASURE', 'Triangles');
+m_inside_g.set('RULE', 'middleman');
+assert(isequal(m_inside_g.get('M'), known_triangles_middleman), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
 % all rule 
 B = [
@@ -255,11 +286,17 @@ B = [
 known_triangles_all = {[1 1 1]'};
 
 g = GraphBD('B', B);
-triangles = Triangles('G', g, 'rule',  'all');
+m_outside_g = Triangles('G', g, 'RULE', 'all');
+assert(isequal(m_outside_g.get('M'), known_triangles_all), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
-assert(isequal(triangles.get('M'), known_triangles_all), ...
-    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
-    'Triangles is not being calculated correctly for GraphBD.')
+
+m_inside_g = g.get('MEASURE', 'Triangles');
+m_inside_g.set('RULE', 'all');
+assert(isequal(m_inside_g.get('M'), known_triangles_all), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
@@ -285,8 +322,14 @@ known_triangles = {
                  };      
 
 g = MultiplexBU('B', B);
-triangles = Triangles('G', g);
 
-assert(isequal(triangles.get('M'), known_triangles), ...
-    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
-    'Triangles is not being calculated correctly for MultiplexBU.')
+m_outside_g = Triangles('G', g);
+assert(isequal(m_outside_g.get('M'), known_triangles), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g)  ' is not being calculated correctly for ' class(g) '.'])
+
+
+m_inside_g = g.get('MEASURE', 'Triangles');
+assert(isequal(m_inside_g.get('M'), known_triangles), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g)  ' is not being calculated correctly for ' class(g) '.'])
