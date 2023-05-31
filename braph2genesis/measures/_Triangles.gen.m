@@ -54,7 +54,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphWU' 'GraphWD' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'GraphBD' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'MultiplexBD'}
+{'GraphWU' 'GraphWD' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'GraphBD' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'MultiplexBD' 'OrdMxWU' 'OrdMxBU'}
 
 %%% ¡prop!
 M (result, cell) is the triangles.
@@ -104,5 +104,189 @@ rule (parameter, OPTION) is the rule to determine what is a triangle in directed
 
 %% ¡tests!
 
+%%% ¡excluded_props!
+[Degree.PFM]
+
+%%% ¡test!
+%%%% ¡name!
+GraphWU
+%%%% ¡code!
+B = [
+    0 2 3 4;
+    2 0 5 0;
+    3 5 0 6;
+    4 0 6 0
+    ];
+
+known_triangles = {[2 1 2 1]'};
+g = GraphBU('B', B);
+m_outside_g = Triangles('G', g);
+assert(isequal(m_outside_g.get('M'), known_triangles), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g)  ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('Measure', 'Triangles');
+assert(isequal(m_inside_g.get('M'), known_triangles), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g)  ' is not being calculated correctly for ' class(g) '.'])
 
 
+%%% ¡test!
+%%%% ¡name!
+GraphBU
+%%%% ¡code!
+B = [
+    0 1 1 1;
+    1 0 1 0;
+    1 1 0 1;
+    1 0 1 0
+    ];
+
+known_triangles = {[2 1 2 1]'};
+
+g = GraphBU('B', B);
+m_outside_g = Triangles('G', g);
+assert(isequal(m_outside_g.get('M'), known_triangles), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g)  ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('Measure', 'Triangles');
+assert(isequal(m_inside_g.get('M'), known_triangles), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g)  ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultigraphBUT
+%%%% ¡code!
+B = [
+    0 1 1 1;
+    1 0 1 0;
+    1 1 0 1;
+    1 0 1 0
+    ];
+
+thresholds = [0 1];
+
+known_triangles = { ...
+    [2 1 2 1]'
+    [0 0 0 0]'
+    };
+
+
+g = MultigraphBUT('B', B, 'THRESHOLDS', thresholds);
+triangles = Triangles('G', g);
+
+assert(isequal(triangles.get('M'), known_triangles), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
+    'Triangles is not being calculated correctly for MultigraphBUT.')
+
+%%% ¡test!
+%%%% ¡name!
+GraphBD
+%%%% ¡code!
+B = [
+    0 0 1; 
+    1 0 0; 
+    0 1 0 
+    ];
+
+% cycle rule - default
+known_triangles_default_cycle = {[1 1 1]'};
+
+g = GraphBD('B', B);
+triangles = Triangles('G', g);
+
+assert(isequal(triangles.get('M'), known_triangles_default_cycle), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
+    'Triangles is not being calculated correctly for GraphBD.')
+
+% in rule 
+B = [
+    0 1 0; 
+    0 0 0; 
+    1 1 0 
+    ];
+known_triangles_in = {[0 1 0]'};
+
+g = GraphBD('B', B);
+triangles = Triangles('G', g, 'rule', 'in');
+
+assert(isequal(triangles.get('M'), known_triangles_in), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
+    'Triangles is not being calculated correctly for GraphBD.')
+
+% out rule 
+B = [
+    0 1 0; 
+    0 0 0; 
+    1 1 0 
+    ];
+known_triangles_out = {[0 0 1]'};
+
+g = GraphBD('B', B);
+triangles = Triangles('G', g, 'rule',  'out');
+
+assert(isequal(triangles.get('M'), known_triangles_out), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
+    'Triangles is not being calculated correctly for GraphBD.')
+
+% middleman rule
+
+known_triangles_middleman = {[1 0 0]'};
+B = [
+    0 1 0; 
+    0 0 0; 
+    1 1 0 
+    ];
+g = GraphBD('B', B);
+triangles = Triangles('G', g, 'rule', 'middleman');
+
+assert(isequal(triangles.get('M'), known_triangles_middleman), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
+    'Triangles is not being calculated correctly for GraphBD.')
+
+% all rule 
+B = [
+    0 0 1; 
+    1 0 0; 
+    0 1 0 
+    ];
+known_triangles_all = {[1 1 1]'};
+
+g = GraphBD('B', B);
+triangles = Triangles('G', g, 'rule',  'all');
+
+assert(isequal(triangles.get('M'), known_triangles_all), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
+    'Triangles is not being calculated correctly for GraphBD.')
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexBU
+%%%% ¡code!
+B11 = [
+      0 1 1 1;
+      1 0 1 0;
+      1 1 0 1;
+      1 0 1 0
+      ];
+B22 = [
+      0 1 1 1;
+      1 0 1 0;
+      1 1 0 1;
+      1 0 1 0
+      ];
+B = {B11 B22};
+
+known_triangles = {
+                 [2 1 2 1]'
+                 [2 1 2 1]'
+                 };      
+
+g = MultiplexBU('B', B);
+triangles = Triangles('G', g);
+
+assert(isequal(triangles.get('M'), known_triangles), ...
+    [BRAPH2.STR ':Triangles:' BRAPH2.BUG_ERR], ...
+    'Triangles is not being calculated correctly for MultiplexBU.')
