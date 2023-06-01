@@ -1,38 +1,38 @@
 %% ¡header!
-OutDegreeAv < OutDegree (m, out-degree av) is the graph out-degree av.
+DegreeOutAv < DegreeOut (m, degreeoutav) is the graph degreeoutav.
 
 %%% ¡description!
-The average out-degree av of a graph is the average of all number of outward edges connected to a node within a layer. 
+The average degreeoutav of a graph is the average of all number of outward edges connected to a node within a layer. 
 
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the out-degree av.
+NAME (constant, string) is the name of the degreeoutav.
 %%%% ¡default!
-'Out-DegreeAv'
+'DegreeOutAv'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the out-degree av.
+DESCRIPTION (constant, string) is the description of the degreeoutav.
 %%%% ¡default!
-'The average out-degree av of a graph is the average of all number of outward edges connected to a node within a layer.'
+'The average degreeoutav of a graph is the average of all number of outward edges connected to a node within a layer.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the out-degree av.
+TEMPLATE (parameter, item) is the template of the degreeoutav.
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the out-degree av.
+ID (data, string) is a few-letter code of the degreeoutav.
 %%%% ¡default!
-'Out-DegreeAv ID'
+'DegreeOutAv ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the out-degree av.
+LABEL (metadata, string) is an extended label of the degreeoutav.
 %%%% ¡default!
-'Out-DegreeAv label'
+'DegreeOutAv label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the out-degree av.
+NOTES (metadata, string) are some specific notes about the degreeoutav.
 %%%% ¡default!
-'Out-DegreeAv notes'
+'DegreeOutAv notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.GLOBAL__.
@@ -55,23 +55,23 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphWD' 'GraphBD' 'MultiplexWD' 'MultiplexBD'}
 
 %%% ¡prop!
-M (result, cell) is the out-degree av.
+M (result, cell) is the degreeoutav.
 %%%% ¡calculate!
-out_degree = calculateValue@OutDegree(m, prop);	
+out_degree = calculateValue@DegreeOut(m, prop);	
 g = m.get('G'); % graph from measure class
 layerNumber = g.get('LAYERNUMBER');
-out_degree_av = cell(layerNumber, 1);
+degree_out_av = cell(layerNumber, 1);
 
 parfor li = 1:1:layerNumber
-    out_degree_av(li) = {mean(out_degree{li})};
+    degree_out_av(li) = {mean(out_degree{li})};
 end
 
-value = out_degree_av;
+value = degree_out_av;
 
 %% ¡tests!
 
 %%% ¡excluded_props!
-[OutDegreeAv.PFM]
+[DegreeOutAv.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -87,14 +87,14 @@ know_out_degree_av = {mean([2 1 1])};
 
 g = GraphBD('B', B);
 
-m_outside_g = OutDegreeAv('G', g);
+m_outside_g = DegreeOutAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_degree), ...
-   [BRAPH2.STR ':OutDegreeAv:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':DegreeOutAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('Measure', 'OutDegreeAv');
+m_inside_g = g.get('Measure', 'DegreeOutAv');
 assert(isequal(m_inside_g.get('M'), known_in_degree), ...
-    [BRAPH2.STR ':OutDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':DegreeOutAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 
@@ -121,14 +121,14 @@ known_in_degree = {
 
 g = MultiplexBD('B', B);
 
-m_outside_g = OutDegreeAv('G', g);
+m_outside_g = DegreeOutAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_degree), ...
-   [BRAPH2.STR ':OutDegreeAv:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':DegreeOutAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('Measure', 'OutDegreeAv');
+m_inside_g = g.get('Measure', 'DegreeOutAv');
 assert(isequal(m_inside_g.get('M'), known_in_degree), ...
-    [BRAPH2.STR ':OutDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':DegreeOutAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -154,12 +154,12 @@ known_in_degree = {
 
 g = MultiplexWD('B', B);
 
-m_outside_g = OutDegreeAv('G', g);
+m_outside_g = DegreeOutAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_degree), ...
-   [BRAPH2.STR ':OutDegreeAv:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':DegreeOutAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('Measure', 'OutDegreeAv');
+m_inside_g = g.get('Measure', 'DegreeOutAv');
 assert(isequal(m_inside_g.get('M'), known_in_degree), ...
-    [BRAPH2.STR ':OutDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':DegreeOutAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

@@ -138,7 +138,7 @@ B_BD = [
     ];
 clustering_BD_out = {[0 0 0]'};  % out rule
 
-g = GraphBU('B', B_BU);
+g = GraphBD('B', B_BD);
 m_outside_g = Clustering('G', g, 'RULE', 'out');
 assert(isequal(m_outside_g.get('M'), clustering_BD_out), ...
     [BRAPH2.STR ':Clustering:' BRAPH2.FAIL_TEST], ...

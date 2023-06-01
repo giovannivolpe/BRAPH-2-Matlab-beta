@@ -1,39 +1,39 @@
 %% ¡header!
-OutDegree < Measure (m, out-degree) is the graph out-degree.
+DegreeOut < Measure (m, outdegree) is the graph degreeout.
 
 %%% ¡description!
-The out-degree of a node is the number of outward edges connected to a node within a layer. 
+The degreeout of a node is the number of outward edges connected to a node within a layer. 
 Connection weights are ignored in calculations.
 
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the out-degree.
+NAME (constant, string) is the name of the degreeout.
 %%%% ¡default!
-'Out-Degree'
+'DegreeOut'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the out-degree.
+DESCRIPTION (constant, string) is the description of the degreeout.
 %%%% ¡default!
-'The out-degree of a node is the number of outward edges connected to a node within a layer. Connection weights are ignored in calculations.'
+'The degreeout of a node is the number of outward edges connected to a node within a layer. Connection weights are ignored in calculations.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the out-degree.
+TEMPLATE (parameter, item) is the template of the degreeout.
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the out-degree.
+ID (data, string) is a few-letter code of the degreeout.
 %%%% ¡default!
-'Out-Degree ID'
+'DegreeOut ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the out-degree.
+LABEL (metadata, string) is an extended label of the degreeout.
 %%%% ¡default!
-'Out-Degree label'
+'DegreeOut label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the out-degree.
+NOTES (metadata, string) are some specific notes about the degreeout.
 %%%% ¡default!
-'Out-Degree notes'
+'DegreeOut notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -57,25 +57,25 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 
 
 %%% ¡prop!
-M (result, cell) is the out-degree.
+M (result, cell) is the degreeout.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 layerNumber = g.get('LAYERNUMBER');
-out-degree = cell(layerNumber, 1);
+degreeout = cell(layerNumber, 1);
 
 parfor li = 1:1:layerNumber
     Aii = A{li, li};
     Aii = binarize(Aii);  % binarizes the adjacency matrix
-    out-degree(li) = {sum(Aii, 2)};  % calculates the out-degree of a node for layer li
+    degreeout(li) = {sum(Aii, 2)};  % calculates the degreeout of a node for layer li
 end
 
-value = out-degree;
+value = degreeout;
 
 %% ¡tests!
 
 %%% ¡excluded_props!
-[OutDegree.PFM]
+[DegreeOut.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -91,14 +91,14 @@ know_out_degree = {[2 0 1]'};
 
 g = GraphBD('B', B);
 
-m_outside_g = OutDegree('G', g);
+m_outside_g = DegreeOut('G', g);
 assert(isequal(m_outside_g.get('M'), know_out_degree), ...
-   [BRAPH2.STR ':OutDegree:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':DegreeOut:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('Measure', 'OutDegree');
+m_inside_g = g.get('Measure', 'DegreeOut');
 assert(isequal(m_inside_g.get('M'), know_out_degree), ...
-    [BRAPH2.STR ':OutDegree:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':DegreeOut:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -115,14 +115,14 @@ know_out_degree = {[2 1 1]'};
 
 g = GraphWD('B', B);
 
-m_outside_g = OutDegree('G', g);
+m_outside_g = DegreeOut('G', g);
 assert(isequal(m_outside_g.get('M'), know_out_degree), ...
-   [BRAPH2.STR ':OutDegree:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':DegreeOut:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('Measure', 'OutDegree');
+m_inside_g = g.get('Measure', 'DegreeOut');
 assert(isequal(m_inside_g.get('M'), know_out_degree), ...
-    [BRAPH2.STR ':OutDegree:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':DegreeOut:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -148,14 +148,14 @@ know_out_degree = {
 
 g = MultiplexBD('B', B);
 
-m_outside_g = OutDegree('G', g);
+m_outside_g = DegreeOut('G', g);
 assert(isequal(m_outside_g.get('M'), know_out_degree), ...
-   [BRAPH2.STR ':OutDegree:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':DegreeOut:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('Measure', 'OutDegree');
+m_inside_g = g.get('Measure', 'DegreeOut');
 assert(isequal(m_inside_g.get('M'), know_out_degree), ...
-    [BRAPH2.STR ':OutDegree:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':DegreeOut:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -181,12 +181,12 @@ know_out_degree = {
 
 g = MultiplexWD('B', B);
 
-m_outside_g = OutDegree('G', g);
+m_outside_g = DegreeOut('G', g);
 assert(isequal(m_outside_g.get('M'), know_out_degree), ...
-   [BRAPH2.STR ':OutDegree:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':DegreeOut:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('Measure', 'OutDegree');
+m_inside_g = g.get('Measure', 'DegreeOut');
 assert(isequal(m_inside_g.get('M'), know_out_degree), ...
-    [BRAPH2.STR ':OutDegree:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':DegreeOut:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
