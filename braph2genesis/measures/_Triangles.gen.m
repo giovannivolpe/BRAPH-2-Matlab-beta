@@ -105,7 +105,7 @@ rule (parameter, OPTION) is the rule to determine what is a triangle in directed
 %% ¡tests!
 
 %%% ¡excluded_props!
-[Degree.PFM]
+[Triangles.PFM]
 
 %%% ¡test!
 %%%% ¡name!
