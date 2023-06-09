@@ -1,5 +1,5 @@
 %% ¡header!
-GlobalEfficiency < Measure (m, global efficiency) is the graph global efficiency.
+GlobalEfficiency < Measure (m, globalefficiency) is the graph globalefficiency.
 
 %%% ¡description!
 The global efficiency is the average inverse shortest path length within each layer. 
@@ -8,31 +8,31 @@ It is inversely related to the characteristic path length.
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the global efficiency.
+NAME (constant, string) is the name of the globalefficiency.
 %%%% ¡default!
-'Global Efficiency'
+'GlobalEfficiency'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the global efficiency.
+DESCRIPTION (constant, string) is the description of the globalefficiency.
 %%%% ¡default!
 'The global efficiency is the average inverse shortest path length within each layer. It is inversely related to the characteristic path length.'
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the global efficiency.
+TEMPLATE (parameter, item) is the template of the globalefficiency.
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the degree.
 %%%% ¡default!
-'Global Efficiency ID'
+'GlobalEfficiency ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the global efficiency.
+LABEL (metadata, string) is an extended label of the globalefficiency.
 %%%% ¡default!
-'Global Efficiency label'
+'GlobalEfficiency label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the global efficiency.
+NOTES (metadata, string) are some specific notes about the globalefficiency.
 %%%% ¡default!
-'Global Efficiency notes'
+'GlobalEfficiency notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -57,22 +57,21 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %% ¡props_update!
 
 %%% ¡prop!
-M (result, cell) is the global efficiency.
+M (result, cell) is theglobalefficiency.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
-N = g.nodenumber();
-L = g.layernumber();
+N = g.get('NODENUMBER');
 
 distance = Distance('G', g).get('M');
 
-global_efficiency = cell(L, 1);
-parfor li = 1:1:L
+globalefficiency = cell(g.get('LAYERNUMBER'), 1);
+parfor li = 1:1:g.get('LAYERNUMBER')
     inverse_distance = distance{li}.^-1;  % inverse distance
     inverse_distance(1:N(li)+1:end) = 0;
-    global_efficiency_layer = (sum(inverse_distance, 2) / (N(li)-1));
-    global_efficiency(li) = {global_efficiency_layer};
+    globalefficiency_layer = (sum(inverse_distance, 2) / (N(li)-1));
+    globalefficiency(li) = {globalefficiency_layer};
 end
-value = global_efficiency;
+value = globalefficiency;
 
 %% ¡tests!
 
@@ -93,14 +92,14 @@ B = [
     0   0   0   0   0
     ];
 
-known_global_efficiency = {[1/4 1/4 1/4 1/4 0]'};
+known_globalefficiency = {[1/4 1/4 1/4 1/4 0]'};
 
 g = GraphBU('B', B);
-global_efficiency = GlobalEfficiency('G', g).get('M');
+m_globalefficiency = GlobalEfficiency('G', g).get('M');
 
-assert(isequal(global_efficiency, known_global_efficiency), ...
-    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.BUG_ERR], ...
-    [class(global_efficiency) ' is not being calculated correctly for ' class(g) '.'])
+assert(isequal(m_globalefficiency, known_globalefficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(globalefficiency) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
@@ -123,17 +122,25 @@ B22 = [
       0   0   .1  0   0
       0   0   0   0   0
       ];
-B = {B11  B22};
+B33 = [
+      0   .1  0   0   0
+      .2  0   0   0   0
+      0   0   0   .2  0
+      0   0   .1  0   0
+      0   0   0   0   0
+      ];
+B = {B11  B22  B33};
 
-known_global_efficiency = {
+known_globalefficiency = {
+                        [1/4 1/4 1/4 1/4 0]'
                         [1/4 1/4 1/4 1/4 0]'
                         [1/4 1/4 1/4 1/4 0]'
                         };
 
 
 g = MultiplexBU('B', B);
-global_efficiency = GlobalEfficiency('G', g).get('M');
+m_globalefficiency = GlobalEfficiency('G', g).get('M');
 
-assert(isequal(global_efficiency, known_global_efficiency), ...
-    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.BUG_ERR], ...
-    [class(global_efficiency) ' is not being calculated correctly for ' class(g) '.'])
+assert(isequal(m_globalefficiency, known_globalefficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(globalefficiency) ' is not being calculated correctly for ' class(g) '.'])
