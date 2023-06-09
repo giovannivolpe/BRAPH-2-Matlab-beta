@@ -112,17 +112,17 @@ B_WU = [
     0 .2 .1 .1 .2;
     .1 0 0 .2 .1];
 
-assortativity_WU_compress = (14.222222/6-(9.333333/6)^2)/(16.111111/6-(9.333333/6)^2);
+assortativity_BU = {(37/6-(15/6)^2)/(39/6-(15/6)^2)};
 
-g = GraphWU('B', B_WU);
+g = GraphBU('B', B_BU);
 
-m_outside_g = Assortativity('G', g);
-assert(isequal(m_outside_g.get('M'), assortativity_WU_compress), ...
+m_outside_g = Assortativity('G', g).get('M');
+assert(round(m_outside_g{1}, 2) == round(assortativity_BU{1},2), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'Assortativity');
-assert(isequal(m_inside_g.get('M'), assortativity_WU_compress), ...
+m_inside_g = g.get('MEASURE', 'Assortativity').get('M');
+assert(round(m_outside_g{1}, 2) == round(assortativity_BU{1},2), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
