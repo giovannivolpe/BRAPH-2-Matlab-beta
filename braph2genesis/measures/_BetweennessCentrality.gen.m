@@ -62,6 +62,7 @@ M (result, cell) is the cell containing betweenness centrality.
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 L = g.get('LAYERNUMBER');
+N = g.get('NODENUMBER');
 
 betweenness_centrality = cell(L, 1);
 connectivity_layer =  g.get('CONNECTIVITY_TYPE', g.get('LAYERNUMBER'));
