@@ -67,7 +67,7 @@ NN = g.get('NODENUMBER');
 betweenness_centrality = cell(L, 1);
 connectivity_layer =  g.get('CONNECTIVITY_TYPE', g.get('LAYERNUMBER'));
 
-parfor li = 1:1:L
+for li = 1:1:L
     Aii = A{li, li};
 
     if connectivity_layer == Graph.WEIGHTED  % weighted graphs
@@ -311,7 +311,7 @@ B_WU = [
 densities = [0 50 90];
 g = MultigraphBUD('B', B_WU, 'DENSITIES', densities);
 
-known_bc = {[0, 0, 0]' [0, 0, 0]' [1, 0, 0]'};
+known_bc = {[0, 0, 0]'; [0, 0, 0]'; [1, 0, 0]'};
 
 m_outside_g = BetweennessCentrality('G', g);
 
