@@ -1,5 +1,5 @@
 %% ¡header!
-Transitivity < Measure (m, transitivity) is the graph transitivity.
+Transitivity < Triangles (m, transitivity) is the graph transitivity.
 
 %%% ¡description!
 The transitivity of a graph is the fraction of triangles to the number 
