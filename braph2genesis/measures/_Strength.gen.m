@@ -89,12 +89,12 @@ B = [
 known_strength = {[1.2 0.2 1]'};
 g = GraphWU('B', B);
 m_outside_g = Strength('G', g);
-assert(isequal(m_outside_g.get('M'), known_degree), ...
+assert(isequal(m_outside_g.get('M'), known_strength), ...
     [BRAPH2.STR ':Strength:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'Strength');
-assert(isequal(m_inside_g.get('M'), known_degree), ...
+assert(isequal(m_inside_g.get('M'), known_strength), ...
     [BRAPH2.STR ':Strength:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -153,8 +153,8 @@ B22 = [
 B= {B11 B22};
 
 known_strength = {
-    [2 1 1]'
-    [1 2 1]'
+    [1.2 .2 1]'
+    [1 1.3 .3]'
     };
 
 g = OrdMxWU('B', B);
