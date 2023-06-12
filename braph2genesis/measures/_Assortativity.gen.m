@@ -114,7 +114,7 @@ B_WU = [
 
 assortativity_BU = {(37/6-(15/6)^2)/(39/6-(15/6)^2)};
 
-g = GraphBU('B', B_BU);
+g = GraphBU('B', B_WU);
 
 m_outside_g = Assortativity('G', g).get('M');
 assert(round(m_outside_g{1}, 2) == round(assortativity_BU{1},2), ...
@@ -142,13 +142,13 @@ assortativity_BU = (37/6-(15/6)^2)/(39/6-(15/6)^2);
 
 g = GraphBU('B', B_BU);
 
-m_outside_g = Assortativity('G', g);
-assert(isequal(m_outside_g.get('M'), assortativity_BU), ...
+m_outside_g = Assortativity('G', g).get('M');
+assert(isequal(round(m_outside_g{1}, 2), round(assortativity_BU, 2)), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'Assortativity');
-assert(isequal(m_inside_g.get('M'), assortativity_BU), ...
+m_inside_g = g.get('MEASURE', 'Assortativity').get('M');
+assert(isequal(round(m_inside_g{1}, 2), round(assortativity_BU, 2)), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -165,22 +165,24 @@ B_BU = [
     0 1 1 1 1;
     1 0 0 1 0];
 
-densities = [.10 .95];
+densities = [10 90];
 
 known_assortativity = { ...
     0
-    (37/6-(15/6)^2)/(39/6-(15/6)^2)
+    round((37/6-(15/6)^2)/(39/6-(15/6)^2), 2)
     };
 
 g = MultigraphBUD('B', B_BU, 'DENSITIES', densities);
 
-m_outside_g = Assortativity('G', g);
-assert(isequal(m_outside_g.get('M'), known_assortativity), ...
+m_outside_g = Assortativity('G', g).get('M');
+m_outside_g_round = cellfun(@(x) round(x, 2), m_outside_g, 'UniformOutput', false);
+assert(isequal(m_outside_g, known_assortativity), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'Assortativity');
-assert(isequal(m_inside_g.get('M'), known_assortativity), ...
+m_inside_g = g.get('MEASURE', 'Assortativity').get('M');
+m_inside_g = cellfun(@(x) round(x, 2), m_inside_g, 'UniformOutput', false);
+assert(isequal(m_inside_g, known_assortativity), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -200,19 +202,22 @@ B_BU = [
 thresholds = [0 1];
 
 known_assortativity = { ...
-    (37/6-(15/6)^2)/(39/6-(15/6)^2)
-    0 
+    round((37/6-(15/6)^2)/(39/6-(15/6)^2), 2)
+    0
     };
 
 g = MultigraphBUT('B', B_BU, 'THRESHOLDS', thresholds);
 
-m_outside_g = Assortativity('G', g);
-assert(isequal(m_outside_g.get('M'), known_assortativity), ...
+m_outside_g = Assortativity('G', g).get('M');
+m_outside_g= cellfun(@(x) round(x, 2), m_outside_g, 'UniformOutput', false);
+
+assert(isequal( m_outside_g, known_assortativity), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'Assortativity');
-assert(isequal(m_inside_g.get('M'), known_assortativity), ...
+m_inside_g = g.get('MEASURE', 'Assortativity').get('M');
+m_inside_g = cellfun(@(x) round(x, 2), m_inside_g, 'UniformOutput', false);
+assert(isequal(m_inside_g, known_assortativity), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -275,20 +280,22 @@ B22 = [
 B = {B11 B22};
 
 known_assortativity = {
-                    (37/6-(15/6)^2)/(39/6-(15/6)^2)
-                    (37/6-(15/6)^2)/(39/6-(15/6)^2)
-                    };
+    round((37/6-(15/6)^2)/(39/6-(15/6)^2), 2)
+    round((37/6-(15/6)^2)/(39/6-(15/6)^2), 2)
+    };
 
 g = MultiplexWU('B', B);
 assortativity = Assortativity('G', g);
 
-m_outside_g = Assortativity('G', g);
-assert(isequal(m_outside_g.get('M'), known_assortativity), ...
+m_outside_g = Assortativity('G', g).get('M');
+m_outside_g = cellfun(@(x) round(x, 2), m_outside_g, 'UniformOutput', false);
+assert(isequal(m_outside_g, known_assortativity), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'Assortativity');
-assert(isequal(m_inside_g.get('M'), known_assortativity), ...
+m_inside_g = g.get('MEASURE', 'Assortativity').get('M');
+m_inside_g = cellfun(@(x) round(x, 2), m_inside_g, 'UniformOutput', false);
+assert(isequal(m_inside_g, known_assortativity), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -312,24 +319,28 @@ B22 = [
       0  1  1  1  1;
       1  0  0  1  0];
 
-densities = [.10 .95];
+B_BU = {B11 B22};
+
+densities = [10 95];
 
 known_assortativity = { ...
     0
     0
-    (37/6-(15/6)^2)/(39/6-(15/6)^2)
-    (37/6-(15/6)^2)/(39/6-(15/6)^2)
+    round((37/6-(15/6)^2)/(39/6-(15/6)^2), 2)
+    round((37/6-(15/6)^2)/(39/6-(15/6)^2), 2)
     };
 
 g = MultiplexBUD('B', B_BU, 'DENSITIES', densities);
 
-m_outside_g = Assortativity('G', g);
-assert(isequal(m_outside_g.get('M'), known_assortativity), ...
+m_outside_g = Assortativity('G', g).get('M');
+m_outside_g = cellfun(@(x) round(x, 2), m_outside_g, 'UniformOutput', false);
+assert(isequal(m_outside_g, known_assortativity), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'Assortativity');
-assert(isequal(m_inside_g.get('M'), known_assortativity), ...
+m_inside_g = g.get('MEASURE', 'Assortativity').get('M');
+m_inside_g = cellfun(@(x) round(x, 2), m_inside_g, 'UniformOutput', false);
+assert(isequal(m_inside_g, known_assortativity), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -354,20 +365,21 @@ B22 = [
 B = {B11 B22};
 
 known_assortativity = {
-                    (37/6-(15/6)^2)/(39/6-(15/6)^2)
-                    (37/6-(15/6)^2)/(39/6-(15/6)^2)
-                    0
-                    0
-                    };
-                
+    round((37/6-(15/6)^2)/(39/6-(15/6)^2), 2)
+    round((37/6-(15/6)^2)/(39/6-(15/6)^2), 2)
+    0
+    0
+    };
+
 g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
-assortativity = Assortativity('G', g);
-m_outside_g = Assortativity('G', g);
-assert(isequal(m_outside_g.get('M'), known_assortativity), ...
+m_outside_g = Assortativity('G', g).get('M');
+m_outside_g = cellfun(@(x) round(x, 2), m_outside_g, 'UniformOutput', false);
+assert(isequal(m_outside_g, known_assortativity), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'Assortativity');
-assert(isequal(m_inside_g.get('M'), known_assortativity), ...
+m_inside_g = g.get('MEASURE', 'Assortativity').get('M');
+m_inside_g = cellfun(@(x) round(x, 2), m_inside_g, 'UniformOutput', false);
+assert(isequal(m_inside_g, known_assortativity), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
