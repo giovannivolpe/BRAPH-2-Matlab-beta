@@ -76,9 +76,9 @@ parfor li = 1:1:L
         
     else  % directed graphs
         
-        in_degree = InDegree('G', g).get('M');
+        in_degree = DegreeIn('G', g).get('M');
         
-        out_degree = OutDegree('G', g).get('M');
+        out_degree = DegreeOut('G', g).get('M');
         
         transitivity_layer = sum(triangles{li}) ./ sum(((out_degree{li} + in_degree{li}) .* (out_degree{li} + in_degree{li} - 1) - 2 * diag(Aii^2)));
     end
@@ -132,7 +132,7 @@ B = [
     1 0 1 0
     ];
 
-known_transitivity = {3/4};
+known_transitivity = {.1875};
 
 g = GraphWD('B', B);
 m_outside_g = Transitivity('G', g);
@@ -186,7 +186,7 @@ B = [
     1 0 1 0
     ];
 
-known_transitivity = {3/4};
+known_transitivity = {.1875};
 
 g = GraphBD('B', B);
 m_outside_g = Transitivity('G', g);
@@ -213,8 +213,8 @@ B = [
     1 0 1 0
     ];
 
-known_transitivity = {[0 3/4]};
-densities = [33 99];
+known_transitivity = {0; 3/4};
+densities = [33 90];
 
 g = MultigraphBUD('B', B, 'DENSITIES', densities);
 m_outside_g = Transitivity('G', g);
@@ -241,7 +241,7 @@ B = [
     1 0 1 0
     ];
 
-known_transitivity = {[0 3/4]};
+known_transitivity = {3/4; 0};
 thresholds = [0 1];
 
 g = MultigraphBUT('B', B, 'THRESHOLDS', thresholds);
@@ -314,8 +314,8 @@ A22 = [
 A = {A11 A22};
 
 known_transitivity = {
-                 3/4
-                 3/4
+                 .1875
+                 .1875
                  };      
 
 g = MultiplexWD('B', A);
@@ -388,8 +388,8 @@ A22 = [
 A = {A11 A22};
 
 known_transitivity = {
-                 3/4
-                 3/4
+                 .1875
+                 .1875
                  };      
 
 g = MultiplexBD('B', A);
@@ -424,7 +424,7 @@ A22 = [
       ];
 A = {A11 A22};
 
-densities = [33 99];
+densities = [33 90];
 
 known_transitivity = {
     0
@@ -465,16 +465,16 @@ A22 = [
       ];
 A = {A11 A22};
 
-thresholds = [33 99];
+thresholds = [0 1];
 
 known_transitivity = {
-    0
-    0
     3/4
     3/4
+    0
+    0
     };
 
-g = MultiplexBUT('B', A, 'THRESHOLDS', densities);
+g = MultiplexBUT('B', A, 'THRESHOLDS', thresholds);
 m_outside_g = Transitivity('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_transitivity), ...
