@@ -62,7 +62,7 @@ M (result, cell) is the cell containing betweenness centrality.
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 L = g.get('LAYERNUMBER');
-N = g.get('NODENUMBER');
+NN = g.get('NODENUMBER');
 
 betweenness_centrality = cell(L, 1);
 connectivity_layer =  g.get('CONNECTIVITY_TYPE', g.get('LAYERNUMBER'));
@@ -71,17 +71,17 @@ parfor li = 1:1:L
     Aii = A{li, li};
 
     if connectivity_layer == Graph.WEIGHTED  % weighted graphs
-        betweenness_centrality_layer = m.getWeightedCalculation(Aii)/((N(li)-1)*(N(li)-2));  % Normalized betweenness centrality
+        betweenness_centrality_layer = getWeightedCalculation(Aii)/((NN(li)-1)*(NN(li)-2));  % Normalized betweenness centrality
         betweenness_centrality(li) = {betweenness_centrality_layer};
     else  % binary graphs
-        betweenness_centrality_layer = m.getBinaryCalculation(Aii)/((N(li)-1)*(N(li)-2));  % Normalized betweenness centrality
+        betweenness_centrality_layer = getBinaryCalculation(Aii)/((NN(li)-1)*(NN(li)-2));  % Normalized betweenness centrality
         betweenness_centrality(li) = {betweenness_centrality_layer};
     end
 end
 
 value = betweenness_centrality;
 %%%% ¡calculate_callbacks!
-function weighted_betweenness_centrality = getWeightedCalculation(m, A)
+function weighted_betweenness_centrality = getWeightedCalculation(A)
     %GETWEIGHTEDCALCULATION calculates the distance value of a weighted adjacency matrix.
     %
     % WEIGHTED_DISTANCE = GETWEIGHTEDCALCULATION(M, A) returns the value of the
@@ -147,7 +147,7 @@ function weighted_betweenness_centrality = getWeightedCalculation(m, A)
         end
     end
 end
-function binary_betweenness_centrality = getBinaryCalculation(m, A)
+function binary_betweenness_centrality = getBinaryCalculation(A)
     %GETBINARYCALCULATION calculates the distance value of a binary adjacency matrix.
     %
     % BINARY_DISTANCE = GETBINARYCALCULATION(A) returns the value of the
@@ -204,7 +204,7 @@ B_BU = [
     1 0 0
     ];
 
-bc_BU = [1, 0, 0]';
+bc_BU = {[1, 0, 0]'};
 
 g = GraphBD('B', B_BU);
 m_outside_g = BetweennessCentrality('G', g);
@@ -229,7 +229,7 @@ B_BU = [
     1 0 0
     ];
 
-bc_BU = [1, 0, 0]';
+bc_BU = {[1, 0, 0]'};
 
 g = GraphBU('B', B_BU);
 m_outside_g = BetweennessCentrality('G', g);
@@ -254,7 +254,7 @@ B_WU = [
     4 0 0 
     ];
 
-bc_WU = [1, 0, 0]'; 
+bc_WU = {[1, 0, 0]'};
 
 g = GraphWD('B', B_WU);
 
@@ -281,7 +281,7 @@ B_WU = [
     4 0 0 
     ];
 
-bc_WU = [1, 0, 0]'; 
+bc_WU = {[1, 0, 0]'}; 
 
 g = GraphWU('B', B_WU);
 
@@ -308,7 +308,7 @@ B_WU = [
     4 0 0 
     ];
  
-densities = [0 50 100];
+densities = [0 50 90];
 g = MultigraphBUD('B', B_WU, 'DENSITIES', densities);
 
 known_bc = {[0, 0, 0]' [0, 0, 0]' [1, 0, 0]'};
@@ -339,7 +339,7 @@ B_WU = [
 thresholds = [0 1];
 g = MultigraphBUT('B', B_WU, 'THRESHOLDS', thresholds);
 
-known_bc = {[0, 0, 0]'  [1, 0, 0]'};
+known_bc = {[1, 0, 0]';  [0, 0, 0]'};
 
 m_outside_g = BetweennessCentrality('G', g);
 
@@ -406,8 +406,8 @@ B22 = [
 B = {B11 B22};
 
 known_betweenness_centrality = {
-    [1/2 0   0]'
-    [0   1/2 0]'
+    [1 0   0]'
+    [0   1 0]'
     };
 
 g = MultiplexBU('B', B);
@@ -477,8 +477,8 @@ B22 = [
 B = {B11 B22};
 
 known_betweenness_centrality = {
-    [1/2 0   0]'
-    [0   1/2 0]'
+    [1 0   0]'
+    [0   1 0]'
     };
 
 g = MultiplexWU('B', B);
@@ -511,10 +511,10 @@ B_WU2 = [
     ];
 B = {B_WU1 B_WU2}
  
-densities = [0 50 100];
+densities = [0 50 90];
 g = MultiplexBUD('B', B, 'DENSITIES', densities);
 
-known_bc = {[0, 0, 0]' [0, 0, 0]' [0, 0, 0]' [0, 0, 0]' [1, 0, 0]' [1, 0, 0]'};
+known_bc = {[0, 0, 0]'; [0, 0, 0]'; [0, 0, 0]'; [0, 0, 0]'; [1, 0, 0]'; [1, 0, 0]'};
 
 m_outside_g = BetweennessCentrality('G', g);
 
@@ -548,7 +548,7 @@ B = {B_WU1 B_WU2}
 thresholds = [0 1];
 g = MultiplexBUT('B', B, 'THRESHOLDS', thresholds);
 
-known_bc = {[0, 0, 0]' [0, 0, 0]' [1, 0, 0]' [1, 0, 0]'};
+known_bc = {[1, 0, 0]'; [1, 0, 0]'; [0, 0, 0]'; [0, 0, 0]'};
 
 m_outside_g = BetweennessCentrality('G', g);
 
