@@ -59,9 +59,9 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 M (result, cell) is the average strength.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
-A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
-
 L = g.get('LAYERNUMBER');
+
+strength = calculateValue@Strength(m, prop);
 
 strength_av = cell(L, 1);
 parfor li = 1:L
