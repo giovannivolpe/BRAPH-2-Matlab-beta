@@ -62,13 +62,13 @@ g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 
 L = g.get('LAYERNUMBER');
-in-strength = cell(L, 1);
+in_strength = cell(L, 1);
 
 parfor li = 1:1:L
     Aii = A{li, li};
-    in-strength(li) = {sum(Aii, 1)};  % calculates the in-strength of a node for layer li
+    in_strength(li) = {sum(Aii, 1)};  % calculates the in-strength of a node for layer li
 end
-value = in-strength;
+value = in_strength;
 
 %% ¡tests!
 
@@ -86,7 +86,7 @@ B = [
     .2 0  0
     1  0  0
     ];
-known_strength = {[1.2 0.2 1]'};
+known_strength = {[1.2 0.2 1]};
 g = GraphWD('B', B);
 m_outside_g = StrengthIn('G', g);
 assert(isequal(m_outside_g.get('M'), known_strength), ...
@@ -118,8 +118,8 @@ B22 = [
 B = {B11 B22};
 
 known_strength = {
-                 [1.2 .2  1]'
-                 [1   1.4 .4]'
+                 [1.2 .2  1]
+                 [1   1.4 .4]
                  };
                                 
 g = MultiplexWD('B', B);
