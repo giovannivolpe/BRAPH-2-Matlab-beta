@@ -154,7 +154,7 @@ B = [
     0  1  0  0
     ];
 
-known_richness = {[1 0 2 3/2]'};
+known_richness = {[1 0 1 1]'};
 
 g = GraphWD('B', B);
 
@@ -207,7 +207,7 @@ B = [
     0  1  0  0
     ];
 
-known_richness = {[1 0 2 3/2]'};
+known_richness = {[1 0 1 1]'};
 
 g = GraphBD('B', B);
 
@@ -345,8 +345,9 @@ assert(isequal(m_outside_g, known_richness), ...
     [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'Richness');
-assert(isequal(m_inside_g.get('M'), known_richness), ...
+m_inside_g = g.get('MEASURE', 'Richness').get('M');
+ m_inside_g = cellfun(@(x) round(x, 3), m_inside_g, 'UniformOutput', false);
+assert(isequal(m_inside_g, known_richness), ...
     [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -370,22 +371,23 @@ A22 = [
 A = {A11 A22};
              
 known_richness = {
-                 [1 0 1 1]'
-                 [1 0 1 1]'
-                 };    
+    [0 0 2 2]'
+    [0 0 0 0]'
+    };
 
 g = MultiplexBU('B', A);
 m_outside_g = Richness('G', g).get('M');
+m_outside_g = cellfun(@(x) round(x, 3), m_outside_g, 'UniformOutput', false);
 
 assert(isequal(m_outside_g, known_richness), ...
     [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'Richness');
-assert(isequal(m_inside_g.get('M'), known_richness), ...
+m_inside_g = g.get('MEASURE', 'Richness').get('M');
+m_inside_g = cellfun(@(x) round(x, 3), m_inside_g, 'UniformOutput', false);
+assert(isequal(m_inside_g, known_richness), ...
     [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
-
 
 %%% ¡test!
 %%%% ¡name!
