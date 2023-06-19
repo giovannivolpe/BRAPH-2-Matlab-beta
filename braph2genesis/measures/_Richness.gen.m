@@ -61,6 +61,7 @@ M (result, cell) is the richness.
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 L = g.get('LAYERNUMBER');
+N = g.get('NODENUMBER');
 
 richness = cell(L, 1);
 directionality_type = g.get('DIRECTIONALITY_TYPE', L); 
@@ -118,6 +119,59 @@ value = richness;
 
 %%% ¡test!
 %%%% ¡name!
+GraphWU
+%%%% ¡code!
+B = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+known_richness = {[1 0 1 1]'};
+
+g = GraphWU('B', B);
+
+m_outside_g = Richness('G', g).get('M');
+
+assert(isequal(m_outside_g, known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Richness');
+assert(isequal(m_inside_g.get('M'), known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+GraphWD
+%%%% ¡code!
+B = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+known_richness = {[1 0 2 3/2]'};
+
+g = GraphWD('B', B);
+
+m_outside_g = Richness('G', g).get('M');
+
+assert(isequal(m_outside_g, known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Richness');
+assert(isequal(m_inside_g.get('M'), known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+
+%%% ¡test!
+%%%% ¡name!
 GraphBU
 %%%% ¡code!
 B = [
@@ -131,11 +185,70 @@ known_richness = {[1 0 1 1]'};
 
 g = GraphBU('B', B);
 
-richness = Richness('G', g).get('M');
+m_outside_g = Richness('G', g).get('M');
 
-assert(isequal(richness, known_richness), ...
-    [BRAPH2.STR ':Richness:' BRAPH2.BUG_ERR], ...
-    'Richness is not being calculated correctly for GraphBU.')
+assert(isequal(m_outside_g, known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Richness');
+assert(isequal(m_inside_g.get('M'), known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+GraphBD
+%%%% ¡code!
+B = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+known_richness = {[1 0 2 3/2]'};
+
+g = GraphBD('B', B);
+
+m_outside_g = Richness('G', g).get('M');
+
+assert(isequal(m_outside_g, known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Richness');
+assert(isequal(m_inside_g.get('M'), known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultigraphBUD
+%%%% ¡code!
+B = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+known_richness = {                 
+                 [0 0 0 0]'
+                 [1 0 1 1]'
+                 };
+
+g = MultigraphBUD('B', B, 'DENSITIES', [10 90]);
+m_outside_g = Richness('G', g).get('M');
+
+assert(isequal(m_outside_g, known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Richness');
+assert(isequal(m_inside_g.get('M'), known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
@@ -153,62 +266,52 @@ known_richness = {
                  [0 0 0 0]'};
 
 g = MultigraphBUT('B', B, 'THRESHOLDS', [0 1]);
-richness = Richness('G', g).get('M');
+m_outside_g = Richness('G', g).get('M');
 
-assert(isequal(richness, known_richness), ...
-    [BRAPH2.STR ':Richness:' BRAPH2.BUG_ERR], ...
-    'Richness is not being calculated correctly for MultigraphBUT.')
+assert(isequal(m_outside_g, known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-%%% ¡test!
-%%%% ¡name!
-GraphBD
-%%%% ¡code!
-A = [
-    0  1  1  1; 
-    1  0  1  1; 
-    1  1  0  0;
-    0  1  0  0
-    ];
-
-known_richness = {[1 0 2 3/2]'};
-
-g = GraphBD('B', A);
-richness = Richness('G', g).get('M');
-
-assert(isequal(richness, known_richness), ...
-    [BRAPH2.STR ':Richness:' BRAPH2.BUG_ERR], ...
-    'Richness is not being calculated correctly for GraphBD.')
+m_inside_g = g.get('MEASURE', 'Richness');
+assert(isequal(m_inside_g.get('M'), known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
-MultiplexBD
+MultiplexWU
 %%%% ¡code!
 A11 = [
-    0  1  1  1; 
+    0  1  1  0; 
     1  0  1  1; 
     1  1  0  0;
     0  1  0  0
     ];
-
 A22 = [
-    0  1  1  1; 
+    0  1  1  0; 
     1  0  1  1; 
     1  1  0  0;
-    0  1  1  0
+    0  1  0  0
     ];
 A = {A11 A22};
-             
+
 known_richness = {
-                 [1 0 2 3/2]'
-                 [1 0 1 2]'
-                 };    
+                 [1 0 1 1]'
+                 [1 0 1 1]'
+                 };   
 
-g = MultiplexBD('B', A);
-richness = Richness('G', g).get('M');
+g = MultiplexWD('B', A);
+m_outside_g = Richness('G', g).get('M');
+m_outside_g = cellfun(@(s) round(s, 4), m_outside_g, 'UniformOutput', false);
 
-assert(isequal(richness, known_richness), ...
-    [BRAPH2.STR ':Richness:' BRAPH2.BUG_ERR], ...
-    'Richness is not being calculated correctly for MultiplexBD.')
+assert(isequal(m_outside_g, known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Richness');
+assert(isequal(m_inside_g.get('M'), known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 
 %%% ¡test!
@@ -235,9 +338,163 @@ known_richness = {
                  };   
 
 g = MultiplexWD('B', A);
-richness = Richness('G', g).get('M');
-richness = cellfun(@(s) round(s, 4), richness, 'UniformOutput', false);
+m_outside_g = Richness('G', g).get('M');
+m_outside_g = cellfun(@(s) round(s, 4), m_outside_g, 'UniformOutput', false);
 
-assert(isequal(richness, known_richness), ...
-    [BRAPH2.STR ':Richness:' BRAPH2.BUG_ERR], ...
-    'Richness is not being calculated correctly for MultiplexWD.')
+assert(isequal(m_outside_g, known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Richness');
+assert(isequal(m_inside_g.get('M'), known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexBU
+%%%% ¡code!
+A11 = [
+    0  1  1  1; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+A22 = [
+    0  1  1  1; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  1  0
+    ];
+A = {A11 A22};
+             
+known_richness = {
+                 [1 0 1 1]'
+                 [1 0 1 1]'
+                 };    
+
+g = MultiplexBU('B', A);
+m_outside_g = Richness('G', g).get('M');
+
+assert(isequal(m_outside_g, known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Richness');
+assert(isequal(m_inside_g.get('M'), known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexBD
+%%%% ¡code!
+A11 = [
+    0  1  1  1; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+A22 = [
+    0  1  1  1; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  1  0
+    ];
+A = {A11 A22};
+             
+known_richness = {
+                 [1 0 2 3/2]'
+                 [1 0 1 2]'
+                 };    
+
+g = MultiplexBD('B', A);
+m_outside_g = Richness('G', g).get('M');
+
+assert(isequal(m_outside_g, known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Richness');
+assert(isequal(m_inside_g.get('M'), known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+%%% ¡test!
+%%%% ¡name!
+MultiplexBUD
+%%%% ¡code!
+B1 = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+B2 = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+B = {B1 B2}
+
+known_richness = {                 
+                 [0 0 0 0]'
+                 [0 0 0 0]'
+                 [1 0 1 1]'                 
+                 [1 0 1 1]'
+                 };
+
+g = MultiplexBUD('B', B, 'DENSITIES', [10 90]);
+m_outside_g = Richness('G', g).get('M');
+
+assert(isequal(m_outside_g, known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Richness');
+assert(isequal(m_inside_g.get('M'), known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexBUT
+%%%% ¡code!
+B1 = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+B2 = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+B = {B1 B2}
+
+known_richness = {
+                 [1 0 1 1]'
+                 [1 0 1 1]'
+                 [0 0 0 0]'
+                 [0 0 0 0]'
+                 };
+
+g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
+m_outside_g = Richness('G', g).get('M');
+
+assert(isequal(m_outside_g, known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Richness');
+assert(isequal(m_inside_g.get('M'), known_richness), ...
+    [BRAPH2.STR ':Richness:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
