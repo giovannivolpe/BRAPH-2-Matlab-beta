@@ -117,6 +117,59 @@ end
 
 %%% ¡test!
 %%%% ¡name!
+GraphWU
+%%%% ¡code!
+B = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+known_core_periphery = {[1 1 0 0]'};
+
+g = GraphWU('B', B);
+
+m_outside_g = CorePeriphery('G', g).get('M');
+
+assert(isequal(m_outside_g, known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CorePeriphery');
+assert(isequal(m_inside_g.get('M'), known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+GraphWD
+%%%% ¡code!
+B = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+known_core_periphery = {[1 1 0 0]'};
+
+g = GraphWD('B', B);
+
+m_outside_g = CorePeriphery('G', g).get('M');
+
+assert(isequal(m_outside_g, known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CorePeriphery');
+assert(isequal(m_inside_g.get('M'), known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+
+%%% ¡test!
+%%%% ¡name!
 GraphBU
 %%%% ¡code!
 B = [
@@ -130,11 +183,71 @@ known_core_periphery = {[1 1 0 0]'};
 
 g = GraphBU('B', B);
 
-core_periphery = CorePeriphery('G', g).get('M');
+m_outside_g = CorePeriphery('G', g).get('M');
 
-assert(isequal(core_periphery, known_core_periphery), ...
-    [BRAPH2.STR ':CorePeriphery:' BRAPH2.BUG_ERR], ...
-    'CorePeriphery is not being calculated correctly for GraphBU.')
+assert(isequal(m_outside_g, known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CorePeriphery');
+assert(isequal(m_inside_g.get('M'), known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+GraphBD
+%%%% ¡code!
+B = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+known_core_periphery = {[1 1 0 0]'};
+
+g = GraphBD('B', B);
+
+m_outside_g = CorePeriphery('G', g).get('M');
+
+assert(isequal(m_outside_g, known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CorePeriphery');
+assert(isequal(m_inside_g.get('M'), known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultigraphBUD
+%%%% ¡code!
+B = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+known_core_periphery = {
+    [1 0 0 0]'
+    [1 1 0 0]'
+    };
+
+g = MultigraphBUD('B', B, 'DENSITIES', [10 90]);
+
+m_outside_g = CorePeriphery('G', g).get('M');
+
+assert(isequal(m_outside_g, known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CorePeriphery');
+assert(isequal(m_inside_g.get('M'), known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
@@ -152,11 +265,91 @@ known_core_periphery = {
                  [1 0 0 0]'};
 
 g = MultigraphBUT('B', B, 'THRESHOLDS', [0 1]);
+
+m_outside_g = CorePeriphery('G', g).get('M');
+
+assert(isequal(m_outside_g, known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CorePeriphery');
+assert(isequal(m_inside_g.get('M'), known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexWU
+%%%% ¡code!
+B11 = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+B22 = [
+    0  1  1  1; 
+    1  0  1  1; 
+    1  1  0  0;
+    1  1  0  0
+    ];
+B = {B11 B22};
+
+known_core_periphery = {
+                     [1 1 0 0]'
+                     [1 1 1 0]'};     
+
+g = MultiplexWU('B', B);
 core_periphery = CorePeriphery('G', g).get('M');
 
-assert(isequal(core_periphery, known_core_periphery), ...
-    [BRAPH2.STR ':CorePeriphery:' BRAPH2.BUG_ERR], ...
-    'CorePeriphery is not being calculated correctly for MultigraphBUT.')
+m_outside_g = CorePeriphery('G', g).get('M');
+
+assert(isequal(m_outside_g, known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CorePeriphery');
+assert(isequal(m_inside_g.get('M'), known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexWD
+%%%% ¡code!
+B11 = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+B22 = [
+    0  1  1  1; 
+    1  0  1  1; 
+    1  1  0  0;
+    1  1  0  0
+    ];
+B = {B11 B22};
+
+known_core_periphery = {
+                     [1 1 0 0]'
+                     [1 1 1 0]'};     
+
+g = MultiplexWD('B', B);
+core_periphery = CorePeriphery('G', g).get('M');
+
+m_outside_g = CorePeriphery('G', g).get('M');
+
+assert(isequal(m_outside_g, known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CorePeriphery');
+assert(isequal(m_inside_g.get('M'), known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
@@ -184,6 +377,126 @@ known_core_periphery = {
 g = MultiplexBU('B', B);
 core_periphery = CorePeriphery('G', g).get('M');
 
-assert(isequal(core_periphery, known_core_periphery), ...
-    [BRAPH2.STR ':CorePeriphery:' BRAPH2.BUG_ERR], ...
-    'CorePeriphery is not being calculated correctly for MultiplexBU.')
+m_outside_g = CorePeriphery('G', g).get('M');
+
+assert(isequal(m_outside_g, known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CorePeriphery');
+assert(isequal(m_inside_g.get('M'), known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexBD
+%%%% ¡code!
+B11 = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+B22 = [
+    0  1  1  1; 
+    1  0  1  1; 
+    1  1  0  0;
+    1  1  0  0
+    ];
+B = {B11 B22};
+
+known_core_periphery = {
+                     [1 1 0 0]'
+                     [1 1 1 0]'};     
+
+g = MultiplexBD('B', B);
+core_periphery = CorePeriphery('G', g).get('M');
+
+m_outside_g = CorePeriphery('G', g).get('M');
+
+assert(isequal(m_outside_g, known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CorePeriphery');
+assert(isequal(m_inside_g.get('M'), known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexBUD
+%%%% ¡code!
+B1 = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+B2 = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+B = {B1 B2};
+
+known_core_periphery = {
+    [1 0 0 0]'
+    [1 0 0 0]'
+    [1 1 0 0]'
+    [1 1 0 0]'
+    };
+
+g = MultiplexBUD('B', B, 'DENSITIES', [10 90]);
+
+m_outside_g = CorePeriphery('G', g).get('M');
+
+assert(isequal(m_outside_g, known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CorePeriphery');
+assert(isequal(m_inside_g.get('M'), known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexBUT
+%%%% ¡code!
+B1 = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+B2 = [
+    0  1  1  0; 
+    1  0  1  1; 
+    1  1  0  0;
+    0  1  0  0
+    ];
+
+B = {B1 B2};
+
+known_core_periphery = {
+                 [1 1 0 0]'
+                 [1 1 0 0]'
+                 [1 0 0 0]'
+                 [1 0 0 0]'};
+
+g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
+
+m_outside_g = CorePeriphery('G', g).get('M');
+
+assert(isequal(m_outside_g, known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CorePeriphery');
+assert(isequal(m_inside_g.get('M'), known_core_periphery), ...
+    [BRAPH2.STR ':CorePeriphery:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
