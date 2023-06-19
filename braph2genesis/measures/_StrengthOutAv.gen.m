@@ -86,7 +86,7 @@ B = [
     .2 0  0
     1  0  0
     ];
-known_strength = {[1.2 0.2 1]'};
+known_strength = {mean([1.2 0.2 1])};
 g = GraphWD('B', B);
 m_outside_g = StrengthOutAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_strength), ...
@@ -118,8 +118,8 @@ B22 = [
 B = {B11 B22};
 
 known_strength = {
-                 [1.2 .2  1]'
-                 [1   1.4 .4]'
+                 mean([1.2 .2  1])
+                 mean([1   1.4 .4])
                  };
                                 
 g = MultiplexWD('B', B);
