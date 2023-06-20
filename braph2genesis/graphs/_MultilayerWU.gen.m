@@ -7,7 +7,8 @@ In a multilayer weighted undirected (WU) graph, layers could have different numb
  number between 0 and 1 and indicating the strength of the connection.
 The connectivity matrices are symmetric (within layer).
 All node connections are allowed between layers.
-
+Matrices on the diagonal line are symmetrized, dediagonalized, semipositivized, standardized
+Matrices on the non-diagonal line are semipositivized, standardized
 %% ¡props_update!
 
 %%% ¡prop!
@@ -100,6 +101,16 @@ for i = 1:1:L
     M = semipositivize(M, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
     M = standardize(M, 'StandardizeRule', g.get('STANDARDIZE_RULE')); % rescales adjacency matrix
     B(i, i) = {M};
+    if ~isempty(A{i, i})
+        for j = i+1:1:L
+            M = semipositivize(B{i,j}, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
+            M = standardize(M, 'StandardizeRule', g.get('STANDARDIZE_RULE'));  % rescales adjacency matrix
+            B(i, j) = {M};
+            M = semipositivize(B{j,i}, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
+            M = standardize(M, 'StandardizeRule', g.get('STANDARDIZE_RULE'));  % rescales adjacency matrix
+            B(j, i) = {M};
+        end
+    end
 end
 A = B;
 value = A;
@@ -194,10 +205,24 @@ g.get('A_CHECK')
 A1 = symmetrize(standardize(semipositivize(dediagonalize(B1))));
 A2 = symmetrize(standardize(semipositivize(dediagonalize(B2))));
 A3 = symmetrize(standardize(semipositivize(dediagonalize(B3))));
+B12 = standardize(semipositivize(B12));
+B13 = standardize(semipositivize(B13));
+B23 = standardize(semipositivize(B23));
 B{1,1} = A1;
 B{2,2} = A2;
 B{3,3} = A3;
+<<<<<<< Updated upstream
 A = B
+=======
+B{1,2} = B12;
+B{2,1} = B12';
+B{1,3} = B13;
+B{3,1} = B13';
+B{2,3} = B23;
+B{3,2} = B23'';
+
+A = B;
+>>>>>>> Stashed changes
 assert(isequal(g.get('A'), A), ...
     [BRAPH2.STR ':MultilayerWU:' BRAPH2.FAIL_TEST], ...
     'MultilayerWU is not constructing well.')
