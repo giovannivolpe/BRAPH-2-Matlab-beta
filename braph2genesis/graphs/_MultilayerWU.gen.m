@@ -211,18 +211,14 @@ B23 = standardize(semipositivize(B23));
 B{1,1} = A1;
 B{2,2} = A2;
 B{3,3} = A3;
-<<<<<<< Updated upstream
-A = B
-=======
 B{1,2} = B12;
 B{2,1} = B12';
 B{1,3} = B13;
 B{3,1} = B13';
 B{2,3} = B23;
 B{3,2} = B23'';
-
 A = B;
->>>>>>> Stashed changes
+
 assert(isequal(g.get('A'), A), ...
     [BRAPH2.STR ':MultilayerWU:' BRAPH2.FAIL_TEST], ...
     'MultilayerWU is not constructing well.')
