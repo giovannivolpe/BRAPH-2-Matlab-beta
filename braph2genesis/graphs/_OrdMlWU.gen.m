@@ -217,7 +217,7 @@ B{2,1} = B12';
 B{1,3} = B13;
 B{3,1} = B13';
 B{2,3} = B23;
-B{3,2} = B23'';
+B{3,2} = B23';
 A = B;
 assert(isequal(g.get('A'), A), ...
     [BRAPH2.STR ':OrdMlWU:' BRAPH2.FAIL_TEST], ...

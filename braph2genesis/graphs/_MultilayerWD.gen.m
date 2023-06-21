@@ -9,7 +9,6 @@ The connectivity matrices are symmetric (within layer).
 All node connections are allowed between layers.
 Matrices on the diagonal line are dediagonalized, semipositivized, standardized
 Matrices on the non-diagonal line are semipositivized, standardized
->>>>>>> Stashed changes
 
 %% ¡props_update!
 
