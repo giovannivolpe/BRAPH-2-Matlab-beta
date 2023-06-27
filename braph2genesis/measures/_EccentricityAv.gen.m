@@ -71,16 +71,6 @@ end
 
 value = eccentricity_av;
 
-
-%% ¡props!
-
-%%% ¡prop! 
-RULE (parameter, OPTION)  % calculation in a graph or its subgraph
-%%%% ¡settings!
-{'all', 'subgraphs'}
-%%%% ¡default!
-'all'
-
 %% ¡tests!
 
 %%% ¡excluded_props!
@@ -112,6 +102,7 @@ assert(isequal(m_outside_g.get('M'), known_eccentricity), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EccentricityAv');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_eccentricity), ...
     [BRAPH2.STR ':EccentricityAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -142,6 +133,7 @@ assert(isequal(m_outside_g.get('M'), known_eccentricity), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EccentricityAv');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_eccentricity), ...
     [BRAPH2.STR ':EccentricityAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -175,6 +167,7 @@ assert(isequal(m_outside_g.get('M'), known_eccentricity), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EccentricityAv');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_eccentricity), ...
     [BRAPH2.STR ':EccentricityAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -209,6 +202,7 @@ assert(isequal(m_outside_g.get('M'), known_eccentricity), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EccentricityAv');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_eccentricity), ...
     [BRAPH2.STR ':EccentricityAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
