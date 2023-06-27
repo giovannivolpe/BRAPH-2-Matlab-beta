@@ -64,7 +64,7 @@ L = g.get('LAYERNUMBER');
 
 distance = Distance('G', g).get('M'); 
 eccentricityIn = cell(L, 1);
-eccentricity_rule = m.get('rule');
+eccentricity_rule = m.get('RULE');
 
 parfor li = 1:1:L
     switch lower(eccentricity_rule)
@@ -182,6 +182,7 @@ assert(isequal(m_outside_g.get('M'), known_eccentricity), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EccentricityIn');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_eccentricity), ...
     [BRAPH2.STR ':EccentricityIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -216,6 +217,7 @@ assert(isequal(m_outside_g.get('M'), known_eccentricity), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EccentricityIn');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_eccentricity), ...
     [BRAPH2.STR ':EccentricityIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

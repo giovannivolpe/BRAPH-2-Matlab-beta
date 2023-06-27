@@ -72,16 +72,6 @@ end
 
 value = eccentricity_av;
 
-
-%% ¡props!
-
-%%% ¡prop! 
-RULE (parameter, OPTION)  % calculation in a graph or its subgraph
-%%%% ¡settings!
-{'all', 'subgraphs'}
-%%%% ¡default!
-'all'
-
 %% ¡tests!
 
 %%% ¡excluded_props!
