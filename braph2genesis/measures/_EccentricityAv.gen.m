@@ -144,20 +144,28 @@ MultiplexWU
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B = [
+B11 = [
     0     .1  .2  .25  0;
     .125  0   0   0    0;
     .2    .5  0   .25  0;
     .125  10  0   0    0;
     0     0   0   0    0
     ];
+B22 = [
+    0     .1  .2  .25  0;
+    .125  0   0   0    0;
+    .2    .5  0   .25  0;
+    .125  10  0   0    0;
+    0     0   0   0    0
+    ];
+B = {B11 B22};
 
 known_eccentricity = {
     mean([5 5 5 4 0]')
     mean([5 5 5 4 0]')
     };
 
-g = MultiplexBU('B', B);
+g = MultiplexWU('B', B);
 
 m_outside_g = EccentricityAv('G', g);
 m_outside_g.set('RULE', 'subgraphs');
@@ -179,13 +187,21 @@ MultiplexBU
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B = [
+B11 = [
     0     .1  .2  .25  0;
     .125  0   0   0    0;
     .2    .5  0   .25  0;
     .125  10  0   0    0;
     0     0   0   0    0
     ];
+B22 = [
+    0     .1  .2  .25  0;
+    .125  0   0   0    0;
+    .2    .5  0   .25  0;
+    .125  10  0   0    0;
+    0     0   0   0    0
+    ];
+B = {B11 B22};
 
 known_eccentricity = {
     mean([1 1 1 1 0]')
