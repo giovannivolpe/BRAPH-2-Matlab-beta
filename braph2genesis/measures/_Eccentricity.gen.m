@@ -63,7 +63,7 @@ L = g.get('LAYERNUMBER');
 
 distance = Distance('G', g).get('M'); 
 eccentricity = cell(L, 1);
-eccentricity_rule = m.get('rule');
+eccentricity_rule = m.get('RULE');
 
 parfor li = 1:1:L
     switch lower(eccentricity_rule)
@@ -147,6 +147,7 @@ assert(isequal(m_outside_g.get('M'), known_eccentricity), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'Eccentricity');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_eccentricity), ...
     [BRAPH2.STR ':Eccentricity:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -157,20 +158,28 @@ MultiplexWU
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B = [
+B11 = [
     0     .1  .2  .25  0;
     .125  0   0   0    0;
     .2    .5  0   .25  0;
     .125  10  0   0    0;
     0     0   0   0    0
     ];
+B22 = [
+    0     .1  .2  .25  0;
+    .125  0   0   0    0;
+    .2    .5  0   .25  0;
+    .125  10  0   0    0;
+    0     0   0   0    0
+    ];
+B = {B11 B22};
 
 known_eccentricity = {
     [5 5 5 4 0]'
     [5 5 5 4 0]'
     };
 
-g = MultiplexBU('B', B);
+g = MultiplexWU('B', B);
 
 m_outside_g = Eccentricity('G', g);
 m_outside_g.set('RULE', 'subgraphs');
@@ -180,6 +189,7 @@ assert(isequal(m_outside_g.get('M'), known_eccentricity), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'Eccentricity');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_eccentricity), ...
     [BRAPH2.STR ':Eccentricity:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -191,13 +201,21 @@ MultiplexBU
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B = [
+B11 = [
     0     .1  .2  .25  0;
     .125  0   0   0    0;
     .2    .5  0   .25  0;
     .125  10  0   0    0;
     0     0   0   0    0
     ];
+B22 = [
+    0     .1  .2  .25  0;
+    .125  0   0   0    0;
+    .2    .5  0   .25  0;
+    .125  10  0   0    0;
+    0     0   0   0    0
+    ];
+B = {B11 B22};
 
 known_eccentricity = {
     [1 1 1 1 0]'
@@ -214,6 +232,7 @@ assert(isequal(m_outside_g.get('M'), known_eccentricity), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'Eccentricity');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_eccentricity), ...
     [BRAPH2.STR ':Eccentricity:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
