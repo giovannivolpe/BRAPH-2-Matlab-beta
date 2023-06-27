@@ -103,6 +103,7 @@ assert(isequal(m_outside_g.get('M'), known_eccentricity), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EccentricityInAv');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_eccentricity), ...
     [BRAPH2.STR ':EccentricityInAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -163,8 +164,8 @@ B = {
     };
 
 known_eccentricity = {
-    mean([5 5 5 4 0]')
-    mean([5 5 5 4 0]')
+    mean([5 10 10 5 0]')
+    mean([5 10 10 5 0]')
     };
 
 g = MultiplexWD('B', B);

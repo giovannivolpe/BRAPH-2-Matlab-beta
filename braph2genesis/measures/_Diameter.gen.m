@@ -153,20 +153,28 @@ MultiplexWU
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B = [
+B11 = [
     0     .1  .2  .25  0;
     .125  0   0   0    0;
     .2    .5  0   .25  0;
     .125  10  0   0    0;
     0     0   0   0    0
     ];
+B22 = [
+    0     .1  .2  .25  0;
+    .125  0   0   0    0;
+    .2    .5  0   .25  0;
+    .125  10  0   0    0;
+    0     0   0   0    0
+    ];
+B = {B11 B22};
 
 known_diameter_subgraphs = {
     5
     5
     };
 
-g = MultiplexBU('B', B);
+g = MultiplexWU('B', B);
 
 m_outside_g = Diameter('G', g);
 m_outside_g.set('RULE', 'subgraphs');
@@ -188,13 +196,21 @@ MultiplexBU
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B = [
+B11 = [
     0     .1  .2  .25  0;
     .125  0   0   0    0;
     .2    .5  0   .25  0;
     .125  10  0   0    0;
     0     0   0   0    0
     ];
+B22 = [
+    0     .1  .2  .25  0;
+    .125  0   0   0    0;
+    .2    .5  0   .25  0;
+    .125  10  0   0    0;
+    0     0   0   0    0
+    ];
+B = {B11 B22};
 
 known_diameter_subgraphs = {
     1
