@@ -65,21 +65,21 @@ L = g.get('LAYERNUMBER');
 
 edgebetweennesscentrality = cell(L, 1);
 connectivity_type =  g.get('CONNECTIVITY_TYPE', L);
-parfor li = 1:1:g.layernumber()    
+for li = 1:L    
     Aii = A{li, li};
     connectivity_layer = connectivity_type(li, li);   
     
     if connectivity_layer == Graph.WEIGHTED  % weighted graphs
-        edge_betweenness_centrality_layer = m.getWeightedCalculation(Aii);
+        edge_betweenness_centrality_layer = getWeightedCalculation(Aii);
     else  % binary graphs
-        edge_betweenness_centrality_layer = m.getBinaryCalculation(Aii);
+        edge_betweenness_centrality_layer = getBinaryCalculation(Aii);
     end
-    edge_betweenness_centrality(li) = {edge_betweenness_centrality_layer};
+    edgebetweennesscentrality(li) = {edge_betweenness_centrality_layer};
 end
 
-value = edge_betweenness_centrality;
+value = edgebetweennesscentrality;
 %%%% ¡calculate_callbacks!
-function binary_edge_betweenness_centrality = getBinaryCalculation(m, A)
+function binary_edge_betweenness_centrality = getBinaryCalculation(A)
 % GETBINARYCALCULATION calculates the edge betweenness centrality value of a binary adjacency matrix
 %
 % BINARY_EDGE_BETWEENNESS_CENTRALITY = GETBINARYCALCULATION(m, A) returns the value
@@ -129,7 +129,7 @@ end
 binary_edge_betweenness_centrality = EBC;
 binary_edge_betweenness_centrality(isnan(binary_edge_betweenness_centrality)) = 0;  % Should return zeros, not NaN
 end
-function weighted_edge_betweenness_centrality = getWeightedCalculation(m, A)
+function weighted_edge_betweenness_centrality = getWeightedCalculation(A)
 % GETWEIGHTEDCALCULATION calculates the edge betweenness centrality value of a weighted adjacency matrix
 %
 % WEIGHTED_EDGE_BETWEENNESS_CENTRALITY  = GETWEIGHTEDCALCULATION(m, A)
@@ -240,15 +240,15 @@ known_edge_betweenness_centrality = {[
     2 0 0
     ]};
 
-g = GraphBD('B', B);
+g = GraphBD('B', A);
 
 m_outside_g = EdgeBetweennessCentrality('G', g);
-assert(isequal(m_outside_g.get('M'), known_distance), ...
+assert(isequal(m_outside_g.get('M'), known_edge_betweenness_centrality), ...
     [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EdgeBetweennessCentrality');
-assert(isequal(m_inside_g.get('M'), known_distance), ...
+assert(isequal(m_inside_g.get('M'), known_edge_betweenness_centrality), ...
     [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -281,15 +281,15 @@ known_edge_betweenness_centrality = {[
     0 2 0
     ]};
 
-g = MultiplexBU('B', B);
+g = MultiplexBU('B', A);
 
 m_outside_g = EdgeBetweennessCentrality('G', g);
-assert(isequal(m_outside_g.get('M'), known_distance), ...
+assert(isequal(m_outside_g.get('M'), known_edge_betweenness_centrality), ...
     [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EdgeBetweennessCentrality');
-assert(isequal(m_inside_g.get('M'), known_distance), ...
+assert(isequal(m_inside_g.get('M'), known_edge_betweenness_centrality), ...
     [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -322,14 +322,14 @@ known_edge_betweenness_centrality = {[
     0 2 0
     ]};
 
-g = MultiplexWD('B', B);
+g = MultiplexWD('B', A);
 
 m_outside_g = EdgeBetweennessCentrality('G', g);
-assert(isequal(m_outside_g.get('M'), known_distance), ...
+assert(isequal(m_outside_g.get('M'), known_edge_betweenness_centrality), ...
     [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EdgeBetweennessCentrality');
-assert(isequal(m_inside_g.get('M'), known_distance), ...
+assert(isequal(m_inside_g.get('M'), known_edge_betweenness_centrality), ...
     [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
