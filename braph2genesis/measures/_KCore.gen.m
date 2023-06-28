@@ -15,7 +15,7 @@ NAME (constant, string) is the name of the kcore.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the kcore.
 %%%% ¡default!
-'The kcore of a graph is the shortest path between all pairs of nodes within a layer of the graph. For weighted graphs, the kcore is calculated with the Dijkstra algorithm using the inverse weight as the kcore associated to the edge.'
+'The k-core of a graph is the largest subnetwork comprising nodes of degree k or higher. k is set by the user; the default value is equal to 1.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the kcore.
