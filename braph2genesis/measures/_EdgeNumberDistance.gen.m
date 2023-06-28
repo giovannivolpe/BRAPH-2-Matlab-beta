@@ -62,15 +62,15 @@ A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for m
 L = g.get('LAYERNUMBER');
 edge_number_distance = cell(L, 1);
 
-parfor li = 1:L
+for li = 1:L
     Aii = A{li, li};
-    edge_number_distance(li) = {m.getEdgeNumberDistance(Aii)};
+    edge_number_distance(li) = {getEdgeNumberDistance(Aii)};
 end
 
 value = edge_number_distance;
 
 %%%% ¡calculate_callbacks!
-function edge_number_distance = getEdgeNumberDistance(m, A)
+function edge_number_distance = getEdgeNumberDistance(A)
     %GETEDGENUMBERDISTANCE calculates the edge distance number of a graph.
     
     ind = A~=0;
@@ -128,22 +128,22 @@ A = [
     ];
 
 known_value = {[
-    0 2 1 1 0;
-    2 0 1 1 0;
-    1 1 0 2 0;
-    1 1 2 0 0;
-    0 0 0 0 0;
-    ]};
+    0  1  1  1  0;
+    1  0  2  2  0;
+    1  1  0  1  0;
+    1  1  2  0  0;
+    0  0  0  0  0;
+    ]}
 
 g = GraphBD('B', A);
 
 m_outside_g = EdgeNumberDistance('G', g);
-assert(isequal(m_outside_g.get('M'), known_distance), ...
+assert(isequal(m_outside_g.get('M'), known_value), ...
     [BRAPH2.STR ':EdgeNumberDistance:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EdgeNumberDistance');
-assert(isequal(m_inside_g.get('M'), known_distance), ...
+assert(isequal(m_inside_g.get('M'), known_value), ...
     [BRAPH2.STR ':EdgeNumberDistance:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -187,11 +187,11 @@ known_value = {[
 g = GraphBD('B', A);
 
 m_outside_g = EdgeNumberDistance('G', g);
-assert(isequal(m_outside_g.get('M'), known_distance), ...
+assert(isequal(m_outside_g.get('M'), known_value), ...
     [BRAPH2.STR ':EdgeNumberDistance:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EdgeNumberDistance');
-assert(isequal(m_inside_g.get('M'), known_distance), ...
+assert(isequal(m_inside_g.get('M'), known_value), ...
     [BRAPH2.STR ':EdgeNumberDistance:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
