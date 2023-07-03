@@ -213,12 +213,12 @@ known_edge_betweenness_centrality = {[
 g = GraphBU('B', B);
 
 m_outside_g = EdgeBetweennessCentrality('G', g);
-assert(isequal(m_outside_g.get('M'), known_distance), ...
+assert(isequal(m_outside_g.get('M'), known_edge_betweenness_centrality), ...
     [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'EdgeBetweennessCentrality');
-assert(isequal(m_inside_g.get('M'), known_distance), ...
+assert(isequal(m_inside_g.get('M'), known_edge_betweenness_centrality), ...
     [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -240,7 +240,7 @@ known_edge_betweenness_centrality = {[
     2 0 0
     ]};
 
-g = GraphBD('B', A);
+g = GraphBD('B', B);
 
 m_outside_g = EdgeBetweennessCentrality('G', g);
 assert(isequal(m_outside_g.get('M'), known_edge_betweenness_centrality), ...
