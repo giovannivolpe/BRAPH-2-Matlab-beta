@@ -62,7 +62,7 @@ M (result, cell) is the radius.
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell matrix for graph, multigraph, or multiplex, etc
 L = g.get('LAYERNUMBER');
-eccentricity = Eccentricity('G', g, 'RULE', m.get('rule')).get('M');
+eccentricity = Eccentricity('G', g, 'RULE', m.get('RULE')).get('M');
 radius = cell(L, 1);
 
 parfor li = 1:1:L
@@ -188,7 +188,7 @@ B = [
     0     0   0   0    0
     ];
 known_radius_subgraphs = {0, 0};
-thresholds = [10 80];
+densities = [10 80];
 
 g = MultigraphBUD('B', B, 'DENSITIES', densities);
 

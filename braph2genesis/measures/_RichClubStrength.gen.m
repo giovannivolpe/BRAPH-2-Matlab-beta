@@ -74,7 +74,7 @@ assert(mod(richclub_threshold, 1) == 0, ...
     ['RichClubStrength threshold must be an integer value ' ...
     'while it is ' tostring(richclub_threshold)])
 
-k_level = abs(richclub_threshold);
+s_levels = abs(richclub_threshold);
 for li = 1:1:L
     
     Aii = A{li, li};
@@ -82,33 +82,32 @@ for li = 1:1:L
 
     if directionality_layer == Graph.UNDIRECTED  % undirected graphs
        
-        degree = calculateValue@Strength(m, prop); 
-        deg = degree{li};
+        strength = calculateValue@Strength(m, prop);
+        st = strength{li};
 
     else  % directed graphs
       
         in_strength = StrengthIn('G', g).get('M');        
         out_strength = StrengthOut('G', g).get('M');       
 
-        deg = (in_strength{li} + out_strength{li})/2;
+        st = (in_strength{li} + out_strength{li})/2;
     end
 
-    richclub_layer = zeros(N(1), 1, k_level);
+    richclub_layer = zeros(N(1), 1, s_levels);
     for k = 1:1:k_level
-        low_rich_nodes = find(deg <= k);  % get lower rich nodes with degree <= k
-        Aii = binarize(Aii);  % binarizes the adjacency matrix
-        subAii = Aii;  % extract subnetwork of nodes >k by removing nodes <= k of Aii
+        low_rich_nodes = find(st <= s);  % get lower rich nodes with strength <= s
+        subAii = Aii;  % extract subnetwork of nodes >s by removing nodes <=s of Aii
         subAii(low_rich_nodes, :) = 0;  % remove rows
         subAii(:, low_rich_nodes) = 0;  % remove columns
 
         if directionality_layer == Graph.UNDIRECTED  % undirected graphs
-            richclub_layer(:, :, k) = sum(subAii, 1)';  % degree of high rich nodes
+            rich_club_strength_layer(:, :, count) = round(sum(subAii, 1), 6)';  % strength of high rich nodes
         else
-            richclub_layer(:, :, k) = (sum(subAii, 1)' + sum(subAii, 2))/2;  % degree of high rich nodes
+            rich_club_strength_layer(:, :, count) = round((sum(subAii, 1)' + sum(subAii, 2)), 6)/2;  % strength of high rich nodes
         end
-
+        count = count + 1;
     end
-    rich_club_strength(li) = {richclub_layer};  % add rich club degree of layer li          
+    rich_club_strength(li) = {rich_club_strength_layer};  %#ok<SAGROW> % add rich club strength of layer li
 end
 
 value = rich_club_strength;
