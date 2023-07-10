@@ -42,6 +42,8 @@ DESCRIPTION (constant, string) is the description of the element GUI.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the element GUI.
+%%%% ¡settings!
+'GUIElement'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the element GUI.
@@ -404,9 +406,13 @@ function cb_open(~, ~)
         filename = fullfile(path, file);
         tmp_el = Element.load(filename);
         %TODO: add checks for BRAPH2 version
-        gui = GUIElement('PE', tmp_el, 'FILE', filename, 'WAITBAR', gui.get('WAITBAR'));
-        gui.get('DRAW')
-        gui.get('SHOW')
+        if isa(tmp_el, 'PanelFig')
+            tmp_gui = GUIFig('PF', tmp_el, 'FILE', filename, 'WAITBAR', gui.get('WAITBAR'));
+        else
+            tmp_gui = GUIElement('PE', tmp_el, 'FILE', filename, 'WAITBAR', gui.get('WAITBAR'));
+        end
+        tmp_gui.get('DRAW')
+        tmp_gui.get('SHOW')
     end
 end
 function cb_save(~, ~)

@@ -22,6 +22,8 @@ DESCRIPTION (constant, string) is the description of the ordinal multiplex binar
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the ordinal multiplex binary undirected graph.
+%%%% ¡settings!
+'OrdMxBU'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the ordinal multiplex binary undirected graph.
@@ -138,7 +140,7 @@ end
 value = alayerlabels;
 
 %%% ¡prop!
-COMPATIBLE_MEASURES (constant, stringlist) is the list of compatible measures.
+COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('OrdMxBU')
 

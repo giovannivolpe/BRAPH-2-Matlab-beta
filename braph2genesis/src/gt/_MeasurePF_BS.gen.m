@@ -7,6 +7,86 @@ MeasurePF_BS manages the basic functionalities to plot of a binodal superglobal 
 %%% ¡seealso!
 Measure
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.ID
+%%%% ¡title!
+Brain Atlas Figure ID
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.LABEL
+%%%% ¡title!
+Brain Atlas Figure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.WAITBAR
+%%%% ¡title!
+WAITBAR ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.NOTES
+%%%% ¡title!
+Brain Atlas NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.BKGCOLOR
+%%%% ¡title!
+BACKGROUND COLOR
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.ST_POSITION
+%%%% ¡title!
+PANEL POSITION
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.ST_AXIS
+%%%% ¡title!
+AXIS
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.ST_AREA
+%%%% ¡title!
+FILLED AREA
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.ST_LINE
+%%%% ¡title!
+MEASURE LINE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.ST_TITLE
+%%%% ¡title!
+TITLE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.ST_XLABEL
+%%%% ¡title!
+X-LABEL
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.ST_YLABEL
+%%%% ¡title!
+Y-LABEL
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_BS.NODES
+%%%% ¡title!
+NODES SELECTION
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -21,6 +101,8 @@ DESCRIPTION (constant, string) is the description of the panel figure binodal su
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the panel figure binodal superglobal measure.
+%%%% ¡settings!
+'MeasurePF_BS'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the panel figure binodal superglobal measure.

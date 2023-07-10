@@ -25,6 +25,8 @@ DESCRIPTION (constant, string) is the description of the concrete element.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the concrete element.
+%%%% ¡settings!
+'ConcreteElement'
 %%%% ¡preset!
 if ~isa(el, class(value))
     error( ...
@@ -45,7 +47,10 @@ for i = 1:1:length(parameter_props)
     varargin{2 * i - 1} = parameter_prop;
     varargin{2 * i} = template.getCallback(parameter_prop);    
 end
+
+warning_backup = warning('off', [BRAPH2.STR ':' class(el)]);
 el.set(varargin{:});
+warning(warning_backup)
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the concrete element.

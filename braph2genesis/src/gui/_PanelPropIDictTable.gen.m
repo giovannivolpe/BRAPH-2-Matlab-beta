@@ -7,10 +7,10 @@ It works for all categories.
 
 It can be personalized with the following props:
   COLS - Numerical array with the columns to be visualized. It can include 
-         PanelPropIDictTable.SELECTOR and/or prop numbers of the item class.
+         __PanelPropIDictTable.SELECTOR__ (PanelPropIDictTable.SELECTOR) and/or prop numbers of the item class.
   ROWNAME - String list with the row names as per uitable format.
          It can be a string list or 'numbered' or {} (to reset it).
-  COLUMNAME - String list with the column names as per uitable format.
+  COLUMNNAME - String list with the column names as per uitable format.
          It can be a string list or 'numbered'.
   COLUMNWIDTH - String list with the cloumn width as per uitable format.
          It can be a string list (e.g. {'1x' '2x'}) or 'auto'.
@@ -37,10 +37,12 @@ NAME (constant, string) is the name of the idict property panel.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the idict property panel.
 %%%% ¡default!
-'PanelPropIDictTable plots the panel of an IDICT property with a table. It works for all categories. It can be personalized with the following props: COLS, ROWNAME, COLUMNAME, COLUMNWIDTH, COLUMNEDITABLE, COLUMNFORMAT, CB_TAB_EDIT.'
+'PanelPropIDictTable plots the panel of an IDICT property with a table. It works for all categories. It can be personalized with the following props: COLS, ROWNAME, COLUMNNAME, COLUMNWIDTH, COLUMNEDITABLE, COLUMNFORMAT, CB_TAB_EDIT.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the idict property panel.
+%%%% ¡settings!
+'PanelPropIDictTable'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the idict property panel.
@@ -737,7 +739,7 @@ function cb_table(~, event) % (src, event)
                                 dict.get('IT', i).set('ID', newdata)
                                 % change item key in idict
                                 oldkey = dict.get('KEY', i);
-                                dict.replaceKey(dict.getKey(i), newdata);
+                                dict.get('REPLACE_KEY', dict.get('KEY', i), newdata);
                             end
                         else
                             dict.get('IT', i).set(col, newdata)
@@ -887,8 +889,8 @@ if pr.get('MENU_OPEN_ITEMS')
         'MenuSelectedFcn', {@cb_hide_all} ...
         );
 end
-if (isempty(pr.get('COLS')) && any(cellfun(@(prop) isequal(Element.getPropFormat(it_class, prop), Format.COLOR), num2cell(Element.getProps(it_class))))) ...
-        || any(cellfun(@(prop) prop > 0 && isequal(Element.getPropFormat(it_class, prop), Format.COLOR), num2cell(pr.get('COLS'))))
+if (isempty(pr.get('COLS')) && any(cellfun(@(prop) isequal(Element.getPropFormat(it_class, prop), Format.COLOR), num2cell(Element.getProps(it_class))))) ... % __Format.COLOR__
+        || any(cellfun(@(prop) prop > 0 && isequal(Element.getPropFormat(it_class, prop), Format.COLOR), num2cell(pr.get('COLS')))) % __Format.COLOR__
     menu_colorize_table = uimenu( ...
         'Separator', 'on', ...
         'Parent', contextmenu, ...

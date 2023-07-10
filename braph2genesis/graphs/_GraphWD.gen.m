@@ -19,6 +19,8 @@ DESCRIPTION (constant, string) is the description of the weighted undirected gra
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the weighted directed graph.
+%%%% ¡settings!
+'GraphWD'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the weighted directed graph.
@@ -81,7 +83,7 @@ pr = PanelPropCell('EL', g, 'PROP', GraphWD.A, ...
     varargin{:});
 
 %%% ¡prop!
-COMPATIBLE_MEASURES (constant, stringlist) is the list of compatible measures.
+COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('GraphWD')
 

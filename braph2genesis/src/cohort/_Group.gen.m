@@ -22,6 +22,38 @@ eval([el.get('SUB_CLASS') '.getGUIMenuExport(el, menu_export, pe)']);
 ex_sub_menus = get(menu_export, 'Children');
 delete(ex_sub_menus(end)); % delete one sub menu to export JSON
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+Group.ID
+%%%% ¡title!
+Group ID
+
+%%% ¡prop!
+%%%% ¡id!
+Group.LABEL
+%%%% ¡title!
+Group NAME
+
+%%% ¡prop!
+%%%% ¡id!
+Group.SUB_CLASS
+%%%% ¡title!
+Group SUBJECT CLASS
+
+%%% ¡prop!
+%%%% ¡id!
+Group.SUB_DICT
+%%%% ¡title!
+Group SUBJECTS
+
+%%% ¡prop!
+%%%% ¡id!
+Group.NOTES
+%%%% ¡title!
+Group NOTES
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -66,7 +98,19 @@ SUB_DICT (data, idict) is an indexed dictionary containing the subjects of the g
 %%%% ¡settings!
 'Subject'
 %%%% ¡gui!
+[order, title] = load_layout(gr.get(Group.SUB_DICT).get(IndexedDictionary.IT_CLASS));
+cols(1) = PanelPropIDictTable.SELECTOR;
+columnname = {''};
+for i = 1:1:length(order)
+    if isfinite(order(i))
+        cols(order(i) + 1) = i;
+        columnname{order(i) + 1} = title{i};
+    end
+end
 pr = PanelPropIDictTable('EL', gr, 'PROP', Group.SUB_DICT, ... 
+    'ROWNAME', 'numbered', ...
+    'COLS', cols, ...
+    'COLUMNNAME', columnname, ...
     'MENU_OPEN_ITEMS', true, ...
     varargin{:});
 
