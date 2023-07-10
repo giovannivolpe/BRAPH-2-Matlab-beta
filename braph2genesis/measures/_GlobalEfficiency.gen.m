@@ -141,8 +141,12 @@ known_global_efficiency = {
 
 
 g = MultiplexBU('B', B);
-m_global_efficiency = GlobalEfficiency('G', g);
-
-assert(isequal(m_global_efficiency.get('M'), known_global_efficiency), ...
+m_global_efficiency_outside = GlobalEfficiency('G', g);
+assert(isequal(m_global_efficiency_outside.get('M'), known_global_efficiency), ...
     [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
-    [class(m_global_efficiency) ' is not being calculated correctly for ' class(g) '.'])
+    [class(m_global_efficiency_outside) ' is not being calculated correctly for ' class(g) '.'])
+
+m_global_efficiency_inside = g.get('MEASURE', 'GlobalEfficiency');
+assert(isequal(m_global_efficiency_inside.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_global_efficiency_inside)  ' is not being calculated correctly for ' class(g) '.'])
