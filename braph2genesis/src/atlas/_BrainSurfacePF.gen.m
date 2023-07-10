@@ -70,6 +70,80 @@ VIEW_AZEL = { ... % vector of view azimutal and polar angle
     BrainSurfacePF.VIEW_CP_AZEL ...
     }
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+BrainSurfacePF.ID
+%%%% ¡title!
+Brain Atlas Figure ID
+
+%%% ¡prop!
+%%%% ¡id!
+BrainSurfacePF.LABEL
+%%%% ¡title!
+Brain Atlas Figure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+BrainSurfacePF.WAITBAR
+%%%% ¡title!
+WAITBAR ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+BrainSurfacePF.NOTES
+%%%% ¡title!
+Brain Atlas NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+BrainSurfacePF.BKGCOLOR
+%%%% ¡title!
+BACKGROUND COLOR
+
+%%% ¡prop!
+%%%% ¡id!
+BrainSurfacePF.ST_POSITION
+%%%% ¡title!
+PANEL POSITION
+
+%%% ¡prop!
+%%%% ¡id!
+BrainSurfacePF.VIEW
+%%%% ¡title!
+3D VIEW
+
+%%% ¡prop!
+%%%% ¡id!
+BrainSurfacePF.ST_AXIS
+%%%% ¡title!
+AXIS
+
+%%% ¡prop!
+%%%% ¡id!
+BrainSurfacePF.BRAIN
+%%%% ¡title!
+BRAIN ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+BrainSurfacePF.SURFFILE
+%%%% ¡title!
+BRAIN SURFACE
+
+%%% ¡prop!
+%%%% ¡id!
+BrainSurfacePF.ST_SURFACE
+%%%% ¡title!
+BRAIN COLOR
+
+%%% ¡prop!
+%%%% ¡id!
+BrainSurfacePF.ST_AMBIENT
+%%%% ¡title!
+MATERIAL & LIGHTNING
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -84,6 +158,8 @@ DESCRIPTION (constant, string) is the description of the panel figure brain surf
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the panel figure brain surface.
+%%%% ¡settings!
+'BrainSurfacePF'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the panel figure brain surface.

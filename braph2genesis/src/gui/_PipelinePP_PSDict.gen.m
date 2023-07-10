@@ -5,7 +5,7 @@ PipelinePP_PSDict < PanelProp (pr, pipeline plot) plots the panel for a pipeline
 PipelinePP_PSDict plots a pipeline allowing the user to execute it in the correct order.
 
 %%% ¡seealso!
-Pipeline, PanelProp
+Pipeline
 
 %% ¡props_update!
 
@@ -21,6 +21,8 @@ DESCRIPTION (constant, string) is the description of the pipeline plot.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the pipeline plot.
+%%%% ¡settings!
+'PipelinePP_PSDict'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the pipeline plot.

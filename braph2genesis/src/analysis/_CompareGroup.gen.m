@@ -77,6 +77,8 @@ DESCRIPTION (constant, string) is the description of the group-based comparison.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the group-based comparison.
+%%%% ¡settings!
+'CompareGroup'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the group-based comparison.
@@ -170,8 +172,8 @@ COMPARISON (query, item) returns a comparison.
 %%%% ¡settings!
 'ComparisonGroup'
 %%%% ¡calculate!
-% CP = g.get(''COMPARISON'', MEASURE_CLASS) checks if the comparison exists in the
-%  comparison dictionary CP_DICT. If not, it creates a new comparison
+% CP = c.get('COMPARISON', MEASURE_CLASS) checks if the comparison exists
+%  in the comparison dictionary CP_DICT. If not, it creates a new comparison
 %  CP of class MEASURE_CLASS. The user must call getValue() for the new
 %  comparison CP to retrieve the value of the comparison. 
 if isempty(varargin)
@@ -192,11 +194,11 @@ g = c.get('A1').get('G');
 m_list = g.get('COMPATIBLE_MEASURES');
 assert( ...
     contains(measure_class, m_list), ...
-    [BRAPH2.STR ':AnalyzeGroup:' BRAPH2.WRONG_INPUT], ...
-    [BRAPH2.STR ':AnalyzeGroup:' BRAPH2.WRONG_INPUT ' \\n' ...
-	 c.get('A1').getClass() ' utilizes Graphs of type ' g.getClass() '. \\n' ...
+    [BRAPH2.STR ':CompareGroup:' BRAPH2.WRONG_INPUT], ...
+    [BRAPH2.STR ':CompareGroup:' BRAPH2.WRONG_INPUT ' \\n' ...
+	 c.get('A1').getClass() ' utilizes graphs of type ' g.getClass() '. \\n' ...
      measure_class ' is not a compatible Measure with ' g.getClass() '. \\n' ...
-    'Use ' g.getClass() '.get(''COMPATIBLE_MEASURES'') for a list of compatible measures.']);
+    'Use ' g.getClass() '().get(''COMPATIBLE_MEASURES'') for a list of compatible measures.']);
 
 cp_dict = c.memorize('CP_DICT');
 if cp_dict.get('CONTAINS_KEY', measure_class)
@@ -216,11 +218,11 @@ value = cp;
 %%% ¡prop!
 PERM (query, itemlist) returns the permuted analyses.
 %%%% ¡calculate!
-% [A1P, A2P] = g.get('PERM', I) retunrs the I-th permutations for the analysis
+% {A1P, A2P} = c.get('PERM', I) retunrs the I-th permutations for the analysis
 %  A1P and A2P. The number of perutations must be smaller than the
 %  permutation number P, which is one of the properties of the comparison.
 %
-% [A1P, A2P] = g.get('PERM', I, true) memorizes the resulting permutations.
+% {A1P, A2P} = c.get('PERM', I, true) memorizes the resulting permutations.
 i = 1;
 if length(varargin) >= 1
     i = varargin{1};
@@ -247,8 +249,8 @@ else
     seeds = c.get('PERM_SEEDS');
     rng(seeds(i), 'twister')
 
-    subs1 = c.get('A1').get('GR').get('SUB_DICT').get('IT_LIST');
-    subs2 = c.get('A2').get('GR').get('SUB_DICT').get('IT_LIST');
+    subs1 = a1.get('GR').get('SUB_DICT').get('IT_LIST');
+    subs2 = a2.get('GR').get('SUB_DICT').get('IT_LIST');
 
     [subs1_perm, subs2_perm] = permutation(subs1, subs2, c.get('LONGITUDINAL'));
 

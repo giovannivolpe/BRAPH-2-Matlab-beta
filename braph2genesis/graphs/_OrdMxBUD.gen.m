@@ -21,10 +21,8 @@ DESCRIPTION (constant, string) is the description of the ordinal binary undirect
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the ordinal binary undirected multiplex with fixed densities.
-%%% ¡_prop!
-% % % TEMPLATE (parameter, item) is the graph template to set the graph and measure parameters.
-% % % %%%% ¡_settings!
-% % % 'MultiplexBUD'
+%%%% ¡settings!
+'OrdMxBUD'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the ordinal binary undirected multiplex with fixed densities.
@@ -151,7 +149,7 @@ end
 value = alayerlabels;
 
 %%% ¡prop!
-COMPATIBLE_MEASURES (constant, stringlist) is the list of compatible measures.
+COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('OrdMxBUD')
 

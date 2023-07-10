@@ -20,6 +20,8 @@ DESCRIPTION (constant, string) is the description of the binary undirected graph
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the binary undirected graph.
+%%%% ¡settings!
+'GraphBU'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the binary undirected graph.
@@ -83,7 +85,7 @@ pr = PanelPropCell('EL', g, 'PROP', GraphBU.A, ...
     varargin{:});
 
 %%% ¡prop!
-COMPATIBLE_MEASURES (constant, stringlist) is the list of compatible measures.
+COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('GraphBU')
 

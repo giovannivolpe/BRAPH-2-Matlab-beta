@@ -25,6 +25,8 @@ DESCRIPTION (constant, string) is the description of the ordinal multilayer bina
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the ordinal multilayer binary undirected graph.
+%%%% ¡settings!
+'OrdMlBU'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the ordinal multilayer binary undirected graph.
@@ -147,7 +149,7 @@ end
 value = alayerlabels;
 
 %%% ¡prop!
-COMPATIBLE_MEASURES (constant, stringlist) is the list of compatible measures.
+COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('OrdMlBU')
 

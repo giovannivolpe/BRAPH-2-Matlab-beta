@@ -21,6 +21,8 @@ DESCRIPTION (constant, string) is the description of the binary undirected multi
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the binary undirected multiplex with fixed thresholds.
+%%%% ¡settings!
+'MultiplexBUT'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the binary undirected multiplex with fixed thresholds.
@@ -147,7 +149,7 @@ end
 value = alayerlabels;
 
 %%% ¡prop!
-COMPATIBLE_MEASURES (constant, stringlist) is the list of compatible measures.
+COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('MultiplexBUT')
 

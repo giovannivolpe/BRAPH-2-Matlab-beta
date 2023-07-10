@@ -22,10 +22,8 @@ DESCRIPTION (constant, string) is the description of the ordinal multilayer bina
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the ordinal multilayer binary directed graph.
-%%% ¡_prop!
-% % % TEMPLATE (parameter, item) is the graph template to set the graph and measure parameters.
-% % % %%%% ¡_settings!
-% % % 'multilayerBD'
+%%%% ¡settings!
+'OrdMlBD'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the ordinal multilayer binary directed graph.
@@ -140,7 +138,7 @@ end
 value = alayerlabels;
 
 %%% ¡prop!
-COMPATIBLE_MEASURES (constant, stringlist) is the list of compatible measures.
+COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('OrdMlBD')
 
@@ -211,7 +209,7 @@ B{2,3} = A23;
 B{2,1} = A21;
 B{3,1} = A31;
 B{3,2} = A32;
-A = B
+A = B;
 assert(isequal(g.get('A'), A), ...
     [BRAPH2.STR ':OrdMlBD:' BRAPH2.FAIL_TEST], ...
     'OrdMlBD is not constructing well.')

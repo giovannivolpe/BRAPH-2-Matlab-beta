@@ -97,7 +97,7 @@ close all; delete(findall(0, 'type', 'figure')); clear all
 % isequal(gui_copy, gui)
 
 %% GUI
-% el_class_list = {'PanelPropCell'}; % 'PanelPropIDictTable' 'PanelPropItemList' 'PanelPropStringTextArea' 'SettingsPosition' 'PanelPropCell'
+% el_class_list = {'PanelPropIDictTable'}; % 'PanelPropIDictTable' 'PanelPropItemList' 'PanelPropStringTextArea' 'SettingsPosition' 'PanelPropCell'
 % for i = 1:1:length(el_class_list)
 %     el_class = el_class_list{i};
 %     el_path = '/src/gui';
@@ -177,7 +177,7 @@ close all; delete(findall(0, 'type', 'figure')); clear all
 % end
 
 %% Graphs
-% el_class_list = {'MeasurePF'} % 'Graph' 'Measure' 'MeasurePF' 'MeasurePF_GU' 'MeasurePF_NU' 'MeasurePF_BU' 'GraphPP_MDict'
+% el_class_list = {'Graph'} % 'Graph' 'Measure' 'MeasurePF' 'MeasurePF_GU' 'MeasurePF_NU' 'MeasurePF_BU' 'GraphPP_MDict'
 % for i = 1:1:length(el_class_list)
 %     el_class = el_class_list{i};
 %     el_path = '/src/gt';
@@ -1159,7 +1159,7 @@ close all; delete(findall(0, 'type', 'figure')); clear all
 %     eval(['test_' el_class])
 % end
 
-% el_class_list = {'CompareGroup'} % {'CompareGroup' 'ComparisonGroup'}
+% el_class_list = {'ComparisonGroup'} % {'CompareGroup' 'ComparisonGroup'}
 % for i = 1:1:length(el_class_list)
 %     el_class = el_class_list{i};
 %     el_path = '/src/analysis';
@@ -1267,14 +1267,218 @@ close all; delete(findall(0, 'type', 'figure')); clear all
 %     eval(['test_' el_class])
 % end
 
-el_class_list = {'AnalyzeGroup_CON_FUN_MP_GA_BUD'} % {'AnalyzeGroup_CON_FUN_MP_GA_WU' 'AnalyzeGroup_CON_FUN_MP_GA_BUD'}
+% el_class_list = {'AnalyzeGroup_CON_FUN_MP_GA_BUD'} % {'AnalyzeGroup_CON_FUN_MP_GA_WU' 'AnalyzeGroup_CON_FUN_MP_GA_BUD'}
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/pipelines/connectivity-functional multiplex group_average';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+%% AnalyzeEnsemble
+
+% el_class_list = {'IndexedDictionary'};
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/src/ds';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+% el_class_list = {'MeasureEnsemble'} % {'AnalyzeEnsemble' 'MeasureEnsemble' 'CompareEnsemble' 'ComparisonEnsemble'}
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/src/analysis';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+% el_class_list = {'AnalyzeEnsemble_CON_BUT'} % {'AnalyzeEnsemble_CON_WU' 'AnalyzeEnsemble_CON_BUT' 'AnalyzeEnsemble_CON_BUD'}
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/pipelines/connectivity';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+% el_class_list = {'AnalyzeEnsemble_CON_MP_BUT'} % {'AnalyzeEnsemble_CON_MP_WU' 'AnalyzeEnsemble_CON_MP_BUT' 'AnalyzeEnsemble_CON_MP_BUT'}
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/pipelines/connectivity multiplex';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+% el_class_list = {'AnalyzeEnsemble_CON_OMP_WU'}
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/pipelines/connectivity ordered_multiplex';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+% el_class_list = {'AnalyzeEnsemble_FUN_WU'} % {'AnalyzeEnsemble_FUN_WU' 'AnalyzeEnsemble_FUN_BUT' 'AnalyzeEnsemble_FUN_BUD'}
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/pipelines/functional';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+% el_class_list = {'AnalyzeEnsemble_FUN_MP_BUD'} % {'AnalyzeEnsemble_FUN_MP_WU' 'AnalyzeEnsemble_FUN_MP_BUT' 'AnalyzeEnsemble_FUN_MP_BUD'}
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/pipelines/functional multiplex';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+% el_class_list = {'AnalyzeEnsemble_FUN_OMP_WU'}
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/pipelines/functional ordered_multiplex';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+% el_class_list = {'AnalyzeEnsemble_CON_FUN_MP_BUT'} % {'AnalyzeEnsemble_CON_FUN_MP_WU' 'AnalyzeEnsemble_CON_FUN_MP_BUT' 'AnalyzeEnsemble_CON_FUN_MP_BUD'}
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/pipelines/connectivity-functional multiplex';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+%% Settings Layout
+% el_class_list = {'BrainSurfacePF'} % {'BrainAtlasPF' 'BrainSurfacePF'}
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/src/atlas';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+% el_class_list = {'GUIFig'}
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/src/gui';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+% el_class_list = {'GraphAdjPF'} % {'GraphAdjPF' 'GraphHistPF' 'MeasurePF' 'MeasurePF_GS' 'MeasurePF_GU' 'MeasurePF_GB' 'MeasurePF_NS' 'MeasurePF_NU' 'MeasurePF_NB' 'MeasurePF_BS' 'MeasurePF_BU' 'MeasurePF_BB'}
+% for i = 1:1:length(el_class_list)
+%     el_class = el_class_list{i};
+%     el_path = '/src/atlas';
+%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+%     eval(['test_' el_class])
+% end
+
+% ba = BrainAtlas();
+% pf = BrainAtlasPF('BA', ba);
+
+% gui_pf = GUIElement('PE', pf);
+% gui_pf.get('DRAW')
+% gui_pf.get('SHOW')
+
+% gui = GUIFig('PF', pf);
+% gui.get('DRAW')
+% gui.get('SHOW')
+
+% gui_settings = gui.memorize('GUI_SETTINGS');
+% gui_settings.get('DRAW')
+% gui_settings.get('SHOW')
+
+%% Group & Subjects interface
+el_class_list = {'SubjectPP_VOIDict'} % {'Group' 'SubjectPP_VOIDict' 'Subject'} 
 for i = 1:1:length(el_class_list)
     el_class = el_class_list{i};
-    el_path = '/pipelines/connectivity-functional multiplex group_average';
+    el_path = '/src/cohort';
     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-    create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-    eval(['test_' el_class])
+%     eval(['test_' el_class])
 end
+
+% im_ba = ImporterBrainAtlasXLS('FILE', 'destrieux_atlas.xlsx');
+% ba = im_ba.get('BA');
+% 
+% gr = Group('SUB_CLASS', 'SubjectST', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectST'));
+% for i = 1:1:50
+%     sub = SubjectST( ...
+%         'ID', ['SUB ST ' int2str(i)], ...
+%         'LABEL', ['Subejct ST ' int2str(i)], ...
+%         'NOTES', ['Notes on subject ST ' int2str(i)], ...
+%         'BA', ba, ...
+%         'ST', rand(ba.get('BR_DICT').get('LENGTH'), 1) ...
+%         );
+%     sub.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 100 * rand()))
+%     sub.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', randi(2, 1)))
+%     gr.get('SUB_DICT').get('ADD', sub)
+% end
+% 
+% gui = GUIElement('PE', gr, 'CLOSEREQ', false);
+% gui.get('DRAW')
+% gui.get('SHOW')
+
+sub = SubjectST();
+voi_dict = sub.memorize('VOI_DICT');
+voi_dict.get('ADD', VOINumeric('ID', 'Age', 'V', 25))
+voi_age = voi_dict.get('IT', 1);
+voi_dict.get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', 2))
+voi_sex = voi_dict.get('IT', 2);
+gui = GUIElement('PE', sub, 'CLOSEREQ', false);
+gui.get('DRAW')
+gui.get('SHOW')

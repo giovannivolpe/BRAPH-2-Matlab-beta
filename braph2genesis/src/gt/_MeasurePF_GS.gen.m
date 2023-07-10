@@ -7,6 +7,80 @@ MeasurePF_GS manages the basic functionalities to plot of a global superglobal m
 %%% ¡seealso!
 Measure
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_GS.ID
+%%%% ¡title!
+Brain Atlas Figure ID
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_GS.LABEL
+%%%% ¡title!
+Brain Atlas Figure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_GS.WAITBAR
+%%%% ¡title!
+WAITBAR ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_GS.NOTES
+%%%% ¡title!
+Brain Atlas NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_GS.BKGCOLOR
+%%%% ¡title!
+BACKGROUND COLOR
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_GS.ST_POSITION
+%%%% ¡title!
+PANEL POSITION
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_GS.ST_AXIS
+%%%% ¡title!
+AXIS
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_GS.ST_AREA
+%%%% ¡title!
+FILLED AREA
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_GS.ST_LINE
+%%%% ¡title!
+MEASURE LINE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_GS.ST_TITLE
+%%%% ¡title!
+TITLE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_GS.ST_XLABEL
+%%%% ¡title!
+X-LABEL
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF_GS.ST_YLABEL
+%%%% ¡title!
+Y-LABEL
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -21,6 +95,8 @@ DESCRIPTION (constant, string) is the description of the panel figure global sup
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the panel figure global superglobal measure.
+%%%% ¡settings!
+'MeasurePF_GS'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the panel figure global superglobal measure.

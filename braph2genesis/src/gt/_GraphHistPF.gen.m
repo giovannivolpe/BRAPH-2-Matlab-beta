@@ -7,6 +7,80 @@ GraphHistPF manages the plot of the histogram of an adjaciency matrix.
 %%% ¡seealso!
 Graph, GraphAdjPF
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+GraphHistPF.ID
+%%%% ¡title!
+Brain Atlas Figure ID
+
+%%% ¡prop!
+%%%% ¡id!
+GraphHistPF.LABEL
+%%%% ¡title!
+Brain Atlas Figure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+GraphHistPF.WAITBAR
+%%%% ¡title!
+WAITBAR ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+GraphHistPF.NOTES
+%%%% ¡title!
+Brain Atlas NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+GraphHistPF.BKGCOLOR
+%%%% ¡title!
+BACKGROUND COLOR
+
+%%% ¡prop!
+%%%% ¡id!
+GraphHistPF.ST_POSITION
+%%%% ¡title!
+PANEL POSITION
+
+%%% ¡prop!
+%%%% ¡id!
+GraphHistPF.ST_AXIS
+%%%% ¡title!
+AXIS
+
+%%% ¡prop!
+%%%% ¡id!
+GraphHistPF.LAYERS
+%%%% ¡title!
+LAYERS
+
+%%% ¡prop!
+%%%% ¡id!
+GraphHistPF.BINS
+%%%% ¡title!
+BINS
+
+%%% ¡prop!
+%%%% ¡id!
+GraphHistPF.DIAGONAL
+%%%% ¡title!
+DIAGONAL IN/OUT
+
+%%% ¡prop!
+%%%% ¡id!
+GraphHistPF.ST_HIST_AREA
+%%%% ¡title!
+HISTOGRAM AREA PROPERTIES
+
+%%% ¡prop!
+%%%% ¡id!
+GraphHistPF.ST_DENSITY_LINE
+%%%% ¡title!
+DENSITY LINE PROPERTIES
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -21,6 +95,8 @@ DESCRIPTION (constant, string) is the description of the panel figure graph hist
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the panel figure graph histogram.
+%%%% ¡settings!
+'GraphHistPF'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the panel figure graph histogram.

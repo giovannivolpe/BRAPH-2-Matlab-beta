@@ -22,6 +22,8 @@ DESCRIPTION (constant, string) is the description of the group-based comparison 
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the group-based comparison result.
+%%%% ¡settings!
+'ComparisonGroup'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the group-based comparison result.
@@ -41,7 +43,9 @@ NOTES (metadata, string) are some specific notes about the group-based compariso
 %% ¡props!
 
 %%% ¡prop!
-MEASURE (data, string) is the measure class.
+MEASURE (data, class) is the measure class.
+%%%% ¡settings!
+'Measure'
 
 %%% ¡prop!
 C (data, item) is the group-based comparison.
@@ -717,7 +721,7 @@ CALCULATE_RESULTS (evanescent, cell) calculates the comparison results {diff, p1
 %  Typically, this method is only called internally.
 
 measure_class = cp.get('MEASURE');
-if isempty(cp.get('MEASURE'))
+if strcmpi(cp.get('MEASURE'), 'Measure')
     diff = {};
     p1 = {};
     p2 = {};
@@ -750,8 +754,8 @@ for j = 1:20:P
         a1_perm = a1_a2_perms{1};
         a2_perm = a1_a2_perms{2};
 
-        m1_perms{1, i} = a1_perm.memorize('G').get('MEASURE', measure_class).memorize('M');
-        m2_perms{1, i} = a2_perm.memorize('G').get('MEASURE', measure_class).memorize('M');
+        m1_perms{1, i} = a1_perm.memorize('G').get('MEASURE', measure_class).memorize('M'); %#ok<PFOUS>
+        m2_perms{1, i} = a2_perm.memorize('G').get('MEASURE', measure_class).memorize('M'); %#ok<PFOUS>
         diff_perms{1, i} = cellfun(@(x, y) y - x, m1_perms{1, i}, m2_perms{1, i}, 'UniformOutput', false);
     end
 

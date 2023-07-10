@@ -22,6 +22,8 @@ DESCRIPTION (constant, string) is the description of the multiplex weighted undi
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multiplex weighted undirected graph.
+%%%% ¡settings!
+'MultiplexWU'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the multiplex weighted undirected graph.
@@ -133,7 +135,7 @@ end
 value = alayerlabels;
 
 %%% ¡prop!
-COMPATIBLE_MEASURES (constant, stringlist) is the list of compatible measures.
+COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('MultiplexWU')
 
@@ -298,9 +300,9 @@ function random_g = randomize(g)
                     random_multi_A(li) = {random_A};
                 end
                 if isa(g, 'MultiplexBUD')
-                    random_g = MultiplexBUD('B', random_multi_A, 'Densities', g.get('Densities'));
+                    random_g = MultiplexBUD('B', random_multi_A, 'DENSITIES', g.get('Densities'));
                 else
-                    random_g = MultiplexBUT('B', random_multi_A, 'Thresholds', g.get('Thresholds'));
+                    random_g = MultiplexBUT('B', random_multi_A, 'THRESHOLDS', g.get('Thresholds'));
                 end
                 
             else % multiplexWU

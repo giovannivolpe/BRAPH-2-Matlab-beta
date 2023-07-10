@@ -7,6 +7,80 @@ MeasurePF manages the basic functionalities to plot of a measure.
 %%% ¡seealso!
 Measure
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF.ID
+%%%% ¡title!
+Brain Atlas Figure ID
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF.LABEL
+%%%% ¡title!
+Brain Atlas Figure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF.WAITBAR
+%%%% ¡title!
+WAITBAR ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF.NOTES
+%%%% ¡title!
+Brain Atlas NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF.BKGCOLOR
+%%%% ¡title!
+BACKGROUND COLOR
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF.ST_POSITION
+%%%% ¡title!
+PANEL POSITION
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF.ST_AXIS
+%%%% ¡title!
+AXIS
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF.ST_AREA
+%%%% ¡title!
+FILLED AREA
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF.ST_LINE
+%%%% ¡title!
+MEASURE LINE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF.ST_TITLE
+%%%% ¡title!
+TITLE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF.ST_XLABEL
+%%%% ¡title!
+X-LABEL
+
+%%% ¡prop!
+%%%% ¡id!
+MeasurePF.ST_YLABEL
+%%%% ¡title!
+Y-LABEL
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -21,6 +95,8 @@ DESCRIPTION (constant, string) is the description of the panel figure measure.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the panel figure measure.
+%%%% ¡settings!
+'MeasurePF'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the panel figure measure.

@@ -42,6 +42,8 @@ DESCRIPTION (constant, string) is the description of the figure GUI.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the figure GUI.
+%%%% ¡settings!
+'GUIFig'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the figure GUI.
@@ -355,13 +357,23 @@ GUI_SETTINGS (data, item) is the handle to the figure to manage the figure setti
 if isa(value.getr('PE'), 'NoValue') % i.e., default initialization
     pf = gui.memorize('PF');
     f = gui.get('H');
-    pr_visible = int8(ismember(1:1:pf.getPropNumber(), pf.getProps(Category.FIGURE)));
-    pr_order = cumsum(pr_visible) .* pr_visible;
-    pe = PanelElement( ...
-        'EL', pf, ...
+    
+    pe = PanelElement('EL', pf);
+    
+    pr_visible = int8(pe.get('PR_VISIBLE') & ismember(1:1:pf.getPropNumber(), pf.getProps(Category.FIGURE))); % __Category.FIGURE__
+
+    pr_order = pe.get('PR_ORDER');
+    pr_order(pr_visible == 0) = NaN;
+    for i = sum(pr_visible):-1:1
+        pr_order(pr_order == max(pr_order)) = -i;
+    end
+    pr_order = -pr_order;
+    
+    pe.set( ...
         'PR_VISIBLE', pr_visible, ...
         'PR_ORDER', pr_order ...
-        );
+        )
+    
 	value.set( ...
         'PE', pe, ...
         'TITLE', ['Settings - ' gui.get('TITLE')], ...
