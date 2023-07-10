@@ -67,7 +67,7 @@ if isempty(g.get('A'))
     return;
 end
 L = g.get('LAYERNUMBER');
-path_length_rule = m.get('rule');
+path_length_rule = m.get('RULE');
 clustering_av = ClusteringAv('G', g).get('M');
 path_length_av = calculateValue@PathLengthAv(m, prop);
 
@@ -78,7 +78,7 @@ for r = 1:1:M
     g_random = g.randomize();
 
     clustering_av_random(r) = {ClusteringAv('G', g_random).get('M')};
-    path_length_av_random(r) = {PathLengthAv('G', g_random, 'rule', path_length_rule).get('M')}; 
+    path_length_av_random(r) = {PathLengthAv('G', g_random, 'RULE', path_length_rule).get('M')}; 
     
 end
 path_length_av_random = cellfun(@(x) cell2mat(x), path_length_av_random, 'UniformOutput', false);
