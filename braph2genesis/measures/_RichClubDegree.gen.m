@@ -1,5 +1,5 @@
 %% ¡header!
-RichClubDegree < Degree (m, richclubdegree) is the graph richclubdegree.
+RichClubDegree < Degree (m, rich-club degree) is the graph richclubdegree.
 
 %%% ¡description!
 The rich-club degree of a node at level k is the sum of 
