@@ -62,7 +62,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%% ¡prop!
 M (result, cell) is the richclub.
 %%%% ¡calculate!
- = m.get('G'); % graph from measure class
+g = m.get('G'); % graph from measure class
 A = g.get('A'); % adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 L = g.get('LAYERNUMBER');
 
