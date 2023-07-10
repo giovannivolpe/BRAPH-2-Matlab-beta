@@ -64,7 +64,7 @@ g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 L = g.get('LAYERNUMBER');
 
-score_threshold = m.get('SCoreThreshold');
+score_threshold = m.get('SCORETHRESHOLD');
 assert(isnumeric(score_threshold) == 1, ...
     [BRAPH2.STR ':SCore:' BRAPH2.WRONG_INPUT], ...
     ['SCore threshold must be a positive number ' ...
@@ -104,7 +104,7 @@ value = s_core;
 
 %% ¡props!
 %%% ¡prop! 
-SCoreThreshold (parameter, scalar) is the strength threshold.
+SCORETHRESHOLD (parameter, scalar) is the strength threshold.
 %%%% ¡default!
 1
 
@@ -135,13 +135,13 @@ known_score = {[
 
 g = GraphWU('B', A);
 
-m_outside_g = SCore('G', g, 'SCoreThreshold', 1.5);
+m_outside_g = SCore('G', g, 'SCORETHRESHOLD', 1.5);
 assert(isequal(m_outside_g.get('M'), known_score), ...
     [BRAPH2.STR ':SCore:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'SCore');
-m_inside_g.set('SCoreThreshold', 1.5);
+m_inside_g.set('SCORETHRESHOLD', 1.5);
 assert(isequal(m_inside_g.get('M'), known_score), ...
     [BRAPH2.STR ':SCore:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -167,13 +167,13 @@ known_score = {[
 
 g = GraphWD('B', A);
 
-m_outside_g = SCore('G', g, 'SCoreThreshold', 3);
+m_outside_g = SCore('G', g, 'SCORETHRESHOLD', 3);
 assert(isequal(m_outside_g.get('M'), known_score), ...
     [BRAPH2.STR ':SCore:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'SCore');
-m_inside_g.set('SCoreThreshold', 3);
+m_inside_g.set('SCORETHRESHOLD', 3);
 assert(isequal(m_inside_g.get('M'), known_score), ...
     [BRAPH2.STR ':SCore:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -215,13 +215,13 @@ known_score(2, 1) = {[
 
 g = MultiplexWU('B', A);
 
-m_outside_g = SCore('G', g, 'SCoreThreshold', 1.5);
+m_outside_g = SCore('G', g, 'SCORETHRESHOLD', 1.5);
 assert(isequal(m_outside_g.get('M'), known_score), ...
     [BRAPH2.STR ':SCore:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'SCore');
-m_inside_g.set('SCoreThreshold', 1.5);
+m_inside_g.set('SCORETHRESHOLD', 1.5);
 assert(isequal(m_inside_g.get('M'), known_score), ...
     [BRAPH2.STR ':SCore:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -260,13 +260,13 @@ known_score(2, 1) = {[
     0   0   0  0
     ]};
 
-m_outside_g = SCore('G', g, 'SCoreThreshold', 1.5);
+m_outside_g = SCore('G', g, 'SCORETHRESHOLD', 1.5);
 assert(isequal(m_outside_g.get('M'), known_score), ...
     [BRAPH2.STR ':SCore:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'SCore');
-m_inside_g.set('SCoreThreshold', 1.5);
+m_inside_g.set('SCORETHRESHOLD', 1.5);
 assert(isequal(m_inside_g.get('M'), known_score), ...
     [BRAPH2.STR ':SCore:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
