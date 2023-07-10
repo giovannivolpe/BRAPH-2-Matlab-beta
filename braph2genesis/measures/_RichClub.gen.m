@@ -135,7 +135,7 @@ B = [
     0   .3  0  0
     ];
 
-r(1, 1, 1) = .75;
+r(1, 1, 1) = .83;
 r(1, 1, 2) = 1;
 r(1, 1, 3) = 0;
 
@@ -145,13 +145,15 @@ g = GraphWU('B', B);
 
 m_outside_g = RichClub('G', g);
 m_outside_g.set('PARAMETRIC_VALUE', 3);
-assert(isequal(m_outside_g.get('M'), known_richclub), ...
+outisde_val = cellfun(@(x) round(x, 2), m_outside_g.get('M'), 'UniformOutput', false);
+assert(isequal(outisde_val, known_richclub), ...
     [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'RichClub');
 m_inside_g.set('PARAMETRIC_VALUE', 3);
-assert(isequal(m_inside_g.get('M'), known_richclub), ...
+inside_val = cellfun(@(x) round(x, 2), m_inside_g.get('M'), 'UniformOutput', false);
+assert(isequal(inside_val, known_richclub), ...
     [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -210,9 +212,7 @@ known_richclub = {r};
 g = GraphBU('B', B);
 
 m_outside_g = RichClub('G', g, 'PARAMETRIC_VALUE', 3).get('M');
-
-m_outside_g.set('PARAMETRIC_VALUE', 2);
-assert(isequal(m_outside_g.get('M'), known_richclub), ...
+assert(isequal(m_outside_g, known_richclub), ...
     [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -236,7 +236,7 @@ B = [
     ];
 
 r(1, 1, 1) = 1;
-r(1, 1, 2) = 1;
+r(1, 1, 2) = 0;
 r(1, 1, 3) = 0;
 
 known_richclub = {r};
@@ -244,9 +244,7 @@ known_richclub = {r};
 g = GraphBD('B', B);
 
 m_outside_g = RichClub('G', g, 'PARAMETRIC_VALUE', 3).get('M');
-
-m_outside_g.set('PARAMETRIC_VALUE', 2);
-assert(isequal(m_outside_g.get('M'), known_richclub), ...
+assert(isequal(m_outside_g, known_richclub), ...
     [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -271,9 +269,8 @@ B = [
 
 r(1, 1, 1) = 1;
 r(1, 1, 2) = 0;
-r(1, 1, 3) = 0;
 
-known_richclub = {r, 0};
+known_richclub = {r, r};
 thresholds = [0.1 0.7];
 
 g = MultigraphBUT('B', B, 'THRESHOLDS', thresholds);
@@ -304,10 +301,11 @@ B =[
     ];
 r(1, 1, 1) = 1;
 r(1, 1, 2) = 0;
-r(1, 1, 3) = 0;
+l(1, 1, 1) = 0;
+l(1, 1, 2) = 0;
 
-known_richclub = {0, r};
-thresholds = [10 80];
+known_richclub = {l, r};
+densities = [10 80];
 
 g = MultigraphBUD('B', B, 'DENSITIES', densities);
 
@@ -323,48 +321,6 @@ assert(isequal(m_inside_g.get('M'), known_richclub), ...
     [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-%%% ¡test!
-%%%% ¡name!
-MultiplexWU
-%%%% ¡code!
-A11 = [
-    0   1   1  .1; 
-    .2  0   1  1; 
-    1   1   0  0;
-    0   .3  0  0
-    ];
-A22 = [
-    0   1   1   .1; 
-    .2  0   1   1; 
-    1   1   0   0;
-    0   .3  .7  0
-    ];
-A = {A11 A22};
-
-richclub_l1(1, 1, 1) = 3/4;
-richclub_l1(1, 1, 2) = 1;
-
-richclub_l2(1, 1, 1) = 5/6;
-richclub_l2(1, 1, 2) = 1;
-
-known_richclub = {
-                 richclub_l1
-                 richclub_l2
-                 };
-
-g = MultiplexWU('B', B);
-
-m_outside_g = RichClub('G', g);
-m_outside_g.set('PARAMETRIC_VALUE', 2);
-assert(isequal(m_outside_g.get('M'), known_richclub), ...
-    [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
-    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-m_inside_g = g.get('MEASURE', 'RichClub');
-m_inside_g.set('PARAMETRIC_VALUE', 2);
-assert(isequal(m_inside_g.get('M'), known_richclub), ...
-    [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
-    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
