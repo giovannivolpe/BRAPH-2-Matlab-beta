@@ -106,8 +106,8 @@ M (result, cell) is the average degree overlap.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
-[l, ls] = g.get('LAYERNUMBER');
-
+l = g.get('LAYERNUMBER');
+ls = l;
 if l == 0
     value = {};
 else
