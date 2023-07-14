@@ -82,7 +82,7 @@ value = global_efficiency;
 
 %%% ¡test!
 %%%% ¡name!
-GraphBU
+GraphWU
 %%%% ¡probability!
 .01
 %%%% ¡code!
@@ -94,14 +94,164 @@ B = [
     0   0   0   0   0
     ];
 
+known_global_efficiency = {[1/20 1/20 1/20 1/20 0]'};
+
+g = GraphWU('B', B);
+
+m_outside_g = GlobalEfficiency('G', g);
+assert(isequal(m_outside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'GlobalEfficiency');
+assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+GraphBU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+
+B = [
+    0   .1  0   0   0
+    .2  0   0   0   0
+    0   0   0   .2  0
+    0   0   .1  0   0
+    0   0   0   0   0
+    ];
+
 known_global_efficiency = {[1/4 1/4 1/4 1/4 0]'};
 
 g = GraphBU('B', B);
-m_global_efficiency = GlobalEfficiency('G', g);
 
-assert(isequal(m_global_efficiency.get('M'), known_global_efficiency), ...
+m_outside_g = GlobalEfficiency('G', g);
+assert(isequal(m_outside_g.get('M'), known_global_efficiency), ...
     [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
-    [class(m_global_efficiency) ' is not being calculated correctly for ' class(g) '.'])
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'GlobalEfficiency');
+assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultigraphBUD
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B = [
+    0   .2   .7
+    .2   0   .1
+    .7  .1   0
+    ];
+
+densities = [0 33 67 100];
+
+known_global_efficiency = { ...
+    [0 0 0]'
+    [1/2 0 1/2]'
+    [1 3/4 3/4]'
+    [1 1 1]'
+    };
+
+g = MultigraphBUD('B', B, 'DENSITIES', densities);
+
+m_outside_g = GlobalEfficiency('G', g);
+assert(isequal(m_outside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'GlobalEfficiency');
+assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultigraphBUT
+%%%% ¡probability!
+.01
+%%%% ¡code!
+
+B = [
+    0   .2   .7
+    .2   0   0
+    .7   0   0
+    ];
+
+thresholds = [0 .5 1];
+
+known_global_efficiency = { ...
+    [1 3/4 3/4]'
+    [1/2 0 1/2]'
+    [0 0 0]'
+    };
+
+g = MultigraphBUT('B', B, 'THRESHOLDS', thresholds);
+
+m_outside_g = GlobalEfficiency('G', g);
+assert(isequal(m_outside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'GlobalEfficiency');
+assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+      0   .1  0   0   0
+      .2  0   0   0   0
+      0   0   0   .2  0
+      0   0   .1  0   0
+      0   0   0   0   0
+      ];
+
+B22 = [
+      0   .1  0   0   0
+      .2  0   0   0   0
+      0   0   0   .2  0
+      0   0   .1  0   0
+      0   0   0   0   0
+      ];
+B33 = [
+      0   .1  0   0   0
+      .2  0   0   0   0
+      0   0   0   .2  0
+      0   0   .1  0   0
+      0   0   0   0   0
+      ];
+B = {B11  B22  B33};
+
+known_global_efficiency = {
+                        [1/20 1/20 1/20 1/20 0]'
+                        [1/20 1/20 1/20 1/20 0]'
+                        [1/20 1/20 1/20 1/20 0]'
+                        };
+
+
+g = MultiplexWU('B', B);
+
+
+m_outside_g = GlobalEfficiency('G', g);
+assert(isequal(m_outside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'GlobalEfficiency');
+assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
@@ -109,6 +259,8 @@ MultiplexBU
 %%%% ¡probability!
 .01
 %%%% ¡code!
+%% Test 17: MultiplexBU
+
 B11 = [
       0   .1  0   0   0
       .2  0   0   0   0
@@ -141,12 +293,211 @@ known_global_efficiency = {
 
 
 g = MultiplexBU('B', B);
-m_global_efficiency_outside = GlobalEfficiency('G', g);
-assert(isequal(m_global_efficiency_outside.get('M'), known_global_efficiency), ...
-    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
-    [class(m_global_efficiency_outside) ' is not being calculated correctly for ' class(g) '.'])
 
-m_global_efficiency_inside = g.get('MEASURE', 'GlobalEfficiency');
-assert(isequal(m_global_efficiency_inside.get('M'), known_global_efficiency), ...
+
+m_outside_g = GlobalEfficiency('G', g);
+assert(isequal(m_outside_g.get('M'), known_global_efficiency), ...
     [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
-    [class(m_global_efficiency_inside)  ' is not being calculated correctly for ' class(g) '.'])
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'GlobalEfficiency');
+assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexBUD
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B = [
+    0   .2   .7
+    .2   0   .1
+    .7  .1   0
+    ];
+
+densities = [0 33 67 100];
+
+known_global_efficiency = { ...
+    [0 0 0]'
+    [0 0 0]'
+    [0 0 0]'
+    [1/2 0 1/2]'
+    [1/2 0 1/2]'
+    [1/2 0 1/2]'
+    [1 3/4 3/4]'
+    [1 3/4 3/4]'
+    [1 3/4 3/4]'
+    [1 1 1]'
+    [1 1 1]'
+    [1 1 1]'
+    };
+
+g = MultiplexBUD('B', {B B B}, 'DENSITIES', densities);
+
+m_outside_g = GlobalEfficiency('G', g);
+assert(isequal(m_outside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'GlobalEfficiency');
+assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexBUT
+%%%% ¡probability!
+.01
+%%%% ¡code!
+%% Test 19: MultiplexBUT
+B = [
+    0   .2   .7
+    .2   0   0
+    .7   0   0
+    ];
+
+thresholds = [0 .5 1];
+
+known_global_efficiency = { ...
+    [1 3/4 3/4]'
+    [1 3/4 3/4]'
+    [1 3/4 3/4]'
+    [1/2 0 1/2]'
+    [1/2 0 1/2]'
+    [1/2 0 1/2]'
+    [0 0 0]'
+    [0 0 0]'
+    [0 0 0]'
+    };
+
+g = MultiplexBUT('B', {B B B}, 'THRESHOLDS', thresholds);
+
+m_outside_g = GlobalEfficiency('G', g);
+assert(isequal(m_outside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'GlobalEfficiency');
+assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMxBU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+
+B11 = [
+    0   1   1
+    1   0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   1
+    0   1   0
+    ];
+B = {B11 B22};
+
+known_global_efficiency = {
+    [1 3/4 3/4]'
+    [3/4 1 3/4]'
+    };
+
+g = OrdMxBU('B', B);
+
+m_outside_g = GlobalEfficiency('G', g);
+assert(isequal(m_outside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'GlobalEfficiency');
+assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMxBUT
+%%%% ¡probability!
+.01
+%%%% ¡code!
+
+B = [
+    0   .2   .7
+    .2   0   0
+    .7   0   0
+    ];
+
+thresholds = [0 .5 1];
+
+known_global_efficiency = { ...
+    [1 3/4 3/4]'
+    [1 3/4 3/4]'
+    [1 3/4 3/4]'
+    [1/2 0 1/2]'
+    [1/2 0 1/2]'
+    [1/2 0 1/2]'
+    [0 0 0]'
+    [0 0 0]'
+    [0 0 0]'
+    };
+
+g = OrdMxBUT('B', {B B B}, 'THRESHOLDS', thresholds);
+
+m_outside_g = GlobalEfficiency('G', g);
+assert(isequal(m_outside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'GlobalEfficiency');
+assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMxBUD
+%%%% ¡probability!
+.01
+%%%% ¡code!
+
+B = [
+    0   .2   .7
+    .2   0   .1
+    .7  .1   0
+    ];
+
+densities = [0 33 67 100];
+
+known_global_efficiency = { ...
+    [0 0 0]'
+    [0 0 0]'
+    [0 0 0]'
+    [1/2 0 1/2]'
+    [1/2 0 1/2]'
+    [1/2 0 1/2]'
+    [1 3/4 3/4]'
+    [1 3/4 3/4]'
+    [1 3/4 3/4]'
+    [1 1 1]'
+    [1 1 1]'
+    [1 1 1]'
+    };
+
+g = OrdMxBUD('B', {B B B}, 'DENSITIES', densities);
+
+m_outside_g = GlobalEfficiency('G', g);
+assert(isequal(m_outside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'GlobalEfficiency');
+assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
+    [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
