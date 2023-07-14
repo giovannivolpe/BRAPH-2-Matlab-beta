@@ -115,7 +115,7 @@ else
     degree = calculateValue@DegreeIn(m, prop);
     overlapping_in_degree = zeros(N(1), 1);
 
-    for li = 1:1:L
+    for li = 1:l
         overlapping_in_degree = overlapping_in_degree + in_degree{li};
     end
     value = {overlapping_in_degree};
@@ -179,11 +179,11 @@ known_overlapping_in_degree = {[2, 3, 1]'};
 
 g = MultiplexWD('B', B);
 m_outside_g = OverlappingInDegree('G', g);
-assert(isequal(m_outside_g.get('M'), known_overlapping_degree), ...
+assert(isequal(m_outside_g.get('M'), known_overlapping_in_degree), ...
     [BRAPH2.STR ':OverlappingInDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'OverlappingInDegree');
-assert(isequal(m_inside_g.get('M'), known_overlapping_degree), ...
+assert(isequal(m_inside_g.get('M'), known_overlapping_in_degree), ...
     [BRAPH2.STR ':OverlappingInDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
