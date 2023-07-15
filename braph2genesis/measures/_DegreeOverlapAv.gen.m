@@ -207,7 +207,7 @@ B22 = [
 B = {B11 B22};
 
 known_degree_overlap = {
-    [1 1 0]'
+    mean([1 1 0]')
     0};
 
 g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
