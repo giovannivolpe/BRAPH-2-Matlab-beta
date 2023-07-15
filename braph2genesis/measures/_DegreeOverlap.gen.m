@@ -1,5 +1,5 @@
 %% ¡header!
-DegreeOverlap < Measure (m, degree overlap) is the graph degree overlap.
+DegreeOverlap < EdgeOverlap (m, degree overlap) is the graph degree overlap.
 
 %%% ¡description!
 The degree overlap is the number of edges connected to a node in all layers. 

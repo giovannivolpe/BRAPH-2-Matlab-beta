@@ -115,6 +115,7 @@ else
    edge_overlap = cell(length(ls), 1);   
     count = 1;
     for i = 1:1:length(ls)
+        N = g.get('NODENUMBER');
         edge_overlap_partition = zeros(N(1));
         for li = count:1:ls(i) + count - 1
             Aii = A{li, li};
