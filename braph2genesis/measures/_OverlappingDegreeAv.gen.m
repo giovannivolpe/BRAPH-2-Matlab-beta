@@ -1,5 +1,5 @@
 %% ¡header!
-OverlappingDegreeAv < OverlappingDegree (m, averge overlapping degree) is the graph averge overlapping degree.
+OverlappingDegreeAv < OverlappingDegree (m, averge overlapping-degree) is the graph averge overlapping degree.
 
 %%% ¡description!
 The average overlapping degree of a graph is the average of the sum of the 
