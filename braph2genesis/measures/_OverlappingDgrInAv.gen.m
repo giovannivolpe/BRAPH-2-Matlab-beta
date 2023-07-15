@@ -1,5 +1,5 @@
 %% ¡header!
-OverlappingInDegreeAv < OverlappingInDegree (m, average overlapping in-degree) is the graph average overlapping in-degree.
+OverlappingDgrInAv < OverlappingDgrIn (m, average overlapping in-degree) is the graph average overlapping in-degree.
 
 %%% ¡description!
 The average overlapping in-degree of a graph is the average of the sum of the 
@@ -9,43 +9,43 @@ in-degrees of a node in all layers.
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegreeAv.ID
+OverlappingDgrInAv.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegreeAv.LABEL
+OverlappingDgrInAv.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegreeAv.G
+OverlappingDgrInAv.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegreeAv.M
+OverlappingDgrInAv.M
 %%%% ¡title!
-OverlappingInDegreeAv
+OverlappingDgrInAv
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegreeAv.PFM
+OverlappingDgrInAv.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegreeAv.NOTES
+OverlappingDgrInAv.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegreeAv.COMPATIBLE_GRAPHS
+OverlappingDgrInAv.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the overlapping in-degree.
 %%%% ¡default!
-'OverlappingInDegreeAv'
+'OverlappingDgrInAv'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the overlapping in-degree.
@@ -64,22 +64,22 @@ DESCRIPTION (constant, string) is the description of the overlapping in-degree.
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the overlapping in-degree.
 %%%% ¡settings!
-'OverlappingInDegreeAv'
+'OverlappingDgrInAv'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the overlapping in-degree.
 %%%% ¡default!
-'OverlappingInDegreeAv ID'
+'OverlappingDgrInAv ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the overlapping in-degree.
 %%%% ¡default!
-'OverlappingInDegreeAv label'
+'OverlappingDgrInAv label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the overlapping in-degree.
 %%%% ¡default!
-'OverlappingInDegreeAv notes'
+'OverlappingDgrInAv notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -105,14 +105,14 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 M (result, cell) is the overlapping in-degree.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
-overlapping_in_degree_av = calculateValue@OverlappingInDegree(m, prop);
+overlapping_in_degree_av = calculateValue@OverlappingDgrIn(m, prop);
 
 value = {mean(cell2mat(overlapping_in_degree_av))};
 
 %% ¡tests!
 
 %%% ¡excluded_props!
-[OverlappingInDegreeAv.PFM]
+[OverlappingDgrInAv.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -135,14 +135,14 @@ B = {B11 B22};
 known_overlapping_in_degree = {mean([3, 2, 1]')};
 
 g = MultiplexBD('B', B);
-m_outside_g = OverlappingInDegreeAv('G', g);
+m_outside_g = OverlappingDgrInAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_overlapping_in_degree), ...
-    [BRAPH2.STR ':OverlappingInDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':OverlappingDgrInAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'OverlappingInDegreeAv');
+m_inside_g = g.get('MEASURE', 'OverlappingDgrInAv');
 assert(isequal(m_inside_g.get('M'), known_overlapping_in_degree), ...
-    [BRAPH2.STR ':OverlappingInDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':OverlappingDgrInAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -166,12 +166,12 @@ B = {B11 B22};
 known_overlapping_in_degree = {mean([2, 3, 1]')};
 
 g = MultiplexWD('B', B);
-m_outside_g = OverlappingInDegreeAv('G', g);
+m_outside_g = OverlappingDgrInAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_overlapping_in_degree), ...
-    [BRAPH2.STR ':OverlappingInDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':OverlappingDgrInAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'OverlappingInDegreeAv');
+m_inside_g = g.get('MEASURE', 'OverlappingDgrInAv');
 assert(isequal(m_inside_g.get('M'), known_overlapping_in_degree), ...
-    [BRAPH2.STR ':OverlappingInDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':OverlappingDgrInAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

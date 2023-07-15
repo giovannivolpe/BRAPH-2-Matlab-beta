@@ -1,5 +1,5 @@
 %% ¡header!
-WeightedEdgeOverlap < Measure (m, weighted edge overlap) is the graph weighted edge overlap.
+WeightedEdgOvrl < Measure (m, weighted edge overlap) is the graph weighted edge overlap.
 
 %%% ¡description!
 The weighted edge overlap of a graph is the average weight of an edge 
@@ -9,43 +9,43 @@ across all layers.
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedEdgeOverlap.ID
+WeightedEdgOvrl.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedEdgeOverlap.LABEL
+WeightedEdgOvrl.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedEdgeOverlap.G
+WeightedEdgOvrl.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedEdgeOverlap.M
+WeightedEdgOvrl.M
 %%%% ¡title!
-WeightedEdgeOverlap
+WeightedEdgOvrl
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedEdgeOverlap.PFM
+WeightedEdgOvrl.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedEdgeOverlap.NOTES
+WeightedEdgOvrl.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedEdgeOverlap.COMPATIBLE_GRAPHS
+WeightedEdgOvrl.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the weighted edge overlap.
 %%%% ¡default!
-'WeightedEdgeOverlap'
+'WeightedEdgOvrl'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the weighted edge overlap.
@@ -64,22 +64,22 @@ DESCRIPTION (constant, string) is the description of the weighted edge overlap.
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the weighted edge overlap.
 %%%% ¡settings!
-'WeightedEdgeOverlap'
+'WeightedEdgOvrl'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the weighted edge overlap.
 %%%% ¡default!
-'WeightedEdgeOverlap ID'
+'WeightedEdgOvrl ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the weighted edge overlap.
 %%%% ¡default!
-'WeightedEdgeOverlap label'
+'WeightedEdgOvrl label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the weighted edge overlap.
 %%%% ¡default!
-'WeightedEdgeOverlap notes'
+'WeightedEdgOvrl notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -125,7 +125,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[WeightedEdgeOverlap.PFM]
+[WeightedEdgOvrl.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -152,14 +152,14 @@ known_weighted_edge_overlap = {[
     ]};
 
 g = MultiplexWU('B', B);
-m_outside_g = WeightedEdgeOverlap('G', g);
+m_outside_g = WeightedEdgOvrl('G', g);
 assert(isequal(m_outside_g.get('M'), known_weighted_edge_overlapoverlap), ...
-    [BRAPH2.STR ':WeightedEdgeOverlap:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':WeightedEdgOvrl:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'WeightedEdgeOverlap');
+m_inside_g = g.get('MEASURE', 'WeightedEdgOvrl');
 assert(isequal(m_inside_g.get('M'), known_weighted_edge_overlapoverlap), ...
-    [BRAPH2.STR ':WeightedEdgeOverlap:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':WeightedEdgOvrl:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -187,12 +187,12 @@ known_weighted_edge_overlap = {[
     ]};
 
 g = MultiplexWD('B', B);
-m_outside_g = WeightedEdgeOverlap('G', g);
+m_outside_g = WeightedEdgOvrl('G', g);
 assert(isequal(m_outside_g.get('M'), known_weighted_edge_overlapoverlap), ...
-    [BRAPH2.STR ':WeightedEdgeOverlap:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':WeightedEdgOvrl:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'WeightedEdgeOverlap');
+m_inside_g = g.get('MEASURE', 'WeightedEdgOvrl');
 assert(isequal(m_inside_g.get('M'), known_weighted_edge_overlapoverlap), ...
-    [BRAPH2.STR ':WeightedEdgeOverlap:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':WeightedEdgOvrl:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

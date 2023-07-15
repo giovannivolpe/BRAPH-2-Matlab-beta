@@ -155,7 +155,7 @@ known_edge_overlap = {[
     0   1   .5
     1   0   .5
     .5  .5  0
-    ]}
+    ]};
 
 g = MultiplexWU('B', B);
 m_outside_g = EdgeOverlap('G', g);

@@ -1,85 +1,85 @@
 %% ¡header!
-OverlappingInDegree < DegreeIn (m, overlapping in-degree) is the graph overlapping in-degree.
+OverlappingDgrOut < DegreeOut (m, overlapping out-degree) is the graph overlapping out-degree.
 
 %%% ¡description!
-The overlapping in-degree of a graph is the sum of the in-degrees of a node 
+The overlapping out-degree of a graph is the sum of the out-degrees of a node 
 in all layers. 
 
 %% ¡layout!
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegree.ID
+OverlappingDgrOut.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegree.LABEL
+OverlappingDgrOut.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegree.G
+OverlappingDgrOut.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegree.M
+OverlappingDgrOut.M
 %%%% ¡title!
-OverlappingInDegree
+OverlappingDgrOut
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegree.PFM
+OverlappingDgrOut.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegree.NOTES
+OverlappingDgrOut.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingInDegree.COMPATIBLE_GRAPHS
+OverlappingDgrOut.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the overlapping in-degree.
+NAME (constant, string) is the name of the overlapping out-degree.
 %%%% ¡default!
-'OverlappingInDegree'
+'OverlappingDgrOut'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the overlapping in-degree.
+DESCRIPTION (constant, string) is the description of the overlapping out-degree.
 %%%% ¡default!
-'The overlapping in-degree of a graph is the sum of the in-degrees of a node in all layers.'
+'The overlapping out-degree of a graph is the sum of the out-degrees of a node in all layers.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the overlapping in-degree.
+TEMPLATE (parameter, item) is the template of the overlapping out-degree.
 %%%% ¡settings!
-'OverlappingInDegree'
+'OverlappingDgrOut'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the overlapping in-degree.
+ID (data, string) is a few-letter code of the overlapping out-degree.
 %%%% ¡default!
-'OverlappingInDegree ID'
+'OverlappingDgrOut ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the overlapping in-degree.
+LABEL (metadata, string) is an extended label of the overlapping out-degree.
 %%%% ¡default!
-'OverlappingInDegree label'
+'OverlappingDgrOut label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the overlapping in-degree.
+NOTES (metadata, string) are some specific notes about the overlapping out-degree.
 %%%% ¡default!
-'OverlappingInDegree notes'
+'OverlappingDgrOut notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -102,7 +102,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'MultiplexWD' 'MultiplexBD'};
 
 %%% ¡prop!
-M (result, cell) is the overlapping in-degree.
+M (result, cell) is the overlapping out-degree.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
@@ -113,19 +113,19 @@ if l == 0
     value = {};
 else
     N = g.get('NODENUMBER');
-    degree = calculateValue@DegreeIn(m, prop);
-    overlapping_in_degree = zeros(N(1), 1);
+    out_degree = calculateValue@DegreeOut(m, prop);
+    overlapping_out_degree = zeros(N(1), 1);
 
-    for li = 1:l
-        overlapping_in_degree = overlapping_in_degree + in_degree{li};
+    for li = 1:l 
+        overlapping_out_degree = overlapping_out_degree + out_degree{li};
     end
-    value = {overlapping_in_degree};
+    value = {overlapping_out_degree};
 end
 
 %% ¡tests!
 
 %%% ¡excluded_props!
-[OverlappingInDegree.PFM]
+[OverlappingDgrOut.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -145,17 +145,17 @@ B22 = [
     ];
 B = {B11 B22};
 
-known_overlapping_in_degree = {[3, 2, 1]'};
+known_overlapping_out_degree = {[2, 3, 1]'};
 
 g = MultiplexBD('B', B);
-m_outside_g = OverlappingInDegree('G', g);
-assert(isequal(m_outside_g.get('M'), known_overlapping_degree), ...
-    [BRAPH2.STR ':OverlappingInDegree:' BRAPH2.FAIL_TEST], ...
+m_outside_g = OverlappingDgrOut('G', g);
+assert(isequal(m_outside_g.get('M'), known_overlapping_out_degree), ...
+    [BRAPH2.STR ':OverlappingDgrOut:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'OverlappingInDegree');
-assert(isequal(m_inside_g.get('M'), known_overlapping_degree), ...
-    [BRAPH2.STR ':OverlappingInDegree:' BRAPH2.FAIL_TEST], ...
+m_inside_g = g.get('MEASURE', 'OverlappingDgrOut');
+assert(isequal(m_inside_g.get('M'), known_overlapping_out_degree), ...
+    [BRAPH2.STR ':OverlappingDgrOut:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -176,15 +176,15 @@ B22 = [
     ];
 B = {B11 B22};
 
-known_overlapping_in_degree = {[2, 3, 1]'};
+known_overlapping_out_degree = {[3, 1, 2]'};
 
 g = MultiplexWD('B', B);
-m_outside_g = OverlappingInDegree('G', g);
-assert(isequal(m_outside_g.get('M'), known_overlapping_in_degree), ...
-    [BRAPH2.STR ':OverlappingInDegree:' BRAPH2.FAIL_TEST], ...
+m_outside_g = OverlappingDgrOut('G', g);
+assert(isequal(m_outside_g.get('M'), known_overlapping_out_degree), ...
+    [BRAPH2.STR ':OverlappingDgrOut:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'OverlappingInDegree');
-assert(isequal(m_inside_g.get('M'), known_overlapping_in_degree), ...
-    [BRAPH2.STR ':OverlappingInDegree:' BRAPH2.FAIL_TEST], ...
+m_inside_g = g.get('MEASURE', 'OverlappingDgrOut');
+assert(isequal(m_inside_g.get('M'), known_overlapping_out_degree), ...
+    [BRAPH2.STR ':OverlappingDgrOut:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
