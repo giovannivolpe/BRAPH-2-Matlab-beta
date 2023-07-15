@@ -1,5 +1,5 @@
 %% ¡header!
-RichClub < Degree (m, richclub) is the graph richclub.
+RichClub < Degree (m, rich-club) is the graph richclub.
 
 %%% ¡description!
 The rich-club coefficient of a node at level k is the fraction of 
