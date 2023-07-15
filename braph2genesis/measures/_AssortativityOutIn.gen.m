@@ -1,43 +1,43 @@
 %% ¡header!
-InInAssortativity < Measure (m, in-in-assortativity) is the graph in-in-assortativity.
+AssortativityOutIn < Measure (m, out-in-assortativity) is the graph out-in-assortativity.
 
 %%% ¡description!
-The in-in-assortativity coefficient of a graph is the correlation coefficient between 
+The out-in-assortativity coefficient of a graph is the correlation coefficient between 
   the degrees/strengths of all nodes on two opposite ends of an edge within a layer. 
 The corresponding coefficient for directed and weighted networks is calculated by 
-  using the weighted and directed variants of in-degree/in-strength.
+  using the weighted and directed variants of in-out-degree/in-out-strength.
 
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the in-in-assortativity.
+NAME (constant, string) is the name of the out-in-assortativity.
 %%%% ¡default!
-'InInAssortativity'
+'AssortativityOutIn'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the in-in-assortativity.
+DESCRIPTION (constant, string) is the description of the out-in-assortativity.
 %%%% ¡default!
-'The in-in-assortativity coefficient of a graph is the correlation coefficient between the degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of in-degree/in-strength.'
+'The out-in-assortativity coefficient of a graph is the correlation coefficient between the degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of in-out-degree/in-out-strength.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the in-in-assortativity.
+TEMPLATE (parameter, item) is the template of the out-in-assortativity.
 %%%% ¡settings!
-'InInAssortativity'
+'AssortativityOutIn'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the in-in-assortativity.
+ID (data, string) is a few-letter code of the out-in-assortativity.
 %%%% ¡default!
-'InInAssortativity ID'
+'AssortativityOutIn ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the in-in-assortativity.
+LABEL (metadata, string) is an extended label of the out-in-assortativity.
 %%%% ¡default!
-'InInAssortativity label'
+'AssortativityOutIn label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the in-in-assortativity.
+NOTES (metadata, string) are some specific notes about the out-in-assortativity.
 %%%% ¡default!
-'InInAssortativity notes'
+'AssortativityOutIn notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.GLOBAL__.
@@ -60,13 +60,13 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphBD' 'GraphWD' 'MultiplexWD' 'MultiplexBD'};
 
 %%% ¡prop!
-M (result, cell) is the in-in-assortativity.
+M (result, cell) is the out-in-assortativity.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 L = g.get('LAYERNUMBER');
 N = g.get('NODENUMBER');
-in_in_assortativity = cell(L, 1);
+out_in_assortativity = cell(L, 1);
 connectivity_types = g.get('CONNECTIVITY_TYPE', L);  
 parfor li = 1:L
     Aii = A{li, li};
@@ -78,28 +78,31 @@ parfor li = 1:L
     
     if connectivity_type == Graph.WEIGHTED  % weighted graphs
         in_strength = StrengthIn('G', g).get('M');
-        d = in_strength{li};
+        out_strength = StrengthOut('G', g).get('M');
+        d_in = in_strength{li};
+        d_out = out_strength{li};
     else  % binary graphs
         in_degree = DegreeIn('G', g).get('M');
-        d= in_degree{li};
+        out_degree = DegreeOut('G', g).get('M');
+        d_in = in_degree{li};
+        d_out = out_degree{li};
     end
     
-    k_i(:, li) = d(i);  % in-degree/in-strength node i
-    k_j(:, li) = d(j);  % in-degree/in-strength node j
+     k_i(:, li) = d_out(i);  % out-degree/out-strength node i
+    k_j(:, li) = d_in(j);  % in-degree/in-strength node j
     % compute assortativity
     assortativity_layer = (sum(k_i(:, li) .* k_j(:, li)) / M - (sum(0.5 * (k_i(:, li) + k_j(:, li))) / M)^2)...
         / (sum(0.5 * (k_i(:, li).^2 + k_j(:, li).^2)) / M - (sum(0.5 * (k_i(:, li) + k_j(:, li))) / M)^2);
     assortativity_layer(isnan(assortativity_layer)) = 0;  % Should return zeros, not NaN
-    
-    in_in_assortativity(li) = {assortativity_layer};
+    out_in_assortativity(li) = {assortativity_layer};
 end
 
-value = in_in_assortativity;
+value = out_in_assortativity;
 
 %% ¡tests!
 
 %%% ¡excluded_props!
-[InInAssortativity.PFM]
+[AssortativityOutIn.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -115,19 +118,19 @@ B = [
     1  0  0  1  0
     ];
 
-known_in_in_assortativity = {(15/7-(21/14)^2)/(35/14-(21/14)^2)};
+known_out_in_assortativity = {(17/7-(11/7)^2)/(19/7-(11/7)^2)};
 
 g = GraphBD('B', A);
-in_in_assortativity = InInAssortativity('G', g).get('M');
+in_in_assortativity = AssortativityOutIn('G', g).get('M');
 
-m_outside_g = InInAssortativity('G', g);
-assert(isequal(m_outside_g.get('M'), known_in_in_assortativity), ...
-    [BRAPH2.STR ':InInAssortativity:' BRAPH2.FAIL_TEST], ...
+m_outside_g = AssortativityOutIn('G', g);
+assert(isequal(m_outside_g.get('M'), known_out_in_assortativity), ...
+    [BRAPH2.STR ':AssortativityOutIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'InInAssortativity');
-assert(isequal(m_inside_g.get('M'), known_in_in_assortativity), ...
-    [BRAPH2.STR ':InInAssortativity:' BRAPH2.FAIL_TEST], ...
+m_inside_g = g.get('MEASURE', 'AssortativityOutIn');
+assert(isequal(m_inside_g.get('M'), known_out_in_assortativity), ...
+    [BRAPH2.STR ':AssortativityOutIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -142,17 +145,17 @@ A = [
     1  0  0  2  0
     ];
 
-known_in_in_assortativity = {(15/7-(21/14)^2)/(35/14-(21/14)^2)};
+known_out_in_assortativity = {(17/7-(11/7)^2)/(19/7-(11/7)^2)};
 
 g = GraphWD('B', A);
-m_outside_g = InInAssortativity('G', g);
-assert(isequal(m_outside_g.get('M'), known_in_in_assortativity), ...
+m_outside_g = AssortativityOutIn('G', g);
+assert(isequal(m_outside_g.get('M'), known_out_in_assortativity), ...
     [BRAPH2.STR ':Degree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'InInAssortativity');
-assert(isequal(m_inside_g.get('M'), known_in_in_assortativity), ...
-    [BRAPH2.STR ':InInAssortativity:' BRAPH2.FAIL_TEST], ...
+m_inside_g = g.get('MEASURE', 'AssortativityOutIn');
+assert(isequal(m_inside_g.get('M'), known_out_in_assortativity), ...
+    [BRAPH2.STR ':AssortativityOutIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -176,21 +179,22 @@ A22 = [
     ];
 A = {A11 A22};
              
-known_in_in_assortativity = {
-                    (15/7-(21/14)^2)/(35/14-(21/14)^2)
-                    (15/7-(21/14)^2)/(35/14-(21/14)^2)
+known_out_in_assortativity = {
+                    (17/7-(11/7)^2)/(19/7-(11/7)^2)
+                    (17/7-(11/7)^2)/(19/7-(11/7)^2)
                     };    
+   
 
 g = MultiplexBD('B', A);
 
-m_outside_g = InInAssortativity('G', g);
-assert(isequal(m_outside_g.get('M'), known_in_in_assortativity), ...
-    [BRAPH2.STR ':InInAssortativity:' BRAPH2.FAIL_TEST], ...
+m_outside_g = AssortativityOutIn('G', g);
+assert(isequal(m_outside_g.get('M'), known_out_in_assortativity), ...
+    [BRAPH2.STR ':AssortativityOutIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'InInAssortativity');
-assert(isequal(m_inside_g.get('M'), known_in_in_assortativity), ...
-    [BRAPH2.STR ':InInAssortativity:' BRAPH2.FAIL_TEST], ...
+m_inside_g = g.get('MEASURE', 'AssortativityOutIn');
+assert(isequal(m_inside_g.get('M'), known_out_in_assortativity), ...
+    [BRAPH2.STR ':AssortativityOutIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -213,19 +217,19 @@ A22 = [
     ];
 A = {A11 A22};
 
-known_in_in_assortativity = {
-                    (15/7-(21/14)^2)/(35/14-(21/14)^2)
-                    (15/7-(21/14)^2)/(35/14-(21/14)^2)
+known_out_in_assortativity = {
+                    (17/7-(11/7)^2)/(19/7-(11/7)^2)
+                    (17/7-(11/7)^2)/(19/7-(11/7)^2)
                     };   
 
 g = MultiplexWD('B', A);
 
-m_outside_g = InInAssortativity('G', g);
-assert(isequal(m_outside_g.get('M'), known_in_in_assortativity), ...
-    [BRAPH2.STR ':InInAssortativity:' BRAPH2.FAIL_TEST], ...
+m_outside_g = AssortativityOutIn('G', g);
+assert(isequal(m_outside_g.get('M'), known_out_in_assortativity), ...
+    [BRAPH2.STR ':AssortativityOutIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'InInAssortativity');
-assert(isequal(m_inside_g.get('M'), known_in_in_assortativity), ...
-    [BRAPH2.STR ':InInAssortativity:' BRAPH2.FAIL_TEST], ...
+m_inside_g = g.get('MEASURE', 'AssortativityOutIn');
+assert(isequal(m_inside_g.get('M'), known_out_in_assortativity), ...
+    [BRAPH2.STR ':AssortativityOutIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
