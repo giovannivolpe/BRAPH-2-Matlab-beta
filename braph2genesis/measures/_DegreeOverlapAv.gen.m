@@ -1,5 +1,5 @@
 %% ¡header!
-DegreeOverlapAv < Measure (m, average average degree overlap) is the graph average degree overlap.
+DegreeOverlapAv < DegreeOverlap (m, average average degree overlap) is the graph average degree overlap.
 
 %%% ¡description!
 The average degree overlap is the average of the number of edges connected 
