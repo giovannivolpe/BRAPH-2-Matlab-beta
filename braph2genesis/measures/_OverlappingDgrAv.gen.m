@@ -1,5 +1,5 @@
 %% ¡header!
-OverlappingDegreeAv < OverlappingDegree (m, averge overlapping-degree) is the graph averge overlapping degree.
+OverlappingDgrAv < OverlappingDgr (m, averge overlapping-degree) is the graph averge overlapping degree.
 
 %%% ¡description!
 The average overlapping degree of a graph is the average of the sum of the 
@@ -9,43 +9,43 @@ degrees of a node in all layers.
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingDegreeAv.ID
+OverlappingDgrAv.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingDegreeAv.LABEL
+OverlappingDgrAv.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingDegreeAv.G
+OverlappingDgrAv.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingDegreeAv.M
+OverlappingDgrAv.M
 %%%% ¡title!
-OverlappingDegreeAv
+OverlappingDgrAv
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingDegreeAv.PFM
+OverlappingDgrAv.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingDegreeAv.NOTES
+OverlappingDgrAv.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-OverlappingDegreeAv.COMPATIBLE_GRAPHS
+OverlappingDgrAv.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the averge overlapping degree.
 %%%% ¡default!
-'OverlappingDegreeAv'
+'OverlappingDgrAv'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the averge overlapping degree.
@@ -64,22 +64,22 @@ DESCRIPTION (constant, string) is the description of the averge overlapping degr
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the averge overlapping degree.
 %%%% ¡settings!
-'OverlappingDegreeAv'
+'OverlappingDgrAv'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the averge overlapping degree.
 %%%% ¡default!
-'OverlappingDegreeAv ID'
+'OverlappingDgrAv ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the averge overlapping degree.
 %%%% ¡default!
-'OverlappingDegreeAv label'
+'OverlappingDgrAv label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the averge overlapping degree.
 %%%% ¡default!
-'OverlappingDegreeAv notes'
+'OverlappingDgrAv notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -112,7 +112,7 @@ ls = g.get('PARTITIONS');
 if l == 0
     value = {};
 else
-    overlapping_degree = calculateValue@OverlappingDegree(m, prop);
+    overlapping_degree = calculateValue@OverlappingDgr(m, prop);
     overlapping_degree_av = cell(length(ls), 1);
 
     for i=1:length(ls)
@@ -124,7 +124,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[OverlappingDegreeAv.PFM]
+[OverlappingDgrAv.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -147,14 +147,14 @@ B = {B11 B22};
 known_overlapping_degree = {mean([3, 3, 2]')};
 
 g = MultiplexWU('B', B);
-m_outside_g = OverlappingDegreeAv('G', g);
+m_outside_g = OverlappingDgrAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_overlapping_degree), ...
-    [BRAPH2.STR ':OverlappingDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':OverlappingDgrAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'OverlappingDegreeAv');
+m_inside_g = g.get('MEASURE', 'OverlappingDgrAv');
 assert(isequal(m_inside_g.get('M'), known_overlapping_degree), ...
-    [BRAPH2.STR ':OverlappingDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':OverlappingDgrAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -178,14 +178,14 @@ B = {B11 B22};
 known_overlapping_degree = {mean([3, 3, 2]')};
 
 g = MultiplexBU('B', B);
-m_outside_g = OverlappingDegreeAv('G', g);
+m_outside_g = OverlappingDgrAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_overlapping_degree), ...
-    [BRAPH2.STR ':OverlappingDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':OverlappingDgrAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'OverlappingDegreeAv');
+m_inside_g = g.get('MEASURE', 'OverlappingDgrAv');
 assert(isequal(m_inside_g.get('M'), known_overlapping_degree), ...
-    [BRAPH2.STR ':OverlappingDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':OverlappingDgrAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -213,14 +213,14 @@ known_overlapping_degree = { ...
 
 g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
 
-m_outside_g = OverlappingDegreeAv('G', g);
+m_outside_g = OverlappingDgrAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_overlapping_degree), ...
-    [BRAPH2.STR ':OverlappingDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':OverlappingDgrAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'OverlappingDegreeAv');
+m_inside_g = g.get('MEASURE', 'OverlappingDgrAv');
 assert(isequal(m_inside_g.get('M'), known_overlapping_degree), ...
-    [BRAPH2.STR ':OverlappingDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':OverlappingDgrAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -248,12 +248,12 @@ known_overlapping_degree = { ...
 
 g = MultiplexBUD('B', B, 'DENSITIES', [0 100]);
 
-m_outside_g = OverlappingDegreeAv('G', g);
+m_outside_g = OverlappingDgrAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_overlapping_degree), ...
-    [BRAPH2.STR ':OverlappingDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':OverlappingDgrAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'OverlappingDegreeAv');
+m_inside_g = g.get('MEASURE', 'OverlappingDgrAv');
 assert(isequal(m_inside_g.get('M'), known_overlapping_degree), ...
-    [BRAPH2.STR ':OverlappingDegreeAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':OverlappingDgrAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

@@ -209,7 +209,7 @@ B = {B11 B22};
 
 known_degree_overlap = {
     [1 1 0]'
-    0};
+    [0 0 0]'};
 
 g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
 
@@ -243,7 +243,7 @@ B = {B11 B22};
 
 known_degree_overlap = {
     [1 1 0]'
-    0};
+    [0 0 0]'};
 
 g = MultiplexBUD('B', B, 'DENSITIES', [90 10]);
 
