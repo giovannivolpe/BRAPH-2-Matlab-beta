@@ -1,5 +1,5 @@
 %% ¡header!
-RichClubStrength < Strength (m, rich-club strength) is the graph richclubstrength.
+RichClubStr < Strength (m, rich-club strength) is the graph richclubstrength.
 
 %%% ¡description!
 The rich-club strength of a node at level s is the sum of the weighted edges 
@@ -11,7 +11,7 @@ The rich-club strength of a node at level s is the sum of the weighted edges
 %%% ¡prop!
 NAME (constant, string) is the name of the richclubstrength.
 %%%% ¡default!
-'RichClubStrength'
+'RichClubStr'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the richclubstrength.
@@ -21,22 +21,22 @@ DESCRIPTION (constant, string) is the description of the richclubstrength.
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the richclubstrength.
 %%%% ¡settings!
-'RichClubStrength'
+'RichClubStr'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the richclubstrength.
 %%%% ¡default!
-'RichClubStrength ID'
+'RichClubStr ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the richclubstrength.
 %%%% ¡default!
-'RichClubStrength label'
+'RichClubStr label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the richclubstrength.
 %%%% ¡default!
-'RichClubStrength notes'
+'RichClubStr notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -70,8 +70,8 @@ rich_club_strength = cell(L, 1);
 directionality_type = g.get('DIRECTIONALITY_TYPE', L);
 richclub_threshold = m.get('PARAMETRIC_VALUE');
 assert(mod(richclub_threshold, 1) == 0, ...
-    [BRAPH2.STR ':RichClubStrength:' BRAPH2.WRONG_INPUT], ...
-    ['RichClubStrength threshold must be an integer value ' ...
+    [BRAPH2.STR ':RichClubStr:' BRAPH2.WRONG_INPUT], ...
+    ['RichClubStr threshold must be an integer value ' ...
     'while it is ' tostring(richclub_threshold)])
 
 s_levels = abs(richclub_threshold);
@@ -121,7 +121,7 @@ PARAMETRIC_VALUE (parameter, SCALAR)
 %% ¡tests!
 
 %%% ¡excluded_props!
-[RichClubStrength.PFM]
+[RichClubStr.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -141,14 +141,14 @@ known_rich_club_strength = {[1.1 1.1 2 0]'};
 
 g = GraphWU('B', B);
 
-m_outside_g = RichClubStrength('G', g);
+m_outside_g = RichClubStr('G', g);
 assert(isequal(m_outside_g.get('M'), known_rich_club_strength), ...
-    [BRAPH2.STR ':RichClubStrength:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubStr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubStrength');
+m_inside_g = g.get('MEASURE', 'RichClubStr');
 assert(isequal(m_inside_g.get('M'), known_rich_club_strength), ...
-    [BRAPH2.STR ':RichClubStrength:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubStr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -170,14 +170,14 @@ known_rich_club_strength = {wrich};
 
 g = GraphWD('B', B);
 
-m_outside_g = RichClubStrength('G', g);
+m_outside_g = RichClubStr('G', g);
 assert(isequal(m_outside_g.get('M'), known_rich_club_strength), ...
-    [BRAPH2.STR ':RichClubStrength:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubStr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubStrength');
+m_inside_g = g.get('MEASURE', 'RichClubStr');
 assert(isequal(m_inside_g.get('M'), known_rich_club_strength), ...
-    [BRAPH2.STR ':RichClubStrength:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubStr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -210,15 +210,15 @@ known_rich_club_strength = {
     };
 
 g = MultiplexWU('B', A);
-m_outside_g = RichClubStrength('G', g, 'PARAMETRIC_VALUE', [1.5, 2]);
+m_outside_g = RichClubStr('G', g, 'PARAMETRIC_VALUE', [1.5, 2]);
 assert(isequal(m_outside_g.get('M'), known_rich_club_strength), ...
-    [BRAPH2.STR ':RichClubStrength:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubStr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubStrength');
+m_inside_g = g.get('MEASURE', 'RichClubStr');
 m_inside_g.set('PARAMETRIC_VALUE', [1.5, 2]);
 assert(isequal(m_inside_g.get('M'), known_rich_club_strength), ...
-    [BRAPH2.STR ':RichClubStrength:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubStr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -251,13 +251,13 @@ known_rich_club_strength = {
     };
 
 g = MultiplexWD('B', A);
-m_outside_g = RichClubStrength('G', g, 'PARAMETRIC_VALUE', [1.5, 2]);
+m_outside_g = RichClubStr('G', g, 'PARAMETRIC_VALUE', [1.5, 2]);
 assert(isequal(m_outside_g.get('M'), known_rich_club_strength), ...
-    [BRAPH2.STR ':RichClubStrength:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubStr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubStrength');
+m_inside_g = g.get('MEASURE', 'RichClubStr');
 m_inside_g.set('PARAMETRIC_VALUE', [1.5, 2]);
 assert(isequal(m_inside_g.get('M'), known_rich_club_strength), ...
-    [BRAPH2.STR ':RichClubStrength:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubStr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
