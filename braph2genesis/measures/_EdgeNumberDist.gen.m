@@ -1,5 +1,5 @@
 %% ¡header!
-EdgeNumberDistance < Measure (m, edgenumberdistance) is the edgenumberdistance.
+EdgeNumberDist < Measure (m, edgenumberdistance) is the edgenumberdistance.
 
 %%% ¡description!
 The edge distance number of a graph is the number of edges in the shortest 
@@ -9,7 +9,7 @@ weighted path between two nodes within a layer.
 %%% ¡prop!
 NAME (constant, string) is the name of the edgenumberdistance.
 %%%% ¡default!
-'EdgeNumberDistance'
+'EdgeNumberDist'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the edgenumberdistance.
@@ -22,17 +22,17 @@ TEMPLATE (parameter, item) is the template of the edgenumberdistance.
 %%% ¡prop!
 ID (data, string) is a few-letter code of the edgenumberdistance.
 %%%% ¡default!
-'EdgeNumberDistance ID'
+'EdgeNumberDist ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the edgenumberdistance.
 %%%% ¡default!
-'EdgeNumberDistance label'
+'EdgeNumberDist label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the edgenumberdistance.
 %%%% ¡default!
-'EdgeNumberDistance notes'
+'EdgeNumberDist notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.BINODAL__.
@@ -111,7 +111,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[EdgeNumberDistance.PFM]
+[EdgeNumberDist.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -137,14 +137,14 @@ known_value = {[
 
 g = GraphBD('B', A);
 
-m_outside_g = EdgeNumberDistance('G', g);
+m_outside_g = EdgeNumberDist('G', g);
 assert(isequal(m_outside_g.get('M'), known_value), ...
-    [BRAPH2.STR ':EdgeNumberDistance:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':EdgeNumberDist:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'EdgeNumberDistance');
+m_inside_g = g.get('MEASURE', 'EdgeNumberDist');
 assert(isequal(m_inside_g.get('M'), known_value), ...
-    [BRAPH2.STR ':EdgeNumberDistance:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':EdgeNumberDist:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -186,12 +186,12 @@ known_value = {[
 
 g = GraphBD('B', A);
 
-m_outside_g = EdgeNumberDistance('G', g);
+m_outside_g = EdgeNumberDist('G', g);
 assert(isequal(m_outside_g.get('M'), known_value), ...
-    [BRAPH2.STR ':EdgeNumberDistance:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':EdgeNumberDist:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'EdgeNumberDistance');
+m_inside_g = g.get('MEASURE', 'EdgeNumberDist');
 assert(isequal(m_inside_g.get('M'), known_value), ...
-    [BRAPH2.STR ':EdgeNumberDistance:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':EdgeNumberDist:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
