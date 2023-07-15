@@ -72,7 +72,7 @@ parfor li = 1:1:L
 
     coreness = zeros(1, N(1));
     for k = 1:N(1)
-        k_core = m.calculate_kcore(Aii, k, directionality_layer);
+        k_core = calculate_kcore(Aii, k, directionality_layer);
         ss = sum(k_core) > 0;
         coreness(ss) = k;
     end

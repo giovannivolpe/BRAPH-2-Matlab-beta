@@ -270,4 +270,3 @@ assert(isequal(m_inside_g.get('M'), known_kcore), ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 
-
