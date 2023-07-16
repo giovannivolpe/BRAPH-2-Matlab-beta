@@ -105,7 +105,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 M (result, cell) is the averge overlapping degree.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
-overlapping_strength = calculateValue@OverlappingStrength(m, prop);
+overlapping_strength = calculateValue@OverlappingStr(m, prop);
 
 value = {mean(cell2mat(overlapping_strength))};
 
