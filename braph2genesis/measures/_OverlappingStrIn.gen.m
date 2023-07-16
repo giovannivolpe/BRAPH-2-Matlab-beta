@@ -115,7 +115,7 @@ else
     strength = calculateValue@StrengthIn(m, prop);	
     overlapping_strength = zeros(N(1), 1);
     for li = 1:l  
-        overlapping_strength = overlapping_strength + strength{li};
+        overlapping_strength = overlapping_strength + strength{li}';
     end
     value = {overlapping_strength};
 end
@@ -133,13 +133,13 @@ MultiplexWD
 %%%% ¡code!
 B11 = [
     0   .2  1
-    .2  0   0
+    .3  0   .1
     1   0   0
     ];
 B22 = [
-    0   1   0
-    1   0   .3
-    0   .3  0
+    0   1   .4
+    1   0   0
+    .7  .3  0
     ];
 B = {B11 B22};
 
