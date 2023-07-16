@@ -114,7 +114,7 @@ else
     N = g.get('NODENUMBER');
     strength = calculateValue@Strength(m, prop);	
     overlapping_strength = zeros(N(1), 1);
-    for li = 1:1:L  
+    for li = 1:l 
         overlapping_strength = overlapping_strength + strength{li};
     end
     value = {overlapping_strength};
