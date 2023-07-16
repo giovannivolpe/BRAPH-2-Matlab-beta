@@ -1,5 +1,5 @@
 %% ¡header!
-OverlappingStrAv < OverlappingStr (m, averge overlapping-strength) is the graph averge overlapping degree.
+OverlappingStrAv < OverlappingStr (m, averge overlapping strength) is the graph averge overlapping degree.
 
 %%% ¡description!
 The average overlapping strength of a graph is the average of the sum of the 
