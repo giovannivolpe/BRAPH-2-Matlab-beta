@@ -1,13 +1,16 @@
 %% ¡header!
-NNData < Element (nnd, data for neural network) produces a dataset to train or test a neural netowrk model.  
+NNData < ConcreteElement (nnd, data for neural network) produces a dataset to train or test a neural network model.
 
 %% ¡description!
-This NN data generates a group of NN subjects, each of which contains the 
+NNData generates a group of NN subjects, each of which contains the 
 input as structural, adjacency matrices, or graph measures from all of the 
 modalities. The generated NN group can be used to train or test neural 
 network models.
-Instances of this class should not be created. 
-Use one of its subclasses instead.
+Instances of this class should not be created. Use one of its subclasses instead.
+
+%% ¡props_update!
+
+% % % COMPLETE
 
 %% ¡props!
 %%% ¡prop!
@@ -26,8 +29,8 @@ true
 
 %%% ¡prop!
 INPUT_TYPE (parameter, option) is the input type for training or testing the NN.
-%%%% ¡gui!
-pr = PPNNDataInputType('EL', nnd, 'PROP', NNData.INPUT_TYPE, 'WAITBAR', Callback('EL', nnd, 'TAG', 'WAITBAR'), varargin{:});
+%%%% ¡_gui!
+% % % pr = PPNNDataInputType('EL', nnd, 'PROP', NNData.INPUT_TYPE, 'WAITBAR', Callback('EL', nnd, 'TAG', 'WAITBAR'), varargin{:});
 
 %%% ¡prop!
 G (parameter, item) is the graph for calculating the graph measures.
@@ -62,7 +65,7 @@ ANALYZE_ENSEMBLE (data, item) contains the graphs of the group.
 %%% ¡prop!
 TARGET_NAME (data, string) is the name of the traget.
 %%%% ¡default!
-'diagnosis'
+'Target'
 
 %%% ¡prop!
 GR (data, item) is a group of subjects defined as subject class.
@@ -74,29 +77,28 @@ GR_NN (result, item) is a group of NN subjects.
 %%%% ¡settings!
 'NNGroup'
 
+%%% ¡_prop!
+% % % TEMPLATE (parameter, item) is the analysis template to set the parameters.
+% % % %%%% ¡settings!
+% % % 'NNData'
+% % % %%%% ¡postprocessing!
+% % % if nnd.prop_set(NNData.TEMPLATE, varargin{:})
+% % %     varargin = {};
+% % %     
+% % %     parameters = nnd.getProps(Category.PARAMETER);
+% % %     for i = 1:1:length(parameters)
+% % %         parameter = parameters(i);
+% % %         
+% % %         if parameter ~= NNData.TEMPLATE
+% % %             varargin{length(varargin) + 1} = parameter;
+% % %             varargin{length(varargin) + 1} = Callback('EL', nnd.get('TEMPLATE'), 'PROP', parameter);
+% % %         end
+% % %     end
+% % %     
+% % %     nnd.set(varargin{:});
+% % % end
 
-%%% ¡prop!
-TEMPLATE (parameter, item) is the analysis template to set the parameters.
-%%%% ¡settings!
-'NNData'
-%%%% ¡postprocessing!
-if nnd.prop_set(NNData.TEMPLATE, varargin{:})
-    varargin = {};
-    
-    parameters = nnd.getProps(Category.PARAMETER);
-    for i = 1:1:length(parameters)
-        parameter = parameters(i);
-        
-        if parameter ~= NNData.TEMPLATE
-            varargin{length(varargin) + 1} = parameter;
-            varargin{length(varargin) + 1} = Callback('EL', nnd.get('TEMPLATE'), 'PROP', parameter);
-        end
-    end
-    
-    nnd.set(varargin{:});
-end
-
-%% ¡methods!
+%% ¡_methods!
 function me = getMeasureEnsemble(nnd, measure_class, varargin)
     %GETMEASURE returns measure.
     %
