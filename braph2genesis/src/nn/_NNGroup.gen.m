@@ -9,29 +9,35 @@ performing a neural network analysis.
 %%% ¡seealso!
 NNSubject
 
+%% ¡props_update!
+
+% % % COMPLETE
+
 %% ¡props!
 
 %%% ¡prop!
 INPUTS (result, cell) is a collection of the input from all NN subjects.
 %%%% ¡calculate!
-if gr.get('SUB_DICT').length() == 0
-    inputs = {};
-else
-    inputs = cellfun(@(x) x.get('INPUT'), gr.get('SUB_DICT').getItems(), 'UniformOutput', false);
-end
-
-value = inputs;
+value = cellfun(@(x) x.get('INPUT'), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false);
+% % % if gr.get('SUB_DICT').length() == 0
+% % %     inputs = {};
+% % % else
+% % %     inputs = cellfun(@(x) x.get('INPUT'), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false);
+% % % end
+% % % 
+% % % value = inputs;
 
 %%% ¡prop!
 TARGETS (result, cell) is a collection of the target from all NN subjects.
 %%%% ¡calculate!
-if gr.get('SUB_DICT').length() == 0
-    targets = {};
-else
-    targets = cellfun(@(x) x.get('TARGET'), gr.get('SUB_DICT').getItems(), 'UniformOutput', false);
-end
-
-value = targets;
+value = cellfun(@(x) x.get('TARGET'), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false);
+% % % if gr.get('SUB_DICT').length() == 0
+% % %     targets = {};
+% % % else
+% % %     targets = cellfun(@(x) x.get('TARGET'), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false);
+% % % end
+% % % 
+% % % value = targets;
 
 %%% ¡prop!
 GRAPH_CLASS (result, class) is the graph obtained from this analysis.
@@ -39,10 +45,10 @@ GRAPH_CLASS (result, class) is the graph obtained from this analysis.
 'Graph'
 %%%% ¡calculate!
 sub_dict = gr.get('SUB_DICT');
-if sub_dict.length == 0
+if sub_dict.get('LENGTH') == 0
     value = 'Graph';
 else
-    sub = sub_dict.getItem(1);
+    sub = sub_dict.get('IT', 1);
     value = sub.get('G').getClass();
 end
 
