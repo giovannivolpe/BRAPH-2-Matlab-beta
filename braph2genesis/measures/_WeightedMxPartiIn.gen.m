@@ -118,9 +118,9 @@ else
 
     weighted_multiplex_in_participation =  zeros(N(1), 1);
     for li = 1:l
-        weighted_multiplex_in_participation = weighted_multiplex_in_participation + (in_strength{li}./overlapping_in_strength{1}).^2;
+        weighted_multiplex_in_participation = weighted_multiplex_in_participation + (in_strength{li}'./overlapping_in_strength{1}).^2;
     end
-    weighted_multiplex_in_participation = L / (L - 1) * (1 - weighted_multiplex_in_participation);
+    weighted_multiplex_in_participation = l / (l - 1) * (1 - weighted_multiplex_in_participation);
     weighted_multiplex_in_participation(isnan(weighted_multiplex_in_participation)) = 0;  % Should return zeros, since NaN happens when strength = 0 and overlapping strength = 0 for all regions
     value = {weighted_multiplex_in_participation};
 end
