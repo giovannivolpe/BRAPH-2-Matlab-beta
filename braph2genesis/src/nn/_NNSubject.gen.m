@@ -7,6 +7,17 @@ NNSubject contains the required information for a neural network analysis.
 %%% ¡seealso!
 NNGroup, NNData
 
+%% ¡constants!
+INPUT_MEASURES = 'Graph Measures'
+INPUT_STRUCTURAL = 'Structural Data'
+INPUT_ADJACENCY = 'Adjacency Matrices'
+
+INPUT_TYPES = {
+    NNSubject.INPUT_MEASURES
+    NNSubject.INPUT_STRUCTURAL
+    NNSubject.INPUT_ADJACENCY
+    }
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -38,17 +49,6 @@ LABEL (metadata, string) is an extended label of the subject for neural network 
 NOTES (metadata, string) are some specific notes about the subject for neural network analysis.
 %%%% ¡default!
 'NNSubject notes'
-
-%% ¡constants!
-INPUT_MEASURES = 'Graph Measures'
-INPUT_STRUCTURAL = 'Structural Data'
-INPUT_ADJACENCY = 'Adjacency Matrices'
-
-INPUT_TYPES = {
-    NNSubject.INPUT_MEASURES
-    NNSubject.INPUT_STRUCTURAL
-    NNSubject.INPUT_ADJACENCY
-    }
 
 %% ¡props!
 
@@ -131,7 +131,7 @@ TARGET (metadata, cell) is the encoded values of a target for the neural network
 PREDICTION (data, cell) is the prediction of the subject from the neural network analysis.
 
 %%% ¡prop!
-BA (data, item) is a brain atlas.
+BA (metadata, item) is a brain atlas used for visualization.
 %%%% ¡settings!
 'BrainAtlas'
 %%%% ¡default!
