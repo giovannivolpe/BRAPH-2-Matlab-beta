@@ -98,7 +98,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT''OrdMXWU'};
+{'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT''OrdMxWU'};
 
 %%% ¡prop!
 M (result, cell) is the weighted multiplex particiption.

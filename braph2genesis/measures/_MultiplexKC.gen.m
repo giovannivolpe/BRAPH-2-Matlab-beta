@@ -99,7 +99,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'OrdMXWU'};
+{'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'OrdMxWU'};
 
 %%% ¡prop!
 M (result, cell) is the multiplex rich-club strength.
@@ -113,7 +113,7 @@ if l == 0
     value = {};
 else
     N = g.get('NODENUMBER');
-    multiplex_kcore_threshold = m.get('MultiplexKCoreThreshold');
+    multiplex_kcore_threshold = m.get('MULTIPLEXKCORETHRESHOLD');
     assert(mod(multiplex_kcore_threshold, 1) == 0, ...
         [BRAPH2.STR ':MultiplexKCore:' BRAPH2.WRONG_INPUT], ...
         ['MultiplexKCore threshold must be an integer value ' ...
@@ -154,7 +154,7 @@ end
 %% ¡props!
 
 %%% ¡prop! 
-MultiplexKCoreThreshold (parameter, SCALAR) is the multiplex k-core threshold
+MULTIPLEXCORETHRESHOLD (parameter, scalar) is the multiplex k-core threshold
 %%%% ¡default!
 1
 
