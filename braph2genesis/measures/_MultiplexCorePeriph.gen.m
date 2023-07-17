@@ -181,13 +181,6 @@ else
     value = multiplex_core_periphery;
 end
 
-%% ¡props!
-
-%%% ¡prop! 
-MULTIRICHNESS_COEFFICIENTS (parameter, RVECTOR)
-%%%% ¡default!
-[0]
-
 %% ¡tests!
 
 %%% ¡excluded_props!
