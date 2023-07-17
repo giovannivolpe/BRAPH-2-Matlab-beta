@@ -119,7 +119,7 @@ if l == 0
 else
     N = g.get('NODENUMBER');
     degree = Degree('G', g).get('M');
-    overlapping_degree = OverlappingDegree('G', g).get('M'); 
+    overlapping_degree = OverlappingDgr('G', g).get('M'); 
     multiplex_participation = cell(length(ls), 1);
     
     count = 1;

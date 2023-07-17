@@ -1,51 +1,51 @@
 %% ¡header!
-MultiplexPartAv < MultiplexPart (m, average mxpart) is the graph average multiplex participation.
+MultiplexPartiAv < MultiplexPart (m, average mxpart) is the graph average multiplex participation.
 
 %%% ¡description!
 The average multiplex participation of a graph is the average homogeneity 
-    of its number of neighbours across the layers. 
+   of its number of neighbours across the layers. 
 
 %% ¡layout!
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartAv.ID
+MultiplexPartiAv.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartAv.LABEL
+MultiplexPartiAv.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartAv.G
+MultiplexPartiAv.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartAv.M
+MultiplexPartiAv.M
 %%%% ¡title!
-MultiplexPartAv
+MultiplexPartiAv
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartAv.PFM
+MultiplexPartiAv.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartAv.NOTES
+MultiplexPartiAv.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartAv.COMPATIBLE_GRAPHS
+MultiplexPartiAv.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex participation.
 %%%% ¡default!
-'MultiplexPartAv'
+'MultiplexPartiAv'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex participation.
@@ -64,22 +64,22 @@ DESCRIPTION (constant, string) is the description of the multiplex participation
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multiplex participation.
 %%%% ¡settings!
-'MultiplexPartAv'
+'MultiplexPartiAv'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the multiplex participation.
 %%%% ¡default!
-'MultiplexPartAv ID'
+'MultiplexPartiAv ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex participation.
 %%%% ¡default!
-'MultiplexPartAv label'
+'MultiplexPartiAv label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex participation.
 %%%% ¡default!
-'MultiplexPartAv notes'
+'MultiplexPartiAv notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -124,7 +124,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MultiplexPartAv.PFM]
+[MultiplexPartiAv.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -146,15 +146,15 @@ B = {B11  B22};
 known_multiplex_participation = {mean([8/9 8/9 1]')};
 
 g = MultiplexWU('B', B);
-m_outside_g = MultiplexPartAv('G', g);
+m_outside_g = MultiplexPartiAv('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multiplex_participation), ...
-    [BRAPH2.STR ':MultiplexPartAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPartAv');
+m_inside_g = g.get('MEASURE', 'MultiplexPartiAv');
 assert(isequal(m_inside_g.get('M'), known_multiplex_participation), ...
-    [BRAPH2.STR ':MultiplexPartAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -183,14 +183,14 @@ B = {B11 B22 B33};
 known_multiplex_participation = {mean([15/16 15/16 3/4]')};
 
 g = MultiplexBU('B', B);
-m_outside_g = MultiplexPartAv('G', g);
+m_outside_g = MultiplexPartiAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_multiplex_participation), ...
-    [BRAPH2.STR ':MultiplexPartAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPartAv');
+m_inside_g = g.get('MEASURE', 'MultiplexPartiAv');
 assert(isequal(m_inside_g.get('M'), known_multiplex_participation), ...
-    [BRAPH2.STR ':MultiplexPartAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -223,14 +223,14 @@ known_multiplex_participation = {...
 
 g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
 
-m_outside_g = MultiplexPartAv('G', g);
+m_outside_g = MultiplexPartiAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_multiplex_participation), ...
-    [BRAPH2.STR ':MultiplexPartAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPartAv');
+m_inside_g = g.get('MEASURE', 'MultiplexPartiAv');
 assert(isequal(m_inside_g.get('M'), known_multiplex_participation), ...
-    [BRAPH2.STR ':MultiplexPartAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -263,12 +263,12 @@ known_multiplex_participation = {...
 
 g = MultiplexBUD('B', B, 'DENSITIES', [0 90]);
 
-m_outside_g = MultiplexPartAv('G', g);
+m_outside_g = MultiplexPartiAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_multiplex_participation), ...
-    [BRAPH2.STR ':MultiplexPartAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPartAv');
+m_inside_g = g.get('MEASURE', 'MultiplexPartiAv');
 assert(isequal(m_inside_g.get('M'), known_multiplex_participation), ...
-    [BRAPH2.STR ':MultiplexPartAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
