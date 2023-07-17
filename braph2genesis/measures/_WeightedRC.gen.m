@@ -122,6 +122,7 @@ assert(isnumeric(weighted_rich_club_threshold) == 1, ...
     'while it is ' tostring(weighted_rich_club_threshold)])
 
 s_levels = abs(weighted_rich_club_threshold);
+directionality_type = g.get('DIRECTIONALITY_TYPE', l);
     
 for li = 1:1:l
     
@@ -193,7 +194,7 @@ r(1, 1, 3) = 0;
 known_weighted_rich_club = {r};  
 
 g = GraphWU('B', A);
-m_outside_g = WeightedRC('G', g);
+m_outside_g = WeightedRC('G', g, 'WRC_PARAMETER', [1, 1.5, 2]);
 
 assert(isequal(m_outside_g.get('M'), known_weighted_rich_club), ...
     [BRAPH2.STR ':WeightedRC:' BRAPH2.FAIL_TEST], ...
@@ -231,7 +232,7 @@ known_weighted_rich_club = {
     };
 
 g = MultiplexWU('B', A);
-m_outside_g = WeightedRC('G', g);
+m_outside_g = WeightedRC('G', g, 'WRC_PARAMETER', [1.5, 2]);
 
 assert(isequal(m_outside_g.get('M'), known_weighted_rich_club), ...
     [BRAPH2.STR ':WeightedRC:' BRAPH2.FAIL_TEST], ...
