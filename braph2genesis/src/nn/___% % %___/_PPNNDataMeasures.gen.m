@@ -33,6 +33,7 @@ menu_set_selection
 menu_measure_open_elements
 menu_measure_hide_elements
 f_measure_elements
+
 %% ¡methods!
 function p_out = draw(pr, varargin)
     %DRAW draws the panel of the graph property and the measure table.
