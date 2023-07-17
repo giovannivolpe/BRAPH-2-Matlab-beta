@@ -101,7 +101,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWU' 'MultiplexWD' 'OrdMXWU'};
+{'MultiplexWU' 'MultiplexWD' 'OrdMxWU'};
 
 %%% ¡prop!
 M (result, cell) is the multiplex rich-club strength.
