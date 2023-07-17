@@ -1,5 +1,5 @@
 %% ¡header!
-DegreeOverlapAv < Measure (m, average average degree overlap) is the graph average degree overlap.
+DegreeOverlapAv < DegreeOverlap (m, average average degree overlap) is the graph average degree overlap.
 
 %%% ¡description!
 The average degree overlap is the average of the number of edges connected 
@@ -106,7 +106,8 @@ M (result, cell) is the average degree overlap.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
-[l, ls] = g.get('LAYERNUMBER');
+l = g.get('LAYERNUMBER');
+ls = g.get('PARTITIONS');
 
 if l == 0
     value = {};
@@ -206,7 +207,7 @@ B22 = [
 B = {B11 B22};
 
 known_degree_overlap = {
-    [1 1 0]'
+    mean([1 1 0]')
     0};
 
 g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);

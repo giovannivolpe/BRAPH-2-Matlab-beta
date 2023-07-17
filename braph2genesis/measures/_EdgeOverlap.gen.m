@@ -106,7 +106,8 @@ M (result, cell) is the edge overlap.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
-[l, ls] = g.get('LAYERNUMBER');
+l = g.get('LAYERNUMBER');
+ls = g.get('PARTITIONS');
 
 if l == 0
     value = {};
@@ -114,6 +115,7 @@ else
    edge_overlap = cell(length(ls), 1);   
     count = 1;
     for i = 1:1:length(ls)
+        N = g.get('NODENUMBER');
         edge_overlap_partition = zeros(N(1));
         for li = count:1:ls(i) + count - 1
             Aii = A{li, li};
@@ -153,7 +155,7 @@ known_edge_overlap = {[
     0   1   .5
     1   0   .5
     .5  .5  0
-    ]}
+    ]};
 
 g = MultiplexWU('B', B);
 m_outside_g = EdgeOverlap('G', g);

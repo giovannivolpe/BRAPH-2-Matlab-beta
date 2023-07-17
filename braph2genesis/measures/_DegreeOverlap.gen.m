@@ -1,5 +1,5 @@
 %% ¡header!
-DegreeOverlap < Measure (m, degree overlap) is the graph degree overlap.
+DegreeOverlap < EdgeOverlap (m, degree overlap) is the graph degree overlap.
 
 %%% ¡description!
 The degree overlap is the number of edges connected to a node in all layers. 
@@ -106,7 +106,8 @@ M (result, cell) is the degree overlap.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
-[l, ls] = g.get('LAYERNUMBER');
+l = g.get('LAYERNUMBER');
+ls = g.get('PARTITIONS');
 
 if l == 0
     value = {};
@@ -208,7 +209,7 @@ B = {B11 B22};
 
 known_degree_overlap = {
     [1 1 0]'
-    0};
+    [0 0 0]'};
 
 g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
 
@@ -242,7 +243,7 @@ B = {B11 B22};
 
 known_degree_overlap = {
     [1 1 0]'
-    0};
+    [0 0 0]'};
 
 g = MultiplexBUD('B', B, 'DENSITIES', [90 10]);
 
