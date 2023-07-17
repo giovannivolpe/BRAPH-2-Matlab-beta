@@ -66,7 +66,7 @@ N = g.get('NODENUMBER');
 k_coreness_centrality = cell(L, 1);
 directionality_type =  g.get('DIRECTIONALITY_TYPE', L);
 
-parfor li = 1:1:L
+for li = 1:1:L
     Aii = A{li, li};
     directionality_layer = directionality_type(li, li);
 
