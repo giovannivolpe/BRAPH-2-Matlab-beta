@@ -1,5 +1,5 @@
 %% ¡header!
-MultiplexPartOut < Measure (m, multiplex out-participation) is the graph multiplex out-participation.
+MultiplexPartiOut < Measure (m, multiplex out-participation) is the graph multiplex out-participation.
 
 %%% ¡description!
 The multiplex out-participation is the homogeneity of the number of outward 
@@ -9,43 +9,43 @@ The multiplex out-participation is the homogeneity of the number of outward
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartOut.ID
+MultiplexPartiAv.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartOut.LABEL
+MultiplexPartiAv.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartOut.G
+MultiplexPartiAv.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartOut.M
+MultiplexPartiAv.M
 %%%% ¡title!
-MultiplexPartOut
+MultiplexPartiAv
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartOut.PFM
+MultiplexPartiAv.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartOut.NOTES
+MultiplexPartiAv.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartOut.COMPATIBLE_GRAPHS
+MultiplexPartiAv.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex out-participation.
 %%%% ¡default!
-'MultiplexPartOut'
+'MultiplexPartiAv'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex out-participation.
@@ -64,22 +64,22 @@ DESCRIPTION (constant, string) is the description of the multiplex out-participa
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multiplex out-participation.
 %%%% ¡settings!
-'MultiplexPartOut'
+'MultiplexPartiAv'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the multiplex out-participation.
 %%%% ¡default!
-'MultiplexPartOut ID'
+'MultiplexPartiAv ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex out-participation.
 %%%% ¡default!
-'MultiplexPartOut label'
+'MultiplexPartiAv label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex out-participation.
 %%%% ¡default!
-'MultiplexPartOut notes'
+'MultiplexPartiAv notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -114,7 +114,7 @@ if l == 0
 else
     N = g.get('NODENUMBER');
     out_degree = DegreeOut('G', g).get('M');
-    overlapping_out_degree = OverlappingDegOut('G', g).get('M');
+    overlapping_out_degree = OverlappingDgrOut('G', g).get('M');
     multiplex_out_participation =  zeros(N(1), 1);
 
     for li = 1:1:L
@@ -128,7 +128,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MultiplexPartOut.PFM]
+[MultiplexPartiAv.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -151,15 +151,15 @@ B = {B11  B22};
 known_multiplex_out_participation = {[8/9 8/9 1]'};
 
 g = MultiplexWD('B', B);
-m_outside_g = MultiplexPartOut('G', g);
+m_outside_g = MultiplexPartiAv('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multiplex_out_participation), ...
-    [BRAPH2.STR ':MultiplexPartOut:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPartOut');
+m_inside_g = g.get('MEASURE', 'MultiplexPartiAv');
 assert(isequal(m_inside_g.get('M'), known_multiplex_out_participation), ...
-    [BRAPH2.STR ':MultiplexPartOut:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -188,12 +188,12 @@ B = {B11 B22 B33};
 known_multiplex_out_participation = {[1 15/16 1]'};
 
 g = MultiplexBD('B', B);
-m_outside_g = MultiplexPartOut('G', g);
+m_outside_g = MultiplexPartiAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_multiplex_out_participation), ...
-    [BRAPH2.STR ':MultiplexPartOut:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPartOut');
+m_inside_g = g.get('MEASURE', 'MultiplexPartiAv');
 assert(isequal(m_inside_g.get('M'), known_multiplex_out_participation), ...
-    [BRAPH2.STR ':MultiplexPartOut:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

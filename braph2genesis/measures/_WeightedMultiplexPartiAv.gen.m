@@ -1,51 +1,51 @@
 %% ¡header!
-WeightedMultiplexPart < Measure (m, weighted mxpart) is the graph weighted multiplex participation.
+WeightedMultiplexPartiAv < WeightedMultiplexParti (m, average weighted mxpart) is the graph average weighted multiplex participation.
 
 %%% ¡description!
-The weighted multiplex participation of a graph is the nodal homogeneity 
- of its number of neighbours across the layers. 
+The average weighted multiplex participation of a graph is the average homogeneity 
+of its number of neighbours across the layers.
 
 %% ¡layout!
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPart.ID
+WeightedMultiplexPartiAv.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPart.LABEL
+WeightedMultiplexPartiAv.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPart.G
+WeightedMultiplexPartiAv.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPart.M
+WeightedMultiplexPartiAv.M
 %%%% ¡title!
-WeightedMultiplexPart
+WeightedMultiplexPartiAv
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPart.PFM
+WeightedMultiplexPartiAv.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPart.NOTES
+WeightedMultiplexPartiAv.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPart.COMPATIBLE_GRAPHS
+WeightedMultiplexPartiAv.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the weighted multiplex particiption.
 %%%% ¡default!
-'WeightedMultiplexPart'
+'WeightedMultiplexPartiAv'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the weighted multiplex particiption.
@@ -64,27 +64,27 @@ DESCRIPTION (constant, string) is the description of the weighted multiplex part
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the weighted multiplex particiption.
 %%%% ¡settings!
-'WeightedMultiplexPart'
+'WeightedMultiplexPartiAv'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the weighted multiplex particiption.
 %%%% ¡default!
-'WeightedMultiplexPart ID'
+'WeightedMultiplexPartiAv ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the weighted multiplex particiption.
 %%%% ¡default!
-'WeightedMultiplexPart label'
+'WeightedMultiplexPartiAv label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the weighted multiplex particiption.
 %%%% ¡default!
-'WeightedMultiplexPart notes'
+'WeightedMultiplexPartiAv notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
 %%%% ¡default!
-Measure.NODAL
+Measure.GLOBAL
 
 %%% ¡prop!
 SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
@@ -105,30 +105,14 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 M (result, cell) is the weighted multiplex particiption.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
-A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
-l = g.get('LAYERNUMBER');
-ls = g.get('PARTITIONS');
 
-if l == 0
-    value = {};
-else
-    N = g.get('NODENUMBER');
-    strength = Strength('G', g).get('M');
-    overlapping_strength = OverlappingStr('G', g).get('M');
-
-    weighted_multiplex_participation =  zeros(N(1), 1);
-    for li = 1:1:L
-        weighted_multiplex_participation = weighted_multiplex_participation + (strength{li}./overlapping_strength{1}).^2;
-    end
-    weighted_multiplex_participation = L / (L - 1) * (1 - weighted_multiplex_participation);
-    weighted_multiplex_participation(isnan(weighted_multiplex_participation)) = 0;  % Should return zeros, since NaN happens when strength = 0 and overlapping strength = 0 for all regions
-    value = {weighted_multiplex_participation};
-end
+weighted_multiplex_participation = calculateValue@WeightedMultiplexParti(m, prop);	
+value = {mean(cell2mat(weighted_multiplex_participation))};
 
 %% ¡tests!
 
 %%% ¡excluded_props!
-[WeightedMultiplexPart.PFM]
+[WeightedMultiplexPartiAv.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -148,16 +132,16 @@ B22 = [
     ];
 B = {B11  B22};
 
-known_weighted_multiplex_participation = {[24/25 3/4 8/9]'};
+known_weighted_multiplex_participation = {mean([24/25 3/4 8/9])};
 
 g = MultiplexWD('B', B);
-m_outside_g = WeightedMultiplexPart('G', g);
+m_outside_g = WeightedMultiplexPartiAv('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_weighted_multiplex_participation), ...
-    [BRAPH2.STR ':WeightedMultiplexPart:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':WeightedMultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'WeightedMultiplexPart');
+m_inside_g = g.get('MEASURE', 'WeightedMultiplexPartiAv');
 assert(isequal(m_inside_g.get('M'), known_weighted_multiplex_participation), ...
-    [BRAPH2.STR ':WeightedMultiplexPart:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':WeightedMultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

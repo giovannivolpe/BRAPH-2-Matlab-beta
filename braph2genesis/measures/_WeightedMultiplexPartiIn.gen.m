@@ -1,5 +1,5 @@
 %% ¡header!
-WeightedMultiplexPartIn < Measure (m, weighted mxpart-in) is the graph weighted multiplex in-participation.
+WeightedMultiplexPartiIn < Measure (m, weighted mxpart-in) is the graph weighted multiplex in-participation.
 
 %%% ¡description!
 The weighted multiplex in-participation of a graph is the nodal homogeneity 
@@ -9,43 +9,43 @@ The weighted multiplex in-participation of a graph is the nodal homogeneity
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPartIn.ID
+WeightedMultiplexPartiIn.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPartIn.LABEL
+WeightedMultiplexPartiIn.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPartIn.G
+WeightedMultiplexPartiIn.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPartIn.M
+WeightedMultiplexPartiIn.M
 %%%% ¡title!
-WeightedMultiplexPartIn
+WeightedMultiplexPartiIn
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPartIn.PFM
+WeightedMultiplexPartiIn.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPartIn.NOTES
+WeightedMultiplexPartiIn.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMultiplexPartIn.COMPATIBLE_GRAPHS
+WeightedMultiplexPartiIn.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the weighted multiplex in-particiption.
 %%%% ¡default!
-'WeightedMultiplexPartIn'
+'WeightedMultiplexPartiIn'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the weighted multiplex in-particiption.
@@ -64,22 +64,22 @@ DESCRIPTION (constant, string) is the description of the weighted multiplex in-p
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the weighted multiplex in-particiption.
 %%%% ¡settings!
-'WeightedMultiplexPartIn'
+'WeightedMultiplexPartiIn'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the weighted multiplex in-particiption.
 %%%% ¡default!
-'WeightedMultiplexPartIn ID'
+'WeightedMultiplexPartiIn ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the weighted multiplex in-particiption.
 %%%% ¡default!
-'WeightedMultiplexPartIn label'
+'WeightedMultiplexPartiIn label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the weighted multiplex in-particiption.
 %%%% ¡default!
-'WeightedMultiplexPartIn notes'
+'WeightedMultiplexPartiIn notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -117,7 +117,7 @@ else
     overlapping_in_strength = OverlappingStrIn('G', g).get('M');
 
     weighted_multiplex_in_participation =  zeros(N(1), 1);
-    for li = 1:1:L
+    for li = 1:l
         weighted_multiplex_in_participation = weighted_multiplex_in_participation + (in_strength{li}./overlapping_in_strength{1}).^2;
     end
     weighted_multiplex_in_participation = L / (L - 1) * (1 - weighted_multiplex_in_participation);
@@ -128,7 +128,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[WeightedMultiplexPartIn.PFM]
+[WeightedMultiplexPartiIn.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -151,13 +151,13 @@ B = {B11  B22};
 known_weighted_multiplex_in_participation = {[24/25 3/4 0]'};
 
 g = MultiplexWD('B', B);
-m_outside_g = WeightedMultiplexPartIn('G', g);
+m_outside_g = WeightedMultiplexPartiIn('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_weighted_multiplex_in_participation), ...
-    [BRAPH2.STR ':WeightedMultiplexPartIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':WeightedMultiplexPartiIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'WeightedMultiplexPartIn');
+m_inside_g = g.get('MEASURE', 'WeightedMultiplexPartiIn');
 assert(isequal(m_inside_g.get('M'), known_weighted_multiplex_in_participation), ...
-    [BRAPH2.STR ':WeightedMultiplexPartIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':WeightedMultiplexPartiIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
