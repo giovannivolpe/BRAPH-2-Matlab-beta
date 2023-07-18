@@ -183,13 +183,14 @@ B = {B11 B22};
 known_multi_rich_club_degree = {[9/4 9/4 2 1/2]'};
 
 g = MultiplexWU('B', B);
-m_outside_g = MultiRCDgr('G', g);
+m_outside_g = MultiRCDgr('G', g, 'MULTIRICHCLUB_COEFFICIENTS', [3/4, 1/4]);
 
 assert(isequal(m_outside_g.get('M'), known_multi_rich_club_degree), ...
     [BRAPH2.STR ':MultiRCDgr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'MultiRCDgr');
+m_inside_g.set('MULTIRICHCLUB_COEFFICIENTS', [3/4, 1/4]);
 assert(isequal(m_inside_g.get('M'), known_multi_rich_club_degree), ...
     [BRAPH2.STR ':MultiRCDgr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

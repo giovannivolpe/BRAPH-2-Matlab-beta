@@ -141,12 +141,13 @@ known_rich_club_strength = {[1.1 1.1 2 0]'};
 
 g = GraphWU('B', B);
 
-m_outside_g = RichClubStr('G', g);
+m_outside_g = RichClubStr('G', g, 'PARAMETRIC_VALUE', 1);
 assert(isequal(m_outside_g.get('M'), known_rich_club_strength), ...
     [BRAPH2.STR ':RichClubStr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'RichClubStr');
+m_inside_g.set('PARAMETRIC_VALUE', 1);
 assert(isequal(m_inside_g.get('M'), known_rich_club_strength), ...
     [BRAPH2.STR ':RichClubStr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -170,12 +171,13 @@ known_rich_club_strength = {wrich};
 
 g = GraphWD('B', B);
 
-m_outside_g = RichClubStr('G', g);
+m_outside_g = RichClubStr('G', g, 'PARAMETRIC_VALUE', [1.5, 2]);
 assert(isequal(m_outside_g.get('M'), known_rich_club_strength), ...
     [BRAPH2.STR ':RichClubStr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'RichClubStr');
+m_inside_g.set('PARAMETRIC_VALUE', [1.5, 2]);
 assert(isequal(m_inside_g.get('M'), known_rich_club_strength), ...
     [BRAPH2.STR ':RichClubStr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

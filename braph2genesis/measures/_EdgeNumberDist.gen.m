@@ -128,14 +128,14 @@ A = [
     ];
 
 known_value = {[
-    0  1  1  1  0;
-    1  0  2  2  0;
-    1  1  0  1  0;
-    1  1  2  0  0;
-    0  0  0  0  0;
-    ]}
+    0 2 1 1 0;
+    2 0 1 1 0;
+    1 1 0 2 0;
+    1 1 2 0 0;
+    0 0 0 0 0;
+    ]};
 
-g = GraphBD('B', A);
+g = GraphWU('B', A);
 
 m_outside_g = EdgeNumberDist('G', g);
 assert(isequal(m_outside_g.get('M'), known_value), ...
@@ -184,7 +184,7 @@ known_value = {[
     0 0 0 0 0;
     ]};
 
-g = GraphBD('B', A);
+g = MultiplexWD('B', A);
 
 m_outside_g = EdgeNumberDist('G', g);
 assert(isequal(m_outside_g.get('M'), known_value), ...

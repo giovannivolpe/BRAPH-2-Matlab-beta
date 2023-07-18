@@ -113,7 +113,7 @@ if l == 0
     value = {};
 else
     N = g.get('NODENUMBER');
-    degree = calculateValue@DegreeIn(m, prop);
+    in_degree = calculateValue@DegreeIn(m, prop);
     overlapping_in_degree = zeros(N(1), 1);
 
     for li = 1:l

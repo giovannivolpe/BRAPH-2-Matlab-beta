@@ -9,43 +9,43 @@ The weighted multiplex out-participation of a graph is the nodal homogeneity
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMxPartiOut .ID
+WeightedMxPartiOut.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMxPartiOut .LABEL
+WeightedMxPartiOut.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMxPartiOut .G
+WeightedMxPartiOut.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMxPartiOut .M
+WeightedMxPartiOut.M
 %%%% ¡title!
 WeightedMxPartiOut 
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMxPartiOut .PFM
+WeightedMxPartiOut.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMxPartiOut .NOTES
+WeightedMxPartiOut.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-WeightedMxPartiOut .COMPATIBLE_GRAPHS
+WeightedMxPartiOut.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -128,7 +128,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[WeightedMxPartiOut .PFM]
+[WeightedMxPartiOut.PFM]
 
 %%% ¡test!
 %%%% ¡name!

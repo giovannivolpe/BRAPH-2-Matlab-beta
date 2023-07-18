@@ -56,7 +56,7 @@ Measure.NONPARAMETRIC
 
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-%%% ¡default!
+%%%% ¡default!
 {'GraphBD' 'GraphWD' 'MultiplexWD' 'MultiplexBD'};
 
 %%% ¡prop!
@@ -89,8 +89,7 @@ parfor li = 1:L
     % compute assortativity
     assortativity_layer = (sum(k_i(:, li) .* k_j(:, li)) / M - (sum(0.5 * (k_i(:, li) + k_j(:, li))) / M)^2)...
         / (sum(0.5 * (k_i(:, li).^2 + k_j(:, li).^2)) / M - (sum(0.5 * (k_i(:, li) + k_j(:, li))) / M)^2);
-    assortativity_layer(isnan(assortativity_layer)) = 0;  % Should return zeros, not NaN
-    
+    assortativity_layer(isnan(assortativity_layer)) = 0;  % Should return zeros, not NaN    
     out_out_assortativity(li) = {assortativity_layer};
 end
 
