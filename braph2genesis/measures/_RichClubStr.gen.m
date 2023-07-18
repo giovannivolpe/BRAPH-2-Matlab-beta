@@ -94,7 +94,7 @@ for li = 1:1:L
     end
 
     richclub_layer = zeros(N(1), 1, s_levels);
-    for k = 1:1:k_level
+    for k = 1:1:s_levels
         low_rich_nodes = find(st <= s);  % get lower rich nodes with strength <= s
         subAii = Aii;  % extract subnetwork of nodes >s by removing nodes <=s of Aii
         subAii(low_rich_nodes, :) = 0;  % remove rows
