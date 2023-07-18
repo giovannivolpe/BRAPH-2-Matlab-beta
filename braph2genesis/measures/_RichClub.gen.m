@@ -56,7 +56,7 @@ Measure.PARAMETRIC
 
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-%%% ¡default!
+%%%% ¡default!
 {'GraphWU''GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MUltiplexBD' 'MultiplexBUD' 'MultiplexBUT'};
 
 %%% ¡prop!
