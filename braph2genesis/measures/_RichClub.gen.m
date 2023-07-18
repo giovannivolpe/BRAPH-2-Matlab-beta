@@ -57,7 +57,7 @@ Measure.PARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MUltiplexBD' 'MultiplexBUD' 'MultiplexBUT'};
+{'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUD' 'MultiplexBUT'};
 
 %%% ¡prop!
 M (result, cell) is the richclub.
