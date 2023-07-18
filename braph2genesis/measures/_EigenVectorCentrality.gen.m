@@ -62,7 +62,7 @@ g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 L = g.get('LAYERNUMBER');
 N = g.get('NODENUMBER');
-
+eigenvector_centrality = cell(L, 1);
 parfor li = 1:L
     Aii = A{li, li};   
     

@@ -62,7 +62,7 @@ g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 L = g.get('LAYERNUMBER');
 
-kcore_threshold = m.get('KCoreThreshold');
+kcore_threshold = m.get('KCORETHRESHOLD');
 
 k_core = cell(L, 1);
 directionality_type =  g.get('DIRECTIONALITY_TYPE', L);
@@ -98,7 +98,7 @@ value = k_core;
 
 %% ¡props!
 %%% ¡prop! 
-KCORETHRESHOLD (parameter, SCALAR) is the k-core threshold
+KCORETHRESHOLD (parameter, scalar) is the k-core threshold
 %%%% ¡default!
 1
 
