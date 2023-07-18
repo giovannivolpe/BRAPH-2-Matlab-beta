@@ -132,7 +132,7 @@ end
 
 %%% ¡test!
 %%%% ¡name!
-MultiplexWD
+MultiplexWU
 %%%% ¡probability!
 .01
 %%%% ¡code!
@@ -150,7 +150,7 @@ B = {B11  B22};
 
 known_weighted_multiplex_participation = {[24/25 3/4 8/9]'};
 
-g = MultiplexWD('B', B);
+g = MultiplexWU('B', B);
 m_outside_g = WeightedMxParti('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_weighted_multiplex_participation), ...
