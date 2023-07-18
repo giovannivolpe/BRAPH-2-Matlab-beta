@@ -192,14 +192,15 @@ known_mkcore = {[
     0  0  0  0
     ]};
 
-g = MultiplexWU('B', B);
-m_outside_g = MultiplexKC('G', g);
+g = MultiplexWU('B', A);
+m_outside_g = MultiplexKC('G', g, 'MULTIPLEXKCORETHRESHOLD', 2);
 
 assert(isequal(m_outside_g.get('M'), known_mkcore), ...
     [BRAPH2.STR ':MultiplexKC:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'MultiplexKC');
+m_inside_g.set('MULTIPLEXKCORETHRESHOLD', 2);
 assert(isequal(m_inside_g.get('M'), known_mkcore), ...
     [BRAPH2.STR ':MultiplexKC:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -232,14 +233,15 @@ known_mkcore = {[
     0  1  1  0
     ]};
 
-g = MultiplexBU('B', B);
-m_outside_g = MultiplexKC('G', g);
+g = MultiplexBU('B', A);
+m_outside_g = MultiplexKC('G', g, 'MULTIPLEXKCORETHRESHOLD', 4);
 
 assert(isequal(m_outside_g.get('M'), known_mkcore), ...
     [BRAPH2.STR ':MultiplexKC:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'MultiplexKC');
+m_inside_g.set('MULTIPLEXKCORETHRESHOLD', 4);
 assert(isequal(m_inside_g.get('M'), known_mkcore), ...
     [BRAPH2.STR ':MultiplexKC:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

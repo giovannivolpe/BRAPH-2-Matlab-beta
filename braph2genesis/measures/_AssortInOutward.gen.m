@@ -56,7 +56,7 @@ Measure.NONPARAMETRIC
 
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-%%% ¡default!
+%%%% ¡default!
 {'GraphBD' 'GraphWD' 'MultiplexWD' 'MultiplexBD'};
 
 %%% ¡prop!
@@ -77,20 +77,23 @@ parfor li = 1:L
     k_j = zeros(length(j), L);
     
     if connectivity_type == Graph.WEIGHTED  % weighted graphs
+        in_strength = StrengthIn('G', g).get('M');
         out_strength = StrengthOut('G', g).get('M');
-        d = out_strength{li};
+        d_in = in_strength{li};
+        d_out = out_strength{li};
     else  % binary graphs
+        in_degree = DegreeIn('G', g).get('M');
         out_degree = DegreeOut('G', g).get('M');
-        d= out_degree{li};
+        d_in = in_degree{li};
+        d_out = out_degree{li};
     end
     
-    k_i(:, li) = d(i);  % in-degree/in-strength node i
-    k_j(:, li) = d(j);  % in-degree/in-strength node j
+    k_i(:, li) = d_in(i);  % in-degree/in-strength node i
+    k_j(:, li) = d_out(j);  % in-degree/in-strength node j
     % compute assortativity
     assortativity_layer = (sum(k_i(:, li) .* k_j(:, li)) / M - (sum(0.5 * (k_i(:, li) + k_j(:, li))) / M)^2)...
         / (sum(0.5 * (k_i(:, li).^2 + k_j(:, li).^2)) / M - (sum(0.5 * (k_i(:, li) + k_j(:, li))) / M)^2);
     assortativity_layer(isnan(assortativity_layer)) = 0;  % Should return zeros, not NaN
-    
     in_in_assortativity(li) = {assortativity_layer};
 end
 
@@ -120,12 +123,12 @@ g = GraphBD('B', A);
 in_in_assortativity = AssortInOutward('G', g).get('M');
 
 m_outside_g = AssortInOutward('G', g);
-assert(isequal(m_outside_g.get('M'), known_in_in_assortativity), ...
+assert(isequal(m_outside_g.get('M'), known_in_out_assortativity), ...
     [BRAPH2.STR ':AssortInOutward:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'AssortInOutward');
-assert(isequal(m_inside_g.get('M'), known_in_in_assortativity), ...
+assert(isequal(m_inside_g.get('M'), known_in_out_assortativity), ...
     [BRAPH2.STR ':AssortInOutward:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -145,12 +148,12 @@ known_in_out_assortativity = {(2-100/49)/(16/7-100/49)};
 
 g = GraphWD('B', A);
 m_outside_g = AssortInOutward('G', g);
-assert(isequal(m_outside_g.get('M'), known_in_in_assortativity), ...
+assert(isequal(m_outside_g.get('M'), known_in_out_assortativity), ...
     [BRAPH2.STR ':Degree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'AssortInOutward');
-assert(isequal(m_inside_g.get('M'), known_in_in_assortativity), ...
+assert(isequal(m_inside_g.get('M'), known_in_out_assortativity), ...
     [BRAPH2.STR ':AssortInOutward:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 

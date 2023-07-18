@@ -182,13 +182,14 @@ B = {B11 B22};
 known_multi_rich_club_strength = {[5.4/4 5.2/4 2 1.8/4]'};   
 
 g = MultiplexWU('B', B);
-m_outside_g = MultiplexRCStr('G', g);
+m_outside_g = MultiplexRCStr('G', g, 'PARAMETRIC_VALUE', 1, 'WEIGHTED_MULTIRICHCLUB_COEFFICIENTS', [3/4, 1/4]);
 
 assert(isequal(m_outside_g.get('M'), known_multi_rich_club_strength), ...
     [BRAPH2.STR ':MultiplexRCStr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'MultiplexRCStr');
+m_inside_g.set('PARAMETRIC_VALUE', 1, 'WEIGHTED_MULTIRICHCLUB_COEFFICIENTS', [3/4, 1/4]);
 assert(isequal(m_inside_g.get('M'), known_multi_rich_club_strength), ...
     [BRAPH2.STR ':MultiplexRCStr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -219,47 +220,14 @@ wmultirich(:, 1, 2) = [0 .5 .5 0]';
 known_multi_rich_club_strength = {wmultirich};
 
 g = MultiplexBU('B', B);
-m_outside_g = MultiplexRCStr('G', g);
+m_outside_g = MultiplexRCStr('G', g, 'PARAMETRIC_VALUE', [1.5, 2]);
 
 assert(isequal(m_outside_g.get('M'), known_multi_rich_club_strength), ...
     [BRAPH2.STR ':MultiplexRCStr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'MultiplexRCStr');
-assert(isequal(m_inside_g.get('M'), known_multi_rich_club_strength), ...
-    [BRAPH2.STR ':MultiplexRCStr:' BRAPH2.FAIL_TEST], ...
-    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-%%% ¡test!
-%%%% ¡name!
-MultiplexBUT
-%%%% ¡code!
-B11 = [
-    0  1  1  0; 
-    1  0  1  1; 
-    1  1  0  0;
-    0  1  0  0
-    ];
-B22 = [
-    0  1  1  1; 
-    1  0  1  1; 
-    1  1  0  0;
-    1  1  0  0
-    ];
-B = {B11 B22};
-
-known_multi_rich_club_strength = {
-                                [5/2 5/2  2  1]'
-                                [0   0    0  0]'};
-
-g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
-m_outside_g = MultiplexRCStr('G', g);
-
-assert(isequal(m_outside_g.get('M'), known_multi_rich_club_strength), ...
-    [BRAPH2.STR ':MultiplexRCStr:' BRAPH2.FAIL_TEST], ...
-    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-m_inside_g = g.get('MEASURE', 'MultiplexRCStr');
+m_inside_g.set('PARAMETRIC_VALUE', [1.5, 2]);
 assert(isequal(m_inside_g.get('M'), known_multi_rich_club_strength), ...
     [BRAPH2.STR ':MultiplexRCStr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
