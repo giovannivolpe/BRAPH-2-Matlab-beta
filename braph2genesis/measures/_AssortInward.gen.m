@@ -56,7 +56,7 @@ Measure.NONPARAMETRIC
 
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-%%% ¡default!
+%%%% ¡default!
 {'GraphBD' 'GraphWD' 'MultiplexWD' 'MultiplexBD'};
 
 %%% ¡prop!

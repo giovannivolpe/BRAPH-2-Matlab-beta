@@ -110,6 +110,7 @@ g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 l = g.get('LAYERNUMBER');
 ls = g.get('PARTITIONS');
+N = g.get('NODENUMBER');
 
 if l == 0
     value = {};

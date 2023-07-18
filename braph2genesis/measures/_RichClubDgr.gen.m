@@ -271,8 +271,8 @@ B = [
     ];
 
 known_richclubdegree = {
-                        [2 2 2 0]'
-                        [0 0 0 0]'};
+    [0 0 0 0]'
+    [2 2 2 0]'};
 
 g = MultigraphBUD('B', B, 'DENSITIES', [10 90]);
 m_outside_g = RichClubDegree('G', g);
