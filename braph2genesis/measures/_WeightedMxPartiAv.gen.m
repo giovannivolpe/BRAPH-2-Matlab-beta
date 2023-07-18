@@ -116,7 +116,7 @@ value = {mean(cell2mat(weighted_multiplex_participation))};
 
 %%% ¡test!
 %%%% ¡name!
-MultiplexWD
+MultiplexWU
 %%%% ¡probability!
 .01
 %%%% ¡code!
@@ -134,7 +134,7 @@ B = {B11  B22};
 
 known_weighted_multiplex_participation = {mean([24/25 3/4 8/9])};
 
-g = MultiplexWD('B', B);
+g = MultiplexWU('B', B);
 m_outside_g = WeightedMxPartiAv('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_weighted_multiplex_participation), ...

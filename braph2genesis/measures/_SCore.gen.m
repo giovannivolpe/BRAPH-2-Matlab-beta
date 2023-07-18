@@ -103,6 +103,7 @@ end
 value = s_core;
 
 %% ¡props!
+
 %%% ¡prop! 
 SCORETHRESHOLD (parameter, scalar) is the strength threshold.
 %%%% ¡default!
@@ -260,6 +261,7 @@ known_score(2, 1) = {[
     0   0   0  0
     ]};
 
+g = MultiplexWD('B', A);
 m_outside_g = SCore('G', g, 'SCORETHRESHOLD', 1.5);
 assert(isequal(m_outside_g.get('M'), known_score), ...
     [BRAPH2.STR ':SCore:' BRAPH2.FAIL_TEST], ...
