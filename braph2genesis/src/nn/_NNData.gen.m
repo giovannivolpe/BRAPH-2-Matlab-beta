@@ -67,16 +67,14 @@ MEASURES (parameter, idict) is the graph measures as input to NN.
 'MeasureEnsemble'
 %%%% ¡default!
 IndexedDictionary('IT_CLASS', 'MeasureEnsemble', 'IT_KEY', MeasureEnsemble.MEASURE);
-%%%% ¡postprocessing!
-if ~braph2_testing && isempty(nnd.get('MEASURES').get('IT_LIST'))
-    if ~strcmp(nnd.get('INPUT_TYPE'), 'structural_data')
-        nnd.getMeasureEnsemble('Degree');
-    end
-end
-%%%% ¡gui!
-pr = PPNNDataMeasures('EL', nnd, 'PROP', NNData.G, 'WAITBAR', Callback('EL', nnd, 'TAG', 'WAITBAR'), varargin{:});
+% % % % %%%% ¡_postprocessing!
+% % % % if ~strcmp(nnd.get('INPUT_TYPE'), 'structural_data')
+% % % %     value = nnd.get('MEASUREENSEMBLE','Degree');
+% % % % end
+%%%% ¡_gui!
+% % % pr = PPNNDataMeasures('EL', nnd, 'PROP', NNData.G, 'WAITBAR', Callback('EL', nnd, 'TAG', 'WAITBAR'), varargin{:});
 
-%%% ¡prop!
+%%% ¡_prop!
 ANALYZE_ENSEMBLE (data, item) contains the graphs of the group.
 %%%% ¡settings!
 'AnalyzeEnsemble'
@@ -144,7 +142,7 @@ end
 m_list = nnd.memorize('GRAPH_TEMPLATE').get('COMPATIBLE_MEASURES');
 a = nnd.getPropDefault('ANALYZE_ENSEMBLE');
 a.set('GR', nnd.get('GR'));
-if isempty(a.get('IT'))
+if isempty(a.get('G_DICT').get('IT'))
     a.memorize('G_DICT').add(g);
 end
      
