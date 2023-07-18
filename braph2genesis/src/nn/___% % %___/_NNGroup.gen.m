@@ -1,5 +1,5 @@
 %% ¡header!
-NNGroup < Group (gr, group of subjects for neural network analysis) is a group of subjects for a neural network analysis.
+NNGroup < Group (gr, group of subjects) is a group of subjects for a neural network analysis.
 
 %%% ¡description!
 NNGroup represents a group of NNSubjects whose class is defined in the property SUB_CLASS.
@@ -7,39 +7,11 @@ NNGroup provides the ready-to-use inputs and targets from all NN subjects, for
 performing a neural network analysis.
 
 %%% ¡seealso!
-NNSubject, NNData
+NNSubject
 
 %% ¡props_update!
 
-%%% ¡prop!
-NAME (constant, string) is the name of the group of subjects for neural network analysis.
-%%%% ¡default!
-'NNGroup'
-
-%%% ¡prop!
-DESCRIPTION (constant, string) is the description of the group of subjects for neural network analysis.
-%%%% ¡default!
-'NNGroup represents a group of NNSubjects whose class is defined in the property SUB_CLASS. NNGroup provides the ready-to-use inputs and targets from all NN subjects, for performing a neural network analysis.'
-
-%%% ¡prop!
-TEMPLATE (parameter, item) is the template of the group of subjects for neural network analysis.
-%%%% ¡settings!
-'NNGroup'
-
-%%% ¡prop!
-ID (data, string) is a few-letter code for the group of subjects for neural network analysis.
-%%%% ¡default!
-'NNGroup ID'
-
-%%% ¡prop!
-LABEL (metadata, string) is an extended label of the group of subjects for neural network analysis.
-%%%% ¡default!
-'NNGroup label'
-
-%%% ¡prop!
-NOTES (metadata, string) are some specific notes about the group of subjects for neural network analysis.
-%%%% ¡default!
-'NNGroup notes'
+% % % COMPLETE
 
 %% ¡props!
 

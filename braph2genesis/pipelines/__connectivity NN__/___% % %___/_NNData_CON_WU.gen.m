@@ -1,51 +1,12 @@
 %% ¡header!
-NNData_CON_WU < NNData (nnd, connectivity data for neural network analysis with graph WU) produces a dataset to train or test a neural netowrk model for connectivity data. 
+NNData_CON_WU < NNData (nnd, data for neural network) produces a dataset to train or test a neural netowrk model for connectivity data. 
 
 %% ¡description!
 This NN data generates a group of NN subjects, each of which contains the 
 input as BUD adjacency matrices or graph measures from connectivity data. 
 The generated NN group can be used to train or test a neural network model.
 
-%%% ¡seealso!
-NNGroup, NNData, NNSubject
-
-%% ¡constants!
-INPUT_TYPES = {
-    NNSubject.INPUT_MEASURES
-    NNSubject.INPUT_ADJACENCY
-    }
-
 %% ¡props_update!
-
-%%% ¡prop!
-NAME (constant, string) is the name of the connectivity data for neural network analysis with graph WU.
-%%%% ¡default!
-'NNData_CON_WU'
-
-%%% ¡prop!
-DESCRIPTION (constant, string) is the description of the connectivity data for neural network analysis with graph WU.
-%%%% ¡default!
-'This NN data generates a group of NN subjects, each of which contains the input as BUD adjacency matrices or graph measures from connectivity data. The generated NN group can be used to train or test a neural network model.'
-
-%%% ¡prop!
-TEMPLATE (parameter, item) is the template of the connectivity data for neural network analysis with graph WU.
-%%%% ¡settings!
-'NNData_CON_WU'
-
-%%% ¡prop!
-ID (data, string) is a few-letter code for the connectivity data for neural network analysis with graph WU.
-%%%% ¡default!
-'NNData_CON_WU ID'
-
-%%% ¡prop!
-LABEL (metadata, string) is an extended label of the connectivity data for neural network analysis with graph WU.
-%%%% ¡default!
-'NNData label'
-
-%%% ¡prop!
-NOTES (metadata, string) are some specific notes about the connectivity data for neural network analysis with graph WU.
-%%%% ¡default!
-'NNData_CON_WU notes'
 
 %%% ¡prop!
 ANALYZE_ENSEMBLE (data, item) contains the graphs of the group.
@@ -63,8 +24,8 @@ GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and meas
 %%%% ¡postprocessing!
 if ~braph2_testing
     if isa(nnd.getr('GRAPH_TEMPLATE'), 'NoValue')
-        if nnd.get('GR').get('SUB_DICT').get('LENGTH') > 0
-            nnd.set('GRAPH_TEMPLATE', GraphWU('BAS', nnd.get('GR').get('SUB_DICT').get('IT', 1).get('BA')));
+        if nnd.get('GR').get('SUB_DICT').length() > 0
+            nnd.set('GRAPH_TEMPLATE', GraphWU('BAS', nnd.get('GR').get('SUB_DICT').getItem(1).get('BA')));
         else
             nnd.set('GRAPH_TEMPLATE', GraphWU());
         end
@@ -74,7 +35,7 @@ end
 %%% ¡prop!
 INPUT_TYPE (parameter, option) is the input type for training or testing the NN.
 %%%% ¡settings!
-INPUT_TYPES
+{'adjacency_matrices' 'graph_measures'}
 
 %%% ¡prop!
 GR (data, item) is a group of subjects defined as SubjectCON class.
@@ -110,18 +71,16 @@ nn_gr.set( ...
     );
 
 atlas = BrainAtlas();
-if ~isempty(gr) && ~isa(gr, 'NoValue') && gr.get('SUB_DICT').get('LENGTH') > 0 
-    atlas = gr.get('SUB_DICT').get('IT', 1).get('BA');
+if ~isempty(gr) && ~isa(gr, 'NoValue') && gr.get('SUB_DICT').length > 0 
+    atlas = gr.get('SUB_DICT').getItem(1).get('BA');
 end
 
 % get analyzeEnsemble
 
 nn_sub_dict = nn_gr.get('SUB_DICT');
 
-for i = 1:1:gr.get('SUB_DICT').get('LENGTH')
-    braph2waitbar(wb, .15 + .85 * i / gr.get('SUB_DICT').get('LENGTH'), ['Constructing subject ' num2str(i) ' of ' num2str(gr.get('SUB_DICT').get('LENGTH'))  ' in ' gr.get('ID') ' ...'])
-
-    sub = gr.get('SUB_DICT').get('IT', i);
+for i = 1:1:gr.get('SUB_DICT').length()
+    sub = gr.get('SUB_DICT').getItem(i);
     g = GraphWU( ...
         'ID', ['g ' sub.get('ID')], ...
         'BAS', atlas, ...
@@ -136,10 +95,10 @@ for i = 1:1:gr.get('SUB_DICT').get('LENGTH')
         input_nodal = [];
         input_binodal = [];
         input_global = [];
-        mlist = cellfun(@(x) x.get('ID'), nnd.get('Measures').get('IT_LIST'), 'UniformOutput', false);
+        mlist = cellfun(@(x) x.get('ID'), nnd.get('Measures').getItems(), 'UniformOutput', false);
         if isempty(mlist)
             nnd.getMeasureEnsemble('Degree');
-            mlist = cellfun(@(x) x.get('ID'), nnd.get('Measures').get('IT_LIST'), 'UniformOutput', false);
+            mlist = cellfun(@(x) x.get('ID'), nnd.get('Measures').getItems(), 'UniformOutput', false);
         end
         input_label = mlist;
         for j = 1:length(mlist)
@@ -158,7 +117,8 @@ for i = 1:1:gr.get('SUB_DICT').get('LENGTH')
     nn_sub = NNSubject( ...
         'ID', [sub.get('ID') ' in ' gr.get('ID')], ...
         'BA', atlas, ...
-        'VOI_DICT', sub_CON.get('VOI_DICT'), ...
+        'age', sub.get('age'), ...
+        'sex', sub.get('sex'), ...
         'G', g, ...
         'INPUT', input, ...
         'INPUT_TYPE', nnd.get('INPUT_TYPE'), ...
@@ -167,6 +127,8 @@ for i = 1:1:gr.get('SUB_DICT').get('LENGTH')
         );
 
     nn_sub_dict.add(nn_sub);
+    
+    braph2waitbar(wb, .30 + .70 * i / gr.get('SUB_DICT').length(), ['Constructing subject ' num2str(i) ' of ' num2str(gr.get('SUB_DICT').length())  ' in ' gr.get('ID') ' ...'])
 end
 
 nn_gr.set('sub_dict', nn_sub_dict);
@@ -179,42 +141,36 @@ value = nn_gr;
 
 %%% ¡test!
 %%%% ¡name!
-Create example files for classification
+Create example files
 %%%% ¡code!
 % % %
 
 %%% ¡test!
 %%%% ¡name!
-Create example files for regression
+Example 1
 %%%% ¡code!
-% % %
+example_NN_CON_WU_Regression_AdjacencyMatrix
 
-% % % %%% ¡test!
-% % % %%%% ¡name!
-% % % Example 1
-% % % %%%% ¡code!
-% % % example_NN_CON_WU_Regression_AdjacencyMatrix
-% % % 
-% % % %%% ¡test!
-% % % %%%% ¡name!
-% % % Example 2
-% % % %%%% ¡code!
-% % % example_NN_CON_WU_Classification_AdjacencyMatrix
-% % % 
-% % % %%% ¡test!
-% % % %%%% ¡name!
-% % % Example 3
-% % % %%%% ¡code!
-% % % example_NN_CON_WU_Classification_GraphMeasures
-% % % 
-% % % %%% ¡test!
-% % % %%%% ¡name!
-% % % Example 4
-% % % %%%% ¡code!
-% % % example_NNCV_CON_WU_Classification_AdjacencyMatrix
-% % % 
-% % % %%% ¡test!
-% % % %%%% ¡name!
-% % % Example 5
-% % % %%%% ¡code!
-% % % example_NNCV_CON_WU_Regression_GraphMeasures
+%%% ¡test!
+%%%% ¡name!
+Example 2
+%%%% ¡code!
+example_NN_CON_WU_Classification_AdjacencyMatrix
+
+%%% ¡test!
+%%%% ¡name!
+Example 3
+%%%% ¡code!
+example_NN_CON_WU_Classification_GraphMeasures
+
+%%% ¡test!
+%%%% ¡name!
+Example 4
+%%%% ¡code!
+example_NNCV_CON_WU_Classification_AdjacencyMatrix
+
+%%% ¡test!
+%%%% ¡name!
+Example 5
+%%%% ¡code!
+example_NNCV_CON_WU_Regression_GraphMeasures
