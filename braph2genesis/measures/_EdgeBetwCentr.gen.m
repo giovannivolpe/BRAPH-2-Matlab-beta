@@ -1,5 +1,5 @@
 %% ¡header!
-EdgeBetweennessCentrality < Measure (m, edgebetweennesscentrality) is the edgebetweennesscentrality.
+EdgeBetwCentr < Measure (m, edgebetweennesscentrality) is the edgebetweennesscentrality.
 
 %%% ¡description!
 The edge betweenness centrality of a graph is the fraction of all shortest paths in the 
@@ -11,7 +11,7 @@ of betweenness centrality participate in a large number of shortest paths.
 %%% ¡prop!
 NAME (constant, string) is the name of the edgebetweennesscentrality.
 %%%% ¡default!
-'EdgeBetweennessCentrality'
+'EdgeBetwCentr'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the edgebetweennesscentrality.
@@ -24,17 +24,17 @@ TEMPLATE (parameter, item) is the template of the edgebetweennesscentrality.
 %%% ¡prop!
 ID (data, string) is a few-letter code of the edgebetweennesscentrality.
 %%%% ¡default!
-'EdgeBetweennessCentrality ID'
+'EdgeBetwCentr ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the edgebetweennesscentrality.
 %%%% ¡default!
-'EdgeBetweennessCentrality label'
+'EdgeBetwCentr label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the edgebetweennesscentrality.
 %%%% ¡default!
-'EdgeBetweennessCentrality notes'
+'EdgeBetwCentr notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.BINODAL__.
@@ -190,7 +190,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[EdgeBetweennessCentrality.PFM]
+[EdgeBetwCentr.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -212,14 +212,14 @@ known_edge_betweenness_centrality = {[
 
 g = GraphBU('B', B);
 
-m_outside_g = EdgeBetweennessCentrality('G', g);
+m_outside_g = EdgeBetwCentr('G', g);
 assert(isequal(m_outside_g.get('M'), known_edge_betweenness_centrality), ...
-    [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':EdgeBetwCentr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'EdgeBetweennessCentrality');
+m_inside_g = g.get('MEASURE', 'EdgeBetwCentr');
 assert(isequal(m_inside_g.get('M'), known_edge_betweenness_centrality), ...
-    [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':EdgeBetwCentr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -242,14 +242,14 @@ known_edge_betweenness_centrality = {[
 
 g = GraphBD('B', B);
 
-m_outside_g = EdgeBetweennessCentrality('G', g);
+m_outside_g = EdgeBetwCentr('G', g);
 assert(isequal(m_outside_g.get('M'), known_edge_betweenness_centrality), ...
-    [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':EdgeBetwCentr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'EdgeBetweennessCentrality');
+m_inside_g = g.get('MEASURE', 'EdgeBetwCentr');
 assert(isequal(m_inside_g.get('M'), known_edge_betweenness_centrality), ...
-    [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':EdgeBetwCentr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -283,14 +283,14 @@ known_edge_betweenness_centrality = {[
 
 g = MultiplexBU('B', A);
 
-m_outside_g = EdgeBetweennessCentrality('G', g);
+m_outside_g = EdgeBetwCentr('G', g);
 assert(isequal(m_outside_g.get('M'), known_edge_betweenness_centrality), ...
-    [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':EdgeBetwCentr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'EdgeBetweennessCentrality');
+m_inside_g = g.get('MEASURE', 'EdgeBetwCentr');
 assert(isequal(m_inside_g.get('M'), known_edge_betweenness_centrality), ...
-    [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':EdgeBetwCentr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -324,12 +324,12 @@ known_edge_betweenness_centrality = {[
 
 g = MultiplexWD('B', A);
 
-m_outside_g = EdgeBetweennessCentrality('G', g);
+m_outside_g = EdgeBetwCentr('G', g);
 assert(isequal(m_outside_g.get('M'), known_edge_betweenness_centrality), ...
-    [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':EdgeBetwCentr:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'EdgeBetweennessCentrality');
+m_inside_g = g.get('MEASURE', 'EdgeBetwCentr');
 assert(isequal(m_inside_g.get('M'), known_edge_betweenness_centrality), ...
-    [BRAPH2.STR ':EdgeBetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':EdgeBetwCentr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

@@ -102,7 +102,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUD' 'MultiplexBUT''OrdMxWU'};
+{'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU'};
 
 %%% ¡prop!
 M (result, cell) is the weighted multiplex particiption.
@@ -112,7 +112,7 @@ A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for m
 l = g.get('LAYERNUMBER');
 ls = g.get('PARTITIONS');
 
-multirichness = calculateValue@Multirichness(m, prop);
+multirichness = calculateValue@Multirich(m, prop);
 
 if l == 0
     value = {};

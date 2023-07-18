@@ -154,7 +154,7 @@ end
 %% ¡props!
 
 %%% ¡prop! 
-MULTIPLEXCORETHRESHOLD (parameter, scalar) is the multiplex k-core threshold
+MULTIPLEXKCORETHRESHOLD (parameter, scalar) is the multiplex k-core threshold
 %%%% ¡default!
 1
 

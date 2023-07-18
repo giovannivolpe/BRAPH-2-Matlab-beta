@@ -64,6 +64,7 @@ g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 L = g.get('LAYERNUMBER');
 local_efficiency = cell(L, 1);
+N = g.get('NODENUMBER');
 
 parfor li = 1:L
     Aii = A{li, li};    
