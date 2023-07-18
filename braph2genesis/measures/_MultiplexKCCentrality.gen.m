@@ -192,7 +192,7 @@ known_multiplexk_coreness_centrality = {
     [2 2 2 1]'
     };
 
-g = MultiplexWU('B', B);
+g = MultiplexWU('B', A);
 m_outside_g = MultiplexKCCentrality('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multiplexk_coreness_centrality), ...
@@ -229,7 +229,7 @@ known_multiplexk_coreness_centrality = {
     [4 4 4 3]'
     };
 
-g = MultiplexBU('B', B);
+g = MultiplexBD('B', A);
 m_outside_g = MultiplexKCCentrality('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multiplexk_coreness_centrality), ...
