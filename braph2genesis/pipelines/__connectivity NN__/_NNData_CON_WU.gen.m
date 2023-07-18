@@ -40,7 +40,7 @@ ID (data, string) is a few-letter code for the connectivity data for neural netw
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the connectivity data for neural network analysis with graph WU.
 %%%% ¡default!
-'NNData label'
+'NNData_CON_WU label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the connectivity data for neural network analysis with graph WU.

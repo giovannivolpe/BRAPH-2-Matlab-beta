@@ -74,7 +74,7 @@ IndexedDictionary('IT_CLASS', 'MeasureEnsemble', 'IT_KEY', MeasureEnsemble.MEASU
 %%%% ¡_gui!
 % % % pr = PPNNDataMeasures('EL', nnd, 'PROP', NNData.G, 'WAITBAR', Callback('EL', nnd, 'TAG', 'WAITBAR'), varargin{:});
 
-%%% ¡_prop!
+%%% ¡prop!
 ANALYZE_ENSEMBLE (data, item) contains the graphs of the group.
 %%%% ¡settings!
 'AnalyzeEnsemble'
