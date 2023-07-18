@@ -9,43 +9,43 @@ The multiplex out-participation is the homogeneity of the number of outward
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartiAv.ID
+MultiplexPartiOut.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartiAv.LABEL
+MultiplexPartiOut.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartiAv.G
+MultiplexPartiOut.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartiAv.M
+MultiplexPartiOut.M
 %%%% ¡title!
-MultiplexPartiAv
+MultiplexPartiOut
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartiAv.PFM
+MultiplexPartiOut.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartiAv.NOTES
+MultiplexPartiOut.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPartiAv.COMPATIBLE_GRAPHS
+MultiplexPartiOut.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex out-participation.
 %%%% ¡default!
-'MultiplexPartiAv'
+'MultiplexPartiOut'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex out-participation.
@@ -64,22 +64,22 @@ DESCRIPTION (constant, string) is the description of the multiplex out-participa
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multiplex out-participation.
 %%%% ¡settings!
-'MultiplexPartiAv'
+'MultiplexPartiOut'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the multiplex out-participation.
 %%%% ¡default!
-'MultiplexPartiAv ID'
+'MultiplexPartiOut ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex out-participation.
 %%%% ¡default!
-'MultiplexPartiAv label'
+'MultiplexPartiOut label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex out-participation.
 %%%% ¡default!
-'MultiplexPartiAv notes'
+'MultiplexPartiOut notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -128,7 +128,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MultiplexPartiAv.PFM]
+[MultiplexPartiOut.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -151,15 +151,15 @@ B = {B11  B22};
 known_multiplex_out_participation = {[8/9 8/9 1]'};
 
 g = MultiplexWD('B', B);
-m_outside_g = MultiplexPartiAv('G', g);
+m_outside_g = MultiplexPartiOut('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multiplex_out_participation), ...
-    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiOut:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPartiAv');
+m_inside_g = g.get('MEASURE', 'MultiplexPartiOut');
 assert(isequal(m_inside_g.get('M'), known_multiplex_out_participation), ...
-    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiOut:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -188,12 +188,12 @@ B = {B11 B22 B33};
 known_multiplex_out_participation = {[1 15/16 1]'};
 
 g = MultiplexBD('B', B);
-m_outside_g = MultiplexPartiAv('G', g);
+m_outside_g = MultiplexPartiOut('G', g);
 assert(isequal(m_outside_g.get('M'), known_multiplex_out_participation), ...
-    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiOut:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPartiAv');
+m_inside_g = g.get('MEASURE', 'MultiplexPartiOut');
 assert(isequal(m_inside_g.get('M'), known_multiplex_out_participation), ...
-    [BRAPH2.STR ':MultiplexPartiAv:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPartiOut:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
