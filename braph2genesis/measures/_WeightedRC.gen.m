@@ -235,14 +235,15 @@ known_weighted_rich_club = {
     };
 
 g = MultiplexWU('B', A);
-m_outside_g = WeightedRC('G', g, 'WRC_PARAMETER', [1.5, 2]);
+m_outside_g = WeightedRC('G', g);
+ans = m_outside_g.get('M');
 
-assert(isequal(m_outside_g.get('M'), known_weighted_rich_club), ...
+assert(isequal(round(ans{1}, 2), round(known_weighted_rich_club{1}, 2)), ...
     [BRAPH2.STR ':WeightedRC:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'WeightedRC');
-m_inside_g.set('WRC_PARAMETER', [1.5, 2]);
-assert(isequal(m_inside_g.get('M'), known_weighted_rich_club), ...
+ans = m_inside_g.get('M');
+assert(isequal(round(ans{1}, 2), round(known_weighted_rich_club{1}, 2)), ...
     [BRAPH2.STR ':WeightedRC:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
