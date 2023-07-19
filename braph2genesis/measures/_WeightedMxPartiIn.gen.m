@@ -99,7 +99,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWD'};
+{'MultiplexWD'}
 
 %%% ¡prop!
 M (result, cell) is the weighted multiplex in-particiption.

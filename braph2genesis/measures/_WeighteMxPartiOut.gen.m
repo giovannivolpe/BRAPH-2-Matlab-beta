@@ -69,17 +69,17 @@ TEMPLATE (parameter, item) is the template of the weighted multiplex out-partici
 %%% ¡prop!
 ID (data, string) is a few-letter code of the weighted multiplex out-particiption.
 %%%% ¡default!
-'WeightedMxPartiOut  ID'
+'WeightedMxPartiOut ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the weighted multiplex out-particiption.
 %%%% ¡default!
-'WeightedMxPartiOut  label'
+'WeightedMxPartiOut label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the weighted multiplex out-particiption.
 %%%% ¡default!
-'WeightedMxPartiOut  notes'
+'WeightedMxPartiOut notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -99,7 +99,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWD'};
+{'MultiplexWD'}
 
 %%% ¡prop!
 M (result, cell) is the weighted multiplex out-particiption.
