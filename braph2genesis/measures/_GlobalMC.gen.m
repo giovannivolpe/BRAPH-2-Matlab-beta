@@ -125,29 +125,29 @@ data_alltrial_MCs = cell(1, trials);
 
 for trial = 1:trials
     
-    %% input data
+    % input data
     input_data = rand(1, T);
     
-    %% input-to-reservoir weight matrix
+    % input-to-reservoir weight matrix
     W_in = normrnd(0, 1, N, n);
     Wsing = svd(W_in);
     W_in = W_in * (1/Wsing); % Set maximal singular value of W_in to 1
     
-    %% Initialize array to hold tau values for all subjects for this trial
+    % Initialize array to hold tau values for all subjects for this trial
     MCs_tau_sub = zeros(tau_max, subjects);
     
     for subject = 1:subjects
                 
-        %% Get the data for the corresponding subject
+        % Get the data for the corresponding subject
         W = data{1, subject};
         
-        %% Skip matrices with NaN values
+        % Skip matrices with NaN values
         if ~isempty(find(isnan(W)))
             disp('W contains NaN values, skipping..')
             break
         end
         
-        %% Normalize reservoir weight matrix to have maximal singular value 1
+        % Normalize reservoir weight matrix to have maximal singular value 1
         sr = max(svd(W));
         if sr == 0
             disp('Sing. val. equal to zero, skipping..')
@@ -155,15 +155,15 @@ for trial = 1:trials
         end
         W = W / sr;
         
-        %% Compute memory capacity
+        % Compute memory capacity
         MC_tau = calculate_MCglobal(W, W_in, tau_max, input_data, 0, 0);
         
-        %% Store memory capacity for each subject
+        % Store memory capacity for each subject
         MCs_tau_sub(:, subject) = MC_tau;
         
     end
     
-    %% Place the values into the array
+    % Place the values into the array
     data_alltrial_MCs{1, trial} = MCs_tau_sub;
 end
 
