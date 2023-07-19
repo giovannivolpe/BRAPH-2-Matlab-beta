@@ -113,7 +113,7 @@ value = rich_club;
 
 %% ¡props!
 %%% ¡prop! 
-PARAMETRIC_VALUE (parameter, SCALAR) 
+PARAMETRIC_VALUE (parameter, scalar) 
 %%%% ¡default!
 1
 

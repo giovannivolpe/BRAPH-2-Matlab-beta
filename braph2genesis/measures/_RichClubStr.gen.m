@@ -93,13 +93,14 @@ for li = 1:1:L
         st = (in_strength{li} + out_strength{li})/2;
     end
 
-    richclub_layer = zeros(N(1), 1, s_levels);
-    for k = 1:1:s_levels
+    rich_club_strength_layer = zeros(N(1), 1, length(s_levels));
+    count = 1;
+    for s = s_levels
         low_rich_nodes = find(st <= s);  % get lower rich nodes with strength <= s
         subAii = Aii;  % extract subnetwork of nodes >s by removing nodes <=s of Aii
         subAii(low_rich_nodes, :) = 0;  % remove rows
         subAii(:, low_rich_nodes) = 0;  % remove columns
-
+        
         if directionality_layer == Graph.UNDIRECTED  % undirected graphs
             rich_club_strength_layer(:, :, count) = round(sum(subAii, 1), 6)';  % strength of high rich nodes
         else
