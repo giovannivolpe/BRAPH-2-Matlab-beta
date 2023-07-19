@@ -381,11 +381,11 @@ A = {A11 A22};
 
 clear richclub_l1;
 clear richclub_l2;
-richclub_l1(:, 1, 1) = [5/2 3 2 3/2]';
+richclub_l1(:, 1, 1) = [3 3 2 2]';
 richclub_l1(:, 1, 2) = [1 1 0 0]';
 
-richclub_l2(:, 1, 1) = [5/2 3 5/2 2]';
-richclub_l2(:, 1, 2) = [2 2 2 0]';
+richclub_l2(:, 1, 1) = [3 3 3 3]';
+richclub_l2(:, 1, 2) = [3 3 3 3]';
 known_richclubdegree = {
                  richclub_l1
                  richclub_l2
@@ -398,7 +398,7 @@ assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'RichClubDgr');
-g.set('PARAMETRIC_VALUE', 2);
+m_inside_g.set('PARAMETRIC_VALUE', 2);
 assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
     [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -442,7 +442,7 @@ assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'RichClubDgr');
-g.set('PARAMETRIC_VALUE', 2);
+m_inside_g.set('PARAMETRIC_VALUE', 2);
 assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
     [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
