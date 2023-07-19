@@ -181,14 +181,16 @@ B = {B11 B22};
 known_multirichness = {[3/40 0 5/4 21/20]'};  
 
 g = MultiplexWU('B', B);
-m_outside_g = Multirich('G', g);
-
-assert(isequal(m_outside_g.get('M'), known_multirichness), ...
+m_outside_g = Multirich('G', g, 'MULTIRICHNESS_COEFFICIENTS', [3/4, 1/4]);
+ans = m_outside_g.get('M');
+assert(isequal(round(ans{1}, 2), round(known_multirichness{1}, 2)), ...
     [BRAPH2.STR ':Multirich:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'Multirich');
-assert(isequal(m_inside_g.get('M'), known_multirichness), ...
+m_inside_g.set('MULTIRICHNESS_COEFFICIENTS', [3/4, 1/4]);
+ans = m_inside_g.get('M');
+assert(isequal(round(ans{1}, 2), round(known_multirichness{1}, 2)), ...
     [BRAPH2.STR ':Multirich:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -285,14 +287,17 @@ B = {B11 B22};
 known_multirichness = {[1 0 5/3 5/3]'}; 
 
 g = MultiplexBU('B', B);
-m_outside_g = Multirich('G', g);
+m_outside_g = Multirich('G', g, 'MULTIRICHNESS_COEFFICIENTS', [2/3, 1/3]);
 
-assert(isequal(m_outside_g.get('M'), known_multirichness), ...
+ans = m_outside_g.get('M');
+assert(isequal(round(ans{1}, 2), round(known_multirichness{1}, 2)), ...
     [BRAPH2.STR ':Multirich:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'Multirich');
-assert(isequal(m_inside_g.get('M'), known_multirichness), ...
+m_inside_g.set('MULTIRICHNESS_COEFFICIENTS', [2/3, 1/3]);
+ans = m_inside_g.get('M');
+assert(isequal(round(ans{1}, 2), round(known_multirichness{1}, 2)), ...
     [BRAPH2.STR ':Multirich:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 

@@ -57,7 +57,7 @@ Measure.PARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUD' 'MultiplexBUT'};
+{'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUD' 'MultiplexBUT'}
 
 %%% ¡prop!
 M (result, cell) is the richclub.
@@ -269,20 +269,21 @@ B = [
 
 r(1, 1, 1) = 1;
 r(1, 1, 2) = 0;
+r(1, 1, 3) = 0;
 
-known_richclub = {r, r};
+known_richclub = {r; r};
 thresholds = [0.1 0.7];
 
 g = MultigraphBUT('B', B, 'THRESHOLDS', thresholds);
 
 m_outside_g = RichClub('G', g);
-m_outside_g.set('PARAMETRIC_VALUE', 2);
+m_outside_g.set('PARAMETRIC_VALUE', 3);
 assert(isequal(m_outside_g.get('M'), known_richclub), ...
     [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'RichClub');
-m_inside_g.set('PARAMETRIC_VALUE', 2);
+m_inside_g.set('PARAMETRIC_VALUE', 3);
 assert(isequal(m_inside_g.get('M'), known_richclub), ...
     [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -301,22 +302,24 @@ B =[
     ];
 r(1, 1, 1) = 1;
 r(1, 1, 2) = 0;
+r(1, 1, 3) = 0;
 l(1, 1, 1) = 0;
 l(1, 1, 2) = 0;
+l(1, 1, 3) = 0;
 
-known_richclub = {l, r};
+known_richclub = {l; r};
 densities = [10 80];
 
 g = MultigraphBUD('B', B, 'DENSITIES', densities);
 
 m_outside_g = RichClub('G', g);
-m_outside_g.set('PARAMETRIC_VALUE', 2);
+m_outside_g.set('PARAMETRIC_VALUE', 3);
 assert(isequal(m_outside_g.get('M'), known_richclub), ...
     [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'RichClub');
-m_inside_g.set('PARAMETRIC_VALUE', 2);
+m_inside_g.set('PARAMETRIC_VALUE', 3);
 assert(isequal(m_inside_g.get('M'), known_richclub), ...
     [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
