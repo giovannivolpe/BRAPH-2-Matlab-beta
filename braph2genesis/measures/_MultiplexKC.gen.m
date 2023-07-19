@@ -233,7 +233,7 @@ known_mkcore = {[
     0  1  1  0
     ]};
 
-g = MultiplexBU('B', A);
+g = MultiplexWD('B', A);
 m_outside_g = MultiplexKC('G', g, 'MULTIPLEXKCORETHRESHOLD', 4);
 
 assert(isequal(m_outside_g.get('M'), known_mkcore), ...
