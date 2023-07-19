@@ -240,7 +240,7 @@ B22 = [
     ];
 B = {B11 B22};
 
-known_multiplex_core_periphery = {[0 1 1 0]'};      
+known_multiplex_core_periphery = {[1 1 1 0]'};      
 
 g = MultiplexWD('B', B);
 m_outside_g = MultiplexCorePeriph('G', g);
