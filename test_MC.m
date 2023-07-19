@@ -13,6 +13,13 @@ data = data_connbin;
 %% Create graph
 g = MultilayerWU('B', data);
 
-%% calculate measures
+%% create measures
 mc_global = g.get('MEASURE', 'GLOBALMC');
 mc_nodal = g.get('MEASURE', 'NODALMC');
+
+%% change parameters
+mc_global.set('TRAINING_SAMPLES', 50); % for example
+
+%% calculate
+mc_global_result = mc_global.get('M');
+mc_nodal_result = mc_nodal.get('M');
