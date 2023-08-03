@@ -1,5 +1,5 @@
 %% ¡header!
-NNBase < ConcreteElement (nn, neural network trainor) trains a neural network model.
+NNBase < ConcreteElement (nn, neural network) trains a neural network model with a given dataset.
 
 %%% ¡description!
 
@@ -71,7 +71,7 @@ PLOT_TRAINING (parameter, logical) is an option for the plot of training-progres
 false
 
 %%% ¡prop!
-D (data, item) is the data to be used to train the NN.
+D (data, item) is the dataset to train the NN.
 %%%% ¡settings!
 'NNData'
 

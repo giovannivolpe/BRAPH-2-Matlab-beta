@@ -2,7 +2,7 @@ close all; delete(findall(0, 'type', 'figure')); clear all
 
 
 %% NNDatta
-el_class_list = {'NNArchitecture' 'NNBase'}; % 'NNDataSplit' 'PanelElement' 'ImporterPipelineBRAPH2' 'ExporterPipelineBRAPH2'
+el_class_list = {'NNBase'}; % 'NNDataSplit' 'PanelElement' 'ImporterPipelineBRAPH2' 'ExporterPipelineBRAPH2'
 for i = 1:1:length(el_class_list)
     el_class = el_class_list{i};
     el_path = '/src/nn';
@@ -15,7 +15,7 @@ for i = 1:1:length(el_class_list)
 end
 
 %%
-el_class_list = {'NNRegressor'}; % 'PanelElement' 'ImporterPipelineBRAPH2' 'ExporterPipelineBRAPH2'
+el_class_list = {'NNRegressorMLP'}; % 'PanelElement' 'ImporterPipelineBRAPH2' 'ExporterPipelineBRAPH2'
 for i = 1:1:length(el_class_list)
     el_class = el_class_list{i};
     el_path = '/neuralnetworks';

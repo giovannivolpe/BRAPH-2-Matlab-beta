@@ -175,7 +175,8 @@ d = NNData( ...
     );
 
 nn = NNRegressorMLP('D', d, 'DENSE_LAYERS', [20 20]);
-trained_model = nn.get('MODEL');
+
+nne_test = NNEvaluator_REG('D', d, 'NN', nn);
 
 % Check whether the number of fully-connected layer matches (excluding fc_output layer)
 assert(length(nn.get('DENSE_LAYERS')) == sum(contains({trained_model.Layers.Name}, 'fc')) - 1, ...
