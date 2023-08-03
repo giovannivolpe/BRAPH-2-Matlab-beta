@@ -61,6 +61,8 @@ eye(10)
 PanelPropMatrix
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 gt = GTA_NM();
 gui = GUI('POSITION', [0 0 1 1], 'CLOSEREQ', false);

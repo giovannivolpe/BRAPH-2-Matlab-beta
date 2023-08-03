@@ -201,6 +201,8 @@ pr = PanelPropMatrix('EL', sub, 'PROP', SubjectCON.CON, ...
 GUI
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 im_ba = ImporterBrainAtlasXLS('FILE', 'desikan_atlas.xlsx');
 ba = im_ba.get('BA');

@@ -202,6 +202,8 @@ pr = PanelPropMatrix('EL', sub, 'PROP', SubjectFUN.FUN, ...
 GUI
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 im_ba = ImporterBrainAtlasXLS('FILE', 'aal90_atlas.xlsx');
 ba = im_ba.get('BA');

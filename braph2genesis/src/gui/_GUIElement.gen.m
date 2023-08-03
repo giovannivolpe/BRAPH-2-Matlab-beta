@@ -538,6 +538,8 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
+%%%% ¡parallel!
+false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':GUIElement'])
 assert(length(findall(0, 'type', 'figure')) == 10)
@@ -549,6 +551,8 @@ warning('on', [BRAPH2.STR ':GUIElement'])
 Basics
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 el = ConcreteElement();
 gui = GUIElement('PE', el, 'CLOSEREQ', false);

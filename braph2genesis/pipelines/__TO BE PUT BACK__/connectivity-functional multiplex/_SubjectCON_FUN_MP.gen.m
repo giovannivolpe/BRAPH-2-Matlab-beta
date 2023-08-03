@@ -130,6 +130,8 @@ pr = PanelPropMatrix('EL', sub, 'PROP', SubjectFUN.FUN, ...
 GUI
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 im_ba = ImporterBrainAtlasXLS('FILE', 'desikan_atlas.xlsx');
 ba = im_ba.get('BA');
@@ -565,6 +567,8 @@ end
 GUI XLS
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 im_ba = ImporterBrainAtlasXLS('FILE', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'atlas.xlsx']);
 ba = im_ba.get('BA');
@@ -600,6 +604,8 @@ gui_FUN.get('CLOSE')
 GUI TXT
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 im_ba = ImporterBrainAtlasTXT('FILE', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP TXT' filesep 'atlas.txt']);
 ba = im_ba.get('BA');

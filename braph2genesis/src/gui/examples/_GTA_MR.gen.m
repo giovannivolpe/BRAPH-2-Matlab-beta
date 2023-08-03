@@ -43,6 +43,8 @@ MR_G (gui, marker) is a prop gui marker.
 Example
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 gt = GTA_MR();
 gui = GUI('POSITION', [0 0 1 1], 'CLOSEREQ', false);

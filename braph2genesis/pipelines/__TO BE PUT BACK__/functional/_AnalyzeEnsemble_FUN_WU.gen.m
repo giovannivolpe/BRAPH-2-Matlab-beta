@@ -226,6 +226,8 @@ example_FUN_WU
 GUI - Analysis
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 im_ba = ImporterBrainAtlasXLS('FILE', 'aal90_atlas.xlsx');
 ba = im_ba.get('BA');
@@ -257,6 +259,8 @@ gui.get('CLOSE')
 GUI - Comparison
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 im_ba = ImporterBrainAtlasXLS('FILE', 'aal90_atlas.xlsx');
 ba = im_ba.get('BA');

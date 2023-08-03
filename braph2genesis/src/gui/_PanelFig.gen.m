@@ -125,6 +125,8 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
+%%%% ¡parallel!
+false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelFig'])
 assert(length(findall(0, 'type', 'figure')) == 3)
@@ -136,6 +138,8 @@ warning('on', [BRAPH2.STR ':PanelFig'])
 Example 1
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 gui = GUI('MENUBAR', true, 'MENU_ABOUT', true, 'TOOLBAR', true, 'TOOL_ABOUT', true, 'CLOSEREQ', false);
 pf = PanelFig('PARENT', gui);

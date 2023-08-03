@@ -399,6 +399,8 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
+%%%% ¡parallel!
+false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':GUI'])
 assert(length(findall(0, 'type', 'figure')) == 2)
@@ -410,6 +412,8 @@ warning('on', [BRAPH2.STR ':GUI'])
 Basics
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 gui = GUI( ...
     'POSITION', [w(0, 'normalized')/4 h(0, 'normalized')/4 w(0, 'normalized')/2 h(0, 'normalized')/2], ...

@@ -188,6 +188,8 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
+%%%% ¡parallel!
+false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':MeasurePF_BU'])
 assert(length(findall(0, 'type', 'figure')) == 5)

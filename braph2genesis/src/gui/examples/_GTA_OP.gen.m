@@ -116,6 +116,8 @@ end
 Example
 %%%% ¡probability!
 .01
+%%%% ¡parallel!
+false
 %%%% ¡code!
 gt = GTA_OP();
 gui = GUI('POSITION', [0 0 1 1], 'CLOSEREQ', false);

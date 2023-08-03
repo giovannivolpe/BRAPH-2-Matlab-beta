@@ -16,14 +16,13 @@ function braph2(gui, ewm)
 %  - NN: "Deep Learning Toolbox"
 %
 % BRAPH2 packages:
-%  <a href="matlab:help src             ">src</a>            - software core
-%  <a href="matlab:help brainsurfs      ">brainsurfs</a>     - brain surfaces
-%  <a href="matlab:help atlases         ">atlases</a>        - brain atlases
-%  <a href="matlab:help graphs          ">graphs</a>         - graphs
-%  <a href="matlab:help measures        ">measures</a>       - measures
-%  <a href="matlab:help neuralnetworks  ">neuralnetworks</a> - neural networks
-%  <a href="matlab:help pipelines       ">pipelines</a>      - pipelines
-%  <a href="matlab:help test            ">test</a>           - unit testing
+%  <a href="matlab:help src         ">src</a>           - software core
+%  <a href="matlab:help brainsurfs  ">brainsurfs</a>    - brain surfaces
+%  <a href="matlab:help atlases     ">atlases</a>       - brain atlases
+%  <a href="matlab:help graphs      ">graphs</a>        - graphs
+%  <a href="matlab:help measures    ">measures</a>      - measures
+%  <a href="matlab:help pipelines   ">pipelines</a>     - pipelines
+%  <a href="matlab:help test        ">test</a>          - unit testing
 %
 % See also BRAPH2GUI.
 
