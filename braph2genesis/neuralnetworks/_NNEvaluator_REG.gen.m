@@ -1,8 +1,8 @@
 %% ¡header!
-NNEvaluator_REG < NNEvaluator (nne, neural network evaluator for regression) evaluates a neural network model with a dataset.
+NNEvaluator_REG < NNEvaluator (nne, neural network evaluator for regression) evaluates the performance of a neural network regressor with a given dataset.
 
 %%% ¡description!
-A neural network evaluator for regression (NNEvaluator_REG) comprises a trained regressor model and a given dataset.
+A neural network evaluator for regression (NNEvaluator_REG) evaluates the performance of a neural network model with a given dataset.
 NNEvaluator_REG evaluates the performance of the trained model with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
 
 %%% ¡seealso!
@@ -18,7 +18,7 @@ NAME (constant, string) is the name of the neural network evaluator for the regr
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the neural network evaluator for the regression analysis.
 %%%% ¡default!
-'A neural network evaluator for regression (NNEvaluator_REG) comprises a trained regressor model and a given dataset. NNEvaluator_REG evaluates the performance of the trained model with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
+'A neural network evaluator for regression (NNEvaluator_REG) evaluates the performance of a neural network model with a given dataset. NNEvaluator_REG evaluates the performance of the trained model with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the neural network evaluator for the regression analysis.
