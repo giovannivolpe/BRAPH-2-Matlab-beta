@@ -1,5 +1,5 @@
 %% ¡header!
-NNEvaluator_REG < NNEvaluator (nn, neural network trainor) evaluates a neural network model with a dataset.
+NNEvaluator_REG < NNEvaluator (nne, neural network trainor) evaluates a neural network model with a dataset.
 
 %%% ¡description!
 
@@ -46,23 +46,45 @@ NN (data, item) is a trained neural network model.
 %%% ¡prop!
 PREDICTIONS (result, cell) is a trained neural network model.
 %%%% ¡calculate!
-value = {};
+nn = nne.get('NN');
+net = nn.get('MODEL');
+inputs = cell2mat(eval([nn.getClass char("('D', nne.get('D')).get('DATA_CONSTRUCT')")]));
+if isempty(inputs)
+    value = {};
+else
+    value = {net.predict(inputs)};
+end
 
 %% ¡props!
 %%% ¡prop!
-CORRELATION_COEFF (result, cell) is an option for data shuffling.
+CORRELATION_COEFF (result, rvector) is an option for data shuffling.
+%%%% ¡calculate!
+value = [];
 
 %%% ¡prop!
-COEFF_OF_DETERMINATION (result, cell) is an option for data shuffling.
+COEFF_OF_DETERMINATION (result, rvector) is an option for data shuffling.
+%%%% ¡calculate!
+value = [];
 
 %%% ¡prop!
-mean_absolute_error (result, cell) is an option for data shuffling.
+MEAN_ABSOLUTE_ERROR (result, rvector) is an option for data shuffling.
+%%%% ¡calculate!
+value = [];
 
 %%% ¡prop!
-mean_squared_error (result, cell) is an option for data shuffling.
+MEAN_SQUARED_ERROR (result, rvector) is an option for data shuffling.
+%%%% ¡calculate!
+value = [];
 
 %%% ¡prop!
-root_mean_squared_error (result, cell) is an option for data shuffling.
+ROOT_MEAN_SQUARED_ERROR (result, rvector) is an option for data shuffling.
+%%%% ¡calculate!
+value = [];
+
+%%% ¡prop!
+permutation_feature_importance (result, cell) assess the significance of each feature by randomly shuffling its values and measuring how much the performance of the model decreases.
+%%%% ¡calculate!
+value = {};
 
 %% ¡tests!
 
@@ -116,7 +138,7 @@ d = NNDataset( ...
 nn = NNRegressorMLP('D', d, 'DENSE_LAYERS', [20 20]);
 nn.get('MODEL_TRAIN');
 
-nne = NNEvaluator_REG('NN', nn, 'D', d)
+nne = NNEvaluator_REG('NN', nn, 'D', d);
 
 % % % Check whether the number of fully-connected layer matches (excluding fc_output layer)
 % % assert(length(nn.get('DENSE_LAYERS')) == sum(contains({trained_model.Layers.Name}, 'fc')) - 1, ...

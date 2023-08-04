@@ -1,5 +1,5 @@
 %% ¡header!
-NNEvaluator < ConcreteElement (nn, neural network trainor) evaluates a neural network model with a given dataset.
+NNEvaluator < ConcreteElement (nne, neural network trainor) evaluates a neural network model with a given dataset.
 
 %%% ¡description!
 
