@@ -82,7 +82,7 @@ D (data, item) is the dataset to train the neural network model.
 DATA_FORMAT (parameter, string) specifies the format of the data that flows through the neural network model.
 
 %%% ¡prop!
-DATA_CONSTRUCT (query, cell) constructs the data based on specified data format that flows through the neural network model.
+DATA_CONSTRUCT (query, cell) constructs the data based on the data format that flows through the neural network model.
 
 %%% ¡prop!
 RESPONSE_CONSTRUCT (query, cell) constructs the responses based on specified data format that flows through the neural network model.
