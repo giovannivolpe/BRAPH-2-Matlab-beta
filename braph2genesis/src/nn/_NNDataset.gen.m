@@ -1,44 +1,44 @@
 %% ¡header!
-NNData < ConcreteElement (d, neural network data) is a dataset for neural network analysis.
+NNDataset < ConcreteElement (d, neural network data) is a dataset for neural network analysis.
 
 %%% ¡description!
-NNData represents a dataset wherein each datapoint, the corresponding class defined as DP_CLASS property.
-NNData encloses all the necessary inputs and targets, readily available for integration into neural network analysis procedures.
+A neural network dataset (NNDataset) represents a dataset containing datapoints whose class is defined by the DP_CLASS property.
+NNDataset can contain all the necessary inputs and targets.
 
 %%% ¡seealso!
-NNDataPoint
+NNDataPoint, NNDatasetCombine, NNDatasetSplit
 
 %% ¡props_update!
 
 %%% ¡prop!
 NAME (constant, string) is the name of the dataset for neural network analysis.
 %%%% ¡default!
-'NNData'
+'NNDataset'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the dataset for neural network analysis.
 %%%% ¡default!
-'NNData represents a dataset wherein each datapoint, the corresponding class defined as DP_CLASS property. NNData encloses all the necessary inputs and targets, readily available for integration into neural network analysis procedures.'
+'A neural network dataset (NNDataset) represents a dataset containing datapoints whose class is defined by the DP_CLASS property. NNDataset can contain all the necessary inputs and targets.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the dataset for neural network analysis.
 %%%% ¡settings!
-'NNData'
+'NNDataset'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the dataset for neural network analysis.
 %%%% ¡default!
-'NNData ID'
+'NNDataset ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the dataset for neural network analysis.
 %%%% ¡default!
-'NNData label'
+'NNDataset label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the dataset for neural network analysis.
 %%%% ¡default!
-'NNData notes'
+'NNDataset notes'
     
 %% ¡props!
 
