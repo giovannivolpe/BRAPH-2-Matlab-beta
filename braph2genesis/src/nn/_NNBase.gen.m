@@ -4,7 +4,7 @@ NNBase < ConcreteElement (nn, neural network) trains a neural network model with
 %%% ¡description!
 
 %%% ¡seealso!
-NNDataPoint, NNData
+NNDataPoint, NNData, NNEvaluator
 
 %% ¡props_update!
 
@@ -73,7 +73,7 @@ false
 %%% ¡prop!
 D (data, item) is the dataset to train the NN.
 %%%% ¡settings!
-'NNData'
+'NNDataset'
 
 %%% ¡prop!
 DATA_FORMAT (parameter, string) specifies the format of the data that flows through the network.
@@ -86,3 +86,8 @@ RESPONSE_CONSTRUCT (query, cell) constructs the response based on specified data
 
 %%% ¡prop!
 MODEL (result, net) is a trained neural network model.
+
+%%% ¡prop!
+MODEL_TRAIN (query, empty) trains the model with the given neural network dataset.
+%%%% ¡calculate!
+nn.memorize('MODEL');

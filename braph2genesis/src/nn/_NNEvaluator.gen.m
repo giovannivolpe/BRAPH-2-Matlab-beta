@@ -4,7 +4,7 @@ NNEvaluator < ConcreteElement (nn, neural network trainor) evaluates a neural ne
 %%% ¡description!
 
 %%% ¡seealso!
-NNDataPoint, NNData
+NNDataPoint, NNData, NNBase
 
 %% ¡props_update!
 
@@ -43,7 +43,7 @@ NOTES (metadata, string) are some specific notes about the trainor for neural ne
 %%% ¡prop!
 D (data, item) is the data to be used to evaluate the NN.
 %%%% ¡settings!
-'NNData'
+'NNDataset'
 
 %%% ¡prop!
 NN (data, item) is a trained neural network model.
