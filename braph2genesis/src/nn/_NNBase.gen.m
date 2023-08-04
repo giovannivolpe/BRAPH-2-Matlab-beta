@@ -85,7 +85,7 @@ DATA_FORMAT (parameter, string) specifies the format of the data that flows thro
 DATA_CONSTRUCT (query, cell) constructs the data based on the data format that flows through the neural network model.
 
 %%% ¡prop!
-RESPONSE_CONSTRUCT (query, cell) constructs the responses based on specified data format that flows through the neural network model.
+RESPONSE_CONSTRUCT (query, cell) constructs the responses based on the data format that flows through the neural network model.
 
 %%% ¡prop!
 MODEL (result, net) is a trained neural network model with the given dataset.
