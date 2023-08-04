@@ -4,7 +4,7 @@ NNEvaluator < ConcreteElement (nne, neural network evaluator) evaluates the perf
 %%% ¡description!
 A neural network evaluator (NNEvaluator) evaluates the performance of a neural network model with a given dataset.
 Instances of this class should not be created. Use one of its subclasses instead.
-Its subclasses shall be specifically designed to cater to different evaluation cases such as a classification task, a regression task or a data generation task.
+Its subclasses shall be specifically designed to cater to different evaluation cases such as a classification task, a regression task, or a data generation task.
 
 
 %%% ¡seealso!
@@ -20,7 +20,7 @@ NAME (constant, string) is the name of the evaluator for the neural network anal
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the evaluator for the neural network analysis.
 %%%% ¡default!
-'A neural network evaluator (NNEvaluator) evaluates the performance of a neural network model with a given dataset. Instances of this class should not be created. Use one of its subclasses instead. Its subclasses shall be specifically designed to cater to different evaluation cases such as a classification task, a regression task or a data generation task.'
+'A neural network evaluator (NNEvaluator) evaluates the performance of a neural network model with a given dataset. Instances of this class should not be created. Use one of its subclasses instead. Its subclasses shall be specifically designed to cater to different evaluation cases such as a classification task, a regression task, or a data generation task.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the evaluator for the neural network analysis.

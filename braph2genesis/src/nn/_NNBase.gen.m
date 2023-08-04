@@ -19,7 +19,7 @@ NAME (constant, string) is the name of the nerual network base.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the nerual network base.
 %%%% ¡default!
-'A neural network base (NNBase) comprises a neural network model with a specific dataset, along with the required options for training the model. Instances of this class should not be created. Use one of its subclasses instead. Its subclasses shall be specifically designed to cater to different use cases such as a classifior, a regressor or a generative model.'
+'A neural network base (NNBase) comprises a neural network model with a specific dataset, along with the required options for training the model. Instances of this class should not be created. Use one of its subclasses instead. Its subclasses shall be specifically designed to cater to different use cases such as a classifier, a regressor, or a generative model.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the nerual network base.
