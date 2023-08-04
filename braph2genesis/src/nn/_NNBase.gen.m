@@ -2,6 +2,8 @@
 NNBase < ConcreteElement (nn, neural network) trains a neural network model with a given dataset.
 
 %%% ¡description!
+Instances of this class should not be created. Use one of its subclasses instead.
+Its subclasses shall be specifically designed to cater to different use cases such as classification task, regression task, or data generation.
 
 %%% ¡seealso!
 NNDataPoint, NNData, NNEvaluator
@@ -86,8 +88,11 @@ RESPONSE_CONSTRUCT (query, cell) constructs the response based on specified data
 
 %%% ¡prop!
 MODEL (result, net) is a trained neural network model.
+%%%% ¡calculate!
+value = network();
 
 %%% ¡prop!
 MODEL_TRAIN (query, empty) trains the model with the given neural network dataset.
 %%%% ¡calculate!
 nn.memorize('MODEL');
+value = {};
