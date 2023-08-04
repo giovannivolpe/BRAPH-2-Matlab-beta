@@ -1,50 +1,52 @@
 %% ¡header!
-NNRegressorMLP < NNBase (nn, neural network architecture) trains a neural network model.
+NNRegressorMLP < NNBase (nn, multi-layer perceptron regressor) comprises a multi-layer perceptron regressor model and a given dataset.
 
 %%% ¡description!
+A neural network multi-layer perceptron regressor (NNRegressorMLP) comprises a multi-layer perceptron regressor model and a given dataset.
+NNRegressorMLP trains the multi-layer perceptron regressor with a formatted inputs ("CB", channel and batch) derived from the given dataset.
 
 %%% ¡seealso!
-NNData, NNEvaluator_REG
+NNDataPoint_CON_REG, NNEvaluator_REG
 
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the trainor for neural network analysis.
+NAME (constant, string) is the name of the neural network multi-layer perceptron regressor.
 %%%% ¡default!
 'NNRegressorMLP'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the trainor for neural network analysis.
+DESCRIPTION (constant, string) is the description of the neural network multi-layer perceptron regressor.
 %%%% ¡default!
-'...'
+'A neural network multi-layer perceptron regressor (NNRegressorMLP) comprises a multi-layer perceptron regressor model and a given dataset. NNRegressorMLP trains the multi-layer perceptron regressor with a formatted inputs ("CB", channel and batch) derived from the given dataset.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the trainor for neural network analysis.
+TEMPLATE (parameter, item) is the template of the neural network multi-layer perceptron regressor.
 %%%% ¡settings!
 'NNRegressorMLP'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the trainor for neural network analysis.
+ID (data, string) is a few-letter code for the neural network multi-layer perceptron regressor.
 %%%% ¡default!
 'NNRegressorMLP ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the trainor for neural network analysis.
+LABEL (metadata, string) is an extended label of the neural network multi-layer perceptron regressor.
 %%%% ¡default!
 'NNRegressorMLP label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the trainor for neural network analysis.
+NOTES (metadata, string) are some specific notes about the neural network multi-layer perceptron regressor.
 %%%% ¡default!
 'NNRegressorMLP notes'
     
 %%% ¡prop!
-DATA_FORMAT (data, string) is the data format of neural network inputs. In this case, it maps "CB" (channel, batch) data.
+DATA_FORMAT (data, string) specifies the format of the data that flows through the neural network model. In this case, it maps "CB" (channel and batch) data.
 %%%% ¡default!
 'CB'
 
 %%% ¡prop!
-DATA_CONSTRUCT (query, cell) constructs the data based on specified data_format that flows through the network.
+DATA_CONSTRUCT (query, cell) constructs the data based on specified data format that flows through the neural network model.
 %%%% ¡calculate!
 inputs = nn.get('D').get('INPUTS');
 if isempty(inputs)
@@ -59,7 +61,7 @@ else
 end
 
 %%% ¡prop!
-RESPONSE_CONSTRUCT (query, cell) constructs the responses based on specified data_format that flows through the network.
+RESPONSE_CONSTRUCT (query, cell) constructs the responses based on specified data format that flows through the neural network model.
 %%%% ¡calculate!
 targets = nn.get('D').get('TARGETS');
 if isempty(targets)
@@ -74,7 +76,7 @@ else
 end
 
 %%% ¡prop!
-MODEL (result, net) is a user defined neural network layers.
+MODEL (result, net) is a trained neural network model with the given dataset.
 %%%% ¡calculate!
 data = cell2mat(nn.get('DATA_CONSTRUCT'));
 responses = cell2mat(nn.get('RESPONSE_CONSTRUCT'));
@@ -123,7 +125,7 @@ end
 %% ¡props!
 
 %%% ¡prop!
-DENSE_LAYERS (data, rvector) is a user defined neural network layers.
+DENSE_LAYERS (data, rvector) is user defined neural network layers.
 
 %% ¡tests!
 

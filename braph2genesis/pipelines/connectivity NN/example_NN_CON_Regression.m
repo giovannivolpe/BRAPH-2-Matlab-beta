@@ -41,18 +41,20 @@ d = NNDataset( ...
     'DP_DICT', dp_dict ...
     );
 
-%% Split the NNData into training set and validation set
+%% Split the NNData into training set and test set
 d_split = NNDatasetSplit('D', d, 'SPLIT', {0.3, 0.7}).get('D_LIST');
 d_training = d_split{1};
 d_test = d_split{2};
 
 %% Create a MLP regressor with training set
 nn = NNRegressorMLP('D', d_training, 'DENSE_LAYERS', [20 20]);
-%% a prop called train query 
-%nn.memorize('MODEL');
-nn.get('TRAIN');
+nn.get('MODEL_TRAIN');
 
 %% Evaluate the regressor with the test set
-% % % nne_test = NNEvaluator_REG('D', d_test, 'NN', nn);
-% % % rmse_val = nne_test.get('RMSE');
-% % % feature_importance = nne_test.get('FEATURE_PERMUTATION_IMPORTANCE');
+nne_test = NNEvaluator_REG('D', d_test, 'NN', nn);
+corr_coeff = nne_test.get('CORRELATION_COEFF');
+coeff_determination = nne_test.get('COEFF_OF_DETERMINATION');
+mae = nne_test.get('MEAN_ABSOLUTE_ERROR');
+mse = nne_test.get('MEAN_SQUARED_ERROR');
+rmse = nne_test.get('ROOT_MEAN_SQUARED_ERROR');
+feature_importance = nne_test.get('PERMUTATION_FEATURE_IMPORTANCE');

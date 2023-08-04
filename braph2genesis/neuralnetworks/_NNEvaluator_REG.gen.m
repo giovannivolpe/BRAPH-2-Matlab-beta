@@ -1,50 +1,52 @@
 %% ¡header!
-NNEvaluator_REG < NNEvaluator (nne, neural network trainor) evaluates a neural network model with a dataset.
+NNEvaluator_REG < NNEvaluator (nne, neural network evaluator for regression) evaluates a neural network model with a dataset.
 
 %%% ¡description!
+A neural network evaluator for regression (NNEvaluator_REG) comprises a trained regressor model and a given dataset.
+NNEvaluator_REG evaluates the performance of the trained model with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
 
 %%% ¡seealso!
-NNData, NNRegressorMLP
+NNDataPoint_CON_REG, NNRegressorMLP
 
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the trainor for neural network analysis.
+NAME (constant, string) is the name of the neural network evaluator for the regression analysis.
 %%%% ¡default!
 'NNEvaluator_REG'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the trainor for neural network analysis.
+DESCRIPTION (constant, string) is the description of the neural network evaluator for the regression analysis.
 %%%% ¡default!
-'...'
+'A neural network evaluator for regression (NNEvaluator_REG) comprises a trained regressor model and a given dataset. NNEvaluator_REG evaluates the performance of the trained model with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the trainor for neural network analysis.
+TEMPLATE (parameter, item) is the template of the neural network evaluator for the regression analysis.
 %%%% ¡settings!
 'NNEvaluator_REG'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the trainor for neural network analysis.
+ID (data, string) is a few-letter code for the neural network evaluator for the regression analysis.
 %%%% ¡default!
 'NNEvaluator_REG ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the trainor for neural network analysis.
+LABEL (metadata, string) is an extended label of the neural network evaluator for the regression analysis.
 %%%% ¡default!
 'NNEvaluator_REG label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the trainor for neural network analysis.
+NOTES (metadata, string) are some specific notes about the neural network evaluator for the regression analysis.
 %%%% ¡default!
 'NNEvaluator_REG notes'
     
 %%% ¡prop!
-NN (data, item) is a trained neural network model.
+NN (data, item) contains a trained neural network regressor.
 %%%% ¡settings!
 'NNRegressorMLP'
 
 %%% ¡prop!
-PREDICTIONS (result, cell) is a trained neural network model.
+PREDICTIONS (result, cell) are the predictions of the trained neural network model from the given dataset.
 %%%% ¡calculate!
 nn = nne.get('NN');
 net = nn.get('MODEL');
@@ -56,8 +58,9 @@ else
 end
 
 %% ¡props!
+
 %%% ¡prop!
-GROUND_TRUTH (query, matrix) returns the matrix of ground truth from the targets.
+GROUND_TRUTH (query, matrix) returns the matrix of ground truth derived from the targets.
 %%%% ¡calculate!
 targets = nne.get('D').get('TARGETS');
 if isempty(targets)
@@ -69,7 +72,7 @@ else
 end
 
 %%% ¡prop!
-CORRELATION_COEFF (result, rvector) is an option for data shuffling.
+CORRELATION_COEFF (result, rvector) provides the metric of the correlation of coefficients.
 %%%% ¡calculate!
 predictions = cell2mat(nne.get('PREDICTIONS'));
 if isempty(predictions)
@@ -85,7 +88,7 @@ else
 end
 
 %%% ¡prop!
-COEFF_OF_DETERMINATION (result, rvector) is an option for data shuffling.
+COEFF_OF_DETERMINATION (result, rvector) provides a measure of how well the predictions are replicated by the model.
 %%%% ¡calculate!
 predictions = cell2mat(nne.get('PREDICTIONS'));
 if isempty(predictions)
@@ -101,7 +104,7 @@ else
 end
 
 %%% ¡prop!
-MEAN_ABSOLUTE_ERROR (result, rvector) is an option for data shuffling.
+MEAN_ABSOLUTE_ERROR (result, rvector) provides the metric of the mean absolute error.
 %%%% ¡calculate!
 predictions = cell2mat(nne.get('PREDICTIONS'));
 if isempty(predictions)
@@ -116,7 +119,7 @@ else
 end
 
 %%% ¡prop!
-MEAN_SQUARED_ERROR (result, rvector) is an option for data shuffling.
+MEAN_SQUARED_ERROR (result, rvector) provides the metric of the mean squared error.
 %%%% ¡calculate!
 predictions = cell2mat(nne.get('PREDICTIONS'));
 if isempty(predictions)
@@ -131,7 +134,7 @@ else
 end
 
 %%% ¡prop!
-ROOT_MEAN_SQUARED_ERROR (result, rvector) is an option for data shuffling.
+ROOT_MEAN_SQUARED_ERROR (result, rvector) provides the metric of the root mean squared error.
 %%%% ¡calculate!
 predictions = cell2mat(nne.get('PREDICTIONS'));
 if isempty(predictions)
@@ -154,7 +157,7 @@ value = {};
 
 %%% ¡test!
 %%%% ¡name!
-evaluate a regressor with example data
+evaluate a regressor with the example data
 %%%% ¡code!
 
 % ensure the example data is generated
@@ -201,18 +204,73 @@ d = NNDataset( ...
 
 nn = NNRegressorMLP('D', d, 'DENSE_LAYERS', [20 20]);
 nn.get('MODEL_TRAIN');
-
 nne = NNEvaluator_REG('NN', nn, 'D', d);
 
-predictions = nne.get('PREDICTIONS');
-c = nne.get('CORRELATION_COEFF');
-c_of_d = nne.get('COEFF_OF_DETERMINATION');
-mae = nne.get('MEAN_ABSOLUTE_ERROR');
-mse = nne.get('MEAN_SQUARED_ERROR');
-rmse = nne.get('ROOT_MEAN_SQUARED_ERROR');
-pfi = nne.get('PERMUTATION_FEATURE_IMPORTANCE');
-% % % Check whether the number of fully-connected layer matches (excluding fc_output layer)
-% % assert(length(nn.get('DENSE_LAYERS')) == sum(contains({trained_model.Layers.Name}, 'fc')) - 1, ...
-% %     [BRAPH2.STR ':NNRegressorMLP:' BRAPH2.FAIL_TEST], ...
-% %     'NNRegressorMLP does not construct the layers correctly. The number of the inputs should be the same as the length of dense layers the property.' ...
-% %     )
+predictions = cell2mat(nne.get('PREDICTIONS'));
+
+% Check whether the ground truth are derived as expected
+ground_truth = nne.get('GROUND_TRUTH');
+targets = d.get('TARGETS');
+
+for i = 1:size(ground_truth, 1)
+    check(i) = isequal(cell2mat(targets{i}), ground_truth(i, :));
+end
+assert(all(check), ...
+    [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
+    'NNEvaluator_REG does not calculate the ground truth correctly.' ...
+    )
+
+
+ground_truth = nne.get('GROUND_TRUTH');
+
+% Check whether the correlation coefficients are calculated as expected
+calculated_value = nne.get('CORRELATION_COEFF');
+for i = 1:size(ground_truth, 2)
+    corr_matrix = corrcoef(predictions(:, i), ground_truth(:, i));
+    known_value(i) = corr_matrix(1, 2);
+end
+assert(isequal(calculated_value, known_value), ...
+    [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
+    'NNEvaluator_REG does not calculate the correlation coefficients correctly.' ...
+    )
+
+% Check whether the correlation coefficients are calculated as expected
+calculated_value = nne.get('COEFF_OF_DETERMINATION');
+for i = 1:size(ground_truth, 2)
+    corr_matrix = corrcoef(predictions(:, i), ground_truth(:, i));
+    known_value(i) = corr_matrix(1, 2)^2;
+end
+assert(isequal(calculated_value, known_value), ...
+    [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
+    'NNEvaluator_REG does not calculate the coefficient of determination correctly.' ...
+    )
+
+% Check whether the mean absolute errors are calculated as expected
+calculated_value = nne.get('MEAN_ABSOLUTE_ERROR');
+for i = 1:size(ground_truth, 2)
+    known_value(i) = mean(abs(predictions(:, i) - ground_truth(:, i)));
+end
+assert(isequal(calculated_value, known_value), ...
+    [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
+    'NNEvaluator_REG does not calculate the mean absolute errors correctly.' ...
+    )
+
+% Check whether the mean squared errors are calculated as expected
+calculated_value = nne.get('MEAN_SQUARED_ERROR');
+for i = 1:size(ground_truth, 2)
+    known_value(i) = mean((predictions(:, i) - ground_truth(:, i)).^2);
+end
+assert(isequal(calculated_value, known_value), ...
+    [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
+    'NNEvaluator_REG does not calculate the mean squared errors correctly.' ...
+    )
+
+% Check whether the mean squared errors are calculated as expected
+calculated_value = nne.get('ROOT_MEAN_SQUARED_ERROR');
+for i = 1:size(ground_truth, 2)
+    known_value(i) = sqrt(mean((predictions(:, i) - ground_truth(:, i)).^2));
+end
+assert(isequal(calculated_value, known_value), ...
+    [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
+    'NNEvaluator_REG does not calculate the root mean squared errors correctly.' ...
+    )
