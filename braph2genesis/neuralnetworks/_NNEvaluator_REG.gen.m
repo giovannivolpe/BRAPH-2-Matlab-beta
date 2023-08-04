@@ -57,32 +57,96 @@ end
 
 %% ¡props!
 %%% ¡prop!
+GROUND_TRUTH (query, matrix) returns the matrix of ground truth from the targets.
+%%%% ¡calculate!
+targets = nne.get('D').get('TARGETS');
+if isempty(targets)
+    value = [];
+else
+    for i = 1:length(targets)
+        value(i, :) = cell2mat(targets{i});
+    end
+end
+
+%%% ¡prop!
 CORRELATION_COEFF (result, rvector) is an option for data shuffling.
 %%%% ¡calculate!
-value = [];
+predictions = cell2mat(nne.get('PREDICTIONS'));
+if isempty(predictions)
+    value = [];
+else
+    ground_truth = nne.get('GROUND_TRUTH');
+    num_dp = size(ground_truth, 1);
+    num_target = size(ground_truth, 2);
+    for i = 1:num_target
+        corr_matrix = corrcoef(predictions(:, i), ground_truth(:, i));
+        value(i) = corr_matrix(1, 2);
+    end
+end
 
 %%% ¡prop!
 COEFF_OF_DETERMINATION (result, rvector) is an option for data shuffling.
 %%%% ¡calculate!
-value = [];
+predictions = cell2mat(nne.get('PREDICTIONS'));
+if isempty(predictions)
+    value = [];
+else
+    ground_truth = nne.get('GROUND_TRUTH');
+    num_dp = size(ground_truth, 1);
+    num_target = size(ground_truth, 2);
+    for i = 1:num_target
+        corr_matrix = corrcoef(predictions(:, i), ground_truth(:, i));
+        value(i) = corr_matrix(1, 2)^2;
+    end
+end
 
 %%% ¡prop!
 MEAN_ABSOLUTE_ERROR (result, rvector) is an option for data shuffling.
 %%%% ¡calculate!
-value = [];
+predictions = cell2mat(nne.get('PREDICTIONS'));
+if isempty(predictions)
+    value = [];
+else
+    ground_truth = nne.get('GROUND_TRUTH');
+    num_dp = size(ground_truth, 1);
+    num_target = size(ground_truth, 2);
+    for i = 1:num_target
+        value(i) = mean(abs(predictions(:, i) - ground_truth(:, i)));
+    end
+end
 
 %%% ¡prop!
 MEAN_SQUARED_ERROR (result, rvector) is an option for data shuffling.
 %%%% ¡calculate!
-value = [];
+predictions = cell2mat(nne.get('PREDICTIONS'));
+if isempty(predictions)
+    value = [];
+else
+    ground_truth = nne.get('GROUND_TRUTH');
+    num_dp = size(ground_truth, 1);
+    num_target = size(ground_truth, 2);
+    for i = 1:num_target
+        value(i) = mean((predictions(:, i) - ground_truth(:, i)).^2);
+    end
+end
 
 %%% ¡prop!
 ROOT_MEAN_SQUARED_ERROR (result, rvector) is an option for data shuffling.
 %%%% ¡calculate!
-value = [];
+predictions = cell2mat(nne.get('PREDICTIONS'));
+if isempty(predictions)
+    value = [];
+else
+    ground_truth = nne.get('GROUND_TRUTH');
+    num_dp = size(ground_truth, 1);
+    num_target = size(ground_truth, 2);
+    for i = 1:num_target
+        value(i) = sqrt(mean((predictions(:, i) - ground_truth(:, i)).^2));
+    end
+end
 
 %%% ¡prop!
-permutation_feature_importance (result, cell) assess the significance of each feature by randomly shuffling its values and measuring how much the performance of the model decreases.
+PERMUTATION_FEATURE_IMPORTANCE (result, cell) assess the significance of each feature by randomly shuffling its values and measuring how much the performance of the model decreases.
 %%%% ¡calculate!
 value = {};
 
@@ -140,6 +204,13 @@ nn.get('MODEL_TRAIN');
 
 nne = NNEvaluator_REG('NN', nn, 'D', d);
 
+predictions = nne.get('PREDICTIONS');
+c = nne.get('CORRELATION_COEFF');
+c_of_d = nne.get('COEFF_OF_DETERMINATION');
+mae = nne.get('MEAN_ABSOLUTE_ERROR');
+mse = nne.get('MEAN_SQUARED_ERROR');
+rmse = nne.get('ROOT_MEAN_SQUARED_ERROR');
+pfi = nne.get('PERMUTATION_FEATURE_IMPORTANCE');
 % % % Check whether the number of fully-connected layer matches (excluding fc_output layer)
 % % assert(length(nn.get('DENSE_LAYERS')) == sum(contains({trained_model.Layers.Name}, 'fc')) - 1, ...
 % %     [BRAPH2.STR ':NNRegressorMLP:' BRAPH2.FAIL_TEST], ...
