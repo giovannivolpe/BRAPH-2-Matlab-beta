@@ -4,7 +4,7 @@ NNBase < ConcreteElement (nn, neural network) comprises a neural network model w
 %%% ¡description!
 A neural network base (NNBase) comprises a neural network model with a specific dataset, along with the required options for training the model.
 Instances of this class should not be created. Use one of its subclasses instead.
-Its subclasses shall be specifically designed to cater to different use cases such as a classifier, a regressor or a generative model.
+Its subclasses shall be specifically designed to cater to different use cases such as a classifier, a regressor, or a generative model.
 
 %%% ¡seealso!
 NNDataPoint, NNData, NNEvaluator
