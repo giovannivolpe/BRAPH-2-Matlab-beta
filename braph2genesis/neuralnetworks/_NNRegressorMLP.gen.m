@@ -46,7 +46,7 @@ DATA_FORMAT (data, string) specifies the format of the data that flows through t
 'CB'
 
 %%% ¡prop!
-DATA_CONSTRUCT (query, cell) constructs the data based on specified data format that flows through the neural network model.
+DATA_CONSTRUCT (query, cell) constructs the data based on the data format that flows through the neural network model.
 %%%% ¡calculate!
 inputs = nn.get('D').get('INPUTS');
 if isempty(inputs)
@@ -61,7 +61,7 @@ else
 end
 
 %%% ¡prop!
-RESPONSE_CONSTRUCT (query, cell) constructs the responses based on specified data format that flows through the neural network model.
+RESPONSE_CONSTRUCT (query, cell) constructs the responses based on the data format that flows through the neural network model.
 %%%% ¡calculate!
 targets = nn.get('D').get('TARGETS');
 if isempty(targets)

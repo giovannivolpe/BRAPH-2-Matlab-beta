@@ -2,8 +2,8 @@
 NNEvaluator_REG < NNEvaluator (nne, neural network evaluator for regression) evaluates the performance of a neural network regressor with a given dataset.
 
 %%% ¡description!
-A neural network evaluator for regression (NNEvaluator_REG) evaluates the performance of a neural network model with a given dataset.
-NNEvaluator_REG evaluates the performance of the trained model with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
+A neural network evaluator for regression (NNEvaluator_REG) evaluates the performance of a neural network regressor with a given dataset.
+NNEvaluator_REG evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
 
 %%% ¡seealso!
 NNDataPoint_CON_REG, NNRegressorMLP
@@ -11,32 +11,32 @@ NNDataPoint_CON_REG, NNRegressorMLP
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the neural network evaluator for the regression analysis.
+NAME (constant, string) is the name of the neural network evaluator for the regression task.
 %%%% ¡default!
 'NNEvaluator_REG'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the neural network evaluator for the regression analysis.
+DESCRIPTION (constant, string) is the description of the neural network evaluator for the regression task.
 %%%% ¡default!
-'A neural network evaluator for regression (NNEvaluator_REG) evaluates the performance of a neural network model with a given dataset. NNEvaluator_REG evaluates the performance of the trained model with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
+'A neural network evaluator for regression (NNEvaluator_REG) evaluates the performance of a neural network regressor with a given dataset. NNEvaluator_REG evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the neural network evaluator for the regression analysis.
+TEMPLATE (parameter, item) is the template of the neural network evaluator for the regression task.
 %%%% ¡settings!
 'NNEvaluator_REG'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the neural network evaluator for the regression analysis.
+ID (data, string) is a few-letter code for the neural network evaluator for the regression task.
 %%%% ¡default!
 'NNEvaluator_REG ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the neural network evaluator for the regression analysis.
+LABEL (metadata, string) is an extended label of the neural network evaluator for the regression task.
 %%%% ¡default!
 'NNEvaluator_REG label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the neural network evaluator for the regression analysis.
+NOTES (metadata, string) are some specific notes about the neural network evaluator for the regression task.
 %%%% ¡default!
 'NNEvaluator_REG notes'
     
@@ -219,9 +219,6 @@ assert(all(check), ...
     [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
     'NNEvaluator_REG does not calculate the ground truth correctly.' ...
     )
-
-
-ground_truth = nne.get('GROUND_TRUTH');
 
 % Check whether the correlation coefficients are calculated as expected
 calculated_value = nne.get('CORRELATION_COEFF');
