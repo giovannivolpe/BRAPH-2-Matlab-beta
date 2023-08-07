@@ -64,7 +64,13 @@ local_efficiency = calculateValue@LocalEfficiency(m, prop);
 
 g = m.get('G');  % graph from measure class
 
-local_efficiency_av = cell(g.get('LAYERNUMBER'), 1);
+local_efficiency_av = cell(g.get('LAYERNUMBER'), 1);ls = g.get('PARTITIONS');
+
+if l == 0
+    value = {};
+    return;
+end
+
 parfor li = 1:g.get('LAYERNUMBER')
     local_efficiency_av(li) ={mean(local_efficiency{li})};
 end

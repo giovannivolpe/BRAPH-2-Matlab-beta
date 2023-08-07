@@ -106,8 +106,14 @@ M (result, cell) is the averge overlapping degree.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 overlapping_strength = calculateValue@OverlappingStr(m, prop);
+ls = g.get('PARTITIONS');
 
-value = {mean(cell2mat(overlapping_strength))};
+if l == 0
+    value = {};
+else
+
+    value = {mean(cell2mat(overlapping_strength))};
+end
 
 
 %% ¡tests!

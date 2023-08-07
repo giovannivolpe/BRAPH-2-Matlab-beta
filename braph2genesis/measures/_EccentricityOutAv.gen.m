@@ -66,9 +66,17 @@ eccentricity = calculateValue@EccentricityOut(m, prop);
 
 eccentricity_av = cell(L, 1);
 
+ls = g.get('PARTITIONS');
+
+if l == 0
+    value = {};
+    return ;
+end
+
 parfor li = 1:L
     eccentricity_av(li) = {mean(eccentricity{li})};
 end
+
 
 value = eccentricity_av;
 

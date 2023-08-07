@@ -105,10 +105,14 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 M (result, cell) is the weighted multiplex particiption.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
+ls = g.get('PARTITIONS');
 
-weighted_multiplex_participation = calculateValue@WeightedMxParti(m, prop);	
-value = {mean(cell2mat(weighted_multiplex_participation))};
-
+if l == 0
+    value = {};
+else
+    weighted_multiplex_participation = calculateValue@WeightedMxParti(m, prop);
+    value = {mean(cell2mat(weighted_multiplex_participation))};
+end
 %% ¡tests!
 
 %%% ¡excluded_props!
