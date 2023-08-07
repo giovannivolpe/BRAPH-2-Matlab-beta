@@ -106,8 +106,15 @@ M (result, cell) is the overlapping in-degree.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
 overlapping_in_degree_av = calculateValue@OverlappingDgrIn(m, prop);
+ls = g.get('PARTITIONS');
+
+if l == 0
+    value = {};
+    return;
+end
 
 value = {mean(cell2mat(overlapping_in_degree_av))};
+
 
 %% ¡tests!
 
