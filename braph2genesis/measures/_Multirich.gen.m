@@ -270,7 +270,7 @@ MultiplexBD
 .01
 %%%% ¡code!
 B11 = [
-    0  1  1  0; 
+    0  1  1  1; 
     1  0  1  1; 
     1  1  0  0;
     0  1  0  0
@@ -280,13 +280,13 @@ B22 = [
     0  1  1  1; 
     1  0  1  1; 
     1  1  0  0;
-    1  1  0  0
+    0  1  1  0
     ];
 B = {B11 B22};
        
 known_multirichness = {[1 0 5/3 5/3]'}; 
 
-g = MultiplexBU('B', B);
+g = MultiplexBD('B', B);
 m_outside_g = Multirich('G', g, 'MULTIRICHNESS_COEFFICIENTS', [2/3, 1/3]);
 
 ans = m_outside_g.get('M');

@@ -115,7 +115,7 @@ value = rich_club_strength;
 
 %% ¡props!
 %%% ¡prop! 
-PARAMETRIC_VALUE (parameter, SCALAR) 
+PARAMETRIC_VALUE (parameter, RVECTOR) 
 %%%% ¡default!
 1
 
