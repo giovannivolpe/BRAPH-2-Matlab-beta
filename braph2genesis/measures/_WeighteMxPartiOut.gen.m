@@ -64,7 +64,7 @@ DESCRIPTION (constant, string) is the description of the weighted multiplex out-
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the weighted multiplex out-particiption.
 %%%% ¡settings!
-'WeightedMxPartiOut '
+'WeightedMxPartiOut'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the weighted multiplex out-particiption.
