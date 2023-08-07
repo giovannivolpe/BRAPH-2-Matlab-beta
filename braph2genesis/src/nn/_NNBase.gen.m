@@ -93,7 +93,7 @@ MODEL (result, net) is a trained neural network model with the given dataset.
 value = network();
 
 %%% ¡prop!
-MODEL_TRAIN (query, empty) trains the neural network model with the given dataset.
+TRAIN (query, empty) trains the neural network model with the given dataset.
 %%%% ¡calculate!
 nn.memorize('MODEL');
 value = {};

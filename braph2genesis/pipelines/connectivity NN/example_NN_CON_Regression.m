@@ -48,7 +48,7 @@ d_test = d_split{2};
 
 %% Create a MLP regressor with training set
 nn = NNRegressorMLP('D', d_training, 'DENSE_LAYERS', [20 20]);
-nn.get('MODEL_TRAIN');
+nn.get('TRAIN');
 
 %% Evaluate the regressor with the test set
 nne_test = NNEvaluator_REG('D', d_test, 'NN', nn);
