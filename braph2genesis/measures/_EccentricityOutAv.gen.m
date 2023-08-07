@@ -68,7 +68,7 @@ eccentricity_av = cell(L, 1);
 
 ls = g.get('PARTITIONS');
 
-if l == 0
+if L == 0
     value = {};
     return ;
 end

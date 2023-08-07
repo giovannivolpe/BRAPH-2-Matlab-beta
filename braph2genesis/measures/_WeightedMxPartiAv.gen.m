@@ -105,7 +105,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 M (result, cell) is the weighted multiplex particiption.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
-ls = g.get('PARTITIONS');
+l = g.get('LAYERNUMBER');
 
 if l == 0
     value = {};
