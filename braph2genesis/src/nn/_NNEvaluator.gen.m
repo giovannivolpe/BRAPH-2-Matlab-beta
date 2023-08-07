@@ -6,7 +6,6 @@ A neural network evaluator (NNEvaluator) evaluates the performance of a neural n
 Instances of this class should not be created. Use one of its subclasses instead.
 Its subclasses shall be specifically designed to cater to different evaluation cases such as a classification task, a regression task, or a data generation task.
 
-
 %%% ¡seealso!
 NNDataPoint, NNData, NNBase
 
