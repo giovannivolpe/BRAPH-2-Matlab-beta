@@ -55,4 +55,4 @@ NN (data, item) contains a trained neural network model.
 'NNBase'
 
 %%% ¡prop!
-PREDICTIONS (result, cell) are the predictions of the trained neural network model from the given dataset.
+PREDICTIONS (result, cell) are the predictions from the trained neural network model on the given dataset.
