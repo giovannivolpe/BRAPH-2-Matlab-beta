@@ -106,7 +106,7 @@ M (result, cell) is the averge overlapping degree.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 overlapping_strength = calculateValue@OverlappingStr(m, prop);
-ls = g.get('PARTITIONS');
+l = g.get('LAYERNUMBER');
 
 if l == 0
     value = {};

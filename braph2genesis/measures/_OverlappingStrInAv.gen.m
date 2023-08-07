@@ -106,12 +106,11 @@ M (result, cell) is the overlapping strength.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
 overlapping_in_strength = calculateValue@OverlappingStrIn(m, prop);
-ls = g.get('PARTITIONS');
+l = g.get('LAYERNUMBER');
 
 if l == 0
     value = {};
 else
-
     value = {mean(cell2mat(overlapping_in_strength))};
 end
 
