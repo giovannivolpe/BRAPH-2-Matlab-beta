@@ -106,8 +106,13 @@ M (result, cell) is the overlapping strength.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
 overlapping_out_strength = calculateValue@OverlappingStrOut(m, prop);
+l = g.get('LAYERNUMBER');
 
-value = {mean(cell2mat(overlapping_out_strength))};
+if l == 0
+    value = {};
+else
+    value = {mean(cell2mat(overlapping_out_strength))};
+end
 
 %% ¡tests!
 
