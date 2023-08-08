@@ -213,9 +213,9 @@ function MC_tau = calculate_MCglobal(W,W_in,tau_max,input_data, ridge,verbose)
     
         % Compute W_out for given delay tau using
         % ridge regression (linear regression if ridge = 0)
-        term1 = y_f*R_f';
-        term2 = pinv(R_f*R_f' + ridge*eye(N), 1e-15);
-        W_out = term1 * term2;
+        term_A = y_f*R_f';
+        term_B = pinv(R_f*R_f' + ridge*eye(N), 1e-15);
+        W_out = term_A * term_B;
     
         % Compute output of reservoir using W_out
         y_pred = W_out * R_f;
