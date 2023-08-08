@@ -64,7 +64,7 @@ GROUND_TRUTH (query, stringlist) returns the matrix of ground truth derived from
 %%%% ¡calculate!
 targets = nne.get('D').get('TARGETS');
 if isempty(targets)
-    value = [];
+    value = {''};
 else
     for i = 1:length(targets)
         value(i, :) = targets{i};
@@ -72,9 +72,33 @@ else
 end
 
 %%% ¡prop!
-AUC (result, scalar) provides the metric of the AUC value.
+AUC (result, rvector) provides the metric of the AUC value.
 %%%% ¡calculate!
-value = 0;
+rng_settings_ = rng(); rng(nne.getPropSeed(11), 'twister')
+predictions = nne.get('PREDICTIONS');
+predictions = cell2mat(predictions);
+predictions = bsxfun(@eq, predictions, max(predictions, [], 2));
+if isempty(predictions)
+    value = [];
+else
+    class_names = nne.get('NN').get('MODEL').Layers(end).Classes;
+    for i = 1:length(predictions)
+        classified(i) = classNames(predictions(i, :));
+    end
+    ground_truth = categorical(nne.get('GROUND_TRUTH'));
+    rocNet = rocmetrics(ground_truth, predictions, class_names);
+    value = rocNet.AUC;
+end
+
+%%% ¡prop!
+AVG_AUC (result, scalar) provides the metric of the average AUC value.
+%%%% ¡calculate!
+auc = nne.get('AUC');
+if isemplyt(auc)
+    value = 0
+else
+    value = mean(auc);
+end
 
 %%% ¡prop!
 C_MATRIX (result, matrix) provides the metric of the confusion matrix.
@@ -82,12 +106,16 @@ C_MATRIX (result, matrix) provides the metric of the confusion matrix.
 predictions = nne.get('PREDICTIONS');
 predictions = cell2mat(predictions);
 predictions = bsxfun(@eq, predictions, max(predictions, [], 2));
-classNames = nne.get('NN').get('MODEL').Layers(end).Classes;
-for i = 1:length(predictions)
-    classified(i) = classNames(predictions(i, :));
+if isempty(predictions)
+    value = [];
+else
+    classNames = nne.get('NN').get('MODEL').Layers(end).Classes;
+    for i = 1:length(predictions)
+        classified(i) = classNames(predictions(i, :));
+    end
+    ground_truth = categorical(nne.get('GROUND_TRUTH'));
+    value = confusionmat(classified, ground_truth);
 end
-ground_truth = categorical(nne.get('GROUND_TRUTH'));
-value = confusionmat(classified,ground_truth);
 
 %%% ¡prop!
 PERMUTATION_FEATURE_IMPORTANCE (result, cell) assess the significance of each feature by randomly shuffling its values and measuring how much the performance of the model decreases.
