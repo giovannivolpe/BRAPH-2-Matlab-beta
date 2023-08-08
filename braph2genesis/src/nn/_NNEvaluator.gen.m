@@ -6,7 +6,6 @@ A neural network evaluator (NNEvaluator) evaluates the performance of a neural n
 Instances of this class should not be created. Use one of its subclasses instead.
 Its subclasses shall be specifically designed to cater to different evaluation cases such as a classification task, a regression task, or a data generation task.
 
-
 %%% ¡seealso!
 NNDataPoint, NNData, NNBase
 
@@ -55,4 +54,4 @@ NN (data, item) contains a trained neural network model.
 'NNBase'
 
 %%% ¡prop!
-PREDICTIONS (result, cell) are the predictions of the trained neural network model from the given dataset.
+PREDICTIONS (result, cell) are the predictions from the trained neural network model on the given dataset.

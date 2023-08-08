@@ -203,7 +203,7 @@ d = NNDataset( ...
     );
 
 nn = NNRegressorMLP('D', d, 'DENSE_LAYERS', [20 20]);
-nn.get('MODEL_TRAIN');
+nn.get('TRAIN');
 nne = NNEvaluator_REG('NN', nn, 'D', d);
 
 predictions = cell2mat(nne.get('PREDICTIONS'));
