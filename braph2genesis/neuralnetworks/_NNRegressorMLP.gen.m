@@ -43,31 +43,45 @@ NOTES (metadata, string) are some specific notes about the neural network multi-
 %%% ¡prop!
 INPUTS (query, cell) constructs the data in the CB (channel-batch) format.
 %%%% ¡calculate!
-inputs = nn.get('D').get('INPUTS');
+% inputs = nn.get('inputs', D) returns a cell array with the
+%  inputs for all data points in dataset D.
+if isempty(varargin)
+    value = {};
+    return
+end
+d = varargin{1};
+inputs = d.get('INPUTS');
 if isempty(inputs)
     value = {};
 else
-    data = [];
+    nn_inputs = [];
     for i = 1:1:length(inputs)
         input = cell2mat(inputs{i});
-        data = [data; input(:)'];
+        nn_inputs = [nn_inputs; input(:)'];
     end
-    value = {data};
+    value = {nn_inputs};
 end
 
 %%% ¡prop!
 TARGETS (query, cell) constructs the targets in the CB (channel-batch) format.
 %%%% ¡calculate!
-targets = nn.get('D').get('TARGETS');
+% targets = nn.get('PREDICT', D) returns a cell array with the
+%  targets for all data points in dataset D.
+if isempty(varargin)
+    value = {};
+    return
+end
+d = varargin{1};
+targets = d.get('TARGETS');
 if isempty(targets)
     value = {};
 else
-    response = [];
+    nn_targets = [];
     for i = 1:1:length(targets)
         target = cell2mat(targets{i});
-        response = [response; target(:)'];
+        nn_targets = [nn_targets; target(:)'];
     end
-    value = {response};
+    value = {nn_targets};
 end
 
 %%% ¡prop!
