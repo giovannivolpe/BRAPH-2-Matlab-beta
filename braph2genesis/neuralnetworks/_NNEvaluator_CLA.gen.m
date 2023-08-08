@@ -74,17 +74,12 @@ end
 %%% ¡prop!
 AUC (result, rvector) provides the metric of the AUC value.
 %%%% ¡calculate!
-rng_settings_ = rng(); rng(nne.getPropSeed(11), 'twister')
 predictions = nne.get('PREDICTIONS');
 predictions = cell2mat(predictions);
-predictions = bsxfun(@eq, predictions, max(predictions, [], 2));
 if isempty(predictions)
     value = [];
 else
     class_names = nne.get('NN').get('MODEL').Layers(end).Classes;
-    for i = 1:length(predictions)
-        classified(i) = classNames(predictions(i, :));
-    end
     ground_truth = categorical(nne.get('GROUND_TRUTH'));
     rocNet = rocmetrics(ground_truth, predictions, class_names);
     value = rocNet.AUC;
@@ -94,8 +89,8 @@ end
 AVG_AUC (result, scalar) provides the metric of the average AUC value.
 %%%% ¡calculate!
 auc = nne.get('AUC');
-if isemplyt(auc)
-    value = 0
+if isempty(auc)
+    value = 0;
 else
     value = mean(auc);
 end
@@ -203,71 +198,43 @@ d = NNDatasetCombine('D_LIST', {d1, d2}).get('D');
 
 nn = NNClassifierMLP('D', d, 'DENSE_LAYERS', [10 10 10]);
 nn.get('MODEL_TRAIN');
-
 nne = NNEvaluator_CLA('NN', nn, 'D', d);
 
+% Check whether the ground truth are derived as expected
+ground_truth = nne.get('GROUND_TRUTH');
+targets = d.get('TARGETS');
+
+for i = 1:size(ground_truth, 1)
+    check(i) = isequal(targets{i}, ground_truth(i, :));
+end
+assert(all(check), ...
+    [BRAPH2.STR ':NNEvaluator_CLA:' BRAPH2.FAIL_TEST], ...
+    'NNEvaluator_CLA does not calculate the ground truth correctly.' ...
+    )
+
+% Check whether the number of predictions are the same as the input datapoints
 predictions = cell2mat(nne.get('PREDICTIONS'));
-% % % 
-% % % % Check whether the ground truth are derived as expected
-% % % ground_truth = nne.get('GROUND_TRUTH');
-% % % targets = d.get('TARGETS');
-% % % 
-% % % for i = 1:size(ground_truth, 1)
-% % %     check(i) = isequal(cell2mat(targets{i}), ground_truth(i, :));
-% % % end
-% % % assert(all(check), ...
-% % %     [BRAPH2.STR ':NNEvaluator_CLA:' BRAPH2.FAIL_TEST], ...
-% % %     'NNEvaluator_CLA does not calculate the ground truth correctly.' ...
-% % %     )
-% % % 
-% % % % Check whether the correlation coefficients are calculated as expected
-% % % calculated_value = nne.get('CORRELATION_COEFF');
-% % % for i = 1:size(ground_truth, 2)
-% % %     corr_matrix = corrcoef(predictions(:, i), ground_truth(:, i));
-% % %     known_value(i) = corr_matrix(1, 2);
-% % % end
-% % % assert(isequal(calculated_value, known_value), ...
-% % %     [BRAPH2.STR ':NNEvaluator_CLA:' BRAPH2.FAIL_TEST], ...
-% % %     'NNEvaluator_CLA does not calculate the correlation coefficients correctly.' ...
-% % %     )
-% % % 
-% % % % Check whether the correlation coefficients are calculated as expected
-% % % calculated_value = nne.get('COEFF_OF_DETERMINATION');
-% % % for i = 1:size(ground_truth, 2)
-% % %     corr_matrix = corrcoef(predictions(:, i), ground_truth(:, i));
-% % %     known_value(i) = corr_matrix(1, 2)^2;
-% % % end
-% % % assert(isequal(calculated_value, known_value), ...
-% % %     [BRAPH2.STR ':NNEvaluator_CLA:' BRAPH2.FAIL_TEST], ...
-% % %     'NNEvaluator_CLA does not calculate the coefficient of determination correctly.' ...
-% % %     )
-% % % 
-% % % % Check whether the mean absolute errors are calculated as expected
-% % % calculated_value = nne.get('MEAN_ABSOLUTE_ERROR');
-% % % for i = 1:size(ground_truth, 2)
-% % %     known_value(i) = mean(abs(predictions(:, i) - ground_truth(:, i)));
-% % % end
-% % % assert(isequal(calculated_value, known_value), ...
-% % %     [BRAPH2.STR ':NNEvaluator_CLA:' BRAPH2.FAIL_TEST], ...
-% % %     'NNEvaluator_CLA does not calculate the mean absolute errors correctly.' ...
-% % %     )
-% % % 
-% % % % Check whether the mean squared errors are calculated as expected
-% % % calculated_value = nne.get('MEAN_SQUARED_ERROR');
-% % % for i = 1:size(ground_truth, 2)
-% % %     known_value(i) = mean((predictions(:, i) - ground_truth(:, i)).^2);
-% % % end
-% % % assert(isequal(calculated_value, known_value), ...
-% % %     [BRAPH2.STR ':NNEvaluator_CLA:' BRAPH2.FAIL_TEST], ...
-% % %     'NNEvaluator_CLA does not calculate the mean squared errors correctly.' ...
-% % %     )
-% % % 
-% % % % Check whether the mean squared errors are calculated as expected
-% % % calculated_value = nne.get('ROOT_MEAN_SQUARED_ERROR');
-% % % for i = 1:size(ground_truth, 2)
-% % %     known_value(i) = sqrt(mean((predictions(:, i) - ground_truth(:, i)).^2));
-% % % end
-% % % assert(isequal(calculated_value, known_value), ...
-% % %     [BRAPH2.STR ':NNEvaluator_CLA:' BRAPH2.FAIL_TEST], ...
-% % %     'NNEvaluator_CLA does not calculate the root mean squared errors correctly.' ...
-% % %     )
+num_predictions = length(predictions);
+num_datapoints = nne.get('D').get('DP_DICT').get('LENGTH');
+assert(isequal(num_predictions, num_datapoints), ...
+    [BRAPH2.STR ':NNEvaluator_CLA:' BRAPH2.FAIL_TEST], ...
+    'NNEvaluator_CLA does not calculate the predictions correctly.' ...
+    )
+
+% Check whether the dimension of the confusion matrix matches with the number of classes
+c_matrix = nne.get('C_MATRIX');
+dim_c = size(c_matrix, 1);
+num_classes = numel(nne.get('NN').get('MODEL').Layers(end).Classes);
+assert(isequal(dim_c, num_classes), ...
+    [BRAPH2.STR ':NNEvaluator_CLA:' BRAPH2.FAIL_TEST], ...
+    'NNEvaluator_CLA does not calculate the confusion matrix correctly.' ...
+    )
+
+% Check whether the dimension of the AUC matches with the number of classes
+auc = nne.get('AUC');
+dim_auc = length(auc);
+num_classes = numel(nne.get('NN').get('MODEL').Layers(end).Classes);
+assert(isequal(dim_auc, num_classes), ...
+    [BRAPH2.STR ':NNEvaluator_CLA:' BRAPH2.FAIL_TEST], ...
+    'NNEvaluator_CLA does not calculate the confusion matrix correctly.' ...
+    )
