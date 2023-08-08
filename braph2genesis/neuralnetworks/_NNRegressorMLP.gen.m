@@ -39,14 +39,9 @@ LABEL (metadata, string) is an extended label of the neural network multi-layer 
 NOTES (metadata, string) are some specific notes about the neural network multi-layer perceptron regressor.
 %%%% ¡default!
 'NNRegressorMLP notes'
-    
-%%% ¡prop!
-DATA_FORMAT (data, string) specifies the format of the data that flows through the neural network model. In this case, it maps "CB" (channel and batch) data.
-%%%% ¡default!
-'CB'
 
 %%% ¡prop!
-DATA_CONSTRUCT (query, cell) constructs the data based on the data format that flows through the neural network model.
+INPUTS (query, cell) constructs the data in the CB (channel-batch) format.
 %%%% ¡calculate!
 inputs = nn.get('D').get('INPUTS');
 if isempty(inputs)
@@ -61,7 +56,7 @@ else
 end
 
 %%% ¡prop!
-RESPONSE_CONSTRUCT (query, cell) constructs the responses based on the data format that flows through the neural network model.
+TARGETS (query, cell) constructs the targets in the CB (channel-batch) format.
 %%%% ¡calculate!
 targets = nn.get('D').get('TARGETS');
 if isempty(targets)
@@ -76,56 +71,57 @@ else
 end
 
 %%% ¡prop!
-MODEL (result, net) is a trained neural network model with the given dataset.
+MODEL (result, net) is a trained neural network model.
 %%%% ¡calculate!
-data = cell2mat(nn.get('DATA_CONSTRUCT'));
-responses = cell2mat(nn.get('RESPONSE_CONSTRUCT'));
-if isempty(data) || isempty(responses)
+inputs = nn.get('INPUTS');
+targets = nn.get('TARGETS');
+if isempty(inputs) || isempty(targets)
     value = network();
 else
-    data_format = nn.get('DATA_FORMAT');
-    ind_channel = find(data_format == 'C');
-    size_data = size(data);
-    num_features = size_data(end);
-    size_targets = size(responses);
-    num_responses = size_targets(end);
-    numLayers = nn.get('DENSE_LAYERS');
-    layers = [featureInputLayer(num_features, 'Name', 'input')];
-    for i = 1:1:length(numLayers)
-        layers = [layers
-            fullyConnectedLayer(numLayers(i), 'Name', ['fc' num2str(i)])
-            batchNormalizationLayer('Name', ['batchNormalization' num2str(i)])
-            dropoutLayer('Name', ['dropout' num2str(i)])
+    number_features = size(inputs, 2);
+    number_targets = size(targets, 2);
+    layers = nn.get('LAYERS');
+    
+    nn_architecture = [featureInputLayer(number_features, 'Name', 'Input')];
+    for i = 1:1:length(layers)
+        nn_architecture = [nn_architecture
+            fullyConnectedLayer(layers(i), 'Name', ['Dense_' num2str(i)])
+            batchNormalizationLayer('Name', ['BatchNormalization_' num2str(i)])
+            dropoutLayer('Name', ['Dropout_' num2str(i)])
             ];
     end
-    layers = [layers
-        reluLayer('Name', 'relu1')
-        fullyConnectedLayer(num_responses, 'Name', 'fc_output')
+    nn_architecture = [nn_architecture
+        reluLayer('Name', 'Relu_output')
+        fullyConnectedLayer(num_responses, 'Name', 'Dense_output')
         regressionLayer('Name', 'output')
         ];
 
-    % specify trianing options
+    % specify training options
     if nn.get('PLOT_TRAINING')
         plot_training = 'training-progress';
     else
         plot_training = 'none';
     end
 
-    options = trainingOptions(nn.get('SOLVER'), ...
+    options = trainingOptions( ...
+        nn.get('SOLVER'), ...
         'MiniBatchSize', nn.get('BATCH'), ...
         'MaxEpochs', nn.get('EPOCHS'), ...
         'Shuffle', nn.get('SHUFFLE'), ...
         'Plots', plot_training, ...
-        'Verbose', nn.get('VERBOSE'));
+        'Verbose', nn.get('VERBOSE') ...
+        );
 
     % train the neural network
-    value = trainNetwork(data, responses, layers, options);
+    value = trainNetwork(inputs, targets, nn_architecture, options);
 end
 
 %% ¡props!
 
 %%% ¡prop!
-DENSE_LAYERS (data, rvector) is user defined neural network layers.
+LAYERS (data, rvector) defines the number of layers and their neurons.
+%%%% ¡default!
+[32 32]
 
 %% ¡tests!
 

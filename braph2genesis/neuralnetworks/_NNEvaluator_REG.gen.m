@@ -1,5 +1,5 @@
 %% ¡header!
-NNEvaluator_REG < NNEvaluator (nne, neural network evaluator for regression) evaluates the performance of a neural network regressor with a given dataset.
+NNRegressor_Evaluator < NNEvaluator (nne, neural network evaluator for regression) evaluates the performance of a neural network regressor with a given dataset.
 
 %%% ¡description!
 A neural network evaluator for regression (NNEvaluator_REG) evaluates the performance of a neural network regressor with a given dataset.
@@ -44,18 +44,6 @@ NOTES (metadata, string) are some specific notes about the neural network evalua
 NN (data, item) contains a trained neural network regressor.
 %%%% ¡settings!
 'NNRegressorMLP'
-
-%%% ¡prop!
-PREDICTIONS (result, cell) are the predictions of the trained neural network model from the given dataset.
-%%%% ¡calculate!
-nn = nne.get('NN');
-net = nn.get('MODEL');
-inputs = cell2mat(eval([nn.getClass char("('D', nne.get('D')).get('DATA_CONSTRUCT')")]));
-if isempty(inputs)
-    value = {};
-else
-    value = {net.predict(inputs)};
-end
 
 %% ¡props!
 
