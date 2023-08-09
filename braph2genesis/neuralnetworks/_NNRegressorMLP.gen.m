@@ -43,38 +43,52 @@ NOTES (metadata, string) are some specific notes about the neural network multi-
 %%% ¡prop!
 INPUTS (query, cell) constructs the data in the CB (channel-batch) format.
 %%%% ¡calculate!
-inputs = nn.get('D').get('INPUTS');
+% inputs = nn.get('inputs', D) returns a cell array with the
+%  inputs for all data points in dataset D.
+if isempty(varargin)
+    value = {};
+    return
+end
+d = varargin{1};
+inputs = d.get('INPUTS');
 if isempty(inputs)
     value = {};
 else
-    data = [];
+    nn_inputs = [];
     for i = 1:1:length(inputs)
         input = cell2mat(inputs{i});
-        data = [data; input(:)'];
+        nn_inputs = [nn_inputs; input(:)'];
     end
-    value = {data};
+    value = {nn_inputs};
 end
 
 %%% ¡prop!
 TARGETS (query, cell) constructs the targets in the CB (channel-batch) format.
 %%%% ¡calculate!
-targets = nn.get('D').get('TARGETS');
+% targets = nn.get('PREDICT', D) returns a cell array with the
+%  targets for all data points in dataset D.
+if isempty(varargin)
+    value = {};
+    return
+end
+d = varargin{1};
+targets = d.get('TARGETS');
 if isempty(targets)
     value = {};
 else
-    response = [];
+    nn_targets = [];
     for i = 1:1:length(targets)
         target = cell2mat(targets{i});
-        response = [response; target(:)'];
+        nn_targets = [nn_targets; target(:)'];
     end
-    value = {response};
+    value = {nn_targets};
 end
 
 %%% ¡prop!
 MODEL (result, net) is a trained neural network model.
 %%%% ¡calculate!
-inputs = nn.get('INPUTS');
-targets = nn.get('TARGETS');
+inputs = cell2mat(nn.get('INPUTS', nn.get('D')));
+targets = cell2mat(nn.get('TARGETS', nn.get('D')));
 if isempty(inputs) || isempty(targets)
     value = network();
 else
@@ -92,7 +106,7 @@ else
     end
     nn_architecture = [nn_architecture
         reluLayer('Name', 'Relu_output')
-        fullyConnectedLayer(num_responses, 'Name', 'Dense_output')
+        fullyConnectedLayer(number_targets, 'Name', 'Dense_output')
         regressionLayer('Name', 'output')
         ];
 
@@ -172,11 +186,11 @@ d = NNDataset( ...
     'DP_DICT', dp_list ...
     );
 
-nn = NNRegressorMLP('D', d, 'DENSE_LAYERS', [20 20]);
+nn = NNRegressorMLP('D', d, 'LAYERS', [20 20]);
 trained_model = nn.get('MODEL');
 
 % Check whether the number of fully-connected layer matches (excluding fc_output layer)
-assert(length(nn.get('DENSE_LAYERS')) == sum(contains({trained_model.Layers.Name}, 'fc')) - 1, ...
+assert(length(nn.get('LAYERS')) == sum(contains({trained_model.Layers.Name}, 'Dense')) - 1, ...
     [BRAPH2.STR ':NNRegressorMLP:' BRAPH2.FAIL_TEST], ...
     'NNRegressorMLP does not construct the layers correctly. The number of the inputs should be the same as the length of dense layers the property.' ...
     )

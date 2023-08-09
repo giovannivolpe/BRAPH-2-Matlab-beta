@@ -2,8 +2,8 @@
 NNRegressor_Evaluator < NNEvaluator (nne, neural network evaluator for regression) evaluates the performance of a neural network regressor with a given dataset.
 
 %%% ¡description!
-A neural network evaluator for regression (NNEvaluator_REG) evaluates the performance of a neural network regressor with a given dataset.
-NNEvaluator_REG evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
+A neural network evaluator for regression (NNRegressor_Evaluator) evaluates the performance of a neural network regressor with a given dataset.
+NNRegressor_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
 
 %%% ¡seealso!
 NNDataPoint_CON_REG, NNRegressorMLP
@@ -13,32 +13,32 @@ NNDataPoint_CON_REG, NNRegressorMLP
 %%% ¡prop!
 NAME (constant, string) is the name of the neural network evaluator for the regression task.
 %%%% ¡default!
-'NNEvaluator_REG'
+'NNRegressor_Evaluator'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the neural network evaluator for the regression task.
 %%%% ¡default!
-'A neural network evaluator for regression (NNEvaluator_REG) evaluates the performance of a neural network regressor with a given dataset. NNEvaluator_REG evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
+'A neural network evaluator for regression (NNRegressor_Evaluator) evaluates the performance of a neural network regressor with a given dataset. NNRegressor_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the neural network evaluator for the regression task.
 %%%% ¡settings!
-'NNEvaluator_REG'
+'NNRegressor_Evaluator'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the neural network evaluator for the regression task.
 %%%% ¡default!
-'NNEvaluator_REG ID'
+'NNRegressor_Evaluator ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the neural network evaluator for the regression task.
 %%%% ¡default!
-'NNEvaluator_REG label'
+'NNRegressor_Evaluator label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the neural network evaluator for the regression task.
 %%%% ¡default!
-'NNEvaluator_REG notes'
+'NNRegressor_Evaluator notes'
     
 %%% ¡prop!
 NN (data, item) contains a trained neural network regressor.
@@ -62,10 +62,11 @@ end
 %%% ¡prop!
 CORRELATION_COEFF (result, rvector) provides the metric of the correlation of coefficients.
 %%%% ¡calculate!
-predictions = cell2mat(nne.get('PREDICTIONS'));
+predictions = nne.get('NN').get('PREDICT', nne.get('D'));
 if isempty(predictions)
     value = [];
 else
+    predictions = cell2mat(predictions);
     ground_truth = nne.get('GROUND_TRUTH');
     num_dp = size(ground_truth, 1);
     num_target = size(ground_truth, 2);
@@ -78,10 +79,11 @@ end
 %%% ¡prop!
 COEFF_OF_DETERMINATION (result, rvector) provides a measure of how well the predictions are replicated by the model.
 %%%% ¡calculate!
-predictions = cell2mat(nne.get('PREDICTIONS'));
+predictions = nne.get('NN').get('PREDICT', nne.get('D'));
 if isempty(predictions)
     value = [];
 else
+    predictions = cell2mat(predictions);
     ground_truth = nne.get('GROUND_TRUTH');
     num_dp = size(ground_truth, 1);
     num_target = size(ground_truth, 2);
@@ -94,10 +96,11 @@ end
 %%% ¡prop!
 MEAN_ABSOLUTE_ERROR (result, rvector) provides the metric of the mean absolute error.
 %%%% ¡calculate!
-predictions = cell2mat(nne.get('PREDICTIONS'));
+predictions = nne.get('NN').get('PREDICT', nne.get('D'));
 if isempty(predictions)
     value = [];
 else
+    predictions = cell2mat(predictions);
     ground_truth = nne.get('GROUND_TRUTH');
     num_dp = size(ground_truth, 1);
     num_target = size(ground_truth, 2);
@@ -109,10 +112,11 @@ end
 %%% ¡prop!
 MEAN_SQUARED_ERROR (result, rvector) provides the metric of the mean squared error.
 %%%% ¡calculate!
-predictions = cell2mat(nne.get('PREDICTIONS'));
+predictions = nne.get('NN').get('PREDICT', nne.get('D'));
 if isempty(predictions)
     value = [];
 else
+    predictions = cell2mat(predictions);
     ground_truth = nne.get('GROUND_TRUTH');
     num_dp = size(ground_truth, 1);
     num_target = size(ground_truth, 2);
@@ -124,10 +128,11 @@ end
 %%% ¡prop!
 ROOT_MEAN_SQUARED_ERROR (result, rvector) provides the metric of the root mean squared error.
 %%%% ¡calculate!
-predictions = cell2mat(nne.get('PREDICTIONS'));
+predictions = nne.get('NN').get('PREDICT', nne.get('D'));
 if isempty(predictions)
     value = [];
 else
+    predictions = cell2mat(predictions);
     ground_truth = nne.get('GROUND_TRUTH');
     num_dp = size(ground_truth, 1);
     num_target = size(ground_truth, 2);
@@ -190,11 +195,10 @@ d = NNDataset( ...
     'DP_DICT', dp_list ...
     );
 
-nn = NNRegressorMLP('D', d, 'DENSE_LAYERS', [20 20]);
+nn = NNRegressorMLP('D', d, 'LAYERS', [20 20]);
 nn.get('TRAIN');
-nne = NNEvaluator_REG('NN', nn, 'D', d);
-
-predictions = cell2mat(nne.get('PREDICTIONS'));
+nne = NNRegressor_Evaluator('NN', nn, 'D', d);
+predictions = cell2mat(nn.get('PREDICT', d));
 
 % Check whether the ground truth are derived as expected
 ground_truth = nne.get('GROUND_TRUTH');
@@ -204,8 +208,8 @@ for i = 1:size(ground_truth, 1)
     check(i) = isequal(cell2mat(targets{i}), ground_truth(i, :));
 end
 assert(all(check), ...
-    [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
-    'NNEvaluator_REG does not calculate the ground truth correctly.' ...
+    [BRAPH2.STR ':NNRegressor_Evaluator:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_Evaluator does not calculate the ground truth correctly.' ...
     )
 
 % Check whether the correlation coefficients are calculated as expected
@@ -215,8 +219,8 @@ for i = 1:size(ground_truth, 2)
     known_value(i) = corr_matrix(1, 2);
 end
 assert(isequal(calculated_value, known_value), ...
-    [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
-    'NNEvaluator_REG does not calculate the correlation coefficients correctly.' ...
+    [BRAPH2.STR ':NNRegressor_Evaluator:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_Evaluator does not calculate the correlation coefficients correctly.' ...
     )
 
 % Check whether the correlation coefficients are calculated as expected
@@ -226,8 +230,8 @@ for i = 1:size(ground_truth, 2)
     known_value(i) = corr_matrix(1, 2)^2;
 end
 assert(isequal(calculated_value, known_value), ...
-    [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
-    'NNEvaluator_REG does not calculate the coefficient of determination correctly.' ...
+    [BRAPH2.STR ':NNRegressor_Evaluator:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_Evaluator does not calculate the coefficient of determination correctly.' ...
     )
 
 % Check whether the mean absolute errors are calculated as expected
@@ -236,8 +240,8 @@ for i = 1:size(ground_truth, 2)
     known_value(i) = mean(abs(predictions(:, i) - ground_truth(:, i)));
 end
 assert(isequal(calculated_value, known_value), ...
-    [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
-    'NNEvaluator_REG does not calculate the mean absolute errors correctly.' ...
+    [BRAPH2.STR ':NNRegressor_Evaluator:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_Evaluator does not calculate the mean absolute errors correctly.' ...
     )
 
 % Check whether the mean squared errors are calculated as expected
@@ -246,8 +250,8 @@ for i = 1:size(ground_truth, 2)
     known_value(i) = mean((predictions(:, i) - ground_truth(:, i)).^2);
 end
 assert(isequal(calculated_value, known_value), ...
-    [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
-    'NNEvaluator_REG does not calculate the mean squared errors correctly.' ...
+    [BRAPH2.STR ':NNRegressor_Evaluator:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_Evaluator does not calculate the mean squared errors correctly.' ...
     )
 
 % Check whether the mean squared errors are calculated as expected
@@ -256,6 +260,6 @@ for i = 1:size(ground_truth, 2)
     known_value(i) = sqrt(mean((predictions(:, i) - ground_truth(:, i)).^2));
 end
 assert(isequal(calculated_value, known_value), ...
-    [BRAPH2.STR ':NNEvaluator_REG:' BRAPH2.FAIL_TEST], ...
-    'NNEvaluator_REG does not calculate the root mean squared errors correctly.' ...
+    [BRAPH2.STR ':NNRegressor_Evaluator:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_Evaluator does not calculate the root mean squared errors correctly.' ...
     )

@@ -42,16 +42,16 @@ d = NNDataset( ...
     );
 
 %% Split the NNData into training set and test set
-d_split = NNDatasetSplit('D', d, 'SPLIT', {0.3, 0.7}).get('D_LIST');
-d_training = d_split{1};
-d_test = d_split{2};
+d_split = NNDatasetSplit('D', d, 'SPLIT', {0.7, 0.3});
+d_training = d_split.get('D_LIST_IT', 1);
+d_test = d_split.get('D_LIST_IT', 2);
 
 %% Create a MLP regressor with training set
-nn = NNRegressorMLP('D', d_training, 'DENSE_LAYERS', [20 20]);
+nn = NNRegressorMLP('D', d_training, 'LAYERS', [20 20]);
 nn.get('TRAIN');
 
 %% Evaluate the regressor with the test set
-nne_test = NNEvaluator_REG('D', d_test, 'NN', nn);
+nne_test = NNRegressor_Evaluator('D', d_test, 'NN', nn);
 corr_coeff = nne_test.get('CORRELATION_COEFF');
 coeff_determination = nne_test.get('COEFF_OF_DETERMINATION');
 mae = nne_test.get('MEAN_ABSOLUTE_ERROR');

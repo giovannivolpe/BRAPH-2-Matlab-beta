@@ -74,14 +74,26 @@ MODEL (result, net) is a trained neural network model with the given dataset.
 value = network();
 
 %%% ¡prop!
-INPUTS (query, matrix) constructs the cell array of the data.
+INPUTS (query, cell) constructs the cell array of the data.
 %%%% ¡calculate!
-% % % 
+% inputs = nn.get('inputs', D) returns a cell array with the
+%  inputs for all data points in dataset D.
+if isempty(varargin)
+    value = {};
+    return
+end
+value = {};
 
 %%% ¡prop!
 TARGETS (query, cell) constructs the cell array of the targets.
 %%%% ¡calculate!
-% % %
+% targets = nn.get('PREDICT', D) returns a cell array with the
+%  targets for all data points in dataset D.
+if isempty(varargin)
+    value = {};
+    return
+end
+value = {};
 
 %%% ¡prop!
 TRAIN (query, empty) trains the neural network model with the given dataset.
@@ -109,8 +121,11 @@ if isempty(varargin)
     return
 end
 d = varargin{1};
-
-net = nn.get('MODEL');
-predictions = net.predict();
-
+inputs = nn.get('INPUTS', d);
+if isempty(inputs)
+    predictions = {};
+else
+    net = nn.get('MODEL');
+    predictions = {net.predict(cell2mat(inputs))};
+end
 value = predictions;

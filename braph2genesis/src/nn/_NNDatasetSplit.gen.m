@@ -84,6 +84,23 @@ value = cellfun(@(x) NNDataset('DP_DICT', IndexedDictionary(...
     'IT_LIST',  dp_list(x) ...
     )), split, 'UniformOutput', false);
 
+%%% ¡prop!
+D_LIST_IT (query, item) returns a specified dataset in the itemlist of splitted neural network datasets.
+%%%% ¡calculate!
+% d = dsp.get('D_LIST_IT', index) returns the NNDataset at the specified 
+% index from the D_LIST property.
+if isempty(varargin)
+    value = NNDataset();
+    return
+end
+idx = varargin{1};
+d_list = dsp.get('D_LIST');
+if idx > length(d_list)
+    value = NNDataset();
+    return
+end
+value = d_list{idx};
+
 %% ¡tests!
 
 %%% ¡test!
