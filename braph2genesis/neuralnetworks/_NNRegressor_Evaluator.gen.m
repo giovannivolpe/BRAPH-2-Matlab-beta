@@ -1,8 +1,8 @@
 %% ¡header!
-NNRegressor_Evaluator < NNEvaluator (nne, neural network evaluator for regression) evaluates the performance of a neural network regressor with a given dataset.
+NNRegressor_Evaluator < NNEvaluator (nne, neural network evaluator for regressor) evaluates the performance of a neural network regressor with a given dataset.
 
 %%% ¡description!
-A neural network evaluator for regression (NNRegressor_Evaluator) evaluates the performance of a neural network regressor with a given dataset.
+A neural network evaluator for regressor (NNRegressor_Evaluator) evaluates the performance of a neural network regressor with a given dataset.
 NNRegressor_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
 
 %%% ¡seealso!
@@ -18,7 +18,7 @@ NAME (constant, string) is the name of the neural network evaluator for the regr
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the neural network evaluator for the regression task.
 %%%% ¡default!
-'A neural network evaluator for regression (NNRegressor_Evaluator) evaluates the performance of a neural network regressor with a given dataset. NNRegressor_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
+'A neural network evaluator for regressor (NNRegressor_Evaluator) evaluates the performance of a neural network regressor with a given dataset. NNRegressor_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the neural network evaluator for the regression task.

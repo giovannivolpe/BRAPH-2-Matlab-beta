@@ -112,7 +112,7 @@ PLOT_TRAINING (parameter, logical) determines whether to plot the training progr
 false
 
 %%% ¡prop!
-PREDICT (query, cell) returns the prediction of the trained neural network for a dataset.
+PREDICT (query, cell) returns the predictions of the trained neural network for a dataset.
 %%%% ¡calculate!
 % PREDICTIONS = nn.get('PREDICT', D) returns a cell array with the
 %  predictions for all data points in dataset D.
@@ -120,6 +120,7 @@ if isempty(varargin)
     value = {};
     return
 end
+
 d = varargin{1};
 inputs = nn.get('INPUTS', d);
 if isempty(inputs)
