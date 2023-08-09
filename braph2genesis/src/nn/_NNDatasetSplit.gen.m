@@ -93,13 +93,11 @@ if isempty(varargin)
     value = NNDataset();
     return
 end
-idx = varargin{1};
+index = varargin{1};
+
 d_list = dsp.get('D_LIST');
-if idx > length(d_list)
-    value = NNDataset();
-    return
-end
-value = d_list{idx};
+
+value = d_list{index};
 
 %% ¡tests!
 
