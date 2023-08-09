@@ -20,6 +20,8 @@ d_split = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_CON_REG', 'DP_D
 %% NN Model
 nn = NNRegressorMLP('D', d_split.get('D_LIST_IT', 1), 'LAYERS', [20 20]); % Train NN Model % NN Model
 
-%% NN Evaluator
+%% NN Evaluator with Training Dataset
 nne_training = NNRegressor_Evaluator('D', d_split.get('D_LIST_IT', 1), 'NN', nn); % Evaluate NN with Training Dataset % Training Dataset Evaluation
+
+%% NN Evaluator with Test Dataset
 nne_test = NNRegressor_Evaluator('D', d_split.get('D_LIST_IT', 2), 'NN', nn); % Evaluate NN with Test Dataset % Test Dataset Evaluation
