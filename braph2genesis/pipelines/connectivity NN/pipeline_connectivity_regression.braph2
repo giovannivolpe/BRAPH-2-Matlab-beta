@@ -17,7 +17,7 @@ gr = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('
 %% Training/test split
 d_split = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_CON_REG', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_CON_REG', 'IT_LIST', cellfun(@(x) NNDataPoint_CON_REG('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', x.get('VOI_DICT').get('KEYS')), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split NN Dataset % NN Dataset Splitter 
 
-%% NN MODEL
+%% NN Model
 nn = NNRegressorMLP('D', d_split.get('D_LIST_IT', 1), 'LAYERS', [20 20]); % Train NN Model % NN Model
 
 %% NN Evaluator
