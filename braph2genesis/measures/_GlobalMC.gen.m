@@ -98,13 +98,16 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultilayerWU'}
+{'MultiplexWU'}
 
 %%% ¡prop!
 M (result, cell) is the global mc.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
-data = g.get('A'); % cell with the subjects data
+tmp_data = g.get('A'); % cell with the subjects data
+for i = 1:size(tmp_data, 1)
+    data{i} = tmp_data{i, i};
+end
 
 global_mc = cell(g.get('LAYERNUMBER'), 1);
 

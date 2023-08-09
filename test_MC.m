@@ -4,21 +4,25 @@
 % into a multilayer and all importers average or ensemble
 % have to run braph2genesis first
 
+%% clear
+clear;
+clc;
+
 %% Load data
 density = 1;
-load_name = ['Updated_AllsubBinaryConnectome_den' num2str(density)];
+load_name = 'TestData_Emiliano.mat';
 load(load_name)
-data = data_connbin;
+data = data_test;
 
 %% Create graph
-g = MultilayerWU('B', data);
+g = MultiplexWU('B', data);
 
 %% create measures
-mc_global = g.get('MEASURE', 'GLOBALMC');
-mc_nodal = g.get('MEASURE', 'NODALMC');
+mc_global = g.get('MEASURE', 'GlobalMC');
+mc_nodal = g.get('MEASURE', 'NodalMC');
 
 %% change parameters
-mc_global.set('TRAINING_SAMPLES', 50); % for example
+mc_global.set('TRAINING_SAMPLES', 20000); % for example
 
 %% calculate
 mc_global_result = mc_global.get('M');
