@@ -39,66 +39,74 @@ LABEL (metadata, string) is an extended label of the neural network multi-layer 
 NOTES (metadata, string) are some specific notes about the neural network multi-layer perceptron classifier.
 %%%% ¡default!
 'NNClassifierMLP notes'
-    
-%%% ¡prop!
-DATA_FORMAT (data, string) specifies the format of the data that flows through the neural network model. In this case, it maps "CB" (channel and batch) data.
-%%%% ¡default!
-'CB'
 
 %%% ¡prop!
-DATA_CONSTRUCT (query, cell) constructs the data based on the data format that flows through the neural network model.
+INPUTS (query, cell) constructs the data in the CB (channel-batch) format.
 %%%% ¡calculate!
-inputs = nn.get('D').get('INPUTS');
+% inputs = nn.get('inputs', D) returns a cell array with the
+%  inputs for all data points in dataset D.
+if isempty(varargin)
+    value = {};
+    return
+end
+d = varargin{1};
+inputs = d.get('INPUTS');
 if isempty(inputs)
     value = {};
 else
-    data = [];
+    nn_inputs = [];
     for i = 1:1:length(inputs)
         input = cell2mat(inputs{i});
-        data = [data; input(:)'];
+        nn_inputs = [nn_inputs; input(:)'];
     end
-    value = {data};
+    value = {nn_inputs};
 end
 
 %%% ¡prop!
-RESPONSE_CONSTRUCT (query, cell) constructs the responses with a cell containing a string array as the output of the neural network model.
+TARGETS (query, cell) constructs the responses with a cell containing a string array as the output of the neural network model.
 %%%% ¡calculate!
-targets = nn.get('D').get('TARGETS');
+% targets = nn.get('PREDICT', D) returns a cell array with the
+%  targets for all data points in dataset D.
+if isempty(varargin)
+    value = {};
+    return
+end
+d = varargin{1};
+targets = d.get('TARGETS');
 if isempty(targets)
     value = {};
 else
-    response = [];
+    nn_targets = [];
     for i = 1:1:length(targets)
         target = targets{i};
-        response = [response; target];
+        nn_targets = [nn_targets; target];
     end
-    value = {response};
+    value = {nn_targets};
 end
 
 %%% ¡prop!
 MODEL (result, net) is a trained neural network model with the given dataset.
 %%%% ¡calculate!
-data = cell2mat(nn.get('DATA_CONSTRUCT'));
-responses = nn.get('RESPONSE_CONSTRUCT');
+inputs = cell2mat(nn.get('INPUTS', nn.get('D')));
+targets = cell2mat(nn.get('TARGETS', nn.get('D')));
 if isempty(data) || isempty(responses)
     value = network();
 else
-    data_format = nn.get('DATA_FORMAT');
-    ind_channel = find(data_format == 'C');
-    size_data = size(data);
-    num_features = size_data(end);
-    responses = categorical(responses{1}); % converting responses to a categorical array from a single string array containing all responses
-    num_classes = numel(categories(responses));
-    numLayers = nn.get('DENSE_LAYERS');
-    layers = [featureInputLayer(num_features, 'Name', 'input')];
-    for i = 1:1:length(numLayers)
-        layers = [layers
+    number_features = size(inputs, 2);
+    number_targets = size(targets, 2);
+    targets = categorical(targets); % converting responses to a categorical array from a single string array containing all responses
+    num_classes = numel(categories(targets));
+    
+    layers = nn.get('LAYERS');
+    nn_architecture = [featureInputLayer(num_features, 'Name', 'input')];
+    for i = 1:1:length(layers)
+        nn_architecture = [nn_architecture
             fullyConnectedLayer(numLayers(i), 'Name', ['fc' num2str(i)])
             batchNormalizationLayer('Name', ['batchNormalization' num2str(i)])
             dropoutLayer('Name', ['dropout' num2str(i)])
             ];
     end
-    layers = [layers
+    nn_architecture = [nn_architecture
         reluLayer('Name', 'relu1')
         fullyConnectedLayer(num_classes, 'Name', 'fc_output')
         softmaxLayer
@@ -120,13 +128,13 @@ else
         'Verbose', nn.get('VERBOSE'));
 
     % train the neural network
-    value = trainNetwork(data, responses, layers, options);
+    value = trainNetwork(inputs, targets, nn_architecture, options);
 end
 
 %% ¡props!
 
 %%% ¡prop!
-DENSE_LAYERS (data, rvector) is user defined neural network layers.
+LAYERS (data, rvector) is user defined neural network layers.
 
 %% ¡tests!
 

@@ -87,8 +87,8 @@ end
 %%% ¡prop!
 MODEL (result, net) is a trained neural network model.
 %%%% ¡calculate!
-inputs = nn.get('INPUTS');
-targets = nn.get('TARGETS');
+inputs = cell2mat(nn.get('INPUTS', nn.get('D')));
+targets = cell2mat(nn.get('TARGETS', nn.get('D')));
 if isempty(inputs) || isempty(targets)
     value = network();
 else
@@ -106,7 +106,7 @@ else
     end
     nn_architecture = [nn_architecture
         reluLayer('Name', 'Relu_output')
-        fullyConnectedLayer(num_responses, 'Name', 'Dense_output')
+        fullyConnectedLayer(number_targets, 'Name', 'Dense_output')
         regressionLayer('Name', 'output')
         ];
 
@@ -186,11 +186,11 @@ d = NNDataset( ...
     'DP_DICT', dp_list ...
     );
 
-nn = NNRegressorMLP('D', d, 'DENSE_LAYERS', [20 20]);
+nn = NNRegressorMLP('D', d, 'LAYERS', [20 20]);
 trained_model = nn.get('MODEL');
 
 % Check whether the number of fully-connected layer matches (excluding fc_output layer)
-assert(length(nn.get('DENSE_LAYERS')) == sum(contains({trained_model.Layers.Name}, 'fc')) - 1, ...
+assert(length(nn.get('LAYERS')) == sum(contains({trained_model.Layers.Name}, 'Dense')) - 1, ...
     [BRAPH2.STR ':NNRegressorMLP:' BRAPH2.FAIL_TEST], ...
     'NNRegressorMLP does not construct the layers correctly. The number of the inputs should be the same as the length of dense layers the property.' ...
     )

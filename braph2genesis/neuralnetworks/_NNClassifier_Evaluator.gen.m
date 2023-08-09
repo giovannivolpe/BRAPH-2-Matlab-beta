@@ -1,9 +1,9 @@
 %% ¡header!
-NNEvaluator_CLA < NNEvaluator (nne, neural network evaluator for classification) evaluates the performance of a neural network classifier with a given dataset.
+NNClassifier_Evaluator < NNEvaluator (nne, neural network evaluator for classification) evaluates the performance of a neural network classifier with a given dataset.
 
 %%% ¡description!
 A neural network evaluator for regression (NNEvaluator_CLA) evaluates the performance of a neural network regressor with a given dataset.
-NNEvaluator_CLA evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
+NNClassifier_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
 
 %%% ¡seealso!
 NNDataPoint_CON_REG, NNRegressorMLP
@@ -45,18 +45,6 @@ NN (data, item) contains a trained neural network regressor.
 %%%% ¡settings!
 'NNClassifierMLP'
 
-%%% ¡prop!
-PREDICTIONS (result, cell) are the predictions of the trained neural network model from the given dataset.
-%%%% ¡calculate!
-nn = nne.get('NN');
-net = nn.get('MODEL');
-inputs = cell2mat(eval([nn.getClass char("('D', nne.get('D')).get('DATA_CONSTRUCT')")]));
-if isempty(inputs)
-    value = {};
-else
-    value = {net.predict(inputs)};
-end
-
 %% ¡props!
 
 %%% ¡prop!
@@ -74,8 +62,7 @@ end
 %%% ¡prop!
 AUC (result, rvector) provides the metric of the AUC value.
 %%%% ¡calculate!
-predictions = nne.get('PREDICTIONS');
-predictions = cell2mat(predictions);
+predictions = cell2mat(nne.get('NN').get('PREDICT'));
 if isempty(predictions)
     value = [];
 else
@@ -98,8 +85,7 @@ end
 %%% ¡prop!
 C_MATRIX (result, matrix) provides the metric of the confusion matrix.
 %%%% ¡calculate!
-predictions = nne.get('PREDICTIONS');
-predictions = cell2mat(predictions);
+predictions = cell2mat(nne.get('NN').get('PREDICT'));
 predictions = bsxfun(@eq, predictions, max(predictions, [], 2));
 if isempty(predictions)
     value = [];
@@ -197,8 +183,8 @@ d2 = NNDataset( ...
 d = NNDatasetCombine('D_LIST', {d1, d2}).get('D');
 
 nn = NNClassifierMLP('D', d, 'DENSE_LAYERS', [10 10 10]);
-nn.get('MODEL_TRAIN');
-nne = NNEvaluator_CLA('NN', nn, 'D', d);
+nn.get('TRAIN');
+nne = NNClassifier_Evaluator('NN', nn, 'D', d);
 
 % Check whether the ground truth are derived as expected
 ground_truth = nne.get('GROUND_TRUTH');

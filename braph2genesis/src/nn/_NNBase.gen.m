@@ -121,8 +121,11 @@ if isempty(varargin)
     return
 end
 d = varargin{1};
-
-net = nn.get('MODEL');
-predictions = net.predict(nn.get('INPUTS', d));
-
-value = {predictions};
+inputs = nn.get('INPUTS', d);
+if isempty(inputs)
+    predictions = {};
+else
+    net = nn.get('MODEL');
+    predictions = {net.predict(cell2mat(inputs))};
+end
+value = predictions;
