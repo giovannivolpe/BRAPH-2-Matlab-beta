@@ -1,12 +1,11 @@
 %% Pipeline Connectivity Regression 
 
-% This is the pipeline script to XXXX
+% This is the pipeline script to train a multi-layer perceptron regressor using connectivity data.
 % 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
-% 2. It loads the data of two groups of subjects from two directories (e.g., GroupName1 and GroupName2) containing XLS files of each subject.
-% 3. XXX
-% 4. XXX
-% 5. XXX
-% 6. XXX
+% 2. It loads data for a group of subjects from the directory (e.g., CON_Group_XLS) containing XLS files for each subject.
+% 3. It splits the dataset into a training dataset and a test dataset.
+% 4. It trains the regressor using the training dataset.
+% 5. It evaluates the performance of the trained regressor using both the training dataset and test dataset.
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
