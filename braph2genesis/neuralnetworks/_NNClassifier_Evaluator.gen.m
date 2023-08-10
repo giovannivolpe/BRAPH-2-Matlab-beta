@@ -2,46 +2,46 @@
 NNClassifier_Evaluator < NNEvaluator (nne, neural network evaluator for classification) evaluates the performance of a neural network classifier with a given dataset.
 
 %%% ¡description!
-A neural network evaluator for regression (NNEvaluator_CLA) evaluates the performance of a neural network regressor with a given dataset.
-NNClassifier_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
+A neural network evaluator for classifier (NNClassifier_Evaluator) evaluates the performance of a neural network classifier with a given dataset.
+NNClassifier_Evaluator evaluates the performance of the trained classifier with a given dataset in terms of various classification metrics (e.g., confusion matrix, area under the receiver operating characteristic curve).
 
 %%% ¡seealso!
-NNDataPoint_CON_REG, NNRegressorMLP
+NNDataPoint_CON_CLA, NNClassifierMLP
 
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the neural network evaluator for the regression task.
+NAME (constant, string) is the name of the neural network evaluator for the classification task.
 %%%% ¡default!
-'NNEvaluator_CLA'
+'NNClassifier_Evaluator'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the neural network evaluator for the regression task.
+DESCRIPTION (constant, string) is the description of the neural network evaluator for the classification task.
 %%%% ¡default!
-'A neural network evaluator for regression (NNEvaluator_CLA) evaluates the performance of a neural network regressor with a given dataset. NNEvaluator_CLA evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
+'A neural network evaluator for classifier (NNClassifier_Evaluator) evaluates the performance of a neural network classifier with a given dataset. NNClassifier_Evaluator evaluates the performance of the trained classifier with a given dataset in terms of various classification metrics (e.g., confusion matrix, area under the receiver operating characteristic curve).'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the neural network evaluator for the regression task.
+TEMPLATE (parameter, item) is the template of the neural network evaluator for the classification task.
 %%%% ¡settings!
-'NNEvaluator_CLA'
+'NNClassifier_Evaluator'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the neural network evaluator for the regression task.
+ID (data, string) is a few-letter code for the neural network evaluator for the classification task.
 %%%% ¡default!
-'NNEvaluator_CLA ID'
+'NNClassifier_Evaluator ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the neural network evaluator for the regression task.
+LABEL (metadata, string) is an extended label of the neural network evaluator for the classification task.
 %%%% ¡default!
-'NNEvaluator_CLA label'
+'NNClassifier_Evaluator label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the neural network evaluator for the regression task.
+NOTES (metadata, string) are some specific notes about the neural network evaluator for the classification task.
 %%%% ¡default!
-'NNEvaluator_CLA notes'
+'NNClassifier_Evaluator notes'
     
 %%% ¡prop!
-NN (data, item) contains a trained neural network regressor.
+NN (data, item) contains a trained neural network classifier.
 %%%% ¡settings!
 'NNClassifierMLP'
 
@@ -50,7 +50,7 @@ NN (data, item) contains a trained neural network regressor.
 %%% ¡prop!
 GROUND_TRUTH (query, stringlist) returns the matrix of ground truth derived from the targets.
 %%%% ¡calculate!
-targets = nne.get('D').get('TARGETS');
+targets = nne.get('D').get('TARGET_IDS');
 if isempty(targets)
     value = {''};
 else
@@ -60,7 +60,7 @@ else
 end
 
 %%% ¡prop!
-AUC (result, rvector) provides the metric of the AUC value.
+AUC (result, rvector) provides the value of the area under the receiver operating characteristic curve.
 %%%% ¡calculate!
 predictions = cell2mat(nne.get('NN').get('PREDICT'));
 if isempty(predictions)
@@ -83,7 +83,7 @@ else
 end
 
 %%% ¡prop!
-C_MATRIX (result, matrix) provides the metric of the confusion matrix.
+C_MATRIX (result, matrix) provides the confusion matrix.
 %%%% ¡calculate!
 predictions = cell2mat(nne.get('NN').get('PREDICT'));
 predictions = bsxfun(@eq, predictions, max(predictions, [], 2));

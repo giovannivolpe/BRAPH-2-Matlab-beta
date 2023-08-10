@@ -6,7 +6,7 @@ A neural network multi-layer perceptron classifier (NNClassifierMLP) comprises a
 NNClassifierMLP trains the multi-layer perceptron classifier with a formatted inputs ("CB", channel and batch) derived from the given dataset.
 
 %%% ¡seealso!
-NNDataPoint_CON_CLA, NNEvaluator_CLA
+NNDataPoint_CON_CLA, NNClassifier_Evaluator
 
 %% ¡props_update!
 
@@ -63,68 +63,40 @@ else
 end
 
 %%% ¡prop!
-TARGETS (query, cell) constructs the responses with a cell containing a string array as the output of the neural network model.
-%%%% ¡calculate!
-% targets = nn.get('PREDICT', D) returns a cell array with the
-%  targets for all data points in dataset D.
-if isempty(varargin)
-    value = {};
-    return
-end
-d = varargin{1};
-targets = d.get('TARGETS');
-if isempty(targets)
-    value = {};
-else
-    nn_targets = [];
-    for i = 1:1:length(targets)
-        target = targets{i};
-        nn_targets = [nn_targets; target];
-    end
-    value = {nn_targets};
-end
-
-%%% ¡prop!
-MODEL (result, net) is a trained neural network model with the given dataset.
+MODEL (result, net) is a trained neural network model.
 %%%% ¡calculate!
 inputs = cell2mat(nn.get('INPUTS', nn.get('D')));
-targets = cell2mat(nn.get('TARGETS', nn.get('D')));
-if isempty(data) || isempty(responses)
+targets = nn.get('TARGET_IDS', nn.get('D'));
+if isempty(inputs) || isempty(targets)
     value = network();
 else
     number_features = size(inputs, 2);
     number_targets = size(targets, 2);
-    targets = categorical(targets); % converting responses to a categorical array from a single string array containing all responses
-    num_classes = numel(categories(targets));
+    targets = categorical(targets); 
+    number_classes = numel(categories(targets));
     
     layers = nn.get('LAYERS');
-    nn_architecture = [featureInputLayer(num_features, 'Name', 'input')];
+    nn_architecture = [featureInputLayer(number_features, 'Name', 'Input')];
     for i = 1:1:length(layers)
         nn_architecture = [nn_architecture
-            fullyConnectedLayer(numLayers(i), 'Name', ['fc' num2str(i)])
-            batchNormalizationLayer('Name', ['batchNormalization' num2str(i)])
-            dropoutLayer('Name', ['dropout' num2str(i)])
+            fullyConnectedLayer(layers(i), 'Name', ['Dense_' num2str(i)])
+            batchNormalizationLayer('Name', ['BatchNormalization_' num2str(i)])
+            dropoutLayer('Name', ['Dropout_' num2str(i)])
             ];
     end
     nn_architecture = [nn_architecture
-        reluLayer('Name', 'relu1')
-        fullyConnectedLayer(num_classes, 'Name', 'fc_output')
+        reluLayer('Name', 'Relu_output')
+        fullyConnectedLayer(number_classes, 'Name', 'Dense_output')
         softmaxLayer
         classificationLayer('Name', 'output')
         ];
 
     % specify trianing options
-    if nn.get('PLOT_TRAINING')
-        plot_training = 'training-progress';
-    else
-        plot_training = 'none';
-    end
-
     options = trainingOptions(nn.get('SOLVER'), ...
         'MiniBatchSize', nn.get('BATCH'), ...
         'MaxEpochs', nn.get('EPOCHS'), ...
         'Shuffle', nn.get('SHUFFLE'), ...
-        'Plots', plot_training, ...
+        'Plots', nn.get('PLOT_TRAINING'), ...
         'Verbose', nn.get('VERBOSE'));
 
     % train the neural network
@@ -134,7 +106,32 @@ end
 %% ¡props!
 
 %%% ¡prop!
-LAYERS (data, rvector) is user defined neural network layers.
+TARGET_IDS (query, stringlist) constructs the target IDs which represent the class of each data point.
+%%%% ¡calculate!
+% targets = nn.get('PREDICT', D) returns a cell array with the
+%  targets for all data points in dataset D.
+if isempty(varargin)
+    value = {''};
+    return
+end
+d = varargin{1};
+targets = d.get('TARGETS');
+if isempty(targets)
+    value = {''};
+else
+    nn_targets = [];
+    for i = 1:1:length(targets)
+        target = targets{i};
+        nn_targets = [nn_targets; target];
+    end
+    value = nn_targets;
+end
+
+
+%%% ¡prop!
+LAYERS (data, rvector) defines the number of layers and their neurons.
+%%%% ¡default!
+[32 32]
 
 %% ¡tests!
 
@@ -215,11 +212,11 @@ d2 = NNDataset( ...
 % combine the two datasets
 d = NNDatasetCombine('D_LIST', {d1, d2}).get('D');
 
-nn = NNClassifierMLP('D', d, 'DENSE_LAYERS', [10 10 10]);
+nn = NNClassifierMLP('D', d, 'LAYERS', [10 10 10]);
 trained_model = nn.get('MODEL');
 
-% Check whether the number of fully-connected layer matches (excluding fc_output layer)
-assert(length(nn.get('DENSE_LAYERS')) == sum(contains({trained_model.Layers.Name}, 'fc')) - 1, ...
+% Check whether the number of fully-connected layer matches (excluding Dense_output layer)
+assert(length(nn.get('LAYERS')) == sum(contains({trained_model.Layers.Name}, 'Dense')) - 1, ...
     [BRAPH2.STR ':NNClassifierMLP:' BRAPH2.FAIL_TEST], ...
     'NNClassifierMLP does not construct the layers correctly. The number of the inputs should be the same as the length of dense layers the property.' ...
     )
