@@ -1,12 +1,11 @@
 %% Pipeline Connectivity Classification
 
-% This is the pipeline script to XXXX
+% This is the pipeline script to train a multi-layer perceptron classifier using connectivity data.
 % 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
-% 2. It loads the data of two groups of subjects from two directories (e.g., GroupName1 and GroupName2) containing XLS files of each subject.
-% 3. XXX
-% 4. XXX
-% 5. XXX
-% 6. XXX
+% 2. It loads data for two groups of subjects from the directories (e.g., CON_Group_1_XLS and CON_Group_2_XLS) containing XLS files for each subject.
+% 3. It splits the dataset into training and test datasets for both groups, respectively.
+% 4. It trains the classifier using the training dataset.
+% 5. It evaluates the performance of the trained classifier using both the training and test dataset.
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
@@ -15,18 +14,13 @@ ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a 
 gr1 = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON 1 from XLS % Group CON 1
 gr2 = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON 2 from XLS % Group CON 2
 
-%% Dataset
-d = NNDatasetCombine('D_LIST', {NNDataset('DP_CLASS', 'NNDataPoint_CON_REG', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_CON_REG', 'IT_LIST', cellfun(@(x) NNDataPoint_CON_REG('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', {'Group 1'}, gr1.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_CON_REG', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_CON_REG', 'IT_LIST', cellfun(@(x) NNDataPoint_CON_REG('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', {'Group 2'}), gr2.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))))}).get('D');  % Construct NN Dataset % NN Dataset
+%% Training-Test Split
+d_split1 = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_CON_REG', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_CON_REG', 'IT_LIST', cellfun(@(x) NNDataPoint_CON_REG('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', {gr1.get('ID')}), gr1.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset for Group 1 % Dataset 1 Splitter
+d_split2 = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_CON_REG', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_CON_REG', 'IT_LIST', cellfun(@(x) NNDataPoint_CON_REG('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', {gr2.get('ID')}), gr2.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset for Group 2 % Dataset 2 Splitter
 
-%% Training/test split
-d_split = NNDatasetSplit('D', d, 'SPLIT', {0.7, 0.3}); % Split NN Dataset % NN Dataset Splitter 
-d_dict =  IndexedDictionary('IT_CLASS', 'NNDataset',  'IT_LIST', d_split.get('D_LIST'));  % Show All Splitted Datasets % NN Splitted Dataset
-d_training = d_dict.get('IT', 1); % Show NN Training Dataset % NN Training Dataset
-d_test = d_dict.get('IT', 2); % Show NN Test Dataset % NN Test Dataset
-
-%% NN MODEL
-nn = NNClassifierMLP('D', d_training, 'DENSE_LAYERS', [20 20]); % Train NN Model % NN Model
+%% Neural Network
+nn = NNClassifierMLP('D', NNDatasetCombine('D_LIST', {d_split1.get('D_LIST_IT', 1), d_split2.get('D_LIST_IT', 1)}).get('D'), 'LAYERS', [20 20]); % Train Neural Network % Trained Neural Network
 
 %% NN Evaluator
-nne_training = NNEvaluator_CLA('D', d_training, 'NN', nn); % Evaluate NN with Training Dataset % Training Dataset Evaluation
-nne_test = NNEvaluator_CLA('D', d_test, 'NN', nn); % Evaluate NN with Test Dataset % Test Dataset Evaluation
+nne_training = NNClassifier_Evaluator('D', NNDatasetCombine('D_LIST', {d_split1.get('D_LIST_IT', 1), d_split2.get('D_LIST_IT', 1)}).get('D'), 'NN', nn); % Evaluate on Training Dataset % Training Dataset Evaluation
+nne_test = NNClassifier_Evaluator('D', NNDatasetCombine('D_LIST', {d_split1.get('D_LIST_IT', 2), d_split2.get('D_LIST_IT', 2)}).get('D'), 'NN', nn); % Evaluate on Test Dataset % Test Dataset Evaluation

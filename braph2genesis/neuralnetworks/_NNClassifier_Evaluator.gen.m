@@ -62,7 +62,7 @@ end
 %%% ¡prop!
 AUC (result, rvector) provides the value of the area under the receiver operating characteristic curve.
 %%%% ¡calculate!
-predictions = cell2mat(nne.get('NN').get('PREDICT'));
+predictions = cell2mat(nne.get('NN').get('PREDICT', nne.get('D')));
 if isempty(predictions)
     value = [];
 else
@@ -85,7 +85,7 @@ end
 %%% ¡prop!
 C_MATRIX (result, matrix) provides the confusion matrix.
 %%%% ¡calculate!
-predictions = cell2mat(nne.get('NN').get('PREDICT'));
+predictions = cell2mat(nne.get('NN').get('PREDICT', nne.get('D')));
 predictions = bsxfun(@eq, predictions, max(predictions, [], 2));
 if isempty(predictions)
     value = [];
@@ -199,7 +199,7 @@ assert(all(check), ...
     )
 
 % Check whether the number of predictions are the same as the input datapoints
-predictions = cell2mat(nne.get('PREDICTIONS'));
+predictions = cell2mat(nne.get('NN').get('PREDICT', nne.get('D')));
 num_predictions = length(predictions);
 num_datapoints = nne.get('D').get('DP_DICT').get('LENGTH');
 assert(isequal(num_predictions, num_datapoints), ...

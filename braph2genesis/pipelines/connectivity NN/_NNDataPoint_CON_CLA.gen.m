@@ -153,6 +153,38 @@ if ~isdir(data_dir)
     end
     writetable(table(vois2), [data_dir filesep() gr2_name '.vois.xlsx'], 'WriteVariableNames', false)
 
+    % Group 3
+    K3 = 2; % degree (mean node degree is 2K) - group 2
+    beta3 = 0.55; % Rewiring probability - group 2
+    gr3_name = 'CON_Group_3_XLS';
+    gr3_dir = [data_dir filesep() gr3_name];
+    mkdir(gr3_dir);
+    vois3 = [
+        {{'Subject ID'} {'Age'} {'Sex'}}
+        {{} {} cell2str(sex_options)}
+        ];
+    for i = 101:1:150
+        sub_id = ['SubjectCON_' num2str(i)];
+
+        h3 = WattsStrogatz(N, K3, beta3);
+        % figure(2)
+        % plot(h2, 'NodeColor',[1 0 0], 'EdgeColor',[0 0 0], 'EdgeAlpha',0.1, 'Layout','circle');
+        % title(['Group 2: Graph with $N = $ ' num2str(N_nodes) ...
+        %     ' nodes, $K = $ ' num2str(K2) ', and $\beta = $ ' num2str(beta2)], ...
+        %     'Interpreter','latex')
+        % axis equal
+
+        A3 = full(adjacency(h3)); A3(1:length(A3)+1:numel(A3)) = 0;
+        r = 0 + (0.5 - 0)*rand(size(A3)); diffA = A3 - r; A3(A3 ~= 0) = diffA(A3 ~= 0);
+        A3 = max(A3, transpose(A3));
+
+        writetable(array2table(A3), [gr3_dir filesep() sub_id '.xlsx'], 'WriteVariableNames', false)
+
+        % variables of interest
+        vois3 = [vois3; {sub_id, randi(90), sex_options(randi(2))}];
+    end
+    writetable(table(vois3), [data_dir filesep() gr3_name '.vois.xlsx'], 'WriteVariableNames', false)
+
     % reset RNG
     rng(rng_settings_)
 end
@@ -301,9 +333,9 @@ end
 %%%% ¡name!
 Example
 %%%% ¡code!
-% % % % ensure the example data is generated
-% % % if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
-% % %     test_NNDataPoint_CON_CLA % create example files
-% % % end
-% % % 
-% % % example_NN_CON_Classification
+% ensure the example data is generated
+if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
+    test_NNDataPoint_CON_CLA % create example files
+end
+
+example_NN_CON_Classification
