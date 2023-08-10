@@ -6,7 +6,7 @@ A neural network multi-layer perceptron regressor (NNRegressorMLP) comprises a m
 NNRegressorMLP trains the multi-layer perceptron regressor with a formatted inputs ("CB", channel and batch) derived from the given dataset.
 
 %%% ¡seealso!
-NNDataPoint_CON_REG, NNEvaluator_REG
+NNDataPoint_CON_REG, NNRegressor_Evaluator
 
 %% ¡props_update!
 
