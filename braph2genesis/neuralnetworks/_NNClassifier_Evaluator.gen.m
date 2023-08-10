@@ -50,7 +50,7 @@ NN (data, item) contains a trained neural network classifier.
 %%% ¡prop!
 GROUND_TRUTH (query, stringlist) returns the matrix of ground truth derived from the targets.
 %%%% ¡calculate!
-targets = nne.get('D').get('TARGET_IDS');
+targets = nne.get('D').get('TARGETS');
 if isempty(targets)
     value = {''};
 else
@@ -182,7 +182,7 @@ d2 = NNDataset( ...
 % combine the two datasets
 d = NNDatasetCombine('D_LIST', {d1, d2}).get('D');
 
-nn = NNClassifierMLP('D', d, 'DENSE_LAYERS', [10 10 10]);
+nn = NNClassifierMLP('D', d, 'LAYERS', [10 10 10]);
 nn.get('TRAIN');
 nne = NNClassifier_Evaluator('NN', nn, 'D', d);
 
