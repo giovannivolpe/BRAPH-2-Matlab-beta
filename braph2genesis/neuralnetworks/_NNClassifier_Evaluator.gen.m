@@ -79,7 +79,7 @@ auc = nne.get('AUC');
 if isempty(auc)
     value = 0;
 else
-    value = mean(auc);
+    value = double(mean(auc));
 end
 
 %%% ¡prop!

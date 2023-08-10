@@ -21,4 +21,4 @@ nn = NNRegressorMLP('D', d_split.get('D_LIST_IT', 1), 'LAYERS', [20 20]); % Trai
 
 %% Evaluation
 nne_training = NNRegressor_Evaluator('D', d_split.get('D_LIST_IT', 1), 'NN', nn); % Evaluate on Training Dataset % Training Dataset Evaluation
-nne_test = NNRegressor_Evaluator('D', d_split.get('D_LIST_IT', 2), 'NN', nn); % Evaluate NN with Test Dataset % Test Dataset Evaluation
+nne_test = NNRegressor_Evaluator('D', d_split.get('D_LIST_IT', 2), 'NN', nn); % Evaluate on Test Dataset % Test Dataset Evaluation
