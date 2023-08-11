@@ -41,6 +41,31 @@ It works for all categories.
 \end{lstlisting}
 
 \begin{lstlisting}[
+	label=cd:m:panelproplogical:props_update,
+	caption={
+		{\bf PanelPropLogical element props update.}
+		The \code{props\_update} section of generator code for \fn{\_PanelPropLogical.gen.m} updates the properties of the \code{PanelProp} element. This defines the core properties of the property panel.
+	}
+]
+%% ¡props_update!
+
+...
+
+%%% ¡prop!
+EL (data, item) is the element. ¥\circled{2}\circlednote{2}{It defines the element for this property panel.}¥
+%%%% ¡default!
+PanelProp()
+
+%%% ¡prop!
+PROP (data, scalar) is the property number. ¥\circled{3}\circlednote{3}{It defines the property pointer associated with the element for this property panel.}¥
+%%%% ¡default!
+PanelProp.DRAW
+
+...
+
+\end{lstlisting}
+
+\begin{lstlisting}[
 	label=cd:m:panelproplogical:props,
 	caption={
 		{\bf PanelPropLogical new props.}
@@ -50,7 +75,7 @@ It works for all categories.
 %% ¡props!
 
 %%% ¡prop!
-CHECKBOX (evanescent, handle) is the logical value checkbox.  ¥\circled{2}\circlednote{2}{The panel for a property logical has a \code{checkbox}.}¥
+CHECKBOX (evanescent, handle) is the logical value checkbox.  ¥\circled{4}\circlednote{4}{The panel for a property logical has a \code{checkbox}.}¥
 %%%% ¡calculate!
 el = pr.get('EL');
 prop = pr.get('PROP');
@@ -66,30 +91,33 @@ checkbox = uicheckbox( ...
 
 value = checkbox;
 %%%% ¡calculate_callbacks!
-function cb_checkbox(~, ~) ¥\circled{3}\circlednote{3}{The panel for a property logical has a \code{callbacks} for its \code{checkbox}, defining the appropreate behavior of the checkbox.}¥
+function cb_checkbox(~, ~) ¥\circled{5}\circlednote{5}{The panel for a property logical has a \code{callbacks} for its \code{checkbox}, defining the appropreate behavior of the checkbox.}¥
     el = pr.get('EL');
-    prop = pr.get('PROP'); ¥\circled{4}\circlednote{4}{The \code{callbacks} firstly extracts the property logical.}¥
+    prop = pr.get('PROP'); ¥\circled{6}\circlednote{6}{The \code{callbacks} firstly extracts the property logical.}¥
     
     checkbox = pr.get('CHECKBOX');
-    new_value = logical(get(checkbox, 'Value'));  ¥\circled{4}\circlednote{4}{The \code{callbacks} then extracts the value of the \code{checkbox}.}¥
+    new_value = logical(get(checkbox, 'Value'));  ¥\circled{7}\circlednote{7}{The \code{callbacks} then extracts the value of the \code{checkbox}.}¥
     
-    el.set(prop, new_value)  ¥\circled{5}\circlednote{5}{Finally, the \code{callbacks} sets the new value to the logical property.}¥
+    el.set(prop, new_value)  ¥\circled{8}\circlednote{8}{Finally, the \code{callbacks} sets the new value to the logical property.}¥
 end
 
 \end{lstlisting}
 
 \begin{lstlisting}[
-	label=cd:m:panelproplogical:props_update,
+	label=cd:m:panelproplogical:props_update2,
 	caption={
 		{\bf PanelPropLogical element props update.}
-		The \code{props\_update} section of generator code for \fn{\_PanelPropLogical.gen.m} updates the properties of the \code{PanelProp} element. This defines the core properties of the property panel.
+		The continuing \code{props\_update} section of generator code for \fn{\_PanelPropLogical.gen.m} updates the rest of the properties of the \code{PanelProp} element. This defines the panel drawing of the property panel.
 	}
 ]
 %% ¡props_update!
+
 ...
 
+
 %%% ¡prop!
-X_DRAW (query, logical) draws the property panel.
+X_DRAW (query, logical) draws the property panel.  ¥\circled{9}\circlednote{9}{\code{X\_DRAW} draws the panel. In this case, the panel contains a checkbox.}¥
+
 %%%% ¡calculate!
 value = calculateValue@PanelProp(pr, PanelProp.X_DRAW, varargin{:}); % also warning
 if value
@@ -97,7 +125,7 @@ if value
 end
 
 %%% ¡prop!
-DELETE (query, logical) resets the handles when the panel is deleted.
+DELETE (query, logical) resets the handles when the panel is deleted. ¥\circled{10}\circlednote{10}{\code{DELETES} resets the handles when the panel is deleted. In this case, it sets the \code{CHECKBOX} to \code{NoValue()}.}¥
 %%%% ¡calculate!
 value = calculateValue@PanelProp(pr, PanelProp.DELETE, varargin{:}); % also warning
 if value
@@ -105,7 +133,7 @@ if value
 end
 
 %%% ¡prop!
-HEIGHT (gui, size) is the pixel height of the property panel.
+HEIGHT (gui, size) is the pixel height of the property panel. ¥\circled{11}\circlednote{11}{\code{HEIGHT} specifies the height of the panel that contains the \code{CHECKBOX}.}¥
 %%%% ¡default!
 s(4)
 
@@ -120,7 +148,7 @@ if value
 end    
 
 %%% ¡prop!
-UPDATE (query, logical) updates the content and permissions of the editfield.
+UPDATE (query, logical) updates the content and permissions of the editfield. ¥\circled{12}\circlednote{12}{\code{UPDATE} updates the status of the \code{CHECKBOX} based on various scenario, influenced by the property's category.}¥
 %%%% ¡calculate!
 value = calculateValue@PanelProp(pr, PanelProp.UPDATE, varargin{:}); % also warning
 if value
@@ -129,20 +157,20 @@ if value
     prop = pr.get('PROP');
     
     switch el.getPropCategory(prop)
-        case Category.CONSTANT
+        case Category.CONSTANT ¥\circled{13}\circlednote{13}{When the property is a \code{CONSTANT}, the checkbox is disabled as it cannot be changed.}¥
             set(pr.get('CHECKBOX'), ...
                 'Value', el.get(prop), ...
                 'Enable', 'off' ...
                 )
 
-        case Category.METADATA
+        case Category.METADATA ¥\circled{14}\circlednote{14}{When the property is a \code{METADATA}, the checkbox's enabling status corresponds to whether it is locked.}¥
             set(pr.get('CHECKBOX'), 'Value', el.get(prop))
 
             if el.isLocked(prop)
                 set(pr.get('CHECKBOX'), 'Enable', 'off')
             end
             
-        case {Category.PARAMETER, Category.DATA, Category.FIGURE, Category.GUI}
+        case {Category.PARAMETER, Category.DATA, Category.FIGURE, Category.GUI}  ¥\circled{15}\circlednote{15}{The behavior of the checkbox varies according to different categories, as we have seen two examples until now. To ensure precise control over the checkbox's functionality, consider the specific cases for behavior.}¥
             set(pr.get('CHECKBOX'), 'Value', el.get(prop))
 
             prop_value = el.getr(prop);
@@ -164,6 +192,8 @@ if value
 end
 
 \end{lstlisting}
+
+
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
