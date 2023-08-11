@@ -30,7 +30,7 @@ BRAPH 2.0's object-oriented programming architecture makes it easy to expand its
 
 - **Graphs**: Developers can implement new graph types by extending the `Graph` element. The [Developer Tutorial to Implement a New Graph](tutorials/developers/devdoc_graph.pdf) provides a step-by-step guide on how to create new graph types.
 
-- **Measures**: New measures can be added to BRAPH 2.0 by extending the `Measure` element. The [Developer Tutorial to Implement a New Measure](tutorials/developers/dev_measure/dev_measure.pdf) explains the process of implementing custom measures.
+- **Measures**: New measures can be added to BRAPH 2.0 by extending the `Measure` element. The [Developer Tutorial to Implement a New Measure](/dev_measure/dev_measure.pdf) explains the process of implementing custom measures.
 
 - **Subjects**: Developers can introduce new data types by extending the `Subject` element. The tutorial [Developer Tutorial to Implement a New Subject](tutorials/developers/devdoc_subject.pdf) provides guidance on creating new data types for subjects.
 
