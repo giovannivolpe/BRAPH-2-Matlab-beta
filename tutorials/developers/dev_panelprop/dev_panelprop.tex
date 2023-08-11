@@ -96,7 +96,7 @@ function cb_checkbox(~, ~) ¥\circled{5}\circlednote{5}{The panel for a property
     prop = pr.get('PROP'); ¥\circled{6}\circlednote{6}{The \code{callback} firstly extracts the property logical.}¥
     
     checkbox = pr.get('CHECKBOX');
-    new_value = logical(get(checkbox, 'Value'));  ¥\circled{7}\circlednote{7}{The \code{callback} then extracts the value of the \code{CHECKBOX}.}¥
+    new_value = logical(get(checkbox, 'Value'));  ¥\circled{7}\circlednote{7}{The \code{callback} then extracts the value of the \code{CHECKBOX} as a new value.}¥
     
     el.set(prop, new_value)  ¥\circled{8}\circlednote{8}{Finally, the \code{callback} sets the new value to the logical property.}¥
 end
@@ -202,7 +202,7 @@ end
 
 The concept of implementing PanelPropLogical, as shown in the previous section, can be seamlessly extended to all other user interface (UI) elements.
 
-The subsequent table presents a comprehensive overview of various UI objects, each coupled with its corresponding property panel as an illustrative example.
+The subsequent table presents a comprehensive overview of various UI objects in BRAPH 2, each coupled with its corresponding property panel as an example.
 
 \newcommand{\addpicbutton}{\includegraphics[width=6em]{fig01.png}}
 \newcommand{\addpiccheckbox}{\includegraphics[width=6em]{fig02.png}}
