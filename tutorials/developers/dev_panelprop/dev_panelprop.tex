@@ -2,7 +2,7 @@
 \usepackage{../braph2_dev}
 %\geometry{showframe} % display margins for debugging page layout
 
-\title{Implement a new Measure}
+\title{Implement a new Property Panel}
 
 \begin{document}
 
@@ -10,558 +10,167 @@
 
 \begin{abstract}
 \noindent
-This is the developer tutorial for implementing a new measure. 
-In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new measure which can the be compiled by \code{braph2genesis}, using the measures \code{Degree}, \code{DegreeAv}, \code{Distance}, and \code{Triangles} as examples.
+This is the developer tutorial for implementing a new property panel. 
+In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new property panel which can the be compiled by \code{braph2genesis}, using the property panel \code{PanelPropLogical} and \code{PanelPropNet} as examples.
 \end{abstract}
 
 \tableofcontents
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\section{Implementation of Unilayer Measures}
+\section{Implementation of Property Panel}
 
-\subsection{Nodal Unilayer Measure (Degree)}
+\subsection{Panel of a property logical}
 
-We will start by implementing in detail the measure \code{Degree}, which applies to most graphs and is a direct extension of the element \code{Measure}.
+We will start by implementing in detail the property panel \code{PanelPropLogical}, which applies the general concepts of a property panel and is a direct extension of the element \code{PanelProp}.
 
 \begin{lstlisting}[
-	label=cd:m:degree:header,
+	label=cd:m:panelproplogical:header,
 	caption={
-		{\bf Degree element header.}
-		The \code{header} section of generator code for \fn{\_Degree.gen.m} provides the general information about the \code{Degree} element.
+		{\bf PanelPropLogical element header.}
+		The \code{header} section of generator code for \fn{\_PanelPropLogical.gen.m} provides the general information about the \code{PanelPropLogical} element.
 	}
 ]
 %% ¡header!
-Degree < Measure (m, degree) is the graph degree. ¥\circled{1}\circlednote{1}{The element \code{Degree} is defined as a subclass of \code{Measure}. The moniker will be \code{m}.}¥
+PanelPropLogical < PanelProp (pr, panel property logical) plots the panel of a property logical.  ¥\circled{1}\circlednote{1}{The element \code{PanelPropLogical} is defined as a subclass of \code{PanelProp}. The moniker will be \code{pr}.}¥
 
 %%% ¡description!
-The degree of a node is the number of edges connected to the node within a layer. 
-Connection weights are ignored in calculations.
+PanelPropLogical plots the panel for a LOGICAL property with a checkbox.
+It works for all categories.
+
 \end{lstlisting}
 
 \begin{lstlisting}[
-	label=cd:m:degree:prop_update,
+	label=cd:m:panelproplogical:props,
 	caption={
-		{\bf Degree element prop update.}
-		The \code{props\_update} section of generator code for \fn{\_Degree.gen.m} updates the properties of the \code{Measure} element. This defines the core properties of the measure.
+		{\bf PanelPropLogical new props.}
+		The \code{props} section of generator code for \fn{\_PanelPropLogical.gen.m} defines the graphical elements for the \code{PanelPropLogical} element.
+	}
+]
+%% ¡props!
+
+%%% ¡prop!
+CHECKBOX (evanescent, handle) is the logical value checkbox.  ¥\circled{2}\circlednote{2}{The panel for a property logical has a \code{checkbox}.}¥
+%%%% ¡calculate!
+el = pr.get('EL');
+prop = pr.get('PROP');
+
+checkbox = uicheckbox( ...
+    'Parent', pr.memorize('H'), ... % H = p for Panel
+    'Tag', 'CHECKBOX', ...
+    'Text', '', ...
+    'FontSize', BRAPH2.FONTSIZE, ...
+    'Tooltip', [num2str(el.getPropProp(prop)) ' ' el.getPropDescription(prop)], ...
+    'ValueChangedFcn', {@cb_checkbox} ...
+    );
+
+value = checkbox;
+%%%% ¡calculate_callbacks!
+function cb_checkbox(~, ~) ¥\circled{3}\circlednote{3}{The panel for a property logical has a \code{callbacks} for its \code{checkbox}, defining the appropreate behavior of the checkbox.}¥
+    el = pr.get('EL');
+    prop = pr.get('PROP'); ¥\circled{4}\circlednote{4}{The \code{callbacks} firstly extracts the property logical.}¥
+    
+    checkbox = pr.get('CHECKBOX');
+    new_value = logical(get(checkbox, 'Value'));  ¥\circled{4}\circlednote{4}{The \code{callbacks} then extracts the value of the \code{checkbox}.}¥
+    
+    el.set(prop, new_value)  ¥\circled{5}\circlednote{5}{Finally, the \code{callbacks} sets the new value to the logical property.}¥
+end
+
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label=cd:m:panelproplogical:props_update,
+	caption={
+		{\bf PanelPropLogical element props update.}
+		The \code{props\_update} section of generator code for \fn{\_PanelPropLogical.gen.m} updates the properties of the \code{PanelProp} element. This defines the core properties of the property panel.
 	}
 ]
 %% ¡props_update!
-
-%%% ¡prop!
-NAME (constant, string) is the name of the degree.
-%%%% ¡default!
-'Degree'
-
-%%% ¡prop!
-DESCRIPTION (constant, string) is the description of the degree.
-%%%% ¡default!
-'The degree of a node is the number of edges connected to the node within a layer. Connection weights are ignored in calculations.'
-
-%%% ¡prop!
-TEMPLATE (parameter, item) is the template of the degree.
-%%%% ¡settings!
-'Degree'
-
-%%% ¡prop!
-ID (data, string) is a few-letter code of the degree.
-%%%% ¡default!
-'Degree ID'
-
-%%% ¡prop!
-LABEL (metadata, string) is an extended label of the degree.
-%%%% ¡default!
-'Degree label'
-
-%%% ¡prop!
-NOTES (metadata, string) are some specific notes about the degree.
-%%%% ¡default!
-'Degree notes'
-
-%%% ¡prop! ¥\circled{1}\circlednote{1}{Measures have a \emph{shape}: \code{Measure.GLOBAL} (a value for the whole brain graph, e.g., average degree), \code{Measure.NODAL} (a value for each brain region, e.g., degree, or \code{Measure.BINODAL} (a value for each couple of brain regions, e.g., distance between couples of nodes).}
-\circlednote{2}{Measures have a \emph{scope}: \code{Measure.SUPERGLOBAL} (a result for the whole multi-layer graph, e.g., overlapping strength), \code{Measure.UNILAYER} (a result for each layer, e.g., average strength), or \code{Measure.BILAYER} (a result for each couple of layers).}
-\circlednote{3}{Measures are either \code{Measure.NONPARAMETRIC} (the usual case) or \code{Measure.PARAMETRIC} (depending on some parameter).}
-\circlednote{4}{Each measure has a list of compatible graphs for which the measure can be used.}¥
-SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
-%%%% ¡default!
-Measure.NODAL
-
-%%% ¡prop! ¥\circled{2}¥
-SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
-%%%% ¡default!
-Measure.UNILAYER
-
-%%% ¡prop! ¥\circled{3}¥
-PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
-%%%% ¡default!
-Measure.NONPARAMETRIC
-
-%%% ¡prop! ¥\circled{4}¥
-COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-%%%% ¡default!
-{'GraphWU' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU' 'OrdMxBU'}
-
-%%% ¡prop! ¥\circled{5}\circlednote{5}{The property \code{M} contains the code to be executed to calculate the measure. Here is where most of the action happens.}¥
-M (result, cell) is the degree.
-%%%% ¡calculate!
-g = m.get('G'); ¥\circled{6}\circlednote{6}{retrieves the graph from the property \code{G} of the measure \code{m}.}¥
-A = g.get('A'); ¥\circled{7}\circlednote{7}{retrieves the cell with the adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.).}¥
-
-degree = cell(g.get('LAYERNUMBER'), 1); ¥\circled{8}\circlednote{8}{preallocates the variable to contain the result of the measure calculation.}¥
-
-parfor li = 1:1:g.get('LAYERNUMBER')
-    Aii = A{li, li};
-    Aii = binarize(Aii); ¥\circled{9}\circlednote{9}{binarizes the adjacency matrix (removing diagonal).}¥
-    degree(li) = {sum(Aii, 2)}; ¥\circled{10}\circlednote{10}{calculates the degree of the node for layer \code{li}.}¥
-end
-
-value = degree; ¥\circled{11}\circlednote{11}{returns the calcualted value of the measure \code{degree} assigning it to the output variable \code{value}.}¥
-\end{lstlisting}
-
-\begin{lstlisting}[
-	label=cd:m:degree:tests,
-	caption={
-		{\bf Degree element tests.}
-		The \code{tests} section from the element generator \fn{\_Degree.gen.m}.
-		A test should be prepared for each graph with which the measure is compatible. The test should at least verify in some simple cases that the value of the measure is correct.
-	}
-]
-%% ¡tests!
-
-%%% ¡excluded_props! ¥\circled{1}\circlednote{1}{List of properties that are excluded from testing.}¥
-[Degree.PFM] 
-
-%%% ¡test! ¥\circled{2}\circlednote{2}{Test for \code{GraphWU}. Similar tests should be implemented for each graph compatible with the measure.}¥
-%%%% ¡name!
-GraphWU
-%%%% ¡probability! ¥\circled{3}\circlednote{3}{assings a low test execution probability.}¥
-.01
-%%%% ¡code!
-B = [
-    0   .6  1
-    .6  0   0
-    1   0   0
-    ];
-
-known_degree = {[2 1 1]'}; ¥\circled{4}\circlednote{4}{is the expected value of the measure calculated by external means.}¥
-
-g = GraphWU('B', B); ¥\circled{5}\circlednote{5}{creates the graph.}¥
-
-m_outside_g = Degree('G', g); ¥\circled{6}\circlednote{6}{creates the measure.}¥
-assert(isequal(m_outside_g.get('M'), known_degree), ... ¥\circled{7}\circlednote{7}{tests that the value of the measure coicides with its expected value.}¥ 
-    [BRAPH2.STR ':Degree:' BRAPH2.FAIL_TEST], ...
-    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-m_inside_g = g.get('MEASURE', 'Degree'); ¥\circled{8}\circlednote{8}{extracts the measure from the graph.}¥
-assert(isequal(m_inside_g.get('M'), known_degree), ... ¥\circled{8}\circlednote{8}{tests that the value of the measure extracted from the graph coicides with its expected value.}¥
-    [BRAPH2.STR ':Degree:' BRAPH2.FAIL_TEST], ...
-    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-¤...¤
-\end{lstlisting}
-
-%%%%% %%%%% %%%%% %%%%% %%%%%
-\clearpage
-\subsection{Global Unilayer Measure (DegreeAv)}
-
-We can now use \code{Degree} as the basis to implement the global measure \code{DegreeAv}.
-The parts of the code that are modified are highlighted.
-
-\begin{lstlisting}[
-	label=cd:m:degreeav:header,
-	caption={
-		{\bf DegreeAv element header.}
-		The \code{header} section of generator code for \fn{\_DegreeAv.gen.m} provides the general information about the \code{DegreeAv} element.
-		\expand{cd:m:degree:header}
-	}
-]
-¤%% ¡header!¤
-DegreeAv ¤<¤ Degree ¤(m, ¤average degree¤)¤ is the graph average degree. ¥\circled{1}\circlednote{1}{\code{DegreeAv} is a child of \code{Degree}.}¥
-
-¤%%% ¡description!¤
-The average degree of a graph is the average of all number of edges connected to a node within a layer. 
-Connection weights are ignored in calculations.
-\end{lstlisting}
-
-\begin{lstlisting}[
-	label=cd:m:degreeav:prop_update,
-	caption={
-		{\bf DegreeAv element prop update.}
-		The \code{props\_update} section of generator code for \fn{\_DegreeAv.gen.m} updates the properties of the \code{Degree} element.
-		\expand{cd:m:degree:prop_update}
-	}
-]
-¤%% ¡props_update!¤
-
-¤%%% ¡prop!
-NAME (constant, string) is the name of the ¤average degree¤.
-%%%% ¡default!¤
-'DegreeAv'
-
-¤%%% ¡prop!
-DESCRIPTION (constant, string) is the description of the ¤average degree¤.
-%%%% ¡default!¤
-'The average degree of a graph is the average of all number of edges connected to a node within a layer. Connection weights are ignored in calculations.'
-
-¤%%% ¡prop!
-TEMPLATE (parameter, item) is the template of the ¤average degree¤.
-%%%% ¡settings!¤
-'DegreeAv'
-
-¤%%% ¡prop!
-ID (data, string) is a few-letter code of the ¤average degree¤.
-%%%% ¡default!¤
-'DegreeAv ID'
-
-¤%%% ¡prop!
-LABEL (metadata, string) is an extended label of the ¤average degree¤.
-%%%% ¡default!¤
-'DegreeAv label'
-
-¤%%% ¡prop!
-NOTES (metadata, string) are some specific notes about the ¤average degree¤.
-%%%% ¡default!¤
-'DegreeAv notes'
-
-¤%%% ¡prop!
-SHAPE (constant, scalar) is the measure shape ¤__Measure.GLOBAL__¤.
-%%%% ¡default!¤
-Measure.GLOBAL
-
-¤%%% ¡prop!
-SCOPE (constant, scalar) is the measure scope ¤__Measure.UNILAYER__¤.
-%%%% ¡default!¤
-Measure.UNILAYER
-
-¤%%% ¡prop!
-PARAMETRICITY (constant, scalar) is the parametricity of the measure ¤__Measure.NONPARAMETRIC__¤.
-%%%% ¡default!¤
-Measure.NONPARAMETRIC
-
-¤%%% ¡prop!
-COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-%%%% ¡default!¤
-{'GraphWU' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU' 'OrdMxBU'}
-
-¤%%% ¡prop!
-M (result, cell) is the ¤average degree¤.
-%%%% ¡calculate!¤
-degree = calculateValue@Degree(m, prop); ¥\circled{1}\circlednote{1}{calculates the value of the degree calling its parent \code{Degree}.}¥
-
-g = m.get('G');
-
-degree_av = cell(g.get('LAYERNUMBER'), 1);
-parfor li = 1:1:g.get('LAYERNUMBER')
-    degree_av(li) = {mean(degree{li})};
-end
-
-value = degree_av;
-\end{lstlisting}
-
-\begin{lstlisting}[
-	label=cd:m:degreeav:tests,
-	caption={
-		{\bf DegreeAv element tests.}
-		The \code{tests} section from the element generator \fn{\_DegreeAv.gen.m}.
-		\expand{cd:m:degree:tests}
-	}
-]
-¤%% ¡tests!¤
-
-¤%%% ¡excluded_props!¤
-[DegreeAv.PFM]
-
-¤%%% ¡test!
-%%%% ¡name!
-GraphWU
-%%%% ¡probability!
-.01
-%%%% ¡code!
-B = [
-    0   .6  1
-    .6  0   0
-    1   0   0
-    ];
-
-¤known_degree_av = {mean([2 1 1])};¤
-
-g = GraphWU('B', B);
-
-m_outside_g = ¤DegreeAv¤('G', g);
-assert(isequal(m_outside_g.get('M'), ¤known_degree_av¤), ...
-    [BRAPH2.STR ':¤DegreeAv¤:' BRAPH2.FAIL_TEST], ...
-    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-m_inside_g = g.get('MEASURE', ¤'DegreeAv'¤);
-assert(isequal(m_inside_g.get('M'), ¤known_degree_av¤), ...
-    [BRAPH2.STR ':¤DegreeAv¤:' BRAPH2.FAIL_TEST], ...
-    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-...¤
-\end{lstlisting}
-
-%%%%% %%%%% %%%%% %%%%% %%%%%
-\clearpage
-\subsection{Binodal Unilayer Measure (Distance)}
-
-Now we implement the binodal measure \code{Distance}, again highlighting the differences.
-
-\begin{lstlisting}[
-	label=cd:m:distance:header,
-	caption={
-		{\bf Distance element header.}
-		The \code{header} section of generator code for \fn{\_Distance.gen.m} provides the general information about the \code{Distance} element.
-		\expand{cd:m:degree:header}
-	}
-]
-¤%% ¡header!¤
-Distance ¤< Measure (m, ¤distance¤) ¤is the distance.
-
-¤%%% ¡description!¤
-The distance of a graph is the shortest path between all pairs of nodes within a layer of the graph.
-For weighted graphs, the distance is calculated with the Dijkstra algorithm using the inverse weight as the distance associated to the edge.
-\end{lstlisting}
-
-\begin{lstlisting}[
-	label=cd:m:distance:prop_update,
-	caption={
-		{\bf Distance element prop update.}
-		The \code{props\_update} section of generator code for \fn{\_Distance.gen.m} updates the properties of the \code{Measure} element.
-		\expand{cd:m:degree:prop_update}
-	}
-]
-¤%% ¡props_update!
-
-%%% ¡prop!
-NAME (constant, string) is the name of the ¤distance¤.
-%%%% ¡default!
-¤'Distance'¤
-
-%%% ¡prop!
-DESCRIPTION (constant, string) is the description of the ¤distance¤.
-%%%% ¡default!
-¤'The distance of a graph is the shortest path between all pairs of nodes within a layer of the graph. For weighted graphs, the distance is calculated with the Dijkstra algorithm using the inverse weight as the distance associated to the edge.'¤
-
-%%% ¡prop!
-TEMPLATE (parameter, item) is the template of the ¤distance¤.
-%%%% ¡settings!¤
-'Distance'
-
-¤%%% ¡prop!
-ID (data, string) is a few-letter code of the ¤distance¤.
-%%%% ¡default!
-¤'Distance ID'¤
-
-%%% ¡prop!
-LABEL (metadata, string) is an extended label of the ¤distance¤.
-%%%% ¡default!
-¤'Distance label'¤
-
-%%% ¡prop!
-NOTES (metadata, string) are some specific notes about the ¤distance¤.
-%%%% ¡default!
-¤'Distance notes'¤
-
-%%% ¡prop!
-SHAPE (constant, scalar) is the measure shape ¤__Measure.BINODAL__¤.
-%%%% ¡default!
-¤Measure.BINODAL¤
-
-%%% ¡prop!
-SCOPE (constant, scalar) is the measure scope ¤__Measure.UNILAYER__¤.
-%%%% ¡default!
-¤Measure.UNILAYER¤
-
-%%% ¡prop!
-PARAMETRICITY (constant, scalar) is the parametricity of the measure ¤__Measure.NONPARAMETRIC__¤.
-%%%% ¡default!
-¤Measure.NONPARAMETRIC¤
-
-%%% ¡prop!
-COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-%%%% ¡default!
-¤{'GraphBD' 'GraphBU' 'GraphWD' 'GraphWU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexBD' 'MultiplexBU' 'MultiplexWD' 'MultiplexWU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxBD' 'OrdMxBU' 'OrdMxWD' 'OrdMxWU'}¤
-
-%%% ¡prop!
-M (result, cell) is the ¤distance¤.
-%%%% ¡calculate!
-¤g = m.get('G');
-A = g.get('A');
-
-distance = cell(g.get('LAYERNUMBER'), 1);
-connectivity_type =  g.get('CONNECTIVITY_TYPE', g.get('LAYERNUMBER'));
-connectivity_type = diag(connectivity_type);
-Aii_tmp = {};
-for li = 1:1:g.get('LAYERNUMBER')
-    Aii_tmp{li} = A{li, li};
-end
-for li = 1:1:g.get('LAYERNUMBER')
-    Aii = Aii_tmp{li};
-    connectivity_layer = connectivity_type(li);
-
-    if connectivity_layer == Graph.WEIGHTED  % weighted graphs
-        distance(li) = {getWeightedCalculation(Aii)}; ¥\circled{1}\twocirclednotes{1}{2}{call some callback functions that are provided below in \circled{3}.}¥
-    else  % binary (i.e., non-weighted) graphs
-        distance(li) = {getBinaryCalculation(Aii)}; ¥\circled{2}¥
-    end
-end
-
-value = distance;
-%%%% ¡calculate_callbacks! ¥\circled{3}\circlednote{3}{This section contains the callback functions for the calculation of the measure.}¥
-function weighted_distance = getWeightedCalculation(A)
-    ...
-end
-function binary_distance = getBinaryCalculation(A)
-    ...
-end
-\end{lstlisting}
-
-\begin{lstlisting}[
-	label=cd:m:distance:tests,
-	caption={
-		{\bf Distance element tests.}
-		The \code{tests} section from the element generator \fn{\_Distance.gen.m}.
-		\expand{cd:m:degree:tests}
-	}
-]
-¤%% ¡tests!
-
-%%% ¡excluded_props!
-¤[Distance.PFM]¤
-
-%%% ¡test!
-%%%% ¡name!
-GraphWU
-%%%% ¡probability!
-.01
-%%%% ¡code!
-¤B = [
-    0     .1    .2  .25  0
-    .125  0     0   0    0
-    .2    .5    0   .25  0
-    .125  10    0   0    0
-    0     0     0   0    0
-    ];
-
-known_distance = {[
-    0   5   5   4   Inf
-    5   0   2   1   Inf
-    5   2   0   3   Inf
-    4   1   3   0   Inf
-    Inf Inf Inf Inf 0
-    ]};¤
-
-g = GraphWU('B', B);
-
-m_outside_g = ¤Distance¤('G', g);
-assert(isequal(m_outside_g.get('M'), ¤known_distance¤), ...
-    [BRAPH2.STR ':¤Distance¤:' BRAPH2.FAIL_TEST], ...
-    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-m_inside_g = g.get('MEASURE', ¤'Distance'¤);
-assert(isequal(m_inside_g.get('M'), ¤known_distance¤), ...
-    [BRAPH2.STR ':¤Distance¤:' BRAPH2.FAIL_TEST], ...
-    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-...¤
-\end{lstlisting}
-
-%%%%% %%%%% %%%%% %%%%% %%%%%
-\clearpage
-\section{Implementation of Measure Parameters (Triangles)}
-
-Now, we implement the (nodal unilayer) measure \code{Triangles}, which depends on a parameter \code{RULE}, which we add as a property of category \code{parameter}.
-The parts of the code that are modified are highlighted.
-
-\begin{lstlisting}[
-	label=cd:m:triangles:header,
-	caption={
-		{\bf Triangles element header.}
-		The \code{header} section of generator code for \fn{\_Triangles.gen.m} provides the general information about the \code{Triangles} element.
-		\expand{cd:m:triangles:header}
-	}
-]
-
-¤%% ¡header!¤
-Triangles ¤< Measure (m, ¤triangles¤) ¤is the triangles.
-
-¤%%% ¡description!¤
-The triangles are calculated as the number of neighbors of a node that are also neighbors of each other within a layer. 
-In weighted graphs, the triangles are calculated as geometric mean of the weights of the edges forming the triangle.
-\end{lstlisting}
-
-\begin{lstlisting}[
-	label=cd:m:triangles:calculate,
-	caption={
-		{\bf Triangles element calculate.}
-		The \code{calculate} section of \fn{\_Triangles.gen.m} utilizes the rule property to select which algorithm it will use to calculate the \code{Triangles} element.
-		\expand{cd:m:triangles:calculate}
-	}
-]
-
-¤%% ¡props_update!
-
-%%% ¡prop!
-NAME (constant, string) is the name of the ¤triangles¤.
-%%%% ¡default!
-¤'Triangles'¤
-
-%%% ¡prop!
-DESCRIPTION (constant, string) is the description of the ¤triangles¤.
-%%%% ¡default!
-¤'The triangles are calculated as the number of neighbors of a node that are also neighbors of each other within a layer. In weighted graphs, the triangles are calculated as geometric mean of the weights of the edges forming the triangle.'¤
-
 ...
 
 %%% ¡prop!
-M (result, cell) is the ¤triangles¤.
-%%% ¡calculate!
-¤g = m.get('G');  % graph from measure class
-A = g.get('A');  % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.) 
-L = g.get('LAYERNUMBER');
-
-triangles = cell(L, 1);
-
-directionality_type =   g.get('DIRECTIONALITY\_TYPE', L);
-for li = 1:1:L        
-	Aii = A{li, li};    
-	
-	if directionality_type == Graph.UNDIRECTED  % undirected graphs
-		triangles_layer = diag((Aii.^(1/3))^3) / 2;
-		triangles_layer(isnan(triangles_layer)) = 0;  % Should return zeros, not NaN
-		triangles(li) = {triangles_layer};
-	
-	else  % directed graphs
-		directed_triangles_rule = m.get('RULE'); ¥\circled{1}\circlednote{1}{gets the rule to calculate the measure Triangle. See below how this rule is defined in \circled{2}, \circled{3}, and \circled{4}.}¥
-		switch lower(directed_triangles_rule)
-			case 'all'  % all rule
-				triangles_layer = diag((Aii.^(1/3) + transpose(Aii).^(1/3))^3) / 2;
-			case 'middleman'  % middleman rule
-				triangles_layer = diag(Aii.^(1/3) * ...
-							transpose(Aii).^(1/3) * Aii.^(1/3));
-			case 'in'  % in rule
-				triangles_layer = diag(transpose(Aii).^(1/3) * (Aii.^(1/3))^2);
-			case 'out'  % out rule
-				triangles_layer = diag((Aii.^(1/3))^2 * transpose(Aii).^(1/3));
-			otherwise  % {'cycle'}  % cycle rule
-				triangles_layer = diag((Aii.^(1/3))^3);
-		end
-		triangles_layer(isnan(triangles_layer)) = 0;  % Should return zeros, not NaN
-		triangles(li) = {triangles_layer};
-	end
+X_DRAW (query, logical) draws the property panel.
+%%%% ¡calculate!
+value = calculateValue@PanelProp(pr, PanelProp.X_DRAW, varargin{:}); % also warning
+if value
+    pr.memorize('CHECKBOX')
 end
 
-value = triangles;¤
+%%% ¡prop!
+DELETE (query, logical) resets the handles when the panel is deleted.
+%%%% ¡calculate!
+value = calculateValue@PanelProp(pr, PanelProp.DELETE, varargin{:}); % also warning
+if value
+    pr.set('CHECKBOX', Element.getNoValue())
+end
 
-¤%% ¡props!
-
-%%% ¡prop! 
-RULE (parameter, option) is the rule to determine what is a triangle in a directed graph. ¥\circled{2}\circlednote{2}{defines a parameter to determine how the measure is calculated. This property must be of category \code{parameter}.}¥
-%%%% ¡settings!
-{'all' 'middleman' 'in' 'out' 'cycle'} ¥\circled{3}\circlednote{3}{defines the available triangle rule options, which are case sensitive.}¥
+%%% ¡prop!
+HEIGHT (gui, size) is the pixel height of the property panel.
 %%%% ¡default!
-'cycle' ¥\circled{4}\circlednote{4}{defines the default option, in this case \code{'cycle'}.}¥
+s(4)
+
+%%% ¡prop!
+REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
+%%%% ¡calculate!
+value = calculateValue@PanelProp(pr, PanelProp.REDRAW, varargin{:}); % also warning
+if value
+    w_p = get_from_varargin(w(pr.get('H'), 'pixels'), 'Width', varargin);
+    
+    set(pr.get('CHECKBOX'), 'Position', [s(.3) s(.3) .70*w_p s(1.75)])
+end    
+
+%%% ¡prop!
+UPDATE (query, logical) updates the content and permissions of the editfield.
+%%%% ¡calculate!
+value = calculateValue@PanelProp(pr, PanelProp.UPDATE, varargin{:}); % also warning
+if value
+
+    el = pr.get('EL');
+    prop = pr.get('PROP');
+    
+    switch el.getPropCategory(prop)
+        case Category.CONSTANT
+            set(pr.get('CHECKBOX'), ...
+                'Value', el.get(prop), ...
+                'Enable', 'off' ...
+                )
+
+        case Category.METADATA
+            set(pr.get('CHECKBOX'), 'Value', el.get(prop))
+
+            if el.isLocked(prop)
+                set(pr.get('CHECKBOX'), 'Enable', 'off')
+            end
+            
+        case {Category.PARAMETER, Category.DATA, Category.FIGURE, Category.GUI}
+            set(pr.get('CHECKBOX'), 'Value', el.get(prop))
+
+            prop_value = el.getr(prop);
+            if el.isLocked(prop) || isa(prop_value, 'Callback')
+                set(pr.get('CHECKBOX'), 'Enable', 'off')
+            end
+            
+        case {Category.RESULT Category.QUERY Category.EVANESCENT}
+            prop_value = el.getr(prop);
+
+            if isa(prop_value, 'NoValue')
+                set(pr.get('CHECKBOX'), 'Value', el.getPropDefault(prop))
+            else
+                set(pr.get('CHECKBOX'), 'Value', el.get(prop))
+            end
+            
+            set(pr.get('CHECKBOX'), 'Enable', 'off')
+    end
+end
+
 \end{lstlisting}
+
+%%%%% %%%%% %%%%% %%%%% %%%%%
+\clearpage
+\subsection{Panel of a property net}
+
+We can now use ...
+
 
 %\bibliography{biblio}
 %\bibliographystyle{plainnat}
