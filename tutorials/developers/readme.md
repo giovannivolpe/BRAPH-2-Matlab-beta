@@ -48,11 +48,11 @@ BRAPH 2.0's object-oriented programming architecture makes it easy to expand its
 
 ## Expanding BRAPH 2.0 with New Graphical Elements
 
-BRAPH 2.0's object-oriented programming architecture makes it easy to expand its capabilities by introducing new elements and features. Here are some of the ways you can extend BRAPH 2.0:
+BRAPH 2.0's object-oriented programming architecture also simplifies the process of designing your own panel to visualize new properties and figures. Here are the methods by which you can expand the capabilities of BRAPH 2.0:
 
 - **Property Panel**: New property panel can be implemented by extending the `Panelprop` element. The [Developer Tutorial to Implement a New Property Panel](tutorials/developers/dev_panelprop.pdf) provides a step-by-step guide on creating new property panel.
 
-- **GUIFig**: New figure can be added to BRAPH 2.0 by extending the `GUIFig` element. The [Developer Tutorial to Implement a New Figure](tutorials/developers/dev_guifig.pdf) explains the process of implementing custom figures.
+- **Figure Panel**: New figure can be added to BRAPH 2.0 by extending the `GUIFig` element. The [Developer Tutorial to Implement a New Figure](tutorials/developers/dev_guifig.pdf) explains the process of implementing custom figures.
 
 These tutorials provide step-by-step instructions and examples to guide developers in expanding BRAPH 2.0 with new functionalities and graphical elements. We encourage developers to contribute to the growth and improvement of BRAPH 2.0 by introducing new elements, measures, and analyses. Feel free to share your implementations, ask questions, and engage with the BRAPH community through the [BRAPH forum](http://braph.org/forums) and [GitHub page](https://github.com/softmatterlab/BRAPH-2-Matlab).
 
