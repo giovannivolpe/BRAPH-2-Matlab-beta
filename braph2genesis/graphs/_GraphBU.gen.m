@@ -46,6 +46,18 @@ NEGATIVE WEIGHTS RULE
 
 %%% ¡prop!
 %%%% ¡id!
+GraphBU.RANDOMIZE
+%%%% ¡title!
+RANDOMIZE ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+GraphBU.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
 GraphBU.A
 %%%% ¡title!
 Binary Undirected ADJACENCY MATRIX
@@ -142,6 +154,14 @@ B = semipositivize(B, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); %#ok<
 B = binarize(B); %#ok<PROPLC> % enforces binary adjacency matrix, equivalent to binarize(B, 'threshold', 0, 'bins', [-1:.001:1])
 
 A = {B}; %#ok<PROPLC>
+
+if g.get('RANDOMIZE')
+    rng(g.get('RANDOM_SEED'), 'twister')
+
+    ...
+
+end
+
 value = A;
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', GraphBU.A, ...
