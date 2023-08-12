@@ -120,7 +120,7 @@ Most things in the settings window are intuitive. So we encourage you to try the
  
 Each brain region can be represented with spheres, symbols, IDs, and labels. Spheres are objects that are rendered in 3D — often prettier, but also more computationally expensive. Symbols are objects rendered in 2D — more stylized and less computationally expensive. IDs and labels are the texts associated with the brain region.
 
-If you wish to apply some properties to a set of brain regions, you can select multiple regions by clicking on the squares on the right, and then right-click and select "apply to selection" before applying some property.
+If you wish to apply some properties to a set of brain regions, you can select multiple regions by clicking on the checkboxes on the right, and then right-click and select "apply to selection" before applying some property.
 
 BRAPH 2.0 provides different brain surfaces, as shown in Figure 10, for the human brain and cerebellum in addition to animals such as the ferret, macaque, mouse, and rat. It is also possible to add additional brain surfaces by adding the required NV files in the BRAPH 2.0 folder *brainsurfs*.
 
