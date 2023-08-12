@@ -108,7 +108,7 @@ end
 %% ¡props_update!
 ...
 %%% ¡prop!
-X_DRAW (query, logical) draws the property panel. ¥\circled{1}\circlednote{1}{draws the panel. In this case, the property panel contains only a checkbox, memorized in \circled{2}.}}¥
+X_DRAW (query, logical) draws the property panel. ¥\circled{1}\circlednote{1}{draws the panel. In this case, the property panel contains only a checkbox, memorized in \circled{2}.}¥
 %%%% ¡calculate!
 value = calculateValue@PanelProp(pr, PanelProp.X_DRAW, varargin{:}); % also warning
 if value
@@ -144,24 +144,24 @@ UPDATE (query, logical) updates the content and permissions of the checkbox. ¥\
 value = calculateValue@PanelProp(pr, PanelProp.UPDATE, varargin{:}); % also warning
 if value
 
-	el = pr.get('EL'); ¥\circled{9}¥
-	prop = pr.get('PROP');
+	el = pr.get('EL'); ¥\circled{9}\twocirclednotes{9}{10}{retrieve the element and property to which the property panel refer.}¥
+	prop = pr.get('PROP'); ¥\circled{10}¥
 
-	switch el.getPropCategory(prop)
-		case Category.CONSTANT ¥\circled{13}\circlednote{13}{When the property is a \code{CONSTANT}, the \code{CHECKBOX} is disabled as it cannot be changed.}¥
+	switch el.getPropCategory(prop) ¥\circled{11}\circlednote{11}{switches between the different possible property categories to make this property panel work for all of them. More specialized property panels might not need to work for all category, thus simplifying this code.}¥
+		case Category.CONSTANT ¥\circled{12}\circlednote{12}{When the property is a \code{CONSTANT}, the checkbox is disabled as it cannot be changed.}¥
 			set(pr.get('CHECKBOX'), ...
 				'Value', el.get(prop), ...
 				'Enable', 'off' ...
 			)
 
-		case Category.METADATA ¥\circled{14}\circlednote{14}{When the property is a \code{METADATA}, the \code{CHECKBOX}'s enabling status corresponds to whether it is locked.}¥
+		case Category.METADATA ¥\circled{13}\circlednote{13}{When the property is a \code{METADATA}, the \code{CHECKBOX}'s enabled status depends on whether it is locked.}¥
 			set(pr.get('CHECKBOX'), 'Value', el.get(prop))
 
 			if el.isLocked(prop)
 				set(pr.get('CHECKBOX'), 'Enable', 'off')
 			end
 
-		case {Category.PARAMETER, Category.DATA, Category.FIGURE, Category.GUI}  ¥\circled{15}\circlednote{15}{The behavior of the \code{CHECKBOX} varies according to different categories, as we have seen two examples until this point. To ensure precise control over the \code{CHECKBOX}'s functionality, consider the specific cases for behavior.}¥
+		case {Category.PARAMETER, Category.DATA, Category.FIGURE, Category.GUI}  ¥\circled{14}\circlednote{14}{When the property is \code{PARAMETER}, \code{DATA}, \code{FIGURE}, or \code{GUI}, the checkbox is enabled only when the property is not locked or a callback.}¥
 			set(pr.get('CHECKBOX'), 'Value', el.get(prop))
 
 			prop_value = el.getr(prop);
@@ -169,7 +169,7 @@ if value
 				set(pr.get('CHECKBOX'), 'Enable', 'off')
 			end
 
-		case {Category.RESULT Category.QUERY Category.EVANESCENT}
+		case {Category.RESULT Category.QUERY Category.EVANESCENT} ¥\circled{15}\circlednote{15}{When the property is \code{RESULT}, \code{QUEY}, or \code{EVANESCENT}, the checkbox is not enabled and it visualizes the default value if the property has not been calculated yet.}¥
 			prop_value = el.getr(prop);
 
 			if isa(prop_value, 'NoValue')
@@ -181,7 +181,6 @@ if value
 			set(pr.get('CHECKBOX'), 'Enable', 'off')
 	end
 end
-
 \end{lstlisting}
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
@@ -189,9 +188,7 @@ end
 
 \section{Example Property Panels for Various UI Objects}
 
-The concept of implementing PanelPropLogical, as shown in the previous section, can be seamlessly extended to all other user interface (UI) elements.
-
-The subsequent table presents a comprehensive overview of various UI objects in BRAPH 2, each coupled with its corresponding property panel as an example.
+The implementation of \code{PanelPropLogical} shown in the previous section can be extended to all other user interface (UI) objects. There are several examples already available in the core code of BRAPH~2.0, each coupled with its corresponding property panel as an example, as shown int he table below. These can be used to guide the realization of new property panels.
 
 \newcommand{\addpicbutton}{\includegraphics[width=6em]{fig01.png}}
 \newcommand{\addpiccheckbox}{\includegraphics[width=6em]{fig02.png}}
@@ -202,26 +199,24 @@ The subsequent table presents a comprehensive overview of various UI objects in 
 \newcommand{\addpictextarea}{\includegraphics[width=6em]{fig07.png}}
 \newcommand{\addpiccontextmenu}{\includegraphics[width=6em]{fig08.png}}
 \newcommand{\addpictable}{\includegraphics[width=6em]{fig09.png}}
-\newcolumntype{C}{>{\centering\arraybackslash}m{6em}}
+\newcolumntype{C}{>{\centering\arraybackslash}m{12em}}
 \begin{table}\sffamily
 	\begin{tabular}{l*4{C}@{}}
 		\toprule
-		UI Object & Example & PanelProp Element \\ 
+		UI Object & Example & Exemple PanelProp \\ 
 		\midrule
 		uibutton & \addpicbutton & PanelPropItem \\ 
 		checkbox & \addpiccheckbox & PanelPropLogical \\ 
 		uitextarea  & \addpictextarea & PanelPropStringList \\
 		uieditfield & \addpiceditfield & PanelPropString \\
-		uidropdown & \addpicdropdown & PanelPropLogical \\
+		uidropdown & \addpicdropdown & PanelPropOption \\
 		uicontextmenu & \addpiccontextmenu & PanelPropMatrix \\
-		uitable & \addpictable & PanelPropItemList \\
+		uitable & \addpictable & PanelPropMatrix \\
 		uilistbox & \addpiclistbox & PanelPropClassList \\
 		uislider & \addpicslider & PanelPropCell \\
 		\bottomrule \\
 	\end{tabular}
 \end{table} 
-By referencing the related PanelProp elements, the process of creating a new property panel becomes straightforward and efficient.
-
 
 %\bibliography{biblio}
 %\bibliographystyle{plainnat}
