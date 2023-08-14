@@ -149,6 +149,8 @@ function cb_button(~, ~)
     prop = pr.get('PROP');
     net = el.memorize(prop);
     
+    analyzeNetwork(net);
+
     if pr.get('MSG_FLAG')
         pr.set('MSG_FLAG', false);
         title = ['About Network Visualization Windows'];
@@ -166,8 +168,6 @@ function cb_button(~, ~)
 
         braph2msgbox(title, message)
     end
-    
-    analyzeNetwork(net);
 end
 
 %%% ¡prop!
