@@ -152,29 +152,21 @@ function cb_button(~, ~)
     if pr.get('MSG_FLAG')
         pr.set('MSG_FLAG', false);
         title = ['About Network Visualization Windows'];
-
-        message = {...
-            '', ...
-            [BRAPH2.STR ':' pr.get('NAME')], ...
-            [BRAPH2.STR ':' class(el)], ...
-            '', ...
-            'Note that the network visualization window cannot', ...
-            'be closed automatically.', ...
-            'It requires manual closure by the user.', ...
-            '', ...
+        
+        message = {''
+                ['{\\bf\\color{orange}' BRAPH2.STR '}'] % note to use doubl slashes to avoid genesis problem
+                ['{\\color{gray}version ' BRAPH2.VERSION '}']
+                ['{\\color{gray}build ' int2str(BRAPH2.BUILD) '}']
+                ''
+            'The network visualization window'
+            'cannot be closed automatically.'
+            'It requires manual closure by the user.'
+            '' 
             ''};
 
 
         braph2msgbox(title, message)
     end
-
-% %     warningDlg =  warndlg({
-% %         [BRAPH2.STR ':' pr.get('NAME')], ...
-% %         [BRAPH2.STR ':' class(el) newline ...
-% %         'Please be aware that the network visualization window will open upon clicking the button. Note that this window cannot be closed automatically and requires manual closure by the user. It is your responsibility to close the window, as our software does not have control over closing it.']
-% %         }, ...
-% %         'Network Visualization Warning', 'modal');
-% %     uiwait(warningDlg);
     
     analyzeNetwork(net);
 end
