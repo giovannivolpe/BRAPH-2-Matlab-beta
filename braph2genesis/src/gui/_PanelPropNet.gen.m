@@ -156,14 +156,14 @@ function cb_button(~, ~)
         title = ['About Network Visualization Windows'];
         
         message = {''
-                ['{\\bf\\color{orange}' BRAPH2.STR '}'] % note to use doubl slashes to avoid genesis problem
-                ['{\\color{gray}version ' BRAPH2.VERSION '}']
-                ['{\\color{gray}build ' int2str(BRAPH2.BUILD) '}']
-                ''
+            ['{\\bf\\color{orange}' BRAPH2.STR '}'] % note to use doubl slashes to avoid genesis problem
+            ['{\\color{gray}version ' BRAPH2.VERSION '}']
+            ['{\\color{gray}build ' int2str(BRAPH2.BUILD) '}']
+            ''
             'The network visualization window'
             'cannot be closed automatically.'
             'It requires manual closure by the user.'
-            '' 
+            ''
             ''};
 
         braph2msgbox(title, message)
