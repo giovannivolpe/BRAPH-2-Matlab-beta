@@ -18,7 +18,7 @@ NAME (constant, string) is the name of the neural network property panel.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the neural network property panel.
 %%%% ¡default!
-'PanelPropNet plots the panel for a NET property with a button. It works for all categories. '
+'PanelPropNet plots the panel for a NET property with a button. It works for all categories.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the neural network property panel.
@@ -163,7 +163,6 @@ function cb_button(~, ~)
             'It requires manual closure by the user.'
             '' 
             ''};
-
 
         braph2msgbox(title, message)
     end
