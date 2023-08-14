@@ -159,6 +159,7 @@ if g.get('RANDOMIZE')
     rng(g.get('RANDOM_SEED'), 'twister')
 
     A = cell2mat(A);
+    attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 
      % remove self connections
     A(1:length(A) + 1:numel(A)) = 0;
@@ -277,6 +278,11 @@ SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.
 SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.
 %%%% ¡settings!
 {'zero', 'absolute'}
+
+%%% ¡_prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡_default!
+5
 
 %% ¡tests!
 
@@ -412,64 +418,3 @@ A_absolute_min = {dediagonalize(min(B, B') ~= 0)};
 assert(isequal(g_absolute_min.get('A'), A_absolute_min), ...
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU is not constructing well.')
-
-
-
-
-%% ¡_props!
-
-%%% ¡_prop!
-ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-%%%% ¡_default!
-5
-
-%% ¡_staticmethods!
-function [random_A, swaps] = randomize_A(A, attempts_per_edge)
-    % RANDOMIZE_A returns a randomized correlation matrix
-    %
-    % RANDOM_A = RANDOMIZE(G) returns the randomized matrix
-    % RANDOM_A. Tries to swap 5 times an edge. The matrix has to
-    % contain more than 1 edge.
-    %
-    % [RANDOM_A, SWAPS] = RANDOMIZE_A(G) attempts to rewire each edge
-    % 5 times. Returns the randomized matrix RANDOM_A. Returns the
-    % number of succesful edge swaps.The matrix has to
-    % contain more than 1 edge. This algorithm was proposed
-    % by Maslov and Sneppen (Science 296, 910, 2002)
-    %
-    % [RANDOM_A, SWAPS] = RANDOMIZE_A(G, ATTEMPTS_PER_EDGE) attempts
-    % to rewire each edge ATTEMPTS_PER_EDGE times then it returns the
-    % randomized matrix RANDOM_A. Returns the number of succesful edge swaps.
-    % The matrix has to contain more than 1 edge.
-    %
-    % See also randomize
-
-    if nargin < 2
-        attempts_per_edge = 5;
-    end
-
-   
-end
-
-%% ¡_methods!
-function random_g = randomize(g)
-    % RANDOMIZE returns a randomized graph and the correlation coefficients
-    %
-    % RANDOM_G = RANDOMIZE(G) returns the randomized graph
-    % RANDOM_G obtained with a randomized correlation
-    % matrix via the static function randomize_A.
-    %
-    % RANDOM_G = RANDOMIZE(G, 'AttemptPerEdge', VALUE, 'NumberOfWeights', VALUE)
-    % returns the randomized graph RANDOM_G obtained with a randomized correlation
-    % matrix via the static function randomize_A, it passes the
-    % attempts per edge and the number of weights specified by the user.
-    %
-    % See also randomize_A
-
-    % get rules
-    attempts_per_edge = g.get('ATTEMPTSPEREDGE');
-
-    A = cell2mat(g.get('A'));
-    random_A = GraphBU.randomize_A(A, attempts_per_edge);
-    random_g = GraphBU('B', random_A);
-end
