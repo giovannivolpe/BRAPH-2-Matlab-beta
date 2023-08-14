@@ -107,7 +107,7 @@ else
     nn_architecture = [nn_architecture
         reluLayer('Name', 'Relu_output')
         fullyConnectedLayer(number_targets, 'Name', 'Dense_output')
-        regressionLayer('Name', 'output')
+        regressionLayer('Name', 'Output')
         ];
     
     % specify trianing options

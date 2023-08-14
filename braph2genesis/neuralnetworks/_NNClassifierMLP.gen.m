@@ -88,7 +88,7 @@ else
         reluLayer('Name', 'Relu_output')
         fullyConnectedLayer(number_classes, 'Name', 'Dense_output')
         softmaxLayer
-        classificationLayer('Name', 'output')
+        classificationLayer('Name', 'Output')
         ];
 
     % specify trianing options
@@ -108,7 +108,7 @@ end
 %%% ¡prop!
 TARGET_IDS (query, stringlist) constructs the target IDs which represent the class of each data point.
 %%%% ¡calculate!
-% targets = nn.get('PREDICT', D) returns a cell array with the
+% targets = nn.get('TARGET_IDS', D) returns a cell array with the
 %  targets for all data points in dataset D.
 if isempty(varargin)
     value = {''};
