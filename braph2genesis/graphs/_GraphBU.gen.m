@@ -418,3 +418,21 @@ A_absolute_min = {dediagonalize(min(B, B') ~= 0)};
 assert(isequal(g_absolute_min.get('A'), A_absolute_min), ...
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU is not constructing well.')
+
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B = randn(10);
+
+g = GraphBU('B', B);
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
+
+A = g.get('A');
+
+assert(isequal(size(A), size(B)), ...
+    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
+    'GraphBU Randomize is not functioning well.')
