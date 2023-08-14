@@ -107,9 +107,9 @@ VERBOSE (parameter, logical) is an indicator to display training progress inform
 false
 
 %%% ¡prop!
-PLOT_TRAINING (parameter, logical) determines whether to plot the training progress.
-%%%% ¡default!
-false
+PLOT_TRAINING (parameter, option) determines whether to plot the training progress.
+%%%% ¡settings!
+{'none' 'training-progress'}
 
 %%% ¡prop!
 PREDICT (query, cell) returns the predictions of the trained neural network for a dataset.
