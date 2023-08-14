@@ -149,21 +149,45 @@ function cb_button(~, ~)
     prop = pr.get('PROP');
     net = el.memorize(prop);
     
-    warningDlg =  warndlg({
-        [BRAPH2.STR ':' pr.get('NAME')], ...
-        [BRAPH2.STR ':' class(el) newline ...
-        'Please be aware that the network visualization window will open upon clicking the button. Note that this window cannot be closed automatically and requires manual closure by the user. It is your responsibility to close the window, as our software does not have control over closing it.']
-        }, ...
-        'Network Visualization Warning', 'modal');
-    uiwait(warningDlg);
+    if pr.get('MSG_FLAG')
+        pr.set('MSG_FLAG', false);
+        title = ['About Network Visualization Windows'];
+
+        message = {...
+            '', ...
+            [BRAPH2.STR ':' pr.get('NAME')], ...
+            [BRAPH2.STR ':' class(el)], ...
+            '', ...
+            'Note that the network visualization window cannot', ...
+            'be closed automatically.', ...
+            'It requires manual closure by the user.', ...
+            '', ...
+            ''};
+
+
+        braph2msgbox(title, message)
+    end
+
+% %     warningDlg =  warndlg({
+% %         [BRAPH2.STR ':' pr.get('NAME')], ...
+% %         [BRAPH2.STR ':' class(el) newline ...
+% %         'Please be aware that the network visualization window will open upon clicking the button. Note that this window cannot be closed automatically and requires manual closure by the user. It is your responsibility to close the window, as our software does not have control over closing it.']
+% %         }, ...
+% %         'Network Visualization Warning', 'modal');
+% %     uiwait(warningDlg);
     
     analyzeNetwork(net);
 end
 
+%%% ¡prop!
+MSG_FLAG (gui, logical) determines whether to show the message box about the neural network visualization window.
+%%%% ¡default!
+true
+
 %% ¡tests!
 
 %%% ¡excluded_props!
-[PanelPropNet.PARENT PanelPropNet.H PanelPropNet.LISTENER_CB PanelPropNet.EL PanelPropNet.BUTTON_TEXT PanelPropNet.BUTTON]
+[PanelPropNet.PARENT PanelPropNet.H PanelPropNet.LISTENER_CB PanelPropNet.EL PanelPropNet.BUTTON_TEXT PanelPropNet.BUTTON PanelPropNet.MSG_FLAG]
 
 %%% ¡warning_off!
 true
