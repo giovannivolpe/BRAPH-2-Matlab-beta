@@ -1,11 +1,11 @@
-%% EXAMPLE_NN_CON_REGRESSION
-% Script example pipeline for NN regression with the input of SubjectCON 
+%% EXAMPLE_NN_CON_CLASSIFICATION
+% Script example pipeline for NN classification with the input of SubjectCON 
 
 clear variables %#ok<*NASGU>
 
 %% Load BrainAtlas
 im_ba = ImporterBrainAtlasXLS( ...
-    'FILE', [fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'], ...
+    'FILE', [fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'], ...
     'WAITBAR', true ...
     );
 
@@ -95,14 +95,15 @@ d3 = NNDataset( ...
 d_split1 = NNDatasetSplit('D', d1, 'SPLIT', {0.7, 0.3}).get('D_LIST');
 d_split2 = NNDatasetSplit('D', d2, 'SPLIT', {0.7, 0.3}).get('D_LIST');
 d_split3 = NNDatasetSplit('D', d3, 'SPLIT', {0.7, 0.3}).get('D_LIST');
+
 d_training = NNDatasetCombine('D_LIST', {d_split1{1}, d_split2{1}, d_split3{1}}).get('D');
 d_test = NNDatasetCombine('D_LIST', {d_split1{2}, d_split2{2}, d_split3{2}}).get('D');
 
-%% Create a MLP regressor with training set
+%% Create a MLP classifier with training set
 nn = NNClassifierMLP('D', d_training, 'LAYERS', [20 20]);
 nn.get('TRAIN');
 
-%% Evaluate the regressor with the test set
+%% Evaluate the classifier with the test set
 nne_test = NNClassifier_Evaluator('D', d_test, 'NN', nn);
 confusion_matrix = nne_test.get('C_MATRIX');
 auc = nne_test.get('AUC');
