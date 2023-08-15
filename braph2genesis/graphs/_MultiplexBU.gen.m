@@ -60,6 +60,24 @@ NEGATIVE EDGE RULE
 
 %%% ¡prop!
 %%%% ¡id!
+MultiplexBU.RANDOMIZE
+%%%% ¡title!
+RANDOMIZE ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MultiplexBU.RANDOMIZATION
+%%%% ¡title!
+RANDOMIZATION VALUE
+
+%%% ¡prop!
+%%%% ¡id!
+MultiplexBU.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
 MultiplexBU.A
 %%%% ¡title!
 Binary Undirected ADJACENCY MATRICES
@@ -179,6 +197,12 @@ for i = 1:1:L
     M = semipositivize(M, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
     M = binarize(M); % enforces binary adjacency matrix, equivalent to binarize(M, 'threshold', 0, 'bins', [-1:.001:1])
     A(i, i) = {M};
+    if g.get('RANDOMIZE')
+        tmp_g = GraphBU();
+        tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+        random_A = tmp_g.get('RANDOMIZATION', M);
+        A(i, i) = {random_A};
+    end
     if ~isempty(A{1, 1})
         for j = i+1:1:L
             A(i, j) = {eye(length(A{1, 1}))};
@@ -245,6 +269,11 @@ SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.
 SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.
 %%%% ¡settings!
 {'zero', 'absolute'}
+
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
 
 %% ¡tests!
 

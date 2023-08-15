@@ -71,6 +71,24 @@ DENSITIES [0% ... 100%]
 
 %%% ¡prop!
 %%%% ¡id!
+MultiplexBUD.RANDOMIZE
+%%%% ¡title!
+RANDOMIZE ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MultiplexBUD.RANDOMIZATION
+%%%% ¡title!
+RANDOMIZATION VALUE
+
+%%% ¡prop!
+%%%% ¡id!
+MultiplexBUD.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
 MultiplexBUD.A
 %%%% ¡title!
 Binary Undirected ADJACENCY MATRICES at fixed Densities
@@ -192,8 +210,16 @@ if L > 0 && ~isempty(cell2mat(A_WU))
         density = densities(i);
         layer = 1;
         for j = (i - 1) * L + 1:1:i * L
-            A{j, j} = dediagonalize(binarize(A_WU{layer, layer}, 'density', density));
+            tmp_A = dediagonalize(binarize(A_WU{layer, layer}, 'density', density));
             layer = layer + 1;
+            A{j, j} = tmp_A;
+            if g.get('RANDOMIZE')
+                tmp_g = GraphWU();
+                tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+                tmp_g.set('NUMBEROFWEIGHTS', g.get('NUMBEROFWEIGHTS'));
+                random_A = tmp_g.get('RANDOMIZATION', M);
+                A{j, j} = random_A;
+            end            
         end
     end
 end
@@ -251,6 +277,11 @@ getCompatibleMeasures('MultiplexBUD')
 DENSITIES (parameter, rvector) is the vector of densities.
 %%%% ¡gui!
 pr = PanelPropRVectorSmart('EL', g, 'PROP', MultiplexBUD.DENSITIES, 'MAX', 100, 'MIN', 0, varargin{:});
+
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
 
 %% ¡tests!
 

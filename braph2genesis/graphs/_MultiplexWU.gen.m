@@ -66,6 +66,30 @@ NORMALIZATION RULE
 
 %%% ¡prop!
 %%%% ¡id!
+MultiplexWU.RANDOMIZE
+%%%% ¡title!
+RANDOMIZE ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MultiplexWU.RANDOMIZATION
+%%%% ¡title!
+RANDOMIZATION VALUE
+
+%%% ¡prop!
+%%%% ¡id!
+MultiplexWU.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
+MultiplexWU.NUMBEROFWEIGHTS
+%%%% ¡title!
+RANDOMIZATION NUMBER OF WEIGHTS
+
+%%% ¡prop!
+%%%% ¡id!
 MultiplexWU.A
 %%%% ¡title!
 Weighted Undirected ADJACENCY MATRICES
@@ -185,6 +209,13 @@ for i = 1:1:L
     M = semipositivize(M, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
     M = standardize(M, 'StandardizeRule', g.get('STANDARDIZE_RULE')); % enforces binary adjacency matrix
     A(i, i) = {M};
+    if g.get('RANDOMIZE')
+        tmp_g = GraphWU();
+        tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+        tmp_g.set('NUMBEROFWEIGHTS', g.get('NUMBEROFWEIGHTS'));
+        random_A = tmp_g.get('RANDOMIZATION', M);
+        A(i, i) = {random_A};
+    end
     if ~isempty(A{1, 1})
         for j = i+1:1:L
             A(i, j) = {eye(length(A{1, 1}))};
@@ -257,6 +288,16 @@ STANDARDIZE_RULE (parameter, option) determines how to normalize the weights bet
 %%%% ¡settings!
 {'threshold' 'range'}
 
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
+%%% ¡prop!
+NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.
+%%%% ¡default!
+10
+
 %% ¡tests!
 
 %%% ¡excluded_props!
@@ -322,24 +363,6 @@ for i = 1:1:length(symmetrize_rules)
 end
 
 
-
-
-
-
-
-
-
-%% ¡_props!
-
-%%% ¡_prop!
-ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-%%%% ¡_default!
-5
-
-%%% ¡_prop!
-NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.
-%%%% ¡_default!
-10
 
 %% ¡_methods!
 function random_g = randomize(g)
