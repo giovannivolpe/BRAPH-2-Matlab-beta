@@ -62,6 +62,24 @@ NEGATIVE EDGE RULE
 
 %%% ¡prop!
 %%%% ¡id!
+MultilayerBU.RANDOMIZE
+%%%% ¡title!
+RANDOMIZE ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBU.RANDOMIZATION
+%%%% ¡title!
+RANDOMIZATION VALUE
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBU.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
 MultilayerBU.A
 %%%% ¡title!
 Binary Undirected ADJACENCY MATRICES
@@ -181,6 +199,12 @@ for i = 1:1:L
     M = semipositivize(M, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
     M = binarize(M); % enforces binary adjacency matrix, equivalent to binarize(M, 'threshold', 0, 'bins', [-1:.001:1])
     A(i, i) = {M};
+    if g.get('RANDOMIZE')
+        tmp_g = GraphBU();
+        tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+        random_A = tmp_g.get('RANDOMIZATION', M);
+        A(i, i) = {random_A};
+    end
     if ~isempty(A{i, i})
         for j = i+1:1:L
             M = semipositivize(B{i, j}, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
@@ -243,6 +267,11 @@ pr = PanelPropCell('EL', g, 'PROP', MultilayerBU.B, ...
     varargin{:});
 
 %%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
+%%% ¡prop!
 SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.
 %%%% ¡settings!
 {'max', 'sum', 'average', 'min'}
@@ -295,57 +324,3 @@ A = B;
 assert(isequal(g.get('A'), A), ...
     [BRAPH2.STR ':MultilayerBU:' BRAPH2.FAIL_TEST], ...
     'MultilayerBU is not constructing well.')
-
-
-%% ¡_props!
-
-%%% ¡_prop!
-ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-%%%% ¡_default!
-5
-
-%%% ¡_prop!
-NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.
-%%%% ¡_default!
-10
-
-%% ¡_methods!
-function random_g = randomize(g)
-    % RANDOMIZE returns a randomized graph
-    %
-    % RANDOMIZED_G = RANDOMIZE(G) returns the randomized
-    % graph RANDOM_G obtained with a randomized correlation
-    % matrix via the static function randomize_A while preserving
-    % degree distributions. The randomization it is done layer by
-    % layer and then integrated in the 2-D supra-adjacency matrix
-    % cell array.
-    %
-    % RANDOMIZED_G = RANDOMIZE(G, 'AttemptsPerEdge', VALUE)
-    % returns the randomized graph RANDOM_G obtained with a
-    % randomized correlation matrix via the static function
-    % randomize_A while preserving  degree distributions.
-    % The multilayer is randomized layer by layer where randomized
-    % adjacency matrix of each layer are then integrated in the
-    % 2-D supra-adjacency matrix cell array.
-    %
-    % See also GraphBD
-
-    % get rules
-    attempts_per_edge = g.get('ATTEMPTSPEREDGE');
-
-    if nargin<2
-        attempts_per_edge = 5;
-    end
-
-    % get A
-    A = g.get('A');
-    L = g.layernumber();
-    random_multi_A = cell(1, L);
-
-    for li = 1:1:L
-        Aii = A{li, li};
-        random_A = GraphBU.randomize_A(Aii, attempts_per_edge);
-        random_multi_A(li) = {random_A};
-    end
-    random_g = MultilayerBU('B', random_multi_A);
-end

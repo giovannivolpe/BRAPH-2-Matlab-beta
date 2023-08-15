@@ -71,6 +71,24 @@ THRESHOLDS [-1 ... 1]
 
 %%% ¡prop!
 %%%% ¡id!
+MultigraphBUT.RANDOMIZE
+%%%% ¡title!
+RANDOMIZE ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MultigraphBUT.RANDOMIZATION
+%%%% ¡title!
+RANDOMIZATION VALUE
+
+%%% ¡prop!
+%%%% ¡id!
+MultigraphBUT.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
 MultigraphBUT.A
 %%%% ¡title!
 Binary Undirected ADJACENCY MATRICES at fixed Thresholds
@@ -186,7 +204,11 @@ A = cell(length(thresholds));
 
 for i = 1:1:length(thresholds)
     threshold = thresholds(i);
-    A{i, i} = dediagonalize(binarize(cell2mat(A_WU), 'threshold', threshold));
+    tmp_A = dediagonalize(binarize(cell2mat(A_WU), 'threshold', threshold));
+    if g.get('RANDOMIZE')
+        tmp_A = g.get('RANDOMIZATION', A_WU);
+    end
+    A{i, i} = tmp_A;
 end
 
 value = A;
@@ -357,3 +379,38 @@ assert(isequal( ...
     ]), ...
     [BRAPH2.STR ':MultigraphBUT:' BRAPH2.FAIL_TEST], ...
     'MultigraphBUT is not constructing well.')
+
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B = randn(10);
+
+g = MultigraphBUT('B', B, 'THRESHOLDS', [.5]);
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
+
+A = g.get('A');
+
+assert(isequal(size(A{1}), size(B)), ...
+    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
+    'GraphBU Randomize is not functioning well.')
+
+g2 = MultigraphBUT('B', B, 'THRESHOLDS', [.5]);
+g2.set('RANDOMIZE', false);
+g2.set('ATTEMPTSPEREDGE', 4);
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
+
+assert(~isequal(A2, random_A), ...
+    [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
+    'GraphWU Randomize is not functioning well.')
+
+d1 = g.get('MEASURE', 'Degree');
+d2 = g2.get('MEASURE', 'Degree');
+
+assert(isequal(d1.get('M'), d2.get('M')), ...
+    [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
+    'GraphWU Randomize is not functioning well.')
