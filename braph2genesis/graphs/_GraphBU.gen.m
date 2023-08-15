@@ -52,9 +52,9 @@ RANDOMIZE ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-GraphBU.RANDOM_SEED
+GraphBU.RANDOMIZATION
 %%%% ¡title!
-RANDOMIZATION SEED
+RANDOMIZATION VALUE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -156,91 +156,9 @@ B = binarize(B); %#ok<PROPLC> % enforces binary adjacency matrix, equivalent to 
 A = {B}; %#ok<PROPLC>
 
 if g.get('RANDOMIZE')
-    rng(g.get('RANDOM_SEED'), 'twister')
-
-    A = cell2mat(A);
-    attempts_per_edge = g.get('ATTEMPTSPEREDGE');
-
-     % remove self connections
-    A(1:length(A) + 1:numel(A)) = 0;
-    [I_edges, J_edges] = find(triu(A)); % find the edges
-    E = length(I_edges); % number of edges
-
-    if E == 0
-        random_A = A;
-        swaps = 0;
-        return
-    end
-
-    if E == 1
-        A(I_edges(1), J_edges(1)) = 0;
-        A(J_edges(1), I_edges(1)) = 0;
-        selected_nodes = randperm(size(A, 1), 2);
-        A(selected_nodes(1), selected_nodes(2)) = 1;
-        A(selected_nodes(2), selected_nodes(1)) = 1;
-        random_A = A;
-        swaps = 1;
-        return
-    end
-
-    random_A = A;
-    swaps = 0; % number of successful edge swaps
-    for attempt = 1:1:attempts_per_edge * E
-
-        % select two edges
-        selected_edges = randperm(E, 2);
-        node_start_1 = I_edges(selected_edges(1));
-        node_end_1 = J_edges(selected_edges(1));
-        node_start_2 = I_edges(selected_edges(2));
-        node_end_2 = J_edges(selected_edges(2));
-
-        if rand(1) > .5
-            I_edges(selected_edges(2)) = node_end_2;
-            J_edges(selected_edges(2)) = node_start_2;
-
-            node_start_2 = I_edges(selected_edges(2));
-            node_end_2 = J_edges(selected_edges(2));
-        end
-
-        % Swap edges if:
-        % 1) no edge between node_start_1 and node_end_2
-        % 2) no edge between node_start_2 and node_end_1
-        % 3) node_start_1 ~= node_start_2
-        % 4) node_end_1 ~= node_end_2
-        % 5) node_start_1 ~= node_end_2
-        % 6) node_start_2 ~= node_end_1
-
-        if ~random_A(node_start_1, node_end_2) && ...
-                ~random_A(node_start_2, node_end_1) && ...
-                node_start_1 ~= node_start_2 && ...
-                node_end_1 ~= node_end_2 && ...
-                node_start_1 ~= node_end_2 && ...
-                node_start_2 ~= node_end_1
-
-            % erase old edges
-            random_A(node_start_1, node_end_1) = 0;
-            random_A(node_end_1, node_start_1) = 0;
-
-            random_A(node_start_2, node_end_2) = 0;
-            random_A(node_end_2, node_start_2) = 0;
-
-            % write new edges
-            random_A(node_start_1, node_end_2) = 1;
-            random_A(node_end_2, node_start_1) = 1;
-
-            random_A(node_start_2, node_end_1) = 1;
-            random_A(node_end_1, node_start_2) = 1;
-
-            % update edge list
-            J_edges(selected_edges(1)) = node_end_2;
-            J_edges(selected_edges(2)) = node_end_1;
-
-            swaps = swaps + 1;
-        end
-    end
+    random_A = g.get('RANDOMIZATION', A);
 
     A = {random_A};
-
 end
 
 value = A;
@@ -283,6 +201,99 @@ SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative ed
 ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
 %%%% ¡default!
 5
+
+%%% ¡prop!
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = cell2mat(varargin{1});
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+
+% remove self connections
+A(1:length(A) + 1:numel(A)) = 0;
+[I_edges, J_edges] = find(triu(A)); % find the edges
+E = length(I_edges); % number of edges
+
+if E == 0
+    random_A = A;
+    swaps = 0;
+    return
+end
+
+if E == 1
+    A(I_edges(1), J_edges(1)) = 0;
+    A(J_edges(1), I_edges(1)) = 0;
+    selected_nodes = randperm(size(A, 1), 2);
+    A(selected_nodes(1), selected_nodes(2)) = 1;
+    A(selected_nodes(2), selected_nodes(1)) = 1;
+    random_A = A;
+    swaps = 1;
+    return
+end
+
+random_A = A;
+swaps = 0; % number of successful edge swaps
+for attempt = 1:1:attempts_per_edge * E
+
+    % select two edges
+    selected_edges = randperm(E, 2);
+    node_start_1 = I_edges(selected_edges(1));
+    node_end_1 = J_edges(selected_edges(1));
+    node_start_2 = I_edges(selected_edges(2));
+    node_end_2 = J_edges(selected_edges(2));
+
+    if rand(1) > .5
+        I_edges(selected_edges(2)) = node_end_2;
+        J_edges(selected_edges(2)) = node_start_2;
+
+        node_start_2 = I_edges(selected_edges(2));
+        node_end_2 = J_edges(selected_edges(2));
+    end
+
+    % Swap edges if:
+    % 1) no edge between node_start_1 and node_end_2
+    % 2) no edge between node_start_2 and node_end_1
+    % 3) node_start_1 ~= node_start_2
+    % 4) node_end_1 ~= node_end_2
+    % 5) node_start_1 ~= node_end_2
+    % 6) node_start_2 ~= node_end_1
+
+    if ~random_A(node_start_1, node_end_2) && ...
+            ~random_A(node_start_2, node_end_1) && ...
+            node_start_1 ~= node_start_2 && ...
+            node_end_1 ~= node_end_2 && ...
+            node_start_1 ~= node_end_2 && ...
+            node_start_2 ~= node_end_1
+
+        % erase old edges
+        random_A(node_start_1, node_end_1) = 0;
+        random_A(node_end_1, node_start_1) = 0;
+
+        random_A(node_start_2, node_end_2) = 0;
+        random_A(node_end_2, node_start_2) = 0;
+
+        % write new edges
+        random_A(node_start_1, node_end_2) = 1;
+        random_A(node_end_2, node_start_1) = 1;
+
+        random_A(node_start_2, node_end_1) = 1;
+        random_A(node_end_1, node_start_2) = 1;
+
+        % update edge list
+        J_edges(selected_edges(1)) = node_end_2;
+        J_edges(selected_edges(2)) = node_end_1;
+
+        swaps = swaps + 1;
+    end
+end
+value = random_A
+
 
 %% ¡tests!
 
@@ -434,5 +445,22 @@ g.set('ATTEMPTSPEREDGE', 4);
 A = g.get('A');
 
 assert(isequal(size(A), size(B)), ...
+    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
+    'GraphBU Randomize is not functioning well.')
+
+g2 = GraphBU('B', B);
+g2.set('RANDOMIZE', false);
+g2.set('ATTEMPTSPEREDGE', 4);
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
+
+assert(~isequal(A2, random_A), ...
+    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
+    'GraphBU Randomize is not functioning well.')
+
+d1 = g.get('MEASURE', 'Degree');
+d2 = g2.get('MEASURE', 'Degree');
+
+assert(isequal(d1.get('M'), d2.get('M'), ...
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
