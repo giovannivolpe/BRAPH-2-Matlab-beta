@@ -52,6 +52,30 @@ NORMALIZATION RULE
 
 %%% ¡prop!
 %%%% ¡id!
+GraphWD.RANDOMIZE
+%%%% ¡title!
+RANDOMIZE ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+GraphWD.RANDOMIZATION
+%%%% ¡title!
+RANDOMIZATION VALUE
+
+%%% ¡prop!
+%%%% ¡id!
+GraphWD.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
+GraphWD.NUMBEROFWEIGHTS
+%%%% ¡title!
+RANDOMIZATION NUMBER OF WEIGHTS
+
+%%% ¡prop!
+%%%% ¡id!
 GraphWU.A
 %%%% ¡title!
 Weighted Undirected ADJACENCY MATRIX
@@ -148,6 +172,10 @@ B = semipositivize(B, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); %#ok<
 B = standardize(B, 'StandardizeRule', g.get('STANDARDIZE_RULE')); %#ok<PROPLC> % ensures all weights are between 0 and 1
 
 A = {B}; %#ok<PROPLC>
+if g.get('RANDOMIZE')
+    random_A = g.get('RANDOMIZATION', A);
+    A = {random_A};
+end
 value = A;
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', GraphWU.A, ...
@@ -188,6 +216,88 @@ SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative ed
 STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.
 %%%% ¡settings!
 {'threshold' 'range'}
+
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
+%%% ¡prop!
+NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.
+%%%% ¡default!
+10
+
+%%% ¡prop!
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = cell2mat(varargin{1});
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+number_of_weights = g.get('NUMBEROFWEIGHTS');
+
+W = A;  % swaps with A
+A = GraphBU.randomize_A(W, attempts_per_edge);
+
+% remove self connections
+A(1:length(A)+1:numel(A)) = 0;
+W(1:length(W)+1:numel(W)) = 0;
+W_bin = W > 0;
+N = size(A,1); % number of nodes
+random_A = zeros(N); % intialize null model matrix
+
+S = sum(W,2); % nodal strength
+W_sorted = sort(W(triu(W_bin))); % sorted weights vector
+% find all the edges
+[I_edges, J_edges] = find(triu(A));
+edges = I_edges + (J_edges-1)*N;
+% expected weights matrix
+P = (S*S.');
+
+for m = numel(W_sorted):-number_of_weights:1
+
+    % sort the expected weights matrix
+    [~, ind] = sort(P(edges));
+
+    % random index of sorted expected weight
+    selected_indices = randperm(m, min(m,number_of_weights)).';
+    selected_edges = ind(selected_indices);
+
+    % assign corresponding sorted weight at this index
+    random_A(edges(selected_edges)) = W_sorted(selected_indices);
+
+    % recalculate expected weight for node I_edges(selected_edge)
+    % cumulative weight
+    WA = accumarray([I_edges(selected_edges); J_edges(selected_edges)], W_sorted([selected_indices; selected_indices]), [N,1]);
+    IJu = any(WA,2);
+    F = 1 - WA(IJu)./S(IJu);
+    F = F(:,ones(1,N));
+    % readjust expected weight probabilities
+    P(IJu,:) = P(IJu,:).*F;
+    P(:,IJu) = P(:,IJu).*F.';
+    % re-adjust strengths
+    S(IJu) = S(IJu) - WA(IJu);
+
+    % remove the edge/weight from further consideration
+    selected_edges = ind(selected_indices);
+    edges(selected_edges) = [];
+    I_edges(selected_edges) = [];
+    J_edges(selected_edges) = [];
+    W_sorted(selected_indices) = [];
+end
+
+% calculate the final matrix
+random_A = random_A + transpose(random_A);
+
+% calculate correlation of original vs reassinged strength
+rpos = corrcoef(sum(W), sum(random_A));
+correlation_coefficients = rpos(2);
+value = random_A;
 
 %% ¡tests!
 
@@ -258,151 +368,37 @@ for i = 1:1:length(symmetrize_rules)
     end
 end
 
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B = randn(10);
 
+g = GraphWU('B', B);
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
 
+A = g.get('A');
 
+assert(isequal(size(A{1}), size(B)), ...
+    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
+    'GraphBU Randomize is not functioning well.')
 
+g2 = GraphWU('B', B);
+g2.set('RANDOMIZE', false);
+g2.set('ATTEMPTSPEREDGE', 4);
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
 
-%% ¡_props!
+assert(~isequal(A2, random_A), ...
+    [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
+    'GraphWU Randomize is not functioning well.')
 
-%%% ¡_prop!
-ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-%%%% ¡_default!
-5
+d1 = g.get('MEASURE', 'Degree');
+d2 = g2.get('MEASURE', 'Degree');
 
-%%% ¡_prop!
-NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.
-%%%% ¡_default!
-10
-
-%% ¡_staticmethods!
-function [random_A, correlation_coefficients] = randomize_A(A, attempts_per_edge, number_of_weights)
-    % RANDOMIZE_A returns a randomized correlation matrix
-    % This algorithm was proposed by Rubinov and Sporns (Neuroimage 56, 4, 2011).
-    %
-    % RANDOM_A = RANDOMIZE_A(G, ATTEMPTS_PER_EDGE, NUMBER_OF_WEIGHTS)
-    % returns the randomized matrix. RANDOM_A. NUMBER_OF_WEIGHTS
-    % specifies the number of weights sorted at the same time.
-    % ATTEMPTS_PER_EDGE is passed as an argument to GraphBD.
-    %
-    % [RANDOM_A, CORRELATION_COEFFICIENTS] = RANDOMIZE_A(G)
-    % returns the randomized matrix. RANDOM_A. NUMBER_OF_WEIGHTS
-    % specifies the number of weights sorted at the same time, it
-    % will be default value of 10. Returns the correlation coefficients
-    % between the original and randomized nodal strengths.
-    % High coefficients indicate more accurate preservation of
-    % the strength sequences. ATTEMPTS_PER_EDGE is passed as an
-    % argument to GraphBD, it will be default value of 5.
-    %
-    % [RANDOM_A, CORRELATION_COEFFICIENTS] = RANDOMIZE_A(G, ATTEMPTS_PER_EDGE, NUMBER_OF_WEIGHTS)
-    % returns the randomized matrix. RANDOM_A. NUMBER_OF_WEIGHTS
-    % specifies the number of weights sorted at the same time. Returns the
-    % correlation coefficients between the original and randomized nodal
-    % strengths. High coefficients indicate more accurate preservation of
-    % the strength sequences. ATTEMPTS_PER_EDGE is passed as an
-    % argument to GraphBD.
-    %
-    % See also randomize.
-
-    if nargin < 2
-        attempts_per_edge = 5;
-    end
-
-    if nargin < 3
-        number_of_weights = 10;
-    end
-
-    W = A;  % swaps with A
-    A = GraphBU.randomize_A(W, attempts_per_edge);
-
-    % remove self connections
-    A(1:length(A)+1:numel(A)) = 0;
-    W(1:length(W)+1:numel(W)) = 0;
-    W_bin = W > 0;
-    N = size(A,1); % number of nodes
-    random_A = zeros(N); % intialize null model matrix
-
-    S = sum(W,2); % nodal strength
-    W_sorted = sort(W(triu(W_bin))); % sorted weights vector
-    % find all the edges
-    [I_edges, J_edges] = find(triu(A));
-    edges = I_edges + (J_edges-1)*N;
-    % expected weights matrix
-    P = (S*S.');
-
-    for m = numel(W_sorted):-number_of_weights:1
-
-        % sort the expected weights matrix
-        [~, ind] = sort(P(edges));
-
-        % random index of sorted expected weight
-        selected_indices = randperm(m, min(m,number_of_weights)).';
-        selected_edges = ind(selected_indices);
-
-        % assign corresponding sorted weight at this index
-        random_A(edges(selected_edges)) = W_sorted(selected_indices);
-
-        % recalculate expected weight for node I_edges(selected_edge)
-        % cumulative weight
-        WA = accumarray([I_edges(selected_edges); J_edges(selected_edges)], W_sorted([selected_indices; selected_indices]), [N,1]);
-        IJu = any(WA,2);
-        F = 1 - WA(IJu)./S(IJu);
-        F = F(:,ones(1,N));
-        % readjust expected weight probabilities
-        P(IJu,:) = P(IJu,:).*F;
-        P(:,IJu) = P(:,IJu).*F.';
-        % re-adjust strengths
-        S(IJu) = S(IJu) - WA(IJu);
-
-        % remove the edge/weight from further consideration
-        selected_edges = ind(selected_indices);
-        edges(selected_edges) = [];
-        I_edges(selected_edges) = [];
-        J_edges(selected_edges) = [];
-        W_sorted(selected_indices) = [];
-    end
-
-    % calculate the final matrix
-    random_A = random_A + transpose(random_A);
-
-    % calculate correlation of original vs reassinged strength
-    rpos = corrcoef(sum(W), sum(random_A));
-    correlation_coefficients = rpos(2);
-end
-
-%% ¡_methods!
-function random_g = randomize(g)
-    % RANDOMIZE returns a randomized graph and the correlation coefficients
-    %
-    % RANDOM_G = RANDOMIZE(G) returns the randomized graph
-    % RANDOM_G obtained with a randomized correlation
-    % matrix via the static function randomize_A.
-    %
-    % RANDOM_G = RANDOMIZE(G, 'AttemptPerEdge', VALUE, 'NumberOfWeights', VALUE)
-    % returns the randomized graph RANDOM_G obtained with a randomized correlation
-    % matrix via the static function randomize_A, it passes the
-    % attempts per edge and the number of weights specified by the user.
-    %
-    % See also randomize_A
-
-    % get rules
-    number_of_weights = g.get('NUMBEROFWEIGHTS');
-    attempts_per_edge = g.get('ATTEMPTSPEREDGE');
-
-    % correction for multigraphs
-    if Graph.is_multigraph(g)
-        tmp_b = g.get('B');
-        tmp_g = GraphWU('B', tmp_b);
-        tmp_A = cell2mat(tmp_g.get('A'));
-        random_B = GraphWU.randomize_A(tmp_A, attempts_per_edge, number_of_weights);
-        if isa(g, 'MultigraphBUD')
-            random_g = MultigraphBUD('B', random_B, 'Densities', g.get('DENSITIES'));
-        else
-            random_g = MultigraphBUT('B', random_B, 'Thresholds', g.get('THRESHOLDS'));
-        end
-    else
-        A = cell2mat(g.get('A'));
-        random_A = GraphWU.randomize_A(A, attempts_per_edge, number_of_weights);
-        random_g = GraphWU('B', random_A);
-    end
-end
+assert(isequal(d1.get('M'), d2.get('M')), ...
+    [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
+    'GraphWU Randomize is not functioning well.')
