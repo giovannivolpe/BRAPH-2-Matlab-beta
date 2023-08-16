@@ -41,7 +41,7 @@ NOTES (metadata, string) are some specific notes about the neural network multi-
 'NNClassifierMLP notes'
 
 %%% ¡prop!
-D (data, item) is the dataset to train the neural network model, and the default value of its data point class DP_CLASS is set to one of the compatible classes of data point DP_CLASSES.
+D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.
 %%%% ¡settings!
 'NNDataset'
 %%%% ¡default!
