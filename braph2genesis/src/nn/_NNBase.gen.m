@@ -49,7 +49,7 @@ NOTES (metadata, string) are some specific notes about the nerual network base.
 %% ¡props!
 
 %%% ¡prop!
-D (data, item) is the dataset to train the neural network model.
+D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.
 %%%% ¡settings!
 'NNDataset'
 %%%% ¡default!
