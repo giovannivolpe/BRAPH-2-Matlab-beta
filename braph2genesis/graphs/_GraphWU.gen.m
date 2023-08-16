@@ -52,25 +52,31 @@ NORMALIZATION RULE
 
 %%% ¡prop!
 %%%% ¡id!
-GraphWD.RANDOMIZE
+GraphWU.RANDOMIZE
 %%%% ¡title!
 RANDOMIZE ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-GraphWD.RANDOMIZATION
+GraphWU.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
+GraphWU.RANDOMIZATION
 %%%% ¡title!
 RANDOMIZATION VALUE
 
 %%% ¡prop!
 %%%% ¡id!
-GraphWD.ATTEMPTSPEREDGE
+GraphWU.ATTEMPTSPEREDGE
 %%%% ¡title!
 RANDOMIZATION ATTEMPTS PER EDGE
 
 %%% ¡prop!
 %%%% ¡id!
-GraphWD.NUMBEROFWEIGHTS
+GraphWU.NUMBEROFWEIGHTS
 %%%% ¡title!
 RANDOMIZATION NUMBER OF WEIGHTS
 

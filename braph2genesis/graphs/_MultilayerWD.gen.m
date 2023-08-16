@@ -68,6 +68,12 @@ RANDOMIZE ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
+MultilayerWD.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
 MultilayerWD.RANDOMIZATION
 %%%% ¡title!
 RANDOMIZATION VALUE
@@ -205,13 +211,6 @@ for i = 1:1:L
     M = semipositivize(M, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
     M = standardize(M, 'StandardizeRule', g.get('STANDARDIZE_RULE'));  % rescales adjacency matrix
     A(i, i) = {M};
-    if g.get('RANDOMIZE')
-        tmp_g = GraphWD();
-        tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
-        tmp_g.set('NUMBEROFWEIGHTS', g.get('NUMBEROFWEIGHTS'));
-        random_A = tmp_g.get('RANDOMIZATION', M);
-        A(i, i) = {random_A};
-    end
     if ~isempty(A{i, i})
         for j = i+1:1:L
             M = semipositivize(B{i,j}, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
@@ -222,6 +221,9 @@ for i = 1:1:L
             A(j, i) = {M};
         end
     end
+end
+if g.get('RANDOMIZE')
+    A = g.get('RANDOMIZATION', A);
 end
 value = A;
 
@@ -293,6 +295,30 @@ ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
 NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.
 %%%% ¡default!
 10
+
+%%% ¡prop!
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+
+for i = 1:length(A)
+    tmp_a = A{i,i};
+
+    tmp_g = GraphWD();
+    tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+    tmp_g.set('NUMBEROFWEIGHTS', g.get('NUMBEROFWEIGHTS'));
+    random_A = tmp_g.get('RANDOMIZATION', tmp_a);
+    A{i, i} = random_A;
+end
+value = random_A;
 
 %% ¡tests!
 

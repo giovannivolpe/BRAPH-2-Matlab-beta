@@ -45,6 +45,12 @@ RANDOMIZE ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
+GraphBD.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
 GraphBD.RANDOMIZATION
 %%%% ¡title!
 RANDOMIZATION VALUE

@@ -68,6 +68,36 @@ NORMALIZATION RULE
 
 %%% ¡prop!
 %%%% ¡id!
+MultilayerWU.RANDOMIZE
+%%%% ¡title!
+RANDOMIZE ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerWU.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerWU.RANDOMIZATION
+%%%% ¡title!
+RANDOMIZATION VALUE
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerWU.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerWU.NUMBEROFWEIGHTS
+%%%% ¡title!
+RANDOMIZATION NUMBER OF WEIGHTS
+
+%%% ¡prop!
+%%%% ¡id!
 MultilayerWU.A
 %%%% ¡title!
 Weighted Undirected ADJACENCY MATRICES
@@ -198,6 +228,9 @@ for i = 1:1:L
         end
     end
 end
+if g.get('RANDOMIZE')
+    A = g.get('RANDOMIZATION', A);
+end
 value = A;
 
 %%%% ¡gui!
@@ -263,6 +296,40 @@ STANDARDIZE_RULE (parameter, option) determines how to normalize the weights bet
 %%%% ¡settings!
 {'threshold' 'range'}
 
+%%% ¡_prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡_default!
+5
+
+%%% ¡_prop!
+NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.
+%%%% ¡_default!
+10
+
+%%% ¡prop!
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+
+for i = 1:length(A)
+    tmp_a = A{i,i};
+
+    tmp_g = GraphWU();
+    tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+    tmp_g.set('NUMBEROFWEIGHTS', g.get('NUMBEROFWEIGHTS'));
+    random_A = tmp_g.get('RANDOMIZATION', tmp_a);
+    A{i, i} = random_A;
+end
+value = random_A;
+
 %% ¡tests!
 
 %%% ¡excluded_props!
@@ -306,56 +373,3 @@ A = B;
 assert(isequal(g.get('A'), A), ...
     [BRAPH2.STR ':MultilayerWU:' BRAPH2.FAIL_TEST], ...
     'MultilayerWU is not constructing well.')
- 
-%% ¡_props!
-%%% ¡_prop!
-ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-%%%% ¡_default!
-5
-
-%%% ¡_prop!
-NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.
-%%%% ¡_default!
-10
-
-%% ¡_methods!
-function random_g = randomize(g)
-    % RANDOMIZE returns a randomized graph
-    %
-    % RANDOMIZED_G = RANDOMIZE(G) returns the randomized
-    % graph RANDOM_G obtained with a randomized correlation
-    % matrix via the static function randomize_A while preserving
-    % degree distributions. The randomization it is done layer by
-    % layer and then integrated in the 2-D supra-adjacency matrix
-    % cell array.
-    %
-    % RANDOMIZED_G = RANDOMIZE(G, 'AttemptsPerEdge', VALUE)
-    % returns the randomized graph RANDOM_G obtained with a
-    % randomized correlation matrix via the static function
-    % randomize_A while preserving  degree distributions.
-    % The multilayer is randomized layer by layer where randomized
-    % adjacency matrix of each layer are then integrated in the
-    % 2-D supra-adjacency matrix cell array.
-    %
-    % See also GraphBD
-
-    % get rules
-    number_of_weights = g.get('NUMBEROFWEIGHTS');
-    attempts_per_edge = g.get('ATTEMPTSPEREDGE');
-
-    if nargin<2
-        attempts_per_edge = 5;
-    end
-
-    % get A
-    A = g.get('A');
-    [l, ls] = g.layernumber();
-
-    random_multi_A = cell(l, l);
-    for li = 1:1:l
-        Aii = A{li, li};
-        random_A = GraphWU.randomize_A(Aii, attempts_per_edge, number_of_weights);
-        random_multi_A(li,li) = {random_A};
-    end
-    random_g = MultilayerWU('B', random_multi_A);
-end

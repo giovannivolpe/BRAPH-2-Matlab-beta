@@ -76,6 +76,36 @@ DENSITIES [0% ... 100%]
 
 %%% ¡prop!
 %%%% ¡id!
+MultilayerBUD.RANDOMIZE
+%%%% ¡title!
+RANDOMIZE ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBUD.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBUD.RANDOMIZATION
+%%%% ¡title!
+RANDOMIZATION VALUE
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBUD.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBUD.NUMBEROFWEIGHTS
+%%%% ¡title!
+RANDOMIZATION NUMBER OF WEIGHTS
+
+%%% ¡prop!
+%%%% ¡id!
 MultilayerBUD.A
 %%%% ¡title!
 Binary Undirected ADJACENCY MATRICES at fixed Densities
@@ -225,6 +255,9 @@ if L > 0 && ~isempty(cell2mat(A_WU))
         end
     end
 end
+if g.get('RANDOMIZE')
+    A = g.get('RANDOMIZATION', A);
+end
 value = A;
 
 %%%% ¡gui!
@@ -281,6 +314,34 @@ DENSITIES (parameter, rvector) is the vector of densities.
 [0 0 0 0]
 %%%% ¡gui!
 pr = PanelPropRVectorSmart('EL', g, 'PROP', MultilayerBUD.DENSITIES, 'MAX', 100, 'MIN', 0, varargin{:});
+
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
+%%% ¡prop!
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+
+for i = 1:length(A)
+    tmp_a = A{i,i};
+
+    tmp_g = GraphWU();
+    tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+    random_A = tmp_g.get('RANDOMIZATION', tmp_a);
+    A{i, i} = random_A;
+end
+value = random_A;
 
 %% ¡tests!
 

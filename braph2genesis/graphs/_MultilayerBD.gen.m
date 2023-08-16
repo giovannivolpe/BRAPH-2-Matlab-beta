@@ -61,6 +61,12 @@ RANDOMIZE ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
+MultilayerBD.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
 MultilayerBD.RANDOMIZATION
 %%%% ¡title!
 RANDOMIZATION VALUE
@@ -191,12 +197,6 @@ for i = 1:1:L
     M = semipositivize(M, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
     M = binarize(M, varargin{:}); % enforces binary adjacency matrix, equivalent to binarize(M, 'threshold', 0, 'bins', [-1:.001:1])
     A(i, i) = {M};
-    if g.get('RANDOMIZE')
-        tmp_g = GraphBD();
-        tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
-        random_A = tmp_g.get('RANDOMIZATION', M);
-        A(i, i) = {random_A};
-    end
     if ~isempty(A{i, i})
         for j = i+1:1:L
             M = semipositivize(B{i,j}, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
@@ -206,10 +206,11 @@ for i = 1:1:L
             M = binarize(M, varargin{:}); % enforces binary adjacency matrix, equivalent to binarize(M, 'threshold', 0, 'bins', [-1:.001:1])
             A(j, i) = {M};
         end
-    end
-    
+    end    
 end
-
+if g.get('RANDOMIZE')
+    A = g.get('RANDOMIZATION', A);
+end
 value = A;
 
 %%%% ¡gui!
@@ -261,14 +262,37 @@ pr = PanelPropCell('EL', g, 'PROP', MultilayerBD.B, ...
     varargin{:});
 
 %%% ¡prop!
+SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.
+%%%% ¡settings!
+{'zero', 'absolute'}
+
+%%% ¡prop!
 ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
 %%%% ¡default!
 5
 
 %%% ¡prop!
-SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.
-%%%% ¡settings!
-{'zero', 'absolute'}
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+
+for i = 1:length(A)
+    tmp_a = A{i,i};
+
+    random_g = GraphBD();
+    random_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+    random_A{i, i} = random_g.randomize_A(tmp_a);
+    A{i, i} = random_A;
+end
+value = random_A;
 
 %% ¡tests!
 
