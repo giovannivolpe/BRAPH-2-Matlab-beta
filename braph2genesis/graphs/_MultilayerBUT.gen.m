@@ -256,6 +256,9 @@ if L > 0 && ~isempty(cell2mat(A_WU))
         end
     end
 end
+if g.get('RANDOMIZE')
+    A = g.get('RANDOMIZATION', A);
+end
 value = A;
 
 %%%% ¡gui!
