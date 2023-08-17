@@ -282,7 +282,6 @@ if isempty(varargin)
 end
 
 A = varargin{1};
-attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 
 for i = 1:length(A)
     tmp_a = A{i,i};

@@ -278,33 +278,6 @@ THRESHOLDS (parameter, rvector) is the vector of thresholds.
 %%%% ¡gui!
 pr = PanelPropRVectorSmart('EL', g, 'PROP', MultiplexBUT.THRESHOLDS, 'MAX', 1, 'MIN', -1, varargin{:});
 
-%%% ¡prop!
-ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-%%%% ¡default!
-5
-
-%%% ¡prop!
-RANDOMIZATION (query, cell) is the attempts to rewire each edge.
-%%%% ¡calculate!
-rng(g.get('RANDOM_SEED'), 'twister')
-
-if isempty(varargin)
-    value = {};
-    return
-end
-
-A = varargin{1};
-attempts_per_edge = g.get('ATTEMPTSPEREDGE');
-
-for i = 1:length(A)
-    tmp_a = A{i,i};
-
-    tmp_g = GraphWU();
-    tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
-    random_A = tmp_g.get('RANDOMIZATION', tmp_a);
-    A{i, i} = random_A;
-end
-value = random_A;
 %% ¡tests!
 
 %%% ¡excluded_props!

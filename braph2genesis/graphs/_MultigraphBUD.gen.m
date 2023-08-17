@@ -257,29 +257,6 @@ DENSITIES (parameter, rvector) is the vector of densities.
 %%%% ¡gui!
 pr = PanelPropRVectorSmart('EL', g, 'PROP', MultigraphBUD.DENSITIES, 'MAX', 100, 'MIN', 0, varargin{:});
 
-%%% ¡prop!
-RANDOMIZATION (query, cell) is the attempts to rewire each edge.
-%%%% ¡calculate!
-rng(g.get('RANDOM_SEED'), 'twister')
-
-if isempty(varargin)
-    value = {};
-    return
-end
-
-A = varargin{1};
-attempts_per_edge = g.get('ATTEMPTSPEREDGE');
-
-for i = 1:length(A)
-    tmp_a = A{i,i};
-
-    random_g = GraphWU();
-    random_g.set('ATTEMPTSPEREDGE',  g.get('ATTEMPTSPEREDGE');
-    random_A{i, i} = random_g.randomize_A(tmp_a);
-end
-
-value = random_A;
-
 %% ¡tests!
 
 %%% ¡excluded_props!

@@ -244,6 +244,19 @@ if isempty(varargin)
 end
 
 A = cell2mat(varargin{1});
+
+if Graph.is_multigraph(g)
+    for i = 1:length(A)
+        tmp_G = GraphWU();
+        tmp_G.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+        tmp_G.set('NUMBEROFWEIGHTS',g.get('NUMBEROFWEIGHTS'));
+        random_B{i, i} = GraphWU.randomize_A(A{i, i});
+    end
+    value = random_B;
+    return;
+end
+
+A = cell2mat(varargin{1});
 attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 number_of_weights = g.get('NUMBEROFWEIGHTS');
 

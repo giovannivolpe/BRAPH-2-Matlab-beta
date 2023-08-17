@@ -296,14 +296,14 @@ STANDARDIZE_RULE (parameter, option) determines how to normalize the weights bet
 %%%% ¡settings!
 {'threshold' 'range'}
 
-%%% ¡_prop!
+%%% ¡prop!
 ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-%%%% ¡_default!
+%%%% ¡default!
 5
 
-%%% ¡_prop!
+%%% ¡prop!
 NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.
-%%%% ¡_default!
+%%%% ¡default!
 10
 
 %%% ¡prop!
@@ -317,7 +317,6 @@ if isempty(varargin)
 end
 
 A = varargin{1};
-attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 
 for i = 1:length(A)
     tmp_a = A{i,i};
