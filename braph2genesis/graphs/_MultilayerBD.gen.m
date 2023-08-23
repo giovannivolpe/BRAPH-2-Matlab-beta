@@ -288,7 +288,7 @@ for i = 1:length(A)
 
     random_g = GraphBD();
     random_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
-    random_A{i, i} = random_g.randomize_A(tmp_a);
+    random_A{i, i} = random_g.get('RANDOMIZATION', tmp_a);
     A{i, i} = random_A;
 end
 value = random_A;

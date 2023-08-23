@@ -245,23 +245,26 @@ end
 
 A = cell2mat(varargin{1});
 
-if Graph.is_multigraph(g)
+if g.get('GRAPH_TYPE') ~= 1
     for i = 1:length(A)
         tmp_G = GraphWU();
         tmp_G.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
         tmp_G.set('NUMBEROFWEIGHTS',g.get('NUMBEROFWEIGHTS'));
-        random_B{i, i} = GraphWU.randomize_A(A{i, i});
+        random_B{i, i} = tmp_G.get('RANDOMIZATION', A(i, i));
     end
     value = random_B;
     return;
 end
 
 A = cell2mat(varargin{1});
+
+W = A;  % swaps with A
 attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 number_of_weights = g.get('NUMBEROFWEIGHTS');
 
 W = A;  % swaps with A
-A = GraphBU.randomize_A(W, attempts_per_edge);
+tmp_g = GraphBU('ATTEMPTSPEREDGE', attempts_per_edge);
+A = tmp_g.get('RANDOMIZATION', {W});
 
 % remove self connections
 A(1:length(A)+1:numel(A)) = 0;
