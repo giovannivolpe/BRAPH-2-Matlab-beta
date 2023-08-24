@@ -234,8 +234,12 @@ A = cell2mat(varargin{1});
 attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 number_of_weights = g.get('NUMBEROFWEIGHTS');
 
-W = A;  % swaps with A
-A = GraphWD.randomize_A(W, attempts_per_edge);
+
+tmp_g = GraphBD('ATTEMPTSPEREDGE', attempts_per_edge);
+tmp_W = tmp_g.get('RANDOMIZATION', W);
+if iscell(tmp_W)
+    W = cell2mat(tmp_W);  % swaps with A
+end
 % remove self connections
 A(1:length(A)+1:numel(A)) = 0;
 W(1:length(W)+1:numel(W)) = 0;
