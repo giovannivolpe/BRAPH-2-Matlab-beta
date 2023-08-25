@@ -73,19 +73,13 @@ THRESHOLDS [-1 ... 1]
 %%%% ¡id!
 MultiplexBUT.RANDOMIZE
 %%%% ¡title!
-RANDOMIZE ON/OFF
+RANDOMIZATION ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
 MultiplexBUT.RANDOM_SEED
 %%%% ¡title!
 RANDOMIZATION SEED
-
-%%% ¡prop!
-%%%% ¡id!
-MultiplexBUT.RANDOMIZATION
-%%%% ¡title!
-RANDOMIZATION VALUE
 
 %%% ¡prop!
 %%%% ¡id!

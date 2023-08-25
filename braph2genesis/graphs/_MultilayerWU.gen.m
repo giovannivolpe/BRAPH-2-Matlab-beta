@@ -70,19 +70,13 @@ NORMALIZATION RULE
 %%%% ¡id!
 MultilayerWU.RANDOMIZE
 %%%% ¡title!
-RANDOMIZE ON/OFF
+RANDOMIZATION ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
 MultilayerWU.RANDOM_SEED
 %%%% ¡title!
 RANDOMIZATION SEED
-
-%%% ¡prop!
-%%%% ¡id!
-MultilayerWU.RANDOMIZATION
-%%%% ¡title!
-RANDOMIZATION VALUE
 
 %%% ¡prop!
 %%%% ¡id!

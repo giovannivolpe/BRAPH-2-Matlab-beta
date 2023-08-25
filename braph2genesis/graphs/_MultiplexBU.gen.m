@@ -62,19 +62,13 @@ NEGATIVE EDGE RULE
 %%%% ¡id!
 MultiplexBU.RANDOMIZE
 %%%% ¡title!
-RANDOMIZE ON/OFF
+RANDOMIZATION ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
 MultiplexBU.RANDOM_SEED
 %%%% ¡title!
 RANDOMIZATION SEED
-
-%%% ¡prop!
-%%%% ¡id!
-MultiplexBU.RANDOMIZATION
-%%%% ¡title!
-RANDOMIZATION VALUE
 
 %%% ¡prop!
 %%%% ¡id!

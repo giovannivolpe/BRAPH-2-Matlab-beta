@@ -47,19 +47,13 @@ NORMALIZATION RULE
 %%%% ¡id!
 GraphWD.RANDOMIZE
 %%%% ¡title!
-RANDOMIZE ON/OFF
+RANDOMIZATION ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
 GraphWD.RANDOM_SEED
 %%%% ¡title!
 RANDOMIZATION SEED
-
-%%% ¡prop!
-%%%% ¡id!
-GraphWD.RANDOMIZATION
-%%%% ¡title!
-RANDOMIZATION VALUE
 
 %%% ¡prop!
 %%%% ¡id!

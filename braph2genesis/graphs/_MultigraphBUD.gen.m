@@ -73,19 +73,13 @@ DENSITIES [0% ... 100%]
 %%%% ¡id!
 MultigraphBUD.RANDOMIZE
 %%%% ¡title!
-RANDOMIZE ON/OFF
+RANDOMIZATION ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
 MultigraphBUD.RANDOM_SEED
 %%%% ¡title!
 RANDOMIZATION SEED
-
-%%% ¡prop!
-%%%% ¡id!
-MultigraphBUD.RANDOMIZATION
-%%%% ¡title!
-RANDOMIZATION VALUE
 
 %%% ¡prop!
 %%%% ¡id!
