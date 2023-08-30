@@ -1,5 +1,5 @@
 \documentclass{tufte-handout}
-\usepackage{braph2_dev}
+\usepackage{braph2_devdoc}
 %\geometry{showframe} % display margins for debugging page layout
 
 \title{Implement a new Graph}
@@ -13,7 +13,7 @@
 \begin{abstract}
 \noindent
 This is the developer tutorial for implementing a new graph. 
-In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new graph which can the be compiled by \code{braph2genesis}, using the graphs \code{GraphBD}, \code{MultilayerWU}, \code{Multiplex??}, \code{OrdMl??} as examples. and \code{OrdMx??} as examples.
+In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new graph which can the be compiled by \code{braph2genesis}, using the graphs \code{GraphBD}, \code{MultilayerWU}, \code{MultiplexBUT} and \code{OrdMxBUT} as examples.
 \end{abstract}
 
 \tableofcontents
@@ -25,6 +25,8 @@ In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} 
 \subsection{Unilayer Graph Binary Directed (GraphBD)}
 
 We will start by implementing in detail the graph \code{GraphBD} which  is a direct extension of the element \code{Graph}.
+
+A unilayer graph is represented by nodes connected with edges. This type of graph is used for single-layer weighted analysis (WU, WD).
 
 \begin{lstlisting}[
 	label=cd:m:GraphBD:header,
@@ -39,75 +41,6 @@ GraphBD < Graph (m, binary directed graph) is a binary directed graph. ¥\circle
 %%% ¡description!
 In a binary directed (BD) graph, the edges are directed and they can be 
 either 0 (absence of connection) or 1 (existence of connection).
-\end{lstlisting}
-
-\begin{lstlisting}[
-	label=cd:m:GraphBD:layout,
-	caption={
-		{\bf GraphBD element layout.}
-		The \code{layout} section of generator code for \fn{\_GraphBD.gen.m} creates the general variables needed for the \code{GraphBD} element.
-	}
-	]
-%% ¡layout!
-%%% ¡prop!
-%%%% ¡id!
-GraphBD.ID
-%%%% ¡title!
-Graph ID
-
-%%% ¡prop!
-%%%% ¡id!
-GraphBD.LABEL
-%%%% ¡title!
-Graph NAME
-
-%%% ¡prop!
-%%%% ¡id!
-GraphBD.NODELABELS
-%%%% ¡title!
-NODES labels
-
-%%% ¡prop!
-%%%% ¡id!
-GraphBD.B
-%%%% ¡title!
-Input ADJACENCY MATRIX
-
-%%% ¡prop!
-%%%% ¡id!
-GraphBD.SEMIPOSITIVIZE_RULE
-%%%% ¡title!
-NEGATIVE WEIGHTS RULE
-
-%%% ¡prop!
-%%%% ¡id!
-GraphBD.A
-%%%% ¡title!
-Binary Directed ADJACENCY MATRIX
-
-%%% ¡prop!
-%%%% ¡id!
-GraphBD.PFGA
-%%%% ¡title!
-Adjacency Matrix Plot
-
-%%% ¡prop!
-%%%% ¡id!
-GraphBD.PFGH
-%%%% ¡title!
-Graph Histogram
-
-%%% ¡prop!
-%%%% ¡id!
-GraphBD.M_DICT
-%%%% ¡title!
-Graph MEASURES
-
-%%% ¡prop!
-%%%% ¡id!
-GraphBD.NOTES
-%%%% ¡title!
-Graph NOTES
 \end{lstlisting}
 
 
@@ -146,7 +79,6 @@ LABEL (metadata, string) is an extended label of the binary directed graph.
 NOTES (metadata, string) are some specific notes about the binary directed graph.
 %%%% ¡default!
 'GraphBD notes'
-
 %%% ¡prop! ¥\circled{1}\circlednote{1}{We need to define the type of graph: \code{Graph.GRAPH} (consists of a single layer), \code{Graph.MULTIGRAPH} (multiple unconnected layers of graphs), \code{Graph.MULTILAYER} (multiple layers with categorical connections between any nodes), \code{Graph.ORDERED\_MULTILAYER} (multiple layers with ordinal connections between any nodes) \code{Graph.MULTIPLEX} (multilayer graph where only interlayer edges are allowed between homologous nodes) and \code{Graph.ORDERED\_MULTIPLEX} (multiplex graph that consists of a sequence of layers with ordinal edges between corresponding nodes in subsequent layers).}¥
 GRAPH_TYPE (constant, scalar) returns the graph type __Graph.GRAPH__.
 %%%% ¡default!
@@ -175,14 +107,14 @@ value = Graph.NONNEGATIVE;
 %%% ¡prop! ¥\circled{6}\circlednote{6}{The property \code{A} contains the code to be executed to calculate the graph.}¥
 A (result, cell) is the binary adjacency matrix of the binary directed graph.
 %%%% ¡calculate!
-B = g.get('B'); ¥\circled{7}\circlednote{7}{retrieves the cell with the adjacency matrix of the graph}¥
+B = g.get('B'); ¥\circled{7}\circlednote{7}{Retrieves the cell with the adjacency matrix of the graph}¥
 
 B = dediagonalize(B);  ¥\circled{8}\circlednote{8}{Apply corresponding functions to define the properties of the graph:  \code{diagonalize} (removes the off-diagonal), \code{dediagonalize} (removes the diagonal),  \code{binarize} (binarizes with threshold=0), \code{semipositivize} (removes negative weights), \code{standardize} (normalizes between 0 and 1) or \code{symmetrize} (symmetrizes the matrix)}¥
 B = semipositivize(B, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); 
 B = binarize(B); 
 
-A = {B}; ¥\circled{9}\circlednote{9}{preallocates the adjacency matrix that contains the result of the defined graph.}¥
-value = A; ¥\circled{10}\circlednote{10}{returns the calcualted graph \code{A} assigning it to the output variable \code{value}.}¥
+A = {B}; ¥\circled{9}\circlednote{9}{Preallocates the adjacency matrix that contains the result of the defined graph.}¥
+value = A; ¥\circled{10}\circlednote{10}{Returns the calcualted graph \code{A} assigning it to the output variable \code{value}.}¥
 
 %%%% ¡gui! ¥\circled{11}\circlednote{11}{Each graph has a panel figure of the cell containing the graph adjacency matrix.}¥
 pr = PanelPropCell('EL', g, 'PROP', GraphBD.A, ... ¥\circled{12}\circlednote{12}{ \code{PanelPropCell} plots the panel for a CELL property with a table and two sliders. It can be personalized with props, e.g., \code{TABLE\_HEIGHT} (height in pixels), \code{XSLIDERSHOW} (whether to show the x-slider),  or \code{COLUMNAME} (string list with column names)}¥
@@ -199,7 +131,6 @@ pr = PanelPropCell('EL', g, 'PROP', GraphBD.A, ... ¥\circled{12}\circlednote{12
 
 
 
-
 %%% ¡prop! ¥\circled{13}\circlednote{13}{Each graph has a list of compatible measures.}¥
 COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
@@ -208,7 +139,7 @@ getCompatibleMeasures('GraphBD')
 %%% ¡prop!¥\circled{14}\circlednote{14}{Each graph has a panel figure of the graph adjacency matrix.}¥
 B (data, smatrix) is the input graph adjacency matrix.
 %%%% ¡gui!
-pr = PanelPropMatrix('EL', g, 'PROP', GraphBD.B, ... ¥\circled{15}\circlednote{15}{ \code{PanelPropMatrix} plots the panel of a property matrix-like with a table. It can be personalized with props as in \circled{12}).}¥
+pr = PanelPropMatrix('EL', g, 'PROP', GraphBD.B, ... ¥\circled{15}\circlednote{15}{ \code{PanelPropMatrix} plots the panel of a property matrix-like with a table. It can be personalized with props as in \circled{12}.}¥
 'TABLE_HEIGHT' , s(40), ...
 'ROWNAME' , g.getCallback('ANODELABELS'), ... 
 'COLUMNNAME', g.getCallback('ANODELABELS'), ...
@@ -231,9 +162,7 @@ SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative ed
 		The \code{tests} section from the element generator \fn{\_GraphBD.gen.m}.
 		A general test should be prepared to test the properties of the graph  when it is empty and full. Furthermore, additional tests should be prepared for the rules defined (one test per rule).
 	}
-	]		
-		
-
+	]			
 %% ¡tests!
 
 %%% ¡excluded_props!  ¥\circled{1}\circlednote{1}{List of properties that are excluded from testing.}¥
@@ -251,7 +180,7 @@ g = GraphBD('B', B);¥\circled{5}\circlednote{5}{Constructs the \fn{GraphBD} gra
 g.get('A_CHECK'); ¥\circled{6}\circlednote{6}{Performs the corresponding checks for the format of the adjacency matrix \code{A}: \code{GRAPH\_TYPE}, \code{CONNECTIVITY\_TYPE}, \code{DIRECTIONALITY\_TYPE}, \code{SELFCONNECTIVITY\_TYPE} and \code{NEGATIVITY\_TYPE}.}¥
 
 A = {binarize(semipositivize(dediagonalize(B)))}; ¥\circled{7}\circlednote{7}{Calculates the value of the graph by apply the corresponding properties function}¥
-assert(isequal(g.get('A'), A), ...¥\circled{8}\circlednote{8}{tests that the value of generated graph calculated by applying the properties functions coincides with the expected value}¥
+assert(isequal(g.get('A'), A), ...¥\circled{8}\circlednote{8}{Tests that the value of generated graph calculated by applying the properties functions coincides with the expected value}¥
 [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 'GraphBD is not constructing well.')
 
@@ -261,7 +190,7 @@ Constructor - Full ¥\circled{9}\circlednote{9}{Checks that a full \fn{GraphBD} 
 %%%% ¡probability!  ¥\circled{3}¥
 .01  ¥\circled{3}¥
 %%%% ¡code!
-B = randn(randi(10)); ¥\circled{10}\circlednote{4}{Generates a random graph}¥
+B = randn(randi(10)); ¥\circled{10}\circlednote{10}{Generates a random graph}¥
 g = GraphBD('B', B);  ¥\circled{5}¥
 
 g.get('A_CHECK') ¥\circled{6}¥
@@ -273,7 +202,7 @@ assert(isequal(g.get('A'), A), ... ¥\circled{8}¥
 
 %%% ¡test!
 %%%% ¡name!
-Semipositivize Rules ¥\circled{10}\circlednote{10}{Checks the \fn{SEMIPOSITIVIZE\_RULE} on the \fn{GraphBD} graph.}¥
+Semipositivize Rules ¥\circled{11}\circlednote{11}{Checks the \fn{SEMIPOSITIVIZE\_RULE} on the \fn{GraphBD} graph.}¥
 %%%% ¡probability!
 .01 ¥\circled{3}¥
 %%%% ¡code!
@@ -283,40 +212,40 @@ B = [
 0 1 2 -2 -1
 1 2 -2 -1 0
 2 -2 -1 0 1
-]; ¥\circled{11}\circlednote{11}{Generates an example graph with negative weights}¥
+]; ¥\circled{12}\circlednote{12}{Generates an example graph with negative weights}¥
 
-g0 = GraphBD('B', B);  ¥\circled{12}\circlednote{12}{Constructs the \fn{GraphBD} graph from the initialized \fn{B} with default RULE for \fn{SEMIPOSITIVIZE\_RULE}. }¥
+g0 = GraphBD('B', B);  ¥\circled{13}\circlednote{13}{Constructs the \fn{GraphBD} graph from the initialized \fn{B} with default RULE for \fn{SEMIPOSITIVIZE\_RULE}. }¥
 A0 = {[
 	0 0 0 1 1
 	0 0 1 1 0
 	0 1 0 0 0
 	1 1 0 0 0
 	1 0 0 0 0
-	]};  ¥\circled{13}\circlednote{13}{Expected value of the graph calculated by external means}¥
+	]};  ¥\circled{14}\circlednote{14}{Expected value of the graph calculated by external means}¥
 assert(isequal(g0.get('A'), A0), ...  ¥\circled{8}¥
 [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 'GraphBD is not constructing well.')
 
-g_zero = GraphBD('B', B, 'SEMIPOSITIVIZE_RULE', 'zero'); ¥\circled{14}\circlednote{14}{Constructs the \fn{GraphBD} graph from the initialized \fn{B} with RULE = 'zero' for \fn{SEMIPOSITIVIZE\_RULE}. }¥
+g_zero = GraphBD('B', B, 'SEMIPOSITIVIZE_RULE', 'zero'); ¥\circled{15}\circlednote{15}{Constructs the \fn{GraphBD} graph from the initialized \fn{B} with RULE = 'zero' for \fn{SEMIPOSITIVIZE\_RULE}. }¥
 A_zero = {[
 	0 0 0 1 1
 	0 0 1 1 0
 	0 1 0 0 0
 	1 1 0 0 0
 	1 0 0 0 0
-	]}; ¥\circled{13}¥
+	]}; ¥\circled{14}¥
 assert(isequal(g_zero.get('A'), A_zero), ... ¥\circled{8}¥
 [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 'GraphBD is not constructing well.')
 
-g_absolute = GraphBD('B', B, 'SEMIPOSITIVIZE_RULE', 'absolute'); ¥\circled{15}\circlednote{15}{Constructs the \fn{GraphBD} graph from the initialized \fn{B} with RULE = 'absolute' for \code{SEMIPOSITIVIZE\_RULE}}¥
+g_absolute = GraphBD('B', B, 'SEMIPOSITIVIZE_RULE', 'absolute'); ¥\circled{16}\circlednote{16}{Constructs the \fn{GraphBD} graph from the initialized \fn{B} with RULE = 'absolute' for \code{SEMIPOSITIVIZE\_RULE}}¥
 A_absolute = {[
 	0 1 0 1 1
 	1 0 1 1 1
 	0 1 0 1 1
 	1 1 1 0 0
 	1 1 1 0 0
-	]}; ¥\circled{13}¥
+	]}; ¥\circled{14}¥
 assert(isequal(g_absolute.get('A'), A_absolute), ... ¥\circled{8}¥
 [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 'GraphBD is not constructing well.')
@@ -330,9 +259,9 @@ assert(isequal(g_absolute.get('A'), A_absolute), ... ¥\circled{8}¥
 
 \subsection{Multilayer Weigthed Directed Graph (MultilayerWD )}
 
+We can now use \code{GraphBD} as the basis to implement the \code{MultilayerWD} graph. The parts of the code that are modified are highlighted.
 
-We can now use \code{GraphBD} as the basis to implement the global measure \code{MultilayerWD}.
-The parts of the code that are modified are highlighted.
+A multilayer network allows connections between any nodes across the multiple layers, where all layers are interconnected following a categorical fashion.
 
 \begin{lstlisting}[
 	label=cd:m:MultilayerWD:header,
@@ -346,9 +275,9 @@ The parts of the code that are modified are highlighted.
 MultilayerWD ¤< Graph¤ (g, multilayer weighted directed graph) is a multilayer weighted directed graph.
 
 ¤%%% ¡description!¤
-In a multilayer weighted directed (WD) graph, layers could have different number 
-of nodes with within-layer weighted directed edges, associated with a real
-number between 0 and 1 and indicating the strength of the connection.
+In a multilayer weighted directed (WD) graph, layers could have different
+number of nodes with within-layer weighted directed edges, associated with a
+real number between 0 and 1 and indicating the strength of the connection.
 The connectivity matrices are symmetric (within layer).
 All node connections are allowed between layers.
 \end{lstlisting}
@@ -358,6 +287,7 @@ All node connections are allowed between layers.
 	caption={
 		{\bf MultilayerWD element prop update.}
 		The \code{props\_update} section of generator code for \fn{\_MultilayerWD.gen.m} updates the properties of \code{MultilayerWD}.
+		\expand{cd:m:GraphBD:prop_update}
 	}
 ]
 ¤%% ¡props_update!¤
@@ -413,9 +343,9 @@ value = Graph.WEIGHTED * ones(layernumber);
 DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type¤ __Graph.DIRECTED__ * ones(layernumber).
 %%%% ¡calculate!
 if isempty(varargin)
-layernumber = 1;
+	layernumber = 1;
 else
-layernumber = varargin{1};
+	layernumber = varargin{1};
 end
 value = Graph.DIRECTED * ones(layernumber);
 
@@ -423,9 +353,9 @@ value = Graph.DIRECTED * ones(layernumber);
 SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type¤ __Graph.NONSELFCONNECTED__ on the diagonal and __Graph.SELFCONNECTED__ off diagonal.
 %%%% ¡calculate!
 if isempty(varargin)
-layernumber = 1;
+	layernumber = 1;
 else
-layernumber = varargin{1};
+	layernumber = varargin{1};
 end
 value = Graph.SELFCONNECTED * ones(layernumber);
 value(1:layernumber+1:end) = Graph.NONSELFCONNECTED;                
@@ -434,20 +364,22 @@ value(1:layernumber+1:end) = Graph.NONSELFCONNECTED;
 NEGATIVITY_TYPE (query, smatrix) returns the negativity type ¤__Graph.NONNEGATIVE__ * ones(layernumber).
 %%%% ¡calculate!
 if isempty(varargin)
-layernumber = 1;
+	layernumber = 1;
 else
-layernumber = varargin{1};
+	layernumber = varargin{1};
 end
 value = Graph.NONNEGATIVE * ones(layernumber);
 
 ¤%%% ¡prop!
-A (result, cell) is the cell containing¤ the within-layer weighted adjacency matrices of the multilayer weighted directed graph and the connections between layers.
+A (result, cell) is the cell containing¤ the within-layer weighted adjacency
+matrices of the multilayer weighted directed graph and the connections
+between layers.
 
 ¤%%%% ¡calculate!
 B = g.get('B'); ¤
 L = length(B); 
 A = cell(L, L);
-for i = 1:1:L ¥\circled{1}\circlednote{1}{For each layer in \fn{MultilayerWD} graph the corresponding functions are applied as in Code~\ref{cd:m:GraphBD:prop_update} \circled{8}}¥
+for i = 1:1:L ¥\circled{1}\circlednote{1}{For each layer in \fn{MultilayerWD} graph the corresponding functions are applied as in  \expand{cd:m:GraphBD:prop_update} \circled{8}}¥
 	M = dediagonalize(B{i,i}); 
 	M = semipositivize(M, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE'));
 	M = standardize(M, 'StandardizeRule', g.get('STANDARDIZE_RULE'));  
@@ -464,6 +396,66 @@ for i = 1:1:L ¥\circled{1}\circlednote{1}{For each layer in \fn{MultilayerWD} g
 	end
 end
 ¤value = A;¤
+
+¤%%%% ¡gui!
+pr = PanelPropCell('EL', g, 'PROP', ¤MultilayerWD.A, ...
+¤'TABLE_HEIGHT', s(40), ...¤
+'XYSLIDERLOCK', true, ... 
+¤'XSLIDERSHOW', false, ...
+'YSLIDERSHOW', true, ...¤
+'YSLIDERLABELS', g.getCallback('ALAYERLABELS'), ...
+'YSLIDERWIDTH', s(5), ...
+¤'ROWNAME', g.getCallback('ANODELABELS'), ...
+'COLUMNNAME', g.getCallback('ANODELABELS'), ...
+varargin{:});¤
+
+%%% ¡prop!
+PARTITIONS (result, rvector) returns the number of layers in the partitions of the graph.
+%%%% ¡calculate!
+value = ones(1, g.get('LAYERNUMBER'));
+
+%%% ¡prop!
+ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.
+%%%% ¡calculate!
+alayerlabels = g.get('LAYERLABELS');
+if isempty(alayerlabels) && ~isa(g.getr('A'), 'NoValue') % ensures that it's not unecessarily calculated
+	alayerlabels = cellfun(@num2str, num2cell([1:1:g.get('LAYERNUMBER')]), 'uniformoutput', false);
+end
+value = alayerlabels;
+
+¤%%% ¡prop!
+COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
+%%%% ¡default!
+getCompatibleMeasures¤('MultilayerWD')
+
+%% ¡props!
+
+%%% ¡prop!
+B (data, cell) is the input cell containing the multilayer adjacency matrices.
+%%%% ¡default!
+{[] []; [] []}
+%%%% ¡gui! ¥\circled{2}\circlednote{2}{Same as in \expand{cd:m:GraphBD:prop_update} \circled{12}}¥
+pr = PanelPropCell('EL', g, 'PROP', MultilayerWD.B, ...
+'TABLE_HEIGHT', s(40), ...
+'XSLIDERSHOW', true, ...
+'XSLIDERLABELS', g.get('LAYERLABELS'), ...
+'XSLIDERHEIGHT', s(3.5), ...
+'YSLIDERSHOW', false, ...
+'ROWNAME', g.getCallback('ANODELABELS'), ...
+'COLUMNNAME', g.getCallback('ANODELABELS'), ...
+varargin{:});
+
+
+¤%%% ¡prop!
+SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.
+%%%% ¡settings!
+{'zero', 'absolute'}¤
+
+%%% ¡prop!  ¥\circled{3}\circlednote{3}{Same as in  \expand{cd:m:GraphBD:prop_update} \circled{16}}¥
+STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.
+%%%% ¡settings!
+{'threshold' 'range'}
+
 \end{lstlisting}
 
 \begin{lstlisting}[
@@ -471,6 +463,7 @@ end
 	caption={
 		{\bf MultilayerWD element tests.}
 		The \code{tests} section from the element generator \fn{\_MultilayerWD.gen.m}.
+		\expand{cd:m:GraphBD:tests}
 	}
 ]
 ¤%% ¡tests!
@@ -528,15 +521,505 @@ A = B;
 
 \clearpage
 
-\subsection{Multiplex ..... Graph ( )}
+\subsection{Multiplex Binary Undirected with fixed Thresholds Graph (MultiplexBUT)}
+
+Now we implement the \code{MultiplexBUT} graph based on previous codes \code{GraphBD} and \code{MultilayerWD}, again highlighting the differences.
+
+A multiplex graph is a type of multilayer graph where only interlayer edges are allowed between homologous nodes. In this case, the layers follow a categorical architecture, which means that all layers are interconnected.
+
+
+\begin{lstlisting}[
+	label=cd:m:MultiplexBUT:header,
+	caption={
+		{\bf MultiplexBUT element header.}
+		The \code{header} section of generator code for \fn{\_MultiplexBUT.gen.m} provides the general information about the \code{MultiplexBUT} element.
+		\expand{cd:m:GraphBD:header}
+	}
+	]
+	¤%% ¡header!¤
+	MultiplexBUT < MultiplexWU (g, binary undirected multiplex with fixed
+	thresholds) is a binary undirected multiplex with fixed thresholds. ¥\circled{1}\circlednote{1}{MultiplexBUT is a child of \fn{MultiplexWU} graph}¥
+	
+	¤%%% ¡description!¤
+	In a binary undirected multiplex with fixed thresholds (BUT), the layers
+	are those of binary undirected (BU) multiplex graphs derived from the
+	same weighted supra-connectivity matrices binarized at different
+	thresholds.The supra-connectivity matrix has a number of partitions
+	equal to the number of thresholds.
+
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label=cd:m:MultiplexBUT:prop_update,
+	caption={
+		{\bf MultiplexBUT element prop update.}
+		The \code{props\_update} section of generator code for \fn{\_MultiplexBUT.gen.m} updates the properties of \code{MultiplexBUT}.
+		\expand{cd:m:GraphBD:prop_update}
+	}
+	]
+	¤%% ¡props_update!¤
+	
+	¤%%% ¡prop!
+	NAME (constant, string) is the name of the ¤binary undirected multiplex with fixed thresholds¤.
+	%%%% ¡default!¤
+	'MultiplexBUT'
+	
+	¤%%% ¡prop!
+	DESCRIPTION (constant, string) is the description of the ¤binary undirected
+	multiplex with fixed thresholds¤.
+	%%%% ¡default!¤
+	'In a binary undirected multiplex with fixed thresholds (BUT), the layers
+	are those of binary undirected (BU) multiplex graphs derived from the
+	same weighted supra-connectivity matrices binarized at different
+	thresholds. The supra-connectivity matrix has a number of partitions
+	equal to the number of thresholds.'
+
+	¤%%% ¡prop!
+	TEMPLATE (parameter, item) is the template of the ¤binary undirected multiplex with fixed thresholds¤.¤
+	
+	¤%%% ¡prop!
+	ID (data, string) is a few-letter code of the ¤binary undirected multiplex with fixed thresholds¤.
+	%%%% ¡default!¤
+	'MultiplexBUT ID'
+	
+	¤%%% ¡prop!
+	LABEL (metadata, string) is an extended label of the ¤binary undirected multiplex with fixed thresholds¤.
+	%%%% ¡default!¤
+	'MultiplexBUT label'
+	
+	¤%%% ¡prop!
+	NOTES (metadata, string) are some specific notes about the ¤binary undirected multiplex with fixed thresholds¤.
+	%%%% ¡default!¤
+	'MultiplexBUT notes'
+	
+	¤%%% ¡prop!
+	GRAPH_TYPE (constant, scalar) returns the graph type¤ __Graph.MULTIPLEX__.
+	%%%% ¡default!
+	Graph.MULTIPLEX
+	
+	¤%%% ¡prop!
+	CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type¤ __Graph.BINARY__  * ones(layernumber).
+	%%%% ¡calculate!
+	if isempty(varargin)
+		layernumber = 1;
+	else
+		layernumber = varargin{1};
+	end
+	value = Graph.BINARY * ones(layernumber); 
+	
+	¤%%% ¡prop!
+	DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type¤ __Graph.UNDIRECTED__ * ones(layernumber).
+	%%%% ¡calculate!
+	if isempty(varargin)
+		layernumber = 1;
+	else
+		layernumber = varargin{1};
+	end
+	value = Graph.UNDIRECTED * ones(layernumber);
+	
+	¤%%% ¡prop!
+	SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type __Graph.NONSELFCONNECTED__ on the diagonal and __Graph.SELFCONNECTED__ off diagonal.
+	%%%% ¡calculate!
+	if isempty(varargin)
+		layernumber = 1;
+	else
+		layernumber = varargin{1};
+	end
+	value = Graph.SELFCONNECTED * ones(layernumber);
+	value(1:layernumber+1:end) = Graph.NONSELFCONNECTED;                
+	
+	%%% ¡prop!
+	NEGATIVITY_TYPE (query, smatrix) returns the negativity type __Graph.NONNEGATIVE__ * ones(layernumber).
+	%%%% ¡calculate!
+	if isempty(varargin)
+		layernumber = 1;
+	else
+		layernumber = varargin{1};
+	end
+	value = Graph.NONNEGATIVE * ones(layernumber);¤
+	
+	¤%%% ¡prop!
+	A (result, cell) is the cell containing¤ multiplex binary adjacency matrices of the binary undirected multiplex.
+	
+	¤%%%% ¡calculate!¤
+	A_WU = calculateValue@MultiplexWU(g, prop);¥\circled{1}\circlednote{1}{Calculates the graph MultiplexWU calling its parent \fn{MultiplexWU}.}¥
+	
+	thresholds = g.get('THRESHOLDS'); ¥\circled{2}\circlednote{2}{Gets the thresholds to be applied to \fn{A\_WU}.}¥
+	L = length(A_WU); % number of layers ¥\circled{3}\circlednote{3}{Gets the number of layers in graph \fn{A\_WU}.}¥
+	A = cell(length(thresholds)*L); ¥\circled{4}\circlednote{4}{The new \fn{MultiplexBUT} graph will have \fn{L} layers for each threshold applied.}¥
+	
+	if L > 0 && ~isempty(cell2mat(A_WU))
+		A(:, :) = {eye(length(A_WU{1, 1}))};
+		for i = 1:1:length(thresholds) ¥\circled{5}\circlednote{5}{Iterates over all the thresholds to be applied}¥
+			threshold = thresholds(i);
+			layer = 1;
+			for j = (i - 1) * L + 1:1:i * L ¥\circled{6}\circlednote{6}{Iterates over all the layers in \fn{A\_WU} }¥
+				A{j, j} = dediagonalize(binarize(A_WU{layer, layer}, 'threshold', threshold)); ¥\circled{7}\circlednote{7}{Binarizes the present layer of the \fn{A\_WU} graph according to the present threshold}¥
+				layer = layer + 1;
+			end
+		end
+	end
+	
+	¤value = A;¤
+	
+	¤%%%% ¡gui! ¥\circled{8}\circlednote{8}{Same as in \expand{cd:m:GraphBD:prop_update} \circled{12}}¥
+	pr = PanelPropCell('EL', g, 'PROP', MultiplexBUT.A, ...
+	'TABLE_HEIGHT', s(40), ...
+	'XYSLIDERLOCK', true, ... 
+	'XSLIDERSHOW', false, ...
+	'YSLIDERSHOW', true, ...
+	'YSLIDERLABELS', g.getCallback('ALAYERLABELS'), ...
+	'YSLIDERWIDTH', s(5), ...
+	'ROWNAME', g.getCallback('ANODELABELS'), ...
+	'COLUMNNAME', g.getCallback('ANODELABELS'), ...
+	varargin{:});¤
+	
+	¤%%% ¡prop!
+	PARTITIONS (result, rvector) returns the number of layers in the partitions of the graph.¤
+	%%%% ¡calculate!
+	l = g.get('LAYERNUMBER');
+	thresholds = g.get('THRESHOLDS');
+	value = ones(1, length(thresholds)) * l / length(thresholds);
+	
+	¤%%% ¡prop!
+	ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.
+	%%%% ¡calculate!
+	alayerlabels = g.get('LAYERLABELS');¤
+	if ~isa(g.getr('A'), 'NoValue') && length(alayerlabels) ~= g.get('LAYERNUMBER') % ensures that it's not unecessarily calculated
+		thresholds = cellfun(@num2str, num2cell(g.get('THRESHOLDS')), 'uniformoutput', false);
+
+		if length(alayerlabels) == length(g.get('B'))
+			blayerlabels = alayerlabels;
+		else % includes isempty(layerlabels)
+			blayerlabels = cellfun(@num2str, num2cell([1:1:length(g.get('B'))]), 'uniformoutput', false);
+		end
+	
+		alayerlabels = {};
+		for i = 1:1:length(thresholds)
+			for j = 1:1:length(blayerlabels)
+				alayerlabels = [alayerlabels, [blayerlabels{j} '|' thresholds{i}]];
+			end
+		end
+	end
+	value = alayerlabels;
+	
+	¤%%% ¡prop! 
+	COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
+	%%%% ¡default!
+	getCompatibleMeasures('MultiplexBUT')¤
+	
+	%% ¡props!
+	
+	%%% ¡prop!
+	THRESHOLDS (parameter, rvector) is the vector of thresholds.
+	%%%% ¡gui! ¥\circled{9}\circlednote{9}{\code{PanelPropRVectorSmart} plots the panel for a row vector with an edit field. Smart means that (almost) any MatLab expression leading to a correct row vector can be introduced in the edit field. Also, the value of the vector can be limited between some MIN and MAX.}¥
+	pr = PanelPropRVectorSmart('EL', g, 'PROP', MultiplexBUT.THRESHOLDS, 'MAX', 1, 'MIN', -1, varargin{:});
+	
+	
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label=cd:m:MultiplexBUT:tests,
+	caption={
+		{\bf MultiplexBUT element tests.}
+		The \code{tests} section from the element generator \fn{\_MultiplexBUT.gen.m}.
+		\expand{cd:m:GraphBD:tests}
+	}
+	]
+	%% ¡tests!
+	
+	%%% ¡test!
+	%%%% ¡name!
+	Constructor - Full
+	%%%% ¡probability!
+	.01
+	%%%% ¡code!
+	B1 = [
+	0 .1 .2 .3 .4 
+	.1 0 .1 .2 .3
+	.2 .1 0 .1 .2
+	.3 .2 .1 0 .1
+	.4 .3 .2 .1 0
+	]; 
+	B = {B1, B1, B1}; ¥\circled{1}\circlednote{1}{creates and example MultiplexWU}¥
+	thresholds = [0 .1 .2 .3 .4]; ¥\circled{2}\circlednote{2}{defines some example thresholds}¥
+	g = MultiplexBUT('B', B, 'THRESHOLDS', thresholds);
+	
+	g.get('A_CHECK')
+	
+	A = g.get('A');
+	for i = 1:1:length(B) * length(thresholds)
+		for j = 1:1:length(B) * length(thresholds)
+			if i == j
+				threshold = thresholds(floor((i - 1) / length(B)) + 1);
+				assert(isequal(A{i, i}, binarize(B1, 'threshold', threshold)), ...
+				[BRAPH2.STR ':MultiplexBUT:' BRAPH2.FAIL_TEST], ...
+				'MultiplexBUT is not constructing well.')
+			else
+				assert(isequal(A{i, j}, eye(length(B1))), ...
+				[BRAPH2.STR ':MultiplexBUT:' BRAPH2.FAIL_TEST], ...
+				'MultiplexBUT is not constructing well.')            
+			end
+		end
+	end
+	
+\end{lstlisting}
+
+
 
 \clearpage
 
-\subsection{Ordinal Multilayer .....  Graph ( )}
+\subsection{Ordinal Multiplex Binary Undirected with fixed Thresholds Graph (OrdMxBUT)}
 
-\clearpage
+Finally, we implement the \code{OrdMxBUT} graph based on previous codes \code{GraphBD}, \code{MultilayerWD} and \code{MultiplexBUT}, again highlighting the differences. An ordered multiplex is a type of multiplex graph that consists of a sequence of layers with ordinal edges between corresponding nodes in subsequent layers.
 
-\subsection{Ordinal Multiplex ... Graph ( )}
+
+\begin{lstlisting}[
+	label=cd:m:OrdMxBUT:header,
+	caption={
+		{\bf OrdMxBUT element header.}
+		The \code{header} section of generator code for \fn{\_OrdMxBUT.gen.m} provides the general information about the \code{OrdMxBUT} element.
+		\expand{cd:m:GraphBD:header}
+	}
+	]
+	¤%% ¡header!¤
+	OrdMxBUT < OrdMxWU (g, ordinal multiplex binary undirected with fixed thresholds) is a binary undirected ordinal multiplex with fixed thresholds. ¥\circled{1}\circlednote{1}{OrdMxBUT is a child of \fn{OrdMxWU} graph}¥
+	
+	¤%%% ¡description!¤
+	In a binary undirected ordinal multiplex with fixed thresholds (BUT), all
+	the layers consist of binary undirected (BU) multiplex graphs derived
+	from the same weighted supra-connectivity matrices binarized at
+	different thresholds. The supra-connectivity matrix has a number of
+	partitions equal to the number of thresholds. The layers are connected
+	in an ordinal fashion, i.e., only consecutive layers are connected.
+	
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label=cd:m:OrdMxBUT:prop_update,
+	caption={
+		{\bf OrdMxBUT element prop update.}
+		The \code{props\_update} section of generator code for \fn{\_OrdMxBUT.gen.m} updates the properties of \code{OrdMxBUT}.
+		\expand{cd:m:GraphBD:prop_update}
+	}
+	]
+	¤%% ¡props_update!¤
+	
+	¤%%% ¡prop!
+	NAME (constant, string) is the name of the ¤binary undirected ordinal multiplex with fixed thresholds.s¤.
+	%%%% ¡default!¤
+	'OrdMxBUT'
+	
+	¤%%% ¡prop!
+	DESCRIPTION (constant, string) is the description of the ¤binary undirected ordinal multiplex with fixed thresholds.¤.
+	%%%% ¡default!¤
+	'In a binary undirected ordinal multiplex with fixed thresholds (BUT),
+	all the layers consist of binary undirected (BU) multiplex graphs
+	derived from the same weighted supra-connectivity matrices
+	binarized at different thresholds. The supra-connectivity matrix has a
+	number of partitions equal to the number of thresholds. The layers are
+	connectedin an ordinal fashion, i.e., only consecutive layers are
+	connected.'
+	
+	¤%%% ¡prop!
+	TEMPLATE (parameter, item) is the template of the ¤binary undirected ordinal multiplex with fixed thresholds¤.¤
+	
+	¤%%% ¡prop!
+	ID (data, string) is a few-letter code of the ¤binary undirected ordinal multiplex with fixed thresholds¤.
+	%%%% ¡default!¤
+	'OrdMxBUT ID'
+	
+	¤%%% ¡prop!
+	LABEL (metadata, string) is an extended label of the ¤binary undirected ordinal multiplex with fixed thresholds¤.
+	%%%% ¡default!¤
+	'OrdMxBUT label'
+	
+	¤%%% ¡prop!
+	NOTES (metadata, string) are some specific notes about the ¤binary undirected ordinal multiplex with fixed thresholds¤.
+	%%%% ¡default!¤
+	'OrdMxBUT notes'
+	
+	¤%%% ¡prop!
+	GRAPH_TYPE (constant, scalar) returns the graph type¤ __Graph.ORDERED_MULTIPLEX__.
+	%%%% ¡default!
+	Graph.ORDERED_MULTIPLEX
+	
+	¤%%% ¡prop!
+	CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type __Graph.BINARY__  * ones(layernumber).
+	%%%% ¡calculate!
+	if isempty(varargin)
+	layernumber = 1;
+	else
+	layernumber = varargin{1};
+	end
+	value = Graph.BINARY * ones(layernumber); ¤
+	
+	¤%%% ¡prop!
+	DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type __Graph.UNDIRECTED__ * ones(layernumber).
+	%%%% ¡calculate!
+	if isempty(varargin)
+	layernumber = 1;
+	else
+	layernumber = varargin{1};
+	end
+	value = Graph.UNDIRECTED * ones(layernumber);¤
+	
+	¤%%% ¡prop!
+	SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type __Graph.NONSELFCONNECTED__ on the diagonal and __Graph.SELFCONNECTED__ off diagonal.
+	%%%% ¡calculate!
+	if isempty(varargin)
+	layernumber = 1;
+	else
+	layernumber = varargin{1};
+	end
+	value = Graph.SELFCONNECTED * ones(layernumber);
+	value(1:layernumber+1:end) = Graph.NONSELFCONNECTED;                
+	
+	%%% ¡prop!
+	NEGATIVITY_TYPE (query, smatrix) returns the negativity type __Graph.NONNEGATIVE__ * ones(layernumber).
+	%%%% ¡calculate!
+	if isempty(varargin)
+	layernumber = 1;
+	else
+	layernumber = varargin{1};
+	end
+	value = Graph.NONNEGATIVE * ones(layernumber);¤
+	
+	¤%%% ¡prop!
+	A (result, cell) is the cell containing¤binary supra-adjacency matrix of the binary undirected multiplex with fixed thresholds (BUT).
+	
+	¤%%%% ¡calculate!¤
+	A_WU = calculateValue@OrdMxWU(g, prop);¥\circled{1}\circlednote{1}{Calculates the graph OrdMxWU calling the parent \fn{OrdMxWU}.}¥
+	
+	¤thresholds = g.get('THRESHOLDS');  ¥\circled{2}\circlednote{2}{Same as in \expand{cd:m:MultiplexBUT:prop_update}  \circled{2}-\circled{4}.}¥
+	L = length(A_WU); % number of layers 
+	A = cell(length(thresholds)*L);¤
+	
+	if L > 0 && ~isempty(cell2mat(A_WU))
+		A(:, :) = {zeros(length(A_WU{1, 1}))};
+		for i = 1:1:length(thresholds) ¥\circled{3}\circlednote{3}{For each threshold we construct an ordinal muliplex binary undirected graph}¥
+			threshold = thresholds(i);
+			layer = 1;
+			for j = (i - 1) * L + 1:1:i * L ¥\circled{4}\circlednote{4}{We need to loop over the layers of \fn{A\_Wu} for each threshold}¥
+				for k = (i - 1) * L + 1:1:i * L
+					if j == k ¥\circled{5}\circlednote{5}{In the diagonal of the supra-adjacency matrix we have the layers that are constructed by binarizing \fn{A\_Wu} accorsing to the present threshold}¥
+						A{j, j} = dediagonalize(binarize(A_WU{layer, layer}, 'threshold', threshold));
+					elseif (j-k)==1 || (k-j)==1 ¥\circled{6}\circlednote{6}{Consecutive layers are connected}¥
+						A(j, k) = {eye(length(A{1, 1}))};
+					else ¥\circled{7}\circlednote{7}{Non-consecutive layers are not connected}¥
+						A(j, k) = {zeros(length(A{1, 1}))};
+					end
+				end
+				layer = layer + 1;
+			end
+		end
+	end
+	
+	¤value = A;¤
+	
+	¤%%%% ¡gui! ¥\circled{8}\circlednote{8}{Same as in \expand{cd:m:MultiplexBUT:prop_update}}¥
+	pr = PanelPropCell('EL', g, 'PROP', OrdMxBUT.A, ...
+	'TABLE_HEIGHT', s(40), ...
+	'XYSLIDERLOCK', true, ... 
+	'XSLIDERSHOW', false, ...
+	'YSLIDERSHOW', true, ...
+	'YSLIDERLABELS', g.getCallback('ALAYERLABELS'), ...
+	'YSLIDERWIDTH', s(5), ...
+	'ROWNAME', g.getCallback('ANODELABELS'), ...
+	'COLUMNNAME', g.getCallback('ANODELABELS'), ...
+	varargin{:});¤
+	
+	¤%%% ¡prop!
+	PARTITIONS (result, rvector) returns the number of layers in the partitions of the graph.
+	%%%% ¡calculate!
+	l = g.get('LAYERNUMBER');
+	thresholds = g.get('THRESHOLDS');
+	value = ones(1, length(thresholds)) * l / length(thresholds);¤
+	
+	¤%%% ¡prop!
+	ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.
+	%%%% ¡calculate!
+	alayerlabels = g.get('LAYERLABELS');
+	if ~isa(g.getr('A'), 'NoValue') && length(alayerlabels) ~= g.get('LAYERNUMBER') % ensures that it's not unecessarily calculated
+		thresholds = cellfun(@num2str, num2cell(g.get('THRESHOLDS')), 'uniformoutput', false);
+	
+		if length(alayerlabels) == length(g.get('B'))
+			blayerlabels = alayerlabels;
+		else % includes isempty(layerlabels)
+			blayerlabels = cellfun(@num2str, num2cell([1:1:length(g.get('B'))]), 'uniformoutput', false);
+		end
+		
+		alayerlabels = {};
+		for i = 1:1:length(thresholds)
+			for j = 1:1:length(blayerlabels)
+				alayerlabels = [alayerlabels, [blayerlabels{j} '|' thresholds{i}]];
+			end
+		end
+	end
+	value = alayerlabels;¤
+	
+	¤%%% ¡prop!
+	COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
+	%%%% ¡default!
+	getCompatibleMeasures('OrdMxBUT')¤
+	
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label=cd:m:OrdMxBUT:tests,
+	caption={
+		{\bf OrdMxBUT element tests.}
+		The \code{tests} section from the element generator \fn{\_OrdMxBUT.gen.m}.
+		\expand{cd:m:GraphBD:tests}
+	}
+	]
+	%% ¡tests!
+	
+	%%% ¡excluded_props!
+	[OrdMxBUT.PFGA OrdMxBUT.PFGH]
+	
+	¤%%% ¡test!
+	%%%% ¡name!
+	Constructor - Full ¥\circled{1}\circlednote{1}{same as in \expand{cd:m:MultiplexBUT:tests}.}¥
+	%%%% ¡probability!
+	.01
+	%%%% ¡code!
+	B1 = [
+	0 .1 .2 .3 .4 
+	.1 0 .1 .2 .3
+	.2 .1 0 .1 .2
+	.3 .2 .1 0 .1
+	.4 .3 .2 .1 0
+	];
+	B = {B1, B1, B1};
+	thresholds = [0 .1 .2 .3 .4];¤
+	g = OrdMxBUT('B', B, 'THRESHOLDS', thresholds);
+	
+	¤g.get('A_CHECK')
+	
+	A = g.get('A');¤
+	for i = 1:1:length(thresholds)
+		threshold = thresholds(i);
+		for j = (i - 1) * length(B) + 1:1:i * length(B)
+			for k = (i - 1) * length(B) + 1:1:i * length(B)
+				if j == k
+					assert(isequal(A{j, j}, binarize(B1, 'threshold', threshold)), ...
+					[BRAPH2.STR ':OrdMxBUT:' BRAPH2.FAIL_TEST], ...
+					'OrdMxBUT is not constructing well.')
+				elseif (j-k)==1 || (k-j)==1
+					assert(isequal(A{j, k}, eye(length(B1))), ...
+					[BRAPH2.STR ':OrdMxBUT:' BRAPH2.FAIL_TEST], ...
+					'OrdMxBUT is not constructing well.')
+				else 
+					assert(isequal(A{j, k}, zeros(length(B1))), ...
+					[BRAPH2.STR ':OrdMxBUT:' BRAPH2.FAIL_TEST], ...
+					'OrdMxBUT is not constructing well.')
+				end
+			end
+		end
+	end
+	
+\end{lstlisting}
 
 %\bibliography{biblio}
 %\bibliographystyle{plainnat}
