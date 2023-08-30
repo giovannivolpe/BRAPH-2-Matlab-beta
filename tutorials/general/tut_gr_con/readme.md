@@ -31,6 +31,7 @@ gr = Group('SUB_CLASS', 'SubjectCON');  % creates a new object Group with subjec
 gui = GUIElement('PE', gr);  % creates a GUI to upload the group data.
 gui.get('DRAW');  % draws the GUI.
 gui.get('SHOW');  % shows the GUI.
+```
 
 ## Visualize the Group Data
 
