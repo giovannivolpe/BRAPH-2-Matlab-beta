@@ -1,46 +1,45 @@
 %% ¡header!
-InGlobalEfficiency < Distance (m, in-global efficiency) is the graph in-global efficiency.
+InGlobalEfficiencyAv < InGlobalEfficiency (m, average in-global efficiency) is the average graph in-global efficiency.
 
 %%% ¡description!
-The in-global efficiency is the average inverse shortest in-path length within each layer. 
-It is inversely related to the characteristic in-path length.
+The average in-global efficiency is the average inverse shortest in-path length within each layer. 
 
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the in-global efficiency.
+NAME (constant, string) is the name of the average in-global efficiency.
 %%%% ¡default!
-'InGlobalEfficiency'
+'InGlobalEfficiencyAv'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the InGlobalEfficiency.
+DESCRIPTION (constant, string) is the description of the InGlobalEfficiencyAv.
 %%%% ¡default!
-'The in-global efficiency is the average inverse shortest in-path length within each layer. It is inversely related to the characteristic in-path length.'
+'The average in-global efficiency is the average inverse shortest in-path length within each layer.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the InGlobalEfficiency.
+TEMPLATE (parameter, item) is the template of the InGlobalEfficiencyAv.
 %%%% ¡settings!
-'InGlobalEfficiency'
+'InGlobalEfficiencyAv'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the InGlobalEfficiency.
+ID (data, string) is a few-letter code of the InGlobalEfficiencyAv.
 %%%% ¡default!
-'InGlobalEfficiency ID'
+'InGlobalEfficiencyAv ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the InGlobalEfficiency.
+LABEL (metadata, string) is an extended label of the InGlobalEfficiencyAv.
 %%%% ¡default!
-'InGlobalEfficiency label'
+'InGlobalEfficiencyAv label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the InGlobalEfficiency.
+NOTES (metadata, string) are some specific notes about the InGlobalEfficiencyAv.
 %%%% ¡default!
-'InGlobalEfficiency notes'
+'InGlobalEfficiencyAv notes'
 
 %%% ¡prop!
-SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
+SHAPE (constant, scalar) is the measure shape __Measure.GLOBAL__.
 %%%% ¡default!
-Measure.NODAL
+Measure.GLOBAL
 
 %%% ¡prop!
 SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
@@ -58,28 +57,23 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphWD' 'GraphBD' 'MultiplexWD' 'MultiplexBD' 'OrdMxBD' 'OrdMxWD'} ;%TBE % % % add multilayerWD multilayerBD ordmlwd ordmlbd tests
 
 %%% ¡prop!
-M (result, cell) is the in-global efficiency.
+M (result, cell) is the average in-global efficiency.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
-A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 L = g.get('LAYERNUMBER');
-N = g.get('NODENUMBER');
 
-distance = calculateValue@Distance(m, prop);
+in_global_efficiency = calculateValue@InGlobalEfficiency(m, prop);
 
-in_global_efficiency = cell(L, 1);
+in_global_efficiency_av = cell(L, 1);
 parfor li = 1:1:L
-    inverse_distance = distance{li}.^-1;  % inverse distance
-    inverse_distance(1:N(li)+1:end) = 0;
-    global_efficiency_layer = (sum(inverse_distance, 1) / (N(li)-1));
-    in_global_efficiency(li) = {global_efficiency_layer};
+    in_global_efficiency_av(li) = {mean(in_global_efficiency{li})};
 end
-value = in_global_efficiency;
+value = in_global_efficiency_av;
 
 %% ¡tests!
 
 %%% ¡excluded_props!
-[InGlobalEfficiency.PFM]
+[InGlobalEfficiencyAv.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -93,18 +87,18 @@ B = [
     0   0   0   0   0
     ];
 
-known_in_global_efficiency = {[1/4 1/4 1/4 1/4 0]'};
+known_in_global_efficiency = {mean([1/4 1/4 1/4 1/4 0])};
 
 g = GraphBD('B', B);
 
-m_outside_g = InGlobalEfficiency('G', g);
+m_outside_g = InGlobalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_global_efficiency), ...
-   [BRAPH2.STR ':InGlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':InGlobalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'InGlobalEfficiency');
+m_inside_g = g.get('MEASURE', 'InGlobalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_in_global_efficiency), ...
-    [BRAPH2.STR ':InGlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':InGlobalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -119,18 +113,18 @@ B = [
     0   0   0   0   0
     ];
 
-known_in_global_efficiency = {[.2/4 .1/4 .1/4 .2/4 0]};
+known_in_global_efficiency = {mean([.2/4 .1/4 .1/4 .2/4 0])};
 
 g = GraphWD('B', B);
 
-m_outside_g = InGlobalEfficiency('G', g);
+m_outside_g = InGlobalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_global_efficiency), ...
-   [BRAPH2.STR ':InGlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':InGlobalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'InGlobalEfficiency');
+m_inside_g = g.get('MEASURE', 'InGlobalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_in_global_efficiency), ...
-    [BRAPH2.STR ':InGlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':InGlobalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -155,20 +149,20 @@ B22 = [
 B = {B11  B22};
 
 known_in_global_efficiency = {
-                        [.2/4 .1/4 .1/4 .2/4 0]
-                        [.2/4 .1/4 .1/4 .2/4 0]
+                        mean([.2/4 .1/4 .1/4 .2/4 0])
+                        mean([.2/4 .1/4 .1/4 .2/4 0])
                         };
 
 g = MultiplexWD('B', B);
 
-m_outside_g = InGlobalEfficiency('G', g);
+m_outside_g = InGlobalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_global_efficiency), ...
-   [BRAPH2.STR ':InGlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':InGlobalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'InGlobalEfficiency');
+m_inside_g = g.get('MEASURE', 'InGlobalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_in_global_efficiency), ...
-    [BRAPH2.STR ':InGlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':InGlobalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -193,20 +187,20 @@ B22 = [
 B = {B11  B22};
 
 known_in_global_efficiency = {
-                        [1/4 1/4 1/4 1/4 0]
-                        [1/4 1/4 1/4 1/4 0]
+                        mean([1/4 1/4 1/4 1/4 0])
+                        mean([1/4 1/4 1/4 1/4 0])
                         };
 
 g = MultiplexBD('B', B);
 
-m_outside_g = InGlobalEfficiency('G', g);
+m_outside_g = InGlobalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_global_efficiency), ...
-   [BRAPH2.STR ':InGlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':InGlobalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'InGlobalEfficiency');
+m_inside_g = g.get('MEASURE', 'InGlobalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_in_global_efficiency), ...
-    [BRAPH2.STR ':InGlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':InGlobalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -231,20 +225,20 @@ B22 = [
 B = {B11  B22};
 
 known_in_global_efficiency = {
-                        [.2/4 .1/4 .1/4 .2/4 0]
-                        [.2/4 .1/4 .1/4 .2/4 0]
+                        mean([.2/4 .1/4 .1/4 .2/4 0])
+                        mean([.2/4 .1/4 .1/4 .2/4 0])
                         };
 
 g = OrdMxWD('B', B);
 
-m_outside_g = InGlobalEfficiency('G', g);
+m_outside_g = InGlobalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_global_efficiency), ...
-   [BRAPH2.STR ':InGlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':InGlobalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'InGlobalEfficiency');
+m_inside_g = g.get('MEASURE', 'InGlobalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_in_global_efficiency), ...
-    [BRAPH2.STR ':InGlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':InGlobalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -269,18 +263,18 @@ B22 = [
 B = {B11  B22};
 
 known_in_global_efficiency = {
-                        [1/4 1/4 1/4 1/4 0]
-                        [1/4 1/4 1/4 1/4 0]
+                        mean([1/4 1/4 1/4 1/4 0])
+                        mean([1/4 1/4 1/4 1/4 0])
                         };
 
 g = OrdMxBD('B', B);
 
-m_outside_g = InGlobalEfficiency('G', g);
+m_outside_g = InGlobalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_global_efficiency), ...
-   [BRAPH2.STR ':InGlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+   [BRAPH2.STR ':InGlobalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'InGlobalEfficiency');
+m_inside_g = g.get('MEASURE', 'InGlobalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_in_global_efficiency), ...
-    [BRAPH2.STR ':InGlobalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':InGlobalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

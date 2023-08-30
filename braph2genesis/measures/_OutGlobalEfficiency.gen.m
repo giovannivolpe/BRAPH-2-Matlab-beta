@@ -93,7 +93,7 @@ B = [
     0   0   0   0   0
     ];
 
-known_out_global_efficiency = {[1/4 1/4 1/4 1/4 0]};
+known_out_global_efficiency = {[1/4 1/4 1/4 1/4 0]'};
 
 g = GraphBD('B', B);
 
@@ -269,8 +269,8 @@ B22 = [
 B = {B11  B22};
 
 known_out_global_efficiency = {
-                        [1/4 1/4 1/4 1/4 0]
-                        [1/4 1/4 1/4 1/4 0]
+                        [1/4 1/4 1/4 1/4 0]'
+                        [1/4 1/4 1/4 1/4 0]'
                         };
 
 g = OrdMxBD('B', B);
