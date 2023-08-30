@@ -66,13 +66,6 @@ To import connectivity data into BRAPH 2.0, you need to have the connectivity ma
 
 ## Adding Covariates
 
-> ![Edit the Covariates](fig06.png)
->
-> **Figure 6. Edit the Covariates.**
-> The editable information in the Covariates file includes:
-> **a** The names of the variables of interest (vois).
-> **b** For categorical vois, you can specify the categories they belong to.
-
 When analyzing data, it's a common practice to incorporate *variables of interest*, which can be *covariates* or *correlates*. In BRAPH 2.0, these variables of interest must be stored in a separate excel file located just outside the group's folder. The file should share the group folder's name, but with a `.vois` extension, as shown in Figure 6a. The file must adhere to a specific format outlined in Figure 6b:
 
 - **Subject IDs (column A).** Starting from row 3, column A should list the subject IDs.
@@ -81,3 +74,11 @@ When analyzing data, it's a common practice to incorporate *variables of interes
   - Row 1: The name of the variable of interest.
   - Row 2: Categories separated by a return (only for categorical variables of interest, like "Sex" and "Education").
   - Subsequent rows: The values of the variable of interest for each subject.
+
+> ![Edit the Covariates](fig06.png)
+>
+> **Figure 6. Edit the Covariates.**
+> The editable information in the Covariates file includes:
+> **a** The names of the variables of interest (vois).
+> **b** For categorical vois, you can specify the categories they belong to.
+
