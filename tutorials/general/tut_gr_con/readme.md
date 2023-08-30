@@ -45,7 +45,7 @@ After completing the steps described in the Figure 2, you can see the data as sh
 
 ## Visualize Each Subject's Data
 
-Finally, you can open each subject's connectivity matrix by selecting the subject, right-click, and select "Open selection" as shown in **Figure 4a**, which displays the matrix values in **Figure 4b**. Here, you can also change the subject's metadata (ID, label, notes), its variables of interest, and the values of its connectivity matrix.
+Finally, you can open each subject's connectivity matrix by selecting the subject, right-click, and select "Open selection" as shown in Figure 4a, which displays the matrix values in Figure 4b. Here, you can also change the subject's metadata (ID, label, notes), its variables of interest, and the values of its connectivity matrix.
 
 > ![Edit the individual subject data](fig04.png)
 > 
@@ -53,3 +53,31 @@ Finally, you can open each subject's connectivity matrix by selecting the subjec
 > **a** Each subject's connectivity matrix can be opened by selecting the subject, right-click, and select "Open selection".
 > **b** In this subject GUI, it is possible to view and edit the metadata of the subject (ID, label, notes), its variables of interest (in this case, age and sex), and the values of the connectivity matrix.
 
+## Preparation of the Data to be Imported
+
+To import connectivity data into BRAPH 2.0, you need to have the connectivity matrices for each subject in either excel or text format inside a folder named after the group. The structure of your group directory and an example of a brain connectivity matrix are shown below.
+
+> ![Data preparation](fig05.png)
+>
+> **Figure 5. Data preparation.**
+> The data organization should follow this format:
+> **a** Connectivity matrices for each subject should be housed in one folder, e.g., `CON_group_1_XLS`.
+> **b** Each matrix should detail the connectivity values between each pair of brain regions, as indicated by the rows and columns. For instance, the (simulated) values in this matrix represent the fractional anisotropy (white matter integrity) of anatomical connections sourced from diffusion-weighted imaging.
+
+## Adding Covariates
+
+> ![Edit the Covariates](fig06.png)
+>
+> **Figure 6. Edit the Covariates.**
+> The editable information in the Covariates file includes:
+> **a** The names of the variables of interest (vois).
+> **b** For categorical vois, you can specify the categories they belong to.
+
+When analyzing data, it's a common practice to incorporate *variables of interest*, which can be *covariates* or *correlates*. In BRAPH 2.0, these variables of interest must be stored in a separate excel file located just outside the group's folder. The file should share the group folder's name, but with a `.vois` extension, as shown in Figure 6a. The file must adhere to a specific format outlined in Figure 6b:
+
+- **Subject IDs (column A).** Starting from row 3, column A should list the subject IDs.
+  
+- **Variables of interest (column B and subsequent columns).** Column B and the following columns should contain the variables of interest, one per column. Using this example, we see variables like "Age" and "Sex", along with an additional "Education" variable. For each column:
+  - Row 1: The name of the variable of interest.
+  - Row 2: Categories separated by a return (only for categorical variables of interest, like "Sex" and "Education").
+  - Subsequent rows: The values of the variable of interest for each subject.
