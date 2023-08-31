@@ -103,7 +103,7 @@ NEGATIVITY_TYPE (query, smatrix) returns the negativity type __Graph.NONNEGATIVE
 %%%% ¡default! ¥\circlednote{7}{retrieves the adjacency matrix of the graph, defined in the new properties below.}¥
 value = Graph.NONNEGATIVE;
 
-%%% ¡prop! ¥\circled{6}\circlednote{8,9,10}{condition the adjaciency matrix removing the diagonal elements, making it semidefinte positive, and binarizing it. A list of useful functions is: \code{diagonalize} (removes the off-diagonal), \code{dediagonalize} (removes the diagonal), \code{binarize} (binarizes with threshold=0), \code{semipositivize} (removes negative weights), \code{standardize} (normalizes between 0 and 1) or \code{symmetrize} (symmetrizes the matrix). Use the MatLab help to see additional functionalities.}¥
+%%% ¡prop! ¥\circled{6}\circlednote{8}{\circled{9} \circled{10} condition the adjaciency matrix removing the diagonal elements, making it semidefinte positive, and binarizing it. A list of useful functions is: \code{diagonalize} (removes the off-diagonal), \code{dediagonalize} (removes the diagonal), \code{binarize} (binarizes with threshold=0), \code{semipositivize} (removes negative weights), \code{standardize} (normalizes between 0 and 1) or \code{symmetrize} (symmetrizes the matrix). Use the MatLab help to see additional functionalities.}¥
 A (result, cell) is the binary adjacency matrix of the binary directed graph.
 %%%% ¡calculate!
 B = g.get('B'); ¥\circled{7}¥
@@ -376,7 +376,7 @@ between layers.
 B = g.get('B'); ¤
 L = length(B); 
 A = cell(L, L);
-for i = 1:1:L ¥\circled{1}\circlednote{1}{For each layer in \fn{MultilayerWD} graph the corresponding functions are applied as in  \expand{cd:m:GraphBD:prop_update} \circled{8}}¥
+for i = 1:1:L ¥\circled{1}\circlednote{1}{For each layer in \fn{MultilayerWD} graph the corresponding functions are applied as in  \expand{cd:m:GraphBD:prop_update} \circled{8, 9 10}}¥
 	M = dediagonalize(B{i,i}); 
 	M = semipositivize(M, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE'));
 	M = standardize(M, 'StandardizeRule', g.get('STANDARDIZE_RULE'));  
