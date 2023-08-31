@@ -60,6 +60,18 @@ value = dsp.get('SPLIT');
 if all(cellfun(@isscalar, value)) & sum(cell2mat(value)) <= 1 & sum(cell2mat(value)) > 0 
     num_sub = dsp.get('D').get('DP_DICT').get('LENGTH');
     lengths = round(cell2mat(value) * num_sub);
+    remaining_subtractions = sum(lengths) - num_sub;
+    if remaining_subtractions > 0
+        [~, idx] = sort(lengths, 'descend');
+        for i = 1:remaining_subtractions
+            lengths(idx(i)) = lengths(idx(i)) - 1;
+        end
+    elseif remaining_subtractions < 0
+        [~, idx] = sort(lengths, 'ascend');
+        for i = 1:-remaining_subtractions
+            lengths(idx(i)) = lengths(idx(i)) + 1;
+        end
+    end
     indices = randperm(num_sub);
     
     startIndex = 1;
