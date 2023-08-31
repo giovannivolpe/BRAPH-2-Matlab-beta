@@ -73,7 +73,7 @@ else
 end
 
 %%% ¡prop!
-AVG_AUC (result, scalar) provides the metric of the average AUC value.
+MACRO_AUC (result, scalar) provides the metric of the average AUC value.
 %%%% ¡calculate!
 auc = nne.get('AUC');
 if isempty(auc)

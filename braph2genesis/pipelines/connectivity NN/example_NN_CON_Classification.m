@@ -107,4 +107,4 @@ nn.get('TRAIN');
 nne_test = NNClassifier_Evaluator('D', d_test, 'NN', nn);
 confusion_matrix = nne_test.get('C_MATRIX');
 auc = nne_test.get('AUC');
-avg_auc = nne_test.get('AVG_AUC');
+avg_auc = nne_test.get('MACRO_AUC');
