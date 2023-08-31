@@ -1,5 +1,5 @@
 \documentclass{tufte-handout}
-\usepackage{braph2_dev}
+\usepackage{../braph2_dev}
 %\geometry{showframe} % display margins for debugging page layout
 
 \title{Implement a new Graph}
@@ -13,25 +13,25 @@
 \begin{abstract}
 \noindent
 This is the developer tutorial for implementing a new graph. 
-In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new graph which can the be compiled by \code{braph2genesis}. All graphs are extensions of the base element \code{Graph}. Here, we will use the graphs \code{GraphBD} (Binary Directed graph), \code{MultilayerWU} (Weighted Undirected multilayer graph), \code{MultiplexBUT} (Binary Undirected multiplex at fixed Thresholds), and \code{OrdMxBUT} (Binary Undirected ordinal multiplex with fixed Thresholds), as examples.
+In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new graph, which can then be compiled by \code{braph2genesis}. All graphs are (direct or indirect) extensions of the base element \code{Graph}. Here, we will use as examples the graphs \code{GraphBD} (Binary Directed graph), \code{MultilayerWU} (Weighted Undirected multilayer graph), \code{MultiplexBUT} (Binary Undirected multiplex at fixed Thresholds), and \code{OrdMxBUT} (Binary Undirected ordinal multiplex with fixed Thresholds).
 \end{abstract}
 
 \tableofcontents
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\section{Implementation of Unilayer Graph}
+\section{Implementation of Unilayer Graphs}
 
-\subsection{Unilayer Graph Binary Directed (GraphBD)}
+\subsection{Unilayer Binary Directed Graph (GraphBD)}
 
-We will start by implementing in detail the graph \code{GraphBD} which  is a direct extension of the element \code{Graph}.
+We will start by implementing in detail \code{GraphBD}, which  is a direct extension of  \code{Graph}.
 A unilayer graph is constituted by nodes connected by edges.
 
 \begin{lstlisting}[
 	label=cd:m:GraphBD:header,
 	caption={
 		{\bf GraphBD element header.}
-		The \code{header} section of generator code for \fn{\_GraphBD.gen.m} provides the general information about the \code{GraphBD} element.
+		The \code{header} section of the generator code for \fn{\_GraphBD.gen.m} provides the general information about the \code{GraphBD} element.
 		}
 ]
 %% ¡header!
@@ -46,7 +46,7 @@ In a binary directed (BD) graph, the edges are directed and they can be either 0
 	label={cd:m:GraphBD:prop_update},
 	caption={
 		{\bf GraphBD element prop update.}
-		The \code{props\_update} section of generator code for \fn{GraphBD.gen.m} updates the properties of the \code{Graph} element. This defines the core properties of the graph.
+		The \code{props\_update} section of the generator code for \fn{GraphBD.gen.m} updates the properties of the \code{Graph} element. This defines the core properties of the graph.
 	}
 ]
 %% ¡props_update!
@@ -260,9 +260,9 @@ assert(isequal(g_absolute.get('A'), A_absolute), ... ¥\circled{8}¥
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\section{Implementation of Multilayer Graph}
+\section{Implementation of Multilayer Graphs}
 
-\subsection{Multilayer Weigthed Directed Graph (MultilayerWD )}
+\subsection{Weigthed Directed Multilayer Graph (MultilayerWD )}
 
 We can now use \code{GraphBD} as the basis to implement the \code{MultilayerWD} graph. The parts of the code that are modified are highlighted.
 
@@ -533,7 +533,7 @@ A = B;
 
 \clearpage
 
-\subsection{Multiplex Binary Undirected with fixed Thresholds Graph (MultiplexBUT)}
+\subsection{Binary Undirected Multilayer Graph with fixed Thresholds (MultiplexBUT)}
 
 Now we implement the \code{MultiplexBUT} graph based on previous codes \code{GraphBD} and \code{MultilayerWD}, again highlighting the differences.
 
@@ -788,7 +788,7 @@ caption={
 
 \clearpage
 
-\subsection{Ordinal Multiplex Binary Undirected with fixed Thresholds Graph (OrdMxBUT)}
+\subsection{Binary Undirected Ordinal Multiplex Graph with fixed Thresholds (OrdMxBUT)}
 
 Finally, we implement the \code{OrdMxBUT} graph based on previous codes \code{GraphBD}, \code{MultilayerWD} and \code{MultiplexBUT}, again highlighting the differences. An ordered multiplex is a type of multiplex graph that consists of a sequence of layers with ordinal edges between corresponding nodes in subsequent layers.
 
