@@ -1,5 +1,5 @@
 \documentclass{tufte-handout}
-\usepackage{../braph2_dev}
+\usepackage{braph2_dev}
 %\geometry{showframe} % display margins for debugging page layout
 
 \title{Implement a new Graph}
@@ -13,7 +13,7 @@
 \begin{abstract}
 \noindent
 This is the developer tutorial for implementing a new graph. 
-In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new graph which can the be compiled by \code{braph2genesis}. All graphs are extensions of the base element \code{Graph}. Here, we will use the graphs \code{GraphBD} (Binary Directed graph), \code{MultilayerWU} (Weighted Undirected multilayer graph), \code{MultiplexBUT} (Binary Undirected multiplex at fixed Thresholds), and \code{OrdMxBUT} (Binary Undirected ordered multiplex at fixed Thresholds), as examples.
+In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new graph which can the be compiled by \code{braph2genesis}. All graphs are extensions of the base element \code{Graph}. Here, we will use the graphs \code{GraphBD} (Binary Directed graph), \code{MultilayerWU} (Weighted Undirected multilayer graph), \code{MultiplexBUT} (Binary Undirected multiplex at fixed Thresholds), and \code{OrdMxBUT} (Binary Undirected ordinal multiplex with fixed Thresholds), as examples.
 \end{abstract}
 
 \tableofcontents
@@ -80,44 +80,43 @@ NOTES (metadata, string) are some specific notes about the binary directed graph
 
 %%% ¡prop! ¥\circled{1}¥
 GRAPH_TYPE (constant, scalar) returns the graph type __Graph.GRAPH__.
-%%%% ¡default!
+%%%% ¡default! ¥\circlednote{2}{Graphs have a \emph{connectivity type} (\code{CONNECTIVITY\_TYPE}): \code{Graph.BINARY} (graph with binary, 0 or 1, connections) or \code{Graph.WEIGHTED} (graph with weighted connections).}¥
 Graph.GRAPH
 
-%%% ¡prop! ¥\circled{2}\circlednote{2}{Graphs have a \emph{connectivity type} (\code{CONNECTIVITY\_TYPE}): \code{Graph.BINARY} (graph with binary, 0 or 1, connections) or \code{Graph.WEIGHTED} (graph with weighted connections).}¥
-CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type __Graph.BINARY__.
+%%% ¡prop! ¥\circled{2}¥
+CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type __Graph.BINARY__. ¥\circlednote{3}{Graphs have a \emph{directionality type} (\code{DIRECTIONALITY\_TYPE}): \code{Graph.DIRECTED} (graph with directed edges) or \code{Graph.UNDIRECTED} (graph with undirected edges). }¥
 %%%% ¡default!
 value = Graph.BINARY;
 
-%%% ¡prop! ¥\circled{3}\circlednote{3}{Graphs have a \emph{directionality type} (\code{DIRECTIONALITY\_TYPE}): \code{Graph.DIRECTED} (graph with directed edges) or \code{Graph.UNDIRECTED} (graph with undirected edges). }¥
+%%% ¡prop! ¥\circled{3}¥¥\circlednote{4}{Graphs have a \emph{self-connectivity type} (\code{SELFCONNECTIVITY\_TYPE}): \code{Graph.NONSELFCONNECTED} (graph without self-connections) or \code{Graph.SELFCONNECTED} (graph with self-connections). }¥
 DIRECTIONALITY_TYPE  (query, smatrix) returns the directionality type __Graph.DIRECTED__.
-%%%% ¡default!
+%%%% ¡default! 
 value = Graph.DIRECTED;
 
-%%% ¡prop! ¥\circled{4}\circlednote{4}{Graphs have a \emph{self-connectivity type} (\code{SELFCONNECTIVITY\_TYPE}): \code{Graph.NONSELFCONNECTED} (graph without self-connections) or \code{Graph.SELFCONNECTED} (graph with self-connections). }¥
+%%% ¡prop! ¥\circled{4}¥ ¥\circlednote{5}{Graphs have a \emph{negativity type} (\code{NEGATIVITY\_TYPE}): \code{Graph.NONNEGATIVE} (graph without negative edges) or \code{Graph.NEGATIVE} (graph allowing negative edges). }¥
 SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type __Graph.NONSELFCONNECTED__.
 %%%% ¡default!
 value = Graph.NONSELFCONNECTED;
 
-%%% ¡prop! ¥\circled{5}\circlednote{5}{Graphs have a \emph{negativity type} (\code{NEGATIVITY\_TYPE}): \code{Graph.NONNEGATIVE} (graph without negative edges) or \code{Graph.NEGATIVE} (graph allowing negative edges). }¥
+%%% ¡prop! ¥\circled{5}¥¥\circlednote{6}{The property \code{A} contains the supra-adjacency matrix of the graph, which is calculated by the code under \code{¡calculate!}.}¥
 NEGATIVITY_TYPE (query, smatrix) returns the negativity type __Graph.NONNEGATIVE__.
-%%%% ¡default!
+%%%% ¡default! ¥\circlednote{7}{retrieves the adjacency matrix of the graph, defined in the new properties below.}¥
 value = Graph.NONNEGATIVE;
 
-%%% ¡prop! ¥\circled{6}\circlednote{6}{The property \code{A} contains the supra-adjacency matrix of the graph, which is calculated by the code under \code{%%%% ¡calculate!}.¥
+%%% ¡prop! ¥\circled{6}\circlednote{8,9,10}{condition the adjaciency matrix removing the diagonal elements, making it semidefinte positive, and binarizing it. A list of useful functions is: \code{diagonalize} (removes the off-diagonal), \code{dediagonalize} (removes the diagonal), \code{binarize} (binarizes with threshold=0), \code{semipositivize} (removes negative weights), \code{standardize} (normalizes between 0 and 1) or \code{symmetrize} (symmetrizes the matrix). Use the MatLab help to see additional functionalities.}¥
 A (result, cell) is the binary adjacency matrix of the binary directed graph.
 %%%% ¡calculate!
-B = g.get('B'); ¥\circled{7}\circlednote{7}{retrieves the adjacency matrix of the graph, defined in the new properties below.}¥
+B = g.get('B'); ¥\circled{7}¥
 
-B = dediagonalize(B);  ¥\circled{8}\threecirclednotes{8,9,10}{condition the adjaciency matrix removing the diagonal elements, making it semidefinte positive, and binarizing it.
-A list of useful functions is: \code{diagonalize} (removes the off-diagonal), \code{dediagonalize} (removes the diagonal), \code{binarize} (binarizes with threshold=0), \code{semipositivize} (removes negative weights), \code{standardize} (normalizes between 0 and 1) or \code{symmetrize} (symmetrizes the matrix). Use the MatLab help to see additional functionalities.}¥
+B = dediagonalize(B);  ¥\circled{8}¥
 B = semipositivize(B, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); ¥\circled{9}¥
 B = binarize(B); ¥\circled{10}¥
 
 A = {B}; ¥\circled{11}\circlednote{11}{preallocates the adjacency matrix that contains the result of the defined graph.}¥
-value = A; ¥\circled{10}\circlednote{10}{Returns the calcualted graph \code{A} assigning it to the output variable \code{value}.}¥
+value = A; ¥\circled{12}\circlednote{12}{returns the calcualted graph \code{A} assigning it to the output variable \code{value}.}¥
 
-%%%% ¡gui! ¥\circled{11}\circlednote{11}{Each graph has a panel figure of the cell containing the graph adjacency matrix.}¥
-pr = PanelPropCell('EL', g, 'PROP', GraphBD.A, ... ¥\circled{12}\circlednote{12}{ \code{PanelPropCell} plots the panel for a CELL property with a table and two sliders. It can be personalized with props, e.g., \code{TABLE\_HEIGHT} (height in pixels), \code{XSLIDERSHOW} (whether to show the x-slider),  or \code{COLUMNAME} (string list with column names)}¥
+%%%% ¡gui! ¥\circled{13}\circlednote{13}{Each graph has a panel figure of the cell containing the calculated graph adjacency matrix \code{A}.}¥
+pr = PanelPropCell('EL', g, 'PROP', GraphBD.A, ... ¥\circled{14}\circlednote{14}{ \code{PanelPropCell} plots the panel for a CELL property with a table and two sliders. It can be personalized with props, e.g., \code{TABLE\_HEIGHT} (height in pixels), \code{XSLIDERSHOW} (whether to show the x-slider),  or \code{COLUMNAME} (string list with column names)}¥
 'TABLE_HEIGHT', s(40), ... 
 'XSLIDERSHOW', false, ... 
 'YSLIDERSHOW', false, ...  
@@ -125,27 +124,33 @@ pr = PanelPropCell('EL', g, 'PROP', GraphBD.A, ... ¥\circled{12}\circlednote{12
 'COLUMNNAME', g.getCallback('ANODELABELS'), ...
 );
 
-
-
-
-
-
-
-%%% ¡prop! ¥\circled{13}\circlednote{13}{Each graph has a list of compatible measures.}¥
+%%% ¡prop! ¥\circled{15}\circlednote{15}{Each graph has a list of compatible measures.}¥
 COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('GraphBD')
+\end{lstlisting}
 
-%%% ¡prop!¥\circled{14}\circlednote{14}{Each graph has a panel figure of the graph adjacency matrix.}¥
+
+
+\begin{lstlisting}[
+	label={cd:m:GraphBD:props},
+	caption={
+		{\bf GraphBD element props.}
+		The \code{props} section of generator code for \fn{GraphBD.gen.m} defines the properties to be used in \fn{GraphBD}.
+	}
+	]
+%% ¡props!
+
+%%% ¡prop!¥\circled{1}\circlednote{1}{Each graph has a panel figure of the input graph adjacency matrix  \code{B}.}¥
 B (data, smatrix) is the input graph adjacency matrix.
 %%%% ¡gui!
-pr = PanelPropMatrix('EL', g, 'PROP', GraphBD.B, ... ¥\circled{15}\circlednote{15}{ \code{PanelPropMatrix} plots the panel of a property matrix-like with a table. It can be personalized with props as in \circled{12}.}¥
+pr = PanelPropMatrix('EL', g, 'PROP', GraphBD.B, ... ¥\circled{2}\circlednote{2}{ \code{PanelPropMatrix} plots the panel of a property matrix-like with a table. It can be personalized with props as in \circled{12}. Here it plots the input graph adjacency matrix \code{B}}¥
 'TABLE_HEIGHT' , s(40), ...
 'ROWNAME' , g.getCallback('ANODELABELS'), ... 
 'COLUMNNAME', g.getCallback('ANODELABELS'), ...
 varargin{:});
 
-%%% ¡prop! ¥\circled{16}\circlednote{16}{Each graph have different rules that need to be defined: \code{SYMMETRIZE\_RULE}: symmetrizes the matrix A by the symmetrize rule specified by RULE and the admissible RULE options are: 'max' (default,maximum between inconnection and outconnection), 'sum' (convert negative values to absolute value), 'average' (average of inconnection and outconnection) or 'min' (minimum between inconnection and outconnection) \code{SEMIPOSITIVIZE\_RULE}: determines how to remove the negative edges and the admissible RULE options are: 'zero' (default, convert negative values to zeros) or 'absolute' (convert negative values to absolute value) \code{STANDARDIZE\_RULE }: determines how to normalize the weights between 0 and 1 and the admissible RULE options are: 'threshold' (default, normalizes the matrix A by converting negative values to zero and values larger than 1 to 1) or  'range' (normalizes the matrix A in order to have values scaled between 0 and 1 by using a linear function). }¥
+%%% ¡prop! ¥\circled{3}\circlednote{3}{Each graph have different rules that need to be defined: \code{SYMMETRIZE\_RULE}: symmetrizes the matrix A by the symmetrize rule specified by RULE and the admissible RULE options are: 'max' (default,maximum between inconnection and outconnection), 'sum' (convert negative values to absolute value), 'average' (average of inconnection and outconnection) or 'min' (minimum between inconnection and outconnection) \code{SEMIPOSITIVIZE\_RULE}: determines how to remove the negative edges and the admissible RULE options are: 'zero' (default, convert negative values to zeros) or 'absolute' (convert negative values to absolute value) \code{STANDARDIZE\_RULE }: determines how to normalize the weights between 0 and 1 and the admissible RULE options are: 'threshold' (default, normalizes the matrix A by converting negative values to zero and values larger than 1 to 1) or  'range' (normalizes the matrix A in order to have values scaled between 0 and 1 by using a linear function). }¥
 SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.
 %%%% ¡settings!
 {'zero', 'absolute'}
@@ -170,27 +175,27 @@ SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative ed
 
 %%% ¡test!
 %%%% ¡name!
-Constructor - Empty  ¥\circled{2}\circlednote{2}{Checks that an empty \fn{GraphBD} graph is constructing well}¥
-%%%% ¡probability! ¥\circled{3}\circlednote{3}{Assigns a low test execution probability}¥
+Constructor - Empty  ¥\circled{2}\circlednote{2}{checks that an empty \fn{GraphBD} graph is constructing well}¥
+%%%% ¡probability! ¥\circled{3}\circlednote{3}{assigns a low test execution probability}¥
 .01
 %%%% ¡code!
-B = []; ¥\circled{4}\circlednote{4}{Initializes an empty \fn{GraphBD} graph}¥
-g = GraphBD('B', B);¥\circled{5}\circlednote{5}{Constructs the \fn{GraphBD} graph from the initialized \fn{B}}¥
+B = []; ¥\circled{4}\circlednote{4}{initializes an empty \fn{GraphBD} graph}¥
+g = GraphBD('B', B);¥\circled{5}\circlednote{5}{constructs the \fn{GraphBD} graph from the initialized \fn{B}}¥
 
-g.get('A_CHECK'); ¥\circled{6}\circlednote{6}{Performs the corresponding checks for the format of the adjacency matrix \code{A}: \code{GRAPH\_TYPE}, \code{CONNECTIVITY\_TYPE}, \code{DIRECTIONALITY\_TYPE}, \code{SELFCONNECTIVITY\_TYPE} and \code{NEGATIVITY\_TYPE}.}¥
+g.get('A_CHECK'); ¥\circled{6}\circlednote{6}{performs the corresponding checks for the format of the adjacency matrix \code{A}: \code{GRAPH\_TYPE}, \code{CONNECTIVITY\_TYPE}, \code{DIRECTIONALITY\_TYPE}, \code{SELFCONNECTIVITY\_TYPE} and \code{NEGATIVITY\_TYPE}.}¥
 
-A = {binarize(semipositivize(dediagonalize(B)))}; ¥\circled{7}\circlednote{7}{Calculates the value of the graph by apply the corresponding properties function}¥
-assert(isequal(g.get('A'), A), ...¥\circled{8}\circlednote{8}{Tests that the value of generated graph calculated by applying the properties functions coincides with the expected value}¥
+A = {binarize(semipositivize(dediagonalize(B)))}; ¥\circled{7}\circlednote{7}{calculates the value of the graph by apply the corresponding properties function}¥
+assert(isequal(g.get('A'), A), ...¥\circled{8}\circlednote{8}{tests that the value of generated graph calculated by applying the properties functions coincides with the expected value}¥
 [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 'GraphBD is not constructing well.')
 
 %%% ¡test!
 %%%% ¡name!
-Constructor - Full ¥\circled{9}\circlednote{9}{Checks that a full \fn{GraphBD} graph is constructing well}¥
+Constructor - Full ¥\circled{9}\circlednote{9}{checks that a full \fn{GraphBD} graph is constructing well}¥
 %%%% ¡probability!  ¥\circled{3}¥
 .01  ¥\circled{3}¥
 %%%% ¡code!
-B = randn(randi(10)); ¥\circled{10}\circlednote{10}{Generates a random graph}¥
+B = randn(randi(10)); ¥\circled{10}\circlednote{10}{generates a random graph}¥
 g = GraphBD('B', B);  ¥\circled{5}¥
 
 g.get('A_CHECK') ¥\circled{6}¥
@@ -202,7 +207,7 @@ assert(isequal(g.get('A'), A), ... ¥\circled{8}¥
 
 %%% ¡test!
 %%%% ¡name!
-Semipositivize Rules ¥\circled{11}\circlednote{11}{Checks the \fn{SEMIPOSITIVIZE\_RULE} on the \fn{GraphBD} graph.}¥
+Semipositivize Rules ¥\circled{11}\circlednote{11}{checks the \fn{SEMIPOSITIVIZE\_RULE} on the \fn{GraphBD} graph.}¥
 %%%% ¡probability!
 .01 ¥\circled{3}¥
 %%%% ¡code!
@@ -212,9 +217,9 @@ B = [
 0 1 2 -2 -1
 1 2 -2 -1 0
 2 -2 -1 0 1
-]; ¥\circled{12}\circlednote{12}{Generates an example graph with negative weights}¥
+]; ¥\circled{12}\circlednote{12}{generates an example graph with negative weights}¥
 
-g0 = GraphBD('B', B);  ¥\circled{13}\circlednote{13}{Constructs the \fn{GraphBD} graph from the initialized \fn{B} with default RULE for \fn{SEMIPOSITIVIZE\_RULE}. }¥
+g0 = GraphBD('B', B);  ¥\circled{13}\circlednote{13}{constructs the \fn{GraphBD} graph from the initialized \fn{B} with default RULE for \fn{SEMIPOSITIVIZE\_RULE}. }¥
 A0 = {[
 	0 0 0 1 1
 	0 0 1 1 0
@@ -226,7 +231,7 @@ assert(isequal(g0.get('A'), A0), ...  ¥\circled{8}¥
 [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 'GraphBD is not constructing well.')
 
-g_zero = GraphBD('B', B, 'SEMIPOSITIVIZE_RULE', 'zero'); ¥\circled{15}\circlednote{15}{Constructs the \fn{GraphBD} graph from the initialized \fn{B} with RULE = 'zero' for \fn{SEMIPOSITIVIZE\_RULE}. }¥
+g_zero = GraphBD('B', B, 'SEMIPOSITIVIZE_RULE', 'zero'); ¥\circled{15}\circlednote{15}{constructs the \fn{GraphBD} graph from the initialized \fn{B} with RULE = 'zero' for \fn{SEMIPOSITIVIZE\_RULE}. }¥
 A_zero = {[
 	0 0 0 1 1
 	0 0 1 1 0
@@ -238,7 +243,7 @@ assert(isequal(g_zero.get('A'), A_zero), ... ¥\circled{8}¥
 [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 'GraphBD is not constructing well.')
 
-g_absolute = GraphBD('B', B, 'SEMIPOSITIVIZE_RULE', 'absolute'); ¥\circled{16}\circlednote{16}{Constructs the \fn{GraphBD} graph from the initialized \fn{B} with RULE = 'absolute' for \code{SEMIPOSITIVIZE\_RULE}}¥
+g_absolute = GraphBD('B', B, 'SEMIPOSITIVIZE_RULE', 'absolute'); ¥\circled{16}\circlednote{16}{constructs the \fn{GraphBD} graph from the initialized \fn{B} with RULE = 'absolute' for \code{SEMIPOSITIVIZE\_RULE}}¥
 A_absolute = {[
 	0 1 0 1 1
 	1 0 1 1 1
@@ -275,11 +280,7 @@ A multilayer network allows connections between any nodes across the multiple la
 MultilayerWD ¤< Graph¤ (g, multilayer weighted directed graph) is a multilayer weighted directed graph.
 
 ¤%%% ¡description!¤
-In a multilayer weighted directed (WD) graph, layers could have different
-number of nodes with within-layer weighted directed edges, associated with a
-real number between 0 and 1 and indicating the strength of the connection.
-The connectivity matrices are symmetric (within layer).
-All node connections are allowed between layers.
+In a multilayer weighted directed (WD) graph, layers could have different number of nodes with within-layer weighted directed edges, associated with a real number between 0 and 1 and indicating the strength of the connection. The connectivity matrices are symmetric (within layer). All node connections are allowed between layers.
 \end{lstlisting}
 
 \begin{lstlisting}[
@@ -300,11 +301,7 @@ NAME (constant, string) is the name of the ¤multilayer weighted directed graph�
 ¤%%% ¡prop!
 DESCRIPTION (constant, string) is the description of the ¤multilayer weighted directed graph¤.
 %%%% ¡default!¤
-'In a multilayer weighted directed (WD) graph, layers could have different number 
-of nodes with within-layer weighted directed edges, associated with a real
-number between 0 and 1 and indicating the strength of the connection.
-The connectivity matrices are symmetric (within layer).
-All node connections are allowed between layers.'
+'In a multilayer weighted directed (WD) graph, layers could have different number of nodes with within-layer weighted directed edges, associated with a realnumber between 0 and 1 and indicating the strength of the connection. The connectivity matrices are symmetric (within layer). All node connections are allowed between layers.'
 
 ¤%%% ¡prop!
 TEMPLATE (parameter, item) is the template of the ¤multilayer weighted directed graph¤.¤
@@ -397,6 +394,7 @@ for i = 1:1:L ¥\circled{1}\circlednote{1}{For each layer in \fn{MultilayerWD} g
 end
 ¤value = A;¤
 
+
 ¤%%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', ¤MultilayerWD.A, ...
 ¤'TABLE_HEIGHT', s(40), ...¤
@@ -407,7 +405,7 @@ pr = PanelPropCell('EL', g, 'PROP', ¤MultilayerWD.A, ...
 'YSLIDERWIDTH', s(5), ...
 ¤'ROWNAME', g.getCallback('ANODELABELS'), ...
 'COLUMNNAME', g.getCallback('ANODELABELS'), ...
-varargin{:});¤
+varargin{:});¤¥\circlednote{2}{There are some properties of graph adjacency matrix \code{A} that can be used in the gui to make the visualization user friendly. The list of properties that can be used are: ALAYERTICKS (to set ticks for each layer according to the layer number), ALAYERLABELS (to set labels for each layer), ANODELABELS (to set the nodel labels for each layer))}¥
 
 %%% ¡prop!
 PARTITIONS (result, rvector) returns the number of layers in the partitions of the graph.
@@ -415,11 +413,11 @@ PARTITIONS (result, rvector) returns the number of layers in the partitions of t
 value = ones(1, g.get('LAYERNUMBER'));
 
 %%% ¡prop!
-ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.
+ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.¥\circled{2}¥
 %%%% ¡calculate!
-alayerlabels = g.get('LAYERLABELS');
+alayerlabels = g.get('LAYERLABELS'); ¥\circled{3}\circlednote{3}{returns the labels of the graph layers provided by the user}¥
 if isempty(alayerlabels) && ~isa(g.getr('A'), 'NoValue') % ensures that it's not unecessarily calculated
-	alayerlabels = cellfun(@num2str, num2cell([1:1:g.get('LAYERNUMBER')]), 'uniformoutput', false);
+	alayerlabels = cellfun(@num2str, num2cell([1:1:g.get('LAYERNUMBER')]), 'uniformoutput', false); ¥\circled{4}\circlednote{4}{constructs the labels of the layers based on the number of the layer (in case no layer labels were provided by the user).}¥
 end
 value = alayerlabels;
 
@@ -428,13 +426,27 @@ COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures¤('MultilayerWD')
 
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[
+label={cd:m:MultilayerWD:props},
+caption={
+	{\bf MultilayerWD element props.}
+	The \code{props} section of generator code for \fn{MultilayerWD.gen.m} defines the properties to be used in \fn{MultilayerWD}.
+	\expand{cd:m:GraphBD:props}
+}
+]
+
 %% ¡props!
 
 %%% ¡prop!
 B (data, cell) is the input cell containing the multilayer adjacency matrices.
 %%%% ¡default!
 {[] []; [] []}
-%%%% ¡gui! ¥\circled{2}\circlednote{2}{Same as in \expand{cd:m:GraphBD:prop_update} \circled{12}}¥
+%%%% ¡gui! ¥\circled{1}\circlednote{1}{Same as in \expand{cd:m:GraphBD:props} \circled{2}}¥
 pr = PanelPropCell('EL', g, 'PROP', MultilayerWD.B, ...
 'TABLE_HEIGHT', s(40), ...
 'XSLIDERSHOW', true, ...
@@ -451,7 +463,7 @@ SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative ed
 %%%% ¡settings!
 {'zero', 'absolute'}¤
 
-%%% ¡prop!  ¥\circled{3}\circlednote{3}{Same as in  \expand{cd:m:GraphBD:prop_update} \circled{16}}¥
+%%% ¡prop!  ¥\circled{2}\circlednote{2}{Same as in  \expand{cd:m:GraphBD:props} \circled{3}}¥
 STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.
 %%%% ¡settings!
 {'threshold' 'range'}
@@ -541,11 +553,7 @@ A multiplex graph is a type of multilayer graph where only interlayer edges are 
 	thresholds) is a binary undirected multiplex with fixed thresholds. ¥\circled{1}\circlednote{1}{MultiplexBUT is a child of \fn{MultiplexWU} graph}¥
 	
 	¤%%% ¡description!¤
-	In a binary undirected multiplex with fixed thresholds (BUT), the layers
-	are those of binary undirected (BU) multiplex graphs derived from the
-	same weighted supra-connectivity matrices binarized at different
-	thresholds.The supra-connectivity matrix has a number of partitions
-	equal to the number of thresholds.
+	In a binary undirected multiplex with fixed thresholds (BUT), the layers are those of binary undirected (BU) multiplex graphs derived from the same weighted supra-connectivity matrices binarized at different thresholds.The supra-connectivity matrix has a number of partitions equal to the number of thresholds.
 
 \end{lstlisting}
 
@@ -568,11 +576,7 @@ A multiplex graph is a type of multilayer graph where only interlayer edges are 
 	DESCRIPTION (constant, string) is the description of the ¤binary undirected
 	multiplex with fixed thresholds¤.
 	%%%% ¡default!¤
-	'In a binary undirected multiplex with fixed thresholds (BUT), the layers
-	are those of binary undirected (BU) multiplex graphs derived from the
-	same weighted supra-connectivity matrices binarized at different
-	thresholds. The supra-connectivity matrix has a number of partitions
-	equal to the number of thresholds.'
+	'In a binary undirected multiplex with fixed thresholds (BUT), the layers are those of binary undirected (BU) multiplex graphs derived from the same weighted supra-connectivity matrices binarized at different thresholds. The supra-connectivity matrix has a number of partitions equal to the number of thresholds.'
 
 	¤%%% ¡prop!
 	TEMPLATE (parameter, item) is the template of the ¤binary undirected multiplex with fixed thresholds¤.¤
@@ -642,27 +646,28 @@ A multiplex graph is a type of multilayer graph where only interlayer edges are 
 	A (result, cell) is the cell containing¤ multiplex binary adjacency matrices of the binary undirected multiplex.
 	
 	¤%%%% ¡calculate!¤
-	A_WU = calculateValue@MultiplexWU(g, prop);¥\circled{1}\circlednote{1}{Calculates the graph MultiplexWU calling its parent \fn{MultiplexWU}.}¥
+	A_WU = calculateValue@MultiplexWU(g, prop);¥\circled{1}\circlednote{1}{calculates the graph MultiplexWU calling its parent \fn{MultiplexWU}.}¥
 	
-	thresholds = g.get('THRESHOLDS'); ¥\circled{2}\circlednote{2}{Gets the thresholds to be applied to \fn{A\_WU}.}¥
-	L = length(A_WU); % number of layers ¥\circled{3}\circlednote{3}{Gets the number of layers in graph \fn{A\_WU}.}¥
+	thresholds = g.get('THRESHOLDS'); ¥\circled{2}\circlednote{2}{gets the thresholds to be applied to \fn{A\_WU}.}¥
+	L = length(A_WU); % number of layers ¥\circled{3}\circlednote{3}{gets the number of layers in graph \fn{A\_WU}.}¥
 	A = cell(length(thresholds)*L); ¥\circled{4}\circlednote{4}{The new \fn{MultiplexBUT} graph will have \fn{L} layers for each threshold applied.}¥
 	
 	if L > 0 && ~isempty(cell2mat(A_WU))
 		A(:, :) = {eye(length(A_WU{1, 1}))};
-		for i = 1:1:length(thresholds) ¥\circled{5}\circlednote{5}{Iterates over all the thresholds to be applied}¥
+		for i = 1:1:length(thresholds) ¥\circled{5}\circlednote{5}{iterates over all the thresholds to be applied}¥
 			threshold = thresholds(i);
 			layer = 1;
-			for j = (i - 1) * L + 1:1:i * L ¥\circled{6}\circlednote{6}{Iterates over all the layers in \fn{A\_WU} }¥
-				A{j, j} = dediagonalize(binarize(A_WU{layer, layer}, 'threshold', threshold)); ¥\circled{7}\circlednote{7}{Binarizes the present layer of the \fn{A\_WU} graph according to the present threshold}¥
+			for j = (i - 1) * L + 1:1:i * L ¥\circled{6}\circlednote{6}{iterates over all the layers in \fn{A\_WU} }¥
+				A{j, j} = dediagonalize(binarize(A_WU{layer, layer}, 'threshold', threshold)); ¥\circled{7}\circlednote{7}{binarizes the present layer of the \fn{A\_WU} graph according to the present threshold}¥
 				layer = layer + 1;
 			end
 		end
 	end
 	
 	¤value = A;¤
-	
-	¤%%%% ¡gui! ¥\circled{8}\circlednote{8}{Same as in \expand{cd:m:GraphBD:prop_update} \circled{12}}¥
+
+
+	¤%%%% ¡gui! ¥\circled{8}\circlednote{8}{Same as in \expand{cd:m:GraphBD:prop_update} \circled{2}}¥
 	pr = PanelPropCell('EL', g, 'PROP', MultiplexBUT.A, ...
 	'TABLE_HEIGHT', s(40), ...
 	'XYSLIDERLOCK', true, ... 
@@ -695,7 +700,7 @@ A multiplex graph is a type of multilayer graph where only interlayer edges are 
 		end
 	
 		alayerlabels = {};
-		for i = 1:1:length(thresholds)
+		for i = 1:1:length(thresholds)¥\circled{9}\circlednote{9}{sets the labels of layers considering the thresholds and the number of layers in each multiplex graph for each threshold}¥
 			for j = 1:1:length(blayerlabels)
 				alayerlabels = [alayerlabels, [blayerlabels{j} '|' thresholds{i}]];
 			end
@@ -708,11 +713,25 @@ A multiplex graph is a type of multilayer graph where only interlayer edges are 
 	%%%% ¡default!
 	getCompatibleMeasures('MultiplexBUT')¤
 	
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[
+label={cd:m:MultiplexBUT:props},
+caption={
+	{\bf MultiplexBUT element props.}
+	The \code{props} section of generator code for \fn{MultiplexBUT.gen.m} defines the properties to be used in \fn{MultiplexBUT}.
+	\expand{cd:m:GraphBD:props}
+}
+]
+
+	
 	%% ¡props!
 	
 	%%% ¡prop!
 	THRESHOLDS (parameter, rvector) is the vector of thresholds.
-	%%%% ¡gui! ¥\circled{9}\circlednote{9}{\code{PanelPropRVectorSmart} plots the panel for a row vector with an edit field. Smart means that (almost) any MatLab expression leading to a correct row vector can be introduced in the edit field. Also, the value of the vector can be limited between some MIN and MAX.}¥
+	%%%% ¡gui! ¥\circled{1}\circlednote{1}{\code{PanelPropRVectorSmart} plots the panel for a row vector with an edit field. Smart means that (almost) any MatLab expression leading to a correct row vector can be introduced in the edit field. Also, the value of the vector can be limited between some MIN and MAX.}¥
 	pr = PanelPropRVectorSmart('EL', g, 'PROP', MultiplexBUT.THRESHOLDS, 'MAX', 1, 'MIN', -1, varargin{:});
 	
 	
@@ -786,13 +805,7 @@ Finally, we implement the \code{OrdMxBUT} graph based on previous codes \code{Gr
 	OrdMxBUT < OrdMxWU (g, ordinal multiplex binary undirected with fixed thresholds) is a binary undirected ordinal multiplex with fixed thresholds. ¥\circled{1}\circlednote{1}{OrdMxBUT is a child of \fn{OrdMxWU} graph}¥
 	
 	¤%%% ¡description!¤
-	In a binary undirected ordinal multiplex with fixed thresholds (BUT), all
-	the layers consist of binary undirected (BU) multiplex graphs derived
-	from the same weighted supra-connectivity matrices binarized at
-	different thresholds. The supra-connectivity matrix has a number of
-	partitions equal to the number of thresholds. The layers are connected
-	in an ordinal fashion, i.e., only consecutive layers are connected.
-	
+	In a binary undirected ordinal multiplex with fixed thresholds (BUT), all the layers consist of binary undirected (BU) multiplex graphs derived from the same weighted supra-connectivity matrices binarized at different thresholds. The supra-connectivity matrix has a number of partitions equal to the number of thresholds. The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected.
 \end{lstlisting}
 
 \begin{lstlisting}[
@@ -813,13 +826,7 @@ Finally, we implement the \code{OrdMxBUT} graph based on previous codes \code{Gr
 	¤%%% ¡prop!
 	DESCRIPTION (constant, string) is the description of the ¤binary undirected ordinal multiplex with fixed thresholds.¤.
 	%%%% ¡default!¤
-	'In a binary undirected ordinal multiplex with fixed thresholds (BUT),
-	all the layers consist of binary undirected (BU) multiplex graphs
-	derived from the same weighted supra-connectivity matrices
-	binarized at different thresholds. The supra-connectivity matrix has a
-	number of partitions equal to the number of thresholds. The layers are
-	connectedin an ordinal fashion, i.e., only consecutive layers are
-	connected.'
+	'In a binary undirected ordinal multiplex with fixed thresholds (BUT), all the layers consist of binary undirected (BU) multiplex graphs derived from the same weighted supra-connectivity matrices binarized at different thresholds. The supra-connectivity matrix has a number of partitions equal to the number of thresholds. The layers are connectedin an ordinal fashion, i.e., only consecutive layers are connected.'
 	
 	¤%%% ¡prop!
 	TEMPLATE (parameter, item) is the template of the ¤binary undirected ordinal multiplex with fixed thresholds¤.¤
@@ -889,7 +896,7 @@ Finally, we implement the \code{OrdMxBUT} graph based on previous codes \code{Gr
 	A (result, cell) is the cell containing¤binary supra-adjacency matrix of the binary undirected multiplex with fixed thresholds (BUT).
 	
 	¤%%%% ¡calculate!¤
-	A_WU = calculateValue@OrdMxWU(g, prop);¥\circled{1}\circlednote{1}{Calculates the graph OrdMxWU calling the parent \fn{OrdMxWU}.}¥
+	A_WU = calculateValue@OrdMxWU(g, prop);¥\circled{1}\circlednote{1}{calculates the graph OrdMxWU calling the parent \fn{OrdMxWU}.}¥
 	
 	¤thresholds = g.get('THRESHOLDS');  ¥\circled{2}\circlednote{2}{Same as in \expand{cd:m:MultiplexBUT:prop_update}  \circled{2}-\circled{4}.}¥
 	L = length(A_WU); % number of layers 
@@ -917,7 +924,7 @@ Finally, we implement the \code{OrdMxBUT} graph based on previous codes \code{Gr
 	
 	¤value = A;¤
 	
-	¤%%%% ¡gui! ¥\circled{8}\circlednote{8}{Same as in \expand{cd:m:MultiplexBUT:prop_update}}¥
+	¤%%%% ¡gui! ¥\circled{8}\circlednote{8}{Same as in \expand{cd:m:MultiplexBUT:gui}}¥
 	pr = PanelPropCell('EL', g, 'PROP', OrdMxBUT.A, ...
 	'TABLE_HEIGHT', s(40), ...
 	'XYSLIDERLOCK', true, ... 
@@ -962,6 +969,27 @@ Finally, we implement the \code{OrdMxBUT} graph based on previous codes \code{Gr
 	COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 	%%%% ¡default!
 	getCompatibleMeasures('OrdMxBUT')¤
+	
+	
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[
+label={cd:m:OrdMxBUT:props},
+caption={
+	{\bf OrdMxBUT element props.}
+	The \code{props} section of generator code for \fn{OrdMxBUT.gen.m} defines the properties to be used in \fn{MultiplexBUT}.
+	\expand{cd:m:GraphBD:props}
+}
+]
+
+¤%% ¡props!
+
+%%% ¡prop!
+THRESHOLDS (parameter, rvector) is the vector of thresholds.
+%%%% ¡gui!
+pr = PanelPropRVectorSmart('EL', g, 'PROP', ¤OrdMxBUT.THRESHOLDS, ¤'MAX', 1, 'MIN', -1, varargin{:});¤
 	
 \end{lstlisting}
 
