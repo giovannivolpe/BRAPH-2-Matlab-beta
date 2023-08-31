@@ -1,38 +1,33 @@
 %% ¡header!
-NNCrossValidation < ConcreteElement (nncv, neural network) comprises a neural network model with a dataset.
+NNCrossValidation < ConcreteElement (nncv, neural network)  is a process for evaluating neural network models using cross-validation.
 
 %%% ¡description!
-A neural network base (NNBase) comprises a neural network model with a specific dataset.
- Instances of this class should not be created. Use one of its subclasses instead.
-
-Its subclasses need to implement the props MODEL, INPUTS and TARGETS.
- Each subclass is typically optimized to work with the subclasses of NNDataPoint in the prop DP_CLASSES.
-
-To train a neural network nn use: nn.get('TRAIN')
-To obtain the prediction on a dataset D use: predictions = nn.get('PREDICT', D)
+NNCrossValidation is a process that facilitates the evaluation of neural network models using cross-validation. 
+ It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. 
+ This helps in assessing the generalization performance of the model and detecting overfitting.
 
 %%% ¡seealso!
-NNDataPoint, NNDataset, NNEvaluator
+NNDataset, NNEvaluator, NNBase
 
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the nerual network base.
+NAME (constant, string) is the name of the cross-valdition.
 %%%% ¡default!
 'NNCrossValidation'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the nerual network base.
+DESCRIPTION (constant, string) is the description of the cross-valdition.
 %%%% ¡default!
-'A neural network base (NNBase) comprises a neural network model with a specific dataset. Instances of this class should not be created. Use one of its subclasses instead. Its subclasses need to implement the props MODEL, INPUTS and TARGETS.'
+'NNCrossValidation is a process that facilitates the evaluation of neural network models using cross-validation. It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. This helps in assessing the generalization performance of the model and detecting overfitting.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the nerual network base.
+TEMPLATE (parameter, item) is the template of the cross-valdition.
 %%%% ¡settings!
 'NNCrossValidation'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the nerual network base.
+ID (data, string) is a few-letter code for the cross-valdition.
 %%%% ¡default!
 'NNCrossValidation ID'
 
@@ -42,7 +37,7 @@ LABEL (metadata, string) is an extended label of the nerual network base.
 'NNCrossValidation label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the nerual network base.
+NOTES (metadata, string) are some specific notes about the cross-validation.
 %%%% ¡default!
 'NNCrossValidation notes'
     
@@ -59,11 +54,22 @@ D (data, item) is the dataset to train the neural network model.
 'NNDataset'
 
 %%% ¡prop!
-NN_LIST (data, itemlist) is the neural network list.
+D_LIST (result, itemlist) is the dataset to train the neural network model.
 %%%% ¡settings!
-'NNBase'
+'NNDataset'
+%%%% ¡calculate!
+d = nncv.get('D');
+d_list = 
+
 
 %%% ¡prop!
-NNEvaluator_LIST (data, itemlist) is the neural network evaluator list.
+NN_LIST (result, itemlist) is the neural network list.
+%%%% ¡settings!
+'NNBase'
+%%%% ¡calculate!
+
+%%% ¡prop!
+NNEvaluator_LIST (result, itemlist) is the neural network evaluator list.
 %%%% ¡settings!
 'NNEvaluator'
+%%%% ¡calculate!
