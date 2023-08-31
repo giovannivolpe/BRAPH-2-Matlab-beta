@@ -1,5 +1,5 @@
 %% ¡header!
-NNCrossValidation < ConcreteElement (nncv, neural network) is a process for evaluating neural network models using cross-validation.
+NNCrossValidation < ConcreteElement (nncv, neural network cross-validation) is a process for evaluating neural network models using cross-validation.
 
 %%% ¡description!
 NNCrossValidation is a process that facilitates the evaluation of neural network models using cross-validation. 
@@ -138,7 +138,7 @@ d = NNDataset('DP_DICT', IndexedDictionary(...
 % create the cross-validation process
 nncv = NNCrossValidation('D', d, 'KFOLD', 5);
 
-% Check whether the number of dp from all d_list matches
+% Check whether the number of datapoint from all d_list matches
 d_list = nncv.get('D_LIST');
 num_dp_from_nncv = 0;
 for i = 1:length(d_list)
@@ -153,7 +153,7 @@ assert(num_dp_from_nncv == num_dp, ...
 % fold
 nncv = NNCrossValidation('D', d, 'KFOLD', 5, 'SPLIT', {[1 2], [3 4], [5 6], [7 8], [9]});
 
-% Check whether the dp matches
+% Check whether the number of datapoint in each fold matches
 split = nncv.get('SPLIT');
 d_list = nncv.get('D_LIST');
 for i = 1:length(split)
