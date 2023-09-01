@@ -6,6 +6,8 @@ NNCrossValidation is a process that facilitates the evaluation of neural network
  It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. 
  This helps in assessing the generalization performance of the model and detecting overfitting.
 
+To train all the neural networks for all folds, use: nncv.get('TRAIN')
+
 %%% ¡seealso!
 NNDataset, NNEvaluator, NNBase
 
@@ -114,6 +116,15 @@ false
 PLOT_TRAINING (parameter, option) determines whether to plot the training progress.
 %%%% ¡settings!
 {'none' 'training-progress'}
+
+%%% ¡prop!
+TRAIN (query, empty) trains all neural network models for all folds.
+%%%% ¡calculate!
+nn_list = nncv.get('NN_LIST');
+for i = 1:1:length(nn_list)
+    nn_list{i}.memorize('MODEL');
+end
+value = [];
 
 %% ¡tests!
 
