@@ -45,8 +45,6 @@ NOTES (metadata, string) are some specific notes about the cross-validation.
 
 %%% ¡prop!
 NN_LIST (result, itemlist) contains the neural network models corresponding to k folds.
-%%%% ¡settings!
-'NNRegressorMLP'
 %%%% ¡calculate!
 d_list = nncv.get('D_LIST');
 
@@ -76,8 +74,6 @@ end
 
 %%% ¡prop!
 EVALUATOR_LIST (result, itemlist) contains the evaluators corresponding to k folds.
-%%%% ¡settings!
-'NNRegressor_Evaluator'
 %%%% ¡calculate!
 d_list = nncv.get('D_LIST');
 nn_list = nncv.get('NN_LIST');
@@ -87,14 +83,74 @@ value = cellfun(@(d, nn) NNRegressor_Evaluator('D', d, 'NN', nn), ...
 %% ¡props!
 
 %%% ¡prop!
-CORRELATION_COEFF (result, rvector) provides the metric of the correlation of coefficients.
+AVG_CORRELATION_COEFF (result, rvector) provides the metric of the correlation of coefficients.
 %%%% ¡calculate!
-value = [];
+e_list = nncv.get('EVALUATOR_LIST');
+
+value = cellfun(@(e) e.get('CORRELATION_COEFF'), ...
+    e_list, 'UniformOutput', false);
+
+if isempty(value)
+    value = [];
+else
+    value = mean(cell2mat(value), 1);
+end
 
 %%% ¡prop!
-COEFF_OF_DETERMINATION (result, rvector) provides a measure of how well the predictions are replicated by the model.
+AVG_COEFF_OF_DETERMINATION (result, rvector) provides a measure of how well the predictions are replicated by the model.
 %%%% ¡calculate!
-value = [];
+e_list = nncv.get('EVALUATOR_LIST');
+
+value = cellfun(@(e) e.get('COEFF_OF_DETERMINATION'), ...
+    e_list, 'UniformOutput', false);
+
+if isempty(value)
+    value = [];
+else
+    value = mean(cell2mat(value), 1);
+end
+
+%%% ¡prop!
+AVG_MEAN_ABSOLUTE_ERROR (result, rvector) provides the metric of the mean absolute error.
+%%%% ¡calculate!
+e_list = nncv.get('EVALUATOR_LIST');
+
+value = cellfun(@(e) e.get('MEAN_ABSOLUTE_ERROR'), ...
+    e_list, 'UniformOutput', false);
+
+if isempty(value)
+    value = [];
+else
+    value = mean(cell2mat(value), 1);
+end
+
+%%% ¡prop!
+AVG_MEAN_SQUARED_ERROR (result, rvector) provides the metric of the mean squared error.
+%%%% ¡calculate!
+e_list = nncv.get('EVALUATOR_LIST');
+
+value = cellfun(@(e) e.get('MEAN_SQUARED_ERROR'), ...
+    e_list, 'UniformOutput', false);
+
+if isempty(value)
+    value = [];
+else
+    value = mean(cell2mat(value), 1);
+end
+
+%%% ¡prop!
+AVG_ROOT_MEAN_SQUARED_ERROR (result, rvector) provides the metric of the root mean squared error.
+%%%% ¡calculate!
+e_list = nncv.get('EVALUATOR_LIST');
+
+value = cellfun(@(e) e.get('ROOT_MEAN_SQUARED_ERROR'), ...
+    e_list, 'UniformOutput', false);
+
+if isempty(value)
+    value = [];
+else
+    value = mean(cell2mat(value), 1);
+end
 
 %% ¡tests!
 

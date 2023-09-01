@@ -230,7 +230,7 @@ if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG
     test_NNDataPoint_CON_REG % create example files
 end
 
-example_NN_CON_REG
+example_NN_CON_Regression
 
 %%% ¡test! 
 %%%% ¡name!
@@ -241,4 +241,4 @@ if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG
     test_NNDataPoint_CON_REG % create example files
 end
 
-example_NNCV_CON_REG
+example_NNCV_CON_Regression

@@ -45,8 +45,6 @@ NOTES (metadata, string) are some specific notes about the cross-validation.
     
 %%% ¡prop!
 NN_LIST (result, itemlist) contains the neural network models corresponding to k folds.
-%%%% ¡settings!
-'NNClassifierMLP'
 %%%% ¡calculate!
 d_list = nncv.get('D_LIST');
 
@@ -76,8 +74,6 @@ end
 
 %%% ¡prop!
 EVALUATOR_LIST (result, itemlist) contains the evaluators corresponding to k folds.
-%%%% ¡settings!
-'NNClassifier_Evaluator'
 %%%% ¡calculate!
 d_list = nncv.get('D_LIST');
 nn_list = nncv.get('NN_LIST');
@@ -94,7 +90,11 @@ e_list = nncv.get('EVALUATOR_LIST');
 aucs = cellfun(@(e) e.get('AUC'), ...
     e_list, 'UniformOutput', false);
 
-value = [];
+if isempty(aucs)
+    value = [];
+else
+    value = mean(cell2mat(aucs), 1);
+end
 
 %%% ¡prop!
 AVG_MACRO_AUC (result, scalar) provides the metric of the average macro AUC value across k folds.
@@ -104,7 +104,11 @@ e_list = nncv.get('EVALUATOR_LIST');
 macro_aucs = cellfun(@(e) e.get('MACRO_AUC'), ...
     e_list, 'UniformOutput', false);
 
-value = 0;
+if isempty(macro_aucs)
+    value = 0;
+else
+    value = mean(cell2mat(macro_aucs), 1);
+end
 
 %%% ¡prop!
 C_MATRIX (result, matrix) provides the confusion matrix across k folds.

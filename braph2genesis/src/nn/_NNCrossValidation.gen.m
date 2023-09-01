@@ -67,8 +67,6 @@ D (data, item) is the dataset to be cross-validated.
 
 %%% ¡prop!
 D_LIST (result, itemlist) contains the split datasets corresponding to k folds.
-%%%% ¡settings!
-'NNDataset'
 %%%% ¡calculate!
 d = nncv.get('D');
 if d.get('DP_DICT').get('LENGTH') == 0
@@ -79,13 +77,9 @@ end
 
 %%% ¡prop!
 NN_LIST (result, itemlist) contains the neural network models corresponding to k folds.
-%%%% ¡settings!
-'NNBase'
 
 %%% ¡prop!
 EVALUATOR_LIST (result, itemlist) contains the evaluators corresponding to k folds.
-%%%% ¡settings!
-'NNEvaluator'
 
 %%% ¡prop!
 EPOCHS (parameter, scalar) is the maximum number of epochs.
@@ -120,7 +114,7 @@ PLOT_TRAINING (parameter, option) determines whether to plot the training progre
 %%% ¡prop!
 TRAIN (query, empty) trains all neural network models for all folds.
 %%%% ¡calculate!
-nn_list = nncv.get('NN_LIST');
+nn_list = nncv.memorize('NN_LIST');
 for i = 1:1:length(nn_list)
     nn_list{i}.memorize('MODEL');
 end

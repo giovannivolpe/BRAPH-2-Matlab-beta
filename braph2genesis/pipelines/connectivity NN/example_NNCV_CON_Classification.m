@@ -36,7 +36,7 @@ im_gr3 = ImporterGroupSubjectCON_XLS( ...
 
 gr3 = im_gr3.get('GR');
 
-%% Training-test split
+%% Create NNData composed of corresponding NNDataPoints
 % create item lists of NNDataPoint_CON_CLA
 it_list1 = cellfun(@(x) NNDataPoint_CON_CLA( ...
     'ID', x.get('ID'), ...
@@ -93,11 +93,11 @@ d3 = NNDataset( ...
 
 d = NNDatasetCombine('D_LIST', {d1, d2, d3}).get('D');
 
-%% Create a MLP classifier with training set
+%% Create a classifier cross-validation
 nncv = NNClassifier_CrossValidation('D', d, 'KFOLD', 5);
 nncv.get('TRAIN');
 
-%% Evaluate the classifier with the test set
+%% Evaluate the performance
 confusion_matrix = nncv.get('C_MATRIX');
 avg_auc = nncv.get('AVG_AUC');
 avg_macro_auc = nncv.get('AVG_MACRO_AUC');
