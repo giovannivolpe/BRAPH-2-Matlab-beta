@@ -6,7 +6,7 @@ PanelPropClassList plots the panel for a CLASSLIST property with a listbox.
 It works for all categories.
 
 %%% ¡seealso!
-uilistbox, GUI, PanelElement, PanelProp
+uilistbox, GUI, PanelElement
 
 %% ¡props_update!
 
@@ -159,8 +159,6 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelPropClassList'])
 assert(length(findall(0, 'type', 'figure')) == 1)

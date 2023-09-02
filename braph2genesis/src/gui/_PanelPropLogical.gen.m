@@ -6,7 +6,7 @@ PanelPropLogical plots the panel for a LOGICAL property with a checkbox.
 It works for all categories.
 
 %%% ¡seealso!
-uicheckbox, GUI, PanelElement, PanelProp
+uicheckbox, GUI, PanelElement
 
 %% ¡props_update!
 
@@ -64,7 +64,7 @@ if value
 end
 
 %%% ¡prop!
-UPDATE (query, logical) updates the content and permissions of the editfield.
+UPDATE (query, logical) updates the content and permissions of the checkbox.
 %%%% ¡calculate!
 value = calculateValue@PanelProp(pr, PanelProp.UPDATE, varargin{:}); % also warning
 if value
@@ -159,8 +159,6 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelPropLogical'])
 assert(length(findall(0, 'type', 'figure')) == 1)

@@ -6,7 +6,7 @@ PanelPropString plots the panel for a STRING property with an edit field.
 It works for all categories.
 
 %%% ¡seealso!
-uieditfield, GUI, PanelElement, PanelProp
+uieditfield, GUI, PanelElement
 
 %% ¡props_update!
 
@@ -172,8 +172,6 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelPropString'])
 assert(length(findall(0, 'type', 'figure')) == 1)

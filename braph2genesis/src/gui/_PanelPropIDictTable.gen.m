@@ -25,7 +25,7 @@ It can be personalized with the following props:
           cb_table_edit_default()
 
 %%% ¡seealso!
-uitable, GUI, PanelPropIDict, PanelElement, PanelProp, GUIElement
+uitable, GUI, PanelPropIDict, PanelElement, GUIElement
 
 %% ¡props_update!
 
@@ -1088,8 +1088,6 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelPropIDictTable'])
 assert(length(findall(0, 'type', 'figure')) == 1)

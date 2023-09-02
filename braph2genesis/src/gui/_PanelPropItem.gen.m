@@ -7,7 +7,7 @@ PanelPropItem plots the panel for a ITEM property with a button.
  figure is a 'GUIElement' or 'GUIFig'.
 
 %%% ¡seealso!
-uibutton, GUI, PanelElement, PanelProp, GUIElement, GUIFig
+uibutton, GUI, PanelElement, GUIElement, GUIFig
 
 %% ¡props_update!
 
@@ -256,8 +256,6 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelPropItem'])
 assert(length(findall(0, 'type', 'figure')) == 5)

@@ -6,7 +6,7 @@ PanelPropOption plots the panel for an OPTION property with a drop-down list.
 It works for all categories.
 
 %%% ¡seealso!
-uidropdown, GUI, PanelElement, PanelProp
+uidropdown, GUI, PanelElement
 
 %% ¡props_update!
 
@@ -158,8 +158,6 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelPropOption'])
 assert(length(findall(0, 'type', 'figure')) == 1)
