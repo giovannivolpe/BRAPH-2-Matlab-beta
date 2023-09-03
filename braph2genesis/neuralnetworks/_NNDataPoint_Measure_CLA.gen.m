@@ -1,5 +1,5 @@
 %% ¡header!
-NNDataPoint_CON_GRAPH_CLA < NNDataPoint_CON_CLA (dp, connectivity classification data point) is a data point for classification with connectivity data.
+NNDataPoint_Measure_CLA < NNDataPoint (dp, connectivity classification data point) is a data point for classification with connectivity data.
 
 %%% ¡description!
 A data point for classification with connectivity data (NNDataPoint_CON_CLA) 
@@ -54,9 +54,9 @@ value = dp.get('TARGET_IDS');
 %% ¡props!
 
 %%% ¡prop!
-G (data, item) is a subject with connectivity data.
+M (data, item) is a subject with connectivity data.
 %%%% ¡settings!
-'Graph'
+'Measure'
 					
 %% ¡tests!
 

@@ -1,5 +1,5 @@
 %% ¡header!
-NNDataPoint_CON_MEASURE_REG < NNDataPoint_CON_REG (dp, connectivity regression data point) is a data point for regression with connectivity data.
+NNDataPoint_Graph_REG < NNDataPoint_CON_REG (dp, connectivity regression data point) is a data point for regression with connectivity data.
 
 %%% ¡description!
 A data point for regression with connectivity data (NNDataPoint_CON_REG) 
@@ -14,7 +14,7 @@ SubjectCON
 %%% ¡prop!
 NAME (constant, string) is the name of a data point for regression with connectivity data.
 %%%% ¡default!
-'NNDataPoint_CON_MEASURE_REG'
+'NNDataPoint_CON_GRAPH_REG'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of a data point for regression with connectivity data.
@@ -24,22 +24,22 @@ DESCRIPTION (constant, string) is the description of a data point for regression
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of a data point for regression with connectivity data.
 %%%% ¡settings!
-'NNDataPoint_CON_MEASURE_REG'
+'NNDataPoint_CON_GRAPH_REG'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for a data point for regression with connectivity data.
 %%%% ¡default!
-'NNDataPoint_CON_MEASURE_REG ID'
+'NNDataPoint_CON_GRAPH_REG ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of a data point for regression with connectivity data.
 %%%% ¡default!
-'NNDataPoint_CON_MEASURE_REG label'
+'NNDataPoint_CON_GRAPH_REG label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about a data point for regression with connectivity data.
 %%%% ¡default!
-'NNDataPoint_CON_MEASURE_REG notes'
+'NNDataPoint_CON_GRAPH_REG notes'
 
 %%% ¡prop!
 INPUT (result, cell) is the input value for this data point.
@@ -54,9 +54,9 @@ value = cellfun(@(x) dp.get('SUB').get('VOI_DICT').get('IT', x).get('V'), dp.get
 %% ¡props!
 
 %%% ¡prop!
-M (data, item) is a subject with connectivity data.
+G (data, item) is a subject with connectivity data.
 %%%% ¡settings!
-'MEASURE'
+'Graph'
 		
 %% ¡tests!
 
