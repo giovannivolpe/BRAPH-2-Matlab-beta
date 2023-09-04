@@ -38,7 +38,7 @@ NOTES (metadata, string) are some specific notes about the average global effici
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
 %%%% ¡default!
-Measure.NODAL
+Measure.GLOBAL
 
 %%% ¡prop!
 SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
