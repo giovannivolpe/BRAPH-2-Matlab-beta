@@ -6,7 +6,7 @@ PanelPropStringTextArea plots the panel for a STRING property with a text area.
 It works for all categories.
 
 %%% ¡seealso!
-uitextarea, GUI, PanelElement, PanelProp
+uitextarea, GUI, PanelElement
 
 %% ¡props_update!
 
@@ -174,8 +174,6 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelPropStringTextArea'])
 assert(length(findall(0, 'type', 'figure')) == 1)

@@ -6,7 +6,7 @@ PanelPropColor plots the panel for a COLOR property with a button.
 It works for all categories.
 
 %%% ¡seealso!
-uibutton, GUI, PanelElement, PanelProp
+uibutton, GUI, PanelElement
 
 %% ¡props_update!
 
@@ -166,8 +166,6 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelPropColor'])
 assert(length(findall(0, 'type', 'figure')) == 1)

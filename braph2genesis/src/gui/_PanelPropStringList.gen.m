@@ -9,7 +9,7 @@ It can be personalized with the following prop:
  TA_HEIGHT - Text area height in pixels when the table is shown.
 
 %%% ¡seealso!
-uitextarea, GUI, PanelElement, PanelProp
+uitextarea, GUI, PanelElement
 
 %% ¡props_update!
 
@@ -193,8 +193,6 @@ true
 %%% ¡test!PanelPropList.LISTENER_CB
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelPropStringList'])
 assert(length(findall(0, 'type', 'figure')) == 1)
