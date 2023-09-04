@@ -108,7 +108,6 @@ assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
     [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-
 %%% ¡test!
 %%%% ¡name!
 GraphBU
@@ -233,10 +232,10 @@ B33 = [
 B = {B11  B22  B33};
 
 known_global_efficiency = {
-                        [1/4 1/4 1/4 1/4 0]'
-                        [1/4 1/4 1/4 1/4 0]'
-                        [1/4 1/4 1/4 1/4 0]'
-                        };
+      [1/4 1/4 1/4 1/4 0]'
+      [1/4 1/4 1/4 1/4 0]'
+      [1/4 1/4 1/4 1/4 0]'
+      };
 
 
 g = MultiplexWU('B', B);
@@ -357,7 +356,7 @@ B = [
 
 thresholds = [0 .5 1];
 
-known_global_efficiency = { ...
+known_global_efficiency = {
     [2 1/2 1/2]'
     [2 1/2 1/2]'
     [2 1/2 1/2]'
@@ -529,7 +528,6 @@ m_inside_g = g.get('MEASURE', 'GlobalEfficiency');
 assert(isequal(m_inside_g.get('M'), known_global_efficiency), ...
     [BRAPH2.STR ':GlobalEfficiency:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
-
 
 %%% ¡test!
 %%%% ¡name!
