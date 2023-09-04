@@ -9,6 +9,80 @@ All node connections are allowed between layers.
 On the diagonal of the supra adjacency matrix, matrices are dediagonalized, semipositivized, and binarized.
 On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBD.ID
+%%%% ¡title!
+Graph ID
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBD.LABEL
+%%%% ¡title!
+Graph NAME
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBD.LAYERTICKS
+%%%% ¡title!
+LAYERS ticks
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBD.LAYERLABELS
+%%%% ¡title!
+LAYERS labels
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBD.NODELABELS
+%%%% ¡title!
+NODES labels
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBD.B
+%%%% ¡title!
+Input ADJACENCY MATRIX
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBD.SEMIPOSITIVIZE_RULE
+%%%% ¡title!
+NEGATIVE EDGE RULE
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBD.A
+%%%% ¡title!
+Binary Directed ADJACENCY MATRICES
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBD.PFGA
+%%%% ¡title!
+Adjacency Matrix Plot
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBD.PFGH
+%%%% ¡title!
+Graph Histogram
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBD.M_DICT
+%%%% ¡title!
+Graph MEASURES
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBD.NOTES
+%%%% ¡title!
+Graph NOTES
+
 %% ¡props_update!
 
 %%% ¡prop!

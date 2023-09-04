@@ -392,8 +392,8 @@ uimenu(menu_file, ...
 uimenu(menu_file, ...
     'Separator', 'on', ...
     'Tag', 'MENU.File.Close', ...
-    'Label', 'Close', ...
-    'Accelerator', 'C', ...
+    'Label', 'Quit', ...
+    'Accelerator', 'Q', ...
     'Callback', {@cb_get, 'CLOSE'})
 
 value = menu_file;
@@ -538,8 +538,6 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':GUIElement'])
 assert(length(findall(0, 'type', 'figure')) == 10)
@@ -551,8 +549,6 @@ warning('on', [BRAPH2.STR ':GUIElement'])
 Basics
 %%%% ¡probability!
 .01
-%%%% ¡parallel!
-false
 %%%% ¡code!
 el = ConcreteElement();
 gui = GUIElement('PE', el, 'CLOSEREQ', false);

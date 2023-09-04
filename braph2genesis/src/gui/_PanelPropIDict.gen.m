@@ -6,7 +6,7 @@ PanelPropIDict plots the panel for a IDICT property with a button.
  It works for all categories.
 
 %%% ¡seealso!
-uibutton, GUI, PanelElement, PanelProp, GUIElement
+uibutton, GUI, PanelElement, GUIElement
 
 %% ¡props_update!
 
@@ -237,8 +237,6 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelPropIDict'])
 assert(length(findall(0, 'type', 'figure')) == 5)

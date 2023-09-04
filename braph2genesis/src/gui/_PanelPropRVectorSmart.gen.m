@@ -9,7 +9,7 @@ Also, the value of the vector can be limited between some MIN and MAX.
 It works for all categories, exept for __Category.RESULT__, __Category.QUERY__, or __Category.EVANESCENT__.
 
 %%% ¡seealso!
-uieditfield, GUI, PanelElement, PanelProp
+uieditfield, GUI, PanelElement
 
 %% ¡props_update!
 
@@ -46,12 +46,12 @@ NOTES (metadata, string) are some specific notes about the smart row vector pane
 %%% ¡prop!
 EL (data, item) is the element.
 %%%% ¡default!
-MultigraphBUD()
+Graph()
 
 %%% ¡prop!
 PROP (data, scalar) is the property number.
 %%%% ¡default!
-MultigraphBUD.DENSITIES
+Graph.LAYERTICKS
 
 %%% ¡prop!
 UPDATE (query, logical) updates the content and permissions of the editfield.
@@ -165,8 +165,6 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelPropRVectorSmart'])
 assert(length(findall(0, 'type', 'figure')) == 1)

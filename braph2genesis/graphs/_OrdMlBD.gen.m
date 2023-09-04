@@ -10,6 +10,80 @@ The layers are connected in an ordinal fashion, i.e., only consecutive layers ar
 On the diagonal of the supra adjacency matrix, matrices are dediagonalized, semipositivized, and binarized.
 On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBD.ID
+%%%% ¡title!
+Graph ID
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBD.LABEL
+%%%% ¡title!
+Graph NAME
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBD.LAYERTICKS
+%%%% ¡title!
+LAYERS ticks
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBD.LAYERLABELS
+%%%% ¡title!
+LAYERS labels
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBD.NODELABELS
+%%%% ¡title!
+NODES labels
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBD.B
+%%%% ¡title!
+Input ADJACENCY MATRIX
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBD.SEMIPOSITIVIZE_RULE
+%%%% ¡title!
+NEGATIVE EDGE RULE
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBD.A
+%%%% ¡title!
+Binary Directed ADJACENCY MATRICES
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBD.PFGA
+%%%% ¡title!
+Adjacency Matrix Plot
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBD.PFGH
+%%%% ¡title!
+Graph Histogram
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBD.M_DICT
+%%%% ¡title!
+Graph MEASURES
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBD.NOTES
+%%%% ¡title!
+Graph NOTES
+
 %% ¡props_update!
 
 %%% ¡prop!

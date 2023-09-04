@@ -6,7 +6,7 @@ PanelPropSize plots the panel for a SIZE property with a numeric edit field.
 It works for all categories.
 
 %%% ¡seealso!
-uieditfield, uiaxes, line, GUI, PanelElement, PanelProp
+uieditfield, uiaxes, line, GUI, PanelElement
 
 %% ¡props_update!
 
@@ -227,8 +227,6 @@ true
 %%% ¡test!
 %%%% ¡name!
 Remove Figures
-%%%% ¡parallel!
-false
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PanelPropSize'])
 assert(length(findall(0, 'type', 'figure')) == 1)
