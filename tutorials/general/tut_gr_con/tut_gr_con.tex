@@ -43,7 +43,7 @@ In most analyses, the group GUI is the second step after you have selected a bra
 	{\bf c}-{\bf f} navigate to the BRAPH~2.0 folder \fn{pipelines}, {\bf d} \fn{connectivity},  {\bf e} \fn{Example data CON XLS}, and {\bf f} select the folder containing the connectivity matrices of one group \fn{CON\_Group\_1\_XLS}.
 	}
 
-To open the GUI and upload the brain connectivity data, you can also do it from the command line (i.e., without opening an analysis pipeline) by typing the commands in \Coderef{cd:launch}.
+To open the GUI and upload the brain connectivity data, you can also do it from the command line (i.e., without opening an analysis pipeline) by typing the commands in \Coderef{cd:launch}. Moreover, if you don't have the \fn{Example data CON XLS} folder inside connectivity, then you can generate it by running the commands in \Coderef{cd:exampledata}.
 %
 \begin{lstlisting}[
 	label=cd:launch,
@@ -53,10 +53,20 @@ To open the GUI and upload the brain connectivity data, you can also do it from 
 	}
 ]
 gr = Group('SUB_CLASS', 'SubjectCON'); ¥\circled{1}\circlednote{1}{creates a new object \code{Group} with subjects with connectivity data, i.e., \code{SubjectCON}.}¥
-
 gui = GUIElement('PE', gr); ¥\circled{2}\circlednote{2}{creates a GUI to upload the group data.}¥
 gui.get('DRAW')¥\circled{3}\circlednote{3}{draws the GUI.}¥
 gui.get('SHOW') ¥\circled{4}\circlednote{4}{shows the GUI.}¥
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label=cd:exampledata,
+	caption={
+		{\bf Code to generate the example data folder in the connectivity directory.}
+		This code can be used in the MatLab command line to copy the \fn{Example data CON XLS} folder to the connectivity pipeline folder.
+	}
+]
+test_ImporterGroupSubjectCON_XLS ¥\circled{1}\circlednote{1}{copies the example connectivity XLS data folder.}¥
+test_ImporterGroupSubjectCON_TXT ¥\circled{2}\circlednote{2}{copies the example connectivity TXT data folder.}¥
 \end{lstlisting}
 
 \section{Visualize the Group Data}
