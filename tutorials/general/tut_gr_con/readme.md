@@ -5,7 +5,7 @@
 For *connectivity data*, a connectivity matrix per subject is already available and can be directly imported into the relative analysis pipeline. For example, the connectivity matrix could correspond to white matter tracts obtained from dMRI or pre-calculated coactivations maps obtained from fMRI data.
 This Tutorial explains how to prepare and work with this kind of data.
 
-> ![GUI for a group of subjects with connectivity data](fig01.png)
+> ![GUI for a group of subjects with connectivity data](fig01.jpg)
 > 
 > **Figure 1. GUI for a group of subjects with connectivity data.**
 > Full graphical user interface to upload a group of subjects with connectivity data in BRAPH 2.0.
