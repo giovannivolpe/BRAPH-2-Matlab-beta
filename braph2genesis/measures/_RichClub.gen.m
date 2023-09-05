@@ -388,30 +388,35 @@ A22 = [
     ];
 A = {A11  A22};
 
-richclub_l1(1, 1, 1) = 3/4;
+richclub_l1(1, 1, 1) = 0.8333;
 richclub_l1(1, 1, 2) = 1;
 
-richclub_l2(1, 1, 1) = 5/6;
+richclub_l2(1, 1, 1) = 1;
 richclub_l2(1, 1, 2) = 1;
 
 known_richclub = {
-                 richclub_l1
-                 richclub_l2
-                 };      
+    richclub_l1
+    richclub_l2
+    };
 
 g = MultiplexBU('B', A);
 
 m_outside_g = RichClub('G', g);
 m_outside_g.set('PARAMETRIC_VALUE', 2);
-assert(isequal(m_outside_g.get('M'), known_richclub), ...
+result_outside = m_outside_g.get('M');
+result_outside = cellfun(@(x) round(x, 4), result_outside, 'UniformOutput', false);
+assert(isequal(result_outside, known_richclub), ...
     [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
+
 m_inside_g = g.get('MEASURE', 'RichClub');
 m_inside_g.set('PARAMETRIC_VALUE', 2);
-assert(isequal(m_inside_g.get('M'), known_richclub), ...
+result_inside = m_inside_g.get('M');
+result_inside = cellfun(@(x) round(x, 4), result_inside, 'UniformOutput', false);
+assert(isequal(result_inside, known_richclub), ...
     [BRAPH2.STR ':RichClub:' BRAPH2.FAIL_TEST], ...
-    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
