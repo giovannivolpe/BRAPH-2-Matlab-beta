@@ -51,7 +51,7 @@ To open the GUI and upload the brain functional data, you can also do it from th
 		This code can be used in the MatLab command line to launch the GUI to upload a structural file without having to open a pipeline.
 	}
 ]
-gr = Group('SUB_CLASS', 'SubjectFUN'); ¥\circled{1}\circlednote{1}{creates a new object \code{Group} to use structural values for assessing connectivity i.e., \code{SubjectST}.}¥
+gr = Group('SUB_CLASS', 'SubjectFUN'); ¥\circled{1}\circlednote{1}{creates a new object \code{Group} to use functional values for assessing connectivity i.e., \code{SubjectFUN}.}¥
 
 gui = GUIElement('PE', gr); ¥\circled{2}\circlednote{2}{creates a GUI to upload the group data.}¥
 gui.get('DRAW')¥\circled{3}\circlednote{3}{draws the GUI.}¥
@@ -97,7 +97,7 @@ Finally, you can open each subject's functional values by selecting the subject,
 	{Edit the individual subject data}
 	{
 	{\bf a} Each subject's functional values can be opened by selecting the subject, right click, and select ``Open selection''
-	{\bf b} In this subject GUI, it is possible to view and edit the metadata of the subject (ID, label, notes), its variables of interest (in this case, age and sex), and the structural values. 
+	{\bf b} In this subject GUI, it is possible to view and edit the metadata of the subject (ID, label, notes), its variables of interest (in this case, age and sex), and the functional values. 
 	}
 
 \clearpage
@@ -114,7 +114,7 @@ To be able to import functional data into BRAPH~2.0, you need to include the fun
 	{Data preparation}
 	{
 	The data should be organised in the following format:
-	{\bf a} The functional values from each subject should be included in a separate file (for example, \fn{ST\_Group\_1\_xlsx}). 
+	{\bf a} The functional values from each subject should be included in a separate file (for example, \fn{FUN\_Group\_1\_xlsx}). 
 	{\bf b} This file should contain the functional values for each brain region belonging to a brain atlas. In this example, the (simulated) values correspond to brain activation signals of 90 brain regions derived from functional MRI.
 	} 
 
