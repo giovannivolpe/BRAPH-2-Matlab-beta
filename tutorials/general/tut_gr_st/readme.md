@@ -31,7 +31,12 @@ gui = GUIElement('PE', gr);  % creates a GUI to upload the group data.
 gui.get('DRAW');  % draws the GUI.
 gui.get('SHOW');  % shows the GUI.
 ```
-Moreover, if you don't have the `Example data ST XLS` folder inside `structural, then you can generate it by running the commands referenced below.
+Moreover, if you don't have the `Example data ST XLS` folder inside `structural`, then you can generate it by running the commands referenced below.
+
+```matlab
+test_ImporterGroupSubjectST_XLS  % generates the example structural XLS data folder.
+test_ImporterGroupSubjectST_TXT  % generates the example structural TXT data folder.
+```
 
 ## Visualize the Group Data
 
@@ -40,29 +45,29 @@ After completing the steps described in the Figure 2, you can see the data as sh
 > ![Edit the group metadata](fig03.jpg)
 > 
 > **Figure 3. Edit the group metadata.** 
-> **a** The GUI of the group's functional data.
+> **a** The GUI of the group's structural data.
 > **b** The information you see on this GUI that can be changed. In this example, we have edited the ID, name, and notes of the group but can also change the subject's specific information.
 
 ## Visualize Each Subject's Data
 
-Finally, you can open each subject's functional values by selecting the subject, right-click, and select "Open selection" as shown in Figure 4a, which shows the functional values in Figure 4b. Here, you can also change the subject's metadata (ID, label, notes), its variables of interest, and the functional values.
+Finally, you can open each subject's structural values by selecting the subject, right-click, and select "Open selection" as shown in Figure 4a, which shows the structural values in Figure 4b. Here, you can also change the subject's metadata (ID, label, notes), its variables of interest, and the structural values.
 
 > ![Edit the individual subject data](fig04.jpg)
 > 
 > **Figure 4. Edit the individual subject data.** 
-> **a** Each subject's functional values can be opened by selecting the subject,  right-click, and select "Open selection".
-> **b** In this subject GUI, it is possible to view and edit the metadata of the subject (ID, label, notes), its variables of interest (in this case, age and sex), and the functional values. 
+> **a** Each subject's structural values can be opened by selecting the subject,  right-click, and select "Open selection".
+> **b** In this subject GUI, it is possible to view and edit the metadata of the subject (ID, label, notes), its variables of interest (in this case, age and sex), and the structural values. 
 
 ## Preparation of the Data to be Imported
 
-To be able to import functional data into BRAPH 2.0, you need to include the functional values in a separate file for each subject in excel or text format. Below you can see how this file should look like.
+To be able to import structural data into BRAPH 2.0, you need to include the structural values for all subjects in a single file in excel or text format. Below you can see how this file should look like.
 
 > ![Data preparation](fig05.jpg)
 >
 > **Figure 5. Data preparation.**
 > The data organization should follow this format:
-> **a** The functional values from each subject should be included in a separate file (for example, FUN_Group_1_xlsx). 
-> **b** This file should contain the functional values for each brain region belonging to a brain atlas. In this example, the (simulated) values correspond to brain activation signals of 90 brain regions derived from functional MRI.
+> **a** The structural values from each subject belonging to the same group should be included in a single file (for example, ST_Group_1_xlsx). 
+> **b** This file should contain the subject's IDs, label and any relevant notes, followed by the structural values for each brain region belonging to a brain atlas. In this example, the (simulated) values correspond to the cortical thickness of 148 brain regions derived from T1-weighted MRI.
  
 ## Adding Covariates
 
