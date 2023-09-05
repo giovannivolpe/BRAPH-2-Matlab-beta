@@ -1,37 +1,37 @@
-# Group of Subjects with Functional Data
+# Group of Subjects with Structural Data
 
-[![Tutorial Group of Subjects with Functional Data](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](tut_gr_fun.pdf)
+[![Tutorial Group of Subjects with Structural Data](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](tut_gr_st.pdf)
 
-For *functional data*, we will upload a folder containing the functional files for different subjects that belong to the same group. For example, the functional values could correspond to brain activation signals derived from functional MRI data. Then a connectivity matrix is computed using correlations in functional values between each pair of brain regions. 
-This Tutorial explains how to prepare and work with this kind of data.
+For *structural data*, we will upload a file containing the structural values for different brain areas across subjects that belong to the same group. For example, the structural values could correspond to cortical thickness or gray matter volumes obtained from T1-weighted MRI data. Then a connectivity matrix is computed using correlations in structural values between each pair of brain regions. This Tutorial explains how to prepare and work with this kind of data.
 
-> ![GUI for a group of subjects with functional data](fig01.jpg)
+> ![GUI for a group of subjects with structural data](fig01.jpg)
 > 
-> **Figure 1. GUI for a group of subjects with functional data.**
-> Full graphical user interface to upload a group of subjects with functional data in BRAPH 2.0.
+> **Figure 1. GUI for a group of subjects with structural data.**
+> Full graphical user interface to upload a group of subjects with structural data in BRAPH 2.0.
 
 ## Open the GUI
 
-In most analyses, the group GUI is the second step after you have selected a brain atlas. You can open it by typing `braph2` in the MatLab's terminal, which allows you to select a pipeline containing the steps required to perform your analysis and upload a brain atlas. After these steps have been completed you can upload your group's data, as shown in Figure 1.
+In most analyses, the group GUI is the second step after you have selected a brain atlas. You can open it by typing `braph2` in MatLab's terminal, which allows you to select a pipeline containing the steps required to perform your analysis and upload a brain atlas. After these steps have been completed you can upload your group's data, as shown in Figure 1.
 
 > ![Upload the data of a group of subjects](fig02.jpg)
 > 
 > **Figure 2. Upload the data of a group of subjects.**
-> Steps to upload a group of subjects with functional data using the GUI and an example dataset:
+> Steps to upload a group of subjects with structural data using the GUI and an example dataset:
 > **a** Open the group GUI.
-> **b** Import a folder containing the functional files in XLS or TXT format (see below for details on their format).
-> To upload the test functional data:
-> **c-f** navigate to the BRAPH 2.0 folder `pipelines`, **d** `functional`, **e** `Example data FUN XLS`, and **f** select the folder containing the functional values of one group `FUN_Group_1_XLS`.
- 
+> **b** Import the structural values in XLS or TXT format (see below for details on their format).
+>	To upload the test structural data:
+> **c-f** navigate to the BRAPH 2.0 folder `pipelines`, **d** `structural`, **e** `Example data ST XLS`, and **f** select the structural values of one group `ST_Group_1_XLS`.
+
 To open the GUI and upload the brain functional data, you can also do it from the command line (i.e., without opening an analysis pipeline) by typing the commands referenced below.
 
 ```matlab
-gr = Group('SUB_CLASS', 'SubjectCFUN');  % creates a new object Group to use functional values for assessing connectivity i.e., SubjectFUN.
+gr = Group('SUB_CLASS', 'SubjectST');  % creates a new object Group to use functional values for assessing connectivity i.e., SubjectST.
 
 gui = GUIElement('PE', gr);  % creates a GUI to upload the group data.
 gui.get('DRAW');  % draws the GUI.
 gui.get('SHOW');  % shows the GUI.
 ```
+Moreover, if you don't have the `Example data ST XLS` folder inside `structural, then you can generate it by running the commands referenced below.
 
 ## Visualize the Group Data
 
