@@ -219,7 +219,7 @@ wmultirich(:, 1, 1) = [1.6 1.6 2 0]';
 wmultirich(:, 1, 2) = [0 .5 .5 0]';
 known_multi_rich_club_strength = {wmultirich};
 
-g = MultiplexBU('B', B);
+g = MultiplexWD('B', B);
 m_outside_g = MultiplexRCStr('G', g, 'PARAMETRIC_VALUE', [1.5, 2]);
 
 assert(isequal(m_outside_g.get('M'), known_multi_rich_club_strength), ...
