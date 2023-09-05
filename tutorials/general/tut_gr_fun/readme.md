@@ -33,6 +33,13 @@ gui.get('DRAW');  % draws the GUI.
 gui.get('SHOW');  % shows the GUI.
 ```
 
+Moreover, if you don't have the `Example data FUN XLS` folder inside `functional`, then you can generate it by running the commands referenced below.
+
+```matlab
+test_ImporterGroupSubjectFUN_XLS  % generates the example functional XLS data folder.
+test_ImporterGroupSubjectFUN_TXT  % generates the example functional TXT data folder.
+```
+
 ## Visualize the Group Data
 
 After completing the steps described in the Figure 2, you can see the data as shown in Figure 3a, and change the Group ID, name, and notes as in Figure 3b.
