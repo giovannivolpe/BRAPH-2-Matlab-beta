@@ -45,7 +45,7 @@ NOTES (metadata, string) are some specific notes about a data point for classifi
 %%% ¡prop!
 INPUT (result, cell) is the input value for this data point.
 %%%% ¡calculate!
-value = cellfun(@(m) m.get('M'), dp.get('G').get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
+value = cellfun(@(m) cell2mat(m.get('M')), dp.get('G').get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
     
 %%% ¡prop!
 TARGET (result, stringlist) is the target values for this data point.
@@ -161,7 +161,7 @@ d2 = NNDataset( ...
 % Check whether the content of input for a single datapoint matches
 for index = 1:1:gr1.get('SUB_DICT').get('LENGTH')
     individual_input = d1.get('DP_DICT').get('IT', index).get('INPUT');
-    known_input = cellfun(@(m) m.get('M'), a_WU1.get('G_DICT').get('IT', index).get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
+    known_input = cellfun(@(m) cell2mat(m.get('M')), a_WU1.get('G_DICT').get('IT', index).get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
 
     assert(isequal(individual_input, known_input), ...
         [BRAPH2.STR ':NNDataPoint_Measure_CLA:' BRAPH2.FAIL_TEST], ...
@@ -276,7 +276,7 @@ d2 = NNDataset( ...
 % Check whether the content of input for a single datapoint matches
 for index = 1:1:gr1.get('SUB_DICT').get('LENGTH')
     individual_input = d1.get('DP_DICT').get('IT', index).get('INPUT');
-    known_input = cellfun(@(m) m.get('M'), a_BUD1.get('G_DICT').get('IT', index).get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
+    known_input = cellfun(@(m) cell2mat(m.get('M')), a_BUD1.get('G_DICT').get('IT', index).get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
 
     assert(isequal(individual_input, known_input), ...
         [BRAPH2.STR ':NNDataPoint_Measure_CLA:' BRAPH2.FAIL_TEST], ...
@@ -423,7 +423,7 @@ d2 = NNDataset( ...
 % Check whether the content of input for a single datapoint matches
 for index = 1:1:gr1.get('SUB_DICT').get('LENGTH')
     individual_input = d1.get('DP_DICT').get('IT', index).get('INPUT');
-    known_input = cellfun(@(m) m.get('M'), a_WU1.get('G_DICT').get('IT', index).get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
+    known_input = cellfun(@(m) cell2mat(m.get('M')), a_WU1.get('G_DICT').get('IT', index).get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
 
     assert(isequal(individual_input, known_input), ...
         [BRAPH2.STR ':NNDataPoint_Measure_CLA:' BRAPH2.FAIL_TEST], ...

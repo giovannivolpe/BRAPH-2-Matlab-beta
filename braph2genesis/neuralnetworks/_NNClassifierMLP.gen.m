@@ -53,18 +53,6 @@ DP_CLASSES (parameter, classlist) is the list of compatible data points.
 {'NNDataPoint_CON_CLA' 'NNDataPoint_Graph_CLA' 'NNDataPoint_Measure_CLA'}
 
 %%% ¡prop!
-D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.
-%%%% ¡settings!
-'NNDataset'
-%%%% ¡default!
-NNDataset('DP_CLASS', 'NNDataPoint_CON_CLA')
-
-%%% ¡prop!
-DP_CLASSES (parameter, classlist) is the list of compatible data points.
-%%%% ¡default!
-{'NNDataPoint_CON_CLA' 'NNDataPoint_Graph_CLA' 'NNDataPoint_Measure_CLA'}
-
-%%% ¡prop!
 INPUTS (query, cell) constructs the data in the CB (channel-batch) format.
 %%%% ¡calculate!
 % inputs = nn.get('inputs', D) returns a cell array with the
@@ -78,25 +66,17 @@ inputs_group = d.get('INPUTS');
 if isempty(inputs_group)
     value = {};
 else
-    flattened_inputs_group = [];
+    nn_inputs_group = [];
     for i = 1:1:length(inputs_group)
         inputs_individual = inputs_group{i};
-        flattened_inputs_individual = [];
-        while ~isempty(inputs_individual)
-            currentData = inputs_individual{end};  % Get the last element from the stack
-            inputs_individual = inputs_individual(1:end-1);   % Remove the last element
-
-            if iscell(currentData)
-                % If it's a cell array, add its contents to the stack
-                inputs_individual = [inputs_individual currentData{:}];
-            else
-                % If it's numeric or other data, append it to the vector
-                flattened_inputs_individual = [currentData(:); flattened_inputs_individual];
-            end
+        nn_inputs_individual = [];
+        for j = 1:1:length(inputs_individual)
+            input_individual = cell2mat(inputs_individual(j));
+            nn_inputs_individual = [nn_inputs_individual; input_individual(:)];
         end
-        flattened_inputs_group = [flattened_inputs_group; flattened_inputs_individual'];
+        nn_inputs_group = [nn_inputs_group; nn_inputs_individual(:)'];
     end
-    value = {flattened_inputs_group};
+    value = {nn_inputs_group};
 end
 
 %%% ¡prop!
