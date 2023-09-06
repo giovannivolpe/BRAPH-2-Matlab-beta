@@ -432,3 +432,4 @@ if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA
     test_NNDataPoint_CON_CLA % create example files
 end
 example_NNCV_CON_GraphWU_Classification
+example_NNCV_CON_GraphBUD_Classification
