@@ -252,25 +252,23 @@ end
 
 A = cell2mat(varargin{1});
 
-W = A;  % swaps with A
 attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 number_of_weights = g.get('NUMBEROFWEIGHTS');
 
 W = A;  % swaps with A
 tmp_g = GraphBU('ATTEMPTSPEREDGE', attempts_per_edge);
-A = tmp_g.get('RANDOMIZATION', {W});
+W = tmp_g.get('RANDOMIZATION', {W});
 
 % remove self connections
-A(1:length(A)+1:numel(A)) = 0;
 W(1:length(W)+1:numel(W)) = 0;
 W_bin = W > 0;
-N = size(A,1); % number of nodes
+N = size(W,1); % number of nodes
 random_A = zeros(N); % intialize null model matrix
 
 S = sum(W,2); % nodal strength
 W_sorted = sort(W(triu(W_bin))); % sorted weights vector
 % find all the edges
-[I_edges, J_edges] = find(triu(A));
+[I_edges, J_edges] = find(triu(W));
 edges = I_edges + (J_edges-1)*N;
 % expected weights matrix
 P = (S*S.');
@@ -308,7 +306,7 @@ for m = numel(W_sorted):-number_of_weights:1
 end
 
 % calculate the final matrix
-random_A = random_A + transpose(random_A);
+random_A = (random_A + transpose(random_A))/2;
 
 % calculate correlation of original vs reassinged strength
 rpos = corrcoef(sum(W), sum(random_A));
@@ -410,6 +408,14 @@ random_A = g2.get('RANDOMIZATION', A2);
 
 assert(~isequal(A2, random_A), ...
     [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
+    'GraphWU Randomize is not functioning well.')
+
+assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same number of nodes
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    'GraphWU Randomize is not functioning well.')
+
+assert(issymmetric(random_A), ... % check symmetry 
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
     'GraphWU Randomize is not functioning well.')
 
 d1 = g.get('MEASURE', 'Degree');

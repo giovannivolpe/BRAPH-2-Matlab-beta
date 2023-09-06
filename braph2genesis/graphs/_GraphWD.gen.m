@@ -228,24 +228,23 @@ A = cell2mat(varargin{1});
 attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 number_of_weights = g.get('NUMBEROFWEIGHTS');
 
-
+W = {A};
 tmp_g = GraphBD('ATTEMPTSPEREDGE', attempts_per_edge);
-tmp_W = tmp_g.get('RANDOMIZATION', W);
-if iscell(tmp_W)
-    W = cell2mat(tmp_W);  % swaps with A
+W = tmp_g.get('RANDOMIZATION', W);
+if iscell(W)
+    W = cell2mat(W);  % swaps with A
 end
 % remove self connections
-A(1:length(A)+1:numel(A)) = 0;
 W(1:length(W)+1:numel(W)) = 0;
 W_bin = W > 0;
-N = size(A,1); % number of nodes
+N = size(W,1); % number of nodes
 random_A = zeros(N); % initialize null model matrix
 
 S_in = sum(W,1).'; % nodal in-strength
 S_out = sum(W,2);  % nodal out-strength
 W_sorted = sort(W(W_bin)); % sorted weights vector
 % find all the edges
-[I_edges, J_edges] = find(A);
+[I_edges, J_edges] = find(W);
 edges = I_edges + (J_edges-1)*N;
 % expected weights matrix
 P = (S_out*S_in.');
@@ -444,6 +443,10 @@ g2.set('ATTEMPTSPEREDGE', 4);
 A2 = g2.get('A');
 random_A = g2.get('RANDOMIZATION', A2);
 
-assert(~isequal(A2, random_A), ...
+assert(~isequal(A2{1}, random_A), ...
     [BRAPH2.STR ':GraphWD:' BRAPH2.FAIL_TEST], ...
+    'GraphWD Randomize is not functioning well.')
+
+assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same number of nodes
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
     'GraphWD Randomize is not functioning well.')
