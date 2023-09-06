@@ -237,18 +237,6 @@ if isempty(varargin)
     return
 end
 
-A = cell2mat(varargin{1});
-
-if g.get('GRAPH_TYPE') ~= 1
-    for i = 1:length(A)
-        tmp_G = GraphWU();
-        tmp_G.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
-        tmp_G.set('NUMBEROFWEIGHTS',g.get('NUMBEROFWEIGHTS'));
-        random_B{i, i} = tmp_G.get('RANDOMIZATION', A(i, i));
-    end
-    value = random_B;
-    return;
-end
 
 A = cell2mat(varargin{1});
 
