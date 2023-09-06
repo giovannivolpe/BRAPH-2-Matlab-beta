@@ -277,10 +277,10 @@ for i = 1:length(A)
 
     tmp_g = GraphBD();
     tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
-    random_A = tmp_g.get('RANDOMIZATION', tmp_a);
+    random_A = tmp_g.get('RANDOMIZATION', {tmp_a});
     A{i, i} = random_A;
 end
-value = random_A;
+value = A;
 
 %% ¡tests!
 
@@ -373,3 +373,46 @@ A_absolute = {
 assert(isequal(g_absolute.get('A'), A_absolute), ...
     [BRAPH2.STR ':MultiplexBD:' BRAPH2.FAIL_TEST], ...
     'MultiplexBD is not constructing well.')
+
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B = [
+    -2 -1 0 1 2
+    -1 0 1 2 -2
+    0 1 2 -2 -1
+    1 2 -2 -1 0
+    2 -2 -1 0 1
+    ];
+B = {B, B, B};
+g = MultiplexBD('B', B);
+
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
+g.get('A_CHECK')
+
+A = g.get('A');
+
+assert(isequal(size(A{1}), size(B{1})), ...
+    [BRAPH2.STR ':MultiplexBD:' BRAPH2.FAIL_TEST], ...
+    'MultiplexBD Randomize is not functioning well.')
+
+g2 = MultiplexBD('B', B);
+g2.set('RANDOMIZE', true);
+g2.set('ATTEMPTSPEREDGE', 4);
+g2.get('A_CHECK')
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
+
+for i = 1:length(A)
+    assert(~isequal(A2{i, i}, random_A{i, i}), ...
+        [BRAPH2.STR ':MultiplexBD:' BRAPH2.FAIL_TEST], ...
+        'MultiplexBD Randomize is not functioning well.')
+    
+    assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
+        [BRAPH2.STR ':MultiplexBD:' BRAPH2.FAIL_TEST], ...
+        'MultiplexBD Randomize is not functioning well.')
+end

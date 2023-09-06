@@ -311,10 +311,10 @@ for i = 1:length(A)
     tmp_g = GraphWU();
     tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
     tmp_g.set('NUMBEROFWEIGHTS', g.get('NUMBEROFWEIGHTS'));
-    random_A = tmp_g.get('RANDOMIZATION', tmp_a);
+    random_A = tmp_g.get('RANDOMIZATION', {tmp_a});
     A{i, i} = random_A;
 end
-value = random_A;
+value = A;
 
 %% ¡tests!
 
@@ -378,4 +378,46 @@ for i = 1:1:length(symmetrize_rules)
             g0 = MultiplexWU('B', {B, B, B}, 'SYMMETRIZE_RULE', symmetrize_rule, 'SEMIPOSITIVIZE_RULE', semipositivize_rule, 'STANDARDIZE_RULE', standardize_rule);
         end
     end
+end
+
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B1 = rand(randi(10));
+B = {B1, B1, B1};
+g = MultiplexWU('B', B);
+
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
+g.get('A_CHECK')
+
+
+A = g.get('A');
+
+assert(isequal(size(A{1}), size(B2{1})), ...
+    [BRAPH2.STR ':MultiplexWU:' BRAPH2.FAIL_TEST], ...
+    'MultiplexWU Randomize is not functioning well.')
+
+g2 = MultiplexWU('B', B);
+g2.set('RANDOMIZE', false);
+g2.set('ATTEMPTSPEREDGE', 4);
+g2.get('A_CHECK')
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
+
+for i = 1:length(A2)
+    assert(~isequal(A2{i, i}, random_A{i, i}), ...
+        [BRAPH2.STR ':MultiplexWU:' BRAPH2.FAIL_TEST], ...
+        'MultiplexWU Randomize is not functioning well.')
+    
+    assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
+        [BRAPH2.STR ':MultiplexWU:' BRAPH2.FAIL_TEST], ...
+        'MultiplexWU Randomize is not functioning well.')
+
+    assert(issymmetric(random_A{i, i}), ... % check symmetry 
+    [BRAPH2.STR ':MultiplexWU:' BRAPH2.FAIL_TEST], ...
+    'MultiplexWU Randomize is not functioning well.')
 end

@@ -276,16 +276,17 @@ if isempty(varargin)
 end
 
 A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 
 for i = 1:length(A)
     tmp_a = A{i,i};
 
-    random_g = GraphBD();
-    random_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
-    random_A{i, i} = random_g.get('RANDOMIZATION', tmp_a);
+    tmp_g = GraphBD();
+    tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+    random_A = tmp_g.get('RANDOMIZATION', {tmp_a});
     A{i, i} = random_A;
 end
-value = random_A;
+value = A;
 
 %% ¡tests!
 
@@ -343,3 +344,52 @@ assert(isequal(g.get('A'), A), ...
 % %%%% ¡probability!
 % .01
 % %%%% ¡code!
+
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B1 = randn(10);
+B2 = randn(10);
+B3 = randn(10);
+B12 = rand(size(B1, 1),size(B2, 2));
+B13 = rand(size(B1, 1),size(B3, 2));
+B23 = rand(size(B2, 1),size(B3, 2));
+B21 = rand(size(B2, 1),size(B1, 2));
+B31 = rand(size(B3, 1),size(B1, 2));
+B32 = rand(size(B3, 1),size(B2, 2));
+B = {
+    B1                           B12                            B13
+    B21                          B2                             B23
+    B31                          B32                            B3
+    };
+g = MultilayerBD('B', B);
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
+g.get('A_CHECK')
+
+A = g.get('A');
+
+assert(isequal(size(A{1}), size(B{1})), ...
+    [BRAPH2.STR ':MultilayerBD:' BRAPH2.FAIL_TEST], ...
+    'MultilayerBD Randomize is not functioning well.')
+
+g2 = MultilayerBD('B', B);
+g2.set('RANDOMIZE', false);
+g2.set('ATTEMPTSPEREDGE', 4);
+g2.get('A_CHECK')
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
+
+for i = 1:length(A2)
+    assert(~isequal(A2{i, i}, random_A{i, i}), ...
+        [BRAPH2.STR ':MultilayerBD:' BRAPH2.FAIL_TEST], ...
+        'MultilayerBD Randomize is not functioning well.')
+    
+    assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
+        [BRAPH2.STR ':MultilayerBD:' BRAPH2.FAIL_TEST], ...
+        'MultilayerBD Randomize is not functioning well.')
+
+end
