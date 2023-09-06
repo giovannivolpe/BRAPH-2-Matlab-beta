@@ -272,6 +272,34 @@ THRESHOLDS (parameter, rvector) is the vector of thresholds.
 %%%% ¡gui!
 pr = PanelPropRVectorSmart('EL', g, 'PROP', MultiplexBUT.THRESHOLDS, 'MAX', 1, 'MIN', -1, varargin{:});
 
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
+%%% ¡prop!
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+
+for i = 1:length(A)
+    tmp_a = A{i,i};
+
+    tmp_g = GraphBU();
+    tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+    random_A = tmp_g.get('RANDOMIZATION', {tmp_a});
+    A{i, i} = random_A;
+end
+value = A;
+
 %% ¡tests!
 
 %%% ¡excluded_props!
@@ -310,4 +338,51 @@ for i = 1:1:length(B) * length(thresholds)
                 'MultiplexBUT is not constructing well.')            
         end
     end
+end
+
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B1 = [
+     0 .1 .2 .3 .4 
+    .1 0 .1 .2 .3
+    .2 .1 0 .1 .2
+    .3 .2 .1 0 .1
+    .4 .3 .2 .1 0
+    ];
+B = {B1, B1, B1};
+thresholds = [0 .1 .2 .3 .4];
+g = MultiplexBUT('B', B, 'THRESHOLDS', thresholds);
+
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
+g.get('A_CHECK')
+
+A = g.get('A');
+
+assert(isequal(size(A{1}), size(B{1})), ...
+    [BRAPH2.STR ':MultiplexBUT:' BRAPH2.FAIL_TEST], ...
+    'MultiplexBUT Randomize is not functioning well.')
+
+g = MultiplexBUT('B', B, 'THRESHOLDS', thresholds);
+g2.set('RANDOMIZE', false);
+g2.set('ATTEMPTSPEREDGE', 4);
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
+
+for i = 1:length(A2)
+    assert(~isequal(A2{i, i}, random_A{i, i}), ...
+        [BRAPH2.STR ':MultiplexBUT:' BRAPH2.FAIL_TEST], ...
+        'MultiplexBUT Randomize is not functioning well.')
+    
+    assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
+        [BRAPH2.STR ':MultiplexBUT:' BRAPH2.FAIL_TEST], ...
+        'MultiplexBUT Randomize is not functioning well.')
+
+    assert(issymmetric(random_A{i, i}), ... % check symmetry 
+    [BRAPH2.STR ':MultiplexBUT:' BRAPH2.FAIL_TEST], ...
+    'MultiplexBUT Randomize is not functioning well.')
 end

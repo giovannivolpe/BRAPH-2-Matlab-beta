@@ -310,6 +310,34 @@ THRESHOLDS (parameter, rvector) is the vector of thresholds.
 %%%% ¡gui!
 pr = PanelPropRVectorSmart('EL', g, 'PROP', MultilayerBUT.THRESHOLDS, 'MAX', 1, 'MIN', -1, varargin{:});
 
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
+%%% ¡prop!
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+
+for i = 1:length(A)
+    tmp_a = A{i,i};
+
+    tmp_g = GraphBU();
+    tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+    random_A = tmp_g.get('RANDOMIZATION', {tmp_a});
+    A{i, i} = random_A;
+end
+value = A;
+
 %% ¡tests!
 
 %%% ¡excluded_props!
@@ -372,4 +400,55 @@ for i = 1:1:length(thresholds)
         end
         layer_x = layer_x + 1;
     end
+end
+
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   1   0  .2
+    1   0   .3  .1
+    0  .3   0   0
+    .2  .1   0   0
+    ];
+
+B12 = rand(size(B11,1),size(B11,2));
+
+B= {B11 B12 B12;
+    B12 B11 B12;
+    B12 B12 B11};
+thresholds = [0 .5 1];
+g = MultilayerBUT('B', B, 'THRESHOLDS', thresholds); 
+
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
+g.get('A_CHECK')
+
+A = g.get('A');
+
+assert(isequal(size(A{1}), size(B{1})), ...
+    [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+    'MultilayerBUT Randomize is not functioning well.')
+
+g2 = MultilayerBUT('B', B, 'THRESHOLDS', thresholds); 
+g2.set('RANDOMIZE', false);
+g2.set('ATTEMPTSPEREDGE', 4);
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
+
+for i = 1:length(A2)
+    assert(~isequal(A2{i, i}, random_A{i, i}), ...
+        [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+        'MultilayerBUT Randomize is not functioning well.')
+    
+    assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
+        [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+        'MultilayerBUT Randomize is not functioning well.')
+
+    assert(issymmetric(random_A{i, i}), ... % check symmetry 
+    [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+    'MultilayerBUT Randomize is not functioning well.')
 end
