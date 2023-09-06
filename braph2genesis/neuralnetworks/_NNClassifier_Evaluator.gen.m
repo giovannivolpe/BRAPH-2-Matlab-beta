@@ -101,6 +101,8 @@ end
 %%% ¡prop!
 PERM_FEATURE_IMPORTANCE (result, cell) assess the significance of each feature by randomly shuffling its values and measuring how much the performance of the model decreases.
 %%%% ¡calculate!
+% shuffle the feature in the input one by one and get model loss function
+% value
 value = {};
 
 %% ¡tests!
