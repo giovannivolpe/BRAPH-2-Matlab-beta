@@ -200,7 +200,7 @@
      inkscape:label="ink_ext_XXXXXX"
      transform="matrix(1.3333333,0,0,-1.3333333,0,814.66667)">
     <path
-       d="M 0.957422,610.579 V 474.516 H 168.95695 V 610.579 H 0.957422"
+       d="m 0,611.00002 v -136.063 h 167.99953 v 136.063 H 0"
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.0276747"
        id="path12"
        inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/general/tut_ba/vector files/fig01.png"
