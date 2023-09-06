@@ -3,13 +3,12 @@ NNDataPoint_Graph_CLA < NNDataPoint (dp, graph classification data point) is a d
 
 %%% ¡description!
 A data point for classification with a graph (NNDataPoint_Graph_CLA) 
- contains the input and target for neural network analysis with any kind of a graph
- (e.g. GraphWU, multigraphBUD, and multiplexWU) derived from a subject (e.g., SubjectCON and SubjectFUN).
-The input is the adjacency matrix of the derived graph of the subject.
+ contains both input and target for neural network analysis.
+The input is the value of the adjacency matrix extracted from the derived graph of the subject.
 The target is obtained from the variables of interest of the subject.
 
 %%% ¡seealso!
-NNDataPoint_Graph_REG
+NNDataPoint_Graph_REG, NNDataPoint_Measure_REG, NNDataPoint_Measure_CLA
 
 %% ¡props_update!
 %%% ¡prop!
@@ -20,7 +19,7 @@ NAME (constant, string) is the name of a data point for classification with a gr
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of a data point for classification with a graph.
 %%%% ¡default!
-'A data point for classification with a graph (NNDataPoint_Graph_CLA) contains the input and target for neural network analysis with any kind of a graph (e.g. GraphWU, multigraphBUD, and multiplexWU) derived from a subject (e.g., SubjectCON and SubjectFUN). The input is the adjacency matrix of the derived graph of the subject. The target is obtained from the variables of interest of the subject.'
+'A data point for classification with a graph (NNDataPoint_Graph_CLA) contains both input and target for neural network analysis. The input is the value of the adjacency matrix extracted from the derived graph of the subject. The target is obtained from the variables of interest of the subject.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of a data point for classification with a graph.
@@ -28,17 +27,17 @@ TEMPLATE (parameter, item) is the template of a data point for classification wi
 'NNDataPoint_Graph_CLA'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for a data point for classification with connectivity a graph.
+ID (data, string) is a few-letter code for a data point for classification with a graph.
 %%%% ¡default!
 'NNDataPoint_Graph_CLA ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of a data point for classification with connectivity data.
+LABEL (metadata, string) is an extended label of a data point for classification with a graph.
 %%%% ¡default!
 'NNDataPoint_Graph_CLA label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about a data point for classification with connectivity data.
+NOTES (metadata, string) are some specific notes about a data point for classification with a graph.
 %%%% ¡default!
 'NNDataPoint_Graph_CLA notes'
 
@@ -55,7 +54,7 @@ value = dp.get('TARGET_IDS');
 %% ¡props!
 
 %%% ¡prop!
-G (data, item) is a subject with connectivity data.
+G (data, item) is a graph.
 %%%% ¡settings!
 'Graph'
 		
@@ -69,7 +68,7 @@ TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be u
 
 %%% ¡test!
 %%%% ¡name!
-Weighted directed graph 
+Construct the data point with the adjacency matrix derived from its weighted undirected graph (GraphWU) 
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
@@ -101,7 +100,7 @@ im_gr2 = ImporterGroupSubjectCON_XLS( ...
 
 gr2 = im_gr2.get('GR');
 
-%% Analysis CON WU
+% Analysis CON WU
 a_WU1 = AnalyzeEnsemble_CON_WU( ...
     'GR', gr1 ...
     );
@@ -114,7 +113,7 @@ a_WU2 = AnalyzeEnsemble_CON_WU( ...
 a_WU1.memorize('G_DICT');
 a_WU2.memorize('G_DICT');
 
-% create item lists of NNDataPoint_CON_CLA
+% create item lists of NNDataPoint_Graph_CLA
 [~, group_folder_name] = fileparts(im_gr1.get('DIRECTORY'));
 it_list1 = cellfun(@(x) NNDataPoint_Graph_CLA( ...
     'ID', x.get('ID'), ...
@@ -131,7 +130,7 @@ it_list2 = cellfun(@(x) NNDataPoint_Graph_CLA( ...
     a_WU2.get('G_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
-% create NNDataPoint_CON_CLA DICT items
+% create NNDataPoint_Graph_CLA DICT items
 dp_list1 = IndexedDictionary(...
         'IT_CLASS', 'NNDataPoint_Graph_CLA', ...
         'IT_LIST', it_list1 ...
@@ -176,7 +175,7 @@ end
 
 %%% ¡test!
 %%%% ¡name!
-Binary undirected multigraph at fixed densities
+Construct the data point with the adjacency matrix derived from its binary undirected multigraph with fixed densities (MultigraphBUD)
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
@@ -208,7 +207,7 @@ im_gr2 = ImporterGroupSubjectCON_XLS( ...
 
 gr2 = im_gr2.get('GR');
 
-%% Analysis CON WU
+% Analysis CON WU
 densities = 0:25:100;
 
 a_BUD1 = AnalyzeEnsemble_CON_BUD( ...
@@ -224,7 +223,7 @@ a_BUD2 = AnalyzeEnsemble_CON_BUD( ...
 a_BUD1.memorize('G_DICT');
 a_BUD2.memorize('G_DICT');
 
-% create item lists of NNDataPoint_CON_CLA
+% create item lists of NNDataPoint_Graph_CLA
 [~, group_folder_name] = fileparts(im_gr1.get('DIRECTORY'));
 it_list1 = cellfun(@(x) NNDataPoint_Graph_CLA( ...
     'ID', x.get('ID'), ...
@@ -241,7 +240,7 @@ it_list2 = cellfun(@(x) NNDataPoint_Graph_CLA( ...
     a_BUD2.get('G_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
-% create NNDataPoint_CON_CLA DICT items
+% create NNDataPoint_Graph_CLA DICT items
 dp_list1 = IndexedDictionary(...
         'IT_CLASS', 'NNDataPoint_Graph_CLA', ...
         'IT_LIST', it_list1 ...
@@ -286,14 +285,14 @@ end
 
 %%% ¡test!
 %%%% ¡name!
-Weighted undirected multiplex graph
+Construct the data point with the adjacency matrix derived from its multiplex weighted undirected graph (MultiplexWU) 
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'atlas.xlsx'])
     test_SubjectCON_FUN_MP % create example files
 end
 
-%% Load BrainAtlas
+% Load BrainAtlas
 im_ba = ImporterBrainAtlasXLS( ...
     'FILE', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'atlas.xlsx'], ...
     'WAITBAR', true ...
@@ -301,7 +300,7 @@ im_ba = ImporterBrainAtlasXLS( ...
 
 ba = im_ba.get('BA');
 
-%% Load Groups of SubjectCON
+% Load Groups of SubjectCON
 im_gr1 = ImporterGroupSubjectCON_XLS( ...
     'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_1_XLS.CON'], ...
     'BA', ba, ...
@@ -318,7 +317,7 @@ im_gr2 = ImporterGroupSubjectCON_XLS( ...
 
 gr2_CON = im_gr2.get('GR');
 
-%% Load Groups of SubjectFUN
+% Load Groups of SubjectFUN
 im_gr1 = ImporterGroupSubjectFUN_XLS( ...
     'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_1_XLS.FUN'], ...
     'BA', ba, ...
@@ -335,7 +334,7 @@ im_gr2 = ImporterGroupSubjectFUN_XLS( ...
 
 gr2_FUN = im_gr2.get('GR');
 
-%% Combine Groups of SubjectCON with Groups of SubjectFUN
+% Combine Groups of SubjectCON with Groups of SubjectFUN
 co_gr1 = CombineGroups_CON_FUN_MP( ...
     'GR_CON', gr1_CON, ...
     'GR_FUN', gr1_FUN, ...
@@ -352,7 +351,7 @@ co_gr2 = CombineGroups_CON_FUN_MP( ...
 
 gr2 = co_gr2.get('GR_CON_FUN_MP');
 
-%% Analysis CON FUN MP WU
+% Analysis CON FUN MP WU
 a_WU1 = AnalyzeEnsemble_CON_FUN_MP_WU( ...
     'GR', gr1 ...
     );
@@ -365,7 +364,7 @@ a_WU2 = AnalyzeEnsemble_CON_FUN_MP_WU( ...
 a_WU1.memorize('G_DICT');
 a_WU2.memorize('G_DICT');
 
-% create item lists of NNDataPoint_CON_CLA
+% create item lists of NNDataPoint_Graph_CLA
 [~, group_folder_name] = fileparts(im_gr1.get('DIRECTORY'));
 it_list1 = cellfun(@(x) NNDataPoint_Graph_CLA( ...
     'ID', x.get('ID'), ...
@@ -382,7 +381,7 @@ it_list2 = cellfun(@(x) NNDataPoint_Graph_CLA( ...
     a_WU2.get('G_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
-% create NNDataPoint_CON_CLA DICT items
+% create NNDataPoint_Graph_CLA DICT items
 dp_list1 = IndexedDictionary(...
         'IT_CLASS', 'NNDataPoint_Graph_CLA', ...
         'IT_LIST', it_list1 ...
@@ -424,3 +423,12 @@ for index = 1:1:gr2.get('SUB_DICT').get('LENGTH')
         'NNDataPoint_Graph_CLA does not construct the dataset correctly. The input value is not derived correctly.' ...
         )
 end
+
+%%% ¡test!
+%%%% ¡name!
+Example script for weighted undirected graph (GraphWU) using connectivity data
+%%%% ¡code!
+if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
+    test_NNDataPoint_CON_CLA % create example files
+end
+example_NNCV_CON_GraphWU_Classification

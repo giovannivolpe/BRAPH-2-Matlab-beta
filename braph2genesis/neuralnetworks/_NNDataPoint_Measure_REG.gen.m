@@ -1,51 +1,51 @@
 %% ¡header!
-NNDataPoint_Measure_REG < NNDataPoint (dp, graph regressioni data point) is a data point for regression with a graph.
+NNDataPoint_Measure_REG < NNDataPoint (dp, measure regression data point)  is a data point for regression with graph measures.
 
 %%% ¡description!
-A data point for regression with measure (NNDataPoint_Graph_REG) 
- contains the input and target for neural network analysis with any kind of a graph
- (e.g. GraphWU, multigraphBUD, and multiplexWU) derived from a subject (e.g., SubjectCON and SubjectFUN).
-The input is the adjacency matrix of the derived graph of the subject.
+A data point for regression with graph measures (NNDataPoint_Measure_REG) 
+ contains both input and target for neural network analysis.
+The input is the value of the graph measures (e.g. Degree, DegreeAv, and Distance), 
+ extracted from the derived graph of the subject.
 The target is obtained from the variables of interest of the subject.
 
 %%% ¡seealso!
-NNDataPoint_Graph_CLA
+NNDataPoint_Graph_REG, NNDataPoint_Graph_REG, NNDataPoint_Measure_CLA
 
 %% ¡props_update!
 %%% ¡prop!
-NAME (constant, string) is the name of a data point for regression with a graph.
+NAME (constant, string) is the name of a data point for regression with graph measures.
 %%%% ¡default!
-'NNDataPoint_Graph_REG'
+'NNDataPoint_Measure_REG'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of a data point for regression with a graph.
+DESCRIPTION (constant, string) is the description of a data point for regression with graph measures.
 %%%% ¡default!
-'A data point for regression with a graph (NNDataPoint_Graph_REG) contains the input and target for neural network analysis with any kind of a graph (e.g. GraphWU, multigraphBUD, and multiplexWU) derived from a subject (e.g., SubjectCON and SubjectFUN). The input is the adjacency matrix of the derived graph of the subject. The target is obtained from the variables of interest of the subject.'
+'A data point for regression with graph measures (NNDataPoint_Measure_REG) contains both input and target for neural network analysis. The input is the value of the graph measures (e.g. Degree, DegreeAv, and Distance), extracted from the derived graph of the subject. The target is obtained from the variables of interest of the subject.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of a data point for regression with a graph.
+TEMPLATE (parameter, item) is the template of a data point for regression with graph measures.
 %%%% ¡settings!
-'NNDataPoint_Graph_REG'
+'NNDataPoint_Measure_REG'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for a data point for regression with connectivity a graph.
+ID (data, string) is a few-letter code for a data point for regression with graph measures.
 %%%% ¡default!
-'NNDataPoint_Graph_REG ID'
+'NNDataPoint_Measure_REG ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of a data point for regression with connectivity data.
+LABEL (metadata, string) is an extended label of a data point for regression with graph measures.
 %%%% ¡default!
-'NNDataPoint_Graph_REG label'
+'NNDataPoint_Measure_REG label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about a data point for regression with connectivity data.
+NOTES (metadata, string) are some specific notes about a data point for regression with graph measures.
 %%%% ¡default!
-'NNDataPoint_Graph_REG notes'
+'NNDataPoint_Measure_REG notes'
 
 %%% ¡prop!
 INPUT (result, cell) is the input value for this data point.
 %%%% ¡calculate!
-value = cellfun(@(m) m.get('M'), np.get('G').get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
+value = cellfun(@(m) m.get('M'), dp.get('G').get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
     
 %%% ¡prop!
 TARGET (result, cell) is the target value for this data point.
@@ -55,7 +55,7 @@ value = cellfun(@(x) dp.get('SUB').get('VOI_DICT').get('IT', x).get('V'), dp.get
 %% ¡props!
 
 %%% ¡prop!
-G (data, item) is a subject with connectivity data.
+G (data, item) is a graph containing the added graph measures (M_DICT).
 %%%% ¡settings!
 'Graph'
 		
@@ -65,11 +65,11 @@ TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be u
 %% ¡tests!
 
 %%% ¡excluded_props!
-[NNDataPoint_Graph_REG.G]
+[NNDataPoint_Measure_REG.G]
 
 %%% ¡test!
 %%%% ¡name!
-Weighted directed graph 
+Construct the data point with the adjacency matrix derived from its weighted undirected graph (GraphWU) 
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
@@ -93,47 +93,49 @@ im_gr = ImporterGroupSubjectCON_XLS( ...
 
 gr = im_gr.get('GR');
 
-%% Analysis CON WU
+% Analysis CON WU
 a_WU = AnalyzeEnsemble_CON_WU( ...
     'GR', gr ...
     );
 
-a_WU.memorize('G_DICT');
+a_WU.get('MEASUREENSEMBLE', 'Degree').get('M');
+a_WU.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
+a_WU.get('MEASUREENSEMBLE', 'Distance').get('M');
 
-% create item lists of NNDataPoint_CON_REG
-it_list = cellfun(@(g, sub) NNDataPoint_Graph_REG( ...
+% create item lists of NNDataPoint_Measure_REG
+it_list = cellfun(@(g, sub) NNDataPoint_Measure_REG( ...
     'ID', sub.get('ID'), ...
     'G', g, ...
     'TARGET_IDS', sub.get('VOI_DICT').get('KEYS')), ...
     a_WU.get('G_DICT').get('IT_LIST'), gr.get('SUB_DICT').get('IT_LIST'),...
     'UniformOutput', false);
 
-% create NNDataPoint_CON_CLA DICT items
+% create NNDataPoint_Measure_REG DICT items
 dp_list = IndexedDictionary(...
-        'IT_CLASS', 'NNDataPoint_Graph_REG', ...
+        'IT_CLASS', 'NNDataPoint_Measure_REG', ...
         'IT_LIST', it_list ...
         );
 
-% create a NNDataset containing the NNDataPoint_Graph_REG DICT
+% create a NNDataset containing the NNDataPoint_Measure_REG DICT
 d = NNDataset( ...
-    'DP_CLASS', 'NNDataPoint_Graph_REG', ...
+    'DP_CLASS', 'NNDataPoint_Measure_REG', ...
     'DP_DICT', dp_list ...
     );
 
 % Check whether the content of input for a single datapoint matches
 for index = 1:1:gr.get('SUB_DICT').get('LENGTH')
     individual_input = d.get('DP_DICT').get('IT', index).get('INPUT');
-    known_input = a_WU.get('G_DICT').get('IT', index).get('A');
+    known_input = cellfun(@(m) m.get('M'), a_WU.get('G_DICT').get('IT', index).get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
 
     assert(isequal(individual_input, known_input), ...
-        [BRAPH2.STR ':NNDataPoint_Graph_REG:' BRAPH2.FAIL_TEST], ...
-        'NNDataPoint_Graph_REG does not construct the dataset correctly. The input value is not derived correctly.' ...
+        [BRAPH2.STR ':NNDataPoint_Measure_REG:' BRAPH2.FAIL_TEST], ...
+        'NNDataPoint_Measure_REG does not construct the dataset correctly. The input value is not derived correctly.' ...
         )
 end
 
 %%% ¡test!
 %%%% ¡name!
-Binary undirected multigraph at fixed densities
+Construct the data point with the adjacency matrix derived from its binary undirected multigraph with fixed densities (MultigraphBUD)
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
@@ -157,7 +159,7 @@ im_gr = ImporterGroupSubjectCON_XLS( ...
 
 gr = im_gr.get('GR');
 
-%% Analysis CON WU
+% Analysis CON WU
 densities = 0:25:100;
 
 a_BUD = AnalyzeEnsemble_CON_BUD( ...
@@ -165,10 +167,12 @@ a_BUD = AnalyzeEnsemble_CON_BUD( ...
     'GR', gr ...
     );
 
-a_BUD.memorize('G_DICT');
+a_BUD.get('MEASUREENSEMBLE', 'Degree').get('M');
+a_BUD.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
+a_BUD.get('MEASUREENSEMBLE', 'Distance').get('M');
 
-% create item lists of NNDataPoint_CON_REG
-it_list = cellfun(@(g, sub) NNDataPoint_Graph_REG( ...
+% create item lists of NNDataPoint_Measure_REG
+it_list = cellfun(@(g, sub) NNDataPoint_Measure_REG( ...
     'ID', sub.get('ID'), ...
     'G', g, ...
     'TARGET_IDS', sub.get('VOI_DICT').get('KEYS')), ...
@@ -177,37 +181,37 @@ it_list = cellfun(@(g, sub) NNDataPoint_Graph_REG( ...
 
 % create NNDataPoint_CON_CLA DICT items
 dp_list = IndexedDictionary(...
-        'IT_CLASS', 'NNDataPoint_Graph_REG', ...
+        'IT_CLASS', 'NNDataPoint_Measure_REG', ...
         'IT_LIST', it_list ...
         );
 
-% create a NNDataset containing the NNDataPoint_Graph_REG DICT
+% create a NNDataset containing the NNDataPoint_Measure_REG DICT
 d = NNDataset( ...
-    'DP_CLASS', 'NNDataPoint_Graph_REG', ...
+    'DP_CLASS', 'NNDataPoint_Measure_REG', ...
     'DP_DICT', dp_list ...
     );
 
 % Check whether the content of input for a single datapoint matches
 for index = 1:1:gr.get('SUB_DICT').get('LENGTH')
     individual_input = d.get('DP_DICT').get('IT', index).get('INPUT');
-    known_input = a_BUD.get('G_DICT').get('IT', index).get('A');
+    known_input = cellfun(@(m) m.get('M'), a_BUD.get('G_DICT').get('IT', index).get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
 
     assert(isequal(individual_input, known_input), ...
-        [BRAPH2.STR ':NNDataPoint_Graph_REG:' BRAPH2.FAIL_TEST], ...
-        'NNDataPoint_Graph_REG does not construct the dataset correctly. The input value is not derived correctly.' ...
+        [BRAPH2.STR ':NNDataPoint_Measure_REG:' BRAPH2.FAIL_TEST], ...
+        'NNDataPoint_Measure_REG does not construct the dataset correctly. The input value is not derived correctly.' ...
         )
 end
 
 %%% ¡test!
 %%%% ¡name!
-Weighted undirected multiplex graph
+Construct the data point with the adjacency matrix derived from its multiplex weighted undirected graph (MultiplexWU) 
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'atlas.xlsx'])
     test_SubjectCON_FUN_MP % create example files
 end
 
-%% Load BrainAtlas
+% Load BrainAtlas
 im_ba = ImporterBrainAtlasXLS( ...
     'FILE', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'atlas.xlsx'], ...
     'WAITBAR', true ...
@@ -215,7 +219,7 @@ im_ba = ImporterBrainAtlasXLS( ...
 
 ba = im_ba.get('BA');
 
-%% Load Groups of SubjectCON
+% Load Groups of SubjectCON
 im_gr = ImporterGroupSubjectCON_XLS( ...
     'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_1_XLS.CON'], ...
     'BA', ba, ...
@@ -224,7 +228,7 @@ im_gr = ImporterGroupSubjectCON_XLS( ...
 
 gr_CON = im_gr.get('GR');
 
-%% Load Groups of SubjectFUN
+% Load Groups of SubjectFUN
 im_gr = ImporterGroupSubjectFUN_XLS( ...
     'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_1_XLS.FUN'], ...
     'BA', ba, ...
@@ -233,7 +237,7 @@ im_gr = ImporterGroupSubjectFUN_XLS( ...
 
 gr_FUN = im_gr.get('GR');
 
-%% Combine Groups of SubjectCON with Groups of SubjectFUN
+% Combine Groups of SubjectCON with Groups of SubjectFUN
 co_gr = CombineGroups_CON_FUN_MP( ...
     'GR_CON', gr_CON, ...
     'GR_FUN', gr_FUN, ...
@@ -242,40 +246,43 @@ co_gr = CombineGroups_CON_FUN_MP( ...
 
 gr = co_gr.get('GR_CON_FUN_MP');
 
-%% Analysis CON FUN MP WU
+% Analysis CON FUN MP WU
 a_WU = AnalyzeEnsemble_CON_FUN_MP_WU( ...
     'GR', gr ...
     );
 
-a_WU.memorize('G_DICT');
+% To be added the multiplex measures
+a_WU.get('MEASUREENSEMBLE', 'Degree').get('M');
+a_WU.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
+a_WU.get('MEASUREENSEMBLE', 'Distance').get('M');
 
-% create item lists of NNDataPoint_CON_CLA
-it_list = cellfun(@(g, sub) NNDataPoint_Graph_REG( ...
+% create item lists of NNDataPoint_Measure_REG
+it_list = cellfun(@(g, sub) NNDataPoint_Measure_REG( ...
     'ID', sub.get('ID'), ...
     'G', g, ...
     'TARGET_IDS', sub.get('VOI_DICT').get('KEYS')), ...
     a_WU.get('G_DICT').get('IT_LIST'), gr.get('SUB_DICT').get('IT_LIST'),...
     'UniformOutput', false);
 
-% create NNDataPoint_Graph_REG DICT items
+% create NNDataPoint_Measure_REG DICT items
 dp_list = IndexedDictionary(...
-        'IT_CLASS', 'NNDataPoint_Graph_REG', ...
+        'IT_CLASS', 'NNDataPoint_Measure_REG', ...
         'IT_LIST', it_list ...
         );
 
-% create a NNDataset containing the NNDataPoint_Graph_REG DICT
+% create a NNDataset containing the NNDataPoint_Measure_REG DICT
 d = NNDataset( ...
-    'DP_CLASS', 'NNDataPoint_Graph_REG', ...
+    'DP_CLASS', 'NNDataPoint_Measure_REG', ...
     'DP_DICT', dp_list ...
     );
 
 % Check whether the content of input for a single datapoint matches
 for index = 1:1:gr.get('SUB_DICT').get('LENGTH')
     individual_input = d.get('DP_DICT').get('IT', index).get('INPUT');
-    known_input = a_WU.get('G_DICT').get('IT', index).get('A');
+    known_input = cellfun(@(m) m.get('M'), a_WU.get('G_DICT').get('IT', index).get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
 
     assert(isequal(individual_input, known_input), ...
-        [BRAPH2.STR ':NNDataPoint_Graph_REG:' BRAPH2.FAIL_TEST], ...
-        'NNDataPoint_Graph_REG does not construct the dataset correctly. The input value is not derived correctly.' ...
+        [BRAPH2.STR ':NNDataPoint_Measure_REG:' BRAPH2.FAIL_TEST], ...
+        'NNDataPoint_Measure_REG does not construct the dataset correctly. The input value is not derived correctly.' ...
         )
 end

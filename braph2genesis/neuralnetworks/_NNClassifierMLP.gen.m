@@ -50,7 +50,7 @@ NNDataset('DP_CLASS', 'NNDataPoint_CON_CLA')
 %%% ¡prop!
 DP_CLASSES (parameter, classlist) is the list of compatible data points.
 %%%% ¡default!
-{'NNDataPoint_CON_CLA'}
+{'NNDataPoint_CON_CLA' 'NNDataPoint_Graph_CLA' 'NNDataPoint_Measure_CLA'}
 
 %%% ¡prop!
 D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.
