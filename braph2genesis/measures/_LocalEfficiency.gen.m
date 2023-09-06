@@ -72,7 +72,7 @@ parfor li = 1:L
     for i = 1:1:N(li)
         nodes = find(Aii(i, :)  | Aii(:, i).');  % neighbours of u
         if numel(nodes) > 1
-            sub_graph = g.subgraph(g, nodes);
+            sub_graph = g.get('SUBGRAPH', nodes);
             global_efficiency = GlobalEfficiency('G', sub_graph).get('M');
             local_efficiency_layer(i) = mean(global_efficiency{li});
         end
