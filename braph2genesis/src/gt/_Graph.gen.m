@@ -656,6 +656,59 @@ PARTITIONS (result, rvector) returns the number of layers in the partitions of t
 value = g.get('LAYERNUMBER'); % by default, there is a single partition
 
 %%% ¡prop!
+SUBGRAPH (query, item) returns a subgraph of original graph
+%%%% ¡calculate!
+A = g.get('A');
+L = g.get('LAYERNUMBER');
+nodes = varargin{1};
+
+if ~iscell(nodes)
+    nodes = repmat({nodes}, 1, L);
+end
+
+switch g.get('GRAPH_TYPE')
+    case Graph.GRAPH
+        B = A{1};
+        B = B(nodes{1}, nodes{1});
+        sg = eval([g.getClass() '(''B'', B)']);
+        
+    case Graph.MULTIGRAPH
+        temp_B = g.get('B');
+        B2 = temp_B(nodes{1}, nodes{1});
+        if isa(g, 'MultigraphBUD')
+            sg = MultigraphBUD('B', B2, 'Densities', g.get('Densities'));
+        else
+            sg = MultigraphBUT('B', B2, 'Thresholds', g.get('Thresholds'));
+        end
+        
+    otherwise  % multiplex
+        if isa(g, 'MultiplexBUD') || isa(g, 'MultiplexBUT')
+            temp_B = g.get('B');
+            for li = 1:1:length(temp_B)
+                Aii = temp_B{li};
+                if ~isempty(Aii)
+                    B(li) = {Aii(nodes{li}, nodes{li})};
+                end
+            end
+            if isa(g, 'MultiplexBUD')
+                sg = MultiplexBUD('B', B, 'Densities', g.get('Densities'));
+            else
+                sg = MultiplexBUT('B', B, 'Thresholds', g.get('Thresholds'));
+            end
+        else
+            for li = 1:1:L
+                Aii = A{li, li};
+                if ~isempty(Aii)
+                    B(li) = {Aii(nodes{li}, nodes{li})};
+                end
+            end
+            sg = eval([g.getClass() '(''B'', B)']);
+        end
+        
+end
+value = sg;
+
+%%% ¡prop!
 M_DICT (result, idict) contains the calculated measures of the graph.
 %%%% ¡settings!
 'Measure'
