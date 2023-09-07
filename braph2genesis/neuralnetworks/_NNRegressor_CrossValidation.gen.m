@@ -83,7 +83,7 @@ value = cellfun(@(d, nn) NNRegressor_Evaluator('D', d, 'NN', nn), ...
 %% ¡props!
 
 %%% ¡prop!
-AVG_CORRELATION_COEFF (result, rvector) provides the metric of the correlation of coefficients.
+AV_CORR (result, rvector) provides the metric of the correlation of coefficients.
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 
@@ -97,7 +97,7 @@ else
 end
 
 %%% ¡prop!
-AVG_COEFF_OF_DETERMINATION (result, rvector) provides a measure of how well the predictions are replicated by the model.
+AV_DET (result, rvector) provides a measure of how well the predictions are replicated by the model.
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 
@@ -111,7 +111,7 @@ else
 end
 
 %%% ¡prop!
-AVG_MEAN_ABSOLUTE_ERROR (result, rvector) provides the metric of the mean absolute error.
+AV_MAE (result, rvector) provides the metric of the mean absolute error.
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 
@@ -125,7 +125,7 @@ else
 end
 
 %%% ¡prop!
-AVG_MEAN_SQUARED_ERROR (result, rvector) provides the metric of the mean squared error.
+AV_MSE (result, rvector) provides the metric of the mean squared error.
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 
@@ -139,7 +139,7 @@ else
 end
 
 %%% ¡prop!
-AVG_ROOT_MEAN_SQUARED_ERROR (result, rvector) provides the metric of the root mean squared error.
+AV_RMSE (result, rvector) provides the metric of the root mean squared error.
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 

@@ -46,7 +46,7 @@ NOTES (metadata, string) are some specific notes about the cross-validation.
 %% ¡props!
 
 %%% ¡prop!
-KFOLD (data, scalar) is the number of folds.
+KFOLDS (data, scalar) is the number of folds.
 %%%% ¡default!
 5
 
@@ -54,7 +54,7 @@ KFOLD (data, scalar) is the number of folds.
 SPLIT (data, cell) is a cell containing the ratio numbers or the vectors stating which datapoints belong to the splitted neural network datasets.
 %%%% ¡postprocessing!
 split = nncv.get('SPLIT');
-kfold = nncv.get('KFOLD');
+kfold = nncv.get('KFOLDS');
 d = nncv.get('D');
 if isempty(split) && d.get('DP_DICT').get('LENGTH') > kfold
     nncv.set('SPLIT', repmat({1 / kfold}, 1, kfold));
@@ -66,7 +66,7 @@ D (data, item) is the dataset to be cross-validated.
 'NNDataset'
 
 %%% ¡prop!
-D_LIST (result, itemlist) contains the split datasets corresponding to k folds.
+D_LIST (result, itemlist) contains the split datasets corresponding to the k folds.
 %%%% ¡calculate!
 d = nncv.get('D');
 if d.get('DP_DICT').get('LENGTH') == 0
@@ -76,10 +76,10 @@ else
 end
 
 %%% ¡prop!
-NN_LIST (result, itemlist) contains the neural network models corresponding to k folds.
+NN_LIST (result, itemlist) contains the neural network models corresponding to the k folds.
 
 %%% ¡prop!
-EVALUATOR_LIST (result, itemlist) contains the evaluators corresponding to k folds.
+EVALUATOR_LIST (result, itemlist) contains the evaluators corresponding to the k folds.
 
 %%% ¡prop!
 EPOCHS (parameter, scalar) is the maximum number of epochs.
@@ -141,7 +141,7 @@ d = NNDataset('DP_DICT', IndexedDictionary(...
     ));
 
 % create the cross-validation process
-nncv = NNCrossValidation('D', d, 'KFOLD', 5);
+nncv = NNCrossValidation('D', d, 'KFOLDS', 5);
 
 % Check whether the number of datapoint from all d_list matches
 d_list = nncv.get('D_LIST');
@@ -156,7 +156,7 @@ assert(num_dp_from_nncv == num_dp, ...
 
 % create the cross-validation process with specifying the datapoints in each
 % fold
-nncv = NNCrossValidation('D', d, 'KFOLD', 5, 'SPLIT', {[1 2], [3 4], [5 6], [7 8], [9]});
+nncv = NNCrossValidation('D', d, 'KFOLDS', 5, 'SPLIT', {[1 2], [3 4], [5 6], [7 8], [9]});
 
 % Check whether the number of datapoint in each fold matches
 split = nncv.get('SPLIT');

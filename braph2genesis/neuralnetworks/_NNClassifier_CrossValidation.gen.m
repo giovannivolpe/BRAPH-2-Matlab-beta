@@ -83,7 +83,7 @@ value = cellfun(@(d, nn) NNClassifier_Evaluator('D', d, 'NN', nn), ...
 %% ¡props!
 
 %%% ¡prop!
-AVG_AUC (result, rvector) provides the average value of the area under the receiver operating characteristic curve across k folds.
+AV_AUC (result, rvector) provides the average value of the area under the receiver operating characteristic curve across k folds.
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 
@@ -97,7 +97,7 @@ else
 end
 
 %%% ¡prop!
-AVG_MACRO_AUC (result, scalar) provides the metric of the average macro AUC value across k folds.
+AV_MACRO_AUC (result, scalar) provides the metric of the average macro AUC value across k folds.
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 
@@ -122,7 +122,7 @@ combined_c_matrix = cellfun(@(x) double(x), c_matrices, 'UniformOutput', false);
 value = sum(cat(3, combined_c_matrix{:}), 3);
 
 %%% ¡prop!
-AVG_PERMUTATION_FEATURE_IMPORTANCE (result, cell) averages the permutation feature importances across k folds.
+AV_PERM_FEATURE_IMPORTANCE (result, cell) averages the permutation feature importances across k folds.
 %%%% ¡calculate!
 value = {};
 
