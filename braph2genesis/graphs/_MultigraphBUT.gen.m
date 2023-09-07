@@ -436,7 +436,7 @@ assert(isequal(size(A{1}), size(B)), ...
     [BRAPH2.STR ':MultigraphBUT:' BRAPH2.FAIL_TEST], ...
     'MultigraphBUT Randomize is not functioning well.')
 
-g2 = MultigraphBUT('B', B);
+g2 = MultigraphBUT('B', B, 'THRESHOLDS', [0 .1 .2 .3 .4 .5]);
 g2.set('RANDOMIZE', false);
 g2.set('ATTEMPTSPEREDGE', 4);
 g2.get('A_CHECK')

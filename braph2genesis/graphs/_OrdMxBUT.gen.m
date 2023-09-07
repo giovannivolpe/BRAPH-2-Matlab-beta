@@ -378,7 +378,7 @@ assert(isequal(size(A{1}), size(B{1})), ...
     [BRAPH2.STR ':OrdMxBUT:' BRAPH2.FAIL_TEST], ...
     'OrdMxBUT Randomize is not functioning well.')
 
-g = OrdMxBUT('B', B, 'THRESHOLDS', thresholds);
+g2 = OrdMxBUT('B', B, 'THRESHOLDS', thresholds);
 g2.set('RANDOMIZE', false);
 g2.set('ATTEMPTSPEREDGE', 4);
 A2 = g2.get('A');

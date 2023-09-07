@@ -367,7 +367,7 @@ assert(isequal(size(A{1}), size(B{1})), ...
     [BRAPH2.STR ':MultiplexBUT:' BRAPH2.FAIL_TEST], ...
     'MultiplexBUT Randomize is not functioning well.')
 
-g = MultiplexBUT('B', B, 'THRESHOLDS', thresholds);
+g2 = MultiplexBUT('B', B, 'THRESHOLDS', thresholds);
 g2.set('RANDOMIZE', false);
 g2.set('ATTEMPTSPEREDGE', 4);
 A2 = g2.get('A');

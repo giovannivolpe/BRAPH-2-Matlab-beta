@@ -172,9 +172,13 @@ B = semipositivize(B, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); %#ok<
 B = standardize(B, 'StandardizeRule', g.get('STANDARDIZE_RULE')); %#ok<PROPLC> % ensures all weights are between 0 and 1
 
 A = {B}; %#ok<PROPLC>
-if g.get('RANDOMIZE')
-    random_A = g.get('RANDOMIZATION', A);
-    A = {random_A};
+
+if g.get('GRAPH_TYPE') ~= 1
+
+else
+    if g.get('RANDOMIZE')
+        A = g.get('RANDOMIZATION', A);
+    end
 end
 value = A;
 %%%% ¡gui!
