@@ -99,7 +99,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWU' 'OrdMxWU'};
+{'MultiplexWU' 'OrdMxWU' 'MultilayerWU' 'OrdMlWU'};
 
 %%% ¡prop!
 M (result, cell) is the averge overlapping degree.
@@ -149,5 +149,104 @@ assert(isequal(m_outside_g.get('M'), known_overlapping_str), ...
 
 m_inside_g = g.get('MEASURE', 'OverlappingStrAv');
 assert(isequal(m_inside_g.get('M'), known_overlapping_str), ...
+    [BRAPH2.STR ':OverlappingStrAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMxWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .2  1
+    .2  0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   .3
+    0   .3  0
+    ];
+B = {B11 B22};
+
+known_overlapping_str = {mean([2.2 1.5 1.3])};
+
+g = OrdMxWU('B', B);
+m_outside_g = OverlappingStrAv('G', g);
+assert(isequal(m_outside_g.get('M'), known_overlapping_str), ...
+    [BRAPH2.STR ':OverlappingStrAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'OverlappingStrAv');
+assert(isequal(m_inside_g.get('M'), known_overlapping_str), ...
+    [BRAPH2.STR ':OverlappingStrAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultilayerWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .2  1
+    .2  0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   .3
+    0   .3  0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B21 = B12';
+B = {B11 B12;
+     B21 B22};
+
+known_overlapping_strength_AV = {mean([2.2 1.5 1.3]')};
+
+g = MultilayerWU('B', B);
+m_outside_g = OverlappingStrAv('G', g);
+assert(isequal(m_outside_g.get('M'), known_overlapping_strength_AV), ...
+    [BRAPH2.STR ':OverlappingStrAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'OverlappingStrAv');
+assert(isequal(m_inside_g.get('M'), known_overlapping_strength_AV), ...
+    [BRAPH2.STR ':OverlappingStrAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMlWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .2  1
+    .2  0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   .3
+    0   .3  0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B21 = B12';
+B = {B11 B12;
+     B21 B22};
+
+known_overlapping_strength_AV = {mean([2.2 1.5 1.3]')};
+
+g = OrdMlWU('B', B);
+m_outside_g = OverlappingStrAv('G', g);
+assert(isequal(m_outside_g.get('M'), known_overlapping_strength_AV), ...
+    [BRAPH2.STR ':OverlappingStrAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'OverlappingStrAv');
+assert(isequal(m_inside_g.get('M'), known_overlapping_strength_AV), ...
     [BRAPH2.STR ':OverlappingStrAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

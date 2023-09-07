@@ -57,7 +57,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphBD' 'GraphWD' 'MultiplexWD' 'MultiplexBD'};
+{'GraphBD' 'GraphWD' 'MultiplexWD' 'MultiplexBD' 'MultilayerWD' 'OrdMlWD'};
 
 %%% ¡prop!
 M (result, cell) is the in-in-assortativity.
@@ -219,6 +219,89 @@ known_in_in_assortativity = {
                     };   
 
 g = MultiplexWD('B', A);
+
+m_outside_g = AssortInward('G', g);
+assert(isequal(m_outside_g.get('M'), known_in_in_assortativity), ...
+    [BRAPH2.STR ':AssortInward:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'AssortInward');
+assert(isequal(m_inside_g.get('M'), known_in_in_assortativity), ...
+    [BRAPH2.STR ':AssortInward:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+
+%%% ¡test!
+%%%% ¡name!
+OrdMlWD
+%%%% ¡code!
+A11 = [
+       0  2  0  0  0;
+       0  0  3  0  0;
+       0  0  0  1  0;
+       0  2  0  0  2;
+       1  0  0  2  0
+    ];
+A22 = [
+       0  2  0  0  0;
+       0  0  3  0  0;
+       0  0  0  1  0;
+       0  2  0  0  2;
+       1  0  0  2  0
+    ];
+A12 = rand(size(A11,1),size(A22,2));
+A21 = A12';
+
+
+A = {A11 A12;
+    A21 A22;};
+
+
+known_in_in_assortativity = {
+                    (15/7-(21/14)^2)/(35/14-(21/14)^2)
+                    (15/7-(21/14)^2)/(35/14-(21/14)^2)
+                    };   
+
+g = OrdMlWD('B', A);
+
+m_outside_g = AssortInward('G', g);
+assert(isequal(m_outside_g.get('M'), known_in_in_assortativity), ...
+    [BRAPH2.STR ':AssortInward:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'AssortInward');
+assert(isequal(m_inside_g.get('M'), known_in_in_assortativity), ...
+    [BRAPH2.STR ':AssortInward:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultilayerWD
+%%%% ¡code!
+A11 = [
+       0  2  0  0  0;
+       0  0  3  0  0;
+       0  0  0  1  0;
+       0  2  0  0  2;
+       1  0  0  2  0
+    ];
+A22 = [
+       0  2  0  0  0;
+       0  0  3  0  0;
+       0  0  0  1  0;
+       0  2  0  0  2;
+       1  0  0  2  0
+    ];
+A12 = rand(size(A11,1),size(A22,2));
+A21 = A12';
+A = {A11 A12;
+    A21 A22;};
+known_in_in_assortativity = {
+                    (15/7-(21/14)^2)/(35/14-(21/14)^2)
+                    (15/7-(21/14)^2)/(35/14-(21/14)^2)
+                    };   
+
+g = MultilayerWD('B', A);
 
 m_outside_g = AssortInward('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_in_assortativity), ...

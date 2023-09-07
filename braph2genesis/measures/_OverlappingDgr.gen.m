@@ -99,7 +99,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU'};
+{'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'MultilayerWU' 'OrdMlWU'};
 
 %%% ¡prop!
 M (result, cell) is the overlapping degree.
@@ -112,6 +112,7 @@ ls = g.get('PARTITIONS');
 if l == 0
     value = {};
 else
+
     N = g.get('NODENUMBER');
     degree = calculateValue@Degree(m, prop);
     overlapping_degree = cell(length(ls), 1);
@@ -126,6 +127,9 @@ else
         overlapping_degree(i) = {overlapping_degree_partition};
     end
     value = overlapping_degree;
+    if contains(class(g),'Multilayer') | contains(class(g),'OrdMl')
+     value = {[sum(cell2mat(overlapping_degree'),2)]}
+    end 
 end
 
 %% ¡tests!
@@ -255,6 +259,74 @@ known_overlapping_degree = { ...
 
 g = MultiplexBUD('B', B, 'DENSITIES', [0 100]);
 
+m_outside_g = OverlappingDgr('G', g);
+assert(isequal(m_outside_g.get('M'), known_overlapping_degree), ...
+    [BRAPH2.STR ':OverlappingDgr:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'OverlappingDgr');
+assert(isequal(m_inside_g.get('M'), known_overlapping_degree), ...
+    [BRAPH2.STR ':OverlappingDgr:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultilayerWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .2  1
+    .2  0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   .3
+    0   .3  0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B21 = B12';
+B = {B11 B12;
+     B21 B22};
+
+known_overlapping_degree = {[3, 3, 2]'};
+
+g = MultilayerWU('B', B);
+m_outside_g = OverlappingDgr('G', g);
+assert(isequal(m_outside_g.get('M'), known_overlapping_degree), ...
+    [BRAPH2.STR ':OverlappingDgr:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'OverlappingDgr');
+assert(isequal(m_inside_g.get('M'), known_overlapping_degree), ...
+    [BRAPH2.STR ':OverlappingDgr:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMlWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .2  1
+    .2  0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   .3
+    0   .3  0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B21 = B12';
+B = {B11 B12;
+     B21 B22};
+
+known_overlapping_degree = {[3, 3, 2]'};
+
+g = OrdMlWU('B', B);
 m_outside_g = OverlappingDgr('G', g);
 assert(isequal(m_outside_g.get('M'), known_overlapping_degree), ...
     [BRAPH2.STR ':OverlappingDgr:' BRAPH2.FAIL_TEST], ...

@@ -110,6 +110,7 @@ m_inside_g = g.get('MEASURE', 'EigenVectorCentrality');
 assert(isequal(round(cell2mat(m_inside_g.get('M')), 6), round(cell2mat(known_eigenvector_centrality), 6)), ...
     [BRAPH2.STR ':EigenVectorCentrality:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
 %%% ¡test!
 %%%% ¡name!
 GraphBU

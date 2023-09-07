@@ -57,7 +57,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphBD' 'GraphWD' 'MultiplexWD' 'MultiplexBD'};
+{'GraphBD' 'GraphWD' 'MultiplexWD' 'MultiplexBD' 'MultilayerWD' 'OrdMlWD'};
 
 %%% ¡prop!
 M (result, cell) is the in-out-assortativity.
@@ -221,6 +221,48 @@ known_in_out_assortativity = {
                     };    
 
 g = MultiplexWD('B', A);
+
+m_outside_g = AssortInOutward('G', g);
+assert(isequal(m_outside_g.get('M'), known_in_out_assortativity), ...
+    [BRAPH2.STR ':AssortInOutward:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'AssortInOutward');
+assert(isequal(m_inside_g.get('M'), known_in_out_assortativity), ...
+    [BRAPH2.STR ':AssortInOutward:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMlWD
+%%%% ¡code!
+B11 = [
+       0  2  0  0  0;
+       0  0  3  0  0;
+       0  0  0  1  0;
+       0  2  0  0  2;
+       1  0  0  2  0
+    ];
+B22 = [
+       0  2  0  0  0;
+       0  0  3  0  0;
+       0  0  0  1  0;
+       0  2  0  0  2;
+       1  0  0  2  0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B21 = B12';
+
+
+B= {B11 B12;
+    B21 B22;};
+
+known_in_out_assortativity = {
+                    (2-100/49)/(16/7-100/49)
+                    (2-100/49)/(16/7-100/49)
+                    };    
+
+g = OrdMlWD('B', B);
 
 m_outside_g = AssortInOutward('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_out_assortativity), ...
