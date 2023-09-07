@@ -73,6 +73,24 @@ THRESHOLDS [-1 ... 1]
 
 %%% ¡prop!
 %%%% ¡id!
+OrdMxBUT.RANDOMIZE
+%%%% ¡title!
+RANDOMIZATION ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMxBUT.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMxBUT.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
 OrdMxBUT.A
 %%%% ¡title!
 Binary Undirected ADJACENCY MATRICES at fixed Thresholds
@@ -307,4 +325,51 @@ for i = 1:1:length(thresholds)
             end
         end
     end
+end
+
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B1 = [
+     0 .1 .2 .3 .4 
+    .1 0 .1 .2 .3
+    .2 .1 0 .1 .2
+    .3 .2 .1 0 .1
+    .4 .3 .2 .1 0
+    ];
+B = {B1, B1, B1};
+thresholds = [0 .1 .2 .3 .4];
+g = OrdMxBUT('B', B, 'THRESHOLDS', thresholds);
+
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
+g.get('A_CHECK')
+
+A = g.get('A');
+
+assert(isequal(size(A{1}), size(B{1})), ...
+    [BRAPH2.STR ':OrdMxBUT:' BRAPH2.FAIL_TEST], ...
+    'OrdMxBUT Randomize is not functioning well.')
+
+g = OrdMxBUT('B', B, 'THRESHOLDS', thresholds);
+g2.set('RANDOMIZE', false);
+g2.set('ATTEMPTSPEREDGE', 4);
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
+
+for i = 1:length(A2)
+    assert(~isequal(A2{i, i}, random_A{i, i}), ...
+        [BRAPH2.STR ':OrdMxBUT:' BRAPH2.FAIL_TEST], ...
+        'OrdMxBUT Randomize is not functioning well.')
+    
+    assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
+        [BRAPH2.STR ':OrdMxBUT:' BRAPH2.FAIL_TEST], ...
+        'OrdMxBUT Randomize is not functioning well.')
+
+    assert(issymmetric(random_A{i, i}), ... % check symmetry 
+    [BRAPH2.STR ':OrdMxBUT:' BRAPH2.FAIL_TEST], ...
+    'OrdMxBUT Randomize is not functioning well.')
 end

@@ -77,6 +77,30 @@ DENSITIES [0% ... 100%]
 
 %%% ¡prop!
 %%%% ¡id!
+OrdMlBUD.RANDOMIZE
+%%%% ¡title!
+RANDOMIZATION ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBUD.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBUD.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMlBUD.NUMBEROFWEIGHTS
+%%%% ¡title!
+RANDOMIZATION NUMBER OF WEIGHTS
+
+%%% ¡prop!
+%%%% ¡id!
 OrdMlBUD.A
 %%%% ¡title!
 Binary Undirected ADJACENCY MATRICES at fixed Densities
@@ -344,4 +368,55 @@ for i = 1:1:length(A)
                 'OrdMlBUD is not constructing well.')
         end
     end
+end
+
+
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B1 = rand(randi([2, 10]));
+B2 = rand(randi([2, 10]));
+B3 = rand(randi([2, 10]));
+B12 = rand(size(B1, 1),size(B2, 2));
+B13 = rand(size(B1, 1),size(B3, 2));
+B23 = rand(size(B2, 1),size(B3, 2));
+B = {
+    B1                           B12                            B13
+    B12'                         B2                             B23
+    B13'                         B23'                           B3
+    };
+densities = [0 55 100];
+g = OrdMlBUD('B', B, 'DENSITIES', densities); 
+
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
+g.get('A_CHECK')
+
+A = g.get('A');
+
+assert(isequal(size(A{1}), size(B{1})), ...
+    [BRAPH2.STR ':OrdMlBUD:' BRAPH2.FAIL_TEST], ...
+    'OrdMlBUD Randomize is not functioning well.')
+
+g2 = OrdMlBUD('B', B, 'DENSITIES', densities); 
+g2.set('RANDOMIZE', false);
+g2.set('ATTEMPTSPEREDGE', 4);
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
+
+for i = 1:length(A2)
+    assert(~isequal(A2{i, i}, random_A{i, i}), ...
+        [BRAPH2.STR ':OrdMlBUD:' BRAPH2.FAIL_TEST], ...
+        'OrdMlBUD Randomize is not functioning well.')
+    
+    assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
+        [BRAPH2.STR ':OrdMlBUD:' BRAPH2.FAIL_TEST], ...
+        'OrdMlBUD Randomize is not functioning well.')
+
+    assert(issymmetric(random_A{i, i}), ... % check symmetry 
+    [BRAPH2.STR ':OrdMlBUD:' BRAPH2.FAIL_TEST], ...
+    'OrdMlBUD Randomize is not functioning well.')
 end
