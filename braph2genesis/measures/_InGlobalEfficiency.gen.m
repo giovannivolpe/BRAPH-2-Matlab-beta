@@ -93,7 +93,7 @@ B = [
     0   0   0   0   0
     ];
 
-known_in_global_efficiency = {[1/4 1/4 1/4 1/4 0]'};
+known_in_global_efficiency = {[1/4 1/4 1/4 1/4 0]};
 
 g = GraphBD('B', B);
 
