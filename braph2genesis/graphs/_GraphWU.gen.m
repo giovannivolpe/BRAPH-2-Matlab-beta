@@ -237,8 +237,12 @@ if isempty(varargin)
     return
 end
 
-
 A = cell2mat(varargin{1});
+
+if g.get('GRAPH_TYPE') ~= 1
+    value = A;
+    return;
+end
 
 attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 number_of_weights = g.get('NUMBEROFWEIGHTS');
@@ -394,9 +398,19 @@ g2.set('ATTEMPTSPEREDGE', 4);
 A2 = g2.get('A');
 random_A = g2.get('RANDOMIZATION', A2);
 
-assert(~isequal(A2, random_A), ...
-    [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
-    'GraphWU Randomize is not functioning well.')
+if all(A2{1}==0, "all") %if all nodes are zero, the random matrix is also all zeros
+    assert(isequal(A2{1}, random_A), ...
+        [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
+        'GraphWU Randomize is not functioning well.')
+elseif isequal((length(A2{1}).^2)- length(A2{1}), sum(A2{1}==1, "all")) %if all nodes (except diagonal) are one, the random matrix is the same as original
+    assert(isequal(A2{1}, random_A), ...
+        [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
+        'GraphWU Randomize is not functioning well.')
+else
+    assert(~isequal(A2{1}, random_A), ...
+        [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
+        'GraphWU Randomize is not functioning well.')
+end
 
 assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same number of nodes
     [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...

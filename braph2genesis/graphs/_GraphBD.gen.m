@@ -211,7 +211,7 @@ A(1:length(A)+1:numel(A)) = 0;
 E = length(I_edges); % number of edges
 
 if E == 0
-    random_A = A;
+    value = A;
     swaps = 0;
     return
 end
@@ -221,7 +221,7 @@ if E == 1
     A(I_edges(1), J_edges(1)) = 0;
     selected_nodes = randperm(size(A, 1), 2);
     A(selected_nodes(1), selected_nodes(2)) = r_ab;
-    random_A = A;
+    value = A;
     swaps = 1;
     return
 end
@@ -383,13 +383,20 @@ g2.set('ATTEMPTSPEREDGE', 4);
 A2 = g2.get('A');
 random_A = g2.get('RANDOMIZATION', A2);
 
-deg_A = sum(A2{1}, 2);
-deg_B = sum(random_A, 2);
-[h, p, ks2stat] = kstest2(deg_A, deg_B);
+if all(A2{1}==0, "all") %if all nodes are zero, the random matrix is also all zeros
+    assert(isequal(A2{1}, random_A), ...
+        [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+        'GraphBD Randomize is not functioning well.')
+elseif isequal((length(A2{1}).^2)- length(A2{1}), sum(A2{1}==1, "all")) %if all nodes (except diagonal) are one, the random matrix is the same as original
+    assert(isequal(A2{1}, random_A), ...
+        [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+        'GraphBD Randomize is not functioning well.')
+else
+    assert(~isequal(A2{1}, random_A), ...
+        [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+        'GraphBD Randomize is not functioning well.')
+end
 
-assert(~isequal(A2, random_A), ...
-    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
-    'GraphBD Randomize is not functioning well.')
 
 assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same number of nodes
     [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...

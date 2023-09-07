@@ -392,7 +392,7 @@ B1 = [
     1 2 -2 -1 0
     2 -2 -1 0 1
     ];
-B = {B1, B1, B1}
+B = {B1, B1, B1};
 g = OrdMxBD('B', B);
 
 g.set('RANDOMIZE', true);
@@ -405,17 +405,27 @@ assert(isequal(size(A{1}), size(B{1})), ...
     [BRAPH2.STR ':OrdMxBD:' BRAPH2.FAIL_TEST], ...
     'OrdMxBD Randomize is not functioning well.')
 
-g2 = OrdMxBD('B', {B, B, B});
+g2 = OrdMxBD('B', B);
 g2.set('RANDOMIZE', true);
 g2.set('ATTEMPTSPEREDGE', 4);
 g2.get('A_CHECK')
 A2 = g2.get('A');
 random_A = g2.get('RANDOMIZATION', A2);
 
-for i = 1:length(A)
-    assert(~isequal(A2{i, i}, random_A{i, i}), ...
-        [BRAPH2.STR ':OrdMxBD:' BRAPH2.FAIL_TEST], ...
-        'OrdMxBD Randomize is not functioning well.')
+for i = 1:length(A2)
+    if all(A2{i, i}==0, "all") %if all nodes are zero, the random matrix is also all zeros
+        assert(isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':OrdMxBD:' BRAPH2.FAIL_TEST], ...
+            'OrdMxBD Randomize is not functioning well.')
+    elseif isequal((length(A2{i, i}).^2)- length(A2{i, i}), sum(A2{i, i}==1, "all")) %if all nodes (except diagonal) are one, the random matrix is the same as original
+        assert(isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':OrdMxBD:' BRAPH2.FAIL_TEST], ...
+            'OrdMxBD Randomize is not functioning well.')
+    else
+        assert(~isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':OrdMxBD:' BRAPH2.FAIL_TEST], ...
+            'OrdMxBD Randomize is not functioning well.')
+    end
     
     assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
         [BRAPH2.STR ':OrdMxBD:' BRAPH2.FAIL_TEST], ...

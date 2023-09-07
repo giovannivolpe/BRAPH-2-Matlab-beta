@@ -222,8 +222,13 @@ for i = 1:1:L
         end
     end
 end
-if g.get('RANDOMIZE')
-    A = g.get('RANDOMIZATION', A);
+if g.get('GRAPH_TYPE') ~= 6
+
+else
+    if g.get('RANDOMIZE')
+        A = g.get('RANDOMIZATION', A);
+    end
+
 end
 value = A;
 
@@ -401,10 +406,20 @@ g2.get('A_CHECK')
 A2 = g.get('A');
 random_A = g2.get('RANDOMIZATION', A2);
 
-for i = 1:length(A)
-    assert(~isequal(A2{i, i}, random_A{i, i}), ...
-        [BRAPH2.STR ':MultilayerWU:' BRAPH2.FAIL_TEST], ...
-        'MultilayerWU Randomize is not functioning well.')
+for i = 1:length(A2)
+    if all(A2{i, i}==0, "all") %if all nodes are zero, the random matrix is also all zeros
+        assert(isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':MultilayerWU:' BRAPH2.FAIL_TEST], ...
+            'MultilayerWU Randomize is not functioning well.')
+    elseif isequal((length(A2{i, i}).^2)- length(A2{i, i}), sum(A2{i, i}==1, "all")) %if all nodes (except diagonal) are one, the random matrix is the same as original
+        assert(isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':MultilayerWU:' BRAPH2.FAIL_TEST], ...
+            'MultilayerWU Randomize is not functioning well.')
+    else
+        assert(~isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':MultilayerWU:' BRAPH2.FAIL_TEST], ...
+            'MultilayerWU Randomize is not functioning well.')
+    end
     
     assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
         [BRAPH2.STR ':MultilayerWU:' BRAPH2.FAIL_TEST], ...

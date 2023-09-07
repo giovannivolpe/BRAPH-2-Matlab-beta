@@ -249,6 +249,9 @@ if L > 0 && ~isempty(cell2mat(A_WU))
         end
     end
 end
+if g.get('RANDOMIZE')
+    A = g.get('RANDOMIZATION', A);
+end
 value = A;
 
 %%%% ¡gui!
@@ -296,6 +299,34 @@ value = alayerlabels;
 COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('MultilayerBUD')
+
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
+%%% ¡prop!
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+
+for i = 1:length(A)
+    tmp_a = A{i,i};
+
+    random_g = GraphBU();
+    random_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+    random_A = random_g.get('RANDOMIZATION', {tmp_a});
+    A{i, i} = random_A;
+end
+value = A;
 
 %% ¡props!
 
@@ -408,9 +439,19 @@ A2 = g2.get('A');
 random_A = g2.get('RANDOMIZATION', A2);
 
 for i = 1:length(A2)
-    assert(~isequal(A2{i, i}, random_A{i, i}), ...
-        [BRAPH2.STR ':MultilayerBUD:' BRAPH2.FAIL_TEST], ...
-        'MultilayerBUD Randomize is not functioning well.')
+    if all(A2{i, i}==0, "all") %if all nodes are zero, the random matrix is also all zeros
+        assert(isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':MultilayerBUD:' BRAPH2.FAIL_TEST], ...
+            'MultilayerBUD Randomize is not functioning well.')
+    elseif isequal((length(A2{i, i}).^2)- length(A2{i, i}), sum(A2{i, i}==1, "all")) %if all nodes (except diagonal) are one, the random matrix is the same as original
+        assert(isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':MultilayerBUD:' BRAPH2.FAIL_TEST], ...
+            'MultilayerBUD Randomize is not functioning well.')
+    else
+        assert(~isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':MultilayerBUD:' BRAPH2.FAIL_TEST], ...
+            'MultilayerBUD Randomize is not functioning well.')
+    end
     
     assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
         [BRAPH2.STR ':MultilayerBUD:' BRAPH2.FAIL_TEST], ...
