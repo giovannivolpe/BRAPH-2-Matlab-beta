@@ -60,7 +60,7 @@ else
 end
 
 %%% ¡prop!
-CORRELATION_COEFF (result, rvector) provides the metric of the correlation of coefficients.
+CORR (result, rvector) provides the metric of the correlation of coefficients.
 %%%% ¡calculate!
 predictions = nne.get('NN').get('PREDICT', nne.get('D'));
 if isempty(predictions)
@@ -77,7 +77,7 @@ else
 end
 
 %%% ¡prop!
-COEFF_OF_DETERMINATION (result, rvector) provides a measure of how well the predictions are replicated by the model.
+DET (result, rvector) provides the coefficient of determination, a measure showing how well the predictions are replicated by the model.
 %%%% ¡calculate!
 predictions = nne.get('NN').get('PREDICT', nne.get('D'));
 if isempty(predictions)
@@ -142,7 +142,7 @@ else
 end
 
 %%% ¡prop!
-PERMUTATION_FEATURE_IMPORTANCE (result, cell) assess the significance of each feature by randomly shuffling its values and measuring how much the performance of the model decreases.
+PERM_FEATURE_IMPORTANCE (result, cell) assess the significance of each feature by randomly shuffling its values and measuring how much the performance of the model decreases.
 %%%% ¡calculate!
 value = {};
 

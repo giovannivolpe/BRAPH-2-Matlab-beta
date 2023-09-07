@@ -42,12 +42,12 @@ d = NNDataset( ...
     );
 
 %% Create a regressor cross-validation
-nncv = NNRegressor_CrossValidation('D', d, 'KFOLD', 5);
+nncv = NNRegressor_CrossValidation('D', d, 'KFOLDS', 5);
 nncv.get('TRAIN');
 
 %% Evaluate the performance
-avg_corr_coeff = nncv.get('AVG_CORRELATION_COEFF');
-avg_coeff_determination = nncv.get('AVG_COEFF_OF_DETERMINATION');
-avg_mae = nncv.get('AVG_MEAN_ABSOLUTE_ERROR');
-avg_mse = nncv.get('AVG_MEAN_SQUARED_ERROR');
-avg_rmse = nncv.get('AVG_ROOT_MEAN_SQUARED_ERROR');
+av_corr_coeff = nncv.get('AV_CORR');
+av_coeff_determination = nncv.get('AV_DET');
+av_mae = nncv.get('AV_MAE');
+av_mse = nncv.get('AV_MSE');
+av_rmse = nncv.get('AV_RMSE');

@@ -66,13 +66,21 @@ D (data, item) is the dataset to be cross-validated.
 'NNDataset'
 
 %%% ¡prop!
+DSP (result, item) is a dataset splitter.
+%%%% ¡settings!
+'NNDatasetSplit'
+%%%% ¡calculate!
+d = nncv.get('D');
+value = NNDatasetSplit('D', d, 'SPLIT', nncv.get('SPLIT'));
+
+%%% ¡prop!
 D_LIST (result, itemlist) contains the split datasets corresponding to the k folds.
 %%%% ¡calculate!
 d = nncv.get('D');
 if d.get('DP_DICT').get('LENGTH') == 0
     value = {};
 else
-    value = NNDatasetSplit('D', d, 'SPLIT', nncv.get('SPLIT')).get('D_LIST');
+    value = nncv.get('DSP').get('D_LIST');
 end
 
 %%% ¡prop!

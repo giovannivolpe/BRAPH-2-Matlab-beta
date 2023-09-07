@@ -62,7 +62,7 @@ if all(cellfun(@isscalar, value)) & sum(cell2mat(value)) <= 1 & sum(cell2mat(val
     
     lengths = floor(cell2mat(value) * num_sub);
     for i = 1:1:num_sub - sum(lengths)
-        lengths(idx(i)) = lengths(idx(i)) - 1;
+        lengths(i) = lengths(i) + 1;
     end
     
     indices = randperm(num_sub);

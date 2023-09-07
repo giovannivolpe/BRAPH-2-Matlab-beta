@@ -94,10 +94,10 @@ d3 = NNDataset( ...
 d = NNDatasetCombine('D_LIST', {d1, d2, d3}).get('D');
 
 %% Create a classifier cross-validation
-nncv = NNClassifier_CrossValidation('D', d, 'KFOLD', 5);
+nncv = NNClassifier_CrossValidation('D', d, 'KFOLDS', 5);
 nncv.get('TRAIN');
 
 %% Evaluate the performance
 confusion_matrix = nncv.get('C_MATRIX');
-avg_auc = nncv.get('AVG_AUC');
-avg_macro_auc = nncv.get('AVG_MACRO_AUC');
+av_auc = nncv.get('AV_AUC');
+av_macro_auc = nncv.get('AV_MACRO_AUC');
