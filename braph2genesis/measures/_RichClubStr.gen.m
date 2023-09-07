@@ -90,7 +90,7 @@ for li = 1:1:L
         in_strength = StrengthIn('G', g).get('M');        
         out_strength = StrengthOut('G', g).get('M');       
 
-        st = (in_strength{li} + out_strength{li})/2;
+        st = (in_strength{li}' + out_strength{li})/2;
     end
 
     rich_club_strength_layer = zeros(N(1), 1, length(s_levels));
@@ -201,11 +201,11 @@ A22 = [
     ];
 A = {A11 A22};
 
-w_richness_l1(:, 1, 1) = [1.6 1.6 2 0]';
-w_richness_l1(:, 1, 2) = [0 0 0 0]';
+w_richness_l1(:, 1, 1) = [2 2 2 0]';
+w_richness_l1(:, 1, 2) = [1 1 0 0]';
 
-w_richness_l2(:, 1, 1) = [1.6 1.6 2 0]';
-w_richness_l2(:, 1, 2) = [0 1 1 0]';
+w_richness_l2(:, 1, 1) = [2.1 3 2.7 1.8]';
+w_richness_l2(:, 1, 2) = [2 2 2 0]';
 
 known_rich_club_strength = {
     w_richness_l1
