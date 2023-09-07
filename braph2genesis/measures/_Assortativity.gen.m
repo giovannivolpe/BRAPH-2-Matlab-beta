@@ -55,7 +55,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphBU' 'GraphWU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexBU' 'MultiplexWU' 'MultiplexBUD' 'MultiplexBUT'}
+{'GraphBU' 'GraphWU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexBU' 'MultiplexWU' 'MultiplexBUD' 'MultiplexBUT' 'MultilayerWU'}
 
 %%% ¡prop!
 M (result, cell) is the cell containing the assortativity value.
@@ -112,17 +112,17 @@ B_WU = [
     0 .2 .1 .1 .2;
     .1 0 0 .2 .1];
 
-assortativity_BU = {(37/6-(15/6)^2)/(39/6-(15/6)^2)};
+assortativity_WU = (14.222222/6-(9.333333/6)^2)/(16.111111/6-(9.333333/6)^2);
 
-g = GraphBU('B', B_WU);
+g = GraphWU('B', B_WU);
 
 m_outside_g = Assortativity('G', g).get('M');
-assert(round(m_outside_g{1}, 2) == round(assortativity_BU{1},2), ...
+assert(round(m_outside_g{1},3) == round(assortativity_WU,3), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'Assortativity').get('M');
-assert(round(m_outside_g{1}, 2) == round(assortativity_BU{1},2), ...
+assert(round(m_inside_g{1}, 3) == round(assortativity_WU,3), ...
     [BRAPH2.STR ':Assortativity:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 

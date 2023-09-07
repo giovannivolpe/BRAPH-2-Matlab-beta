@@ -99,7 +99,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWD' 'MultiplexBD'};
+{'MultiplexWD' 'MultiplexBD' 'MultilayerBD' 'OrdMlBD'};
 
 %%% ¡prop!
 M (result, cell) is the overlapping in-degree.
@@ -179,6 +179,74 @@ B = {B11 B22};
 known_overlapping_in_degree = {[2, 3, 1]'};
 
 g = MultiplexWD('B', B);
+m_outside_g = OverlappingDgrIn('G', g);
+assert(isequal(m_outside_g.get('M'), known_overlapping_in_degree), ...
+    [BRAPH2.STR ':OverlappingDgrIn:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'OverlappingDgrIn');
+assert(isequal(m_inside_g.get('M'), known_overlapping_in_degree), ...
+    [BRAPH2.STR ':OverlappingDgrIn:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultilayerBD
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   1   0
+    1   0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   1
+    0   0   0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B21 = B12';
+B = {B11 B12;
+     B21 B22};
+
+known_overlapping_in_degree = {[3, 2, 1]'};
+
+g = MultilayerBD('B', B);
+m_outside_g = OverlappingDgrIn('G', g);
+assert(isequal(m_outside_g.get('M'), known_overlapping_in_degree), ...
+    [BRAPH2.STR ':OverlappingDgrIn:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'OverlappingDgrIn');
+assert(isequal(m_inside_g.get('M'), known_overlapping_in_degree), ...
+    [BRAPH2.STR ':OverlappingDgrIn:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMlBD
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   1   0
+    1   0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   1
+    0   0   0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B21 = B12';
+B = {B11 B12;
+     B21 B22};
+
+known_overlapping_in_degree = {[3, 2, 1]'};
+
+g = OrdMlBD('B', B);
 m_outside_g = OverlappingDgrIn('G', g);
 assert(isequal(m_outside_g.get('M'), known_overlapping_in_degree), ...
     [BRAPH2.STR ':OverlappingDgrIn:' BRAPH2.FAIL_TEST], ...

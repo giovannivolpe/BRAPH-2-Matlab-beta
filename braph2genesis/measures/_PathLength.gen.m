@@ -53,7 +53,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphWU' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT'}
+{'GraphWU' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'MultilayerWU' 'OrdMlWU'}
 
 %%% ¡prop!
 M (result, cell) is the cell containing the pathlength.
@@ -370,6 +370,96 @@ known_path_length = { ...
     };
 
 g = MultiplexBUT('B', {B B B}, 'THRESHOLDS', thresholds);
+
+m_outside_g = PathLength('G', g);
+pl_answer = cellfun(@(x) round(x, 2), m_outside_g.get('M'), 'UniformOutput', false);
+assert(isequal(pl_answer, known_path_length), ...
+    [BRAPH2.STR ':PathLength:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'PathLength');
+pl_answer = cellfun(@(x) round(x, 2), m_inside_g.get('M'), 'UniformOutput', false);
+assert(isequal(pl_answer, known_path_length), ...
+    [BRAPH2.STR ':PathLength:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultilayerWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .1  0   0
+    .1  0   0  0
+    0   0  0   .1
+    0   0   .1  0
+    ];
+
+B22 = [
+    0   .1  0   0
+    .1  0   0  0
+    0   0  0   .1
+    0   0   .1  0
+    ];
+
+B = {B11  B22};
+B12 = rand(size(B11, 1),size(B22, 2));
+B21 = B12';
+B= {B11 B12;
+    B21 B22};
+
+known_path_length = {
+    [30 30 30 30]'
+    [30 30 30 30]'
+    };
+
+g = MultilayerWU('B', B);
+
+m_outside_g = PathLength('G', g);
+pl_answer = cellfun(@(x) round(x, 2), m_outside_g.get('M'), 'UniformOutput', false);
+assert(isequal(pl_answer, known_path_length), ...
+    [BRAPH2.STR ':PathLength:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'PathLength');
+pl_answer = cellfun(@(x) round(x, 2), m_inside_g.get('M'), 'UniformOutput', false);
+assert(isequal(pl_answer, known_path_length), ...
+    [BRAPH2.STR ':PathLength:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMlWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .1  0   0
+    .1  0   0  0
+    0   0  0   .1
+    0   0   .1  0
+    ];
+
+B22 = [
+    0   .1  0   0
+    .1  0   0  0
+    0   0  0   .1
+    0   0   .1  0
+    ];
+
+B = {B11  B22};
+B12 = rand(size(B11, 1),size(B22, 2));
+B21 = B12';
+B= {B11 B12;
+    B21 B22};
+
+known_path_length = {
+    [30 30 30 30]'
+    [30 30 30 30]'
+    };
+
+g = OrdMlWU('B', B);
 
 m_outside_g = PathLength('G', g);
 pl_answer = cellfun(@(x) round(x, 2), m_outside_g.get('M'), 'UniformOutput', false);

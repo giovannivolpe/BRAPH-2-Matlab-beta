@@ -53,7 +53,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphWU' 'MultiplexWU' 'OrdMxWU'}
+{'GraphWU' 'MultiplexWU' 'OrdMxWU' 'MultilayerWU' 'OrdMlWU'}
 
 %%% ¡prop!
 M (result, cell) is the average strength.
@@ -158,6 +158,110 @@ known_strength = {
     };
 
 g = OrdMxWU('B', B);
+
+m_outside_g = StrengthAv('G', g);
+assert(isequal(m_outside_g.get('M'), known_strength), ...
+    [BRAPH2.STR ':StrengthAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'StrengthAv');
+assert(isequal(m_inside_g.get('M'), known_strength), ...
+    [BRAPH2.STR ':StrengthAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultilayerWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .2   .7
+    .2   0   .1
+    .7  .1   0
+    ];
+
+B22 = [    
+    0   .2   .7 .5
+    .2   0   .1 .5
+    .7  .1   0  .5
+    .5  .5  .5  0
+    ];
+B33 = [    
+    0   .2   .9 .5
+    .2   0   .1 .5
+    .9  .1   0  .2
+    .5  .5  .2  0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B13 = rand(size(B11,1),size(B33,2));
+B23 = rand(size(B22,1),size(B33,2));
+B21 = B12';
+B31 = B13';
+B32 = B23';
+B= {B11 B12 B13;
+    B21 B22 B23;
+    B31 B32 B33};
+
+known_strength = {
+    mean([0.9 0.3 0.8]')
+    mean([1.4 0.8 1.3 1.5]')
+    mean([1.6 0.8 1.2 1.2]')
+    };
+
+g = MultilayerWU('B', B);
+
+m_outside_g = StrengthAv('G', g);
+assert(isequal(m_outside_g.get('M'), known_strength), ...
+    [BRAPH2.STR ':StrengthAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'StrengthAv');
+assert(isequal(m_inside_g.get('M'), known_strength), ...
+    [BRAPH2.STR ':StrengthAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMlWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .2   .7
+    .2   0   .1
+    .7  .1   0
+    ];
+
+B22 = [    
+    0   .2   .7 .5
+    .2   0   .1 .5
+    .7  .1   0  .5
+    .5  .5  .5  0
+    ];
+B33 = [    
+    0   .2   .9 .5
+    .2   0   .1 .5
+    .9  .1   0  .2
+    .5  .5  .2  0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B13 = rand(size(B11,1),size(B33,2));
+B23 = rand(size(B22,1),size(B33,2));
+B21 = B12';
+B31 = B13';
+B32 = B23';
+B= {B11 B12 B13;
+    B21 B22 B23;
+    B31 B32 B33};
+
+known_strength = {
+    mean([0.9 0.3 0.8]')
+    mean([1.4 0.8 1.3 1.5]')
+    mean([1.6 0.8 1.2 1.2]')
+    };
+
+g = OrdMlWU('B', B);
 
 m_outside_g = StrengthAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_strength), ...

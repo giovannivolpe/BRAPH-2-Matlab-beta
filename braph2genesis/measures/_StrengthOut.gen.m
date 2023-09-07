@@ -53,7 +53,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphWD' 'MultiplexWD'}
+{'GraphWD' 'MultiplexWD' 'OrdMxWD' 'MultilayerWD' 'OrdMlWD'}
 
 %%% ¡prop!
 M (result, cell) is the out-strength.
@@ -86,18 +86,17 @@ B = [
     .2 0  0
     1  0  0
     ];
-known_strength = {[1.2 0.2 1]};
+known_strength = {[1.2 0.2 1]'};
 g = GraphWD('B', B);
-m_outside_g = StrengthIn('G', g);
+m_outside_g = StrengthOut('G', g);
 assert(isequal(m_outside_g.get('M'), known_strength), ...
-    [BRAPH2.STR ':StrengthIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':StrengthOut:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'StrengthIn');
+m_inside_g = g.get('MEASURE', 'StrengthOut');
 assert(isequal(m_inside_g.get('M'), known_strength), ...
-    [BRAPH2.STR ':StrengthIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':StrengthOut:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
-
 
 %%% ¡test!
 %%%% ¡name!
@@ -118,17 +117,159 @@ B22 = [
 B = {B11 B22};
 
 known_strength = {
-                 [1.2 .2  1]
-                 [1   1.4 .4]
+                 [1.2 .2  1]'
+                 [1   1.4 .4]'
                  };
                                 
 g = MultiplexWD('B', B);
-m_outside_g = StrengthIn('G', g);
+m_outside_g = StrengthOut('G', g);
 assert(isequal(m_outside_g.get('M'), known_strength), ...
-    [BRAPH2.STR ':StrengthIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':StrengthOut:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'StrengthIn');
+m_inside_g = g.get('MEASURE', 'StrengthOut');
 assert(isequal(m_inside_g.get('M'), known_strength), ...
-    [BRAPH2.STR ':StrengthIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':StrengthOut:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMxWD
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .3  1
+    .2  0   0
+    1   0   0
+    ];
+B22 = [
+    0   0.3   0
+    1   0   .3
+    0   .3  0
+    ];
+B= {B11 B22};
+
+known_strength = {
+    [1.3 .2 1]'
+    [0.3 1.3 .3]'
+    };
+
+g = OrdMxWD('B', B);
+
+m_outside_g = StrengthOut('G', g);
+assert(isequal(m_outside_g.get('M'), known_strength), ...
+    [BRAPH2.STR ':StrengthOut:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'StrengthOut');
+assert(isequal(m_inside_g.get('M'), known_strength), ...
+    [BRAPH2.STR ':StrengthOut:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultilayerWD
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   0.2   .7
+    .2   0   .1
+    .7  .1   0
+    ];
+
+B22 = [    
+    0   .2   .7 .5
+    .2   0   .1 .5
+    .7  .1   0  .5
+    .5  .5  .5  0
+    ];
+B33 = [    
+    0   .2   .9 .5
+    .2   0   .1 .5
+    .9  .1   0  .2
+    .5  .5  .2  0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B13 = rand(size(B11,1),size(B33,2));
+B23 = rand(size(B22,1),size(B33,2));
+B21 = B12';
+B31 = B13';
+B32 = B23';
+B= {B11 B12 B13;
+    B21 B22 B23;
+    B31 B32 B33};
+
+known_strength = {
+    [0.9 0.3 0.8]'
+    [1.4 0.8 1.3 1.5]'
+    [1.6 0.8 1.2 1.2]'
+    };
+
+g = MultilayerWD('B', B);
+
+m_outside_g = StrengthOut('G', g);
+pl_answer = cellfun(@(x) round(x, 3), m_outside_g.get('M'), 'UniformOutput', false);;
+assert(isequal(pl_answer, known_strength), ...
+    [BRAPH2.STR ':StrengthOut:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'StrengthOut');
+pl_answer = cellfun(@(x) round(x, 3), m_inside_g.get('M'), 'UniformOutput', false);
+assert(isequal(pl_answer, known_strength), ...
+    [BRAPH2.STR ':StrengthOut:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMlWD
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   0.2   .7
+    .2   0   .1
+    .7  .1   0
+    ];
+
+B22 = [    
+    0   .2   .7 .5
+    .2   0   .1 .5
+    .7  .1   0  .5
+    .5  .5  .5  0
+    ];
+B33 = [    
+     0  .2   .9 .5
+    .2   0   .1 .5
+    .9  .1   0  .2
+    .5  .5  .2  0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B13 = rand(size(B11,1),size(B33,2));
+B23 = rand(size(B22,1),size(B33,2));
+B21 = B12';
+B31 = B13';
+B32 = B23';
+B= {B11 B12 B13;
+    B21 B22 B23;
+    B31 B32 B33};
+
+known_strength = {
+    [0.9 0.3 0.8]'
+    [1.4 0.8 1.3 1.5]'
+    [1.6 0.8 1.2 1.2]'
+    };
+
+g = OrdMlWD('B', B);
+m_outside_g = StrengthOut('G', g);
+pl_answer = cellfun(@(x) round(x, 3), m_outside_g.get('M'), 'UniformOutput', false);
+assert(isequal(pl_answer, known_strength), ...
+    [BRAPH2.STR ':StrengthOut:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'StrengthOut');
+pl_answer = cellfun(@(x) round(x, 3), m_inside_g.get('M'), 'UniformOutput', false);
+assert(isequal(pl_answer, known_strength), ...
+    [BRAPH2.STR ':StrengthOut:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
