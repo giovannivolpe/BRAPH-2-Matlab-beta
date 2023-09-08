@@ -346,7 +346,6 @@ Randomize Rules
 %%%% ¡probability!
 .01
 %%%% ¡code!
-<<<<<<< HEAD
 B1 = randn(10);
 B = {B1, B1, B1};
 thresholds = [0 .1 .2 .3 .4];

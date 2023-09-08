@@ -347,7 +347,6 @@ Randomize Rules
 %%%% ¡probability!
 .01
 %%%% ¡code!
-<<<<<<< HEAD
 B1 = randn(10);
 B = {B1, B1, B1};
 densities = [0 55 100];
