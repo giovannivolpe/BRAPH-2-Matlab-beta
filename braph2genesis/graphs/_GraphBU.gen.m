@@ -160,7 +160,6 @@ B = semipositivize(B, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); %#ok<
 B = binarize(B); %#ok<PROPLC> % enforces binary adjacency matrix, equivalent to binarize(B, 'threshold', 0, 'bins', [-1:.001:1])
 
 A = {B}; %#ok<PROPLC>
-
 if g.get('RANDOMIZE')
     random_A = g.get('RANDOMIZATION', A);
     A = {random_A};
@@ -454,7 +453,7 @@ g.set('ATTEMPTSPEREDGE', 4);
 
 A = g.get('A');
 
-assert(isequal(size(A{1}), size(B)), ... % check equal size
+assert(isequal(size(A{1}), size(B)), ...
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
 
@@ -485,7 +484,7 @@ d2 = g2.get('MEASURE', 'Degree');
 assert(isequal(d1.get('M'), d2.get('M')), ...
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
-
+    
 assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same number of nodes
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
