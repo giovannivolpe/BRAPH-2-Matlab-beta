@@ -172,6 +172,7 @@ B = semipositivize(B, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); %#ok<
 B = standardize(B, 'StandardizeRule', g.get('STANDARDIZE_RULE')); %#ok<PROPLC> % ensures all weights are between 0 and 1
 
 A = {B}; %#ok<PROPLC>
+
 if g.get('GRAPH_TYPE') ~= 1
 
 else
