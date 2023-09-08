@@ -119,5 +119,5 @@ nncv.get('TRAIN');
 
 %% Evaluate the performance
 confusion_matrix = nncv.get('C_MATRIX');
-avg_auc = nncv.get('AVG_AUC');
-avg_macro_auc = nncv.get('AVG_MACRO_AUC');
+av_auc = nncv.get('AV_AUC');
+av_macro_auc = nncv.get('AV_MACRO_AUC');

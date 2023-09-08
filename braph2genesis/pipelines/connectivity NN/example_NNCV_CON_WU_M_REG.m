@@ -56,8 +56,8 @@ nncv = NNRegressor_CrossValidation('D', d, 'KFOLD', 5);
 nncv.get('TRAIN');
 
 %% Evaluate the performance
-avg_corr_coeff = nncv.get('AV_CORR');
-avg_coeff_determination = nncv.get('AV_DET');
-avg_mae = nncv.get('AV_MAE');
-avg_mse = nncv.get('AV_MSE');
-avg_rmse = nncv.get('AV_RMSE');
+av_corr_coeff = nncv.get('AV_CORR');
+av_coeff_determination = nncv.get('AV_DET');
+av_mae = nncv.get('AV_MAE');
+av_mse = nncv.get('AV_MSE');
+av_rmse = nncv.get('AV_RMSE');
