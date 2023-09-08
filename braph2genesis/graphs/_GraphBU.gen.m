@@ -52,6 +52,12 @@ RANDOMIZATION ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
+GraphBU.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
 GraphBU.RANDOMIZATION
 %%%% ¡title!
 RANDOMIZATION VALUE

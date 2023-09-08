@@ -222,13 +222,13 @@ for i = 1:1:L
         end
     end
 end
+
 if g.get('GRAPH_TYPE') ~= 6
 
 else
     if g.get('RANDOMIZE')
         A = g.get('RANDOMIZATION', A);
     end
-
 end
 value = A;
 
