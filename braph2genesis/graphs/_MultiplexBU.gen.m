@@ -197,12 +197,6 @@ for i = 1:1:L
     M = semipositivize(M, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
     M = binarize(M); % enforces binary adjacency matrix, equivalent to binarize(M, 'threshold', 0, 'bins', [-1:.001:1])
     A(i, i) = {M};
-    if g.get('RANDOMIZE')
-        tmp_g = GraphBU();
-        tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
-        random_A = tmp_g.get('RANDOMIZATION', M);
-        A(i, i) = {random_A};
-    end
     if ~isempty(A{1, 1})
         for j = i+1:1:L
             A(i, j) = {eye(length(A{1, 1}))};

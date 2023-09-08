@@ -201,13 +201,6 @@ for i = 1:1:L
     M = semipositivize(M, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
     M = standardize(M, 'StandardizeRule', g.get('STANDARDIZE_RULE')); % enforces binary adjacency matrix
     A(i, i) = {M};
-    if g.get('RANDOMIZE')
-        tmp_g = GraphWD();
-        tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
-        tmp_g.set('NUMBEROFWEIGHTS', g.get('NUMBEROFWEIGHTS'));
-        random_A = tmp_g.get('RANDOMIZATION', M);
-        A(i, i) = {random_A};
-    end
     if ~isempty(A{1, 1})
         for j = i+1:1:L
             A(i, j) = {eye(length(A{1, 1}))};
