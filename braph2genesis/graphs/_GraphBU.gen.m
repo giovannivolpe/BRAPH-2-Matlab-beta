@@ -503,3 +503,8 @@ assert(isequal(0, h), ... % check same degree distribution
 =======
     'GraphBU is not constructing well.')
 >>>>>>> c467e065 (Update _GraphBU.gen.m)
+=======
+assert(isequal(size(A), size(B)), ...
+    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
+    'GraphBU Randomize is not functioning well.')
+>>>>>>> f6bef332 (Update _GraphBU.gen.m)
