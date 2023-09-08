@@ -136,3 +136,79 @@ else
     predictions = {net.predict(cell2mat(inputs))};
 end
 value = predictions;
+
+%%% ¡prop!
+CELL_FLATTEN (query, rvector) flattens a cell array into a single vector
+%%%% ¡calculate!
+% flattened_vector = nn.get('FLATTEN', cell_array) returns a flattened 
+%  vector within the input cell (cell_array)
+if isempty(varargin)
+    value = [];
+    return
+end
+
+cell_array = varargin{1};
+flattened_vector = [];
+for i = 1:numel(cell_array)
+    cell_data = cell_array{i};
+    if iscell(cell_data)
+        % Flatten nested cell arrays recursively
+        nested_vector = nn.get('CELL_FLATTEN', cell_data);
+        flattened_vector = [flattened_vector; nested_vector];
+    else
+        % Append numeric or other data to the vector
+        flattened_vector = [flattened_vector; cell_data(:)];
+    end
+end
+
+value = flattened_vector;
+
+%%% ¡prop!
+MAP_TO_CELL (query, cell)  maps a single vector back to the original cell array structure.
+%%%% ¡calculate!
+% mapped_cell = nn.get('MAP_TO_CELL', flattened_vector, cell_array_temp) maps
+%  the flattened vector back to the original cell array structure (cell_array).
+if isempty(varargin) || length(varargin) < 2
+    value = {};
+    return
+end
+
+flattened_vector = varargin{1}
+cell_array_temp = varargin{2};
+mapped_cell_array = cell_array_temp;
+index = 1;
+for i = 1:numel(cell_array_temp)
+    cell_data = cell_array_temp{i};
+    if iscell(cell_data)
+        % Map the vector to nested cell arrays recursively
+        nested_vector = nn.get('MAP_TO_CELL', flattened_vector(index:end), cell_data);
+        mapped_cell_array{i} = nested_vector;
+        index = index + sum(cell2mat(cellfun(@(x) numel(x), nested_vector, 'Uniformoutput', false)));
+    else
+        % Assign elements from the vector to cells
+        numElements = numel(cell_data);
+        mapped_cell_array{i} = reshape(flattened_vector(index:index + numElements-1), size(cell_data));
+        index = index + numElements;
+    end
+end
+
+value = mapped_cell_array;
+
+%% ¡tests!
+
+%%% ¡test!
+%%%% ¡name!
+Example usage of flattening a cell array to a vector and map the flattened vector back to the cell array structure
+%%%% ¡code!
+cell_array = {{[1 2] [3 4]}, {4 50.8667}, {rand(90)}};
+
+% Flatten the cell array into a single vector
+flattened_vector = nn.get('CELL_FLATTEN', value);
+
+% Map the flattened vector back to the original cell array structure
+mapped_cell_array = nn.get('MAP_TO_CELL', flattened_vector, value);
+
+assert(isequal(cell_array, mapped_cell_array), ...
+    [BRAPH2.STR ':NNBase:' BRAPH2.FAIL_TEST], ...
+    'NNBase does not flatten and map back a cell array correctly.' ...
+    )

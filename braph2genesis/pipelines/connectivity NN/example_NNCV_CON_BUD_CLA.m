@@ -116,7 +116,7 @@ d3 = NNDataset( ...
 d = NNDatasetCombine('D_LIST', {d1, d2, d3}).get('D');
 
 %% Create a classifier cross-validation
-nncv = NNClassifier_CrossValidation('D', d, 'KFOLD', 5);
+nncv = NNClassifier_CrossValidation('D', d, 'KFOLDS', 5);
 nncv.get('TRAIN');
 
 %% Evaluate the performance

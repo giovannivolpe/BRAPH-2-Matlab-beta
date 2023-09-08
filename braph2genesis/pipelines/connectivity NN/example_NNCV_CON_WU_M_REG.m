@@ -52,7 +52,7 @@ d = NNDataset( ...
     );
 
 %% Create a regressor cross-validation
-nncv = NNRegressor_CrossValidation('D', d, 'KFOLD', 5);
+nncv = NNRegressor_CrossValidation('D', d, 'KFOLDS', 5);
 nncv.get('TRAIN');
 
 %% Evaluate the performance

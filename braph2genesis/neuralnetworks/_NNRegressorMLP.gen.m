@@ -66,17 +66,13 @@ inputs_group = d.get('INPUTS');
 if isempty(inputs_group)
     value = {};
 else
-    nn_inputs_group = [];
+    flattened_inputs_group = [];
     for i = 1:1:length(inputs_group)
         inputs_individual = inputs_group{i};
-        nn_inputs_individual = [];
-        for j = 1:1:length(inputs_individual)
-            input_individual = cell2mat(inputs_individual(j));
-            nn_inputs_individual = [nn_inputs_individual; input_individual(:)];
-        end
-        nn_inputs_group = [nn_inputs_group; nn_inputs_individual(:)'];
+        flattened_inputs_individual = nn.get('CELL_FLATTEN', inputs_individual);
+        flattened_inputs_group = [flattened_inputs_group; flattened_inputs_individual'];
     end
-    value = {nn_inputs_group};
+    value = {flattened_inputs_group};
 end
 
 %%% ¡prop!
