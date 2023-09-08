@@ -501,13 +501,7 @@ Randomize Rules
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B1 = [
--2 -1 0 0 2
--1 0 1 0 -2
-0 1 2 -2 -1
-1 0 -2 0 0
-0 -2 0 0 1
-];
+B1 = randn(10);
 B = {B1, B1, B1};
 
 g = MultiplexBU('B', B);

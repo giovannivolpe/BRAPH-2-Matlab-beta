@@ -397,7 +397,7 @@ Randomize Rules
 .01
 %%%% ¡code!
 B1 = 10 * rand(randi(10) + 5) - 5; % random number in U(-5, 5)
-B = {B1, B1, B1}
+B = {B1, B1, B1};
 g = OrdMxWU('B', B); 
 
 g.set('RANDOMIZE', true);

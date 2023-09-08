@@ -177,7 +177,8 @@ if g.get('GRAPH_TYPE') ~= 1
 
 else
     if g.get('RANDOMIZE')
-        A = g.get('RANDOMIZATION', A);
+        random_A = g.get('RANDOMIZATION', A);
+        A = {random_A};
     end
 end
 value = A;

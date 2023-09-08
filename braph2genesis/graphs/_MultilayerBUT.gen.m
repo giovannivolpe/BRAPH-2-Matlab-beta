@@ -408,12 +408,7 @@ Randomize Rules
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B11 = [
-    0   1   0  .2
-    1   0   .3  .1
-    0  .3   0   0
-    .2  .1   0   0
-    ];
+B11 = randn(10);
 
 B12 = rand(size(B11,1),size(B11,2));
 

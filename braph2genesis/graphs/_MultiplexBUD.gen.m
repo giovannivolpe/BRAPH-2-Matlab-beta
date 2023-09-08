@@ -347,13 +347,7 @@ Randomize Rules
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B1 = [
-     0 .1 .2 .3 .4
-    .1  0 .5 .6 .7
-    .2 .5  0 .8 .9
-    .3 .6 .8  0  1
-    .4 .7 .9  1  0
-    ];
+B1 = randn(10);
 B = {B1, B1, B1};
 densities = [0 55 100];
 g = MultiplexBUD('B', B, 'DENSITIES', [0 55 100]);
