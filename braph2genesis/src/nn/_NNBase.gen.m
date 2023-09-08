@@ -138,7 +138,7 @@ end
 value = predictions;
 
 %%% ¡prop!
-CELL_FLATTEN (query, rvector) flattens a cell array into a single vector
+CELL_FLATTEN (query, rvector) flattens a cell array into a single vector.
 %%%% ¡calculate!
 % flattened_vector = nn.get('FLATTEN', cell_array) returns a flattened 
 %  vector within the input cell (cell_array)
