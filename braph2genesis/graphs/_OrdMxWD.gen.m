@@ -505,7 +505,7 @@ for i = 1:length(A2)
             [BRAPH2.STR ':OrdMxWD:' BRAPH2.FAIL_TEST], ...
             'OrdMxWD Randomize is not functioning well.')
     end
-    
+
     assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
         [BRAPH2.STR ':OrdMxWD:' BRAPH2.FAIL_TEST], ...
         'OrdMxWD Randomize is not functioning well.')
