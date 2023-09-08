@@ -5,8 +5,8 @@
    version="1.1"
    id="svg2"
    width="177.8mm"
-   height="122mm"
-   viewBox="0 0 672.00002 461.10235"
+   height="115mm"
+   viewBox="0 0 672.00002 434.64566"
    sodipodi:docname="fig01_big.svg"
    inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
    inkscape:export-filename="/Users/anna.canal.garcia/Documents/PhD/BRAPH 2.0/Tutorials/New/fig01_7inchess.jpg"
@@ -61,6 +61,17 @@
          x="-811.94403"
          y="-346.85278" />
     </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath1531">
+      <rect
+         style="fill:#f47216;fill-opacity:0.6;stroke:#f47216;stroke-width:1.80604;stroke-miterlimit:22.9256;stroke-dasharray:3.61209, 1.80604;stop-color:#000000"
+         id="rect1533"
+         width="659.37598"
+         height="422.99716"
+         x="-811.97339"
+         y="-346.88214" />
+    </clipPath>
   </defs>
   <sodipodi:namedview
      id="namedview4"
@@ -74,9 +85,9 @@
      inkscape:pageshadow="0"
      showgrid="false"
      units="mm"
-     inkscape:zoom="1.1256639"
-     inkscape:cx="115.4874"
-     inkscape:cy="401.98499"
+     inkscape:zoom="1.2889641"
+     inkscape:cx="188.52348"
+     inkscape:cy="227.70222"
      inkscape:window-width="2434"
      inkscape:window-height="1295"
      inkscape:window-x="46"
@@ -90,10 +101,10 @@
      inkscape:label="ink_ext_XXXXXX"
      transform="matrix(1.3333333,0,0,-1.3333333,0,388)">
     <rect
-       style="fill:#ffffff;fill-opacity:1;stroke-width:2.10893;stroke-miterlimit:22.9256;stroke-dasharray:4.21785, 2.10893;stop-color:#000000"
+       style="fill:#ffffff;fill-opacity:1;stroke-width:2.04753;stroke-miterlimit:22.9256;stroke-dasharray:4.09506, 2.04753;stop-color:#000000"
        id="rect19947"
        width="504.00003"
-       height="345.82678"
+       height="325.98425"
        x="3.5604003e-10"
        y="-291"
        transform="scale(1,-1)"
@@ -110,7 +121,7 @@
        x="-811.84869"
        y="-358.43167"
        transform="matrix(0.76007149,0,0,-0.76007149,618.53517,25.839067)"
-       clip-path="url(#clipPath1313)"
+       clip-path="url(#clipPath1531)"
        inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/general/tut_gr_con_mp/vector files/fig01.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
