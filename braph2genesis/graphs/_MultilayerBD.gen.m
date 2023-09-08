@@ -276,6 +276,7 @@ if isempty(varargin)
 end
 
 A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 
 for i = 1:length(A)
     tmp_a = A{i,i};
@@ -396,7 +397,7 @@ for i = 1:length(A2)
             [BRAPH2.STR ':MultilayerBD:' BRAPH2.FAIL_TEST], ...
             'MultilayerBD Randomize is not functioning well.')
     end
-    
+
     assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
         [BRAPH2.STR ':MultilayerBD:' BRAPH2.FAIL_TEST], ...
         'MultilayerBD Randomize is not functioning well.')
