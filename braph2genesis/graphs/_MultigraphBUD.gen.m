@@ -81,6 +81,7 @@ MultigraphBUD.RANDOM_SEED
 %%%% ¡title!
 RANDOMIZATION SEED
 
+
 %%% ¡prop!
 %%%% ¡id!
 MultigraphBUD.ATTEMPTSPEREDGE
@@ -206,7 +207,6 @@ if ~isempty(cell2mat(A_WU))
     for i = 1:1:length(densities)
         density = densities(i);
         A{i, i} = dediagonalize(binarize(cell2mat(A_WU), 'density', density));
-        
     end
 end
 if g.get('RANDOMIZE')

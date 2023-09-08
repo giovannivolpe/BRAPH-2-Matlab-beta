@@ -205,7 +205,6 @@ A = cell(length(thresholds));
 for i = 1:1:length(thresholds)
     threshold = thresholds(i);
     tmp_A = dediagonalize(binarize(cell2mat(A_WU), 'threshold', threshold));
-
     A{i, i} = tmp_A;
 end
 if g.get('RANDOMIZE')
@@ -409,7 +408,6 @@ assert(isequal( ...
     ]), ...
     [BRAPH2.STR ':MultigraphBUT:' BRAPH2.FAIL_TEST], ...
     'MultigraphBUT is not constructing well.')
-
 
 %%% ¡test!
 %%%% ¡name!
