@@ -250,6 +250,9 @@ if L > 0 && ~isempty(cell2mat(A_WU))
         end
     end
 end
+if g.get('RANDOMIZE')
+    A = g.get('RANDOMIZATION', A);
+end
 value = A;
 
 %%%% ¡gui!
@@ -444,7 +447,7 @@ for i = 1:length(A2)
             [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
             'MultilayerBUT Randomize is not functioning well.')
     end
-   
+
     assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
         [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
         'MultilayerBUT Randomize is not functioning well.')

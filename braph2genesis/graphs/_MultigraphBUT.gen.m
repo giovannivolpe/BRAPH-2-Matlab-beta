@@ -207,6 +207,9 @@ for i = 1:1:length(thresholds)
     tmp_A = dediagonalize(binarize(cell2mat(A_WU), 'threshold', threshold));
     A{i, i} = tmp_A;
 end
+if g.get('RANDOMIZE')
+    A = g.get('RANDOMIZATION', A);
+end
 value = A;
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', MultigraphBUT.A, ...
@@ -448,7 +451,7 @@ for i = 1:length(A2)
             [BRAPH2.STR ':MultigraphBUT:' BRAPH2.FAIL_TEST], ...
             'MultigraphBUT Randomize is not functioning well.')
     end
-    
+
     assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
         [BRAPH2.STR ':MultigraphBUT:' BRAPH2.FAIL_TEST], ...
         'MultigraphBUT Randomize is not functioning well.')

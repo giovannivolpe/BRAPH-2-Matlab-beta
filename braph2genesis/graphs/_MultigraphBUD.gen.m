@@ -208,6 +208,9 @@ if ~isempty(cell2mat(A_WU))
         A{i, i} = dediagonalize(binarize(cell2mat(A_WU), 'density', density));
     end
 end
+if g.get('RANDOMIZE')
+    A = g.get('RANDOMIZATION', A);
+end
 value = A;
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', MultigraphBUD.A, ...
