@@ -200,7 +200,6 @@ SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative ed
 %%%% ¡settings!
 {'zero', 'absolute'}
 
-
 %%% ¡prop!
 ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
 %%%% ¡default!
