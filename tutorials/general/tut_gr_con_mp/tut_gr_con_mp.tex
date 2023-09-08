@@ -2,7 +2,7 @@
 \usepackage{../braph2_tut}
 %\geometry{showframe} % display margins for debugging page layout
 
-\title{Group of Subjects with Connectivity Data}
+\title{Group of Subjects with Connectivity Multiplex Data}
 
 \begin{document}
 
@@ -10,7 +10,7 @@
 
 \begin{abstract}
 \noindent
-For \emph{connectivity data}, a connectivity matrix per subject is already available and can be directly imported into the relative analysis pipeline. For example, the connectivity matrix could correspond to white matter tracts obtained from dMRI or pre-calculated coactivations maps obtained from fMRI data.
+For \emph{connectivity multiplex data}, a connectivity matrix per subject is already available for different layers and can be directly imported into the relative analysis pipeline. For example, the connectivity matrix could correspond to white matter tracts obtained from dMRI or pre-calculated coactivations maps obtained from fMRI data.
 This Tutorial explains how to prepare and work with this kind of data.
 \end{abstract}
 
@@ -19,9 +19,9 @@ This Tutorial explains how to prepare and work with this kind of data.
 \fig{figure*}
 	{fig:01}
 	{\includegraphics{fig01.jpg}}
-	{GUI for a group of subjects with connectivity data}
+	{GUI for a group of subjects with connectivity multiplex data}
 	{
-	Full graphical user interface to upload a group of subjects with connectivity data in BRAPH~2.0. 
+	Full graphical user interface to upload a group of subjects with connectivity multiplex data in BRAPH~2.0. 
 	}
 
 \clearpage
@@ -36,40 +36,40 @@ In most analyses, the group GUI is the second step after you have selected a bra
 	}
 	{Upload the data of a group of subjects}
 	{
-	Steps to upload a group of subjects with connectivity data using the GUI and an example dataset: 
+	Steps to upload a group of subjects with connectivity multiplex data using the GUI and an example dataset: 
 	{\bf a} Open the group GUI.
-	{\bf b} Import a folder containing the connectivity matrices in XLS or TXT format (see below for details on their format).
-	To upload the test connectivity data:
-	{\bf c}-{\bf f} navigate to the BRAPH~2.0 folder \fn{pipelines}, {\bf d} \fn{connectivity},  {\bf e} \fn{Example data CON XLS}, and {\bf f} select the folder containing the connectivity matrices of one group \fn{CON\_Group\_1\_XLS}.
+	{\bf b} Import a folder that contains individual subject folders. Each of these subject folders contain one file per layer with the connectivity matrix in XLS or TXT format (see below for details on their format).
+	To upload the test connectivity multiplex data:
+	{\bf c}-{\bf f} navigate to the BRAPH~2.0 folder \fn{pipelines}, {\bf d} \fn{connectivity multiplex},  {\bf e} \fn{Example data CON\_MP XLS}, and {\bf f} select the folder containing the connectivity matrices of one group \fn{CON\_MP\_Group\_1\_XLS}.
 	}
-
-To open the GUI and upload the brain connectivity data, you can also do it from the command line (i.e., without opening an analysis pipeline) by typing the commands in \Coderef{cd:launch}. 
+ 
+To open the GUI and upload the brain connectivity multiplex data, you can also do it from the command line (i.e., without opening an analysis pipeline) by typing the commands in \Coderef{cd:launch}. 
 %
 \begin{lstlisting}[
 	label=cd:launch,
 	caption={
-		{\bf Code to launch the GUI to upload a group of subjects with connectivity data.}
-		This code can be used in the MatLab command line to launch the GUI to upload a group of subjects with connectivity data without having to open a pipeline.
+		{\bf Code to launch the GUI to upload a group of subjects with connectivity multiplex data.}
+		This code can be used in the MatLab command line to launch the GUI to upload a group of subjects with connectivity multiplex data without having to open a pipeline.
 	}
 ]
-gr = Group('SUB_CLASS', 'SubjectCON'); ¥\circled{1}\circlednote{1}{creates a new object \code{Group} with subjects with connectivity data, i.e., \code{SubjectCON}.}¥
+gr = Group('SUB_CLASS', 'SubjectCON_MP'); ¥\circled{1}\circlednote{1}{creates a new object \code{Group} with subjects with connectivity multiplex data, i.e., \code{SubjectCON$\_$MP}.}¥
 
 gui = GUIElement('PE', gr); ¥\circled{2}\circlednote{2}{creates a GUI to upload the group data.}¥
 gui.get('DRAW')¥\circled{3}\circlednote{3}{draws the GUI.}¥
 gui.get('SHOW') ¥\circled{4}\circlednote{4}{shows the GUI.}¥
 \end{lstlisting}
 
-Moreover, if you don't have the \fn{Example data CON XLS} folder inside \fn{connectivity}, then you can generate it by running the commands in \Coderef{cd:exampledata}.
+Moreover, if you don't have the \fn{Example data CON\_MP XLS} folder inside \fn{connectivity multiplex}, then you can generate it by running the commands in \Coderef{cd:exampledata}.
 
 \begin{lstlisting}[
 	label=cd:exampledata,
 	caption={
 		{\bf Code to generate the example data folder.}
-		This code can be used in the MatLab command line to generate the \fn{Example data CON XLS} folder to the \fn{connectivity} pipeline folder.
+		This code can be used in the MatLab command line to generate the \fn{Example data CON$\_$MP XLS} folder to the \fn{connectivity multiplex} pipeline folder.
 	}
 ]
-test_ImporterGroupSubjectCON_XLS ¥\circled{1}\circlednote{1}{generates the example connectivity XLS data folder.}¥
-test_ImporterGroupSubjectCON_TXT ¥\circled{2}\circlednote{2}{generates the example connectivity TXT data folder.}¥
+test_ImporterGroupSubjectCON_MP_XLS ¥\circled{1}\circlednote{1}{generates the example connectivity multiplex XLS data folder.}¥
+test_ImporterGroupSubjectCON_MP_TXT ¥\circled{2}\circlednote{2}{generates the example connectivity multiplex TXT data folder.}¥
 \end{lstlisting}
 
 \section{Visualize the Group Data}
@@ -83,13 +83,13 @@ After completing the steps described in \Figref{fig:02}, you can see the data (\
 	}
 	{Edit the group metadata}
 	{ 
-	{\bf a} The GUI of the group's connectivity data. 
+	{\bf a} The GUI of the group's connectivity multiplex data. 
 	{\bf b} The information you see on this GUI that can be changed. In this example, we have edited the ID, name, and notes of the group but can also change the subject's specific information.
 	}
 
 \section{Visualize Each Subject's Data}
 
-Finally, you can open each subject's connectivity matrix by selecting the subject, right click, and select ``Open selection'' (\Figref{fig:04}a), which shows the matrix values (\Figref{fig:04}b). Here, you can also change the subject's metadata (ID, label, notes), its variables of interest, and the values of its connectivity matrix.
+Finally, you can open each subject's connectivity multiplex data by selecting the subject, right click, and select ``Open selection'' (\Figref{fig:04}a), which shows the matrix values from layer 1 (\Figref{fig:04}b). Here, you can also change the subject's metadata (ID, label, notes), its variables of interest, and the values of its connectivity multiplex data.
 
 \fig{figure}
 	{fig:04}
@@ -97,14 +97,14 @@ Finally, you can open each subject's connectivity matrix by selecting the subjec
 	}
 	{Edit the individual subject data}
 	{
-	{\bf a}  Each subject's connectivity matrix can be opened by selecting the subject, right click, and select ``Open selection''
-	{\bf b} In this subject GUI, it is possible to view and edit the metadata of the subject (ID, label, notes), its variables of interest (in this case, age and sex), and the values of the connectivity matrix. 
+	{\bf a}  Each subject's connectivity multiplex data can be opened by selecting the subject, right click, and select ''Open selection''. 
+	{\bf b} In this subject GUI, it is possible to view and edit the metadata of the subject (ID, label, notes), its variables of interest (in this case, age and sex), and the connectivity multiplex data. 
 	}
 
 \clearpage
 \section{Preparation of the Data to be Imported}
 
-To be able to import connectivity data into BRAPH~2.0, you need to include the connectivity matrices for each subject in excel or text format inside a folder with the name of the group. Below you can see how your group directory should look like as well as an example of a brain connectivity matrix.
+To be able to import connectivity multiplex data into BRAPH~2.0, you create a folder with the name of your group, and within this group folder, you need to include the connectivity matrices for each subject and for each layer in a single file in excel or text format. Below you can see how your group directory should look like as well as an example of a brain connectivity matrix.
 
 \fig{figure*}
 	{fig:05}
@@ -115,8 +115,8 @@ To be able to import connectivity data into BRAPH~2.0, you need to include the c
 	{Data preparation}
 	{
 	The data should be organised in the following format:
-	{\bf a} The connectivity matrices from each subject should be included in one folder (for example, \fn{CON\_group\_1\_XLS}). 
-	{\bf b} Each matrix should contain the connectivity values between each pair of brain regions denoted by the rows and columns. In example, the (simulated) values in the matrix correspond to the fractional anisotropy (white matter integrity) of anatomical connections derived from diffusion weighted imaging.
+	{\bf a} The connectivity matrices from each subject and each layer should be included in one folder (for example, \fn{CON\_MP\_group\_1\_XLS}). 
+	{\bf b} Each matrix should contain the connectivity values between each pair of brain regions denoted by the rows and columns. In this example, the (simulated) values in the matrix correspond to the fractional anisotropy (white matter integrity) of anatomical connections derived from diffusion weighted imaging.
 	} 
 
 \section{Adding Covariates}
