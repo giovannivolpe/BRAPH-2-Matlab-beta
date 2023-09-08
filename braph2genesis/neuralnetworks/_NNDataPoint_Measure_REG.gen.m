@@ -5,7 +5,7 @@ NNDataPoint_Measure_REG < NNDataPoint (dp, measure regression data point)  is a 
 A data point for regression with graph measures (NNDataPoint_Measure_REG) 
  contains both input and target for neural network analysis.
 The input is the value of the graph measures (e.g. Degree, DegreeAv, and Distance), 
- extracted from the derived graph of the subject.
+ calculated from the derived graph of the subject.
 The target is obtained from the variables of interest of the subject.
 
 %%% ¡seealso!
@@ -20,7 +20,7 @@ NAME (constant, string) is the name of a data point for regression with graph me
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of a data point for regression with graph measures.
 %%%% ¡default!
-'A data point for regression with graph measures (NNDataPoint_Measure_REG) contains both input and target for neural network analysis. The input is the value of the graph measures (e.g. Degree, DegreeAv, and Distance), extracted from the derived graph of the subject. The target is obtained from the variables of interest of the subject.'
+'A data point for regression with graph measures (NNDataPoint_Measure_REG) contains both input and target for neural network analysis. The input is the value of the graph measures (e.g. Degree, DegreeAv, and Distance), calculated from the derived graph of the subject. The target is obtained from the variables of interest of the subject.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of a data point for regression with graph measures.
@@ -299,4 +299,4 @@ Example script for weighted undirected graph (GraphWU) using connectivity data
 if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
     test_NNDataPoint_CON_REG % create example files
 end
-example_NNCV_CON_GraphWU_Measure_Regression
+example_NNCV_CON_WU_REG_Measure

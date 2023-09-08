@@ -5,7 +5,7 @@ NNDataPoint_Measure_CLA < NNDataPoint (dp, measure classification data point) is
 A data point for classification with graph measures (NNDataPoint_Measure_CLA) 
  contains both input and target for neural network analysis.
 The input is the value of the graph measures (e.g. Degree, DegreeAv, and Distance), 
- extracted from the derived graph of the subject.
+ calculated from the derived graph of the subject.
 The target is obtained from the variables of interest of the subject.
 
 %%% ¡seealso!
@@ -20,7 +20,7 @@ NAME (constant, string) is the name of a data point for classification with grap
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of a data point for classification with graph measures.
 %%%% ¡default!
-'A data point for classification with graph measures (NNDataPoint_Measure_CLA) contains both input and target for neural network analysis. The input is the value of the graph measures (e.g. Degree, DegreeAv, and Distance), extracted from the derived graph of the subject. The target is obtained from the variables of interest of the subject.'
+'A data point for classification with graph measures (NNDataPoint_Measure_CLA) contains both input and target for neural network analysis. The input is the value of the graph measures (e.g. Degree, DegreeAv, and Distance), calculated from the derived graph of the subject. The target is obtained from the variables of interest of the subject.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of a data point for classification with graph measures.
