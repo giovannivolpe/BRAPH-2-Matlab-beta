@@ -69,7 +69,19 @@ else
     flattened_inputs_group = [];
     for i = 1:1:length(inputs_group)
         inputs_individual = inputs_group{i};
-        flattened_inputs_individual = nn.get('CELL_FLATTEN', inputs_individual);
+        flattened_inputs_individual = [];
+        while ~isempty(inputs_individual)
+            currentData = inputs_individual{end};  % Get the last element from the stack
+            inputs_individual = inputs_individual(1:end-1);   % Remove the last element
+
+            if iscell(currentData)
+                % If it's a cell array, add its contents to the stack
+                inputs_individual = [inputs_individual currentData{:}];
+            else
+                % If it's numeric or other data, append it to the vector
+                flattened_inputs_individual = [currentData(:); flattened_inputs_individual];
+            end
+        end
         flattened_inputs_group = [flattened_inputs_group; flattened_inputs_individual'];
     end
     value = {flattened_inputs_group};
