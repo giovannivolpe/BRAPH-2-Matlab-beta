@@ -454,7 +454,7 @@ g.set('ATTEMPTSPEREDGE', 4);
 
 A = g.get('A');
 
-assert(isequal(size(A{1}), size(B)), ...
+assert(isequal(size(A{1}), size(B)), ... % check equal size
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
 
@@ -520,5 +520,17 @@ d1 = g.get('MEASURE', 'Degree');
 d2 = g2.get('MEASURE', 'Degree');
 
 assert(isequal(d1.get('M'), d2.get('M')), ...
+    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
+    'GraphBU Randomize is not functioning well.')
+
+assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same number of nodes
+    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
+    'GraphBU Randomize is not functioning well.')
+
+deg_A = sum(A2{1});
+deg_B = sum(random_A);
+[h, p, ks2stat] = kstest2(deg_A, deg_B);
+
+assert(isequal(0, h), ... % check same degree distribution
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
