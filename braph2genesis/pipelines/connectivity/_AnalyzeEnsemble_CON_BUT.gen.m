@@ -131,7 +131,7 @@ for i = 1:1:gr.get('SUB_DICT').get('LENGTH')
     g_dict.get('ADD', g)
 end
 
-if ~isa(a.getr('GRAPH_TEMPLATE'), 'NoValue')
+if ~isa(a.get('GRAPH_TEMPLATE'), 'NoValue')
     for i = 1:1:g_dict.get('LENGTH')
         g_dict.get('IT', i).set('TEMPLATE', a.get('GRAPH_TEMPLATE'))
     end
