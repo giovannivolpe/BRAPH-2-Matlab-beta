@@ -48,7 +48,7 @@ NOTES (metadata, string) are some specific notes about the cross-validation.
 %%% ¡prop!
 KFOLDS (data, scalar) is the number of folds.
 %%%% ¡default!
-10
+5
 
 %%% ¡prop!
 SPLIT (data, cell) is a cell containing the ratio numbers or the vectors stating which datapoints belong to the splitted neural network datasets.
