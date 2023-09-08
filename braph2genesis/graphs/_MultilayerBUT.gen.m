@@ -338,6 +338,34 @@ THRESHOLDS (parameter, rvector) is the vector of thresholds.
 %%%% ¡gui!
 pr = PanelPropRVectorSmart('EL', g, 'PROP', MultilayerBUT.THRESHOLDS, 'MAX', 1, 'MIN', -1, varargin{:});
 
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
+%%% ¡prop!
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+
+for i = 1:length(A)
+    tmp_a = A{i,i};
+
+    tmp_g = GraphBU();
+    tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+    random_A = tmp_g.get('RANDOMIZATION', {tmp_a});
+    A{i, i} = random_A;
+end
+value = A;
+
 %% ¡tests!
 
 %%% ¡excluded_props!
@@ -409,7 +437,6 @@ Randomize Rules
 .01
 %%%% ¡code!
 B11 = randn(10);
-
 B12 = rand(size(B11,1),size(B11,2));
 
 B= {B11 B12 B12;
@@ -448,7 +475,7 @@ for i = 1:length(A2)
             [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
             'MultilayerBUT Randomize is not functioning well.')
     end
-    
+   
     assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
         [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
         'MultilayerBUT Randomize is not functioning well.')
