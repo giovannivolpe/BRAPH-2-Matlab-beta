@@ -383,12 +383,16 @@ deg_B = sum(random_A, 2);
 [h, p, ks2stat] = kstest2(deg_A, deg_B);
 
 assert(~isequal(A2, random_A), ...
-    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
-    'GraphBU Randomize is not functioning well.')
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    'GraphBD Randomize is not functioning well.')
 
 assert(~isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same number of nodes
     [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
     'GraphBD Randomize is not functioning well.')
+
+deg_A = sum(A2{1}, 2);
+deg_B = sum(random_A, 2);
+[h, p, ks2stat] = kstest2(deg_A, deg_B);
 
 assert(~isequal(0, h), ... % check same degree distribution
     [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
