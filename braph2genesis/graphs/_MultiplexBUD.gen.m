@@ -301,6 +301,11 @@ DENSITIES (parameter, rvector) is the vector of densities.
 %%%% ¡gui!
 pr = PanelPropRVectorSmart('EL', g, 'PROP', MultiplexBUD.DENSITIES, 'MAX', 100, 'MIN', 0, varargin{:});
 
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
 %% ¡tests!
 
 %%% ¡excluded_props!
