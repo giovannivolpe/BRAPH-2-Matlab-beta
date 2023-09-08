@@ -303,7 +303,7 @@ for attempt = 1:1:attempts_per_edge * E
         swaps = swaps + 1;
     end
 end
-value = random_A
+value = random_A;
 
 %% ¡tests!
 
@@ -519,6 +519,6 @@ assert(~isequal(A2, random_A), ...
 d1 = g.get('MEASURE', 'Degree');
 d2 = g2.get('MEASURE', 'Degree');
 
-assert(isequal(d1.get('M'), d2.get('M'), ...
+assert(isequal(d1.get('M'), d2.get('M')), ...
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
