@@ -200,6 +200,7 @@ SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative ed
 %%%% ¡settings!
 {'zero', 'absolute'}
 
+
 %%% ¡prop!
 ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
 %%%% ¡default!
@@ -500,3 +501,6 @@ deg_B = sum(random_A);
 assert(isequal(0, h), ... % check same degree distribution
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
+=======
+    'GraphBU is not constructing well.')
+>>>>>>> c467e065 (Update _GraphBU.gen.m)
