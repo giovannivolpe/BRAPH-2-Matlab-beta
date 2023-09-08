@@ -457,4 +457,7 @@ else
         'GraphWD Randomize is not functioning well.')
 end
 
+
 assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same number of nodes
+    [BRAPH2.STR ':GraphWD:' BRAPH2.FAIL_TEST], ...
+    'GraphWD Randomize is not functioning well.')

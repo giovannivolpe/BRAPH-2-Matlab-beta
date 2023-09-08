@@ -429,7 +429,7 @@ assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same numb
     'GraphWU Randomize is not functioning well.')
 
 assert(issymmetric(random_A), ... % check symmetry 
-    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
     'GraphWU Randomize is not functioning well.')
 
 d1 = g.get('MEASURE', 'Degree');

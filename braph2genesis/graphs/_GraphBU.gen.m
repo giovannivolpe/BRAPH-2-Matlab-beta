@@ -527,6 +527,10 @@ assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same numb
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
 
+assert(issymmetric(random_A), ... % check symmetry 
+[BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
+'GraphBU Randomize is not functioning well.')
+
 deg_A = sum(A2{1});
 deg_B = sum(random_A);
 [h, p, ks2stat] = kstest2(deg_A, deg_B);
