@@ -259,7 +259,6 @@ W = tmp_g.get('RANDOMIZATION', {W});
 W(1:length(W)+1:numel(W)) = 0;
 W_bin = W > 0;
 N = size(W,1); % number of nodes
-
 random_A = zeros(N); % intialize null model matrix
 
 S = sum(W,2); % nodal strength
@@ -423,6 +422,14 @@ assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same numb
 
 assert(issymmetric(random_A), ... % check symmetry 
     [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
+    'GraphWU Randomize is not functioning well.')
+
+assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same number of nodes
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    'GraphWU Randomize is not functioning well.')
+
+assert(issymmetric(random_A), ... % check symmetry 
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
     'GraphWU Randomize is not functioning well.')
 
 d1 = g.get('MEASURE', 'Degree');
