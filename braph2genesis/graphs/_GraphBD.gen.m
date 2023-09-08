@@ -236,8 +236,7 @@ for attempt = 1:1:attempts_per_edge*E
     node_end_1 = J_edges(selected_edges(1));
     node_start_2 = I_edges(selected_edges(2));
     node_end_2 = J_edges(selected_edges(2));
-    
-    
+
     r_1 = random_A(node_start_1, node_end_1);
     r_2 = random_A(node_start_2, node_end_2);
 
@@ -248,13 +247,14 @@ for attempt = 1:1:attempts_per_edge*E
     % 4) node_end_1 ~= node_end_2
     % 5) node_start_1 ~= node_end_2
     % 6) node_start_2 ~= node_end_1
-    
+
     if ~random_A(node_start_1, node_end_2) && ...
             ~random_A(node_start_2, node_end_1) && ...
             node_start_1~=node_start_2 && ...
             node_end_1~=node_end_2 && ...
             node_start_1~=node_end_2 && ...
             node_start_2~=node_end_1
+
         % erase old edges
         random_A(node_start_1, node_end_1) = 0;
         random_A(node_start_2, node_end_2) = 0;

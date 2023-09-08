@@ -65,6 +65,7 @@ RANDOMIZATION SEED
 %%% ¡prop!
 %%%% ¡id!
 GraphWU.ATTEMPTSPEREDGE
+
 %%%% ¡title!
 RANDOMIZATION ATTEMPTS PER EDGE
 
@@ -172,7 +173,6 @@ B = semipositivize(B, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); %#ok<
 B = standardize(B, 'StandardizeRule', g.get('STANDARDIZE_RULE')); %#ok<PROPLC> % ensures all weights are between 0 and 1
 
 A = {B}; %#ok<PROPLC>
-
 if g.get('GRAPH_TYPE') ~= 1
 
 else
@@ -260,6 +260,7 @@ W = tmp_g.get('RANDOMIZATION', {W});
 W(1:length(W)+1:numel(W)) = 0;
 W_bin = W > 0;
 N = size(W,1); % number of nodes
+
 random_A = zeros(N); % intialize null model matrix
 
 S = sum(W,2); % nodal strength
