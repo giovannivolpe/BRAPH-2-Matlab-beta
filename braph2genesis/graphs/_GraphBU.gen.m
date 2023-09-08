@@ -52,9 +52,9 @@ RANDOMIZATION ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-GraphBU.RANDOM_SEED
+GraphBU.RANDOMIZATION
 %%%% ¡title!
-RANDOMIZATION SEED
+RANDOMIZATION VALUE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -289,6 +289,7 @@ for attempt = 1:1:attempts_per_edge * E
         random_A(node_end_2, node_start_2) = 0;
 
         % write new edges
+
         random_A(node_start_1, node_end_2) = r_1;
         random_A(node_end_2, node_start_1) = r_3;
 
@@ -302,7 +303,7 @@ for attempt = 1:1:attempts_per_edge * E
         swaps = swaps + 1;
     end
 end
-value = random_A;
+value = random_A
 
 %% ¡tests!
 
@@ -500,11 +501,24 @@ deg_B = sum(random_A);
 assert(isequal(0, h), ... % check same degree distribution
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
-=======
-    'GraphBU is not constructing well.')
->>>>>>> c467e065 (Update _GraphBU.gen.m)
-=======
+
 assert(isequal(size(A), size(B)), ...
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
->>>>>>> f6bef332 (Update _GraphBU.gen.m)
+
+g2 = GraphBU('B', B);
+g2.set('RANDOMIZE', false);
+g2.set('ATTEMPTSPEREDGE', 4);
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
+
+assert(~isequal(A2, random_A), ...
+    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
+    'GraphBU Randomize is not functioning well.')
+
+d1 = g.get('MEASURE', 'Degree');
+d2 = g2.get('MEASURE', 'Degree');
+
+assert(isequal(d1.get('M'), d2.get('M'), ...
+    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
+    'GraphBU Randomize is not functioning well.')
