@@ -83,11 +83,11 @@ value = cellfun(@(d, nn) NNRegressor_Evaluator('D', d, 'NN', nn), ...
 %% ¡props!
 
 %%% ¡prop!
-AVG_CORRELATION_COEFF (result, rvector) provides the metric of the correlation of coefficients.
+AV_CORR (result, rvector) provides the metric of the correlation of coefficients.
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 
-value = cellfun(@(e) e.get('CORRELATION_COEFF'), ...
+value = cellfun(@(e) e.get('CORR'), ...
     e_list, 'UniformOutput', false);
 
 if isempty(value)
@@ -97,11 +97,11 @@ else
 end
 
 %%% ¡prop!
-AVG_COEFF_OF_DETERMINATION (result, rvector) provides a measure of how well the predictions are replicated by the model.
+AV_DET (result, rvector) provides the coefficient of determination, a measure showing how well the predictions are replicated by the model.
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 
-value = cellfun(@(e) e.get('COEFF_OF_DETERMINATION'), ...
+value = cellfun(@(e) e.get('DET'), ...
     e_list, 'UniformOutput', false);
 
 if isempty(value)
@@ -111,11 +111,11 @@ else
 end
 
 %%% ¡prop!
-AVG_MEAN_ABSOLUTE_ERROR (result, rvector) provides the metric of the mean absolute error.
+AV_MAE (result, rvector) provides the metric of the mean absolute error.
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 
-value = cellfun(@(e) e.get('MEAN_ABSOLUTE_ERROR'), ...
+value = cellfun(@(e) e.get('MAE'), ...
     e_list, 'UniformOutput', false);
 
 if isempty(value)
@@ -125,11 +125,11 @@ else
 end
 
 %%% ¡prop!
-AVG_MEAN_SQUARED_ERROR (result, rvector) provides the metric of the mean squared error.
+AV_MSE (result, rvector) provides the metric of the mean squared error.
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 
-value = cellfun(@(e) e.get('MEAN_SQUARED_ERROR'), ...
+value = cellfun(@(e) e.get('MSE'), ...
     e_list, 'UniformOutput', false);
 
 if isempty(value)
@@ -139,11 +139,11 @@ else
 end
 
 %%% ¡prop!
-AVG_ROOT_MEAN_SQUARED_ERROR (result, rvector) provides the metric of the root mean squared error.
+AV_RMSE (result, rvector) provides the metric of the root mean squared error.
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 
-value = cellfun(@(e) e.get('ROOT_MEAN_SQUARED_ERROR'), ...
+value = cellfun(@(e) e.get('RMSE'), ...
     e_list, 'UniformOutput', false);
 
 if isempty(value)
@@ -151,6 +151,11 @@ if isempty(value)
 else
     value = mean(cell2mat(value), 1);
 end
+
+%%% ¡prop!
+AV_PERM_FEATURE_IMPORTANCE (result, cell) averages the permutation feature importances across k folds.
+%%%% ¡calculate!
+value = {};
 
 %% ¡tests!
 
@@ -200,16 +205,16 @@ d = NNDataset( ...
     'DP_DICT', dp_list ...
     );
 
-kfold = 3;
-nncv = NNRegressor_CrossValidation('KFOLD', kfold, 'D', d);
+kfolds = 3;
+nncv = NNRegressor_CrossValidation('KFOLDS', kfolds, 'D', d);
 
 nn_list = nncv.get('NN_LIST');
-assert(length(nn_list) == kfold, ...
+assert(length(nn_list) == kfolds, ...
     [BRAPH2.STR ':NNRegressor_CrossValidation:' BRAPH2.FAIL_TEST], ...
     'NNRegressor_CrossValidation does not calculate the neural network list correctly.' ...
     )
 e_list = nncv.get('EVALUATOR_LIST');
-assert(length(e_list) == kfold, ...
+assert(length(e_list) == kfolds, ...
     [BRAPH2.STR ':NNRegressor_CrossValidation:' BRAPH2.FAIL_TEST], ...
     'NNRegressor_CrossValidation does not calculate the evaluator list correctly.' ...
     )

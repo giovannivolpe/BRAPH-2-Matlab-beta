@@ -338,7 +338,7 @@ if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA
     test_NNDataPoint_CON_CLA % create example files
 end
 
-example_NN_CON_Classification
+example_NN_CON_CLA
 
 %%% ¡test! 
 %%%% ¡name!
@@ -349,4 +349,4 @@ if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA
     test_NNDataPoint_CON_CLA % create example files
 end
 
-example_NNCV_CON_Classification
+example_NNCV_CON_CLA
