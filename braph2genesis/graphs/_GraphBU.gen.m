@@ -58,12 +58,6 @@ RANDOMIZATION SEED
 
 %%% ¡prop!
 %%%% ¡id!
-GraphBU.RANDOMIZATION
-%%%% ¡title!
-RANDOMIZATION VALUE
-
-%%% ¡prop!
-%%%% ¡id!
 GraphBU.ATTEMPTSPEREDGE
 %%%% ¡title!
 RANDOMIZATION ATTEMPTS PER EDGE

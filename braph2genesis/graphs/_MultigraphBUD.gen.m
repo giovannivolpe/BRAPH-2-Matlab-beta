@@ -81,7 +81,6 @@ MultigraphBUD.RANDOM_SEED
 %%%% ¡title!
 RANDOMIZATION SEED
 
-
 %%% ¡prop!
 %%%% ¡id!
 MultigraphBUD.ATTEMPTSPEREDGE
