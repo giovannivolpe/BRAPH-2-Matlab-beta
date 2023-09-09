@@ -1,4 +1,4 @@
-%% EXAMPLE_NN_CON_CLASSIFICATION
+%% EXAMPLE_NN_CON_CLA
 % Script example pipeline for NN classification with the input of SubjectCON 
 
 clear variables %#ok<*NASGU>

@@ -1,4 +1,4 @@
-%% EXAMPLE_NNCV_CON_GRAPHWU_CLASSIFICATION
+%% EXAMPLE_NNCV_CON_WU_CLA
 % Script example pipeline for NN classification cross-validation with the input of GraphWU derived from SubjectCON 
 
 clear variables %#ok<*NASGU>

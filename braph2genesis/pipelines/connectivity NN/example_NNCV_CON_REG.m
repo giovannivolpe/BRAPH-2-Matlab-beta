@@ -1,4 +1,4 @@
-%% EXAMPLE_NNCV_CON_REGRESSION
+%% EXAMPLE_NNCV_CON_REG
 % Script example pipeline for NN regression cross-validation with the input of SubjectCON 
 
 clear variables %#ok<*NASGU>

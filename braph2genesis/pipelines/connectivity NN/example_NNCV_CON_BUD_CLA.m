@@ -1,4 +1,4 @@
-%% EXAMPLE_NNCV_CON_GRAPHBUD_CLASSIFICATION
+%% EXAMPLE_NNCV_CON_BUD_CLA
 % Script example pipeline for NN classification cross-validation with the input of GraphBUD derived from SubjectCON 
 
 clear variables %#ok<*NASGU>

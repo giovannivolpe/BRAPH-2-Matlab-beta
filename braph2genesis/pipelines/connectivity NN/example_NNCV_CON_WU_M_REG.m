@@ -1,4 +1,4 @@
-%% EXAMPLE_NNCV_CON_GRAPHWU_MEASURE_REGRESSION
+%% EXAMPLE_NNCV_CON_WU_ME_REG
 % Script example pipeline for NN regression cross-validation with input of GraphWU measures derived from SubjectCON 
 
 clear variables %#ok<*NASGU>
