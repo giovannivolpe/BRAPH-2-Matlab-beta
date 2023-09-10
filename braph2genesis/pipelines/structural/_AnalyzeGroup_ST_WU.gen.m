@@ -179,8 +179,8 @@ assert(isequal(a_WU2.get('CORRELATION_RULE'), correlation_rule))
 
 % check that measure parameters are correclty templated between analysis 1 and 2
 triangles_rule = 'middleman';
-g_WU1 = a_WU1.memorize('G'); % memorize is essential to keep the graph
-g_WU2 = a_WU2.memorize('G'); % memorize is essential to keep the graph
+g_WU2 = a_WU2.get('G');
+g_WU1 = a_WU1.get('G'); % it has been memborized in the previous line (!) when calculating the templated graph.
 m_triangles_WU1 = g_WU1.get('MEASURE', 'Triangles');
 m_triangles_WU1.set('RULE', triangles_rule)
 m_triangles_WU2 = g_WU2.get('MEASURE', 'Triangles');
@@ -198,8 +198,8 @@ assert(isequal(a_WU2_perm.get('NEGATIVE_WEIGHT_RULE'), negative_weight_rule))
 assert(isequal(a_WU2_perm.get('CORRELATION_RULE'), correlation_rule))
 
 % check that measure parameters are correclty templated to permutation analyses
-g_WU1_perm = a_WU1_perm.memorize('G'); % memorize is essential to keep the graph
-g_WU2_perm = a_WU2_perm.memorize('G'); % memorize is essential to keep the graph
+g_WU1_perm = a_WU1_perm.get('G'); % memorize is essential to keep the graph
+g_WU2_perm = a_WU2_perm.get('G'); % memorize is essential to keep the graph
 m_triangles_WU1_perm = g_WU1_perm.get('MEASURE', 'Triangles');
 m_triangles_WU1_perm.set('RULE', triangles_rule)
 m_triangles_WU2_perm = g_WU2_perm.get('MEASURE', 'Triangles');
