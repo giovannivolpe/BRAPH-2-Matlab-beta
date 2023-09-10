@@ -40,12 +40,12 @@ a_WU2 = AnalyzeGroup_ST_WU( ...
     );
 
 % measure calculation
-g_WU1 = a_WU1.get('G');
+g_WU1 = a_WU1.memorize('G');
 % % % strength_WU1 = g_WU1.get('MEASURE', 'Strength').get('M');
 % % % strength_av_WU1 = g_WU1.getMeasure('MEASURE', 'StrengthAv').get('M');
 distance_WU1 = g_WU1.get('MEASURE', 'Distance').get('M');
 
-g_WU2 = a_WU2.get('G');
+g_WU2 = a_WU2.memorize('G');
 % % % strength_WU2 = g_WU2.get('MEASURE', 'Strength').get('M');
 % % % strength_av_WU2 = g_WU2.get('MEASURE', 'StrengthAv').get('M');
 distance_WU2 = g_WU2.get('MEASURE', 'Distance').get('M');
