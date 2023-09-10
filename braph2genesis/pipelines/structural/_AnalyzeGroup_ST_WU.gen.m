@@ -198,8 +198,8 @@ assert(isequal(a_WU2_perm.get('NEGATIVE_WEIGHT_RULE'), negative_weight_rule))
 assert(isequal(a_WU2_perm.get('CORRELATION_RULE'), correlation_rule))
 
 % check that measure parameters are correclty templated to permutation analyses
-g_WU1_perm = a_WU1_perm.get('G'); % memorize is essential to keep the graph
-g_WU2_perm = a_WU2_perm.get('G'); % memorize is essential to keep the graph
+g_WU1_perm = a_WU1_perm.get('G');
+g_WU2_perm = a_WU2_perm.get('G');
 m_triangles_WU1_perm = g_WU1_perm.get('MEASURE', 'Triangles');
 m_triangles_WU1_perm.set('RULE', triangles_rule)
 m_triangles_WU2_perm = g_WU2_perm.get('MEASURE', 'Triangles');
