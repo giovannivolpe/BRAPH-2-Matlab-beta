@@ -76,6 +76,11 @@ else
 end
 
 %%% ¡prop!
+NN_TEMPLATE (result, itemlist) is the neural network template to set all neural network parameters.
+%%%% ¡settings!
+'NNBase'
+
+%%% ¡prop!
 NN_LIST (result, itemlist) contains the neural network models corresponding to k folds.
 
 %%% ¡prop!

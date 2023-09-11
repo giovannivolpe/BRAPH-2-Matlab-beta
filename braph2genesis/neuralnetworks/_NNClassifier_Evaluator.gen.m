@@ -99,11 +99,9 @@ else
 end
 
 %%% ¡prop!
-PERM_FEATURE_IMPORTANCE (result, cell) assess the significance of each feature by randomly shuffling its values and measuring how much the performance of the model decreases.
+FEATURE_IMPORTANCE (result, cell) quantifies the average significance and impact of individual input features within neural network models. Various techniques, such as permutation feature importance for MLPs and gradient-based analysis for CNNs, can be applied to quantify this aspect.
 %%%% ¡calculate!
-% shuffle the feature in the input one by one and get model loss function
-% value
-value = {};
+value = nne.get('NN').get('FEATURE_IMPORTANCE', nne.get('D'));
 
 %% ¡tests!
 

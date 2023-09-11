@@ -92,15 +92,15 @@ d3 = NNDataset( ...
     );
 
 % Split the NNData into training set and test set
-d_split1 = NNDatasetSplit('D', d1, 'SPLIT', {0.7, 0.3}).get('D_LIST');
-d_split2 = NNDatasetSplit('D', d2, 'SPLIT', {0.7, 0.3}).get('D_LIST');
-d_split3 = NNDatasetSplit('D', d3, 'SPLIT', {0.7, 0.3}).get('D_LIST');
+d_split1 = NNDatasetSplit('D', d1, 'SPLIT', {0.7, 0.3});
+d_split2 = NNDatasetSplit('D', d2, 'SPLIT', {0.7, 0.3});
+d_split3 = NNDatasetSplit('D', d3, 'SPLIT', {0.7, 0.3});
 
-d_training = NNDatasetCombine('D_LIST', {d_split1{1}, d_split2{1}, d_split3{1}}).get('D');
-d_test = NNDatasetCombine('D_LIST', {d_split1{2}, d_split2{2}, d_split3{2}}).get('D');
+d_training = NNDatasetCombine('D_LIST', {d_split1.get('D_LIST_IT', 1), d_split2.get('D_LIST_IT', 1), d_split3.get('D_LIST_IT', 1)}).get('D');
+d_test = NNDatasetCombine('D_LIST', {d_split1.get('D_LIST_IT', 2), d_split2.get('D_LIST_IT', 2), d_split3.get('D_LIST_IT', 2)}).get('D');
 
 %% Create a MLP classifier with training set
-nn = NNClassifierMLP('D', d_training, 'LAYERS', [20 20]);
+nn = NNClassifierMLP('D', d_training, 'LAYERS', [20 20], 'P', 5);
 nn.get('TRAIN');
 
 %% Evaluate the classifier with the test set
@@ -108,3 +108,4 @@ nne_test = NNClassifier_Evaluator('D', d_test, 'NN', nn);
 confusion_matrix = nne_test.get('C_MATRIX');
 auc = nne_test.get('AUC');
 avg_auc = nne_test.get('MACRO_AUC');
+fi = nne_test.get('FEATURE_IMPORTANCE');
