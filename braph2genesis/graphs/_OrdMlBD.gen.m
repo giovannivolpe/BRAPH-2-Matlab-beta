@@ -186,7 +186,6 @@ for i = 1:1:L
     end
 end
 value = A;
-
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', OrdMlBD.A, ...
     'TABLE_HEIGHT', s(40), ...
