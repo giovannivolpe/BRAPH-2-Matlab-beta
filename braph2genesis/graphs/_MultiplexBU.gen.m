@@ -208,6 +208,7 @@ if g.get('RANDOMIZE')
     A = g.get('RANDOMIZATION', A);
 end
 value = A;
+
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', MultiplexBU.A, ...
     'TABLE_HEIGHT', s(40), ...
