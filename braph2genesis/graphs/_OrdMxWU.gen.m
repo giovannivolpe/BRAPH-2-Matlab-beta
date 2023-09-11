@@ -232,6 +232,7 @@ else
     end
 end
 value = A;
+
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', OrdMxWU.A, ...
     'TABLE_HEIGHT', s(40), ...
@@ -403,7 +404,6 @@ g = OrdMxWU('B', B);
 g.set('RANDOMIZE', true);
 g.set('ATTEMPTSPEREDGE', 4);
 g.get('A_CHECK')
-
 
 A = g.get('A');
 

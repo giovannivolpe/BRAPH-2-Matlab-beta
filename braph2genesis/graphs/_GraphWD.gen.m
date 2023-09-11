@@ -169,6 +169,7 @@ if g.get('RANDOMIZE')
     A = {random_A};
 end
 value = A;
+
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', GraphWD.A, ...
     'TABLE_HEIGHT', s(40), ...
@@ -292,7 +293,6 @@ rpos_in = corrcoef(sum(W,1), sum(random_A,1));
 rpos_out = corrcoef(sum(W,2), sum(random_A,2));
 correlation_coefficients = [rpos_in(2) rpos_out(2)];
 value = random_A;
-
 
 %% ¡tests!
 

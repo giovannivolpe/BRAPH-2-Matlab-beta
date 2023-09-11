@@ -216,6 +216,7 @@ for i = 1:1:L
         end
     end
 end
+
 if g.get('RANDOMIZE')
     A = g.get('RANDOMIZATION', A);
 end

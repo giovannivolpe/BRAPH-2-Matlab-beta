@@ -218,6 +218,7 @@ if g.get('RANDOMIZE')
     A = g.get('RANDOMIZATION', A);
 end
 value = A;
+
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', OrdMxWD.A, ...
     'TABLE_HEIGHT', s(40), ...
@@ -510,6 +511,7 @@ for i = 1:length(A2)
         [BRAPH2.STR ':OrdMxWD:' BRAPH2.FAIL_TEST], ...
         'OrdMxWD Randomize is not functioning well.')
 end
+
 %% ¡_methods!
 function random_g = randomize(g)
     % RANDOMIZE returns a randomized graph

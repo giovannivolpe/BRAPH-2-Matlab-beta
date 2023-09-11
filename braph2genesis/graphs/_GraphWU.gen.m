@@ -182,6 +182,7 @@ else
     end
 end
 value = A;
+
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', GraphWU.A, ...
     'TABLE_HEIGHT', s(40), ...
@@ -416,7 +417,6 @@ else
         [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
         'GraphWU Randomize is not functioning well.')
 end
-
 
 assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same number of nodes
     [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
