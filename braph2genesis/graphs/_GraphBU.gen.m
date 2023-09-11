@@ -165,7 +165,6 @@ if g.get('RANDOMIZE')
     A = {random_A};
 end
 value = A;
-
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', GraphBU.A, ...
     'TABLE_HEIGHT', s(40), ...
