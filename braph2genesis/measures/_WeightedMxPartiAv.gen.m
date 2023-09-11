@@ -149,3 +149,35 @@ m_inside_g = g.get('MEASURE', 'WeightedMxPartiAv');
 assert(isequal(m_inside_g.get('M'), known_weighted_multiplex_participation), ...
     [BRAPH2.STR ':WeightedMxPartiAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMxWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .5  1
+    .5  0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   0
+    0   .5  0
+    ];
+B = {B11  B22};
+
+known_weighted_multiplex_participation = {mean([24/25 3/4 8/9]')};
+
+g = OrdMxWU('B', B);
+m_outside_g = WeightedMxPartiAv('G', g);
+
+assert(isequal(m_outside_g.get('M'), known_weighted_multiplex_participation), ...
+    [BRAPH2.STR ':WeightedMxPartiAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'WeightedMxPartiAv');
+assert(isequal(m_inside_g.get('M'), known_weighted_multiplex_participation), ...
+    [BRAPH2.STR ':WeightedMxPartiAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

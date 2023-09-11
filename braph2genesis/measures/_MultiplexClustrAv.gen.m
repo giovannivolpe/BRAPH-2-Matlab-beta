@@ -292,3 +292,40 @@ assert(isequal(m_inside_g.get('M'), known_multiplex_clustering), ...
     [BRAPH2.STR ':MultiplexClustrAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
+%%% ¡test!
+%%%% ¡name!
+OrdMxWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+      0   .2  1   1;
+      .2  0   1  0;
+      1   1  0   0;
+      1   0   0   0
+      ];
+B22 = [
+      0   .2  1  .7;
+      .2  0   0  0;
+      1   0   0  0;
+      .7  0   0  0
+      ];
+B = {B11 B22};
+
+known_multiplex_clustering = diag(B11.^(1/3)*B22.^(1/3)*B11.^(1/3) + B22.^(1/3)*B11.^(1/3)*B22.^(1/3)) ./ ([12, 2, 2, 0]');
+known_multiplex_clustering(isnan(known_multiplex_clustering)) = 0;
+known_multiplex_clustering_Av = {
+    mean(known_multiplex_clustering)
+    };
+
+g = OrdMxWU('B', B);
+m_outside_g = MultiplexClustrAv('G', g);
+
+assert(isequal(m_outside_g.get('M'), known_multiplex_clustering_Av), ...
+    [BRAPH2.STR ':MultiplexClustrAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'MultiplexClustrAv');
+assert(isequal(m_inside_g.get('M'), known_multiplex_clustering_Av), ...
+    [BRAPH2.STR ':MultiplexClustrAv:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

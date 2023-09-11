@@ -99,7 +99,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWU' 'MultiplexWD' 'OrdMxWU'};
+{'MultiplexWU' 'MultiplexWD' 'OrdMxWU' 'MultilayerWU'};
 
 %%% ¡prop!
 M (result, cell) is the weighted edge overlap.
@@ -187,6 +187,79 @@ known_weighted_edge_overlap = {[
     ]};
 
 g = MultiplexWD('B', B);
+m_outside_g = WeightedEdgOvrl('G', g);
+assert(isequal(m_outside_g.get('M'), known_weighted_edge_overlap), ...
+    [BRAPH2.STR ':WeightedEdgOvrl:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'WeightedEdgOvrl');
+assert(isequal(m_inside_g.get('M'), known_weighted_edge_overlap), ...
+    [BRAPH2.STR ':WeightedEdgOvrl:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMxWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .2  1
+    .2  0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   .4
+    0   .4  0
+    ];
+B = {B11 B22};
+
+known_weighted_edge_overlap = {[
+    0   .6  0.5
+    .6   0  .2
+    .5  .2  0
+    ]};
+
+g = OrdMxWU('B', B);
+m_outside_g = WeightedEdgOvrl('G', g);
+assert(isequal(m_outside_g.get('M'), known_weighted_edge_overlap), ...
+    [BRAPH2.STR ':WeightedEdgOvrl:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'WeightedEdgOvrl');
+assert(isequal(m_inside_g.get('M'), known_weighted_edge_overlap), ...
+    [BRAPH2.STR ':WeightedEdgOvrl:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultilayerWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .2  1
+    .2  0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   .4
+    0   .4  0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B21 = B12';
+B = {B11 B12;
+     B21 B22};
+
+known_weighted_edge_overlap = {[
+    0   .6  0.5
+    .6   0  .2
+    .5  .2  0
+    ]};
+
+g = MultilayerWU('B', B);
 m_outside_g = WeightedEdgOvrl('G', g);
 assert(isequal(m_outside_g.get('M'), known_weighted_edge_overlap), ...
     [BRAPH2.STR ':WeightedEdgOvrl:' BRAPH2.FAIL_TEST], ...

@@ -240,3 +240,40 @@ m_inside_g = g.get('MEASURE', 'MultiplexKCCentrality');
 assert(isequal(m_inside_g.get('M'), known_multiplexk_coreness_centrality), ...
     [BRAPH2.STR ':MultiplexKCCentrality:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMxWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+A11 = [
+    0   .1  1  0; 
+    .1  0   1  .8; 
+    1   1   0  0;
+    0   .8  0  0
+    ];
+
+A22 = [
+    0   .1  1  0; 
+    .1  0   1  .8; 
+    1   1   0  0;
+    1   .8  0  0
+    ];
+A = {A11 A22};
+             
+known_multiplexk_coreness_centrality = {
+    [2 2 2 1]'
+    };
+
+g = OrdMxWU('B', A);
+m_outside_g = MultiplexKCCentrality('G', g);
+
+assert(isequal(m_outside_g.get('M'), known_multiplexk_coreness_centrality), ...
+    [BRAPH2.STR ':MultiplexKCCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'MultiplexKCCentrality');
+assert(isequal(m_inside_g.get('M'), known_multiplexk_coreness_centrality), ...
+    [BRAPH2.STR ':MultiplexKCCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
