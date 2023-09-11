@@ -411,13 +411,14 @@ B11 = randn(10);
 B12 = rand(size(B11,1),size(B11,2));
 
 B= {B11 B12 B12;
-    B12 B11 B12;
-    B12 B12 B11};
+    B12' B11 B12;
+    B12' B12' B11};
 thresholds = [0 .5 1];
 g = MultilayerBUT('B', B, 'THRESHOLDS', thresholds); 
 
 g.set('RANDOMIZE', true);
 g.set('ATTEMPTSPEREDGE', 4);
+g.get('A_CHECK')
 
 A = g.get('A');
 
