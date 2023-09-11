@@ -99,7 +99,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWD'}
+{'MultiplexWD' 'OrdMxWD'}
 
 %%% ¡prop!
 M (result, cell) is the weighted multiplex in-particiption.
@@ -151,6 +151,38 @@ B = {B11  B22};
 known_weighted_multiplex_in_participation = {[24/25 3/4 0]'};
 
 g = MultiplexWD('B', B);
+m_outside_g = WeightedMxPartiIn('G', g);
+
+assert(isequal(m_outside_g.get('M'), known_weighted_multiplex_in_participation), ...
+    [BRAPH2.STR ':WeightedMxPartiIn:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'WeightedMxPartiIn');
+assert(isequal(m_inside_g.get('M'), known_weighted_multiplex_in_participation), ...
+    [BRAPH2.STR ':WeightedMxPartiIn:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMxWD
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .5  1
+    .5  0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   0
+    0   .5  0
+    ];
+B = {B11  B22};
+
+known_weighted_multiplex_in_participation = {[24/25 3/4 0]'};
+
+g = OrdMxWD('B', B);
 m_outside_g = WeightedMxPartiIn('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_weighted_multiplex_in_participation), ...

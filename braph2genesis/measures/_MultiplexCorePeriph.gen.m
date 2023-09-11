@@ -312,13 +312,13 @@ B = {B11 B22};
              
 known_multiplex_core_periphery = {[1 1 1 0]'};      
 
-g = MultiplexBU('B', B);
+g = MultiplexBD('B', B);
 m_outside_g = MultiplexCorePeriph('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multiplex_core_periphery), ...
     [BRAPH2.STR ':MultiplexCorePeriph:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
-
+33333
 m_inside_g = g.get('MEASURE', 'MultiplexCorePeriph');
 assert(isequal(m_inside_g.get('M'), known_multiplex_core_periphery), ...
     [BRAPH2.STR ':MultiplexCorePeriph:' BRAPH2.FAIL_TEST], ...
@@ -394,3 +394,36 @@ assert(isequal(m_inside_g.get('M'), known_multiplex_core_periphery), ...
     [BRAPH2.STR ':MultiplexCorePeriph:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
+%%% ¡test!
+%%%% ¡name!
+OrdMxWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .1  1  0; 
+    .1  0   1  .8; 
+    1   1   0  0;
+    0   .8  0  0
+    ];
+B22 = [
+    0   .1  1  1; 
+    .1  0   1  .8; 
+    1   1   0  0;
+    1   .8  0  0
+    ];
+B = {B11 B22};
+
+known_multiplex_core_periphery = {[0 0 1 0]'};      
+
+g = OrdMxWU('B', B);
+m_outside_g = MultiplexCorePeriph('G', g);
+
+assert(isequal(m_outside_g.get('M'), known_multiplex_core_periphery), ...
+    [BRAPH2.STR ':MultiplexCorePeriph:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'MultiplexCorePeriph');
+assert(isequal(m_inside_g.get('M'), known_multiplex_core_periphery), ...
+    [BRAPH2.STR ':MultiplexCorePeriph:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

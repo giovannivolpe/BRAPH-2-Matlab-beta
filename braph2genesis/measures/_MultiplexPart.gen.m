@@ -287,3 +287,34 @@ m_inside_g = g.get('MEASURE', 'MultiplexPart');
 assert(isequal(m_inside_g.get('M'), known_multiplex_participation), ...
     [BRAPH2.STR ':MultiplexPart:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMxWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   .2  1
+    .2  0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   .3
+    0   .3  0
+    ];
+B = {B11  B22};
+known_multiplex_participation = {[8/9 8/9 1]'};
+
+g = OrdMxWU('B', B);
+m_outside_g = MultiplexPart('G', g);
+
+assert(isequal(m_outside_g.get('M'), known_multiplex_participation), ...
+    [BRAPH2.STR ':MultiplexPart:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'MultiplexPart');
+assert(isequal(m_inside_g.get('M'), known_multiplex_participation), ...
+    [BRAPH2.STR ':MultiplexPart:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

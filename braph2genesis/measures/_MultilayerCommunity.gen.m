@@ -3,8 +3,8 @@ MultilayerCommunity < Measure (m, multilayer community structure) is the graph m
 
 %%% ¡description!
 The multilayer community structure of a multilayer graph is a subdivision of 
-the network into non-overlapping groups of nodes which maximizes the number 
-of within group edges, and minimizes the number of between group edges.
+ the network into non-overlapping groups of nodes which maximizes the number 
+ of within group edges, and minimizes the number of between group edges.
 
 %% ¡layout!
     
