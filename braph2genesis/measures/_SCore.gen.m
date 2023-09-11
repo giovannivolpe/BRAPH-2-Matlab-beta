@@ -55,7 +55,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphWD' 'GraphWU' 'MultiplexWD' 'MultiplexWU' 'OrdMxWD' 'OrdMlWD'};
+{'GraphWD' 'GraphWU' 'MultiplexWD' 'MultiplexWU'};
 
 %%% ¡prop!
 M (result, cell) is the score.
@@ -262,52 +262,6 @@ known_score(2, 1) = {[
     ]};
 
 g = MultiplexWD('B', A);
-m_outside_g = SCore('G', g, 'SCORETHRESHOLD', 1.5);
-assert(isequal(m_outside_g.get('M'), known_score), ...
-    [BRAPH2.STR ':SCore:' BRAPH2.FAIL_TEST], ...
-    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-m_inside_g = g.get('MEASURE', 'SCore');
-m_inside_g.set('SCORETHRESHOLD', 1.5);
-assert(isequal(m_inside_g.get('M'), known_score), ...
-    [BRAPH2.STR ':SCore:' BRAPH2.FAIL_TEST], ...
-    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-%%% ¡test!
-%%%% ¡name!
-OrdMxWD
-%%%% ¡probability!
-.01
-%%%% ¡code!
-A11 = [
-    0   .5  1  0;
-    .5  0   1  .8;
-    1   1   0  0;
-    0   .8  0  0
-    ];
-
-A22 = [
-    0   .5  1  0;
-    .5  0   1  .8;
-    1   1   0  0;
-    0   .8  0  0
-    ];
-A = {A11 A22};
-
-known_score(1) = {[
-    0   .5  1  0;
-    .5  0   1  0.8;
-    1   1   0  0;
-    0   0.8   0  0
-    ]};
-known_score(2, 1) = {[
-    0   .5  1  0;
-    .5  0   1  0.8;
-    1   1   0  0;
-    0   0.8   0  0
-    ]};
-
-g = OrdMxWD('B', A);
 m_outside_g = SCore('G', g, 'SCORETHRESHOLD', 1.5);
 assert(isequal(m_outside_g.get('M'), known_score), ...
     [BRAPH2.STR ':SCore:' BRAPH2.FAIL_TEST], ...
