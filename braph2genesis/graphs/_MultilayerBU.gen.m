@@ -264,6 +264,11 @@ pr = PanelPropCell('EL', g, 'PROP', MultilayerBU.B, ...
     varargin{:});
 
 %%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
+%%% ¡prop!
 SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.
 %%%% ¡settings!
 {'max', 'sum', 'average', 'min'}
@@ -272,11 +277,6 @@ SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.
 SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.
 %%%% ¡settings!
 {'zero', 'absolute'}
-
-%%% ¡prop!
-ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-%%%% ¡default!
-5
 
 %%% ¡prop!
 RANDOMIZATION (query, cell) is the attempts to rewire each edge.
