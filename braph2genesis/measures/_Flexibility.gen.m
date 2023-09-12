@@ -138,9 +138,7 @@ assert(~isempty(m_inside_g.get('M')), ...
 
 %%% ¡test!
 %%%% ¡name!
-MultiplexBUT
-%%%% ¡probability!
-.01
+MultiplexWD
 %%%% ¡code!
 A11 = [
       0  1 1 .5;
@@ -154,11 +152,11 @@ A22 = [
       1  1 0 1;
       .1 0 1 0
       ];
-B = {A11 A22};
-
+A = {A11 A22};
+ 
 known_flexibility = {[0 0 0 0]'};  
 
-g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
+g = MultiplexWD('B', A);
 
 m_outside_g = Flexibility('G', g);
 assert(~isempty(m_outside_g.get('M')), ...
