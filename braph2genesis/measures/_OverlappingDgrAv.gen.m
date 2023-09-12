@@ -115,7 +115,7 @@ else
     overlapping_degree = calculateValue@OverlappingDgr(m, prop);
     overlapping_degree_av = cell(length(l), 1);
 
-    for i=1:length(l)
+    for i=1:length(ls)
         overlapping_degree_av(i) = {mean(overlapping_degree{i})};
     end
     value = overlapping_degree_av;
@@ -209,20 +209,20 @@ B22 = [
     ];
 B = {B11 B22};
 
-known_overlapping_degree = { ...
-    mean([3, 3, 2]')
-    mean([0, 0, 0]')
-    };
+known_overlapping_degree_av = { ...
+                            mean([3, 3, 2])
+                            0
+                            }';
 
 g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
 
 m_outside_g = OverlappingDgrAv('G', g);
-assert(isequal(m_outside_g.get('M'), known_overlapping_degree), ...
+assert(isequal(m_outside_g.get('M'), known_overlapping_degree_av), ...
     [BRAPH2.STR ':OverlappingDgrAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'OverlappingDgrAv');
-assert(isequal(m_inside_g.get('M'), known_overlapping_degree), ...
+assert(isequal(m_inside_g.get('M'), known_overlapping_degree_av), ...
     [BRAPH2.STR ':OverlappingDgrAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -245,9 +245,9 @@ B22 = [
 B = {B11 B22};
 
 known_overlapping_degree = { ...
-    mean([0, 0, 0]')
+    0
     mean([4, 4, 4]')
-    };
+    }';
 
 g = MultiplexBUD('B', B, 'DENSITIES', [0 100]);
 

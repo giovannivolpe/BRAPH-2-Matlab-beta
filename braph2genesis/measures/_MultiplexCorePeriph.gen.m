@@ -313,13 +313,14 @@ B = {B11 B22};
 known_multiplex_core_periphery = {[1 1 1 0]'};      
 
 g = MultiplexBD('B', B);
-m_outside_g = MultiplexCorePeriph('G', g);
+m_outside_g = MultiplexCorePeriph('G', g, 'MULTIRICHNESS_COEFFICIENTS', [2/3, 1/3]);
 
 assert(isequal(m_outside_g.get('M'), known_multiplex_core_periphery), ...
     [BRAPH2.STR ':MultiplexCorePeriph:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
-33333
+
 m_inside_g = g.get('MEASURE', 'MultiplexCorePeriph');
+m_inside_g.set('MULTIRICHNESS_COEFFICIENTS', [2/3, 1/3]);
 assert(isequal(m_inside_g.get('M'), known_multiplex_core_periphery), ...
     [BRAPH2.STR ':MultiplexCorePeriph:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

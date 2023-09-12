@@ -7,32 +7,32 @@ The in-path length is the average shortest in-path length of one node to all oth
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the PathlengthIn.
+NAME (constant, string) is the name of the PathLengthIn.
 %%%% ¡default!
-'PathlengthIn'
+'PathLengthIn'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the PathlengthIn.
+DESCRIPTION (constant, string) is the description of the PathLengthIn.
 %%%% ¡default!
-'The PathlengthIn is the average shortest pathlength of one node to all other nodes within a layer.'
+'The PathLengthIn is the average shortest pathlength of one node to all other nodes within a layer.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the PathlengthIn.
+TEMPLATE (parameter, item) is the template of the PathLengthIn.
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the PathlengthIn.
+ID (data, string) is a few-letter code of the PathLengthIn.
 %%%% ¡default!
-'PathlengthIn ID'
+'PathLengthIn ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the PathlengthIn.
+LABEL (metadata, string) is an extended label of the PathLengthIn.
 %%%% ¡default!
-'PathlengthIn label'
+'PathLengthIn label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the PathlengthIn.
+NOTES (metadata, string) are some specific notes about the PathLengthIn.
 %%%% ¡default!
-'PathlengthIn notes'
+'PathLengthIn notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -55,7 +55,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphBD' 'GraphWD' 'MultiplexBD' 'MultiplexWD' 'MultilayerBD' 'OrdMlBD'}
 
 %%% ¡prop!
-M (result, cell) is the cell containing the PathlengthIn.
+M (result, cell) is the cell containing the PathLengthIn.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
 A = g.get('A');  % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
@@ -96,7 +96,7 @@ value = in_path_length;
 %% ¡props!
 
 %%% ¡prop! 
-RULE (parameter, option) is the PathlengthIn algorithm
+RULE (parameter, option) is the PathLengthIn algorithm
 %%%% ¡settings!
 {'subgraphs' 'harmonic' 'mean'}
 %%%% ¡default!
@@ -119,14 +119,14 @@ A = [
 known_in_path_length = {[Inf Inf Inf Inf Inf]'};
 g = GraphBD('B', A);
 
-m_outside_g = PathlengthIn('G', g);
+m_outside_g = PathLengthIn('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_path_length), ...
-    [BRAPH2.STR ':PathlengthIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'PathlengthIn');
+m_inside_g = g.get('MEASURE', 'PathLengthIn');
 assert(isequal(m_inside_g.get('M'), known_in_path_length), ...
-    [BRAPH2.STR ':PathlengthIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -157,14 +157,14 @@ known_in_path_length = {
 
 g = MultiplexBD('B', A);
 
-m_outside_g = PathlengthIn('G', g);
+m_outside_g = PathLengthIn('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_path_length), ...
-    [BRAPH2.STR ':PathlengthIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'PathlengthIn');
+m_inside_g = g.get('MEASURE', 'PathLengthIn');
 assert(isequal(m_inside_g.get('M'), known_in_path_length), ...
-    [BRAPH2.STR ':PathlengthIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -198,12 +198,12 @@ known_in_path_length = {
 
 g = OrdMlBD('B', A);
 
-m_outside_g = PathlengthIn('G', g);
+m_outside_g = PathLengthIn('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_path_length), ...
-    [BRAPH2.STR ':PathlengthIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'PathlengthIn');
+m_inside_g = g.get('MEASURE', 'PathLengthIn');
 assert(isequal(m_inside_g.get('M'), known_in_path_length), ...
-    [BRAPH2.STR ':PathlengthIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
