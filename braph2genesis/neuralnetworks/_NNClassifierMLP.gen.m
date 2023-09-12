@@ -90,7 +90,7 @@ end
 %%% ¡prop!
 TARGETS (query, cell) constructs the targets in the CB (channel-batch) format with one-hot vectors.
 %%%% ¡calculate!
-% targets = nn.get('PREDICT', D) returns a cell array with the
+% targets = nn.get('TARGETS', D) returns a cell array with the
 %  targets for all data points in dataset D with one-hot vectors.
 if isempty(varargin)
     value = {};
