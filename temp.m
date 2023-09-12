@@ -1166,8 +1166,8 @@ close all; delete(findall(0, 'type', 'figure')); clear all
 %     eval(['test_' el_class])
 % end
 
-% el_class_list = {'CompareGroupPP_CpDict'} % {'AnalyzeGroup' 'CompareGroup' 'ComparisonGroup' 'AnalyzeGroupPP_G' 'CompareGroupPP_CpDict'}
-% el_class_list = {'ComparisonGroupPF_NU'} % {'ComparisonGroupPF' 'ComparisonGroupPF_BB' 'ComparisonGroupPF_BS' 'ComparisonGroupPF_BU' 'ComparisonGroupPF_GB' 'ComparisonGroupPF_GS' 'ComparisonGroupPF_GU' 'ComparisonGroupPF_NB' 'ComparisonGroupPF_NS' 'ComparisonGroupPF_NU' }
+% el_class_list = {'ComparisonGroup'} % {'AnalyzeGroup' 'CompareGroup' 'ComparisonGroup' 'AnalyzeGroupPP_G' 'CompareGroupPP_CpDict'}
+% % el_class_list = {'ComparisonGroupPF_NU'} % {'ComparisonGroupPF' 'ComparisonGroupPF_BB' 'ComparisonGroupPF_BS' 'ComparisonGroupPF_BU' 'ComparisonGroupPF_GB' 'ComparisonGroupPF_GS' 'ComparisonGroupPF_GU' 'ComparisonGroupPF_NB' 'ComparisonGroupPF_NS' 'ComparisonGroupPF_NU' }
 % for i = 1:1:length(el_class_list)
 %     el_class = el_class_list{i};
 %     el_path = '/src/analysis';
@@ -1563,3 +1563,24 @@ close all; delete(findall(0, 'type', 'figure')); clear all
 % gui = GUIElement('PE', sub, 'CLOSEREQ', false);
 % gui.get('DRAW')
 % gui.get('SHOW')
+
+%% Pipelines Analysis Group
+% im = ImporterPipelineBRAPH2(...
+%     'FILE', [fileparts(which('braph2')) filesep 'pipelines' filesep 'structural' filesep 'pipeline_structural_comparison_wu.braph2'], ...
+%     'WAITBAR', true ...
+%     ); 
+% pip = im.get('PIP');
+
+% pip = Element.load('ST_WU.b2');
+pip = Element.load('ST_WU_a1_a2.b2');
+
+gui = GUIElement( ...
+    'PE', pip, ...
+    'WAITBAR', true, ...
+    'CLOSEREQ', false ...
+    );
+gui.get('DRAW')
+gui.get('SHOW')
+
+% a1 = pip.get('PS_DICT').get('IT', 3).get('PC_DICT').get('IT', 1).get('EL')
+% a1g = pip.get('PS_DICT').get('IT', 3).get('PC_DICT').get('IT', 1).get('EL').get('G')
