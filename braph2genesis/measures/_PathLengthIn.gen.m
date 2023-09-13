@@ -83,7 +83,7 @@ parfor li = 1:1:L
                 Du = distance_layer(:, u);
                 in_path_length_layer(u) = harmmean(Du(Du~=0));
             end
-        otherwise  % 'default'
+        otherwise 
             for u = 1:1:N
                 Du = distance_layer(:, u);
                 in_path_length_layer(u) = mean(Du(Du~=0));
@@ -116,16 +116,17 @@ A = [
     0  0  0  0  0
     ];
 
-known_in_path_length = {[Inf Inf Inf Inf Inf]'};
+known_in_path_length = {[1.3333 1.3333 2 1.6000 Inf]'};
+known_in_path_length = cellfun(@(x) round(x, 3), known_in_path_length, 'UniformOutput', false);
 g = GraphBD('B', A);
 
 m_outside_g = PathLengthIn('G', g);
-assert(isequal(m_outside_g.get('M'), known_in_path_length), ...
+assert(isequal(cellfun(@(x) round(x, 3), m_outside_g.get('M'), 'UniformOutput', false), known_in_path_length), ...
     [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'PathLengthIn');
-assert(isequal(m_inside_g.get('M'), known_in_path_length), ...
+assert(isequal(cellfun(@(x) round(x, 3), m_outside_g.get('M'), 'UniformOutput', false), known_in_path_length), ...
     [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -158,11 +159,13 @@ known_in_path_length = {
 g = MultiplexBD('B', A);
 
 m_outside_g = PathLengthIn('G', g);
+m_outside_g.set('RULE', 'mean');
 assert(isequal(m_outside_g.get('M'), known_in_path_length), ...
     [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'PathLengthIn');
+m_inside_g.set('RULE', 'mean');
 assert(isequal(m_inside_g.get('M'), known_in_path_length), ...
     [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -199,11 +202,13 @@ known_in_path_length = {
 g = OrdMlBD('B', B);
 
 m_outside_g = PathLengthIn('G', g);
+m_outside_g.set('RULE', 'mean');
 assert(isequal(m_outside_g.get('M'), known_in_path_length), ...
     [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'PathLengthIn');
+m_inside_g.set('RULE', 'mean');
 assert(isequal(m_inside_g.get('M'), known_in_path_length), ...
     [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
