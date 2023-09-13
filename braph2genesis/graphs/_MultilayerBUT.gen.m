@@ -355,7 +355,7 @@ for li = 1:1:L
         B(li) = {Aii(nodes{li}, nodes{li})};
     end
 end
-value = MultiplexBUD('B', B, 'THRESHOLDS', g.get('THRESHOLDS'));
+value = MultilayerBUT('B', B, 'THRESHOLDS', g.get('THRESHOLDS'));
 
 %% ¡tests!
 
