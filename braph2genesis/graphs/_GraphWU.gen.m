@@ -104,6 +104,12 @@ GraphWU.NOTES
 %%%% ¡title!
 Graph NOTES
 
+%%% ¡prop!
+%%%% ¡id!
+GraphWU.SUBGRAPH
+%%%% ¡title!
+SUBGRAPH
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -309,6 +315,19 @@ random_A = (random_A + transpose(random_A))/2;
 rpos = corrcoef(sum(W), sum(random_A));
 correlation_coefficients = rpos(2);
 value = random_A;
+
+%%% ¡prop!
+SUBGRAPH (query, cell) is the subgraph
+%%%% ¡calculate!
+A = g.get('A');
+nodes = varargin{1};
+
+if ~iscell(nodes)
+    nodes = repmat({nodes}, 1, L);
+end
+B = A{1};
+B = B(nodes{1}, nodes{1});
+value = eval([g.getClass() '(''B'', B)']);
 
 %% ¡tests!
 
