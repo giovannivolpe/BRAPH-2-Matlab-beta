@@ -284,6 +284,15 @@ DENSITIES (parameter, rvector) is the vector of densities.
 %%%% ¡gui!
 pr = PanelPropRVectorSmart('EL', g, 'PROP', MultigraphBUD.DENSITIES, 'MAX', 100, 'MIN', 0, varargin{:});
 
+%%% ¡prop!
+SUBGRAPH (query, item) returns a subgraph of original graph
+%%%% ¡calculate!
+A = g.get('A');
+L = g.get('LAYERNUMBER');
+nodes = varargin{1};
+temp_B = g.get('B');
+B2 = temp_B(nodes{1}, nodes{1});
+value = MultigraphBUD('B', B2, 'DENSITIES', g.get('DENSITIES'));
 
 %% ¡tests!
 
