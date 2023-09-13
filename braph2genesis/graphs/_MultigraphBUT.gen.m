@@ -285,7 +285,15 @@ THRESHOLDS (parameter, rvector) is the vector of thresholds.
 %%%% ¡gui!
 pr = PanelPropRVectorSmart('EL', g, 'PROP', MultigraphBUT.THRESHOLDS, 'MAX', 1, 'MIN', -1, varargin{:});
 
-
+%%% ¡prop!
+SUBGRAPH (query, item) returns a subgraph of original graph
+%%%% ¡calculate!
+A = g.get('A');
+L = g.get('LAYERNUMBER');
+nodes = varargin{1};
+temp_B = g.get('B');
+B2 = temp_B(nodes{1}, nodes{1});
+value = MultigraphBUT('B', B2, 'THRESHOLDS', g.get('THRESHOLDS'));
 
 %% ¡tests!
 
