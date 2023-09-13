@@ -13,16 +13,16 @@
 \begin{abstract}
 \noindent
 This is the developer tutorial for implementing a new neural network data point. 
-In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new neural network data point, which can then be compiled by \code{braph2genesis}. All neural network data point are (direct or indirect) extensions of the base element \code{NNDataPoint}. Here, we will use as examples the neural network data point \code{NNDataPoint\_CON\_REG} (connectivity data for regression), \code{NNDataPoint\_Graph\_REG} (adjacency matrix for regression), and \code{NNDataPoint\_Measure\_CLA} (graph measure for classification).
+In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new neural network data point, which can then be compiled by \code{braph2genesis}. All kinds of neural network data point are (direct or indirect) extensions of the base element \code{NNDataPoint}. Here, we will use as examples the neural network data point \code{NNDataPoint\_CON\_REG} (connectivity data for regression), \code{NNDataPoint\_CON\_CLA} (connectivity data for classification) \code{NNDataPoint\_Graph\_REG} (adjacency matrix for regression), \code{NNDataPoint\_Graph\_CLA} (adjacency matrix for classification), \code{NNDataPoint\_Measure\_REG} (graph measure for regression), and \code{NNDataPoint\_Measure\_CLA} (graph measure for classification).
 \end{abstract}
 
 \tableofcontents
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\section{Implementation of Connectivity Data for Regression (\code{NNDataPoint\_CON\_REG})}
+\section{Implementation of a Data Point with Connectivity Data}
 
-%\subsection{Unilayer Binary Directed Graph (GraphBD)}
+\subsection{Connectivity Data Point for Regression (\code{NNDataPoint\_CON\_REG})}
 
 We will start by implementing in detail \code{NNDataPoint\_CON\_REG}, which is a direct extension of \code{NNDataPoint}.
 A data point for regression with connectivity data \code{NNDataPoint\_CON\_REG} contains the input and target for neural network analysis with a subject with connectivity data (SubjectCON), where the input is the subject's connectivity data and the target is the subject's variables of interest.
@@ -217,7 +217,7 @@ function h = WattsStrogatz(N, K, beta) ¥\circled{10}¥
 end
 
 %%% ¡test! 
-%%%% ¡name!
+%%%% ¡name! ¥\circled{11}\circlednote{11}{validates the data point by using assertions to confirm that the input and target calculated values match the connectivity data and the variables of interest in the example files.}¥
 Create a NNDataset containg NNDataPoint_CON_REG with simulated data
 %%%% ¡code!
 % Load BrainAtlas
@@ -237,7 +237,7 @@ im_gr = ImporterGroupSubjectCON_XLS( ...
 
 gr = im_gr.get('GR');
 
-% create a item list of NNDataPoint_CON_REG
+% create an item list of NNDataPoint_CON_REG ¥\circled{12}\threecirclednotes{12}{13}{14}{creates an item list for the data points, subsequently generates the data point dictionary using the list, and then constructs the neural network dataset containing these data points.}¥
 it_list = cellfun(@(x) NNDataPoint_CON_REG( ...
     'ID', x.get('ID'), ...
     'SUB', x, ...
@@ -245,31 +245,31 @@ it_list = cellfun(@(x) NNDataPoint_CON_REG( ...
     gr.get('SUB_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
-% create a NNDataPoint_CON_REG DICT
+% create a NNDataPoint_CON_REG DICT ¥\circled{13}¥
 dp_list = IndexedDictionary(...
         'IT_CLASS', 'NNDataPoint_CON_REG', ...
         'IT_LIST', it_list ...
         );
 
-% create a NNDataset containing the NNDataPoint_CON_REG DICT
+% create a NNDataset containing the NNDataPoint_CON_REG DICT ¥\circled{14}¥
 d = NNDataset( ...
     'DP_CLASS', 'NNDataPoint_CON_REG', ...
     'DP_DICT', dp_list ...
     );
 
-% Check whether the number of inputs matches
+% Check whether the number of inputs matches ¥\circled{14}\circlednote{14}{tests the number of inputs from the dataset matches the number of subjects in the group.}¥
 assert(length(d.get('INPUTS')) == gr.get('SUB_DICT').get('LENGTH'), ...
 		[BRAPH2.STR ':NNDataPoint_CON_REG:' BRAPH2.FAIL_TEST], ...
 		'NNDataPoint_CON_REG does not construct the dataset correctly. The number of the inputs should be the same as the number of imported subjects.' ...
 		)
 
-% Check whether the number of targets matches
+% Check whether the number of targets matches ¥\circled{15}\circlednote{15}{tests the number of targets from the dataset matches the number of subjects in the group.}¥
 assert(length(d.get('TARGETS')) == gr.get('SUB_DICT').get('LENGTH'), ...
 		[BRAPH2.STR ':NNDataPoint_CON_REG:' BRAPH2.FAIL_TEST], ...
 		'NNDataPoint_CON_REG does not construct the dataset correctly. The number of the targets should be the same as the number of imported subjects.' ...
 		)
 
-% Check whether the content of input for a single datapoint matches
+% Check whether the content of input for a single datapoint matches ¥\circled{16}\circlednote{16}{tests the value of each input from the data point matches the subject's connectivity data.}¥
 for index = 1:1:gr.get('SUB_DICT').get('LENGTH')
     individual_input = d.get('DP_DICT').get('IT', index).get('INPUT');
     known_input = {gr.get('SUB_DICT').get('IT', index).get('CON')};
@@ -281,7 +281,7 @@ for index = 1:1:gr.get('SUB_DICT').get('LENGTH')
 end
 
 %%% ¡test! 
-%%%% ¡name!
+%%%% ¡name!  ¥\circled{17}\twocirclednotes{17}{18}{executes the corresponding example scripts to ensure the functionalities.}¥
 Example training-test regression
 %%%% ¡code!
 % ensure the example data is generated
@@ -292,7 +292,7 @@ end
 example_NN_CON_REG
 
 %%% ¡test! 
-%%%% ¡name!
+%%%% ¡name! ¥\circled{18}¥
 Example cross-validation regression
 %%%% ¡code!
 % ensure the example data is generated
@@ -306,7 +306,17 @@ example_NNCV_CON_REG
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\section{Implementation of Multilayer Graphs}
+\subsection{Connectivity Data Point for Classification (\code{NNDataPoint\_CON\_CLA})}
+
+%%%%% %%%%% %%%%% %%%%% %%%%%
+\clearpage
+\section{Implementation of a Data Point with Graphs}
+\subsection{Graph Data Point for Regression (\code{NNDataPoint\_Graph\_REG})}
+
+%%%%% %%%%% %%%%% %%%%% %%%%%
+\clearpage
+\section{Implementation of a Data Point with Graph Measures}
+\subsection{Graph Measure Data Point for Classification (\code{NNDataPoint\_Measure\_CLA})}
 
 
 %\bibliography{biblio}
