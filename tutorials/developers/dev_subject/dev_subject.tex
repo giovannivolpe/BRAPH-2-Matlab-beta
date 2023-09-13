@@ -13,7 +13,7 @@
 \begin{abstract}
 \noindent
 This is the developer tutorial for implementing a new Subject. 
-In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new subject, which can then be compiled by \code{braph2genesis}. All types of subjects are extensions of the base element \code{Subject}. Here, we will use as examples the subjects \code{SubjectCON} (subject with connectivity data), \code{SubjectCON\_MP} (subject with connectivity multiplex data), \code{SubjectFUN} (subject with functional data), \code{SubjectFUN\_MP} (subject with functional multiplex data), \code{SubjectST} (subject with structural data), and \code{SubjectST\_MP} (subject with structural multiplex data).
+In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new subject, which can then be compiled by \code{braph2genesis}. All types of subjects are extensions of the base element \code{Subject}. Here, we will use as examples the subjects \code{SubjectCon} (subject with connectivity data), \code{SubjectCON\_MP} (subject with connectivity multiplex data), \code{SubjectFUN} (subject with functional data), \code{SubjectFUN\_MP} (subject with functional multiplex data), \code{SubjectST} (subject with structural data), and \code{SubjectST\_MP} (subject with structural multiplex data).
 \end{abstract}
 
 \tableofcontents
@@ -22,9 +22,9 @@ In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} 
 \clearpage
 \section{Implementation of a subject with connectivity matrix}
 
-\subsection{Subject with connectivity data (SubjectCON)}
+\subsection{subject with connectivity data (SubjectCON)}
 
-We will start by implementing in detail \code{SubjectCON}. This class can be used for subjects with connectivity matrix data usually obtained from DTI.
+We will start by implementing in detail \code{SubjectCON}. The connectivity matrix can be obtained from DTI data.
 
 \begin{lstlisting}[
 	label=cd:m:SubjectCON:header,
@@ -94,7 +94,7 @@ BA (data, item) is a brain atlas.
 %%% ¡prop! 
 CON (data, smatrix) is an adjacency matrix.
 %%%% ¡check_value!
-br_number = sub.get('BA').get('BR_DICT').get('LENGTH'); ¥\circled{1}\circlednote{1}{defines the number of brain regions from the Brain Atlas.}\circlednote{2}{checks that the size of \code{value} is equal to the number of brain regions.}\circlednote{3}{returns the check information \code{msg} according to the variable \code{check}.}\circlednote{4}{plots the panel of a property matrix-like with element \code{sub} and the property number \code{SubjectCON.CON}. \code{ROWNAME} and \code{COLUMNNAME} are the name of regions from brain atlas.}¥
+br_number = sub.get('BA').get('BR_DICT').get('LENGTH'); ¥\circled{1}\circlednote{1}{defines the number of brain regions from the Brain Atlas.}\circlednote{2}{The \code{value} is the data matrix. Checking the size of \code{value} is equal to the number of brain regions.}\circlednote{3}{returns the check information \code{msg} according to the variable \code{check}.}\circlednote{4}{plots the panel of a property matrix-like with element \code{sub} and the property number \code{SubjectCon.Con}. \code{ROWNAME} and \code{COLUMNNAME} are the name of regions from brain atlas.}¥
 check = isequal(size(value), [br_number, br_number]); ¥ \circled{2}¥
 if check ¥ \circled{3}¥
     msg = 'All ok!';
@@ -131,8 +131,8 @@ im_ba = ImporterBrainAtlasXLS('FILE', 'desikan_atlas.xlsx'); ¥\circled{3}\circl
 ba = im_ba.get('BA');  ¥\circled{4}\circlednote{4}{returns the brain atlas.}¥
 
 gr = Group('SUB_CLASS', 'SubjectCON', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectCON'));  ¥\circled{5}\circlednote{5}{represents a group of subjects whose class is defined in the property \code{'SUB\_CLASS'}. \code{'SUB\_DICT'} manages the subjects as an indexed dictionary of subjects.}¥
-for i = 1:1:50 ¥\circled{6}\circlednote{6}{iterates to create 50 subjects.}¥
-    sub = SubjectCON( ... ¥\circled{7}\circlednote{7}{creates a new subject of the class \code{SubjectCON}. For that, it defines the \code{'ID'}, \code{'LABEL'}, \code{'NOTES'}, \code{'BA'} (Brain Atlas) and \code{'CON'} (a random adjacency matrix) for the new subject.}¥
+for i = 1:1:50 ¥\circled{6}\circlednote{6}{construts 50 subjects.}¥
+    sub = SubjectCON( ... ¥\circled{7}\circlednote{7}{defines the \code{'ID'}, \code{'LABEL'}, \code{'NOTES'}, \code{'BA'} (Brain Atlas) and \code{'CON'} (a random adjacency matrix) for a subject.}¥
         'ID', ['SUB CON ' int2str(i)], ...
         'LABEL', ['Subejct CON ' int2str(i)], ...
         'NOTES', ['Notes on subject CON ' int2str(i)], ...
@@ -141,7 +141,7 @@ for i = 1:1:50 ¥\circled{6}\circlednote{6}{iterates to create 50 subjects.}¥
         );
     sub.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 100 * rand())) ¥\circled{8}\circlednote{8}{adds a random \code{Numeric} \code{'Age'} as the variable of interest of the subject.}¥
     sub.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', randi(2, 1))) ¥\circled{9}\circlednote{8}{adds a random \code{Categoric} \code{'Sex'} as the variable of interest of the subject.}¥
-    gr.get('SUB_DICT').get('ADD', sub) ¥\circled{10}\circlednote{10}{adds the created subject \code{'sub'} into group of subjects.}¥
+    gr.get('SUB_DICT').get('ADD', sub) ¥\circled{10}\circlednote{10}{adds \code{'sub'} into group.}¥
 end
 
 gui = GUIElement('PE', gr, 'CLOSEREQ', false); ¥\circled{11}\circlednote{11}{constructs the GUI panel from \code{gr}. Setting the \code{'CLOSEREQ'} to \code{false} means doesn't confirm whether the GUI is close.}¥
@@ -153,7 +153,7 @@ gui.get('CLOSE') ¥\circled{14}\circlednote{14}{closes the figure and its depend
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\subsection{Subject with connectivity multiplex data (SubjectCON\_MP)}
+\subsection{subject with connectivity multiplex data (SubjectCON\_MP)}
 
 We can now use \code{SubjectCON} as the basis to implement the \code{SubjectCON\_MP}. The parts of the code that are modified are highlighted.
 The multilayer data allows connections between any nodes across the multiple layers. The \code{SubjectCON\_MP} can also be used on ordinal multilayer data.
@@ -222,12 +222,12 @@ BA (data, item) is a brain atlas.
 'BrainAtlas'
 
 ¤%%% ¡prop! 
-L (data, scalar) is the number of layers of subject data. ¥\circled{1}\circlednote{1}{defines a parameter to determine the number of layers of subject data. This property must be a scalar parameter.}¥
+L (data, scalar) is the number of layers of subject data. ¥\circled{1}\circlednote{1}{defines a parameter to determine the number of layers of subject data. This property must be of a scalar parameter.}¥
 %%%% ¡default!
 2¤ ¥\circled{2}\circlednote{2}{defines the default option, in this case \code{'2'}.}¥
 
 ¤%%% ¡prop! 
-LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.¤ ¥\circled{3}\circlednote{3}{defines a parameter to determine the labels for each layer. This property must be a string list parameter.}¥
+LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.¤ ¥\circled{3}\circlednote{3}{defines a parameter to determine the labels for each layer. This property must be of string list parameter.}¥
 
 ¤%%% ¡prop!
 ALAYERLABELS (query, stringlist) returns the processed layer labels.¤ ¥\circled{4}\circlednote{4}{defines a parameter to determine the processed labels for each layer. This property must be of string list parameter.}¥
@@ -239,7 +239,7 @@ value = sub.get('LAYERLABELS'); ¥\circled{5}\circlednote{5}{defines the \code{v
 %%%% ¡check_value!
 br_number = sub.get('BA').get('BR_DICT').get('LENGTH');
 ¤num_layers = sub.get('L'); ¥\circled{6}\circlednote{6}{defines the number of layers.}¥
-check = (iscell(value) && isequal(length(value), num_layers)  && isequal( cellfun(@(v) size(v, 1), value), ones(1, num_layers) * br_number)  && isequal( cellfun(@(v) size(v, 2), value), ones(1, num_layers) * br_number)) || (isempty(value) && br_number == 0);¤ ¥\circled{6}\circlednote{6}{checks that the size of each layer is equal to the number of brain regions.}¥
+check = (iscell(value) && isequal(length(value), num_layers)  && isequal( cellfun(@(v) size(v, 1), value), ones(1, num_layers) * br_number)  && isequal( cellfun(@(v) size(v, 2), value), ones(1, num_layers) * br_number)) || (isempty(value) && br_number == 0);¤ ¥\circled{6}\circlednote{6}{checks the size of each layer is equal to the number of brain regions.}¥
 if check
     msg = 'All ok!';
 else   
@@ -285,7 +285,7 @@ for i = 1:1:10
         ¤'L', 3, ... ¥\circled{1}\circlednote{1}{defines the number of layers.}¥
         'LAYERLABELS', {'L1' 'L2' 'L3'}, ... ¥\circled{2}\circlednote{2}{defines the label of each layer.}¥
         'CON_MP', {rand(ba.get('BR_DICT').get('LENGTH')), rand(ba.get('BR_DICT').get('LENGTH')), rand(ba.get('BR_DICT').get('LENGTH'))} ...¤
-        ); ¥\circled{3}\circlednote{3}{constructs 3 layers randomly of the same size as the number of brain regions.}¥
+        ); ¥\circled{3}\circlednote{3}{constructs 3 layers randomly with size of brain regions by brain regions.}¥
     sub.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 100 * rand()))
     sub.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', randi(2, 1)))
     gr.get('SUB_DICT').get('ADD', sub)
@@ -301,7 +301,7 @@ gui.get('CLOSE')
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
 \section{Implementation of a subject with functional data}
-\subsection{Subject with functional data (SubjectFUN)}
+\subsection{subject with functional data (SubjectFUN)}
 
 We will start by implementing in detail \code{SubjectFUN}. The connectivity matrix can be obtained from fMRI data.
 
@@ -410,7 +410,7 @@ for i = 1:1:50
         'LABEL', [¤'Subejct FUN '¤ int2str(i)], ...
         'NOTES', [¤'Notes on subject FUN '¤ int2str(i)], ...
         'BA', ba, ...
-        ¤'FUN', rand(10, ba.get('BR_DICT').get('LENGTH')) ...¥\circled{1}\circlednote{1}{constructs the random adjacency matrix with a size of 10 timepoints by the number of brain regions.}¥¤
+        ¤'FUN', rand(10, ba.get('BR_DICT').get('LENGTH')) ...¥\circled{1}\circlednote{1}{constructs the random adjacency matrix with the size of 10 timepoints by the number of brain regions.}¥¤
         );
     sub.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 100 * rand()))
     sub.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', randi(2, 1)))
@@ -426,7 +426,7 @@ gui.get('CLOSE')
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\subsection{Subject with functional multiplex data (SubjectFUN\_MP)}
+\subsection{subject with functional multiplex data (SubjectFUN\_MP)}
 
 We will start by implementing in detail \code{SubjectFUN\_MP}. The functional matrix can be obtained from fMRI data.
 
@@ -511,7 +511,7 @@ value = sub.get('LAYERLABELS');
 %%%% ¡check_value!
 br_number = sub.get('BA').get('BR_DICT').get('LENGTH');
 ¤num_layers = sub.get('L');
-check = (iscell(value) && isequal(length(value), num_layers)  && isequal( cellfun(@(v) size(v, 2), value), ones(1, num_layers) * br_number)) || (isempty(value) && br_number == 0); ¤ ¥\circled{4}\circlednote{4}{checks that the size of each layer is equal to the number of brain regions. The size of each layer is the length of time series by the number of regions.}¥
+check = (iscell(value) && isequal(length(value), num_layers)  && isequal( cellfun(@(v) size(v, 2), value), ones(1, num_layers) * br_number)) || (isempty(value) && br_number == 0); ¤ ¥\circled{4}\circlednote{4}{checks the size of each layer are equal to the number of brain regions. The size of each layer is the length of time series by the number of regions.}¥
 if check
     msg = 'All ok!';
 else   
@@ -574,7 +574,7 @@ gui.get('CLOSE')¤
 \clearpage
 \section{Implementation of a subject with structural data}
 
-\subsection{Subject with structural data (SubjectST)}
+\subsection{subject with structural data (SubjectST)}
 
 We will start by implementing in detail \code{SubjectST}. The structural matrix can be obtained from sMRI data.
 
@@ -646,7 +646,7 @@ BA (data, item) is a brain atlas.
 ¤ST (data, cvector) is a column vector with data for each brain region.¤
 %%%% ¡check_value!
 br_number = sub.get('BA').get('BR_DICT').get('LENGTH');
-¤check = (iscolumn(value) && isequal(size(value), [br_number, 1])) || (isempty(value) && br_number == 0);¤ ¥\circled{1}\circlednote{1}{checks that the size of the row of \code{value} is equal to the number of brain regions. The number of columns is 1.}¥¤
+¤check = (iscolumn(value) && isequal(size(value), [br_number, 1])) || (isempty(value) && br_number == 0);¤ ¥\circled{1}\circlednote{1}{checks the size of the row of \code{value} is equal to the number of brain regions. The number of column is 1.}¥¤
 if check
     msg = 'All ok!';
 else   
@@ -684,7 +684,7 @@ for i = 1:1:50
         'LABEL', [¤'Subejct ST '¤ int2str(i)], ...
         'NOTES', [¤'Notes on subject ST '¤ int2str(i)], ...
         'BA', ba, ...
-        ¤'ST', rand(ba.get('BR_DICT').get('LENGTH'), 1) ...¤ ¥\circled{1}\circlednote{1}{constructs the random adjacency matrix with a size of number of brain regions by 1.}¥¤
+        ¤'ST', rand(ba.get('BR_DICT').get('LENGTH'), 1) ...¤ ¥\circled{1}\circlednote{1}{constructs the random adjacency matrix with size of the number of brain regions by 1.}¥¤
         );
     sub.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 100 * rand()))
     sub.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', randi(2, 1)))
@@ -700,7 +700,7 @@ gui.get('CLOSE')¤
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\subsection{Subject with structural multiplex data (SubjectST\_MP)}
+\subsection{subject with structural multiplex data (SubjectST\_MP)}
 
 We will start by implementing in detail \code{SubjectST\_MP}. The structural matrix can be obtained from sMRI data.
 
@@ -725,7 +725,7 @@ We will start by implementing in detail \code{SubjectST\_MP}. The structural mat
 	label={cd:m:SubjectST_MP:prop_update},
 	caption={
 		{\bf SubjectST\_MP element prop update.}
-		The \code{props\_update} section of the generator code for \fn{\_SubjectST\_MP.gen.m} updates the properties of the \code{Subject} element. \expand{cd:m:SubjectCON_MP:prop_update}
+		The \code{props\_update} section of the generator code for \fn{\_SubjectST_MP.gen.m} updates the properties of the \code{Subject} element. \expand{cd:m:SubjectCON_MP:prop_update}
 	}
 ]
 ¤%% ¡props_update!
@@ -785,7 +785,7 @@ value = sub.get('LAYERLABELS');
 %%%% ¡check_value!
 br_number = sub.get('BA').get('BR_DICT').get('LENGTH');
 num_layers = sub.get('L');
-¤check = (iscell(value) && isequal(length(value), num_layers)  && isequal( cellfun(@(v) size(v, 1), value), ones(1, num_layers) * br_number)) || (isempty(value) && br_number == 0); ¤ ¥\circled{4}\circlednote{4}{checks the size of each layer is equal to the number of brain regions. The size of each layer is the number of regions by 1.}¥
+¤check = (iscell(value) && isequal(length(value), num_layers)  && isequal( cellfun(@(v) size(v, 1), value), ones(1, num_layers) * br_number)) || (isempty(value) && br_number == 0); ¤ ¥\circled{4}\circlednote{4}{checks the size of each layer are equal to the number of brain regions. The size of each layer is the number of regions by 1.}¥
 if check
     msg = 'All ok!';
 else   
