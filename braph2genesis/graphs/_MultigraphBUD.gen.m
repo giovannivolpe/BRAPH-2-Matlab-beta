@@ -117,6 +117,12 @@ MultigraphBUD.NOTES
 %%%% ¡title!
 Graph NOTES
 
+%%% ¡prop!
+%%%% ¡id!
+MultigraphBUD.SUBGRAPH
+%%%% ¡title!
+SUBGRAPH
+
 %% ¡props_update!
 
 %%% ¡prop!

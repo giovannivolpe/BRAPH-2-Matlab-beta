@@ -118,6 +118,12 @@ MultiplexWU.NOTES
 %%%% ¡title!
 Graph NOTES
 
+%%% ¡prop!
+%%%% ¡id!
+MultiplexWU.SUBGRAPH
+%%%% ¡title!
+SUBGRAPH
+
 %% ¡props_update!
 
 %%% ¡prop!

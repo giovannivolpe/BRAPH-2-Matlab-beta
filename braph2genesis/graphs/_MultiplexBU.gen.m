@@ -106,6 +106,12 @@ MultiplexBU.NOTES
 %%%% ¡title!
 Graph NOTES
 
+%%% ¡prop!
+%%%% ¡id!
+MultiplexBU.SUBGRAPH
+%%%% ¡title!
+SUBGRAPH
+
 %% ¡props_update!
 
 %%% ¡prop!

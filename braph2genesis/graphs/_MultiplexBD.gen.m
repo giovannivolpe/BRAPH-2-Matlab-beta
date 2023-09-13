@@ -99,6 +99,12 @@ MultiplexBD.NOTES
 %%%% ¡title!
 Graph NOTES
 
+%%% ¡prop!
+%%%% ¡id!
+MultiplexBD.SUBGRAPH
+%%%% ¡title!
+SUBGRAPH
+
 %% ¡props_update!
 
 %%% ¡prop!
