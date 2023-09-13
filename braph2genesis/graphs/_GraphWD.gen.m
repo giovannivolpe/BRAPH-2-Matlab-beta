@@ -97,6 +97,12 @@ GraphWD.NOTES
 %%%% ¡title!
 Graph NOTES
 
+%%% ¡prop!
+%%%% ¡id!
+GraphWD.SUBGRAPH
+%%%% ¡title!
+SUBGRAPH
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -292,6 +298,19 @@ rpos_in = corrcoef(sum(W,1), sum(random_A,1));
 rpos_out = corrcoef(sum(W,2), sum(random_A,2));
 correlation_coefficients = [rpos_in(2) rpos_out(2)];
 value = random_A;
+
+%%% ¡prop!
+SUBGRAPH (query, cell) is the subgraph
+%%%% ¡calculate!
+A = g.get('A');
+nodes = varargin{1};
+
+if ~iscell(nodes)
+    nodes = repmat({nodes}, 1, L);
+end
+B = A{1};
+B = B(nodes{1}, nodes{1});
+value = eval([g.getClass() '(''B'', B)']);
 
 
 %% ¡tests!

@@ -92,6 +92,12 @@ GraphBU.NOTES
 %%%% ¡title!
 Graph NOTES
 
+%%% ¡prop!
+%%%% ¡id!
+GraphBU.SUBGRAPH
+%%%% ¡title!
+SUBGRAPH
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -304,6 +310,19 @@ for attempt = 1:1:attempts_per_edge * E
     end
 end
 value = random_A;
+
+%%% ¡prop!
+SUBGRAPH (query, cell) is the subgraph
+%%%% ¡calculate!
+A = g.get('A');
+nodes = varargin{1};
+
+if ~iscell(nodes)
+    nodes = repmat({nodes}, 1, L);
+end
+B = A{1};
+B = B(nodes{1}, nodes{1});
+value = eval([g.getClass() '(''B'', B)']);
 
 %% ¡tests!
 
