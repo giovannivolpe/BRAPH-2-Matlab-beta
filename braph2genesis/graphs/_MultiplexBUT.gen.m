@@ -299,6 +299,20 @@ for i = 1:length(A)
 end
 value = A;
 
+%%% ¡prop!
+SUBGRAPH (query, item) returns a subgraph of original graph
+%%%% ¡calculate!
+A = g.get('A');
+L = g.get('LAYERNUMBER');
+nodes = varargin{1};
+for li = 1:1:L
+    Aii = A{li, li};
+    if ~isempty(Aii)
+        B(li) = {Aii(nodes{li}, nodes{li})};
+    end
+end
+value = MultiplexBUT('B', B, 'THRESHOLDS', g.get('THRESHOLDS'));
+
 %% ¡props!
 
 %%% ¡prop!

@@ -346,7 +346,7 @@ for li = 1:1:L
         B(li) = {Aii(nodes{li}, nodes{li})};
     end
 end
-value = MultiplexBUD('B', B, 'DENSITIES', g.get('DENSITIES'));
+value = MultilayerBUD('B', B, 'DENSITIES', g.get('DENSITIES'));
 
 %% ¡props!
 
