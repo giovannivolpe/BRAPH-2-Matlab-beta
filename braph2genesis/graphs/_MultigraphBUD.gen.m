@@ -277,13 +277,6 @@ for i = 1:length(A)
 end
 value = A;
 
-%% ¡props!
-
-%%% ¡prop!
-DENSITIES (parameter, rvector) is the vector of densities.
-%%%% ¡gui!
-pr = PanelPropRVectorSmart('EL', g, 'PROP', MultigraphBUD.DENSITIES, 'MAX', 100, 'MIN', 0, varargin{:});
-
 %%% ¡prop!
 SUBGRAPH (query, item) returns a subgraph of original graph
 %%%% ¡calculate!
@@ -293,6 +286,13 @@ nodes = varargin{1};
 temp_B = g.get('B');
 B2 = temp_B(nodes{1}, nodes{1});
 value = MultigraphBUD('B', B2, 'DENSITIES', g.get('DENSITIES'));
+
+%% ¡props!
+
+%%% ¡prop!
+DENSITIES (parameter, rvector) is the vector of densities.
+%%%% ¡gui!
+pr = PanelPropRVectorSmart('EL', g, 'PROP', MultigraphBUD.DENSITIES, 'MAX', 100, 'MIN', 0, varargin{:});
 
 %% ¡tests!
 

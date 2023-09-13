@@ -335,15 +335,6 @@ for i = 1:length(A)
 end
 value = A;
 
-%% ¡props!
-
-%%% ¡prop!
-THRESHOLDS (parameter, rvector) is the vector of thresholds.
-%%%% ¡default!
-[0 0 0 0]
-%%%% ¡gui!
-pr = PanelPropRVectorSmart('EL', g, 'PROP', MultilayerBUT.THRESHOLDS, 'MAX', 1, 'MIN', -1, varargin{:});
-
 %%% ¡prop!
 SUBGRAPH (query, item) returns a subgraph of original graph
 %%%% ¡calculate!
@@ -357,6 +348,15 @@ for li = 1:1:L
     end
 end
 value = MultilayerBUT('B', B, 'THRESHOLDS', g.get('THRESHOLDS'));
+
+%% ¡props!
+
+%%% ¡prop!
+THRESHOLDS (parameter, rvector) is the vector of thresholds.
+%%%% ¡default!
+[0 0 0 0]
+%%%% ¡gui!
+pr = PanelPropRVectorSmart('EL', g, 'PROP', MultilayerBUT.THRESHOLDS, 'MAX', 1, 'MIN', -1, varargin{:});
 
 %% ¡tests!
 
