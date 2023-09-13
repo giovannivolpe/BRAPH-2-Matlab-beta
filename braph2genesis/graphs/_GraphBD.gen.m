@@ -430,3 +430,14 @@ deg_B = sum(random_A, 2);
 assert(isequal(0, h), ... % check same degree distribution
     [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
     'GraphBD Randomize is not functioning well.')
+
+%%% ¡test!
+%%%% ¡name!
+SUBGRAPH
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B = randn(10);
+g = GraphBD('B', B);
+nodes = [1 3 4 7];
+sub_g = g.get('SUBGRAPH', nodes);
