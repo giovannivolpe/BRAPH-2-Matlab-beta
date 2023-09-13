@@ -115,7 +115,7 @@ else
     overlapping_degree = calculateValue@OverlappingDgr(m, prop);
     overlapping_degree_av = cell(length(l), 1);
 
-    for i=1:length(ls)
+    for i=1:length(l)
         overlapping_degree_av(i) = {mean(overlapping_degree{i})};
     end
     value = overlapping_degree_av;
