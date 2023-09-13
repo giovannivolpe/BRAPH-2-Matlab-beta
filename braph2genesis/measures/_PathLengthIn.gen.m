@@ -52,7 +52,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphBD' 'GraphWD' 'MultiplexBD' 'MultiplexWD' 'MultilayerBD' 'OrdMlBD'}
+{'GraphBD' 'GraphWD' 'MultiplexBD' 'MultiplexWD' 'MultilayerBD' 'OrdMxBD'}
 
 %%% ¡prop!
 M (result, cell) is the cell containing the PathLengthIn.
@@ -172,7 +172,7 @@ assert(isequal(m_inside_g.get('M'), known_in_path_length), ...
 
 %%% ¡test!
 %%%% ¡name!
-OrdMlBD
+OrdMxBD
 %%%% ¡code!
 B11 = [
       0  1  1  1  0;
