@@ -63,7 +63,7 @@ N = g.get('NODENUMBER');
 L = g.get('LAYERNUMBER');
 
 out_path_length = cell(L, 1);                    
-path_length_rule = m.get('rule');
+path_length_rule = m.get('RULE');
 
 distance = Distance('G', g).get('M');
 
