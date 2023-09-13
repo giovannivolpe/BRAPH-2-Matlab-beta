@@ -317,10 +317,11 @@ correlation_coefficients = rpos(2);
 value = random_A;
 
 %%% ¡prop!
-SUBGRAPH (query, cell) is the subgraph
+SUBGRAPH (query, item) is the subgraph
 %%%% ¡calculate!
 A = g.get('A');
 nodes = varargin{1};
+L = g.get('LAYERNUMBER');
 
 if ~iscell(nodes)
     nodes = repmat({nodes}, 1, L);

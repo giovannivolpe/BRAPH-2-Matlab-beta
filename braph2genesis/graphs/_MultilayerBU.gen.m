@@ -285,11 +285,6 @@ SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative ed
 {'zero', 'absolute'}
 
 %%% ¡prop!
-ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-%%%% ¡default!
-5
-
-%%% ¡prop!
 RANDOMIZATION (query, cell) is the attempts to rewire each edge.
 %%%% ¡calculate!
 rng(g.get('RANDOM_SEED'), 'twister')
