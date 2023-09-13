@@ -53,6 +53,24 @@ NEGATIVE EDGE RULE
 
 %%% ¡prop!
 %%%% ¡id!
+OrdMxBD.RANDOMIZE
+%%%% ¡title!
+RANDOMIZATION ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMxBD.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
+OrdMxBD.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
 OrdMxBD.A
 %%%% ¡title!
 Binary Directed ADJACENCY MATRICES
@@ -183,7 +201,9 @@ for i = 1:1:L
         end
     end
 end
-
+if g.get('RANDOMIZE')
+    A = g.get('RANDOMIZATION', A);
+end
 value = A;
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', OrdMxBD.A, ...
@@ -232,6 +252,34 @@ pr = PanelPropCell('EL', g, 'PROP', OrdMxBD.B, ...
 SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.
 %%%% ¡settings!
 {'zero', 'absolute'}
+
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
+%%% ¡prop!
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+
+for i = 1:length(A)
+    tmp_a = A{i,i};
+
+    tmp_g = GraphBD();
+    tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+    random_A = tmp_g.get('RANDOMIZATION', {tmp_a});
+    A{i, i} = random_A;
+end
+value = A;
 
 %% ¡tests!
 
@@ -326,51 +374,55 @@ assert(isequal(g_absolute.get('A'), A_absolute), ...
     'OrdMxBD is not constructing well.')
 
 
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B1 = [
+    -2 -1 0 1 2
+    -1 0 1 2 -2
+    0 1 2 -2 -1
+    1 2 -2 -1 0
+    2 -2 -1 0 1
+    ];
+B = {B1, B1, B1};
+g = OrdMxBD('B', B);
 
-%% ¡_props!
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
+g.get('A_CHECK')
 
-%%% ¡_prop!
-ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-%%%% ¡_default!
-5
+A = g.get('A');
 
-%% ¡_methods!
-function random_g = randomize(g)
-    % RANDOMIZE returns a randomized graph
-    %
-    % RANDOMIZED_G = RANDOMIZE(G) returns the randomized
-    % graph RANDOM_G obtained with a randomized correlation
-    % matrix via the static function randomize_A while preserving
-    % degree distributions. The randomization it is done layer by
-    % layer and then integrated in the 2-D supra-adjacency matrix
-    % cell array.
-    %
-    % RANDOMIZED_G = RANDOMIZE(G, 'AttemptsPerEdge', VALUE)
-    % returns the randomized graph RANDOM_G obtained with a
-    % randomized correlation matrix via the static function
-    % randomize_A while preserving  degree distributions.
-    % The multiplex is randomized layer by layer where randomized
-    % adjacency matrix of each layer are then integrated in the
-    % 2-D supra-adjacency matrix cell array.
-    %
-    % See also GraphBD
+assert(isequal(size(A{1}), size(B{1})), ...
+    [BRAPH2.STR ':OrdMxBD:' BRAPH2.FAIL_TEST], ...
+    'OrdMxBD Randomize is not functioning well.')
 
-    % get rules
-    attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+g2 = OrdMxBD('B', B);
+g2.set('RANDOMIZE', true);
+g2.set('ATTEMPTSPEREDGE', 4);
+g2.get('A_CHECK')
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
 
-    if nargin<2
-        attempts_per_edge = 5;
+for i = 1:length(A2)
+    if all(A2{i, i}==0, "all") %if all nodes are zero, the random matrix is also all zeros
+        assert(isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':OrdMxBD:' BRAPH2.FAIL_TEST], ...
+            'OrdMxBD Randomize is not functioning well.')
+    elseif isequal((length(A2{i, i}).^2)- length(A2{i, i}), sum(A2{i, i}==1, "all")) %if all nodes (except diagonal) are one, the random matrix is the same as original
+        assert(isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':OrdMxBD:' BRAPH2.FAIL_TEST], ...
+            'OrdMxBD Randomize is not functioning well.')
+    else
+        assert(~isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':OrdMxBD:' BRAPH2.FAIL_TEST], ...
+            'OrdMxBD Randomize is not functioning well.')
     end
 
-    % get A
-    A = g.get('A');
-    L = g.layernumber();
-    random_multi_A = cell(1, L);
-
-    for li = 1:1:L
-        Aii = A{li, li};
-        random_A = GraphBD.randomize_A(Aii, attempts_per_edge);
-        random_multi_A(li) = {random_A};
-    end
-    random_g = OrdMxBD('B', random_multi_A);
+    assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
+        [BRAPH2.STR ':OrdMxBD:' BRAPH2.FAIL_TEST], ...
+        'OrdMxBD Randomize is not functioning well.')
 end

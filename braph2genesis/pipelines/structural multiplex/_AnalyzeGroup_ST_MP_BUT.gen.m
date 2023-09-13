@@ -155,8 +155,8 @@ g = MultiplexBUT( ...
     'THRESHOLDS', thresholds ...  % % % 'LAYERTICKS', thresholds, ... % % % 'LAYERLABELS', cell2str(layerlabels), ... % % % 'BAS', atlas ...
     );
 
-if ~isa(a.getr('TEMPLATE'), 'NoValue')
-    g.set('TEMPLATE', a.get('TEMPLATE').memorize('G'))
+if ~isa(a.getr('TEMPLATE'), 'NoValue') % the analysis has a template
+    g.set('TEMPLATE', a.get('TEMPLATE').memorize('G')) % the template is memorized - overwrite thresholds
 end
 
 value = g;

@@ -2,13 +2,16 @@
 MultilayerBUT < MultilayerWU (g, multilayer binary undirected with fixed thresholds graph) is a multilayer binary undirected with fixed thresholds graph.
 
 %%% ¡description!
-In a multilayer binary undirected with fixed thresholds (BUT) graph, the layers are those of binary undirected (BU)
-multilayer graphs derived from the same weighted supra-adjacency matrix binarized at different thresholds. 
-The supra-adjacency matrix has a number of partitions equal to the number of thresholds. Layers
-within the binary undirected (BU) multilayer graphs could have different number of nodes
-with within-layer binary undirected edges. Edges can be either 0 (absence of connection)
-or 1 (existence of connection).
+In a multilayer binary undirected with fixed thresholds (BUT) graph, the layers 
+ are those of binary undirected (BU) multilayer graphs derived from the same 
+ weighted supra-adjacency matrix binarized at different thresholds. The supra-adjacency 
+ matrix has a number of partitions equal to the number of thresholds. Layers
+ within the binary undirected (BU) multilayer graphs could have different number of nodes 
+ with within-layer binary undirected edges. Edges can be either 0 (absence of connection) 
+ or 1 (existence of connection).
 All node connections are allowed between layers.
+On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized.
+On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.
 
 %% ¡layout!
 
@@ -74,6 +77,30 @@ THRESHOLDS [-1 ... 1]
 
 %%% ¡prop!
 %%%% ¡id!
+MultilayerBUT.RANDOMIZE
+%%%% ¡title!
+RANDOMIZATION ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBUT.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBUT.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerBUT.NUMBEROFWEIGHTS
+%%%% ¡title!
+RANDOMIZATION NUMBER OF WEIGHTS
+
+%%% ¡prop!
+%%%% ¡id!
 MultilayerBUT.A
 %%%% ¡title!
 Binary Undirected ADJACENCY MATRICES at fixed Thresholds
@@ -113,7 +140,7 @@ NAME (constant, string) is the name of the multilayer undirected with fixed thre
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multilayer undirected with fixed thresholds graph.
 %%%% ¡default!
-'In a multilayer binary undirected with fixed thresholds (BUT) graph, the layers are those of binary undirected (BU) multilayer graphs derived from the same weighted supra-adjacency matrix binarized at different thresholds. The supra-adjacency matrix has a number of partitions equal to the number of thresholds. Layers within the binary undirected (BU) multilayer graphs could have different number of nodes with within-layer binary undirected edges. Edges can be either 0 (absence of connection) or 1 (existence of connection). All node connections are allowed between layers.'
+'In a multilayer binary undirected with fixed thresholds (BUT) graph, the layers are those of binary undirected (BU) multilayer graphs derived from the same weighted supra-adjacency matrix binarized at different thresholds. The supra-adjacency  matrix has a number of partitions equal to the number of thresholds. Layers within the binary undirected (BU) multilayer graphs could have different number of nodes with within-layer binary undirected edges. Edges can be either 0 (absence of connection) or 1 (existence of connection). All node connections are allowed between layers. On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multilayer binarized at different thresholds graph.
@@ -191,20 +218,42 @@ L = length(A_WU); % number of layers
 A = cell(length(thresholds)*L);
 
 if L > 0 && ~isempty(cell2mat(A_WU))
-    A(:, :) = {eye(length(A_WU{1, 1}))};
     for i = 1:1:length(thresholds)
         threshold = thresholds(i);
-        layer = 1;
+        layer_x = 1;
         for j = (i - 1) * L + 1:1:i * L
+            layer_y = 1;
 	        for k = (i - 1) * L + 1:1:i * L
-                A{j, k} = dediagonalize(binarize(A_WU{layer, layer}, 'threshold', threshold));
+                if j==k
+                    M = symmetrize(A_WU{layer_x, layer_x}, 'SymmetrizeRule', g.get('SYMMETRIZE_RULE')); %#ok<PROPLC> % enforces symmetry of adjacency matrix
+                    M = dediagonalize(M); % removes self-connections by removing diagonal from adjacency matrix, equivalent to dediagonalize(M, 'DediagonalizeRule', 0)
+                    M = semipositivize(M, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
+                    M = binarize(M,  'threshold', threshold); % enforces binary adjacency matrix, equivalent to binarize(M, 'threshold', 0, 'bins', [-1:.001:1])
+                    A(j, j) = {M};
+                else
+                    M = semipositivize(A_WU{layer_x, layer_y}, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); % removes negative weights
+                    M = binarize(M, 'threshold', threshold, 'diagonal', 'include');  % enforces binary adjacency matrix, equivalent to binarize(M, 'threshold', 0, 'bins', [-1:.001:1])
+                    A(j, k) = {M};
+                end
+                layer_y = layer_y + 1;
             end
-            layer = layer + 1;
+            layer_y = 1;
+            for n = k + 1:1:length(thresholds)*L
+                if layer_y == L+1
+                    layer_y = 1;
+                end
+                A(j, n) = {zeros(size(A_WU{layer_x, layer_y}, 1), size(A_WU{layer_x, layer_y}, 2))};
+                A(n, j) = {zeros(size(A_WU{layer_y, layer_x}, 1), size(A_WU{layer_y, layer_x}, 2))};
+                layer_y = layer_y + 1;
+            end
+            layer_x = layer_x + 1;
         end
     end
 end
+if g.get('RANDOMIZE')
+    A = g.get('RANDOMIZATION', A);
+end
 value = A;
-
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', MultilayerBUT.A, ...
     'TABLE_HEIGHT', s(40), ...
@@ -251,6 +300,34 @@ COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('MultilayerBUT')
 
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
+%%% ¡prop!
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+
+for i = 1:length(A)
+    tmp_a = A{i,i};
+
+    random_g = GraphBU();
+    random_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+    random_A = random_g.get('RANDOMIZATION', {tmp_a});
+    A{i, i} = random_A;
+end
+value = A;
+
 %% ¡props!
 
 %%% ¡prop!
@@ -271,18 +348,18 @@ Constructor - Full
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B11 = [
-    0   1   0  .2
-    1   0   .3  .1
-    0  .3   0   0
-    .2  .1   0   0
-    ];
+B1 = rand(randi([2, 10]));
+B2 = rand(randi([2, 10]));
+B3 = rand(randi([2, 10]));
+B12 = rand(size(B1, 1),size(B2, 2));
+B13 = rand(size(B1, 1),size(B3, 2));
+B23 = rand(size(B2, 1),size(B3, 2));
+B = {
+    B1                           B12                            B13
+    B12'                         B2                             B23
+    B13'                         B23'                           B3
+    };
 
-B12 = rand(size(B11,1),size(B11,2));
-
-B= {B11 B12 B12;
-    B12 B11 B12;
-    B12 B12 B11};
 thresholds = [0 .5 1];
 g = MultilayerBUT('B', B, 'THRESHOLDS', thresholds); 
 g.get('A_CHECK')
@@ -292,13 +369,89 @@ L = length(B); % number of layers
 
 for i = 1:1:length(thresholds)
     threshold = thresholds(i);
-    layer = 1; 
+    layer_x = 1;
     for j = (i - 1) * L + 1:1:i * L
+        layer_y = 1;
         for k = (i - 1) * L + 1:1:i * L
-            assert(isequal(A{j, k}, dediagonalize(binarize(B{layer, layer}, 'threshold', threshold))), ...
-                [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
-                'MultilayerBUT is not constructing well.')
+            if j==k
+                assert(isequal(A{j, j},binarize(symmetrize(dediagonalize(semipositivize(B{layer_x, layer_x}))), 'threshold', threshold)), ...
+                    [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+                    'MultilayerBUT is not constructing well.')
+            else
+                assert(isequal(A{j, k},binarize(semipositivize(B{layer_x, layer_y}), 'threshold', threshold)), ...
+                    [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+                    'MultilayerBUT is not constructing well.')
+            end
+            layer_y = layer_y + 1;
         end
-        layer = layer + 1;
+        layer_y = 1;
+        for n = k + 1:1:length(thresholds)*L
+            if layer_y == L+1
+                layer_y = 1;
+            end
+            assert(isequal(A{j, n},zeros(size(B{layer_x, layer_y}, 1), size(B{layer_x, layer_y}, 2))), ...
+            [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+            'MultilayerBUT is not constructing well.')
+            assert(isequal(A{n, j},zeros(size(B{layer_y, layer_x}, 1), size(B{layer_y, layer_x}, 2))), ...
+            [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+            'MultilayerBUT is not constructing well.')
+            layer_y = layer_y + 1;
+        end
+        layer_x = layer_x + 1;
     end
+end
+
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = randn(10);
+B12 = rand(size(B11,1),size(B11,2));
+
+B= {B11 B12 B12;
+    B12' B11 B12;
+    B12' B12' B11};
+thresholds = [0 .5 1];
+g = MultilayerBUT('B', B, 'THRESHOLDS', thresholds); 
+
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
+g.get('A_CHECK')
+
+A = g.get('A');
+
+assert(isequal(size(A{1}), size(B{1})), ...
+    [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+    'MultilayerBUT Randomize is not functioning well.')
+
+g2 = MultilayerBUT('B', B, 'THRESHOLDS', thresholds); 
+g2.set('RANDOMIZE', false);
+g2.set('ATTEMPTSPEREDGE', 4);
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
+
+for i = 1:length(A2)
+    if all(A2{i, i}==0, "all") %if all nodes are zero, the random matrix is also all zeros
+        assert(isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+            'MultilayerBUT Randomize is not functioning well.')
+    elseif isequal((length(A2{i, i}).^2)- length(A2{i, i}), sum(A2{i, i}==1, "all")) %if all nodes (except diagonal) are one, the random matrix is the same as original
+        assert(isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+            'MultilayerBUT Randomize is not functioning well.')
+    else
+        assert(~isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+            'MultilayerBUT Randomize is not functioning well.')
+    end
+
+    assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
+        [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+        'MultilayerBUT Randomize is not functioning well.')
+
+    assert(issymmetric(random_A{i, i}), ... % check symmetry 
+    [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+    'MultilayerBUT Randomize is not functioning well.')
 end

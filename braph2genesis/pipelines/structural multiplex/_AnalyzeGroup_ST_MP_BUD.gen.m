@@ -155,8 +155,8 @@ g = MultiplexBUD( ...
     'DENSITIES', densities ...  % % % 'LAYERTICKS', densities, ... % % % 'LAYERLABELS', cell2str(layerlabels), ... % % % 'BAS', ba ...
     );
 
-if ~isa(a.getr('TEMPLATE'), 'NoValue')
-    g.set('TEMPLATE', a.get('TEMPLATE').memorize('G'))
+if ~isa(a.getr('TEMPLATE'), 'NoValue') % the analysis has a template
+    g.set('TEMPLATE', a.get('TEMPLATE').memorize('G')) % the template is memorized - overwrite densities
 end
 
 value = g;
