@@ -58,9 +58,12 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 M (result, cell) is the cell containing the PathLengthOutAv.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
+A = g.get('A');  % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
+N = g.get('NODENUMBER');
+L = g.get('LAYERNUMBER');
 
-out_path_length = calculateValue@PathLengthOutAv(m, prop);
-out_path_length_av = cell(g.layernumber(), 1);
+out_path_length = calculateValue@PathLengthOut(m, prop);
+out_path_length_av = cell(L, 1);
 parfor li = 1:1:length(out_path_length_av)
     out_path_length_av(li) = {mean(out_path_length{li})};
 end

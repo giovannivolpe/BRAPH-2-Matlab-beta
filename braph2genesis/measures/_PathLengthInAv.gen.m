@@ -62,8 +62,8 @@ A = g.get('A');  % cell with adjacency matrix (for graph) or 2D-cell array (for 
 N = g.get('NODENUMBER');
 L = g.get('LAYERNUMBER');
 
-in_path_length = calculateValue@InPathLength(m, prop);
-in_path_length_av = cell(g.layernumber(), 1);
+in_path_length = calculateValue@PathLengthIn(m, prop);
+in_path_length_av = cell(L, 1);
 parfor li = 1:1:length(in_path_length_av)
     in_path_length_av(li) = {mean(in_path_length{li})};
 end
@@ -88,12 +88,12 @@ known_in_path_length_av = {Inf};
 g = GraphBD('B', B);
 
 m_outside_g = PathLengthInAv('G', g);
-assert(isequal(m_outside_g.get('M'), known_in_path_length), ...
+assert(isequal(m_outside_g.get('M'), known_in_path_length_av), ...
     [BRAPH2.STR ':PathLengthInAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'PathLengthInAv');
-assert(isequal(m_inside_g.get('M'), known_in_path_length), ...
+assert(isequal(m_inside_g.get('M'), known_in_path_length_av), ...
     [BRAPH2.STR ':PathLengthInAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -164,7 +164,7 @@ known_in_path_length = {
                     Inf
                     };
 
-g = OrdMlBD('B', A);
+g = OrdMlBD('B', B);
 
 m_outside_g = PathLengthInAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_in_path_length), ...
