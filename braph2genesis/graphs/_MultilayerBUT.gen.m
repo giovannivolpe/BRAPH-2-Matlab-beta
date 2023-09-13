@@ -344,6 +344,20 @@ THRESHOLDS (parameter, rvector) is the vector of thresholds.
 %%%% ¡gui!
 pr = PanelPropRVectorSmart('EL', g, 'PROP', MultilayerBUT.THRESHOLDS, 'MAX', 1, 'MIN', -1, varargin{:});
 
+%%% ¡prop!
+SUBGRAPH (query, item) returns a subgraph of original graph
+%%%% ¡calculate!
+A = g.get('A');
+L = g.get('LAYERNUMBER');
+nodes = varargin{1};
+for li = 1:1:L
+    Aii = A{li, li};
+    if ~isempty(Aii)
+        B(li) = {Aii(nodes{li}, nodes{li})};
+    end
+end
+value = MultiplexBUD('B', B, 'THRESHOLDS', g.get('THRESHOLDS'));
+
 %% ¡tests!
 
 %%% ¡excluded_props!
