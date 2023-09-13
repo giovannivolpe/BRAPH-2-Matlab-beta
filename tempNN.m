@@ -1,7 +1,7 @@
 close all; delete(findall(0, 'type', 'figure')); clear all
 
 %% pipelines
-el_class_list = {'NNDataPoint_FUN_CLA'}; % 'NNDataPoint_CON_CLA' 'NNDataPoint_CON_REG' 
+el_class_list = {'NNDataPoint_CON_CLA'}; % 'NNDataPoint_CON_CLA' 'NNDataPoint_CON_REG' 
 for i = 1:1:length(el_class_list)
     el_class = el_class_list{i};
     el_path = '/pipelines/connectivity NN';
