@@ -148,14 +148,14 @@ Template for Graphs and Measures
 %%%% ¡probability!
 .01
 %%%% ¡code!
-if ~isfile([fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'atlas.xlsx'])
+if ~isfile([fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'atlas.txt'])
     test_ImporterGroupSubjectCON_TXT % create example files
 end
 
-% ba = ImporterBrainAtlasTXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST TXT' filesep 'atlas.txt']).get('BA');
-% gr1 = ImporterGroupSubjectST_TXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST txt' filesep 'ST_Group_1.txt'], 'BA', ba).get('GR');
-% gr2 = ImporterGroupSubjectST_TXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST txt' filesep 'ST_Group_2.txt'], 'BA', ba).get('GR');
-% 
+ba = ImporterBrainAtlasTXT('FILE', [fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'atlas.txt']).get('BA');
+gr1 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'CON_Group_1_TXT'], 'BA', ba).get('GR');
+gr2 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'CON_Group_2_TXT'], 'BA', ba).get('GR');
+
 % % check that analysis parameters are correclty templated between analysis 1 and 2
 % negative_weight_rule = Correlation.ABS;
 % correlation_rule = Correlation.SPEARMAN;
