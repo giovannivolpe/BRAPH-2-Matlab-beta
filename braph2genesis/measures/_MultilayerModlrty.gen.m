@@ -99,7 +99,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexBU' 'MultilayerBU'} ;%TBE % % % add any missing tests
+{'MultiplexBU'} ;%TBE % % % add any missing tests
 
 %%% ¡prop!
 M (result, cell) is the multilayer modularity.
@@ -126,30 +126,6 @@ MultiplexBU
 A = rand(5, 5);
 B = {A A};
 g = MultiplexBU('B', B);
-
-m_outside_g = MultilayerModlrty('G', g);
-assert(~isempty(m_outside_g.get('M')), ...
-    [BRAPH2.STR ':MultilayerModlrty:' BRAPH2.FAIL_TEST], ...
-    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-m_inside_g = g.get('MEASURE', 'MultilayerModlrty');
-assert(~isempty(m_inside_g.get('M')), ...
-    [BRAPH2.STR ':MultilayerModlrty:' BRAPH2.FAIL_TEST], ...
-    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-%%% ¡test!
-%%%% ¡name!
-MultilayerBU
-%%%% ¡probability!
-.01
-%%%% ¡code!
-A11 = rand(5, 5);
-A22 = rand(5, 5);
-A12 = rand(size(A11, 1),size(A22, 2));
-A21 = A12';
-A = {A11 A12;
-    A21 A22};
-g = MultilayerBU('B', A);
 
 m_outside_g = MultilayerModlrty('G', g);
 assert(~isempty(m_outside_g.get('M')), ...
