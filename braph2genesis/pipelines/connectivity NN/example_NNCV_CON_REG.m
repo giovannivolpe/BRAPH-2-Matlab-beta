@@ -1,5 +1,5 @@
-%% EXAMPLE_NN_CON_REG
-% Script example pipeline for NN regression with the input of SubjectCON 
+%% EXAMPLE_NNCV_CON_REG
+% Script example pipeline for NN regression cross-validation with the input of SubjectCON 
 
 clear variables %#ok<*NASGU>
 
@@ -41,20 +41,15 @@ d = NNDataset( ...
     'DP_DICT', dp_dict ...
     );
 
-%% Split the NNData into training set and test set
-d_split = NNDatasetSplit('D', d, 'SPLIT', {0.7, 0.3});
-d_training = d_split.get('D_LIST_IT', 1);
-d_test = d_split.get('D_LIST_IT', 2);
+%% Create a regressor cross-validation
+nn_template = NNRegressorMLP('P', 5);
+nncv = NNRegressor_CrossValidation('D', d, 'KFOLDS', 5, 'NN_TEMPLATE', nn_template);
+nncv.get('TRAIN');
 
-%% Create a MLP regressor with training set
-nn = NNRegressorMLP('D', d_training, 'LAYERS', [20 20], 'P', 5);
-nn.get('TRAIN');
-
-%% Evaluate the regressor with the test set
-nne_test = NNRegressor_Evaluator('D', d_test, 'NN', nn);
-corr_coeff = nne_test.get('CORR');
-coeff_determination = nne_test.get('DET');
-mae = nne_test.get('MAE');
-mse = nne_test.get('MSE');
-rmse = nne_test.get('RMSE');
-fi = nne_test.get('FEATURE_IMPORTANCE');
+%% Evaluate the performance
+av_corr_coeff = nncv.get('AV_CORR');
+av_coeff_determination = nncv.get('AV_DET');
+av_mae = nncv.get('AV_MAE');
+av_mse = nncv.get('AV_MSE');
+av_rmse = nncv.get('AV_RMSE');
+av_fi = nncv.get('AV_FEATURE_IMPORTANCE');

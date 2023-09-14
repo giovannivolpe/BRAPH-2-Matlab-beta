@@ -8,86 +8,6 @@ NNClassifierMLP trains the multi-layer perceptron classifier with a formatted in
 %%% ¡seealso!
 NNDataPoint_CON_CLA, NNClassifier_Evaluator
 
-%% ¡layout!
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.ID
-%%%% ¡title!
-Neural Networks ID
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.LABEL
-%%%% ¡title!
-Neural Networks LABEL
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.WAITBAR
-%%%% ¡title!
-WAITBAR ON/OFF
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.VERBOSE
-%%%% ¡title!
-VERBOSE ON/OFF
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.PLOT_TRAINING
-%%%% ¡title!
-PLOT TRAINING PROGRESS
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.D
-%%%% ¡title!
-DATASET
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.EPOCHS
-%%%% ¡title!
-Training EPOCHS
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.BATCH
-%%%% ¡title!
-Training BATCH
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.SHUFFLE
-%%%% ¡title!
-Training SHUFFLE
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.SOLVER
-%%%% ¡title!
-Training SOLVER
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.LAYERS
-%%%% ¡title!
-Number of Neurons per Layer
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.MODEL
-%%%% ¡title!
-Neural Network CLASSIFIER
-
-E%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP.NOTES
-%%%% ¡title!
-Neural Networks NOTES
-
 %% ¡props_update!
 
 %%% ¡prop!
@@ -257,9 +177,26 @@ WAITBAR (gui, logical) detemines whether to show the waitbar.
 true
 
 %%% ¡prop!
+P (parameter, scalar) is the permutation number.
+%%%% ¡default!
+1e+2
+%%%% ¡check_prop!
+check = value > 0 && value == round(value);
+
+%%% ¡prop!
+PERM_SEEDS (result, rvector) is the list of seeds for the random permutations.
+%%%% ¡calculate!
+value = randi(intmax('uint32'), 1, nn.get('P'));
+
+%%% ¡prop!
+INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.
+%%%% ¡default!
+.001
+
+%%% ¡prop!
 FEATURE_IMPORTANCE (query, cell) evaluates the average significance of each feature by iteratively shuffling its values P times and measuring the resulting average decrease in model performance.
 %%%% ¡calculate!
-% fi = nn.get('FEATURE_IMPORTANCE', D, P, SEED) retrieves a cell array containing
+% fi = nn.get('FEATURE_IMPORTANCE', D) retrieves a cell array containing
 %  the feature importance values for the trained model, as assessed by
 %  evaluating it on the input dataset D.
 if isempty(varargin)
@@ -267,8 +204,6 @@ if isempty(varargin)
     return
 end
 d = varargin{1};
-P = varargin{2};
-seeds = varargin{3};
 
 inputs = cell2mat(nn.get('INPUTS', d));
 if isempty(inputs)
@@ -276,6 +211,8 @@ if isempty(inputs)
     return
 end
 targets = nn.get('TARGETS', d);
+P = nn.get('P');
+seeds = nn.get('PERM_SEEDS');
 net = nn.get('MODEL');
 
 number_features = size(inputs, 2);

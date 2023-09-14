@@ -1,4 +1,4 @@
-%% Pipeline Classification Training-Test Split Connectivity Data
+%% Pipeline Connectivity Classification
 
 % This is the pipeline script to train a multi-layer perceptron classifier using connectivity data.
 % 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).

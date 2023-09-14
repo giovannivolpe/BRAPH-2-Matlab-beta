@@ -1,5 +1,6 @@
 %% EXAMPLE_NNCV_CON_BUD_CLA
-% Script example pipeline for NN classification cross-validation with the input of adjacency marix from GraphBUD with SubjectCON 
+% Script example pipeline for NN classification cross-validation with the input of GraphBUD derived from SubjectCON 
+
 clear variables %#ok<*NASGU>
 
 %% Load BrainAtlas
@@ -36,10 +37,9 @@ im_gr3 = ImporterGroupSubjectCON_XLS( ...
 gr3 = im_gr3.get('GR');
 
 %% Analysis CON WU
-densities = 50:50:100;
-graph_temp = MultigraphBUD('DENSITIES', densities);
+densities = 0:25:100;
 a_BUD1 = AnalyzeEnsemble_CON_BUD( ...
-    'GRAPH_TEMPLATE', graph_temp, ...
+    'DENSITIES', densities, ...
     'GR', gr1 ...
     );
 
@@ -116,8 +116,8 @@ d3 = NNDataset( ...
 d = NNDatasetCombine('D_LIST', {d1, d2, d3}).get('D');
 
 %% Create a classifier cross-validation
-nne_template = NNClassifierMLP_Evaluator('P', 2);
-nncv = NNClassifierMLP_CrossValidation('D', d, 'KFOLDS', 5, 'NNEVALUATOR_TEMPLATE', nne_template);
+nn_template = NNClassifierMLP('P', 5);
+nncv = NNClassifier_CrossValidation('D', d, 'KFOLDS', 5, 'NN_TEMPLATE', nn_template);
 nncv.get('TRAIN');
 
 %% Evaluate the performance

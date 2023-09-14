@@ -1,8 +1,8 @@
 %% ¡header!
-NNRegressorMLP_CrossValidation < NNCrossValidation (nncv, neural network cross-validation) is a process for evaluating neural network regressors using cross-validation.
+NNRegressor_CrossValidation < NNCrossValidation (nncv, neural network cross-validation) is a process for evaluating neural network regressors using cross-validation.
 
 %%% ¡description!
-A cross validation for regressors (NNRegressorMLP_CrossValidation) is a process that facilitates the evaluation of neural network regressors using cross-validation. 
+A cross validation for regressors (NNRegressor_CrossValidation) is a process that facilitates the evaluation of neural network regressors using cross-validation. 
  It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. 
  This helps in assessing the generalization performance of the model and detecting overfitting.
 
@@ -16,42 +16,32 @@ NNDataPoint, NNDataset, NNEvaluator
 %%% ¡prop!
 NAME (constant, string) is the name of the cross-validation.
 %%%% ¡default!
-'NNRegressorMLP_CrossValidation'
+'NNRegressor_CrossValidation'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the cross-validation.
 %%%% ¡default!
-'A cross validation for regressors (NNRegressorMLP_CrossValidation) is a process that facilitates the evaluation of neural network regressors using cross-validation. It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. This helps in assessing the generalization performance of the model and detecting overfitting.'
+'A cross validation for regressors (NNRegressor_CrossValidation) is a process that facilitates the evaluation of neural network regressors using cross-validation. It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. This helps in assessing the generalization performance of the model and detecting overfitting.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the nerual cross-validation.
 %%%% ¡settings!
-'NNRegressorMLP_CrossValidation'
+'NNRegressor_CrossValidation'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the cross-validation.
 %%%% ¡default!
-'NNRegressorMLP_CrossValidation ID'
+'NNRegressor_CrossValidation ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the cross-validation.
 %%%% ¡default!
-'NNRegressorMLP_CrossValidation label'
+'NNRegressor_CrossValidation label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the cross-validation.
 %%%% ¡default!
-'NNRegressorMLP_CrossValidation notes'
-
-%%% ¡prop!
-NN_TEMPLATE (parameter, item) is the neural network template to set all neural network parameters.
-%%%% ¡settings!
-'NNRegressorMLP'
-
-%%% ¡prop!
-NNEVALUATOR_TEMPLATE (parameter, item) is the neural network evaluator template to set all evalutor parameters.
-%%%% ¡settings!
-'NNRegressorMLP_Evaluator'
+'NNRegressor_CrossValidation notes'
 
 %%% ¡prop!
 NN_LIST (result, itemlist) contains the neural network models corresponding to k folds.
@@ -89,30 +79,12 @@ end
 %%% ¡prop!
 EVALUATOR_LIST (result, itemlist) contains the evaluators corresponding to k folds.
 %%%% ¡calculate!
-%%% ¡prop!
-EVALUATOR_LIST (result, itemlist) contains the evaluators corresponding to k folds.
-%%%% ¡calculate!
 d_list = nncv.get('D_LIST');
 nn_list = nncv.get('NN_LIST');
-
-if ~isa(nncv.getr('NNEVALUATOR_TEMPLATE'), 'NoValue')
-    nne_template = nncv.get('NNEVALUATOR_TEMPLATE');
-else
-    nne_template = NNRegressorMLP_Evaluator( ...
-        'P', nncv.get('P'));
-end
-
-value = cellfun(@(d, nn) NNRegressorMLP_Evaluator('TEMPLATE', nne_template, 'D', d, 'NN', nn), ...
+value = cellfun(@(d, nn) NNRegressor_Evaluator('D', d, 'NN', nn), ...
     d_list, nn_list, 'UniformOutput', false);
 
 %% ¡props!
-
-%%% ¡prop!
-P (parameter, scalar) is the permutation number.
-%%%% ¡default!
-1e+2
-%%%% ¡check_prop!
-check = value > 0 && value == round(value);
 
 %%% ¡prop!
 AV_CORR (result, rvector) provides the metric of the correlation of coefficients.
@@ -253,15 +225,15 @@ d = NNDataset( ...
     );
 
 kfolds = 3;
-nncv = NNRegressorMLP_CrossValidation('KFOLDS', kfolds, 'D', d);
+nncv = NNRegressor_CrossValidation('KFOLDS', kfolds, 'D', d);
 
 nn_list = nncv.get('NN_LIST');
 assert(length(nn_list) == kfolds, ...
-    [BRAPH2.STR ':NNRegressorMLP_CrossValidation:' BRAPH2.FAIL_TEST], ...
-    'NNRegressorMLP_CrossValidation does not calculate the neural network list correctly.' ...
+    [BRAPH2.STR ':NNRegressor_CrossValidation:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_CrossValidation does not calculate the neural network list correctly.' ...
     )
 e_list = nncv.get('EVALUATOR_LIST');
 assert(length(e_list) == kfolds, ...
-    [BRAPH2.STR ':NNRegressorMLP_CrossValidation:' BRAPH2.FAIL_TEST], ...
-    'NNRegressorMLP_CrossValidation does not calculate the evaluator list correctly.' ...
+    [BRAPH2.STR ':NNRegressor_CrossValidation:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_CrossValidation does not calculate the evaluator list correctly.' ...
     )

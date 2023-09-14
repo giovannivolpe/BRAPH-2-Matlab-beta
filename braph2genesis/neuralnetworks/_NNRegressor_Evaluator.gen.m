@@ -1,9 +1,9 @@
 %% ¡header!
-NNRegressorMLP_Evaluator < NNEvaluator (nne, neural network evaluator for regressor) evaluates the performance of a neural network regressor with a given dataset.
+NNRegressor_Evaluator < NNEvaluator (nne, neural network evaluator for regressor) evaluates the performance of a neural network regressor with a given dataset.
 
 %%% ¡description!
-A neural network evaluator for regressor (NNRegressorMLP_Evaluator) evaluates the performance of a neural network regressor with a given dataset.
-NNRegressorMLP_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
+A neural network evaluator for regressor (NNRegressor_Evaluator) evaluates the performance of a neural network regressor with a given dataset.
+NNRegressor_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
 
 %%% ¡seealso!
 NNDataPoint_CON_REG, NNRegressorMLP
@@ -13,32 +13,32 @@ NNDataPoint_CON_REG, NNRegressorMLP
 %%% ¡prop!
 NAME (constant, string) is the name of the neural network evaluator for the regression task.
 %%%% ¡default!
-'NNRegressorMLP_Evaluator'
+'NNRegressor_Evaluator'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the neural network evaluator for the regression task.
 %%%% ¡default!
-'A neural network evaluator for regressor (NNRegressorMLP_Evaluator) evaluates the performance of a neural network regressor with a given dataset. NNRegressorMLP_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
+'A neural network evaluator for regressor (NNRegressor_Evaluator) evaluates the performance of a neural network regressor with a given dataset. NNRegressor_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the neural network evaluator for the regression task.
 %%%% ¡settings!
-'NNRegressorMLP_Evaluator'
+'NNRegressor_Evaluator'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the neural network evaluator for the regression task.
 %%%% ¡default!
-'NNRegressorMLP_Evaluator ID'
+'NNRegressor_Evaluator ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the neural network evaluator for the regression task.
 %%%% ¡default!
-'NNRegressorMLP_Evaluator label'
+'NNRegressor_Evaluator label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the neural network evaluator for the regression task.
 %%%% ¡default!
-'NNRegressorMLP_Evaluator notes'
+'NNRegressor_Evaluator notes'
     
 %%% ¡prop!
 NN (data, item) contains a trained neural network regressor.
@@ -141,28 +141,10 @@ else
     end
 end
 
-
-%%% ¡prop!
-P (parameter, scalar) is the permutation number.
-%%%% ¡default!
-1e+2
-%%%% ¡check_prop!
-check = value > 0 && value == round(value);
-
-%%% ¡prop!
-PERM_SEEDS (result, rvector) is the list of seeds for the random permutations.
-%%%% ¡calculate!
-value = randi(intmax('uint32'), 1, nn.get('P'));
-
-%%% ¡prop!
-INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.
-%%%% ¡default!
-.001
-
 %%% ¡prop!
 FEATURE_IMPORTANCE (result, cell) quantifies the average significance and impact of individual input features within neural network models. Various techniques, such as permutation feature importance for MLPs and gradient-based analysis for CNNs, can be applied to quantify this aspect.
 %%%% ¡calculate!
-all_fi = nne.get('NN').get('FEATURE_IMPORTANCE', nne.get('D'), nne.get('P'), nne.get('PERM_SEEDS'));
+all_fi = nne.get('NN').get('FEATURE_IMPORTANCE', nne.get('D'));
 if isempty(cell2mat(all_fi))
     value = {};
 else
@@ -179,7 +161,7 @@ end
 
 %%% ¡test!
 %%%% ¡name!
-Evaluate a regressor with the example data
+evaluate a regressor with the example data
 %%%% ¡code!
 
 % ensure the example data is generated
@@ -226,7 +208,7 @@ d = NNDataset( ...
 
 nn = NNRegressorMLP('D', d, 'LAYERS', [20 20]);
 nn.get('TRAIN');
-nne = NNRegressorMLP_Evaluator('NN', nn, 'D', d);
+nne = NNRegressor_Evaluator('NN', nn, 'D', d);
 predictions = cell2mat(nn.get('PREDICT', d));
 
 % Check whether the ground truth are derived as expected
@@ -237,8 +219,8 @@ for i = 1:size(ground_truth, 1)
     check(i) = isequal(cell2mat(targets{i}), ground_truth(i, :));
 end
 assert(all(check), ...
-    [BRAPH2.STR ':NNRegressorMLP_Evaluator:' BRAPH2.FAIL_TEST], ...
-    'NNRegressorMLP_Evaluator does not calculate the ground truth correctly.' ...
+    [BRAPH2.STR ':NNRegressor_Evaluator:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_Evaluator does not calculate the ground truth correctly.' ...
     )
 
 % Check whether the correlation coefficients are calculated as expected
@@ -248,8 +230,8 @@ for i = 1:size(ground_truth, 2)
     known_value(i) = corr_matrix(1, 2);
 end
 assert(isequal(calculated_value, known_value), ...
-    [BRAPH2.STR ':NNRegressorMLP_Evaluator:' BRAPH2.FAIL_TEST], ...
-    'NNRegressorMLP_Evaluator does not calculate the correlation coefficients correctly.' ...
+    [BRAPH2.STR ':NNRegressor_Evaluator:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_Evaluator does not calculate the correlation coefficients correctly.' ...
     )
 
 % Check whether the correlation of determination are calculated as expected
@@ -259,8 +241,8 @@ for i = 1:size(ground_truth, 2)
     known_value(i) = corr_matrix(1, 2)^2;
 end
 assert(isequal(calculated_value, known_value), ...
-    [BRAPH2.STR ':NNRegressorMLP_Evaluator:' BRAPH2.FAIL_TEST], ...
-    'NNRegressorMLP_Evaluator does not calculate the coefficient of determination correctly.' ...
+    [BRAPH2.STR ':NNRegressor_Evaluator:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_Evaluator does not calculate the coefficient of determination correctly.' ...
     )
 
 % Check whether the mean absolute errors are calculated as expected
@@ -269,8 +251,8 @@ for i = 1:size(ground_truth, 2)
     known_value(i) = mean(abs(predictions(:, i) - ground_truth(:, i)));
 end
 assert(isequal(calculated_value, known_value), ...
-    [BRAPH2.STR ':NNRegressorMLP_Evaluator:' BRAPH2.FAIL_TEST], ...
-    'NNRegressorMLP_Evaluator does not calculate the mean absolute errors correctly.' ...
+    [BRAPH2.STR ':NNRegressor_Evaluator:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_Evaluator does not calculate the mean absolute errors correctly.' ...
     )
 
 % Check whether the mean squared errors are calculated as expected
@@ -279,8 +261,8 @@ for i = 1:size(ground_truth, 2)
     known_value(i) = mean((predictions(:, i) - ground_truth(:, i)).^2);
 end
 assert(isequal(calculated_value, known_value), ...
-    [BRAPH2.STR ':NNRegressorMLP_Evaluator:' BRAPH2.FAIL_TEST], ...
-    'NNRegressorMLP_Evaluator does not calculate the mean squared errors correctly.' ...
+    [BRAPH2.STR ':NNRegressor_Evaluator:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_Evaluator does not calculate the mean squared errors correctly.' ...
     )
 
 % Check whether the mean squared errors are calculated as expected
@@ -289,6 +271,6 @@ for i = 1:size(ground_truth, 2)
     known_value(i) = sqrt(mean((predictions(:, i) - ground_truth(:, i)).^2));
 end
 assert(isequal(calculated_value, known_value), ...
-    [BRAPH2.STR ':NNRegressorMLP_Evaluator:' BRAPH2.FAIL_TEST], ...
-    'NNRegressorMLP_Evaluator does not calculate the root mean squared errors correctly.' ...
+    [BRAPH2.STR ':NNRegressor_Evaluator:' BRAPH2.FAIL_TEST], ...
+    'NNRegressor_Evaluator does not calculate the root mean squared errors correctly.' ...
     )
