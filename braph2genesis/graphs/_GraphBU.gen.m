@@ -520,3 +520,27 @@ deg_B = sum(random_A);
 assert(isequal(0, h), ... % check same degree distribution
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
+
+%%% ¡test!
+%%%% ¡name!
+SUBGRAPH
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B = randn(10);
+g = GraphBU('B', B);
+nodes = [1 3 4 7];
+sub_g = g.get('SUBGRAPH', nodes);
+
+assert(isequal(g.getClass(), sub_g.getClass()), ... 
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    'GraphBD Randomize is not functioning well.')
+
+assert(isequal(size(sub_g.get('A')), [length(nodes) length(nodes)]), ... 
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    'GraphBD Randomize is not functioning well.')
+
+tmp_A = g.get('A');
+assert(isequal(tmp_A(nodes, nodes), sub_g.get('A')), ... 
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    'GraphBD Randomize is not functioning well.')

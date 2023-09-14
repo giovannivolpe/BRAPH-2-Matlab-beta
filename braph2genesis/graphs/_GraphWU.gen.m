@@ -451,3 +451,27 @@ d2 = g2.get('MEASURE', 'Degree');
 assert(isequal(d1.get('M'), d2.get('M')), ...
     [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
     'GraphWU Randomize is not functioning well.')
+
+%%% ¡test!
+%%%% ¡name!
+SUBGRAPH
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B = randn(10);
+g = GraphWU('B', B);
+nodes = [1 3 4 7];
+sub_g = g.get('SUBGRAPH', nodes);
+
+assert(isequal(g.getClass(), sub_g.getClass()), ... 
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    'GraphBD Randomize is not functioning well.')
+
+assert(isequal(size(sub_g.get('A')), [length(nodes) length(nodes)]), ... 
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    'GraphBD Randomize is not functioning well.')
+
+tmp_A = g.get('A');
+assert(isequal(tmp_A(nodes, nodes), sub_g.get('A')), ... 
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    'GraphBD Randomize is not functioning well.')
