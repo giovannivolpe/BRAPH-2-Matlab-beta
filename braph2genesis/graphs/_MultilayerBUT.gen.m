@@ -475,3 +475,48 @@ for i = 1:length(A2)
     [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
     'MultilayerBUT Randomize is not functioning well.')
 end
+
+%%% ¡test!
+%%%% ¡name!
+SUBGRAPH
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B1 = randn(10);
+B2 = randn(10);
+B3 = randn(10);
+B12 = rand(size(B1, 1),size(B2, 2));
+B13 = rand(size(B1, 1),size(B3, 2));
+B23 = rand(size(B2, 1),size(B3, 2));
+B21 = rand(size(B2, 1),size(B1, 2));
+B31 = rand(size(B3, 1),size(B1, 2));
+B32 = rand(size(B3, 1),size(B2, 2));
+B = {
+    B1                           B12                            B13
+    B21                          B2                             B23
+    B31                          B32                            B3
+    };
+g = MultilayerBUT('B', B, 'THRESHOLDS', [0.1 0.4]);
+nodes = [1 3 4 7];
+sub_g = g.get('SUBGRAPH', nodes);
+
+assert(isequal(g.getClass(), sub_g.getClass()), ... 
+    [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+    'MultilayerBUT SUBGRAPH is not functioning well.')
+
+tmp_A = g.get('A');
+sub_tmp_A = sub_g.get('A');
+
+for i = 1:length(tmp_A)
+    tmp_ai = tmp_A{i, i};
+    sub_tmp_ai = sub_tmp_A{i, i};
+
+    assert(isequal(size(tmp_ai), [length(nodes) length(nodes)]), ...
+        [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+        'MultilayerBUT SUBGRAPH is not functioning well.')
+
+    
+    assert(isequal(tmp_ai(nodes, nodes), sub_tmp_ai), ...
+        [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
+        'MultilayerBUT SUBGRAPH is not functioning well.')
+end

@@ -566,3 +566,36 @@ for i = 1:length(A2)
     [BRAPH2.STR ':MultiplexBU:' BRAPH2.FAIL_TEST], ...
     'MultiplexBU Randomize is not functioning well.')
 end
+
+%%% ¡test!
+%%%% ¡name!
+SUBGRAPH
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B = randn(10);
+
+g = MultiplexBU('B', B);
+nodes = [1 3 4 7];
+sub_g = g.get('SUBGRAPH', nodes);
+
+assert(isequal(g.getClass(), sub_g.getClass()), ... 
+    [BRAPH2.STR ':MultiplexBU:' BRAPH2.FAIL_TEST], ...
+    'MultiplexBU SUBGRAPH is not functioning well.')
+
+tmp_A = g.get('A');
+sub_tmp_A = sub_g.get('A');
+
+for i = 1:length(tmp_A)
+    tmp_ai = tmp_A{i, i};
+    sub_tmp_ai = sub_tmp_A{i, i};
+
+    assert(isequal(size(tmp_ai), [length(nodes) length(nodes)]), ...
+        [BRAPH2.STR ':MultiplexBU:' BRAPH2.FAIL_TEST], ...
+        'MultiplexBU SUBGRAPH is not functioning well.')
+
+    
+    assert(isequal(tmp_ai(nodes, nodes), sub_tmp_ai), ...
+        [BRAPH2.STR ':MultiplexBU:' BRAPH2.FAIL_TEST], ...
+        'MultiplexBU SUBGRAPH is not functioning well.')
+end
