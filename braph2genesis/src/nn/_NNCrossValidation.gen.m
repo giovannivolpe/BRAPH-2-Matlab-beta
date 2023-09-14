@@ -71,6 +71,11 @@ NN_TEMPLATE (parameter, item) is the neural network template to set all neural n
 'NNBase'
 
 %%% ¡prop!
+NNEVALUATOR_TEMPLATE (parameter, item) is the neural network evaluator template to set all evalutor parameters.
+%%%% ¡settings!
+'NNEvaluator'
+
+%%% ¡prop!
 DSP (result, item) is a dataset splitter.
 %%%% ¡settings!
 'NNDatasetSplit'
