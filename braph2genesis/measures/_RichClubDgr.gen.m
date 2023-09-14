@@ -1,5 +1,5 @@
 %% ¡header!
-RichClubDgr < Degree (m, rich-club degree) is the graph richclubdegree.
+RichClubDgr < Degree (m, richclubdegree) is the graph richclubdegree.
 
 %%% ¡description!
 The rich-club degree of a node at level k is the sum of 
@@ -26,17 +26,17 @@ TEMPLATE (parameter, item) is the template of the richclubdegree.
 %%% ¡prop!
 ID (data, string) is a few-letter code of the richclubdegree.
 %%%% ¡default!
-'RichClubDgr ID'
+'RichClubDegree ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the richclubdegree.
 %%%% ¡default!
-'RichClubDgr label'
+'RichClubDegree label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the richclubdegree.
 %%%% ¡default!
-'RichClubDgr notes'
+'RichClubDegree notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -70,8 +70,8 @@ rich_club_degree = cell(L, 1);
 directionality_type = g.get('DIRECTIONALITY_TYPE', L);
 richclub_threshold = m.get('PARAMETRIC_VALUE');
 assert(mod(richclub_threshold, 1) == 0, ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.WRONG_INPUT], ...
-    ['RichClubDgr threshold must be an integer value ' ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.WRONG_INPUT], ...
+    ['RichClubDegree threshold must be an integer value ' ...
     'while it is ' tostring(richclub_threshold)])
 
 k_level = abs(richclub_threshold);
@@ -122,7 +122,7 @@ PARAMETRIC_VALUE (parameter, SCALAR)
 %% ¡tests!
 
 %%% ¡excluded_props!
-[RichClubDgr.PFM]
+[RichClubDegree.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -142,14 +142,14 @@ known_richclubdegree = {[2 2 2 0]'};
 
 g = GraphWU('B', B);
 
-m_outside_g = RichClubDgr('G', g);
+m_outside_g = RichClubDegree('G', g);
 assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubDgr');
+m_inside_g = g.get('MEASURE', 'RichClubDegree');
 assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -169,14 +169,14 @@ known_richclubdegree = {[2 2 2 0]'};
 
 g = GraphWD('B', B);
 
-m_outside_g = RichClubDgr('G', g);
+m_outside_g = RichClubDegree('G', g);
 assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubDgr');
+m_inside_g = g.get('MEASURE', 'RichClubDegree');
 assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -196,14 +196,14 @@ known_richclubdegree = {[2 2 2 0]'};
 
 g = GraphBU('B', B);
 
-m_outside_g = RichClubDgr('G', g);
+m_outside_g = RichClubDegree('G', g);
 assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubDgr');
+m_inside_g = g.get('MEASURE', 'RichClubDegree');
 assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -223,14 +223,14 @@ known_richclubdegree = {[2 2 2 0]'};
 
 g = GraphBD('B', B);
 
-m_outside_g = RichClubDgr('G', g);
+m_outside_g = RichClubDegree('G', g);
 assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubDgr');
+m_inside_g = g.get('MEASURE', 'RichClubDegree');
 assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -249,14 +249,14 @@ known_richclubdegree = {
                         [0 0 0 0]'};
 
 g = MultigraphBUT('B', B, 'THRESHOLDS', [0 1]);
-m_outside_g = RichClubDgr('G', g);
+m_outside_g = RichClubDegree('G', g);
 assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubDgr');
+m_inside_g = g.get('MEASURE', 'RichClubDegree');
 assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -275,14 +275,14 @@ known_richclubdegree = {
     [2 2 2 0]'};
 
 g = MultigraphBUD('B', B, 'DENSITIES', [10 90]);
-m_outside_g = RichClubDgr('G', g);
+m_outside_g = RichClubDegree('G', g);
 assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubDgr');
+m_inside_g = g.get('MEASURE', 'RichClubDegree');
 assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -312,14 +312,14 @@ known_richclubdegree = {
     };
 
 g = MultiplexWU('B', A);
-m_outside_g = RichClubDgr('G', g);
+m_outside_g = RichClubDegree('G', g);
 assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubDgr');
+m_inside_g = g.get('MEASURE', 'RichClubDegree');
 assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -349,14 +349,14 @@ known_richclubdegree = {
     };
 
 g = MultiplexWD('B', A);
-m_outside_g = RichClubDgr('G', g);
+m_outside_g = RichClubDegree('G', g);
 assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubDgr');
+m_inside_g = g.get('MEASURE', 'RichClubDegree');
 assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -381,26 +381,26 @@ A = {A11 A22};
 
 clear richclub_l1;
 clear richclub_l2;
-richclub_l1(:, 1, 1) = [3 3 2 2]';
+richclub_l1(:, 1, 1) = [5/2 3 2 3/2]';
 richclub_l1(:, 1, 2) = [1 1 0 0]';
 
-richclub_l2(:, 1, 1) = [3 3 3 3]';
-richclub_l2(:, 1, 2) = [3 3 3 3]';
+richclub_l2(:, 1, 1) = [5/2 3 5/2 2]';
+richclub_l2(:, 1, 2) = [2 2 2 0]';
 known_richclubdegree = {
                  richclub_l1
                  richclub_l2
                  };
 
 g = MultiplexBU('B', A);
-m_outside_g = RichClubDgr('G', g, 'PARAMETRIC_VALUE', 2);
+m_outside_g = RichClubDegree('G', g, 'PARAMETRIC_VALUE', 2);
 assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubDgr');
-m_inside_g.set('PARAMETRIC_VALUE', 2);
+m_inside_g = g.get('MEASURE', 'RichClubDegree');
+g.set('PARAMETRIC_VALUE', 2);
 assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -436,13 +436,13 @@ known_richclubdegree = {
                  };
 
 g = MultiplexBD('B', A);
-m_outside_g = RichClubDgr('G', g, 'PARAMETRIC_VALUE', 2);
+m_outside_g = RichClubDegree('G', g, 'PARAMETRIC_VALUE', 2);
 assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'RichClubDgr');
-m_inside_g.set('PARAMETRIC_VALUE', 2);
+m_inside_g = g.get('MEASURE', 'RichClubDegree');
+g.set('PARAMETRIC_VALUE', 2);
 assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
-    [BRAPH2.STR ':RichClubDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':RichClubDegree:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

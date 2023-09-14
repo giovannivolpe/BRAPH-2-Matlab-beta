@@ -233,9 +233,7 @@ pr = PanelPropCell('EL', g, 'PROP', MultigraphBUD.A, ...
 %%% ¡prop!
 PARTITIONS (result, rvector) returns the number of layers in the partitions of the graph.
 %%%% ¡calculate!
-l = g.get('LAYERNUMBER');
-densities = g.get('DENSITIES');
-value = ones(1, length(densities)) * l / length(densities);
+value = ones(1, g.get('LAYERNUMBER'));
 
 %%% ¡prop!
 ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.

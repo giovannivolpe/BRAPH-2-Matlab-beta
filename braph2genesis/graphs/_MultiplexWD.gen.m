@@ -230,7 +230,6 @@ pr = PanelPropCell('EL', g, 'PROP', MultiplexWD.A, ...
     'COLUMNNAME', g.getCallback('ANODELABELS'), ...
     varargin{:});
 
-
 %%% ¡prop!
 ALAYERLABELS (query, stringlist) returns the layer labels for A.
 %%%% ¡calculate!

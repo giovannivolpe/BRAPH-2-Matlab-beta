@@ -243,7 +243,6 @@ pr = PanelPropCell('EL', g, 'PROP', MultiplexWU.A, ...
     'COLUMNNAME', g.getCallback('ANODELABELS'), ...
     varargin{:});
 
-
 %%% ¡prop!
 ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.
 %%%% ¡calculate!
