@@ -1,5 +1,5 @@
 %% EXAMPLE_NNCV_CON_FUN_MP_WU_ME_REG
-% Script example pipeline for NN regression cross-validation with input of GraphWU measures derived from SubjectCON_FUN_MP 
+% Script example pipeline for NN regression cross-validation with input of MultiplexWU measures derived from SubjectCON_FUN_MP 
 
 clear variables %#ok<*NASGU>
 
