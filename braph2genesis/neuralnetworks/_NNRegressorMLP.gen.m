@@ -247,6 +247,11 @@ WAITBAR (gui, logical) detemines whether to show the waitbar.
 true
 
 %%% ¡prop!
+INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.
+%%%% ¡default!
+.001
+
+%%% ¡prop!
 FEATURE_IMPORTANCE (query, cell) evaluates the average significance of each feature by iteratively shuffling its values P times and measuring the resulting average decrease in model performance.
 %%%% ¡calculate!
 % fi = nn.get('FEATURE_IMPORTANCE', D) retrieves a cell array containing

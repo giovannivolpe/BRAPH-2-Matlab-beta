@@ -111,11 +111,6 @@ PERM_SEEDS (result, rvector) is the list of seeds for the random permutations.
 value = randi(intmax('uint32'), 1, nne.get('P'));
 
 %%% ¡prop!
-INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.
-%%%% ¡default!
-.001
-
-%%% ¡prop!
 FEATURE_IMPORTANCE (result, cell) quantifies the average significance and impact of individual input features within neural network models. Various techniques, such as permutation feature importance for MLPs and gradient-based analysis for CNNs, can be applied to quantify this aspect.
 %%%% ¡calculate!
 all_fi = nne.get('NN').get('FEATURE_IMPORTANCE', nne.get('D'), nne.get('P'), nne.get('PERM_SEEDS'));
