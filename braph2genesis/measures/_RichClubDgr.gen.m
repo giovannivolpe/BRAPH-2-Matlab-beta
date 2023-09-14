@@ -1,5 +1,5 @@
 %% ¡header!
-RichClubDegree < Degree (m, richclubdegree) is the graph richclubdegree.
+RichClubDgr < Degree (m, richclubdegree) is the graph richclubdegree.
 
 %%% ¡description!
 The rich-club degree of a node at level k is the sum of 
@@ -11,7 +11,7 @@ The rich-club degree of a node at level k is the sum of
 %%% ¡prop!
 NAME (constant, string) is the name of the richclubdegree.
 %%%% ¡default!
-'RichClubDegree'
+'RichClubDgr'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the richclubdegree.
@@ -21,7 +21,7 @@ DESCRIPTION (constant, string) is the description of the richclubdegree.
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the richclubdegree.
 %%%% ¡settings!
-'RichClubDegree'
+'RichClubDgr'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the richclubdegree.

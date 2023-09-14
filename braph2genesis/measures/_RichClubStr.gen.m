@@ -1,5 +1,5 @@
 %% ¡header!
-RichClubStrength < Strength (m, richclubstrength) is the graph richclubstrength.
+RichClubStr < Strength (m, richclubstrength) is the graph richclubstrength.
 
 %%% ¡description!
 The rich-club strength of a node at level s is the sum of the weighted edges 
@@ -11,7 +11,7 @@ The rich-club strength of a node at level s is the sum of the weighted edges
 %%% ¡prop!
 NAME (constant, string) is the name of the richclubstrength.
 %%%% ¡default!
-'RichClubStrength'
+'RichClubStr'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the richclubstrength.
@@ -21,7 +21,7 @@ DESCRIPTION (constant, string) is the description of the richclubstrength.
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the richclubstrength.
 %%%% ¡settings!
-'RichClubStrength'
+'RichClubStr'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the richclubstrength.
