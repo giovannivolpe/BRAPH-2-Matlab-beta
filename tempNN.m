@@ -1,10 +1,10 @@
 close all; delete(findall(0, 'type', 'figure')); clear all
 
 %% pipelines
-el_class_list = {'NNDataPoint_CON_CLA'}; % 'NNDataPoint_CON_CLA' 'NNDataPoint_CON_REG' 
+el_class_list = {'NNDataPoint_CON_FUN_MP_REG'}; % 'NNDataPoint_CON_CLA' 'NNDataPoint_CON_REG' 'NNDataPoint_CON_CLA'
 for i = 1:1:length(el_class_list)
     el_class = el_class_list{i};
-    el_path = '/pipelines/connectivity NN';
+    el_path = '/pipelines/connectivity-functional multiplex NN'; % '/pipelines/connectivity NN' 
     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
@@ -13,12 +13,12 @@ for i = 1:1:length(el_class_list)
     eval(['test_' el_class])
 end
 
-%% PIPELINE TEST 'pipeline_connectivity_regression'
-im = ImporterPipelineBRAPH2(...
-    'FILE', [fileparts(which('braph2genesis')) filesep 'pipelines' filesep 'connectivity NN' filesep 'pipeline_connectivity_bud_classification_cross_validation.braph2'], ...
-    'WAITBAR', true ...
-    ); 
-pip = im.get('PIP');
-gui = GUIElement('PE', pip, 'CLOSEREQ', false);
-gui.get('DRAW')
-gui.get('SHOW')
+% %% PIPELINE TEST 'pipeline_connectivity_regression'
+% im = ImporterPipelineBRAPH2(...
+%     'FILE', [fileparts(which('braph2genesis')) filesep 'pipelines' filesep 'connectivity NN' filesep 'pipeline_connectivity_bud_classification_cross_validation.braph2'], ...
+%     'WAITBAR', true ...
+%     ); 
+% pip = im.get('PIP');
+% gui = GUIElement('PE', pip, 'CLOSEREQ', false);
+% gui.get('DRAW')
+% gui.get('SHOW')
