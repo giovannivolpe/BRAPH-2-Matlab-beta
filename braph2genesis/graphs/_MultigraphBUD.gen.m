@@ -285,6 +285,9 @@ SUBGRAPH (query, item) returns a subgraph of original graph
 A = g.get('A');
 L = g.get('LAYERNUMBER');
 nodes = varargin{1};
+if ~iscell(nodes)
+    nodes = repmat({nodes}, 1, L);
+end
 temp_B = g.get('B');
 B2 = temp_B(nodes{1}, nodes{1});
 value = MultigraphBUD('B', B2, 'DENSITIES', g.get('DENSITIES'));
@@ -469,10 +472,9 @@ for i = 1:length(tmp_A)
     tmp_ai = tmp_A{i, i};
     sub_tmp_ai = sub_tmp_A{i, i};
 
-    assert(isequal(size(tmp_ai), [length(nodes) length(nodes)]), ...
+    assert(isequal(size(sub_tmp_ai), [length(nodes) length(nodes)]), ...
         [BRAPH2.STR ':MultigraphBUD:' BRAPH2.FAIL_TEST], ...
         'MultigraphBUD SUBGRAPH is not functioning well.')
-
     
     assert(isequal(tmp_ai(nodes, nodes), sub_tmp_ai), ...
         [BRAPH2.STR ':MultigraphBUD:' BRAPH2.FAIL_TEST], ...

@@ -285,6 +285,10 @@ value = random_A;
 SUBGRAPH (query, item) is the subgraph
 %%%% ¡calculate!
 A = g.get('A');
+if isempty(varargin)
+    value = g;
+    return
+end
 nodes = varargin{1};
 L = g.get('LAYERNUMBER');
 
@@ -447,11 +451,13 @@ assert(isequal(g.getClass(), sub_g.getClass()), ...
     [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
     'GraphBD SUBGRAPH is not functioning well.')
 
-assert(isequal(size(sub_g.get('A')), [length(nodes) length(nodes)]), ... 
+tmp_sub_A = sub_g.get('A');
+
+assert(isequal(size(tmp_sub_A{1}), [length(nodes) length(nodes)]), ... 
     [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
     'GraphBD SUBGRAPH is not functioning well.')
 
 tmp_A = g.get('A');
-assert(isequal(tmp_A(nodes, nodes), sub_g.get('A')), ... 
+assert(isequal(tmp_A{1}(nodes, nodes), tmp_sub_A{1}), ... 
     [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
     'GraphBD SUBGRAPH is not functioning well.')
