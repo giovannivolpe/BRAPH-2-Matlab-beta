@@ -332,6 +332,10 @@ SUBGRAPH (query, item) returns a subgraph of original graph
 %%%% ¡calculate!
 A = g.get('A');
 L = g.get('LAYERNUMBER');
+if isempty(varargin)
+    value = g;
+    return
+end
 nodes = varargin{1};
 if ~iscell(nodes)
     nodes = repmat({nodes}, 1, L);
