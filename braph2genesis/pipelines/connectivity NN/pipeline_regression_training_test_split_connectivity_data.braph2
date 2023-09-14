@@ -1,4 +1,4 @@
-%% Pipeline Connectivity Regression 
+%% Pipeline Regression Training-test Split Connectivity Data
 
 % This is the pipeline script to train a multi-layer perceptron regressor using connectivity data.
 % 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).

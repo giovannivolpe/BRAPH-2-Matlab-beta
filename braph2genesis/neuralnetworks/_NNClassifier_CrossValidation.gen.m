@@ -1,8 +1,8 @@
 %% ¡header!
-NNClassifier_CrossValidation < NNCrossValidation (nncv, neural network cross-validation) is a process for evaluating neural network classifiers using cross-validation.
+NNClassifierMLP_CrossValidation < NNCrossValidation (nncv, neural network cross-validation) is a process for evaluating neural network classifiers using cross-validation.
 
 %%% ¡description!
-A cross validation for classifiers (NNClassifier_CrossValidation) is a process that facilitates the evaluation of neural network classifiers using cross-validation. 
+A cross validation for classifiers (NNClassifierMLP_CrossValidation) is a process that facilitates the evaluation of neural network classifiers using cross-validation. 
  It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. 
  This helps in assessing the generalization performance of the model and detecting overfitting.
 
@@ -16,33 +16,43 @@ NNDataPoint, NNDataset, NNEvaluator
 %%% ¡prop!
 NAME (constant, string) is the name of the cross-validation.
 %%%% ¡default!
-'NNClassifier_CrossValidation'
+'NNClassifierMLP_CrossValidation'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the cross-validation.
 %%%% ¡default!
-'A cross validation for classifiers (NNClassifier_CrossValidation) is a process that facilitates the evaluation of neural network classifiers using cross-validation. It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. This helps in assessing the generalization performance of the model and detecting overfitting.'
+'A cross validation for classifiers (NNClassifierMLP_CrossValidation) is a process that facilitates the evaluation of neural network classifiers using cross-validation. It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. This helps in assessing the generalization performance of the model and detecting overfitting.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the cross-validation.
 %%%% ¡settings!
-'NNClassifier_CrossValidation'
+'NNClassifierMLP_CrossValidation'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the cross-validation.
 %%%% ¡default!
-'NNClassifier_CrossValidation ID'
+'NNClassifierMLP_CrossValidation ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the cross-validation.
 %%%% ¡default!
-'NNClassifier_CrossValidation label'
+'NNClassifierMLP_CrossValidation label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the cross-validation.
 %%%% ¡default!
-'NNClassifier_CrossValidation notes'
-    
+'NNClassifierMLP_CrossValidation notes'
+
+%%% ¡prop!
+NN_TEMPLATE (parameter, item) is the neural network template to set all neural network parameters.
+%%%% ¡settings!
+'NNClassifierMLP'
+
+%%% ¡prop!
+NNEVALUATOR_TEMPLATE (parameter, item) is the neural network evaluator template to set all evalutor parameters.
+%%%% ¡settings!
+'NNClassifierMLP_Evaluator'
+
 %%% ¡prop!
 NN_LIST (result, itemlist) contains the neural network models corresponding to k folds.
 %%%% ¡calculate!
@@ -81,10 +91,25 @@ EVALUATOR_LIST (result, itemlist) contains the evaluators corresponding to k fol
 %%%% ¡calculate!
 d_list = nncv.get('D_LIST');
 nn_list = nncv.get('NN_LIST');
-value = cellfun(@(d, nn) NNClassifier_Evaluator('D', d, 'NN', nn), ...
+
+if ~isa(nncv.getr('NNEVALUATOR_TEMPLATE'), 'NoValue')
+    nne_template = nncv.get('NNEVALUATOR_TEMPLATE');
+else
+    nne_template = NNClassifierMLP_Evaluator( ...
+        'P', nncv.get('P'));
+end
+
+value = cellfun(@(d, nn) NNClassifier_Evaluator('TEMPLATE', nne_template, 'D', d, 'NN', nn), ...
     d_list, nn_list, 'UniformOutput', false);
 
 %% ¡props!
+
+%%% ¡prop!
+P (parameter, scalar) is the permutation number.
+%%%% ¡default!
+1e+2
+%%%% ¡check_prop!
+check = value > 0 && value == round(value);
 
 %%% ¡prop!
 AV_AUC (result, rvector) provides the average value of the area under the receiver operating characteristic curve across k folds.
@@ -225,15 +250,15 @@ d2 = NNDataset( ...
 d = NNDatasetCombine('D_LIST', {d1, d2}).get('D');
 
 kfolds = 7;
-nncv = NNClassifier_CrossValidation('KFOLDS', kfolds, 'D', d);
+nncv = NNClassifierMLP_CrossValidation('KFOLDS', kfolds, 'D', d);
 
 nn_list = nncv.get('NN_LIST');
 assert(length(nn_list) == kfolds, ...
-    [BRAPH2.STR ':NNClassifier_CrossValidation:' BRAPH2.FAIL_TEST], ...
-    'NNClassifier_CrossValidation does not calculate the neural network list correctly.' ...
+    [BRAPH2.STR ':NNClassifierMLP_CrossValidation:' BRAPH2.FAIL_TEST], ...
+    'NNClassifierMLP_CrossValidation does not calculate the neural network list correctly.' ...
     )
 e_list = nncv.get('EVALUATOR_LIST');
 assert(length(e_list) == kfolds, ...
-    [BRAPH2.STR ':NNClassifier_CrossValidation:' BRAPH2.FAIL_TEST], ...
-    'NNClassifier_CrossValidation does not calculate the evaluator list correctly.' ...
+    [BRAPH2.STR ':NNClassifierMLP_CrossValidation:' BRAPH2.FAIL_TEST], ...
+    'NNClassifierMLP_CrossValidation does not calculate the evaluator list correctly.' ...
     )
