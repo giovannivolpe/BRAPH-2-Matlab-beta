@@ -220,7 +220,6 @@ if g.get('RANDOMIZE')
     A = g.get('RANDOMIZATION', A);
 end
 value = A;
-
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', MultilayerBU.A, ...
     'TABLE_HEIGHT', s(40), ...
@@ -268,11 +267,6 @@ pr = PanelPropCell('EL', g, 'PROP', MultilayerBU.B, ...
     'ROWNAME', g.getCallback('ANODELABELS'), ...
     'COLUMNNAME', g.getCallback('ANODELABELS'), ...
     varargin{:});
-
-%%% ¡prop!
-ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-%%%% ¡default!
-5
 
 %%% ¡prop!
 SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.

@@ -260,7 +260,6 @@ if g.get('RANDOMIZE')
     A = g.get('RANDOMIZATION', A);
 end
 value = A;
-
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', MultilayerBUT.A, ...
     'TABLE_HEIGHT', s(40), ...
@@ -432,8 +431,8 @@ B11 = randn(10);
 B12 = rand(size(B11,1),size(B11,2));
 
 B= {B11 B12 B12;
-    B12 B11 B12;
-    B12 B12 B11};
+    B12' B11 B12;
+    B12' B12' B11};
 thresholds = [0 .5 1];
 g = MultilayerBUT('B', B, 'THRESHOLDS', thresholds); 
 

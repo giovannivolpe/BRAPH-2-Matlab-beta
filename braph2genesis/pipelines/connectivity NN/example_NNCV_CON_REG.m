@@ -1,4 +1,4 @@
-%% EXAMPLE_NNCV_CON_REGRESSION
+%% EXAMPLE_NNCV_CON_REG
 % Script example pipeline for NN regression cross-validation with the input of SubjectCON 
 
 clear variables %#ok<*NASGU>
@@ -42,7 +42,8 @@ d = NNDataset( ...
     );
 
 %% Create a regressor cross-validation
-nncv = NNRegressor_CrossValidation('D', d, 'KFOLDS', 5);
+nn_template = NNRegressorMLP('P', 5);
+nncv = NNRegressor_CrossValidation('D', d, 'KFOLDS', 5, 'NN_TEMPLATE', nn_template);
 nncv.get('TRAIN');
 
 %% Evaluate the performance
@@ -51,3 +52,4 @@ av_coeff_determination = nncv.get('AV_DET');
 av_mae = nncv.get('AV_MAE');
 av_mse = nncv.get('AV_MSE');
 av_rmse = nncv.get('AV_RMSE');
+av_fi = nncv.get('AV_FEATURE_IMPORTANCE');
