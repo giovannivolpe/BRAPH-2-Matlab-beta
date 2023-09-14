@@ -108,7 +108,7 @@ check = value > 0 && value == round(value);
 %%% ¡prop!
 PERM_SEEDS (result, rvector) is the list of seeds for the random permutations.
 %%%% ¡calculate!
-value = randi(intmax('uint32'), 1, nn.get('P'));
+value = randi(intmax('uint32'), 1, nne.get('P'));
 
 %%% ¡prop!
 INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.
