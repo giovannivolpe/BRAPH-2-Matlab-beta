@@ -38,14 +38,16 @@ co_gr = CombineGroups_CON_FUN_MP( ...
 
 gr = co_gr.get('GR_CON_FUN_MP');
 
-%% Analysis CON FUN MP WU
-a_WU = AnalyzeEnsemble_CON_FUN_MP_WU( ...
-    'GR', gr ...
+%% Analysis CON FUN MP BUT
+thresholds = .7:.1:.9;
+a_BUT = AnalyzeEnsemble_CON_FUN_MP_BUT( ...
+    'GR', gr, ...
+    'THRESHOLDS', thresholds ...
     );
 
-a_WU.get('MEASUREENSEMBLE', 'Degree').get('M');
-a_WU.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
-a_WU.get('MEASUREENSEMBLE', 'Distance').get('M');
+a_BUT.get('MEASUREENSEMBLE', 'Degree').get('M');
+a_BUT.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
+a_BUT.get('MEASUREENSEMBLE', 'Distance').get('M');
 
 %% Create NNData composed of corresponding NNDataPoints
 % create a item list of NNDataPoint_CON_FUN_MP_REG
