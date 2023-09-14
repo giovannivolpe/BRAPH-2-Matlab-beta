@@ -11,6 +11,134 @@ To train all the neural networks for all folds, use: nncv.get('TRAIN')
 %%% ¡seealso!
 NNDataPoint, NNDataset, NNEvaluator
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.ID
+%%%% ¡title!
+Cross Validation ID
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.LABEL
+%%%% ¡title!
+Cross Validation LABEL
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.VERBOSE
+%%%% ¡title!
+VERBOSE ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.PLOT_TRAINING
+%%%% ¡title!
+PLOT TRAINING PROGRESS
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.EPOCHS
+%%%% ¡title!
+Training EPOCHS
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.BATCH
+%%%% ¡title!
+Training BATCH
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.SHUFFLE
+%%%% ¡title!
+Training SHUFFLE
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.SOLVER
+%%%% ¡title!
+Training SOLVER
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.NN_TEMPLATE
+%%%% ¡title!
+Template for Neural Network Regressor
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.NNEVALUATOR_TEMPLATE
+%%%% ¡title!
+Template for Neural Network Evaluator
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.D
+%%%% ¡title!
+DATASET
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.D_LIST
+%%%% ¡title!
+Dataset List
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.NN_LIST
+%%%% ¡title!
+Neural Network Regressor List
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.EVALUATOR_LIST
+%%%% ¡title!
+Neural Network Evaluator List
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.AV_CORR
+%%%% ¡title!
+Average of Correlation Coefficient
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.AV_DET
+%%%% ¡title!
+Average of Coefficient of Determination
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.AV_MAE
+%%%% ¡title!
+Average of Mean Absolute Error
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.AV_MSE
+%%%% ¡title!
+Average of Mean Squared Error
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.AV_RMSE
+%%%% ¡title!
+Average of Root Mean Squared Error
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.AV_FEATURE_IMPORTANCE
+%%%% ¡title!
+Average of Feature Importance
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP_CrossValidation.NOTES
+%%%% ¡title!
+Cross Validation NOTES
+
 %% ¡props_update!
 
 %%% ¡prop!

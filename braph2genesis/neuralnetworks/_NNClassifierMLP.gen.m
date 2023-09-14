@@ -42,12 +42,6 @@ PLOT TRAINING PROGRESS
 
 %%% ¡prop!
 %%%% ¡id!
-NNClassifierMLP.D
-%%%% ¡title!
-DATASET
-
-%%% ¡prop!
-%%%% ¡id!
 NNClassifierMLP.EPOCHS
 %%%% ¡title!
 Training EPOCHS
@@ -69,6 +63,12 @@ Training SHUFFLE
 NNClassifierMLP.SOLVER
 %%%% ¡title!
 Training SOLVER
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP.D
+%%%% ¡title!
+DATASET
 
 %%% ¡prop!
 %%%% ¡id!
@@ -250,6 +250,11 @@ end
 LAYERS (data, rvector) defines the number of layers and their neurons.
 %%%% ¡default!
 [32 32]
+%%%% ¡gui!
+pr = PanelPropRVectorSmart('EL', nn, 'PROP', NNClassifierMLP.LAYERS, ...
+    'MIN', 0, 'MAX', 2000, ...
+    'DEFAULT', NNClassifierMLP.getPropDefault('LAYERS'), ...
+    varargin{:});
 
 %%% ¡prop!
 WAITBAR (gui, logical) detemines whether to show the waitbar.

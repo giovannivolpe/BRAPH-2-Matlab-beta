@@ -11,6 +11,116 @@ To train all the neural networks for all folds, use: nncv.get('TRAIN')
 %%% ¡seealso!
 NNDataPoint, NNDataset, NNEvaluator
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.ID
+%%%% ¡title!
+Cross Validation ID
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.LABEL
+%%%% ¡title!
+Cross Validation LABEL
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.VERBOSE
+%%%% ¡title!
+VERBOSE ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.PLOT_TRAINING
+%%%% ¡title!
+PLOT TRAINING PROGRESS
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.EPOCHS
+%%%% ¡title!
+Training EPOCHS
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.BATCH
+%%%% ¡title!
+Training BATCH SIZE
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.SHUFFLE
+%%%% ¡title!
+Training SHUFFLE
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.SOLVER
+%%%% ¡title!
+Training SOLVER
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.NN_TEMPLATE
+%%%% ¡title!
+Template for Neural Network Classifier
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.NNEVALUATOR_TEMPLATE
+%%%% ¡title!
+Template for Neural Network Evaluator
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.D
+%%%% ¡title!
+DATASET
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.D_LIST
+%%%% ¡title!
+Dataset List
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.NN_LIST
+%%%% ¡title!
+Neural Network Regressor List
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.EVALUATOR_LIST
+%%%% ¡title!
+Neural Network Evaluator List
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.AV_AUC
+%%%% ¡title!
+Average of Area Under Receiver Operating Characteristic Curve
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.AV_MACRO_AUC
+%%%% ¡title!
+Average of Macro Area Under Receiver Operating Characteristic Curve
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.C_MATRIX
+%%%% ¡title!
+Confusion Matrix
+
+%%% ¡prop!
+%%%% ¡id!
+NNClassifierMLP_CrossValidation.AV_FEATURE_IMPORTANCE
+%%%% ¡title!
+Average of Feature Importance
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -99,7 +209,7 @@ else
         'P', nncv.get('P'));
 end
 
-value = cellfun(@(d, nn) NNClassifier_Evaluator('TEMPLATE', nne_template, 'D', d, 'NN', nn), ...
+value = cellfun(@(d, nn) NNClassifierMLP_Evaluator('TEMPLATE', nne_template, 'D', d, 'NN', nn), ...
     d_list, nn_list, 'UniformOutput', false);
 
 %% ¡props!

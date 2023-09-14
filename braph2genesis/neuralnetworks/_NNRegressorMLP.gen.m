@@ -42,12 +42,6 @@ PLOT TRAINING PROGRESS
 
 %%% ¡prop!
 %%%% ¡id!
-NNRegressorMLP.D
-%%%% ¡title!
-DATASET
-
-%%% ¡prop!
-%%%% ¡id!
 NNRegressorMLP.EPOCHS
 %%%% ¡title!
 Training EPOCHS
@@ -69,6 +63,12 @@ Training SHUFFLE
 NNRegressorMLP.SOLVER
 %%%% ¡title!
 Training SOLVER
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.D
+%%%% ¡title!
+DATASET
 
 %%% ¡prop!
 %%%% ¡id!
