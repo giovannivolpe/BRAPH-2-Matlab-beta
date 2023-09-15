@@ -92,7 +92,9 @@ if ~isdir(data_dir)
     rng_settings_ = rng(); rng('default')
 
     sex_options = {'Female' 'Male'};
-    N_subjects = 10;
+    N_subjects_group1 = 10;
+    N_subjects_group2 = 10;
+    N_subjects_group3 = 10;
     N_tslength = 200;
     
     % Group 1
@@ -106,15 +108,15 @@ if ~isdir(data_dir)
     indices4 = 55:1:72;
     indices5 = 73:1:90;
     indices = {indices1; indices2; indices3; indices4; indices5};
-    gr1_ts1 = cell(1, N_subjects); % layer 1
-    gr1_ts2 = cell(1, N_subjects); % layer 2
+    gr1_ts1 = cell(1, N_subjects_group1); % layer 1
+    gr1_ts2 = cell(1, N_subjects_group1); % layer 2
     gr_name1 = 'CON_FUN_MP_Group1_XLS';
     vois1 = [
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} cell2str(sex_options)}
         ];
-    sub_id = cell(1, N_subjects);
-    for i = 1:1:N_subjects % subject number
+    sub_id = cell(1, N_subjects_group1);
+    for i = 1:1:N_subjects_group1 % subject number
         sub_id(i) = {['SubjectCON_FUN_MP_' num2str(i)]};
 
         % randomize the parameters
@@ -163,7 +165,7 @@ if ~isdir(data_dir)
     % Create the tables - functional layer
     %tables_gr11 = cell(size(gr1_ts1));
     mkdir([data_dir filesep() 'Functional' filesep() gr_name1]);
-    for i_tab = 1:1:N_subjects
+    for i_tab = 1:1:N_subjects_group1
         T_gr11 = array2table(gr1_ts1{i_tab});
         %tables_gr11{i_tab} = T_gr11;
         file_name = [data_dir filesep() 'Functional' filesep() gr_name1 filesep() sub_id{i_tab} '.xlsx'];
@@ -173,7 +175,7 @@ if ~isdir(data_dir)
     % Create the tables - connectivity layer
     %tables_gr12 = cell(size(gr1_ts2));
     mkdir([data_dir filesep() 'Connectivity' filesep() gr_name1]);
-    for i_tab = 1:1:N_subjects
+    for i_tab = 1:1:N_subjects_group1
         T_gr12 = array2table(gr1_ts2{i_tab});
         %tables_gr12{i_tab} = T_gr12;
         file_name = [data_dir filesep() 'Connectivity' filesep() gr_name1 filesep() sub_id{i_tab} '.xlsx'];
@@ -190,15 +192,15 @@ if ~isdir(data_dir)
     indices1 = 1:1:45;
     indices2 = 46:1:90;
     indices = {indices1; indices2};
-    gr2_ts1 = cell(1, N_subjects); % layer 1
-    gr2_ts2 = cell(1, N_subjects); % layer 2
+    gr2_ts1 = cell(1, N_subjects_group2); % layer 1
+    gr2_ts2 = cell(1, N_subjects_group2); % layer 2
     gr2_name = 'CON_FUN_MP_Group2_XLS';
     vois2 = [
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} cell2str(sex_options)}
         ];
-    sub_id = cell(1, N_subjects);
-    for i = 1:1:N_subjects % subject number
+    sub_id = cell(1, N_subjects_group1);
+    for i = N_subjects_group1+1:1:N_subjects_group1+N_subjects_group2 % subject number
         sub_id(i) = {['SubjectCON_FUN_MP_' num2str(i)]};
         
         % randomize the parameters
@@ -254,7 +256,7 @@ if ~isdir(data_dir)
     % Create the tables - functional layer
     %tables_gr11 = cell(size(gr2_ts1));
     mkdir([data_dir filesep() 'Functional' filesep() gr2_name]);
-    for i_tab = 1:1:N_subjects
+    for i_tab = N_subjects_group1+1:1:N_subjects_group1 + N_subjects_group2
         T_gr21 = array2table(gr2_ts1{i_tab});
         %tables_gr21{i_tab} = T_gr21;
         file_name = [data_dir filesep() 'Functional' filesep() gr2_name filesep() sub_id{i_tab} '.xlsx'];
@@ -264,7 +266,7 @@ if ~isdir(data_dir)
     % Create the tables - connectivity layer
     %tables_gr12 = cell(size(gr2_ts2));
     mkdir([data_dir filesep() 'Connectivity' filesep() gr2_name]);
-    for i_tab = 1:1:N_subjects
+    for i_tab = N_subjects_group1+1:1:N_subjects_group1 + N_subjects_group2
         T_gr22 = array2table(gr2_ts2{i_tab});
         %tables_gr22{i_tab} = T_gr22;
         file_name = [data_dir filesep() 'Connectivity' filesep() gr2_name filesep() sub_id{i_tab} '.xlsx'];
@@ -281,15 +283,15 @@ if ~isdir(data_dir)
     indices1 = 1:1:45;
     indices2 = 46:1:90;
     indices = {indices1; indices2};
-    gr3_ts1 = cell(1, N_subjects); % layer 1
-    gr3_ts2 = cell(1, N_subjects); % layer 2
+    gr3_ts1 = cell(1, N_subjects_group3); % layer 1
+    gr3_ts2 = cell(1, N_subjects_group3); % layer 2
     gr3_name = 'CON_FUN_MP_Group3_XLS';
     vois3 = [
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} cell2str(sex_options)}
         ];
-    sub_id = cell(1, N_subjects);
-    for i = 1:1:N_subjects % subject number
+    sub_id = cell(1, N_subjects_group3);
+    for i = N_subjects_group1+N_subjects_group2+1:1:N_subjects_group1+N_subjects_group2+N_subjects_group3 % subject number
         sub_id(i) = {['SubjectCON_FUN_MP_' num2str(i)]};
         
         % randomize the parameters
@@ -345,7 +347,7 @@ if ~isdir(data_dir)
     % Create the tables - functional layer
     %tables_gr11 = cell(size(gr3_ts1));
     mkdir([data_dir filesep() 'Functional' filesep() gr3_name]);
-    for i_tab = 1:1:N_subjects
+    for i_tab = N_subjects_group1+N_subjects_group2+1:1:N_subjects_group1+N_subjects_group2+N_subjects_group3
         T_gr31 = array2table(gr3_ts1{i_tab});
         %tables_gr21{i_tab} = T_gr31;
         file_name = [data_dir filesep() 'Functional' filesep() gr3_name filesep() sub_id{i_tab} '.xlsx'];
@@ -355,7 +357,7 @@ if ~isdir(data_dir)
     % Create the tables - connectivity layer
     %tables_gr12 = cell(size(gr3_ts2));
     mkdir([data_dir filesep() 'Connectivity' filesep() gr3_name]);
-    for i_tab = 1:1:N_subjects
+    for i_tab = N_subjects_group1+N_subjects_group2+1:1:N_subjects_group1+N_subjects_group2+N_subjects_group3
         T_gr32 = array2table(gr3_ts2{i_tab});
         %tables_gr32{i_tab} = T_gr32;
         file_name = [data_dir filesep() 'Connectivity' filesep() gr3_name filesep() sub_id{i_tab} '.xlsx'];
