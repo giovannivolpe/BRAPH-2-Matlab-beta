@@ -1,5 +1,5 @@
-%% EXAMPLE_NNCV_CON_BUT_M_CLA
-% Script example pipeline for NN regression cross-validation with input of GraphBUT measures derived from SubjectCON 
+%% EXAMPLE_NNCV_CON_FUN_MP_BUT_M_CLA
+% Script example pipeline for NN regression cross-validation with input of MultiplexBUT measures derived from SubjectCON_FUN_MP 
 
 clear variables %#ok<*NASGU>
 
