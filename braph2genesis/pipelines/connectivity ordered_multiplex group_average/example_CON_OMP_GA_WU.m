@@ -5,7 +5,7 @@ clear variables %#ok<*NASGU>
 
 %% Load BrainAtlas
 im_ba = ImporterBrainAtlasXLS( ...
-    'FILE', [fileparts(which('example_CON_MP_WU')) filesep 'example data CON_MP' filesep 'aal90_atlas.xlsx'], ...
+    'FILE', [fileparts(which('SubjectCON_MP')) filesep 'Example data CON_MP XLS' filesep 'atlas.xlsx'], ...
     'WAITBAR', true ...
     );
 
@@ -13,7 +13,7 @@ ba = im_ba.get('BA');
 
 %% Load Groups of SubjectCON_MP
 im_gr1 = ImporterGroupSubjectCON_MP_XLS( ...
-    'DIRECTORY', [fileparts(which('example_CON_MP_WU')) filesep 'example data CON_MP' filesep 'xls' filesep 'GroupName1'], ...
+    'DIRECTORY', [fileparts(which('SubjectCON_MP')) filesep 'Example data CON_MP XLS' filesep 'CON_MP_Group_1_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
@@ -21,7 +21,7 @@ im_gr1 = ImporterGroupSubjectCON_MP_XLS( ...
 gr1 = im_gr1.get('GR');
 
 im_gr2 = ImporterGroupSubjectCON_MP_XLS( ...
-    'DIRECTORY', [fileparts(which('example_CON_MP_WU')) filesep 'example data CON_MP' filesep 'xls' filesep 'GroupName2'], ...
+    'DIRECTORY', [fileparts(which('SubjectCON_MP')) filesep 'Example data CON_MP XLS' filesep 'CON_MP_Group_2_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
@@ -34,15 +34,22 @@ a_WU1 = AnalyzeGroup_CON_OMP_GA_WU( ...
     );
 
 a_WU2 = AnalyzeGroup_CON_OMP_GA_WU( ...
+    'TEMPLATE', a_WU1, ...
     'GR', gr2 ...
     );
 
 % measure calculation
-g_WU1 = a_WU1.get('G');
-mcommunities_WU1 = g_WU1.getMeasure('MultilayerCommunityStructure').get('M');
+g_WU1 = a_WU1.memorize('G'); % essential to memorize in case there are measures with non-default rules
+degree_WU1 = g_WU1.get('MEASURE', 'Degree').get('M');
+% % % wmpc_WU1 = g_WU1.get('MEASURE', 'WeightedMultiplexParticipation').get('M');
+% % % wmpc_av_WU1 = g_WU1.get('MEASURE', 'WeightedMultiplexParticipationAv').get('M');
+% % % mcommunities_WU1 = g_WU1.get('MEASURE', 'MultilayerCommunityStructure').get('M');
 
 g_WU2 = a_WU2.get('G');
-mcommunities_WU2 = g_WU2.getMeasure('MultilayerCommunityStructure').get('M');
+degree_WU2 = g_WU2.get('MEASURE', 'Degree').get('M');
+% % % wmpc_WU2 = g_WU2.get('MEASURE', 'WeightedMultiplexParticipation').get('M');
+% % % wmpc_av_WU2 = g_WU2.get('MEASURE', 'WeightedMultiplexParticipationAv').get('M');
+% % % mcommunities_WU2 = g_WU2.get('MEASURE', 'MultilayerCommunityStructure').get('M');
 
 % comparison
 c_WU = CompareGroup( ...
@@ -54,14 +61,26 @@ c_WU = CompareGroup( ...
     'MEMORIZE', true ...
     );
 
-overlappingdegree_WU_diff = c_WU.getComparison('OverlappingDegree').get('DIFF');
-overlappingdegree_WU_p1 = c_WU.getComparison('OverlappingDegree').get('P1');
-overlappingdegree_WU_p2 = c_WU.getComparison('OverlappingDegree').get('P2');
-overlappingdegree_WU_cil = c_WU.getComparison('OverlappingDegree').get('CIL');
-overlappingdegree_WU_ciu = c_WU.getComparison('OverlappingDegree').get('CIU');
+degree_WU_diff = c_WU.get('COMPARISON', 'Degree').get('DIFF');
+degree_WU_p1 = c_WU.get('COMPARISON', 'Degree').get('P1');
+degree_WU_p2 = c_WU.get('COMPARISON', 'Degree').get('P2');
+degree_WU_cil = c_WU.get('COMPARISON', 'Degree').get('CIL');
+degree_WU_ciu = c_WU.get('COMPARISON', 'Degree').get('CIU');
 
-overlappingdegree_av_WU_diff = c_WU.getComparison('OverlappingDegreeAv').get('DIFF');
-overlappingdegree_av_WU_p1 = c_WU.getComparison('OverlappingDegreeAv').get('P1');
-overlappingdegree_av_WU_p2 = c_WU.getComparison('OverlappingDegreeAv').get('P2');
-overlappingdegree_av_WU_cil = c_WU.getComparison('OverlappingDegreeAv').get('CIL');
-overlappingdegree_av_WU_ciu = c_WU.getComparison('OverlappingDegreeAv').get('CIU');
+% % % overlappingdegree_WU_diff = c_WU.get('COMPARISON', 'OverlappingDegree').get('DIFF');
+% % % overlappingdegree_WU_p1 = c_WU.get('COMPARISON', 'OverlappingDegree').get('P1');
+% % % overlappingdegree_WU_p2 = c_WU.get('COMPARISON', 'OverlappingDegree').get('P2');
+% % % overlappingdegree_WU_cil = c_WU.get('COMPARISON', 'OverlappingDegree').get('CIL');
+% % % overlappingdegree_WU_ciu = c_WU.get('COMPARISON', 'OverlappingDegree').get('CIU');
+
+% % % overlappingdegree_av_WU_diff = c_WU.get('COMPARISON', 'OverlappingDegreeAv').get('DIFF');
+% % % overlappingdegree_av_WU_p1 = c_WU.get('COMPARISON', 'OverlappingDegreeAv').get('P1');
+% % % overlappingdegree_av_WU_p2 = c_WU.get('COMPARISON', 'OverlappingDegreeAv').get('P2');
+% % % overlappingdegree_av_WU_cil = c_WU.get('COMPARISON', 'OverlappingDegreeAv').get('CIL');
+% % % overlappingdegree_av_WU_ciu = c_WU.get('COMPARISON', 'OverlappingDegreeAv').get('CIU');
+
+% % % mcommunities_WU_diff = c_WU.get('COMPARISON', 'MultilayerCommunityStructure').get('DIFF');
+% % % mcommunities_WU_p1 = c_WU.get('COMPARISON', 'MultilayerCommunityStructure').get('P1');
+% % % mcommunities_WU_p2 = c_WU.get('COMPARISON', 'MultilayerCommunityStructure').get('P2');
+% % % mcommunities_WU_cil = c_WU.get('COMPARISON', 'MultilayerCommunityStructure').get('CIL');
+% % % mcommunities_WU_ciu = c_WU.get('COMPARISON', 'MultilayerCommunityStructure').get('CIU');
