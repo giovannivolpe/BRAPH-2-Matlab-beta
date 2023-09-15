@@ -4,7 +4,7 @@
 % 1. It loads a brain atlas from an XLS file (e.g., aal90_atlas.xlsx).
 % 2.1 It loads the connectivity data of two groups of subjects from three directories (e.g., CON_Group1_XLS, CON_Group2_XLS, and CON_Group3_XLS) containing XLS files of each subject.
 % 2.2 It loads the functional data of two groups of subjects from three directories (e.g., CON_Group1_XLS, CON_Group2_XLS, and CON_Group3_XLS) containing XLS files of each subject.
-% 3. It analyzes these groups using connectivity analyses (CON) based on weighted undirected graphs (WU).
+% 3. It analyzes these groups using connectivity-functional analyses (CON-FUN) based on weighted undirected multiplex (MultiplexWU).
 % 4. It executes the cross-validation process.
 
 %% Brain Atlas
@@ -26,9 +26,9 @@ gr2 = CombineGroups_CON_FUN_MP('GR_CON', gr2_CON, 'GR_FUN', gr2_FUN, 'WAITBAR', 
 gr3 = CombineGroups_CON_FUN_MP('GR_CON', gr3_CON, 'GR_FUN', gr3_FUN, 'WAITBAR', true).get('GR_CON_FUN_MP'); % Combine Groups 3 % Group CON-FUN 2
 
 %% Analysis
-a_WU1 = AnalyzeEnsemble_CON_WU('GR', gr1); % Analyze Group 1 % Group 1 Analysis
-a_WU2 = AnalyzeEnsemble_CON_WU('GR', gr2, 'TEMPLATE', a_WU1); % Analyze Group 2 % Group 2 Analysis
-a_WU3 = AnalyzeEnsemble_CON_WU('GR', gr3, 'TEMPLATE', a_WU1); % Analyze Group 3 % Group 3 Analysis
+a_WU1 = AnalyzeEnsemble_CON_FUN_MP_WU('GR', gr1); % Analyze Group 1 % Group 1 Analysis
+a_WU2 = AnalyzeEnsemble_CON_FUN_MP_WU('GR', gr2, 'TEMPLATE', a_WU1); % Analyze Group 2 % Group 2 Analysis
+a_WU3 = AnalyzeEnsemble_CON_FUN_MP_WU('GR', gr3, 'TEMPLATE', a_WU1); % Analyze Group 3 % Group 3 Analysis
 
 %% Cross-Validation
 nncv = NNClassifierMLP_CrossValidation('D', NNDatasetCombine('D_LIST', {NNDataset('DP_CLASS', 'NNDataPoint_Graph_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Graph_CLA('ID', g.get('ID'), 'G', g, 'TARGET_IDS', {gr1.get('ID')}), a_WU1.get('G_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_Graph_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Graph_CLA('ID', g.get('ID'), 'G', g, 'TARGET_IDS', {gr2.get('ID')}), a_WU2.get('G_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_Graph_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Graph_CLA('ID', g.get('ID'), 'G', g, 'TARGET_IDS', {gr3.get('ID')}), a_WU3.get('G_DICT').get('IT_LIST'), 'UniformOutput', false)))}).get('D')); % Cross-Validation % Cross-Validation Process
