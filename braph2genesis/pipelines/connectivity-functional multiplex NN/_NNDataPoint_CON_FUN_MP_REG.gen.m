@@ -20,7 +20,7 @@ NAME (constant, string) is the name of a data point for regression with connecti
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of a data point for regression with connectivity-functional multiplex data.
 %%%% ¡default!
-'A data point for regression with connectivity data (NNDataPoint_CON_REG) contains the input and target for neural network analysis with a subject with connectivity data (SubjectCON). The input is the connectivity data of the subject. The target is obtained from the variables of interest of the subject.'
+'A data point for regression with connectivity-functional multiplex data (NNDataPoint_CON_FUN_MP_REG) contains the input and target for neural network analysis with a subject with connectivity-functional multiplex data (SubjectCON_FUN_MP). The input is the connectivity-functional multiplex data of the subject. The target is obtained from the variables of interest of the subject.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of a data point for regression with connectivity-functional multiplex data.
