@@ -1,5 +1,5 @@
 %% ¡header!
-NNDataPoint_CON_FUN_MP_REG < NNDataPoint (dp, connectivity-functipnal multiplex regression data point) is a data point for regression with connectivity-functional multiplex data.
+NNDataPoint_CON_FUN_MP_REG < NNDataPoint (dp, connectivity-functional multiplex regression data point) is a data point for regression with connectivity-functional multiplex data.
 
 %%% ¡description!
 A data point for regression with connectivity-functional multiplex data (NNDataPoint_CON_FUN_MP_REG) 
@@ -160,8 +160,6 @@ if ~isdir(data_dir)
         % place in the array
         gr1_ts1{1, i} = R11;
         gr1_ts2{1, i} = A_full2;
-        
-        %writetable(array2table(A), [gr_dir filesep() sub_id '.xlsx'], 'WriteVariableNames', false)
 
         % variables of interest
         age_upperBound = 80;
