@@ -337,7 +337,7 @@ value = A;
 %%% ¡prop!
 SUBGRAPH (query, item) returns a subgraph of original graph
 %%%% ¡calculate!
-A = g.get('A');
+B = g.get('B');
 L = g.get('LAYERNUMBER');
 if isempty(varargin)
     value = g;
