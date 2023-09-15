@@ -292,8 +292,11 @@ if ~iscell(nodes)
     nodes = repmat({nodes}, 1, L);
 end
 temp_B = g.get('B');
-B2 = temp_B(nodes{1}, nodes{1});
-value = MultigraphBUT('B', B2, 'THRESHOLDS', g.get('THRESHOLDS'));
+B = temp_B(nodes{1}, nodes{1});
+value = MultigraphBUT('B', B, 'TEMPLATE', g, ...
+    'ID', ['Subgraph of ' g.get('ID')], ...
+    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
+    'NOTES', ['Subgraph - ' g.get('NOTES')]);
 
 %% ¡props!
 

@@ -91,7 +91,6 @@ GraphBD.SUBGRAPH
 %%%% ¡title!
 SUBGRAPH
 
-
 %% ¡props_update!
 
 %%% ¡prop!
@@ -178,6 +177,27 @@ pr = PanelPropCell('EL', g, 'PROP', GraphBD.A, ...
 COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('GraphBD')
+
+%%% ¡prop!
+SUBGRAPH (query, item) is the subgraph
+%%%% ¡calculate!
+A = g.get('A');
+if isempty(varargin)
+    value = g;
+    return
+end
+nodes = varargin{1};
+L = g.get('LAYERNUMBER');
+
+if ~iscell(nodes)
+    nodes = repmat({nodes}, 1, L);
+end
+B = A{1};
+B = B(nodes{1}, nodes{1});
+value = GraphBD('B', B, 'TEMPLATE', g, ...
+    'ID', ['Subgraph of ' g.get('ID')], ...
+    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
+    'NOTES', ['Subgraph - ' g.get('NOTES')]);
 
 %% ¡props!
 
@@ -280,24 +300,6 @@ for attempt = 1:1:attempts_per_edge*E
     end
 end
 value = random_A;
-
-%%% ¡prop!
-SUBGRAPH (query, item) is the subgraph
-%%%% ¡calculate!
-A = g.get('A');
-if isempty(varargin)
-    value = g;
-    return
-end
-nodes = varargin{1};
-L = g.get('LAYERNUMBER');
-
-if ~iscell(nodes)
-    nodes = repmat({nodes}, 1, L);
-end
-B = A{1};
-B = B(nodes{1}, nodes{1});
-value = eval([g.getClass() '(''B'', B)']);
 
 %% ¡tests!
 

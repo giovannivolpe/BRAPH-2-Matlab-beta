@@ -327,7 +327,10 @@ if ~iscell(nodes)
 end
 B = A{1};
 B = B(nodes{1}, nodes{1});
-value = eval([g.getClass() '(''B'', B)']);
+value = GraphBU('B', B, 'TEMPLATE', g, ...
+    'ID', ['Subgraph of ' g.get('ID')], ...
+    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
+    'NOTES', ['Subgraph - ' g.get('NOTES')]);
 
 %% ¡tests!
 

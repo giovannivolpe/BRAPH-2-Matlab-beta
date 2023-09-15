@@ -318,7 +318,10 @@ for li = 1:1:L
         B(li) = {Aii(nodes{li}, nodes{li})};
     end
 end
-value = MultiplexBUT('B', B, 'THRESHOLDS', g.get('THRESHOLDS'));
+value = MultiplexBUT('B', B, 'TEMPLATE', g, ...
+    'ID', ['Subgraph of ' g.get('ID')], ...
+    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
+    'NOTES', ['Subgraph - ' g.get('NOTES')]);
 
 %% ¡props!
 
