@@ -528,7 +528,7 @@ assert(length(d2.get('TARGETS')) == gr2.get('SUB_DICT').get('LENGTH'), ...
 
 % Check whether the content of input for a single datapoint matches
 for index = 1:1:gr1.get('SUB_DICT').get('LENGTH')
-    individual_input = d.get('DP_DICT').get('IT', index).get('INPUT');
+    individual_input = d1.get('DP_DICT').get('IT', index).get('INPUT');
     A = cell(1, 2);
     A{1} = gr1.get('SUB_DICT').get('IT', index).get('CON');
     A{2} = gr1.get('SUB_DICT').get('IT', index).get('FUN');
@@ -540,7 +540,7 @@ for index = 1:1:gr1.get('SUB_DICT').get('LENGTH')
         )
 end
 for index = 1:1:gr2.get('SUB_DICT').get('LENGTH')
-    individual_input = d.get('DP_DICT').get('IT', index).get('INPUT');
+    individual_input = d2.get('DP_DICT').get('IT', index).get('INPUT');
     A = cell(1, 2);
     A{1} = gr2.get('SUB_DICT').get('IT', index).get('CON');
     A{2} = gr2.get('SUB_DICT').get('IT', index).get('FUN');
