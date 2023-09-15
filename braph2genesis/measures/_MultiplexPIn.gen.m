@@ -1,5 +1,5 @@
 %% ¡header!
-MultiplexPiIn < Measure (m, multiplex in-participation) is the graph multiplex in-participation.
+MultiplexPIn < Measure (m, multiplex in-participation) is the graph multiplex in-participation.
 
 %%% ¡description!
 The multiplex in-participation is the homogeneity of the number of inward 
@@ -9,43 +9,43 @@ neighbours of a node across the layers.
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiIn.ID
+MultiplexPIn.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiIn.LABEL
+MultiplexPIn.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiIn.G
+MultiplexPIn.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiIn.M
+MultiplexPIn.M
 %%%% ¡title!
-MultiplexPiIn
+MultiplexPIn
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiIn.PFM
+MultiplexPIn.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiIn.NOTES
+MultiplexPIn.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiIn.COMPATIBLE_GRAPHS
+MultiplexPIn.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex in-participation.
 %%%% ¡default!
-'MultiplexPiIn'
+'MultiplexPIn'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex in-participation.
@@ -64,22 +64,22 @@ DESCRIPTION (constant, string) is the description of the multiplex in-participat
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multiplex in-participation.
 %%%% ¡settings!
-'MultiplexPiIn'
+'MultiplexPIn'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the multiplex in-participation.
 %%%% ¡default!
-'MultiplexPiIn ID'
+'MultiplexPIn ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex in-participation.
 %%%% ¡default!
-'MultiplexPiIn label'
+'MultiplexPIn label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex in-participation.
 %%%% ¡default!
-'MultiplexPiIn notes'
+'MultiplexPIn notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -124,7 +124,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MultiplexPiIn.PFM]
+[MultiplexPIn.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -153,14 +153,14 @@ known_multiplex_in_participation = {[3/4 3/4 3/4]'};
 
 g = MultiplexBD('B', B);
 
-m_outside_g = MultiplexPiIn('G', g);
+m_outside_g = MultiplexPIn('G', g);
 assert(isequal(m_outside_g.get('M'), known_multiplex_in_participation), ...
-    [BRAPH2.STR ':MultiplexPiIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPiIn');
+m_inside_g = g.get('MEASURE', 'MultiplexPIn');
 assert(isequal(m_inside_g.get('M'), known_multiplex_in_participation), ...
-    [BRAPH2.STR ':MultiplexPiIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -185,12 +185,12 @@ known_multiplex_in_participation = {[8/9 8/9 1]'};
 
 g = MultiplexWD('B', B);
 
-m_outside_g = MultiplexPiIn('G', g);
+m_outside_g = MultiplexPIn('G', g);
 assert(isequal(m_outside_g.get('M'), known_multiplex_in_participation), ...
-    [BRAPH2.STR ':MultiplexPiIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPiIn');
+m_inside_g = g.get('MEASURE', 'MultiplexPIn');
 assert(isequal(m_inside_g.get('M'), known_multiplex_in_participation), ...
-    [BRAPH2.STR ':MultiplexPiIn:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

@@ -1,5 +1,5 @@
 %% ¡header!
-MultiplexKCoror < Measure (m,  multiplex k-core) is the graph  multiplex k-core.
+MultiplexKCor < Measure (m,  multiplex k-core) is the graph  multiplex k-core.
 
 %%% ¡description!
 The multiplex k-core of a graph is the largest subnetwork comprising nodes of overlapping degree k or higher. 
@@ -9,43 +9,43 @@ k is set by the user; the default value is equal to 1.
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCoror.ID
+MultiplexKCor.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCoror.LABEL
+MultiplexKCor.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCoror.G
+MultiplexKCor.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCoror.M
+MultiplexKCor.M
 %%%% ¡title!
-MultiplexKCoror
+MultiplexKCor
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCoror.PFM
+MultiplexKCor.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCoror.NOTES
+MultiplexKCor.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCoror.COMPATIBLE_GRAPHS
+MultiplexKCor.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex rich-club strength.
 %%%% ¡default!
-'MultiplexKCoror'
+'MultiplexKCor'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex rich-club strength.
@@ -64,22 +64,22 @@ DESCRIPTION (constant, string) is the description of the multiplex rich-club str
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multiplex rich-club strength.
 %%%% ¡settings!
-'MultiplexKCoror'
+'MultiplexKCor'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the multiplex rich-club strength.
 %%%% ¡default!
-'MultiplexKCoror ID'
+'MultiplexKCor ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex rich-club strength.
 %%%% ¡default!
-'MultiplexKCoror label'
+'MultiplexKCor label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex rich-club strength.
 %%%% ¡default!
-'MultiplexKCoror notes'
+'MultiplexKCor notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -115,8 +115,8 @@ else
     N = g.get('NODENUMBER');
     multiplex_kcore_threshold = m.get('MULTIPLEXKCORETHRESHOLD');
     assert(mod(multiplex_kcore_threshold, 1) == 0, ...
-        [BRAPH2.STR ':MultiplexKCororore:' BRAPH2.WRONG_INPUT], ...
-        ['MultiplexKCororore threshold must be an integer value ' ...
+        [BRAPH2.STR ':MultiplexKCore:' BRAPH2.WRONG_INPUT], ...
+        ['MultiplexKCore threshold must be an integer value ' ...
         'while it is ' tostring(multiplex_kcore_threshold)])
     
     directionality_layer = g.get('DIRECTIONALITY_TYPE', l);
@@ -162,7 +162,7 @@ MULTIPLEXKCORETHRESHOLD (parameter, scalar) is the multiplex k-core threshold
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MultiplexKCoror.PFM]
+[MultiplexKCor.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -193,16 +193,16 @@ known_mkcore = {[
     ]};
 
 g = MultiplexWU('B', A);
-m_outside_g = MultiplexKCoror('G', g, 'MULTIPLEXKCORETHRESHOLD', 2);
+m_outside_g = MultiplexKCor('G', g, 'MULTIPLEXKCORETHRESHOLD', 2);
 
 assert(isequal(m_outside_g.get('M'), known_mkcore), ...
-    [BRAPH2.STR ':MultiplexKCoror:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexKCor:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexKCoror');
+m_inside_g = g.get('MEASURE', 'MultiplexKCor');
 m_inside_g.set('MULTIPLEXKCORETHRESHOLD', 2);
 assert(isequal(m_inside_g.get('M'), known_mkcore), ...
-    [BRAPH2.STR ':MultiplexKCoror:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexKCor:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -234,16 +234,16 @@ known_mkcore = {[
     ]};
 
 g = MultiplexWD('B', A);
-m_outside_g = MultiplexKCoror('G', g, 'MULTIPLEXKCORETHRESHOLD', 4);
+m_outside_g = MultiplexKCor('G', g, 'MULTIPLEXKCORETHRESHOLD', 4);
 
 assert(isequal(m_outside_g.get('M'), known_mkcore), ...
-    [BRAPH2.STR ':MultiplexKCoror:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexKCor:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexKCoror');
+m_inside_g = g.get('MEASURE', 'MultiplexKCor');
 m_inside_g.set('MULTIPLEXKCORETHRESHOLD', 4);
 assert(isequal(m_inside_g.get('M'), known_mkcore), ...
-    [BRAPH2.STR ':MultiplexKCoror:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexKCor:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -275,14 +275,14 @@ known_mkcore = {[
     ]};
 
 g = OrdMxWU('B', A);
-m_outside_g = MultiplexKCoror('G', g, 'MULTIPLEXKCORETHRESHOLD', 2);
+m_outside_g = MultiplexKCor('G', g, 'MULTIPLEXKCORETHRESHOLD', 2);
 
 assert(isequal(m_outside_g.get('M'), known_mkcore), ...
-    [BRAPH2.STR ':MultiplexKCoror:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexKCor:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexKCoror');
+m_inside_g = g.get('MEASURE', 'MultiplexKCor');
 m_inside_g.set('MULTIPLEXKCORETHRESHOLD', 2);
 assert(isequal(m_inside_g.get('M'), known_mkcore), ...
-    [BRAPH2.STR ':MultiplexKCoror:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexKCor:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

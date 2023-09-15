@@ -128,7 +128,7 @@ else
     end
     value = overlapping_degree;
     if contains(class(g),'Multilayer') | contains(class(g),'OrdMl')
-     value = {[sum(cell2mat(overlapping_degree'),2)]}
+     value = {[sum(cell2mat(overlapping_degree'),2)]};
     end 
 end
 

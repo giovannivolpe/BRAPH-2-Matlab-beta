@@ -1,5 +1,5 @@
 %% ¡header!
-MultiplexKCororCentrality < Measure (m, multiplex k-coreness centrality) is the graph multiplex k-coreness centrality.
+MultiplexKCorC < Measure (m, multiplex k-coreness centrality) is the graph multiplex k-coreness centrality.
 
 %%% ¡description!
 The multiplex k-coreness centrality of a node is k if the node belongs to the k-core 
@@ -9,43 +9,43 @@ but not to the (k+1)-core.
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCororCentrality.ID
+MultiplexKCorC.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCororCentrality.LABEL
+MultiplexKCorC.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCororCentrality.G
+MultiplexKCorC.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCororCentrality.M
+MultiplexKCorC.M
 %%%% ¡title!
-MultiplexKCororCentrality
+MultiplexKCorC
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCororCentrality.PFM
+MultiplexKCorC.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCororCentrality.NOTES
+MultiplexKCorC.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCororCentrality.COMPATIBLE_GRAPHS
+MultiplexKCorC.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex rich-club strength.
 %%%% ¡default!
-'MultiplexKCororCentrality'
+'MultiplexKCorC'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex rich-club strength.
@@ -64,22 +64,22 @@ DESCRIPTION (constant, string) is the description of the multiplex rich-club str
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multiplex rich-club strength.
 %%%% ¡settings!
-'MultiplexKCororCentrality'
+'MultiplexKCorC'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the multiplex rich-club strength.
 %%%% ¡default!
-'MultiplexKCororCentrality ID'
+'MultiplexKCorC ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex rich-club strength.
 %%%% ¡default!
-'MultiplexKCororCentrality label'
+'MultiplexKCorC label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex rich-club strength.
 %%%% ¡default!
-'MultiplexKCororCentrality notes'
+'MultiplexKCorC notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -165,7 +165,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MultiplexKCororCentrality.PFM]
+[MultiplexKCorC.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -193,15 +193,15 @@ known_multiplexk_coreness_centrality = {
     };
 
 g = MultiplexWU('B', A);
-m_outside_g = MultiplexKCororCentrality('G', g);
+m_outside_g = MultiplexKCorC('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multiplexk_coreness_centrality), ...
-    [BRAPH2.STR ':MultiplexKCororCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexKCorC:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexKCororCentrality');
+m_inside_g = g.get('MEASURE', 'MultiplexKCorC');
 assert(isequal(m_inside_g.get('M'), known_multiplexk_coreness_centrality), ...
-    [BRAPH2.STR ':MultiplexKCororCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexKCorC:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -230,15 +230,15 @@ known_multiplexk_coreness_centrality = {
     };
 
 g = MultiplexBD('B', A);
-m_outside_g = MultiplexKCororCentrality('G', g);
+m_outside_g = MultiplexKCorC('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multiplexk_coreness_centrality), ...
-    [BRAPH2.STR ':MultiplexKCororCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexKCorC:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexKCororCentrality');
+m_inside_g = g.get('MEASURE', 'MultiplexKCorC');
 assert(isequal(m_inside_g.get('M'), known_multiplexk_coreness_centrality), ...
-    [BRAPH2.STR ':MultiplexKCororCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexKCorC:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -267,13 +267,13 @@ known_multiplexk_coreness_centrality = {
     };
 
 g = OrdMxWU('B', A);
-m_outside_g = MultiplexKCororCentrality('G', g);
+m_outside_g = MultiplexKCorC('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multiplexk_coreness_centrality), ...
-    [BRAPH2.STR ':MultiplexKCororCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexKCorC:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexKCororCentrality');
+m_inside_g = g.get('MEASURE', 'MultiplexKCorC');
 assert(isequal(m_inside_g.get('M'), known_multiplexk_coreness_centrality), ...
-    [BRAPH2.STR ':MultiplexKCororCentrality:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexKCorC:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

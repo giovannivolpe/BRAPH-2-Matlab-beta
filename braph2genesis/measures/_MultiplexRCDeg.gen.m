@@ -1,5 +1,5 @@
 %% ¡header!
-MultiRCDgr < RCDeg (m, multi rich-club degree) is the graph multiplex rich-club degree.
+MultiplexRCDeg < RCDeg (m, multi rich-club degree) is the graph multiplex rich-club degree.
 
 %%% ¡description!
 The multi rich-club degree of a node at level k is the sum of 
@@ -11,43 +11,43 @@ The relevance of each layer is controlled by the coefficients c that are
 
 %%% ¡prop!
 %%%% ¡id!
-MultiRCDgr.ID
+MultiplexRCDeg.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-MultiRCDgr.LABEL
+MultiplexRCDeg.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-MultiRCDgr.G
+MultiplexRCDeg.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-MultiRCDgr.M
+MultiplexRCDeg.M
 %%%% ¡title!
-MultiRCDgr
+MultiplexRCDeg
 
 %%% ¡prop!
 %%%% ¡id!
-MultiRCDgr.PFM
+MultiplexRCDeg.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-MultiRCDgr.NOTES
+MultiplexRCDeg.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-MultiRCDgr.COMPATIBLE_GRAPHS
+MultiplexRCDeg.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -56,7 +56,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex rich-club degree.
 %%%% ¡default!
-'MultiRCDgr'
+'MultiplexRCDeg'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex rich-club degree.
@@ -66,22 +66,22 @@ DESCRIPTION (constant, string) is the description of the multiplex rich-club deg
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multiplex rich-club degree.
 %%%% ¡settings!
-'MultiRCDgr'
+'MultiplexRCDeg'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the multiplex rich-club degree.
 %%%% ¡default!
-'MultiRCDgr ID'
+'MultiplexRCDeg ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex rich-club degree.
 %%%% ¡default!
-'MultiRCDgr label'
+'MultiplexRCDeg label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex rich-club degree.
 %%%% ¡default!
-'MultiRCDgr notes'
+'MultiplexRCDeg notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -158,7 +158,7 @@ MULTIRICHCLUB_COEFFICIENTS (parameter, RVECTOR) is the multi rich-club degree co
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MultiRCDgr.PFM]
+[MultiplexRCDeg.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -183,16 +183,16 @@ B = {B11 B22};
 known_multi_rich_club_degree = {[9/4 9/4 2 1/2]'};
 
 g = MultiplexWU('B', B);
-m_outside_g = MultiRCDgr('G', g, 'MULTIRICHCLUB_COEFFICIENTS', [3/4, 1/4]);
+m_outside_g = MultiplexRCDeg('G', g, 'MULTIRICHCLUB_COEFFICIENTS', [3/4, 1/4]);
 
 assert(isequal(m_outside_g.get('M'), known_multi_rich_club_degree), ...
-    [BRAPH2.STR ':MultiRCDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexRCDeg:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiRCDgr');
+m_inside_g = g.get('MEASURE', 'MultiplexRCDeg');
 m_inside_g.set('MULTIRICHCLUB_COEFFICIENTS', [3/4, 1/4]);
 assert(isequal(m_inside_g.get('M'), known_multi_rich_club_degree), ...
-    [BRAPH2.STR ':MultiRCDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexRCDeg:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -218,15 +218,15 @@ B = {B11 B22};
 known_multi_rich_club_degree = {[5/2 5/2 2 1]'};  
 
 g = MultiplexBU('B', B);
-m_outside_g = MultiRCDgr('G', g);
+m_outside_g = MultiplexRCDeg('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multi_rich_club_degree), ...
-    [BRAPH2.STR ':MultiRCDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexRCDeg:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiRCDgr');
+m_inside_g = g.get('MEASURE', 'MultiplexRCDeg');
 assert(isequal(m_inside_g.get('M'), known_multi_rich_club_degree), ...
-    [BRAPH2.STR ':MultiRCDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexRCDeg:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -252,15 +252,15 @@ known_multi_rich_club_degree = {
                                 [0   0    0  0]'};
 
 g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
-m_outside_g = MultiRCDgr('G', g);
+m_outside_g = MultiplexRCDeg('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multi_rich_club_degree), ...
-    [BRAPH2.STR ':MultiRCDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexRCDeg:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiRCDgr');
+m_inside_g = g.get('MEASURE', 'MultiplexRCDeg');
 assert(isequal(m_inside_g.get('M'), known_multi_rich_club_degree), ...
-    [BRAPH2.STR ':MultiRCDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexRCDeg:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -286,14 +286,14 @@ known_multi_rich_club_degree = {
     [5/2 5/2  2  1]'};
 
 g = MultiplexBUD('B', B, 'DENSITIES', [10 90]);
-m_outside_g = MultiRCDgr('G', g);
+m_outside_g = MultiplexRCDeg('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multi_rich_club_degree), ...
-    [BRAPH2.STR ':MultiRCDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexRCDeg:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiRCDgr');
+m_inside_g = g.get('MEASURE', 'MultiplexRCDeg');
 assert(isequal(m_inside_g.get('M'), known_multi_rich_club_degree), ...
-    [BRAPH2.STR ':MultiRCDgr:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexRCDeg:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 

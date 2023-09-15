@@ -1,5 +1,5 @@
 %% ¡header!
-MultiplexPiOut < Measure (m, multiplex out-participation) is the graph multiplex out-participation.
+MultiplexPOut < Measure (m, multiplex out-participation) is the graph multiplex out-participation.
 
 %%% ¡description!
 The multiplex out-participation is the homogeneity of the number of outward 
@@ -9,43 +9,43 @@ The multiplex out-participation is the homogeneity of the number of outward
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiOut.ID
+MultiplexPOut.ID
 %%%% ¡title!
 Measure ID
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiOut.LABEL
+MultiplexPOut.LABEL
 %%%% ¡title!
 Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiOut.G
+MultiplexPOut.G
 %%%% ¡title!
 Graph
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiOut.M
+MultiplexPOut.M
 %%%% ¡title!
-MultiplexPiOut
+MultiplexPOut
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiOut.PFM
+MultiplexPOut.PFM
 %%%% ¡title!
 Measure Plot
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiOut.NOTES
+MultiplexPOut.NOTES
 %%%% ¡title!
 Measure NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexPiOut.COMPATIBLE_GRAPHS
+MultiplexPOut.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
 
@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex out-participation.
 %%%% ¡default!
-'MultiplexPiOut'
+'MultiplexPOut'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex out-participation.
@@ -64,22 +64,22 @@ DESCRIPTION (constant, string) is the description of the multiplex out-participa
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multiplex out-participation.
 %%%% ¡settings!
-'MultiplexPiOut'
+'MultiplexPOut'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the multiplex out-participation.
 %%%% ¡default!
-'MultiplexPiOut ID'
+'MultiplexPOut ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex out-participation.
 %%%% ¡default!
-'MultiplexPiOut label'
+'MultiplexPOut label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex out-participation.
 %%%% ¡default!
-'MultiplexPiOut notes'
+'MultiplexPOut notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -128,7 +128,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MultiplexPiOut.PFM]
+[MultiplexPOut.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -151,15 +151,15 @@ B = {B11  B22};
 known_multiplex_out_participation = {[8/9 8/9 1]'};
 
 g = MultiplexWD('B', B);
-m_outside_g = MultiplexPiOut('G', g);
+m_outside_g = MultiplexPOut('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_multiplex_out_participation), ...
-    [BRAPH2.STR ':MultiplexPiOut:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPOut:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPiOut');
+m_inside_g = g.get('MEASURE', 'MultiplexPOut');
 assert(isequal(m_inside_g.get('M'), known_multiplex_out_participation), ...
-    [BRAPH2.STR ':MultiplexPiOut:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPOut:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -188,12 +188,12 @@ B = {B11 B22 B33};
 known_multiplex_out_participation = {[1 15/16 1]'};
 
 g = MultiplexBD('B', B);
-m_outside_g = MultiplexPiOut('G', g);
+m_outside_g = MultiplexPOut('G', g);
 assert(isequal(m_outside_g.get('M'), known_multiplex_out_participation), ...
-    [BRAPH2.STR ':MultiplexPiOut:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPOut:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPiOut');
+m_inside_g = g.get('MEASURE', 'MultiplexPOut');
 assert(isequal(m_inside_g.get('M'), known_multiplex_out_participation), ...
-    [BRAPH2.STR ':MultiplexPiOut:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':MultiplexPOut:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

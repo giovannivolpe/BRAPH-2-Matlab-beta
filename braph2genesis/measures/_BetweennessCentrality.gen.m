@@ -509,7 +509,7 @@ B_WU2 = [
     1 0 0; 
     4 0 0 
     ];
-B = {B_WU1 B_WU2}
+B = {B_WU1 B_WU2};
  
 densities = [0 50 90];
 g = MultiplexBUD('B', B, 'DENSITIES', densities);
@@ -543,7 +543,7 @@ B_WU2 = [
     1 0 0; 
     4 0 0 
     ];
-B = {B_WU1 B_WU2}
+B = {B_WU1 B_WU2};
  
 thresholds = [0 1];
 g = MultiplexBUT('B', B, 'THRESHOLDS', thresholds);
