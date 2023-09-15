@@ -21,7 +21,7 @@ gr1_FUN = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').
 gr = CombineGroups_CON_FUN_MP('GR_CON', gr1_CON, 'GR_FUN', gr1_FUN, 'WAITBAR', true).get('GR_CON_FUN_MP'); % Combine Groups 1 % Group CON-FUN
 
 %% Training-Test Split
-d_split = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_CON_REG', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_CON_REG', 'IT_LIST', cellfun(@(x) NNDataPoint_CON_REG('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', x.get('VOI_DICT').get('KEYS')), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset % Dataset Splitter
+d_split = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_CON_FUN_MP_REG', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_CON_FUN_MP_REG', 'IT_LIST', cellfun(@(x) NNDataPoint_CON_FUN_MP_REG('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', x.get('VOI_DICT').get('KEYS')), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset % Dataset Splitter
 
 %% Neural Network
 nn = NNRegressorMLP('D', d_split.get('D_LIST_IT', 1), 'LAYERS', [20 20]); % Train Neural Network % Trained Neural Network
