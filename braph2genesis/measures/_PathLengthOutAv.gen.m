@@ -77,6 +77,8 @@ value = out_path_length_av;
 %%% ¡test!
 %%%% ¡name!
 GraphBD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 B = [
     0  1  1  1  0;
@@ -102,6 +104,8 @@ assert(isequal(m_inside_g.get('M'), known_out_path_length_av), ...
 %%% ¡test!
 %%%% ¡name!
 MultiplexBD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 B11 = [
       0  1  1  1  0;
@@ -140,6 +144,8 @@ assert(isequal(m_inside_g.get('M'), known_out_path_length_av), ...
 %%% ¡test!
 %%%% ¡name!
 OrdMxBD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 A11 = [
       0  1  1  1  0;

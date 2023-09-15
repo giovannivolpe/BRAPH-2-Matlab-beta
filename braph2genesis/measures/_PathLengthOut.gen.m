@@ -138,6 +138,8 @@ assert(isequal(cellfun(@(x) round(x, 3), m_outside_g.get('M'), 'UniformOutput', 
 %%% ¡test!
 %%%% ¡name!
 MultiplexBD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 A11 = [
       0  1  1  1  0;
@@ -177,6 +179,8 @@ assert(isequal(m_inside_g.get('M'), known_out_path_length), ...
 %%% ¡test!
 %%%% ¡name!
 OrdMxBD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 A11 = [
       0  1  1  1  0;
