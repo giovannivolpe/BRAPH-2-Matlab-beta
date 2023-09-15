@@ -466,7 +466,7 @@ SUBGRAPH
 %%%% ¡code!
 B = randn(10);
 
-g = MultiplexBD('B', B);
+g = MultiplexBD('B', {B B B});
 nodes = [1 3 4 7];
 sub_g = g.get('SUBGRAPH', nodes);
 

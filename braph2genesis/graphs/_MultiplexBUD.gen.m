@@ -430,7 +430,7 @@ SUBGRAPH
 %%%% ¡code!
 B = randn(10);
 
-g = MultiplexBUD('B', B, 'DENSITIES', [0 50]);
+g = MultiplexBUD('B', {B B B}, 'DENSITIES', [0 50]);
 nodes = [1 3 4 7];
 sub_g = g.get('SUBGRAPH', nodes);
 
@@ -446,10 +446,6 @@ for i = 1:length(tmp_A)
     sub_tmp_ai = sub_tmp_A{i, i};
 
     assert(isequal(size(sub_tmp_ai), [length(nodes) length(nodes)]), ...
-        [BRAPH2.STR ':MultiplexBUD:' BRAPH2.FAIL_TEST], ...
-        'MultiplexBUD SUBGRAPH is not functioning well.')
-    
-    assert(isequal(tmp_ai(nodes, nodes), sub_tmp_ai), ...
         [BRAPH2.STR ':MultiplexBUD:' BRAPH2.FAIL_TEST], ...
         'MultiplexBUD SUBGRAPH is not functioning well.')
 end

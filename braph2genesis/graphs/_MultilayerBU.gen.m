@@ -267,7 +267,7 @@ end
 for li = 1:1:L
     Aii = A{li, li};
     if ~isempty(Aii)
-        B(li) = {Aii(nodes{li}, nodes{li})};
+        B(li, li) = {Aii(nodes{li}, nodes{li})};
     end
 end
 value = MultilayerBU('B', B, 'TEMPLATE', g, ...

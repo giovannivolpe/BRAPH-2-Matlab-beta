@@ -429,7 +429,7 @@ SUBGRAPH
 %%%% ¡code!
 B = randn(10);
 
-g = MultiplexBUT('B', B, 'THRESHOLDS', [0.1 0.4]);
+g = MultiplexBUT('B', {B B B}, 'THRESHOLDS', [0.1 0.4]);
 nodes = [1 3 4 7];
 sub_g = g.get('SUBGRAPH', nodes);
 

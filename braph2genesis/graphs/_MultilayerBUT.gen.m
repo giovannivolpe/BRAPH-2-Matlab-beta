@@ -347,13 +347,19 @@ nodes = varargin{1};
 if ~iscell(nodes)
     nodes = repmat({nodes}, 1, L);
 end
-for li = 1:1:L
-    Aii = A{li, li};
-    if ~isempty(Aii)
-        B(li) = {Aii(nodes{li}, nodes{li})};
+for li = 1:1:length(B)
+    for j = 1:length(B)
+        if li == j
+            Bii = B{li, li};
+            if ~isempty(Bii)
+                BB(li, j) = {Bii(nodes{li}, nodes{li})};
+            end
+        else
+            BB(li, j) = {zeros(length(nodes{1}))};
+        end
     end
 end
-value = MultilayerBUT('B', B, 'TEMPLATE', g, ...
+value = MultilayerBUT('B', BB, 'TEMPLATE', g, ...
     'ID', ['Subgraph of ' g.get('ID')], ...
     'LABEL', ['Subgraph - ' g.get('LABEL')], ...
     'NOTES', ['Subgraph - ' g.get('NOTES')]);

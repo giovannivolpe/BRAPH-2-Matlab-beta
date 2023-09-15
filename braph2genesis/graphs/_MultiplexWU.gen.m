@@ -474,7 +474,7 @@ SUBGRAPH
 %%%% ¡code!
 B = randn(10);
 
-g = MultiplexWU('B', B);
+g = MultiplexWU('B', {B B B});
 nodes = [1 3 4 7];
 sub_g = g.get('SUBGRAPH', nodes);
 

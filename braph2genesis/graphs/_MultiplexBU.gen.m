@@ -585,7 +585,7 @@ SUBGRAPH
 %%%% ¡code!
 B = randn(10);
 
-g = MultiplexBU('B', B);
+g = MultiplexBU('B', {B B B});
 nodes = [1 3 4 7];
 sub_g = g.get('SUBGRAPH', nodes);
 
