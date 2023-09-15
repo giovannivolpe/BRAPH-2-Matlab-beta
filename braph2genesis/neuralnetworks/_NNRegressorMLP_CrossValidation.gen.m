@@ -1,8 +1,8 @@
 %% ¡header!
-NNRegressorMLP_CrossValidation < NNCrossValidation (nncv, neural network cross-validation) is a process for evaluating neural network regressors using cross-validation.
+NNRegressorMLP_CrossValidation < NNCrossValidation (nncv, neural network cross-validation) is a process for evaluating multi-layer perceptron regressors using cross-validation.
 
 %%% ¡description!
-A cross validation for regressors (NNRegressorMLP_CrossValidation) is a process that facilitates the evaluation of neural network regressors using cross-validation. 
+A cross validation for multi-layer perceptron regressors (NNRegressorMLP_CrossValidation) is a process that facilitates the evaluation of multi-layer perceptron regressors using cross-validation. 
  It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. 
  This helps in assessing the generalization performance of the model and detecting overfitting.
 
@@ -149,7 +149,7 @@ NAME (constant, string) is the name of the cross-validation.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the cross-validation.
 %%%% ¡default!
-'A cross validation for regressors (NNRegressorMLP_CrossValidation) is a process that facilitates the evaluation of neural network regressors using cross-validation. It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. This helps in assessing the generalization performance of the model and detecting overfitting.'
+'A cross validation for multi-layer perceptron regressors (NNRegressorMLP_CrossValidation) is a process that facilitates the evaluation of multi-layer perceptron regressors using cross-validation. It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. This helps in assessing the generalization performance of the model and detecting overfitting.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the nerual cross-validation.

@@ -1,8 +1,8 @@
 %% ¡header!
-NNClassifierMLP_Evaluator < NNEvaluator (nne, neural network evaluator for classification) evaluates the performance of a neural network classifier with a given dataset.
+NNClassifierMLP_Evaluator < NNEvaluator (nne, neural network evaluator for classification) evaluates the performance of a multi-layer perceptron classifier with a given dataset.
 
 %%% ¡description!
-A neural network evaluator for multi-layer perceptron classifier (NNClassifierMLP_Evaluator) evaluates the performance of a neural network classifier with a given dataset.
+A neural network evaluator for multi-layer perceptron classifier (NNClassifierMLP_Evaluator) evaluates the performance of a multi-layer perceptron classifier with a given dataset.
 NNClassifierMLP_Evaluator evaluates the performance of the trained classifier with a given dataset in terms of various classification metrics (e.g., confusion matrix, area under the receiver operating characteristic curve).
 
 %%% ¡seealso!
@@ -18,7 +18,7 @@ NAME (constant, string) is the name of the neural network evaluator for the clas
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the neural network evaluator for the classification task.
 %%%% ¡default!
-'A neural network evaluator for multi-layer perceptron classifier (NNClassifierMLP_Evaluator) evaluates the performance of a neural network classifier with a given dataset. NNClassifierMLP_Evaluator evaluates the performance of the trained classifier with a given dataset in terms of various classification metrics (e.g., confusion matrix, area under the receiver operating characteristic curve).'
+'A neural network evaluator for multi-layer perceptron classifier (NNClassifierMLP_Evaluator) evaluates the performance of a multi-layer perceptron classifier with a given dataset. NNClassifierMLP_Evaluator evaluates the performance of the trained classifier with a given dataset in terms of various classification metrics (e.g., confusion matrix, area under the receiver operating characteristic curve).'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the neural network evaluator for the classification task.
