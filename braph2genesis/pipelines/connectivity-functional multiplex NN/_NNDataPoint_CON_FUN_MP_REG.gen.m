@@ -77,9 +77,7 @@ Create example files for regression
 data_dir = [fileparts(which('NNDataPoint_CON_FUN_MP_REG')) filesep 'Example data NN REG CON_FUN_MP XLS'];
 if ~isdir(data_dir)
     mkdir(data_dir);
-    mkdir([data_dir filesep() 'Functional/GroupName1']);
-    mkdir([data_dir filesep() 'Connectivity/GroupName1']);
-    
+   
     % Brain Atlas
     im_ba = ImporterBrainAtlasXLS('FILE', 'aal90_atlas.xlsx');
     ba = im_ba.get('BA');
@@ -111,8 +109,7 @@ if ~isdir(data_dir)
     gr1_ts1 = cell(1, N_subjects); % layer 1
     gr1_ts2 = cell(1, N_subjects); % layer 2
     gr_name = 'CON_FUN_MP_Group_XLS';
-%     gr_dir = [data_dir filesep() gr_name];
-%     mkdir(gr_dir);
+
     vois = [
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} cell2str(sex_options)}
@@ -167,6 +164,7 @@ if ~isdir(data_dir)
         age = age_lowerBound + beta_temp*(age_upperBound - age_lowerBound);
         vois = [vois; {sub_id{i}, age, sex_options(randi(2))}];   
     end
+    
     % Create the tables - functional layer
     tables_gr11 = cell(size(gr1_ts1));
     mkdir([data_dir filesep() 'Functional' filesep() gr_name]);
