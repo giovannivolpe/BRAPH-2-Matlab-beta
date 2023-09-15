@@ -178,8 +178,8 @@ if ~isdir(data_dir)
         file_name = [data_dir filesep() 'Connectivity' filesep() gr_name1 filesep() sub_id{i_tab} '.xlsx'];
         writetable(T_gr12, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end
-    writetable(table(vois1), [data_dir 'Connectivity' filesep() gr_name1 '.vois.xlsx'], 'WriteVariableNames', false)
-    writetable(table(vois1), [data_dir 'Functional' filesep() gr_name1 '.vois.xlsx'], 'WriteVariableNames', false)
+    writetable(table(vois1), [data_dir filesep() 'Connectivity' filesep() gr_name1 '.vois.xlsx'], 'WriteVariableNames', false)
+    writetable(table(vois1), [data_dir filesep() 'Functional' filesep() gr_name1 '.vois.xlsx'], 'WriteVariableNames', false)
     
     % Group 2
     % initialize values for the WS model
@@ -269,8 +269,8 @@ if ~isdir(data_dir)
         file_name = [data_dir filesep() 'Connectivity' filesep() gr2_name filesep() sub_id{i_tab} '.xlsx'];
         writetable(T_gr22, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end  
-    writetable(table(vois2), [data_dir 'Connectivity' filesep() gr_name2 '.vois.xlsx'], 'WriteVariableNames', false)
-    writetable(table(vois2), [data_dir 'Functional' filesep() gr_name2 '.vois.xlsx'], 'WriteVariableNames', false)
+    writetable(table(vois2), [data_dir filesep() 'Connectivity' filesep() gr2_name '.vois.xlsx'], 'WriteVariableNames', false)
+    writetable(table(vois2), [data_dir filesep() 'Functional' filesep() gr2_name '.vois.xlsx'], 'WriteVariableNames', false)
     
     % Group 3
     % initialize values for the WS model
@@ -360,8 +360,8 @@ if ~isdir(data_dir)
         file_name = [data_dir filesep() 'Connectivity' filesep() gr3_name filesep() sub_id{i_tab} '.xlsx'];
         writetable(T_gr32, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end
-    writetable(table(vois3), [data_dir 'Connectivity' filesep() gr_name3 '.vois.xlsx'], 'WriteVariableNames', false)
-    writetable(table(vois3), [data_dir 'Functional' filesep() gr_name3 '.vois.xlsx'], 'WriteVariableNames', false)
+    writetable(table(vois3), [data_dir filesep() 'Connectivity' filesep() gr3_name '.vois.xlsx'], 'WriteVariableNames', false)
+    writetable(table(vois3), [data_dir filesep() 'Functional' filesep() gr3_name '.vois.xlsx'], 'WriteVariableNames', false)
     
     % reset RNG
     rng(rng_settings_)
@@ -410,22 +410,22 @@ ba = im_ba.get('BA');
 
 % Load Group 1
 % Load SubjectCON
-im_gr = ImporterGroupSubjectCON_XLS( ...
-    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'Connectivity' filesep 'GroupName1'], ...
+im_gr1 = ImporterGroupSubjectCON_XLS( ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'Connectivity' filesep 'CON_FUN_MP_Group1_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
 
-gr1_CON = im_gr.get('GR');
+gr1_CON = im_gr1.get('GR');
 
 % Load SubjectFUN
-im_gr = ImporterGroupSubjectFUN_XLS( ...
-    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'Functional' filesep 'GroupName1'], ...
+im_gr1 = ImporterGroupSubjectFUN_XLS( ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'Functional' filesep 'CON_FUN_MP_Group1_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
 
-gr1_FUN = im_gr.get('GR');
+gr1_FUN = im_gr1.get('GR');
 
 % Combine Group of SubjectCON with Group of SubjectFUN
 co_gr1 = CombineGroups_CON_FUN_MP( ...
@@ -439,22 +439,22 @@ gr1 = co_gr1.get('GR_CON_FUN_MP');
 
 % Load Group 2
 % Load SubjectCON
-im_gr = ImporterGroupSubjectCON_XLS( ...
-    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'Connectivity' filesep 'GroupName2'], ...
+im_gr2 = ImporterGroupSubjectCON_XLS( ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'Connectivity' filesep 'CON_FUN_MP_Group2_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
 
-gr2_CON = im_gr.get('GR');
+gr2_CON = im_gr2.get('GR');
 
 % Load SubjectFUN
-im_gr = ImporterGroupSubjectFUN_XLS( ...
-    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'Functional' filesep 'GroupName2'], ...
+im_gr2 = ImporterGroupSubjectFUN_XLS( ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'Functional' filesep 'CON_FUN_MP_Group2_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
 
-gr2_FUN = im_gr.get('GR');
+gr2_FUN = im_gr2.get('GR');
 
 % Combine Group of SubjectCON with Group of SubjectFUN
 co_gr2 = CombineGroups_CON_FUN_MP( ...
@@ -528,18 +528,23 @@ assert(length(d2.get('TARGETS')) == gr2.get('SUB_DICT').get('LENGTH'), ...
 
 % Check whether the content of input for a single datapoint matches
 for index = 1:1:gr1.get('SUB_DICT').get('LENGTH')
-    individual_input = d1.get('DP_DICT').get('IT', index).get('INPUT');
-    known_input = {gr1.get('SUB_DICT').get('IT', index).get('CON')};
+    individual_input = d.get('DP_DICT').get('IT', index).get('INPUT');
+    A = cell(1, 2);
+    A{1} = gr1.get('SUB_DICT').get('IT', index).get('CON');
+    A{2} = gr1.get('SUB_DICT').get('IT', index).get('FUN');
+    known_input = A;
 
     assert(isequal(individual_input, known_input), ...
         [BRAPH2.STR ':NNDataPoint_CON_FUN_MP_CLA:' BRAPH2.FAIL_TEST], ...
         'NNDataPoint_CON_FUN_MP_CLA does not construct the dataset correctly. The input value is not derived correctly.' ...
         )
 end
-
 for index = 1:1:gr2.get('SUB_DICT').get('LENGTH')
-    individual_input = d2.get('DP_DICT').get('IT', index).get('INPUT');
-    known_input = {gr2.get('SUB_DICT').get('IT', index).get('CON')};
+    individual_input = d.get('DP_DICT').get('IT', index).get('INPUT');
+    A = cell(1, 2);
+    A{1} = gr2.get('SUB_DICT').get('IT', index).get('CON');
+    A{2} = gr2.get('SUB_DICT').get('IT', index).get('FUN');
+    known_input = A;
 
     assert(isequal(individual_input, known_input), ...
         [BRAPH2.STR ':NNDataPoint_CON_FUN_MP_CLA:' BRAPH2.FAIL_TEST], ...
