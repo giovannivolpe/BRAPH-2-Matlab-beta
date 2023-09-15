@@ -3,8 +3,8 @@ NNDataPoint_CON_FUN_MP_REG < NNDataPoint (dp, connectivity-functional multiplex 
 
 %%% ¡description!
 A data point for regression with connectivity-functional multiplex data (NNDataPoint_CON_FUN_MP_REG) 
-contains the input and target for neural network analysis with a subject 
-with connectivity-functional multiplex data (SubjectCON_FUN_MP).
+ contains the input and target for neural network analysis with a subject 
+ with connectivity-functional multiplex data (SubjectCON_FUN_MP).
 The input is the connectivity-functional multiplex data of the subject.
 The target is obtained from the variables of interest of the subject.
 
@@ -94,7 +94,7 @@ if ~isdir(data_dir)
     sex_options = {'Female' 'Male'};
 
     % Group 
-    N_subjects = 10;
+    N_subjects = 50;
     N_tslength = 200;
     % initialize values for the WS model
     K1 = [3 4 5 6 7];
