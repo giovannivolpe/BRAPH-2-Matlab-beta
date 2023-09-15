@@ -71,6 +71,9 @@ value = in_path_length_av;
 
 %% ¡tests!
 
+%%% ¡excluded_props!
+[PathLengthInAv.PFM]
+
 %%% ¡test!
 %%%% ¡name!
 GraphBD

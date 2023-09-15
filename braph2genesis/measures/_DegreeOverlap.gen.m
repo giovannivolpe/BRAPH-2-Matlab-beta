@@ -290,3 +290,37 @@ m_inside_g = g.get('MEASURE', 'DegreeOverlap');
 assert(isequal(m_inside_g.get('M'), known_degree_overlap), ...
     [BRAPH2.STR ':DegreeOverlap:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMlBU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   1   1
+    1   0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   1
+    0   1   0
+    ];
+B12 = rand(size(B11,1),size(B22,2));
+B21 = B12';
+B = {B11 B12;
+    B21 B22};
+
+known_degree_overlap = {[1 1 0]'};
+
+g = OrdMlBU('B', B);
+m_outside_g = DegreeOverlap('G', g);
+assert(isequal(m_outside_g.get('M'), known_degree_overlap), ...
+    [BRAPH2.STR ':DegreeOverlap:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'DegreeOverlap');
+assert(isequal(m_inside_g.get('M'), known_degree_overlap), ...
+    [BRAPH2.STR ':DegreeOverlap:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

@@ -52,7 +52,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphBD' 'GraphWD' 'MultiplexBD' 'MultiplexWD' 'MultilayerBD' 'OrdMxBD'}
+{'GraphBD' 'GraphWD' 'MultiplexBD' 'MultiplexWD' 'MultilayerBD' 'OrdMlBD'}
 
 %%% ¡prop!
 M (result, cell) is the cell containing the PathLengthIn.
@@ -103,6 +103,9 @@ RULE (parameter, option) is the PathLengthIn algorithm
 'harmonic'
 
 %% ¡tests!
+
+%%% ¡excluded_props!
+[PathLengthIn.PFM]
 
 %%% ¡test!
 %%%% ¡name!
@@ -172,7 +175,7 @@ assert(isequal(m_inside_g.get('M'), known_in_path_length), ...
 
 %%% ¡test!
 %%%% ¡name!
-OrdMxBD
+OrdMlBD
 %%%% ¡code!
 B11 = [
       0  1  1  1  0;

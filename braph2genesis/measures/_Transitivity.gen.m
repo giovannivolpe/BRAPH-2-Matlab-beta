@@ -53,7 +53,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUD' 'MultiplexBUT'}
+{'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUD' 'MultiplexBUT' 'MultilayerWU' 'OrdMlWU'}
 
 %%% ¡prop!
 M (result, cell) is the transitivity.
@@ -475,6 +475,86 @@ known_transitivity = {
     };
 
 g = MultiplexBUT('B', A, 'THRESHOLDS', thresholds);
+m_outside_g = Transitivity('G', g);
+
+assert(isequal(m_outside_g.get('M'), known_transitivity), ...
+    [BRAPH2.STR ':Transitivity:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Transitivity');
+assert(isequal(m_inside_g.get('M'), known_transitivity), ...
+    [BRAPH2.STR ':Transitivity:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultilayerWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+A11 = [
+      0 1 1 1;
+      1 0 1 0;
+      1 1 0 1;
+      1 0 1 0
+      ];
+A22 = [
+      0 1 1 1;
+      1 0 1 0;
+      1 1 0 1;
+      1 0 1 0
+      ];
+A12 = rand(size(A11,1),size(A22,2));
+A21 = A12';
+A = {A11 A12;
+     A21 A22};
+
+known_transitivity = {
+                 3/4
+                 3/4
+                 };      
+
+g = MultilayerWU('B', A);
+m_outside_g = Transitivity('G', g);
+
+assert(isequal(m_outside_g.get('M'), known_transitivity), ...
+    [BRAPH2.STR ':Transitivity:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Transitivity');
+assert(isequal(m_inside_g.get('M'), known_transitivity), ...
+    [BRAPH2.STR ':Transitivity:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMlWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+A11 = [
+      0 1 1 1;
+      1 0 1 0;
+      1 1 0 1;
+      1 0 1 0
+      ];
+A22 = [
+      0 1 1 1;
+      1 0 1 0;
+      1 1 0 1;
+      1 0 1 0
+      ];
+A12 = rand(size(A11,1),size(A22,2));
+A21 = A12';
+A = {A11 A12;
+     A21 A22};
+
+known_transitivity = {
+                 3/4
+                 3/4
+                 };      
+
+g = OrdMlWU('B', A);
 m_outside_g = Transitivity('G', g);
 
 assert(isequal(m_outside_g.get('M'), known_transitivity), ...
