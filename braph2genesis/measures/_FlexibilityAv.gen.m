@@ -142,3 +142,73 @@ m_inside_g = g.get('MEASURE', 'FlexibilityAv');
 assert(~isempty(m_inside_g.get('M')), ...
     [BRAPH2.STR ':FlexibilityAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultilayerWD
+%%%% ¡code!
+A11 = [
+      0  1 1 .5;
+      1  0 1 0;
+      1  1 0 1;
+      .1 0 1 0
+      ];
+A22 = [
+      0  1 1 .5;
+      1  0 1 0;
+      1  1 0 1;
+      .1 0 1 0
+      ];
+A12 = rand(size(A11,1),size(A22,2));
+A21 = A12';
+A = {A11 A12;
+     A21 A22};
+ 
+known_flexibility = {0};  
+
+g = MultilayerWD('B', A);
+
+m_outside_g = Flexibility('G', g);
+assert(~isempty(m_outside_g.get('M')), ...
+    [BRAPH2.STR ':Flexibility:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Flexibility');
+assert(~isempty(m_inside_g.get('M')), ...
+    [BRAPH2.STR ':Flexibility:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMlWD
+%%%% ¡code!
+A11 = [
+      0  1 1 .5;
+      1  0 1 0;
+      1  1 0 1;
+      .1 0 1 0
+      ];
+A22 = [
+      0  1 1 .5;
+      1  0 1 0;
+      1  1 0 1;
+      .1 0 1 0
+      ];
+A12 = rand(size(A11,1),size(A22,2));
+A21 = A12';
+A = {A11 A12;
+     A21 A22};
+ 
+known_flexibility = {0};  
+
+g = OrdMlWD('B', A);
+
+m_outside_g = Flexibility('G', g);
+assert(~isempty(m_outside_g.get('M')), ...
+    [BRAPH2.STR ':Flexibility:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Flexibility');
+assert(~isempty(m_inside_g.get('M')), ...
+    [BRAPH2.STR ':Flexibility:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
