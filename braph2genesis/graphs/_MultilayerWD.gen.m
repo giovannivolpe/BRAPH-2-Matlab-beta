@@ -256,6 +256,30 @@ COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('MultilayerWD')
 
+%%% ¡prop!
+SUBGRAPH (query, item) returns a subgraph of original graph
+%%%% ¡calculate!
+A = g.get('A');
+L = g.get('LAYERNUMBER');
+if isempty(varargin)
+    value = g;
+    return
+end
+nodes = varargin{1};
+if ~iscell(nodes)
+    nodes = repmat({nodes}, 1, L);
+end
+for li = 1:1:L
+    Aii = A{li, li};
+    if ~isempty(Aii)
+        B(li) = {Aii(nodes{li}, nodes{li})};
+    end
+end
+value = MultilayerWD('B', B, 'TEMPLATE', g, ...
+    'ID', ['Subgraph of ' g.get('ID')], ...
+    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
+    'NOTES', ['Subgraph - ' g.get('NOTES')]);
+
 %% ¡props!
 
 %%% ¡prop!
@@ -317,30 +341,6 @@ for i = 1:length(A)
     A{i, i} = random_A;
 end
 value = A;
-
-%%% ¡prop!
-SUBGRAPH (query, item) returns a subgraph of original graph
-%%%% ¡calculate!
-A = g.get('A');
-L = g.get('LAYERNUMBER');
-if isempty(varargin)
-    value = g;
-    return
-end
-nodes = varargin{1};
-if ~iscell(nodes)
-    nodes = repmat({nodes}, 1, L);
-end
-for li = 1:1:L
-    Aii = A{li, li};
-    if ~isempty(Aii)
-        B(li) = {Aii(nodes{li}, nodes{li})};
-    end
-end
-value = MultilayerWD('B', B, 'TEMPLATE', g, ...
-    'ID', ['Subgraph of ' g.get('ID')], ...
-    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
-    'NOTES', ['Subgraph - ' g.get('NOTES')]);
 
 %% ¡tests!
 

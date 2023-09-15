@@ -189,6 +189,27 @@ COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('GraphWD')
 
+%%% ¡prop!
+SUBGRAPH (query, item) is the subgraph
+%%%% ¡calculate!
+A = g.get('A');
+if isempty(varargin)
+    value = g;
+    return
+end
+nodes = varargin{1};
+L = g.get('LAYERNUMBER');
+
+if ~iscell(nodes)
+    nodes = repmat({nodes}, 1, L);
+end
+B = A{1};
+B = B(nodes{1}, nodes{1});
+value = GraphWD('B', B, 'TEMPLATE', g, ...
+    'ID', ['Subgraph of ' g.get('ID')], ...
+    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
+    'NOTES', ['Subgraph - ' g.get('NOTES')]);
+
 %% ¡props!
 
 %%% ¡prop!
@@ -298,27 +319,6 @@ rpos_in = corrcoef(sum(W,1), sum(random_A,1));
 rpos_out = corrcoef(sum(W,2), sum(random_A,2));
 correlation_coefficients = [rpos_in(2) rpos_out(2)];
 value = random_A;
-
-%%% ¡prop!
-SUBGRAPH (query, item) is the subgraph
-%%%% ¡calculate!
-A = g.get('A');
-if isempty(varargin)
-    value = g;
-    return
-end
-nodes = varargin{1};
-L = g.get('LAYERNUMBER');
-
-if ~iscell(nodes)
-    nodes = repmat({nodes}, 1, L);
-end
-B = A{1};
-B = B(nodes{1}, nodes{1});
-value = GraphWD('B', B, 'TEMPLATE', g, ...
-    'ID', ['Subgraph of ' g.get('ID')], ...
-    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
-    'NOTES', ['Subgraph - ' g.get('NOTES')]);
 
 %% ¡tests!
 
