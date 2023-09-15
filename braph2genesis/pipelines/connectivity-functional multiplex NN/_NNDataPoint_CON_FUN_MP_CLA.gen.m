@@ -12,32 +12,32 @@ SubjectCON_FUN_MP
 
 %% ¡props_update!
 %%% ¡prop!
-NAME (constant, string) is the name of a data point for classification with connectivity-functional multiple data.
+NAME (constant, string) is the name of a data point for classification with connectivity-functional multiplex data.
 %%%% ¡default!
 'NNDataPoint_CON_FUN_MP_CLA'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of a data point for classification with connectivity-functional multiple data.
+DESCRIPTION (constant, string) is the description of a data point for classification with connectivity-functional multiplex data.
 %%%% ¡default!
-'A data point for classification with connectivity-functional multiple data (NNDataPoint_CON_FUN_MP_CLA) contains the input and target for neural network analysis with a subject with connectivity data (SubjectCON). The input is the connectivity data of the subject. The target is obtained from the variables of interest of the subject.'
+'A data point for classification with connectivity-functional multiplex data (NNDataPoint_CON_FUN_MP_CLA) contains the input and target for neural network analysis with a subject with connectivity-functional multiplex data (SubjectCON_FUN_MP). The input is the connectivity-functional multiplex data of the subject. The target is obtained from the variables of interest of the subject.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of a data point for classification with connectivity-functional multiple data.
+TEMPLATE (parameter, item) is the template of a data point for classification with connectivity-functional multiplex data.
 %%%% ¡settings!
 'NNDataPoint_CON_FUN_MP_CLA'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for a data point for classification with connectivity-functional multiple data.
+ID (data, string) is a few-letter code for a data point for classification with connectivity-functional multiplex data.
 %%%% ¡default!
 'NNDataPoint_CON_FUN_MP_CLA ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of a data point for classification with connectivity-functional multiple data.
+LABEL (metadata, string) is an extended label of a data point for classification with connectivity-functional multiplex data.
 %%%% ¡default!
 'NNDataPoint_CON_FUN_MP_CLA label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about a data point for classification with connectivity-functional multiple data.
+NOTES (metadata, string) are some specific notes about a data point for classification with connectivity-functional multiplex data.
 %%%% ¡default!
 'NNDataPoint_CON_FUN_MP_CLA notes'
 
