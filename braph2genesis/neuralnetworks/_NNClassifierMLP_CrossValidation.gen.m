@@ -117,6 +117,12 @@ Confusion Matrix
 
 %%% ¡prop!
 %%%% ¡id!
+NNClassifierMLP_CrossValidation.P
+%%%% ¡title!
+Permutation Times for Feature Importance
+
+%%% ¡prop!
+%%%% ¡id!
 NNClassifierMLP_CrossValidation.AV_FEATURE_IMPORTANCE
 %%%% ¡title!
 Average of Feature Importance

@@ -129,6 +129,12 @@ Average of Root Mean Squared Error
 
 %%% ¡prop!
 %%%% ¡id!
+NNClassifierMLP_CrossValidation.P
+%%%% ¡title!
+Permutation Times for Feature Importance
+
+%%% ¡prop!
+%%%% ¡id!
 NNRegressorMLP_CrossValidation.AV_FEATURE_IMPORTANCE
 %%%% ¡title!
 Average of Feature Importance
