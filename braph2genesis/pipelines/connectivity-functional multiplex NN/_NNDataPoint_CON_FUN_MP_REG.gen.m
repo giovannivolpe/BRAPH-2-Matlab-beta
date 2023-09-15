@@ -161,7 +161,7 @@ if ~isdir(data_dir)
         % variables of interest
         age_upperBound = 80;
         age_lowerBound = 50;
-        age = age_lowerBound + beta_temp*(age_upperBound - age_lowerBound);
+        age = age_lowerBound + beta_temp(2)*(age_upperBound - age_lowerBound);
         vois = [vois; {sub_id{i}, age, sex_options(randi(2))}];   
     end
     
@@ -171,7 +171,7 @@ if ~isdir(data_dir)
     for i_tab = 1:1:N_subjects
         T_gr11 = array2table(gr1_ts1{i_tab});
         tables_gr11{i_tab} = T_gr11;
-        file_name = [data_dir filesep() 'Functional' filesep() gr_namefilesep() sub_id{i_tab} '.xlsx'];
+        file_name = [data_dir filesep() 'Functional' filesep() gr_name filesep() sub_id{i_tab} '.xlsx'];
         writetable(T_gr11, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end
     
