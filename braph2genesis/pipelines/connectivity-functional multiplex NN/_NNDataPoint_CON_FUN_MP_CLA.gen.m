@@ -3,8 +3,9 @@ NNDataPoint_CON_FUN_MP_CLA < NNDataPoint (dp, connectivity-functional multiplex 
 
 %%% ¡description!
 A data point for classification with connectivity-functional multiplex data (NNDataPoint_CON_FUN_MP_CLA) 
-contains the input and target for neural network analysis with a subject with connectivity-functional multiplex data (SubjectCON_FUN_MP).
-The input is the connectivity data of the subject.
+contains the input and target for neural network analysis with a subject 
+with connectivity-functional multiplex data (SubjectCON_FUN_MP).
+The input is the connectivity-functional multiplex data of the subject.
 The target is obtained from the variables of interest of the subject.
 
 %%% ¡seealso!
