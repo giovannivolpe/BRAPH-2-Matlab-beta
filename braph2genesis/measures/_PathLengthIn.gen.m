@@ -110,6 +110,8 @@ RULE (parameter, option) is the PathLengthIn algorithm
 %%% ¡test!
 %%%% ¡name!
 GraphBD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 A = [
     0  1  1  1  0;
@@ -136,6 +138,8 @@ assert(isequal(cellfun(@(x) round(x, 3), m_outside_g.get('M'), 'UniformOutput', 
 %%% ¡test!
 %%%% ¡name!
 MultiplexBD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 A11 = [
       0  1  1  1  0;
@@ -175,7 +179,54 @@ assert(isequal(m_inside_g.get('M'), known_in_path_length), ...
 
 %%% ¡test!
 %%%% ¡name!
+MultilayerBD
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+      0  1  1  1  0;
+      1  0  0  0  0;
+      1  1  0  1  0;
+      1  1  0  0  0;
+      0  0  0  0  0
+      ];
+
+B22 = [
+      0  1  1  1  0;
+      1  0  0  0  0;
+      1  1  0  1  0;
+      1  1  0  0  0;
+      0  0  0  0  0
+      ];
+B12 = rand(size(B11,1),size(B22,2));
+B21 = B12';
+B = {B11 B12;
+     B21 B22};
+
+known_in_path_length = {
+                    [Inf Inf Inf Inf Inf]'
+                    [Inf Inf Inf Inf Inf]'
+                    };
+
+g = MultilayerBD('B', B);
+
+m_outside_g = PathLengthIn('G', g);
+m_outside_g.set('RULE', 'mean');
+assert(isequal(m_outside_g.get('M'), known_in_path_length), ...
+    [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'PathLengthIn');
+m_inside_g.set('RULE', 'mean');
+assert(isequal(m_inside_g.get('M'), known_in_path_length), ...
+    [BRAPH2.STR ':PathLengthIn:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
 OrdMlBD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 B11 = [
       0  1  1  1  0;
