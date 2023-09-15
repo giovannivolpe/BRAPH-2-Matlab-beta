@@ -156,14 +156,10 @@ ba = ImporterBrainAtlasTXT('FILE', [fileparts(which('SubjectCON')) filesep 'Exam
 gr1 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'CON_Group_1_TXT'], 'BA', ba).get('GR');
 gr2 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'CON_Group_2_TXT'], 'BA', ba).get('GR');
 
-% % check that analysis parameters are correclty templated between analysis 1 and 2
-% negative_weight_rule = Correlation.ABS;
-% correlation_rule = Correlation.SPEARMAN;
-% a_WU1 = AnalyzeGroup_ST_WU('GR', gr1, 'NEGATIVE_WEIGHT_RULE', negative_weight_rule, 'CORRELATION_RULE', correlation_rule);
-% a_WU2 = AnalyzeGroup_ST_WU('TEMPLATE', a_WU1, 'GR', gr2);
-% assert(isequal(a_WU2.get('NEGATIVE_WEIGHT_RULE'), negative_weight_rule))
-% assert(isequal(a_WU2.get('CORRELATION_RULE'), correlation_rule))
-% 
+% check that analysis parameters are correclty templated between analysis 1 and 2
+a_WU1 = AnalyzeEnsemble_CON_WU('GR', gr1);
+a_WU2 = AnalyzeEnsemble_CON_WU('TEMPLATE', a_WU1, 'GR', gr2); % also memorizes the graph in a_WU1
+
 % % check that graph parameters are correclty templated between analysis 1 and 2
 % randomize = true;
 % random_seed = 42;
