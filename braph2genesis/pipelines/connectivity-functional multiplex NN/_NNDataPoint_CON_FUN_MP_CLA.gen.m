@@ -244,8 +244,8 @@ if ~isdir(data_dir)
         std_R21 = std(R21);
         R21 = (R21 - mean_R21) ./ std_R21;
         % place in the array
-        gr2_ts1{1, i_gr2} = R21;
-        gr2_ts2{1, i_gr2} = A_full2;
+        gr2_ts1{1, i} = R21;
+        gr2_ts2{1, i} = A_full2;
         
         % variables of interest
         vois2 = [vois2; {sub_id{i}, randi(90), sex_options(randi(2))}];
@@ -335,11 +335,11 @@ if ~isdir(data_dir)
         std_R21 = std(R21);
         R21 = (R21 - mean_R21) ./ std_R21;
         % place in the array
-        gr3_ts1{1, i_gr2} = R21;
-        gr3_ts2{1, i_gr2} = A_full2;
+        gr3_ts1{1, i} = R21;
+        gr3_ts2{1, i} = A_full2;
         
         % variables of interest
-        vois2 = [vois2; {sub_id{i}, randi(90), sex_options(randi(2))}];
+        vois3 = [vois3; {sub_id{i}, randi(90), sex_options(randi(2))}];
     end
     % Create the tables - functional layer
     %tables_gr11 = cell(size(gr3_ts1));
