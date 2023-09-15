@@ -76,8 +76,6 @@ Create example files
 data_dir = [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS'];
 if ~isdir(data_dir)
     mkdir(data_dir);
-    mkdir([data_dir filesep() 'Functional/GroupName1']);
-    mkdir([data_dir filesep() 'Connectivity/GroupName1']);
     
     % Brain Atlas
     im_ba = ImporterBrainAtlasXLS('FILE', 'aal90_atlas.xlsx');
@@ -163,25 +161,26 @@ if ~isdir(data_dir)
     end
     % Create the tables - functional layer
     %tables_gr11 = cell(size(gr1_ts1));
-    mkdir([data_dir filesep() 'Functional/GroupName1']);
+    mkdir([data_dir filesep() 'Functional' filesep() gr_name1]);
     for i_tab = 1:1:N_subjects
         T_gr11 = array2table(gr1_ts1{i_tab});
         %tables_gr11{i_tab} = T_gr11;
-        file_name = [data_dir filesep() 'Functional/GroupName1' filesep() sub_id{i_tab} '.xlsx'];
+        file_name = [data_dir filesep() 'Functional' filesep() gr_name1 filesep() sub_id{i_tab} '.xlsx'];
         writetable(T_gr11, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end
     
     % Create the tables - connectivity layer
     %tables_gr12 = cell(size(gr1_ts2));
-    mkdir([data_dir filesep() 'Connectivity/GroupName1']);
+    mkdir([data_dir filesep() 'Connectivity' filesep() gr_name1]);
     for i_tab = 1:1:N_subjects
         T_gr12 = array2table(gr1_ts2{i_tab});
         %tables_gr12{i_tab} = T_gr12;
-        file_name = [data_dir filesep() 'Connectivity/GroupName1' filesep() sub_id{i_tab} '.xlsx'];
+        file_name = [data_dir filesep() 'Connectivity' filesep() gr_name1 filesep() sub_id{i_tab} '.xlsx'];
         writetable(T_gr12, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end
-    writetable(table(vois1), [data_dir filesep() gr_name1 '.vois.xlsx'], 'WriteVariableNames', false)
-
+    writetable(table(vois1), [data_dir 'Connectivity' filesep() gr_name1 '.vois.xlsx'], 'WriteVariableNames', false)
+    writetable(table(vois1), [data_dir 'Functional' filesep() gr_name1 '.vois.xlsx'], 'WriteVariableNames', false)
+    
     % Group 2
     % initialize values for the WS model
     K2 = [3 7];
@@ -253,25 +252,26 @@ if ~isdir(data_dir)
     end
     % Create the tables - functional layer
     %tables_gr11 = cell(size(gr2_ts1));
-    mkdir([data_dir filesep() 'Functional/GroupName2']);
+    mkdir([data_dir filesep() 'Functional' filesep() gr2_name]);
     for i_tab = 1:1:N_subjects
         T_gr21 = array2table(gr2_ts1{i_tab});
         %tables_gr21{i_tab} = T_gr21;
-        file_name = [data_dir filesep() 'Functional/GroupName2' filesep() sub_id{i_tab} '.xlsx'];
+        file_name = [data_dir filesep() 'Functional' filesep() gr2_name filesep() sub_id{i_tab} '.xlsx'];
         writetable(T_gr21, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end
     
     % Create the tables - connectivity layer
     %tables_gr12 = cell(size(gr2_ts2));
-    mkdir([data_dir filesep() 'Connectivity/GroupName2']);
+    mkdir([data_dir filesep() 'Connectivity' filesep() gr2_name]);
     for i_tab = 1:1:N_subjects
         T_gr22 = array2table(gr2_ts2{i_tab});
         %tables_gr22{i_tab} = T_gr22;
-        file_name = [data_dir filesep() 'Connectivity/GroupName2' filesep() sub_id{i_tab} '.xlsx'];
+        file_name = [data_dir filesep() 'Connectivity' filesep() gr2_name filesep() sub_id{i_tab} '.xlsx'];
         writetable(T_gr22, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end  
-    writetable(table(vois2), [data_dir filesep() gr_name2 '.vois.xlsx'], 'WriteVariableNames', false)
-
+    writetable(table(vois2), [data_dir 'Connectivity' filesep() gr_name2 '.vois.xlsx'], 'WriteVariableNames', false)
+    writetable(table(vois2), [data_dir 'Functional' filesep() gr_name2 '.vois.xlsx'], 'WriteVariableNames', false)
+    
     % Group 3
     % initialize values for the WS model
     K3 = [6 2];
@@ -343,25 +343,26 @@ if ~isdir(data_dir)
     end
     % Create the tables - functional layer
     %tables_gr11 = cell(size(gr3_ts1));
-    mkdir([data_dir filesep() 'Functional/GroupName3']);
+    mkdir([data_dir filesep() 'Functional' filesep() gr3_name]);
     for i_tab = 1:1:N_subjects
         T_gr31 = array2table(gr3_ts1{i_tab});
         %tables_gr21{i_tab} = T_gr31;
-        file_name = [data_dir filesep() 'Functional/GroupName3' filesep() sub_id{i_tab} '.xlsx'];
+        file_name = [data_dir filesep() 'Functional' filesep() gr3_name filesep() sub_id{i_tab} '.xlsx'];
         writetable(T_gr31, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end
     
     % Create the tables - connectivity layer
     %tables_gr12 = cell(size(gr3_ts2));
-    mkdir([data_dir filesep() 'Connectivity/GroupName3']);
+    mkdir([data_dir filesep() 'Connectivity' filesep() gr3_name]);
     for i_tab = 1:1:N_subjects
         T_gr32 = array2table(gr3_ts2{i_tab});
         %tables_gr32{i_tab} = T_gr32;
-        file_name = [data_dir filesep() 'Connectivity/GroupName3' filesep() sub_id{i_tab} '.xlsx'];
+        file_name = [data_dir filesep() 'Connectivity' filesep() gr3_name filesep() sub_id{i_tab} '.xlsx'];
         writetable(T_gr32, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end
-    writetable(table(vois3), [data_dir filesep() gr_name3 '.vois.xlsx'], 'WriteVariableNames', false)
-
+    writetable(table(vois3), [data_dir 'Connectivity' filesep() gr_name3 '.vois.xlsx'], 'WriteVariableNames', false)
+    writetable(table(vois3), [data_dir 'Functional' filesep() gr_name3 '.vois.xlsx'], 'WriteVariableNames', false)
+    
     % reset RNG
     rng(rng_settings_)
 end
