@@ -185,7 +185,8 @@ if ~isdir(data_dir)
         writetable(T_gr12, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end
     
-    writetable(table(vois), [data_dir filesep() gr_name '.vois.xlsx'], 'WriteVariableNames', false)
+    writetable(table(vois), [data_dir filesep() 'Connectivity' filesep() gr_name '.vois.xlsx'], 'WriteVariableNames', false)
+    writetable(table(vois), [data_dir filesep() 'Functional' filesep() gr_name '.vois.xlsx'], 'WriteVariableNames', false)
     % reset RNG
     rng(rng_settings_)
 end
