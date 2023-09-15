@@ -169,21 +169,21 @@ if ~isdir(data_dir)
     end
     % Create the tables - functional layer
     tables_gr11 = cell(size(gr1_ts1));
-    mkdir([data_dir filesep() 'Functional/GroupName1']);
+    mkdir([data_dir filesep() 'Functional' filesep() gr_name]);
     for i_tab = 1:1:N_subjects
         T_gr11 = array2table(gr1_ts1{i_tab});
         tables_gr11{i_tab} = T_gr11;
-        file_name = [data_dir filesep() 'Functional/GroupName1' filesep() sub_id{i_tab} '.xlsx'];
+        file_name = [data_dir filesep() 'Functional' filesep() gr_namefilesep() sub_id{i_tab} '.xlsx'];
         writetable(T_gr11, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end
     
     % Create the tables - connectivity layer
     tables_gr12 = cell(size(gr1_ts2));
-    mkdir([data_dir filesep() 'Connectivity/GroupName1']);
+    mkdir([data_dir filesep() 'Connectivity' filesep() gr_name]);
     for i_tab = 1:1:N_subjects
         T_gr12 = array2table(gr1_ts2{i_tab});
         tables_gr12{i_tab} = T_gr12;
-        file_name = [data_dir filesep() 'Connectivity/GroupName1' filesep() sub_id{i_tab} '.xlsx'];
+        file_name = [data_dir filesep() 'Connectivity' filesep() gr_name filesep() sub_id{i_tab} '.xlsx'];
         writetable(T_gr12, file_name, 'WriteRowNames', false, 'WriteVariableNames', false)
     end
     
