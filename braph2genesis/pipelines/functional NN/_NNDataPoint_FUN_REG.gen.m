@@ -89,6 +89,15 @@ if ~isdir(data_dir)
 
     sex_options = {'Female' 'Male'};
 
+    %% Specify the network parameters
+    N_nodes = 90; % AAL atlas
+    
+    %% Specify length of time series 
+    N_tslength = 200;
+    
+    %% Specify number of subjects
+    N_groups = 100;
+    
     % Group 
     K = 2; % degree (mean node degree is 2K)
     gr_name = 'FUN_Group_XLS';
@@ -98,16 +107,6 @@ if ~isdir(data_dir)
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} cell2str(sex_options)}
         ];
-
-    %% Specify the network parameters for the two groups
-    N_nodes = 90; % AAL atlas
-    
-    %% Specify length of time series 
-    N_tslength = 200;
-    
-    %% Specify number of subjects
-    N_groups = 100;
-    
     %% Group properties
     % random N modules
     gr_ts = cell(1, N_groups);
@@ -175,6 +174,7 @@ if ~isdir(data_dir)
     % reset RNG
     rng(rng_settings_)
 end
+
 %%% ¡test_functions!
 function h = WattsStrogatz(N, K, beta)
 % H = WattsStrogatz(N,K,beta) returns a Watts-Strogatz model graph with N

@@ -1,12 +1,23 @@
 close all; delete(findall(0, 'type', 'figure')); clear all
 
+
+%%COMPILE FILES
+el_class_list = {'NNRegressorMLP_Evaluator', 'NNRegressorMLP_CrossValidation', 'NNClassifierMLP_Evaluator', 'NNClassifierMLP_CrossValidation'}; 
+for i = 1:1:length(el_class_list)
+    el_path = '/neuralnetworks';
+    el_class = el_class_list{i};
+    create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    %create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    %['test_' el_class]
+    %eval(['test_' el_class])
+end
+
 %% pipelines
-el_class_list = {'NNDataPoint_CON_CLA'}; % 'NNDataPoint_CON_CLA' 'NNDataPoint_CON_REG' 
+el_class_list = {'NNDataPoint_FUN_REG', 'NNDataPoint_FUN_CLA'}; % 'NNDataPoint_CON_CLA' 'NNDataPoint_CON_REG' 
 for i = 1:1:length(el_class_list)
     el_class = el_class_list{i};
-    el_path = '/pipelines/connectivity NN';
+    el_path = '/pipelines/functional NN';
     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
-    create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
     ['test_' el_class]
