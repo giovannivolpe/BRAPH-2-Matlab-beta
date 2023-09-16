@@ -233,45 +233,43 @@ a_WU1_perm = a_WU_perms{1};
 a_WU2_perm = a_WU_perms{2};
 
 % check that graph parameters are correclty templated to permutation analyses
-% g_WU1_perm = a_WU1_perm.get('G');
-% g_WU2_perm = a_WU2_perm.get('G');
-% assert(isequal(g_WU1_perm.get('RANDOMIZE'), randomize))
-% assert(isequal(g_WU1_perm.get('RANDOM_SEED'), random_seed))
-% assert(isequal(g_WU1_perm.get('SYMMETRIZE_RULE'), symmetrize_rule))
-% assert(isequal(g_WU1_perm.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
-% assert(isequal(g_WU1_perm.get('STANDARDIZE_RULE'), standardize_rule))
-% assert(isequal(g_WU1_perm.get('ATTEMPTSPEREDGE'), attemptsperedge))
-% assert(isequal(g_WU1_perm.get('NUMBEROFWEIGHTS'), numberofweights))
-% assert(isequal(g_WU2_perm.get('RANDOMIZE'), randomize))
-% assert(isequal(g_WU2_perm.get('RANDOM_SEED'), random_seed))
-% assert(isequal(g_WU2_perm.get('SYMMETRIZE_RULE'), symmetrize_rule))
-% assert(isequal(g_WU2_perm.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
-% assert(isequal(g_WU2_perm.get('STANDARDIZE_RULE'), standardize_rule))
-% assert(isequal(g_WU2_perm.get('ATTEMPTSPEREDGE'), attemptsperedge))
-% assert(isequal(g_WU2_perm.get('NUMBEROFWEIGHTS'), numberofweights))
+g_template_WU1_perm = a_WU1_perm.get('GRAPH_TEMPLATE');
+g_template_WU2_perm = a_WU2_perm.get('GRAPH_TEMPLATE');
+assert(isequal(g_template_WU1_perm.get('RANDOMIZE'), randomize))
+assert(isequal(g_template_WU1_perm.get('RANDOM_SEED'), random_seed))
+assert(isequal(g_template_WU1_perm.get('SYMMETRIZE_RULE'), symmetrize_rule))
+assert(isequal(g_template_WU1_perm.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
+assert(isequal(g_template_WU1_perm.get('STANDARDIZE_RULE'), standardize_rule))
+assert(isequal(g_template_WU1_perm.get('ATTEMPTSPEREDGE'), attemptsperedge))
+assert(isequal(g_template_WU1_perm.get('NUMBEROFWEIGHTS'), numberofweights))
+assert(isequal(g_template_WU2_perm.get('RANDOMIZE'), randomize))
+assert(isequal(g_template_WU2_perm.get('RANDOM_SEED'), random_seed))
+assert(isequal(g_template_WU2_perm.get('SYMMETRIZE_RULE'), symmetrize_rule))
+assert(isequal(g_template_WU2_perm.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
+assert(isequal(g_template_WU2_perm.get('STANDARDIZE_RULE'), standardize_rule))
+assert(isequal(g_template_WU2_perm.get('ATTEMPTSPEREDGE'), attemptsperedge))
+assert(isequal(g_template_WU2_perm.get('NUMBEROFWEIGHTS'), numberofweights))
 
-% g_WU1_perm = a_WU1_perm.get('G');
-% g_WU2_perm = a_WU2_perm.get('G');
-% assert(isequal(g_WU1_perm.get('RANDOMIZE'), randomize))
-% assert(isequal(g_WU1_perm.get('RANDOM_SEED'), random_seed))
-% assert(isequal(g_WU1_perm.get('SYMMETRIZE_RULE'), symmetrize_rule))
-% assert(isequal(g_WU1_perm.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
-% assert(isequal(g_WU1_perm.get('STANDARDIZE_RULE'), standardize_rule))
-% assert(isequal(g_WU1_perm.get('ATTEMPTSPEREDGE'), attemptsperedge))
-% assert(isequal(g_WU1_perm.get('NUMBEROFWEIGHTS'), numberofweights))
-% assert(isequal(g_WU2_perm.get('RANDOMIZE'), randomize))
-% assert(isequal(g_WU2_perm.get('RANDOM_SEED'), random_seed))
-% assert(isequal(g_WU2_perm.get('SYMMETRIZE_RULE'), symmetrize_rule))
-% assert(isequal(g_WU2_perm.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
-% assert(isequal(g_WU2_perm.get('STANDARDIZE_RULE'), standardize_rule))
-% assert(isequal(g_WU2_perm.get('ATTEMPTSPEREDGE'), attemptsperedge))
-% assert(isequal(g_WU2_perm.get('NUMBEROFWEIGHTS'), numberofweights))
+g_WU1_perm_i = a_WU1_perm.get('G_DICT').get('IT', i);
+g_WU2_perm_i = a_WU2_perm.get('G_DICT').get('IT', i);
+assert(isequal(g_WU1_perm_i.get('RANDOMIZE'), randomize))
+assert(isequal(g_WU1_perm_i.get('RANDOM_SEED'), random_seed))
+assert(isequal(g_WU1_perm_i.get('SYMMETRIZE_RULE'), symmetrize_rule))
+assert(isequal(g_WU1_perm_i.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
+assert(isequal(g_WU1_perm_i.get('STANDARDIZE_RULE'), standardize_rule))
+assert(isequal(g_WU1_perm_i.get('ATTEMPTSPEREDGE'), attemptsperedge))
+assert(isequal(g_WU1_perm_i.get('NUMBEROFWEIGHTS'), numberofweights))
+assert(isequal(g_WU2_perm_i.get('RANDOMIZE'), randomize))
+assert(isequal(g_WU2_perm_i.get('RANDOM_SEED'), random_seed))
+assert(isequal(g_WU2_perm_i.get('SYMMETRIZE_RULE'), symmetrize_rule))
+assert(isequal(g_WU2_perm_i.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
+assert(isequal(g_WU2_perm_i.get('STANDARDIZE_RULE'), standardize_rule))
+assert(isequal(g_WU2_perm_i.get('ATTEMPTSPEREDGE'), attemptsperedge))
+assert(isequal(g_WU2_perm_i.get('NUMBEROFWEIGHTS'), numberofweights))
  
-% % check that measure parameters are correclty templated to permutation analyses
-% m_triangles_WU1_perm = g_WU1_perm.get('MEASURE', 'Triangles');
-% m_triangles_WU1_perm.set('RULE', triangles_rule)
-% m_triangles_WU2_perm = g_WU2_perm.get('MEASURE', 'Triangles');
-% assert(isequal(m_triangles_WU2_perm.get('RULE'), triangles_rule))
+% check that measure parameters are correclty templated to permutation analyses
+assert(isequal(g_WU1_perm_i.get('MEASURE', 'Triangles').get('RULE'), triangles_rule))
+assert(isequal(g_WU2_perm_i.get('MEASURE', 'Triangles').get('RULE'), triangles_rule))
 
 %%% ¡test!
 %%%% ¡name!
