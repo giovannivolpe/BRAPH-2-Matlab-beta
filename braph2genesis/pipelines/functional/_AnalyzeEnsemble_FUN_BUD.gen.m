@@ -36,6 +36,12 @@ SUBJECT GROUP
 
 %%% ¡prop!
 %%%% ¡id!
+AnalyzeEnsemble_FUN_BUD.GRAPH_TEMPLATE
+%%%% ¡title!
+GRAPH & MEASURE PARAMETERS
+
+%%% ¡prop!
+%%%% ¡id!
 AnalyzeEnsemble_FUN_BUD.DENSITIES
 %%%% ¡title!
 DENSITIES [0% ... 100%]
@@ -221,6 +227,9 @@ pr = PanelPropRVectorSmart('EL', a, 'PROP', AnalyzeEnsemble_FUN_BUD.DENSITIES, .
     varargin{:});
 
 %% ¡tests!
+
+%%% ¡excluded_props!
+[AnalyzeEnsemble_FUN_BUD.TEMPLATE AnalyzeEnsemble_FUN_BUD.GRAPH_TEMPLATE]
 
 %%% ¡test!
 %%%% ¡name!
