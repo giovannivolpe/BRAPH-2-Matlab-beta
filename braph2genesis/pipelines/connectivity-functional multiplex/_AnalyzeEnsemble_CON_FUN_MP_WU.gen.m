@@ -36,6 +36,12 @@ SUBJECT GROUP
 
 %%% ¡prop!
 %%%% ¡id!
+AnalyzeEnsemble_CON_FUN_MP_WU.GRAPH_TEMPLATE
+%%%% ¡title!
+GRAPH & MEASURE PARAMETERS
+
+%%% ¡prop!
+%%%% ¡id!
 AnalyzeEnsemble_CON_FUN_MP_WU.REPETITION
 %%%% ¡title!
 REPETITION TIME [s]
@@ -215,6 +221,9 @@ Correlation.NEGATIVE_WEIGHT_RULE_LIST
 Correlation.NEGATIVE_WEIGHT_RULE_LIST{1}
 
 %% ¡tests!
+
+%%% ¡excluded_props!
+[AnalyzeEnsemble_CON_FUN_MP_WU.TEMPLATE AnalyzeEnsemble_CON_FUN_MP_WU.GRAPH_TEMPLATE]
 
 %%% ¡test!
 %%%% ¡name!
