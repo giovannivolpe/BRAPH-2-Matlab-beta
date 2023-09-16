@@ -204,8 +204,8 @@ m_triangles_WU2 = g_template_WU2.get('MEASURE', 'Triangles');
 assert(isequal(m_triangles_WU2.get('RULE'), triangles_rule))
 
 % check that graph and measure parameters are correctly propagated to graph and measure dictionaries
-me_triangles_WU1 = a_WU1.get('MEASUREENSEMBLE', 'Triangles') % calculates G_DICT and Triangles for each graph
-me_triangles_WU2 = a_WU2.get('MEASUREENSEMBLE', 'Triangles') % calculates G_DICT and Triangles for each graph
+me_triangles_WU1 = a_WU1.get('MEASUREENSEMBLE', 'Triangles'); % calculates G_DICT and Triangles for each graph
+me_triangles_WU2 = a_WU2.get('MEASUREENSEMBLE', 'Triangles'); % calculates G_DICT and Triangles for each graph
 
 i = randi(a_WU1.get('G_DICT').get('LENGTH'));
 
