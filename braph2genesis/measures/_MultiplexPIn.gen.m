@@ -220,12 +220,12 @@ known_multiplex_in_participation = {[8/9 8/9 1]'};
 
 g = OrdMlWD('B', B);
 
-m_outside_g = MultiplexPartiIn('G', g);
+m_outside_g = MultiplexPIn('G', g);
 assert(isequal(m_outside_g.get('M'), known_multiplex_in_participation), ...
     [BRAPH2.STR ':MultiplexPartiIn:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'MultiplexPartiIn');
+m_inside_g = g.get('MEASURE', 'MultiplexPIn');
 assert(isequal(m_inside_g.get('M'), known_multiplex_in_participation), ...
     [BRAPH2.STR ':MultiplexPartiIn:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
