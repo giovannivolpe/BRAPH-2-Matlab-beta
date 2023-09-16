@@ -115,13 +115,10 @@ else
     overlapping_degree = calculateValue@OverlappingDeg(m, prop);
     overlapping_degree_av = cell(length(l), 1);
 
-    for i=1:length(l)
+    for i=1:length(ls)
         overlapping_degree_av(i) = {mean(overlapping_degree{i})};
     end
     value = overlapping_degree_av;
-    if contains(class(g),'Multilayer') | contains(class(g),'OrdMl')
-     value = {mean([sum(cell2mat(overlapping_degree'),2)])}
-    end 
 end
 
 %% ¡tests!
