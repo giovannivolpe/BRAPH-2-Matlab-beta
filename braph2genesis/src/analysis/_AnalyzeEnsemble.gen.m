@@ -24,6 +24,8 @@ DESCRIPTION (constant, string) is the description of the ensemble-based graph an
 TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis.
 %%%% ¡settings!
 'AnalyzeEnsemble'
+%%%% ¡postset!
+a.get('TEMPLATE').memorize('GRAPH_TEMPLATE')
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the ensemble-based graph analysis.
@@ -153,3 +155,8 @@ value = me;
 % % % pr = PanelPropItem('EL', a, 'PROP', AnalyzeEnsemble.PFGD, ...
 % % %     'GUICLASS', 'GUIFig', ...
 % % %     varargin{:});
+
+%% ¡tests!
+
+%%% ¡excluded_props!
+[AnalyzeEnsemble.TEMPLATE AnalyzeEnsemble.GRAPH_TEMPLATE]
