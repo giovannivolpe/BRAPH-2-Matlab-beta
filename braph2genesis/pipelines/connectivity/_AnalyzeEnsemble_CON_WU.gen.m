@@ -130,6 +130,9 @@ ME_DICT (result, idict) contains the calculated measures of the graph ensemble.
 
 %% ¡tests!
 
+%%% ¡excluded_props!
+[AnalyzeEnsemble_CON_WU.TEMPLATE AnalyzeEnsemble_CON_WU.GRAPH_TEMPLATE]
+
 %%% ¡test!
 %%%% ¡name!
 Example
