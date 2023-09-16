@@ -161,35 +161,35 @@ gr2 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('SubjectCON')) f
 
 % check that analysis parameters are correclty templated between analysis 1 and 2
 a_WU1 = AnalyzeEnsemble_CON_WU('GR', gr1);
-a_WU2 = AnalyzeEnsemble_CON_WU('TEMPLATE', a_WU1, 'GR', gr2); % also memorizes the graph in a_WU1
+a_WU2 = AnalyzeEnsemble_CON_WU('TEMPLATE', a_WU1, 'GR', gr2); % also memorizes the graph in a_WU1 (!)
 
-% % check that graph parameters are correclty templated between analysis 1 and 2
-% randomize = true;
-% random_seed = 42;
-% symmetrize_rule = 'min';
-% semipositivize_rule = 'absolute';
-% standardize_rule = 'range';
-% attemptsperedge = 1000;
-% numberofweights = 25;
-% g_WU2 = a_WU2.get('G');
-% g_WU1 = a_WU1.get('G'); % it has been memorized in the previous line (!) when calculating the templated graph.
-% g_WU1.set( ...
-%     'RANDOMIZE', randomize, ...
-%     'RANDOM_SEED', random_seed, ...
-%     'SYMMETRIZE_RULE', symmetrize_rule, ...
-%     'SEMIPOSITIVIZE_RULE', semipositivize_rule, ...
-%     'STANDARDIZE_RULE', standardize_rule, ...
-%     'ATTEMPTSPEREDGE', attemptsperedge, ...
-%     'NUMBEROFWEIGHTS', numberofweights ...
-%     )
-% assert(isequal(g_WU2.get('RANDOMIZE'), randomize))
-% assert(isequal(g_WU2.get('RANDOM_SEED'), random_seed))
-% assert(isequal(g_WU2.get('SYMMETRIZE_RULE'), symmetrize_rule))
-% assert(isequal(g_WU2.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
-% assert(isequal(g_WU2.get('STANDARDIZE_RULE'), standardize_rule))
-% assert(isequal(g_WU2.get('ATTEMPTSPEREDGE'), attemptsperedge))
-% assert(isequal(g_WU2.get('NUMBEROFWEIGHTS'), numberofweights))
-% 
+% check that graph parameters are correclty templated between analysis 1 and 2
+randomize = true;
+random_seed = 42;
+symmetrize_rule = 'min';
+semipositivize_rule = 'absolute';
+standardize_rule = 'range';
+attemptsperedge = 1000;
+numberofweights = 25;
+g_template_WU1 = a_WU1.get('GRAPH_TEMPLATE'); 
+g_template_WU1.set( ...
+    'RANDOMIZE', randomize, ...
+    'RANDOM_SEED', random_seed, ...
+    'SYMMETRIZE_RULE', symmetrize_rule, ...
+    'SEMIPOSITIVIZE_RULE', semipositivize_rule, ...
+    'STANDARDIZE_RULE', standardize_rule, ...
+    'ATTEMPTSPEREDGE', attemptsperedge, ...
+    'NUMBEROFWEIGHTS', numberofweights ...
+    )
+g_template_WU2 = a_WU2.get('GRAPH_TEMPLATE'); 
+assert(isequal(g_template_WU2.get('RANDOMIZE'), randomize))
+assert(isequal(g_template_WU2.get('RANDOM_SEED'), random_seed))
+assert(isequal(g_template_WU2.get('SYMMETRIZE_RULE'), symmetrize_rule))
+assert(isequal(g_template_WU2.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
+assert(isequal(g_template_WU2.get('STANDARDIZE_RULE'), standardize_rule))
+assert(isequal(g_template_WU2.get('ATTEMPTSPEREDGE'), attemptsperedge))
+assert(isequal(g_template_WU2.get('NUMBEROFWEIGHTS'), numberofweights))
+
 % % check that measure parameters are correclty templated between analysis 1 and 2
 % triangles_rule = 'middleman';
 % m_triangles_WU1 = g_WU1.get('MEASURE', 'Triangles');
