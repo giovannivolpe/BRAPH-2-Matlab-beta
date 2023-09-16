@@ -25,6 +25,8 @@ TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis.
 %%%% ¡settings!
 'AnalyzeEnsemble'
 %%%% ¡postset!
+a.postset@ConcreteElement(AnalyzeEnsemble.TEMPLATE)
+
 a.get('TEMPLATE').memorize('GRAPH_TEMPLATE')
 
 %%% ¡prop!
