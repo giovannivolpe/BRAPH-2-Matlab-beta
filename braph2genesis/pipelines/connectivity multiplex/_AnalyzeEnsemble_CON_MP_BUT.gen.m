@@ -36,6 +36,12 @@ SUBJECT GROUP
 
 %%% ¡prop!
 %%%% ¡id!
+AnalyzeEnsemble_CON_MP_BUT.GRAPH_TEMPLATE
+%%%% ¡title!
+GRAPH & MEASURE PARAMETERS
+
+%%% ¡prop!
+%%%% ¡id!
 AnalyzeEnsemble_CON_MP_BUT.THRESHOLDS
 %%%% ¡title!
 THRESHOLDS [-1 ... 1]
@@ -151,6 +157,9 @@ pr = PanelPropRVectorSmart('EL', a, 'PROP', AnalyzeEnsemble_CON_MP_BUT.THRESHOLD
     varargin{:});
 
 %% ¡tests!
+
+%%% ¡excluded_props!
+[AnalyzeEnsemble_CON_MP_BUT.TEMPLATE AnalyzeEnsemble_CON_MP_BUT.GRAPH_TEMPLATE]
 
 %%% ¡test!
 %%%% ¡name!
