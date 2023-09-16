@@ -190,13 +190,16 @@ assert(isequal(g_template_WU2.get('STANDARDIZE_RULE'), standardize_rule))
 assert(isequal(g_template_WU2.get('ATTEMPTSPEREDGE'), attemptsperedge))
 assert(isequal(g_template_WU2.get('NUMBEROFWEIGHTS'), numberofweights))
 
-% % check that measure parameters are correclty templated between analysis 1 and 2
-% triangles_rule = 'middleman';
-% m_triangles_WU1 = g_WU1.get('MEASURE', 'Triangles');
-% m_triangles_WU1.set('RULE', triangles_rule)
-% m_triangles_WU2 = g_WU2.get('MEASURE', 'Triangles');
-% assert(isequal(m_triangles_WU2.get('RULE'), triangles_rule))
-% 
+% check that measure parameters are correclty templated between analysis 1 and 2
+triangles_rule = 'middleman';
+m_triangles_WU1 = g_template_WU1.get('MEASURE', 'Triangles');
+m_triangles_WU1.set('RULE', triangles_rule)
+m_triangles_WU2 = g_template_WU2.get('MEASURE', 'Triangles');
+assert(isequal(m_triangles_WU2.get('RULE'), triangles_rule))
+
+% check that graph and measure parameters are correctly propagated to graph dictionaries
+
+
 % % check that analysis parameters are correclty templated to permutation analyses
 % permutations = 10;
 % c_WU = CompareGroup('P', permutations, 'A1', a_WU1, 'A2', a_WU2);
