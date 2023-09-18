@@ -111,7 +111,7 @@ NOTES (metadata, string) are some specific notes about the group-based compariso
 %% ¡props!
 
 %%% ¡prop!
-MEASURE (data, class) is the measure class.
+MEASURE (parameter, class) is the measure class.
 %%%% ¡settings!
 'Measure'
 
@@ -499,7 +499,7 @@ end
 %%%% ¡gui!
 pr = PanelPropItem('EL', cp, 'PROP', ComparisonGroup.PFC, ...
     'GUICLASS', 'GUIFig', ...
-	'BUTTON_TEXT', ['Plot ' cp.get('LABEL')], ...
+	'BUTTON_TEXT', ['Plot ' cp.get('MEASURE') ' Comparison'], ...
     varargin{:});
 
 %%% ¡prop!
@@ -548,10 +548,11 @@ PFBG (gui, item) contains the panel figure of the brain graph.
 % % %         end
 % % %     end
 % % % end
-%%%% ¡_gui!
-% % % pr = PanelPropItem('EL', cp, 'PROP', ComparisonGroup.PFBG, ...
-% % %     'GUICLASS', 'GUIFig', ...
-% % %     varargin{:});
+%%%% ¡gui!
+pr = PanelPropItem('EL', cp, 'PROP', ComparisonGroup.PFBG, ...
+    'GUICLASS', 'GUIFig', ...
+	'BUTTON_TEXT', ['Brain Graph ' cp.get('MEASURE') ' Comparison'], ...
+    varargin{:});
 
 %%% ¡prop!
 CALCULATE_RESULTS (evanescent, cell) calculates the comparison results {diff, p1, p2, ci_lower, ci_upper}.
