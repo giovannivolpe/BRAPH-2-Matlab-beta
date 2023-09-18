@@ -408,9 +408,7 @@ for i = 1:length(A2)
             [BRAPH2.STR ':MultiplexBUD:' BRAPH2.FAIL_TEST], ...
             'MultiplexBUD Randomize is not functioning well.')
     else
-%         assert(~isequal(A2{i, i}, random_A{i, i}), ...
-%             [BRAPH2.STR ':MultiplexBUD:' BRAPH2.FAIL_TEST], ...
-%             'MultiplexBUD Randomize is not functioning well.')
+        % sometimes swaps dont occur
     end
 
     assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes

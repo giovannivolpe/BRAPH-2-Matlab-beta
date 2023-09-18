@@ -501,9 +501,7 @@ elseif isequal((length(A2{1}).^2)- length(A2{1}), sum(A2{1}==1, "all")) %if all 
         [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
         'GraphBU Randomize is not functioning well.')
 else
-%     assert(~isequal(A2{1}, random_A), ...
-%         [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
-%         'GraphBU Randomize is not functioning well.')
+    % sometimes swaps dont occur
 end
 
 d1 = g.get('MEASURE', 'Degree');
