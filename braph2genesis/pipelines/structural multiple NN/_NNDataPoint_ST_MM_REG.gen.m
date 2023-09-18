@@ -4,8 +4,8 @@ NNDataPoint_ST_MM_REG < NNDataPoint (dp, structural multimodality regression dat
 %%% ¡description!
 A data point for regression with structural multimodality data (NNDataPoint_ST_MM_REG) 
  contains the input and target for neural network analysis with a subject 
- with structural multimodality data (SubjectST_MP).
-The input is the structural multimodality data of the subject.
+ with structural multiplex data (SubjectST_MP).
+The input is the structural multiplex data of the subject.
 The target is obtained from the variables of interest of the subject.
 
 %%% ¡seealso!
