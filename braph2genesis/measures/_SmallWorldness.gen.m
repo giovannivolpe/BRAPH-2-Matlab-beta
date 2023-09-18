@@ -110,19 +110,19 @@ GraphWU
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B = rand(20);
+small_sample = testBraph2WattsStrogatz(20,5,0.1);
 
-known_smallworldness = {1};
-
-g = GraphWU('B', B);
+g = GraphWU('B', adjacency(small_sample));
 
 m_outside_g = SmallWorldness('G', g);
-assert(isequal(m_outside_g.get('M'), known_smallworldness), ...
+tmp_val = m_outside_g.get('M');
+assert(tmp_val{1} > 1, ...
     [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'SmallWorldness');
-assert(isequal(m_inside_g.get('M'), known_smallworldness), ...
+tmp_val = m_inside_g.get('M');
+assert(tmp_val{1} > 1, ...
     [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -132,19 +132,19 @@ GraphBU
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B = rand(20);
+small_sample = testBraph2WattsStrogatz(20, 5, 0.1);
 
-known_smallworldness = {1};
-
-g = GraphBU('B', B);
+g = GraphBU('B', adjacency(small_sample));
 
 m_outside_g = SmallWorldness('G', g);
-assert(isequal(m_outside_g.get('M'), known_smallworldness), ...
-    [BRAPH2.STR ':Degree:' BRAPH2.FAIL_TEST], ...
+tmp_val = m_outside_g.get('M');
+assert(tmp_val{1} > 1, ...
+    [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'SmallWorldness');
-assert(isequal(m_inside_g.get('M'), known_smallworldness), ...
+tmp_val = m_inside_g.get('M');
+assert(tmp_val{1} > 1, ...
     [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -154,21 +154,21 @@ MultigraphBUD
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B = rand(20);
-
-known_smallworldness = {0 1};
+small_sample = testBraph2WattsStrogatz(20, 5, 0.1);
 
 densities = [1 90];
 
-g = MultigraphBUD('B', B, 'DENSITIES', densities);
+g = MultigraphBUD('B', adjacency(small_sample), 'DENSITIES', densities);
 
 m_outside_g = SmallWorldness('G', g);
-assert(isequal(m_outside_g.get('M'), known_degree), ...
+tmp_val = m_outside_g.get('M');
+assert(tmp_val{2} > 1, ...
     [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'SmallWorldness');
-assert(isequal(m_inside_g.get('M'), known_degree), ...
+tmp_val = m_inside_g.get('M');
+assert(tmp_val{2} > 1, ...
     [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -177,19 +177,21 @@ assert(isequal(m_inside_g.get('M'), known_degree), ...
 MultigraphBUT
 %%%% ¡code!
 thresholds = [0 1];
-B = rand(20);
+small_sample = testBraph2WattsStrogatz(20, 5, 0.1);
 
 known_smallworldness = {1 0};
 
-g = MultigraphBUT('B', B, 'THRESHOLDS', thresholds);
+g = MultigraphBUT('B', adjacency(small_sample), 'THRESHOLDS', thresholds);
 
 m_outside_g = SmallWorldness('G', g);
-assert(isequal(m_outside_g.get('M'), known_degree), ...
+tmp_val = m_outside_g.get('M');
+assert(tmp_val{2} > 1, ...
     [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'SmallWorldness');
-assert(isequal(m_inside_g.get('M'), known_degree), ...
+tmp_val = m_inside_g.get('M');
+assert(tmp_val{2} > 1, ...
     [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -199,22 +201,22 @@ MultiplexWU
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B11 = rand(20);
-B22 = rand(20);
+B11 = adjacency(testBraph2WattsStrogatz(20, 5, 0.1));
+B22 = adjacency(testBraph2WattsStrogatz(20, 5, 0.1));
 
 B = {B11 B22};
-
-known_smallworldness = {1; 1};
 
 g = MultiplexWU('B', B);
 
 m_outside_g = SmallWorldness('G', g);
-assert(isequal(m_outside_g.get('M'), known_smallworldness), ...
+tmp_val = m_outside_g.get('M');
+assert(tmp_val{2} > 1, ...
     [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'SmallWorldness');
-assert(isequal(m_inside_g.get('M'), known_smallworldness), ...
+tmp_val = m_inside_g.get('M');
+assert(tmp_val{2} > 1, ...
     [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -224,21 +226,21 @@ GraphBU
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B11 = rand(20);
-B22 = rand(20);
+B11 = adjacency(testBraph2WattsStrogatz(20, 5, 0.1));
+B22 = adjacency(testBraph2WattsStrogatz(20, 5, 0.1));
 
 B = {B11 B22};
 
-known_smallworldness = {1; 1};
-
-g = GraphBU('B', B);
+g = MultiplexBU('B', B);
 
 m_outside_g = SmallWorldness('G', g);
-assert(isequal(m_outside_g.get('M'), known_smallworldness), ...
-    [BRAPH2.STR ':Degree:' BRAPH2.FAIL_TEST], ...
+tmp_val = m_outside_g.get('M');
+assert(tmp_val{2} > 1, ...
+    [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'SmallWorldness');
-assert(isequal(m_inside_g.get('M'), known_smallworldness), ...
+tmp_val = m_inside_g.get('M');
+assert(tmp_val{2} > 1, ...
     [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
