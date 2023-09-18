@@ -302,8 +302,8 @@ value = A;
 %%% ¡prop!
 SUBGRAPH (query, item) returns a subgraph of original graph
 %%%% ¡calculate!
-A = g.get('A');
-L = g.get('LAYERNUMBER');
+A = g.get('B');
+L = length(A);
 if isempty(varargin)
     value = g;
     return
@@ -313,7 +313,7 @@ if ~iscell(nodes)
     nodes = repmat({nodes}, 1, L);
 end
 for li = 1:1:L
-    Aii = A{li, li};
+    Aii = A{li};
     if ~isempty(Aii)
         B(li) = {Aii(nodes{li}, nodes{li})};
     end
