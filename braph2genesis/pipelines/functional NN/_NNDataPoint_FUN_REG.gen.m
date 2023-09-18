@@ -288,4 +288,4 @@ if ~isfile([fileparts(which('NNDataPoint_FUN_REG')) filesep 'Example data NN REG
     test_NNDataPoint_FUN_REG % create example files
 end
 
-example_NNCV_FUN_REG
+example_NNCV_FUN_BUD_REG

@@ -446,4 +446,4 @@ if ~isfile([fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA
     test_NNDataPoint_FUN_CLA % create example files
 end
 
-example_NN_FUN_CLA
+example_NN_FUN_WU_CLA
