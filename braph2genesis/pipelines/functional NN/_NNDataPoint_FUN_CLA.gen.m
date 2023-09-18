@@ -1,5 +1,5 @@
 %% ¡header!
-NNDataPoint_FUN_CLA < NNDataPoint (dp, functional classificationession data point) is a data point for classificationession with functional data.
+NNDataPoint_FUN_CLA < NNDataPoint (dp, functional classification data point) is a data point for classification with functional data.
 
 %%% ¡description!
 A data point for classification with functional data (NNDataPoint_FUN_CLA) 
@@ -17,27 +17,27 @@ NAME (constant, string) is the name of a data point for classification with func
 'NNDataPoint_FUN_CLA'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of a data point for classificationession with functional data.
+DESCRIPTION (constant, string) is the description of a data point for classification with functional data.
 %%%% ¡default!
-'A data point for classificationession with functional data (NNDataPoint_FUN_CLA) contains the input and target for neural network analysis with a subject with functional data (SubjectFUN). The input is the functional data of the subject. The target is obtained from the variables of interest of the subject.'
+'A data point for classification with functional data (NNDataPoint_FUN_CLA) contains the input and target for neural network analysis with a subject with functional data (SubjectFUN). The input is the functional data of the subject. The target is obtained from the variables of interest of the subject.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of a data point for classificationession with functional data.
+TEMPLATE (parameter, item) is the template of a data point for classification with functional data.
 %%%% ¡settings!
 'NNDataPoint_FUN_CLA'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for a data point for classificationession with functional data.
+ID (data, string) is a few-letter code for a data point for classification with functional data.
 %%%% ¡default!
 'NNDataPoint_FUN_CLA ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of a data point for classificationession with functional data.
+LABEL (metadata, string) is an extended label of a data point for classification with functional data.
 %%%% ¡default!
 'NNDataPoint_FUN_CLA label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about a data point for classificationession with functional data.
+NOTES (metadata, string) are some specific notes about a data point for classification with functional data.
 %%%% ¡default!
 'NNDataPoint_FUN_CLA notes'
 
@@ -49,7 +49,7 @@ value = {dp.get('SUB').get('FUN')};
 %%% ¡prop!
 TARGET (result, cell) is the target value for this data point.
 %%%% ¡calculate!
-value = cellfun(@(x) dp.get('SUB').get('VOI_DICT').get('IT', x).get('V'), dp.get('TARGET_IDS'), 'UniformOutput', false);
+value = dp.get('TARGET_IDS');
 
 %% ¡props!
 
@@ -59,7 +59,7 @@ SUB (data, item) is a subject with functional data.
 'SubjectFUN'
 
 %%% ¡prop!
-TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be used as classificationession targets.
+TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be used as classification targets.
 					
 %% ¡tests!
 
@@ -68,9 +68,9 @@ TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be u
 
 %%% ¡test!
 %%%% ¡name!
-Create example files for classificationession
+Create example files for classification
 %%%% ¡code!
-data_dir = [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN REG FUN XLS'];
+data_dir = [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN XLS'];
 if ~isdir(data_dir)
     mkdir(data_dir);
 
@@ -96,7 +96,7 @@ if ~isdir(data_dir)
     N_tslength = 200;
     
     %% Specify number of subjects
-    N_groups = 100;
+    N_groups = 30;
     
     %% Group 1
     gr1_ts = cell(1, N_groups);
@@ -107,7 +107,7 @@ if ~isdir(data_dir)
     {{'Subject ID'} {'Age'} {'Sex'}}
     {{} {} cell2str(sex_options)}
     ];
-    for i_gr = 1:1:N_groups % subject number
+    for i_gr = 1:1:50 % subject number
         sub_id = ['SubjectFUN_' num2str(i_gr)];
         % create WS graphs with random beta
             % initialize values for the WS model
@@ -172,7 +172,7 @@ if ~isdir(data_dir)
     {{'Subject ID'} {'Age'} {'Sex'}}
     {{} {} cell2str(sex_options)}
     ];
-    for i_gr = 1:1:N_groups % subject number
+    for i_gr = 51:1:100 % subject number
         sub_id = ['SubjectFUN_' num2str(i_gr)];
         % create WS graphs with random beta
             % initialize values for the WS model
@@ -237,7 +237,7 @@ if ~isdir(data_dir)
     {{'Subject ID'} {'Age'} {'Sex'}}
     {{} {} cell2str(sex_options)}
     ];
-    for i_gr = 1:1:N_groups % subject number
+    for i_gr = 101:1:150  % subject number
         sub_id = ['SubjectFUN_' num2str(i_gr)];
         % create WS graphs with random beta
             % initialize values for the WS model
@@ -332,7 +332,7 @@ Create a NNDataset containg NNDataPoint_FUN_CLA with simulated data
 %%%% ¡code!
 % Load BrainAtlas
 im_ba = ImporterBrainAtlasXLS( ...
-    'FILE', [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN REG FUN XLS' filesep 'atlas.xlsx'], ...
+    'FILE', [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN XLS' filesep 'atlas.xlsx'], ...
     'WAITBAR', true ...
     );
 
@@ -340,27 +340,27 @@ ba = im_ba.get('BA');
 
 % Load Groups of SubjectFUN
 im_gr1 = ImporterGroupSubjectFUN_XLS( ...
-    'DIRECTORY', [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN REG FUN XLS' filesep 'FUN_Group_1_XLS'], ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN XLS' filesep 'FUN_Group_1_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
 
-gr1 = im_gr.get('GR');
+gr1 = im_gr1.get('GR');
 
 im_gr2 = ImporterGroupSubjectFUN_XLS( ...
-    'DIRECTORY', [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN REG FUN XLS' filesep 'FUN_Group_2_XLS'], ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN XLS' filesep 'FUN_Group_2_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
 
-gr2 = im_gr.get('GR');
+gr2 = im_gr2.get('GR');
 
 % create a item list of NNDataPoint_FUN_CLA
 [~, group_folder_name] = fileparts(im_gr1.get('DIRECTORY'));
 it_list1 = cellfun(@(x) NNDataPoint_FUN_CLA( ...
     'ID', x.get('ID'), ...
     'SUB', x, ...
-    'TARGET_IDS', x.get('VOI_DICT').get('KEYS')), ...
+    'TARGET_IDS', {group_folder_name}), ...
     gr1.get('SUB_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
@@ -368,7 +368,7 @@ it_list1 = cellfun(@(x) NNDataPoint_FUN_CLA( ...
 it_list2 = cellfun(@(x) NNDataPoint_FUN_CLA( ...
     'ID', x.get('ID'), ...
     'SUB', x, ...
-    'TARGET_IDS', x.get('VOI_DICT').get('KEYS')), ...
+    'TARGET_IDS', {group_folder_name}), ...
     gr2.get('SUB_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
@@ -439,10 +439,10 @@ end
 
 %%% ¡test! 
 %%%% ¡name!
-Example training-test classificationession
+Example training-test classification
 %%%% ¡code!
 % ensure the example data is generated
-if ~isfile([fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN REG FUN XLS' filesep 'atlas.xlsx'])
+if ~isfile([fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN XLS' filesep 'atlas.xlsx'])
     test_NNDataPoint_FUN_CLA % create example files
 end
 
