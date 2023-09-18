@@ -91,7 +91,6 @@ GraphBD.SUBGRAPH
 %%%% ¡title!
 SUBGRAPH
 
-
 %% ¡props_update!
 
 %%% ¡prop!
@@ -178,6 +177,27 @@ pr = PanelPropCell('EL', g, 'PROP', GraphBD.A, ...
 COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('GraphBD')
+
+%%% ¡prop!
+SUBGRAPH (query, item) is the subgraph
+%%%% ¡calculate!
+A = g.get('A');
+if isempty(varargin)
+    value = g;
+    return
+end
+nodes = varargin{1};
+L = g.get('LAYERNUMBER');
+
+if ~iscell(nodes)
+    nodes = repmat({nodes}, 1, L);
+end
+B = A{1};
+B = B(nodes{1}, nodes{1});
+value = GraphBD('B', B, 'TEMPLATE', g, ...
+    'ID', ['Subgraph of ' g.get('ID')], ...
+    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
+    'NOTES', ['Subgraph - ' g.get('NOTES')]);
 
 %% ¡props!
 
@@ -280,19 +300,6 @@ for attempt = 1:1:attempts_per_edge*E
     end
 end
 value = random_A;
-
-%%% ¡prop!
-SUBGRAPH (query, cell) is the subgraph
-%%%% ¡calculate!
-A = g.get('A');
-nodes = varargin{1};
-
-if ~iscell(nodes)
-    nodes = repmat({nodes}, 1, L);
-end
-B = A{1};
-B = B(nodes{1}, nodes{1});
-value = eval([g.getClass() '(''B'', B)']);
 
 %% ¡tests!
 
@@ -441,3 +448,18 @@ B = randn(10);
 g = GraphBD('B', B);
 nodes = [1 3 4 7];
 sub_g = g.get('SUBGRAPH', nodes);
+
+assert(isequal(g.getClass(), sub_g.getClass()), ... 
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    'GraphBD SUBGRAPH is not functioning well.')
+
+tmp_sub_A = sub_g.get('A');
+
+assert(isequal(size(tmp_sub_A{1}), [length(nodes) length(nodes)]), ... 
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    'GraphBD SUBGRAPH is not functioning well.')
+
+tmp_A = g.get('A');
+assert(isequal(tmp_A{1}(nodes, nodes), tmp_sub_A{1}), ... 
+    [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
+    'GraphBD SUBGRAPH is not functioning well.')

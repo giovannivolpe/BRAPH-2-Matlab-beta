@@ -177,50 +177,50 @@ for i = 1:1:length(el_class_list)
 end
 
 %% Graphs
-% el_class_list = {'Graph'} % 'Graph' 'Measure' 'MeasurePF' 'MeasurePF_GU' 'MeasurePF_NU' 'MeasurePF_BU' 'GraphPP_MDict'
-% for i = 1:1:length(el_class_list)
-%     el_class = el_class_list{i};
-%     el_path = '/src/gt';
-%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
-%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     eval(['test_' el_class])
-% end
-% el_class_list = {'SettingsTextPP'} % 'SettingsLine' 'SettingsArea' 'SettingsLinePP' 'SettingsAreaPP' 'PanelPropStringList' 'PanelPropIDictTable'
-% for i = 1:1:length(el_class_list)
-%     el_class = el_class_list{i};
-%     el_path = '/src/gui';
-%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
-%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     eval(['test_' el_class])
-% end
-% el_class_list = {'GraphPP_MDict'} % 'Graph' 'GraphAdjPF' 'GraphHistPF' 'LayersPP' 'GraphPP_MDict'
-% for i = 1:1:length(el_class_list)
-%     el_class = el_class_list{i};
-%     el_path = '/src/gt';
-%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
-%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     eval(['test_' el_class])
-% end
-% el_class_list = {'MultigraphBUT'} % {'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexBD' 'MultiplexBU' 'MultiplexWD' 'MultiplexWU' 'OrdMultiWU' 'MultiplexBUD' 'MultiplexBUT'};
-% for i = 1:1:length(el_class_list)
-%     el_class = el_class_list{i};
-%     el_path = '/graphs';
-%     delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
-%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
-%     eval(['test_' el_class])
-% end
+el_class_list = {'Graph'} % 'Graph' 'Measure' 'MeasurePF' 'MeasurePF_GU' 'MeasurePF_NU' 'MeasurePF_BU' 'GraphPP_MDict'
+for i = 1:1:length(el_class_list)
+    el_class = el_class_list{i};
+    el_path = '/src/gt';
+    delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+    create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    eval(['test_' el_class])
+end
+el_class_list = {'SettingsTextPP'} % 'SettingsLine' 'SettingsArea' 'SettingsLinePP' 'SettingsAreaPP' 'PanelPropStringList' 'PanelPropIDictTable'
+for i = 1:1:length(el_class_list)
+    el_class = el_class_list{i};
+    el_path = '/src/gui';
+    delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+    create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    eval(['test_' el_class])
+end
+el_class_list = {'GraphPP_MDict'} % 'Graph' 'GraphAdjPF' 'GraphHistPF' 'LayersPP' 'GraphPP_MDict'
+for i = 1:1:length(el_class_list)
+    el_class = el_class_list{i};
+    el_path = '/src/gt';
+    delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+    create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    eval(['test_' el_class])
+end
+el_class_list = {'MultigraphBUT'} % {'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexBD' 'MultiplexBU' 'MultiplexWD' 'MultiplexWU' 'OrdMultiWU' 'MultiplexBUD' 'MultiplexBUT'};
+for i = 1:1:length(el_class_list)
+    el_class = el_class_list{i};
+    el_path = '/graphs';
+    delete([fileparts(which('braph2')) el_path filesep() el_class '.m'])
+    create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    create_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    create_layout([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
+    eval(['test_' el_class])
+end
 
 % Graph
 % g = Graph();
