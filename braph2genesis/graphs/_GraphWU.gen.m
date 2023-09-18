@@ -412,9 +412,7 @@ elseif isequal((length(A2{1}).^2)- length(A2{1}), sum(A2{1}==1, "all")) %if all 
         [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
         'GraphWU Randomize is not functioning well.')
 else
-%     assert(~isequal(A2{1}, random_A), ...
-%         [BRAPH2.STR ':GraphWU:' BRAPH2.FAIL_TEST], ...
-%         'GraphWU Randomize is not functioning well.')
+    % sometimes swaps dont occur
 end
 
 assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same number of nodes
