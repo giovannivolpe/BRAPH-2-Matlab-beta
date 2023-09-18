@@ -1,0 +1,138 @@
+\documentclass[justified]{tufte-handout}
+\usepackage{../braph2_tut}
+%\geometry{showframe} % display margins for debugging page layout
+
+\title{Pipeline for Comparison of Weighted Structural Data between Groups of Subjects}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+For \emph{structural data}, we will upload a file containing the pipeline with the different steps to compare two groups of subjects. The structural values could correspond to grey matter volumes, blood flow or glucose metabolism derived from T1-weighted MRI, ASL MRI and FDG-PET data, respectively. This Tutorial explains how to perform group comparisons with this kind of data.
+\end{abstract}
+
+\tableofcontents
+
+\fig{figure*}
+	{fig:01}
+	{\includegraphics{fig01.jpg}}
+	{GUI for working with the pipeline to compare two groups of subjects with structural using a weighted undirected analysis}
+	{
+	Full graphical user interface to perform group comparisons with structural data in BRAPH~2.0. 
+	}
+
+\clearpage
+\section{Open the GUI}
+
+The pipeline GUI can be opened by typing \code{braph2} in the MatLab's terminal, which allows you to select a pipeline (containing the steps required to perform your analysis), as shown in \Figref{fig:02}.
+
+\fig{figure}
+	{fig:02}
+	{
+	\includegraphics{fig02.jpg}
+	}
+	{Uploading the Weighted Structural Comparison Pipeline}
+	{
+	Steps to upload the pipeline to be able to compare two groups of subjects with structural data using a weighted analyses with the GUI: 
+	{\bf a} Open the pipeline GUI.
+	{\bf b} Import the file with the Weighted Undirected (WU) Structural Pipeline in JSON or BRAPH2 format.
+	{\bf c}-{\bf e} Navigate to the BRAPH~2.0 folder \fn{pipelines}, {\bf d} \fn{structural}, and {\bf e} select the file  \fn{pipeline_structural_comparison_wu.braph2.
+	}
+
+To open the GUI and upload the structural comparison pipeline, you can also do it from the command line by typing the commands in \Coderef{cd:launch}.
+%
+\begin{lstlisting}[
+	label=cd:launch,
+	caption={
+		{\bf Code to launch the GUI to upload a pipeline file to compare two groups of subjects.}
+		This code can be used in the MatLab command line to launch the GUI to upload a pipeline file.
+	}
+]
+pip = Pipeline(); ¥\circled{1}\circlednote{1}{creates a new object \code{Pipeline} to upload the steps to perform an analysis or comparison.}¥
+
+gui = GUIElement('PE', pip); ¥\circled{2}\circlednote{2}{creates a GUI to upload the files into the pipeline.}¥
+gui.get('DRAW')¥\circled{3}\circlednote{3}{draws the GUI.}¥
+gui.get('SHOW') ¥\circled{4}\circlednote{4}{shows the GUI.}¥
+\end{lstlisting}
+
+
+Once the pipeline is uploaded, the GUI shown in (\Figref{fig:02}a) will contain different options to upload a brain atlas, upload the structural data of two groups, analyse them, and finally compare the groups (\Figref{fig:03}a). 
+
+\section{Step 1: Load the Brain Atlas}
+
+\Figref{fig:03} shows how to upload the brain atlas that you used to extract the structural data for your analysis.
+
+\fig{figure}
+	{fig:03}
+	{
+	\includegraphics{fig03.jpg}
+	}
+	{Uploading the Brain Atlas}
+	{
+	Steps to upload the brain atlas:
+	{\bf a} Click on \fn{Load Atlas} from the pipeline GUI.
+	{\bf b} Navigate to the BRAPH~2.0 folder \fn{atlases} and {\bf c} select one of the atlas files, in this example the \fn{destrieux_atlas.xlsx}. Similarly to the other tutorials, you can edit the information of this atlas as desired, including the Brain Atlas ID, NAME, NOTES or Brain Regions. You can also plot the brain atlas and visualize it using different options.
+
+\section{Step 2: Load the Structural Group Data}
+
+After you loaded the brain atlas, you can upload the structural files for each group of subjects separately as shown in \Figref{fig:04}. A new window will be shown containing the data for the group you just selected. You can open each subject’s structural values by selecting
+the subject, right click, and select “Open selection” (\Figref{fig:04}f), which shows these values (\Figref{fig:04}g). 
+	
+	\fig{figure}
+	{fig:04}
+	{
+	\includegraphics{fig04.jpg}
+	}
+	{Loading the Group Data}
+	{
+	Steps to upload the data from each group:
+	{\bf a} Click on \fn{Load Group ST XLS from the pipeline GUI}.
+	{\bf b} Navigate to the BRAPH~2.0 folder \fn{pipelines}, {\bf c} \fn{structural}, {\bf d} \fn{Example data ST XLS}, and select the file {\bf e} \fn{ST\_Group\_1\_.xlsx}.
+
+If you don't have the \fn{Example data CON XLS} folder inside \fn{structural}, then you can generate it by running the commands in the Matlab command window:
+test_ImporterGroupSubjectCON_XLS  % generates the example connectivity XLS data folder.
+test_ImporterGroupSubjectCON_TXT  % generates the example connectivity TXT data folder.
+
+You should repeat the same procedure for group 2.
+
+\section{Step 3: Analysing the Data of Group 1}
+
+After you have loaded the data, you can analyse the data of your first group by clicking on \fn{Analyze Group 1} (\Figref{fig:05}a). A new window will be shown that allows you to pre-calculate network measures for each group and explore them (\Figref{fig:05}b). For example, you can select the statistical test to calculate correlations in structural values between pairs of brain regions (\Figref{fig:05}c), you can decide how you want to analyze the negative weights (\Figref{fig:05}d) or you can calculate some graph measures (\Figref{fig:05}e), which might be useful to get an insight on what these measures look like for the group. Once calculated, a C will appear next to the measures and you can visualize the results by selecting them, right click and plot the selected measures. In settings you can change the visualization of the plots and save them. When you do right click there are other options you can explore such as Plot Graph Plot (connectivity matrix) as well as Data Graph (labels of brain regions, values of the connectivity matrix, options to plot matrix and histogram), all of which can also be saved.
+
+Importantly, the parameters you select for this analysis, graph and measures will be fixed for the analysis of the second group and for the group comparisons.
+
+	\fig{figure}
+	{fig:05}
+	{
+	\includegraphics{fig05.jpg}
+	}
+	{Analyze the Group Data}
+	{
+	{\bf a} Click on \fn{Analyze Group 1} in the pipeline's GUI.
+	{\bf b} In this new window, you can select the statistical test fo the correlations {\bf c}, what you want to do with the negative correlation weights {\bf d} and calculate some graph measures {\bf e}.
+
+\section{Step 4: Analysing the Data of Group 2}
+
+After the analysis of group 1 you can proceed with the analysis of the second group by clicking on \fn{Analyze Group 2}. You will notice that, in the new window that is shown, the parameters you selected for group 1 are already selected and fixed for this analysis. If you realize that some of the options you previously selected are not the ones you would like, you can reset the analysis parameters of group 1 by clicking on the C checkbox next to it.
+
+\section{Step 5: Comparing Groups}
+
+Once you have explored the network measures for each group, you can proceed with their statistical comparison. To do this, you should click on \fn{Compare Groups} (\Figref{fig:06}a) and in the new window select if want a wait bar and verbose functions ON while you wait for the analysis to finish {\Figref{fig:06}b}. You can also decide how many permutations you want to use to assess differences between groups {\Figref{fig:06}c} and, if the groups are not independent but represent the same subjects in two different points in time, you can select the longitudinal comparison option, which will permute the values within each subject {\Figref{fig:06}d}. Finally, you can select the graph measures you want to compare between groups {\Figref{fig:06}e} and once you have selected all the measures you are interested in, you should right click and select \fn{Calculate all selected comparisons} {\Figref{fig:06}f}. If you turned ON the wait bar and verbose functions, two window bars will open that show you at which point in time the analysis is at. There is one last option on this GUI that you can select to save intermediate results during the permutations.
+
+	\fig{figure}
+	{fig:06}
+	{
+	\includegraphics{fig06.jpg}
+	}
+	{Compare the Group Data}
+	{
+	{\bf a} Click on \fn{Compare Groups} in the pipeline's GUI.
+	{\bf b} In this new window, you can select what to turn ON/OFF the wait bar and verbose functions {\bf c}, you can change the number of permutations {\bf d}, whether to perform a longitudinal group comparison {\bf f}, compare some graph measures between groups {\bf e}, or memorize intermediate steps {\bf f}.
+
+\end{itemize}	
+
+\end{document}
+
+\Coderef{cd:exampledata}.
