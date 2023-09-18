@@ -92,12 +92,6 @@ GraphBU.NOTES
 %%%% ¡title!
 Graph NOTES
 
-%%% ¡prop!
-%%%% ¡id!
-GraphBU.SUBGRAPH
-%%%% ¡title!
-SUBGRAPH
-
 %% ¡props_update!
 
 %%% ¡prop!
@@ -184,27 +178,6 @@ pr = PanelPropCell('EL', g, 'PROP', GraphBU.A, ...
 COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('GraphBU')
-
-%%% ¡prop!
-SUBGRAPH (query, item) is the subgraph
-%%%% ¡calculate!
-A = g.get('A');
-if isempty(varargin)
-    value = g;
-    return
-end
-nodes = varargin{1};
-L = g.get('LAYERNUMBER');
-
-if ~iscell(nodes)
-    nodes = repmat({nodes}, 1, L);
-end
-B = A{1};
-B = B(nodes{1}, nodes{1});
-value = GraphBU('B', B, 'TEMPLATE', g, ...
-    'ID', ['Subgraph of ' g.get('ID')], ...
-    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
-    'NOTES', ['Subgraph - ' g.get('NOTES')]);
 
 %% ¡props!
 
@@ -331,7 +304,6 @@ for attempt = 1:1:attempts_per_edge * E
     end
 end
 value = random_A;
-
 
 %% ¡tests!
 
@@ -501,7 +473,9 @@ elseif isequal((length(A2{1}).^2)- length(A2{1}), sum(A2{1}==1, "all")) %if all 
         [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
         'GraphBU Randomize is not functioning well.')
 else
-    % sometimes swaps dont occur
+%     assert(~isequal(A2{1}, random_A), ...
+%         [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
+%         'GraphBU Randomize is not functioning well.')
 end
 
 d1 = g.get('MEASURE', 'Degree');
@@ -526,29 +500,3 @@ deg_B = sum(random_A);
 assert(isequal(0, h), ... % check same degree distribution
     [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
     'GraphBU Randomize is not functioning well.')
-
-%%% ¡test!
-%%%% ¡name!
-SUBGRAPH
-%%%% ¡probability!
-.01
-%%%% ¡code!
-B = randn(10);
-g = GraphBU('B', B);
-nodes = [1 3 4 7];
-sub_g = g.get('SUBGRAPH', nodes);
-
-assert(isequal(g.getClass(), sub_g.getClass()), ... 
-    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
-    'GraphBU SUBGRAPH is not functioning well.')
-
-tmp_sub_A = sub_g.get('A');
-
-assert(isequal(size(tmp_sub_A{1}), [length(nodes) length(nodes)]), ... 
-    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
-    'GraphBU SUBGRAPH is not functioning well.')
-
-tmp_A = g.get('A');
-assert(isequal(tmp_A{1}(nodes, nodes), tmp_sub_A{1}), ... 
-    [BRAPH2.STR ':GraphBU:' BRAPH2.FAIL_TEST], ...
-    'GraphBU SUBGRAPH is not functioning well.')

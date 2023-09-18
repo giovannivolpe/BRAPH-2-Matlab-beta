@@ -97,12 +97,6 @@ GraphWD.NOTES
 %%%% ¡title!
 Graph NOTES
 
-%%% ¡prop!
-%%%% ¡id!
-GraphWD.SUBGRAPH
-%%%% ¡title!
-SUBGRAPH
-
 %% ¡props_update!
 
 %%% ¡prop!
@@ -188,27 +182,6 @@ pr = PanelPropCell('EL', g, 'PROP', GraphWD.A, ...
 COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('GraphWD')
-
-%%% ¡prop!
-SUBGRAPH (query, item) is the subgraph
-%%%% ¡calculate!
-A = g.get('A');
-if isempty(varargin)
-    value = g;
-    return
-end
-nodes = varargin{1};
-L = g.get('LAYERNUMBER');
-
-if ~iscell(nodes)
-    nodes = repmat({nodes}, 1, L);
-end
-B = A{1};
-B = B(nodes{1}, nodes{1});
-value = GraphWD('B', B, 'TEMPLATE', g, ...
-    'ID', ['Subgraph of ' g.get('ID')], ...
-    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
-    'NOTES', ['Subgraph - ' g.get('NOTES')]);
 
 %% ¡props!
 
@@ -478,35 +451,11 @@ elseif isequal((length(A2{1}).^2)- length(A2{1}), sum(A2{1}==1, "all")) %if all 
         [BRAPH2.STR ':GraphWD:' BRAPH2.FAIL_TEST], ...
         'GraphWD Randomize is not functioning well.')
 else
-    % sometimes swaps dont occur
+%     assert(~isequal(A2{1}, random_A), ...
+%         [BRAPH2.STR ':GraphWD:' BRAPH2.FAIL_TEST], ...
+%         'GraphWD Randomize is not functioning well.')
 end
 
 assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... % check same number of nodes
     [BRAPH2.STR ':GraphWD:' BRAPH2.FAIL_TEST], ...
     'GraphWD Randomize is not functioning well.')
-
-%%% ¡test!
-%%%% ¡name!
-SUBGRAPH
-%%%% ¡probability!
-.01
-%%%% ¡code!
-B = randn(10);
-g = GraphWD('B', B);
-nodes = [1 3 4 7];
-sub_g = g.get('SUBGRAPH', nodes);
-
-assert(isequal(g.getClass(), sub_g.getClass()), ... 
-    [BRAPH2.STR ':GraphWD:' BRAPH2.FAIL_TEST], ...
-    'GraphWD SUBGRAPH is not functioning well.')
-
-tmp_sub_A = sub_g.get('A');
-
-assert(isequal(size(tmp_sub_A{1}), [length(nodes) length(nodes)]), ... 
-    [BRAPH2.STR ':GraphWD:' BRAPH2.FAIL_TEST], ...
-    'GraphWD SUBGRAPH is not functioning well.')
-
-tmp_A = g.get('A');
-assert(isequal(tmp_A{1}(nodes, nodes), tmp_sub_A{1}), ... 
-    [BRAPH2.STR ':GraphWD:' BRAPH2.FAIL_TEST], ...
-    'GraphWD SUBGRAPH is not functioning well.')
