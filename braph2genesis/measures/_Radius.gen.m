@@ -272,7 +272,48 @@ known_radius_subgraphs = {
                          0
                          };
 
-g = MultiplexWU('B', B);
+g = MultiplexBU('B', B);
+
+m_outside_g = Radius('G', g);
+m_outside_g.set('RULE', 'subgraphs');
+assert(isequal(m_outside_g.get('M'), known_radius_subgraphs), ...
+    [BRAPH2.STR ':Radius:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Radius');
+m_inside_g.set('RULE', 'subgraphs');
+assert(isequal(m_inside_g.get('M'), known_radius_subgraphs), ...
+    [BRAPH2.STR ':Radius:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+OrdMxWU
+%%%% ¡code!
+B11 = [
+      0     .1  .2  .25  0;
+      .125  0   0   0    0;
+      .2    .5  0   .25  0;
+      .125  10  0   0    0;
+      0     0   0   0    0
+      ];
+B22 = [
+      0     .1  .2  .25  0;
+      .125  0   0   0    0;
+      .2    .5  0   .25  0;
+      .125  10  0   0    0;
+      0     0   0   0    0
+      ];
+B = {
+    B11 B22
+    };
+
+known_radius_subgraphs = {
+                         0
+                         0
+                         };
+
+g = OrdMxWU('B', B);
 
 m_outside_g = Radius('G', g);
 m_outside_g.set('RULE', 'subgraphs');

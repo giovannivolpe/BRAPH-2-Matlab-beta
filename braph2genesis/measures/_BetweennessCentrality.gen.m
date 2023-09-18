@@ -54,7 +54,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphBD' 'GraphBU' 'GraphWD' 'GraphWU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexBD' 'MultiplexBU' 'MultiplexWD' 'MultiplexWU' 'MultiplexBUD' 'MultiplexBUT'}
+{'GraphBD' 'GraphBU' 'GraphWD' 'GraphWU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexBD' 'MultiplexBU' 'MultiplexWD' 'MultiplexWU' 'MultiplexBUD' 'MultiplexBUT' 'MultilayerWU' 'OrdMlWU'}
 
 %%% ¡prop!
 M (result, cell) is the cell containing betweenness centrality.
@@ -509,7 +509,7 @@ B_WU2 = [
     1 0 0; 
     4 0 0 
     ];
-B = {B_WU1 B_WU2}
+B = {B_WU1 B_WU2};
  
 densities = [0 50 90];
 g = MultiplexBUD('B', B, 'DENSITIES', densities);
@@ -543,7 +543,7 @@ B_WU2 = [
     1 0 0; 
     4 0 0 
     ];
-B = {B_WU1 B_WU2}
+B = {B_WU1 B_WU2};
  
 thresholds = [0 1];
 g = MultiplexBUT('B', B, 'THRESHOLDS', thresholds);

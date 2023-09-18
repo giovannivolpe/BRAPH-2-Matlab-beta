@@ -117,6 +117,12 @@ MultiplexBUD.NOTES
 %%%% ¡title!
 Graph NOTES
 
+%%% ¡prop!
+%%%% ¡id!
+MultiplexBUD.SUBGRAPH
+%%%% ¡title!
+SUBGRAPH
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -294,6 +300,33 @@ for i = 1:length(A)
 end
 value = A;
 
+%%% ¡prop!
+SUBGRAPH (query, item) returns a subgraph of original graph
+%%%% ¡calculate!
+
+A = g.get('B');
+L = length(A);
+
+if isempty(varargin)
+    value = g;
+    return
+end
+nodes = varargin{1};
+if ~iscell(nodes)
+    nodes = repmat({nodes}, 1, L);
+end
+for li = 1:1:L
+    Aii = A{li};
+
+    if ~isempty(Aii)
+        B(li) = {Aii(nodes{li}, nodes{li})};
+    end
+end
+value = MultiplexBUD('B', B, 'TEMPLATE', g, ...
+    'ID', ['Subgraph of ' g.get('ID')], ...
+    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
+    'NOTES', ['Subgraph - ' g.get('NOTES')]);
+
 %% ¡props!
 
 %%% ¡prop!
@@ -378,9 +411,7 @@ for i = 1:length(A2)
             [BRAPH2.STR ':MultiplexBUD:' BRAPH2.FAIL_TEST], ...
             'MultiplexBUD Randomize is not functioning well.')
     else
-%         assert(~isequal(A2{i, i}, random_A{i, i}), ...
-%             [BRAPH2.STR ':MultiplexBUD:' BRAPH2.FAIL_TEST], ...
-%             'MultiplexBUD Randomize is not functioning well.')
+        % sometimes swaps dont occur
     end
 
     assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
@@ -390,4 +421,32 @@ for i = 1:length(A2)
     assert(issymmetric(random_A{i, i}), ... % check symmetry 
     [BRAPH2.STR ':MultiplexBUD:' BRAPH2.FAIL_TEST], ...
     'MultiplexBUD Randomize is not functioning well.')
+end
+
+%%% ¡test!
+%%%% ¡name!
+SUBGRAPH
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B = randn(10);
+
+g = MultiplexBUD('B', {B B B}, 'DENSITIES', [0 50]);
+nodes = [1 3 4 7];
+sub_g = g.get('SUBGRAPH', nodes);
+
+assert(isequal(g.getClass(), sub_g.getClass()), ... 
+    [BRAPH2.STR ':MultiplexBUD:' BRAPH2.FAIL_TEST], ...
+    'MultiplexBUD SUBGRAPH is not functioning well.')
+
+tmp_A = g.get('A');
+sub_tmp_A = sub_g.get('A');
+
+for i = 1:length(tmp_A)
+    tmp_ai = tmp_A{i, i};
+    sub_tmp_ai = sub_tmp_A{i, i};
+
+    assert(isequal(size(sub_tmp_ai), [length(nodes) length(nodes)]), ...
+        [BRAPH2.STR ':MultiplexBUD:' BRAPH2.FAIL_TEST], ...
+        'MultiplexBUD SUBGRAPH is not functioning well.')
 end
