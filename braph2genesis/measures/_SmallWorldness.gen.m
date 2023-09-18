@@ -75,7 +75,9 @@ M = 100;  % number of random graphs
 clustering_av_random = cell(1, M);
 path_length_av_random = cell(1, M);
 for r = 1:1:M
-    g_random = g.randomize();
+    tmp_b = g.get('B'); %#ok<NASGU>
+    g_random = eval([g.getClass() '(''B'', tmp_b, ''TEMPLATE'', g)']);
+    g_random.set('RANDOMIZE', true);
 
     clustering_av_random(r) = {ClusteringAv('G', g_random).get('M')};
     path_length_av_random(r) = {PathLengthAv('G', g_random, 'RULE', path_length_rule).get('M')}; 
