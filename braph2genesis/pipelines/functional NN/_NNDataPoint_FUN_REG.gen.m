@@ -96,7 +96,7 @@ if ~isdir(data_dir)
     N_tslength = 200;
     
     %% Specify number of subjects
-    N_groups = 100;
+    N_groups = 30;
     
     % Group 
     K = 2; % degree (mean node degree is 2K)
