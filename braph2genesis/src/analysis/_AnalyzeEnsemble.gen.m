@@ -64,6 +64,10 @@ pr = PanelPropItem('EL', a, 'PROP', AnalyzeEnsemble.GR, ...
 GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
 %%%% ¡settings!
 'Graph'
+%%%% ¡gui!
+pr = PanelPropItem('EL', a, 'PROP', AnalyzeEnsemble.TEMPLATE, ...
+    'BUTTON_TEXT', ['GRAPH TEMPLATE (' a.get('GRAPH_TEMPLATE').getClass() ')'], ...
+    varargin{:});
 
 %%% ¡prop!
 G_DICT (result, idict) is the graph ensemble obtained from this analysis.
@@ -71,6 +75,10 @@ G_DICT (result, idict) is the graph ensemble obtained from this analysis.
 'Graph'
 %%%% ¡calculate!
 value = IndexedDictionary('IT_CLASS', 'Graph');
+%%%% ¡_gui!
+% % % pr = AnalyzeEnsemblePP_GDict('EL', a, 'PROP', AnalyzeEnsemble.G_DICT, ...
+% % %     'WAITBAR', a.getCallback('WAITBAR'), ...
+% % %     varargin{:});
 
 %%% ¡prop!
 ME_DICT (result, idict) contains the calculated measures of the graph ensemble.
@@ -78,10 +86,10 @@ ME_DICT (result, idict) contains the calculated measures of the graph ensemble.
 'MeasureEnsemble'
 %%%% ¡calculate!
 value = IndexedDictionary('IT_CLASS', 'MeasureEnsemble', 'IT_KEY', MeasureEnsemble.MEASURE);
-%%%% ¡gui!
-pr = AnalyzeEnsemblePP_MeDict('EL', a, 'PROP', AnalyzeEnsemble.ME_DICT, ...
-    'WAITBAR', a.getCallback('WAITBAR'), ...
-    varargin{:});
+%%%% ¡_gui!
+% % % pr = AnalyzeEnsemblePP_MeDict('EL', a, 'PROP', AnalyzeEnsemble.ME_DICT, ...
+% % %     'WAITBAR', a.getCallback('WAITBAR'), ...
+% % %     varargin{:});
 
 %%% ¡prop!
 MEASUREENSEMBLE (query, item) returns an ensemble-based measure.
