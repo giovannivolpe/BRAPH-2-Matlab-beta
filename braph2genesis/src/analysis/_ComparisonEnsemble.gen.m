@@ -44,7 +44,7 @@ NOTES (metadata, string) are some specific notes about the results of an ensembl
 %% ¡props!
 
 %%% ¡prop!
-MEASURE (parameter, class) is the measure class.
+MEASURE (data, class) is the measure class.
 %%%% ¡settings!
 'Measure'
 
