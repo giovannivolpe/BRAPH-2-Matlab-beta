@@ -86,37 +86,66 @@ if ~isdir(data_dir)
 
     % saves RNG
     rng_settings_ = rng(); rng('default')
-
     sex_options = {'Female' 'Male'};
 
     % Group 
-    K = 2; % degree (mean node degree is 2K)
-    beta = 0.3; % Rewiring probability
-    gr_name = 'ST_Group_XLS';
-    gr_dir = [data_dir filesep() gr_name];
-    mkdir(gr_dir);
-    vois = [
+    N_subjects = 50;
+    K1 = 4; % degree (mean node degree is 2K) - group 1
+    beta1 = 0.08; % Rewiring probability - group 1
+
+    h1 = WattsStrogatz(N, K1, beta1); % create graph
+    % figure(1)
+    % plot(h1, 'NodeColor',[1 0 0], 'EdgeColor',[0 0 0], 'EdgeAlpha',0.1, 'Layout','circle');
+    % title(['Group 1: Graph with $N = $ ' num2str(N) ...
+    %     ' nodes, $K = $ ' num2str(K1) ', and $\beta = $ ' num2str(beta1)], ...
+    %     'Interpreter','latex')
+    % axis equal
+
+    A1 = full(adjacency(h1)); A1(1:length(A1)+1:numel(A1)) = 1; % Extract the adjacency matrix
+    A1 = A1*transpose(A1); % this is needed to make the matrices positive definite
+    % imshow(A1)
+
+    % These matrices will be covariance matrices for the two groups
+    mu_gr1 = ones(1, length(A1)); % Specify the mean
+    R1 = mvnrnd(mu_gr1, A1, N_subjects); % Create time series for the two groups
+    mean_R1 = mean(R1); std_R1 = std(R1); R1 = (R1 - mean(R1)) ./ std(R1); % Normalize the time series
+    R1 = R1 + abs(min(min(R1))); % We need only positive values
+
+    % row
+    sub_Tags1 = strings(size(R1, 1), 1);
+    for i_sub = 1:1:length(sub_Tags1)
+        sub_Tags1(i_sub) = string(['sub_' num2str(i_sub)]);
+    end
+    label_Tags1 = strings(size(R1, 1), 1);
+    for i_sub = 1:1:length(label_Tags1)
+        label_Tags1(i_sub) = string(['Label ' num2str(i_sub)]);
+    end
+    note_Tags1 = strings(size(R1, 1), 1);
+    for i_sub = 1:1:length(note_Tags1)
+        note_Tags1(i_sub) = string(['Note ' num2str(i_sub)]);
+    end
+
+    % column
+    reg_Tags = strings(1, size(R1,2) + 3);
+    reg_Tags(1, 1) = 'ID';
+    reg_Tags(1, 2) = 'Label';
+    reg_Tags(1, 3) = 'Notes';
+    for i_reg = 4:1:length(reg_Tags)
+        reg_Tags(1, i_reg) = string(['Region_' num2str(i_reg - 3)]);
+    end
+
+    % create the table
+    writetable(array2table([cellstr(sub_Tags1) cellstr(label_Tags1) cellstr(note_Tags1) num2cell(R1)], 'VariableNames', reg_Tags), [data_dir filesep() 'ST_Group_1.xlsx'], 'WriteRowNames', true)
+
+    % variables of interest
+    vois1 = [
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} cell2str(sex_options)}
         ];
-    for i = 1:1:100 % subject number
-        sub_id = ['SubjectST_' num2str(i)];
-        mean_all(i) = 30 + (10 - 1)*rand(1);
-        %R(i, :) = deviation.*randn(N_nodes, 1) + mean_all(i);
-        R_ind = randn(N_nodes, 1) + mean_all(i);
-        R_ind(R_ind < 0) = 0;
-        mean_all(i) = mean(R_ind, 'all');
-        A(i, :) = R_ind;
-        writetable(array2table(A), [gr_dir filesep() sub_id '.xlsx'], 'WriteVariableNames', false)
-
-        % variables of interest
-        age_upperBound = 80;
-        age_lowerBound = 50;
-        age = age_lowerBound + beta(i)*(age_upperBound - age_lowerBound);
-        vois = [vois; {sub_id, age, sex_options(randi(2))}];
+    for i = 1:1:N_subjects
+        vois1 = [vois1; {sub_Tags1{i}, randi(90), sex_options(randi(2))}];
     end
-    writetable(table(vois), [data_dir filesep() gr_name '.vois.xlsx'], 'WriteVariableNames', false)
-
+    writetable(table(vois1), [data_dir filesep() 'ST_Group_1.vois.xlsx'], 'WriteVariableNames', false)
     % reset RNG
     rng(rng_settings_)
 end
@@ -163,7 +192,7 @@ ba = im_ba.get('BA');
 
 % Load Group of SubjectST
 im_gr = ImporterGroupSubjectST_XLS( ...
-    'DIRECTORY', [fileparts(which('NNDataPoint_ST_REG')) filesep 'Example data NN REG ST XLS' filesep 'ST_Group_XLS'], ...
+    'FILE', [fileparts(which('NNDataPoint_ST_REG')) filesep 'Example data NN REG ST XLS' filesep 'ST_Group_1.xlsx'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );

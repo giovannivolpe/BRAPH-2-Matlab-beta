@@ -125,12 +125,12 @@ D (data, item) is the dataset to train the neural network model, and its data po
 %%%% ¡settings!
 'NNDataset'
 %%%% ¡default!
-NNDataset('DP_CLASS', 'NNDataPoint_CON_REG')
+NNDataset('DP_CLASS', 'NNDataPoint_CON_REG' 'NNDataPoint_ST_REG')
 
 %%% ¡prop!
 DP_CLASSES (parameter, classlist) is the list of compatible data points.
 %%%% ¡default!
-{'NNDataPoint_CON_REG' 'NNDataPoint_Graph_REG' 'NNDataPoint_Measure_REG'}
+{'NNDataPoint_CON_REG' 'NNDataPoint_Graph_REG' 'NNDataPoint_Measure_REG' 'NNDataPoint_ST_REG'}
 
 %%% ¡prop!
 INPUTS (query, cell) constructs the data in the CB (channel-batch) format.
