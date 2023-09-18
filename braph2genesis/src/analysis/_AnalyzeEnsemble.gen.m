@@ -55,6 +55,10 @@ true
 GR (data, item) is the subject group, which also defines the subject class.
 %%%% ¡settings!
 'Group'
+%%%% ¡gui!
+pr = PanelPropItem('EL', a, 'PROP', AnalyzeEnsemble.GR, ...
+    'BUTTON_TEXT', a.get('GR').get('ID'), ...
+    varargin{:});
 
 %%% ¡prop!
 GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
@@ -74,8 +78,10 @@ ME_DICT (result, idict) contains the calculated measures of the graph ensemble.
 'MeasureEnsemble'
 %%%% ¡calculate!
 value = IndexedDictionary('IT_CLASS', 'MeasureEnsemble', 'IT_KEY', MeasureEnsemble.MEASURE);
-%%%% ¡_gui!
-% % % pr = PPAnalyzeEnsemble_MeDict('EL', a, 'PROP', AnalyzeEnsemble.ME_DICT, 'WAITBAR', Callback('EL', a, 'TAG', 'WAITBAR'), varargin{:});
+%%%% ¡gui!
+pr = AnalyzeEnsemblePP_MeDict('EL', a, 'PROP', AnalyzeEnsemble.ME_DICT, ...
+    'WAITBAR', a.getCallback('WAITBAR'), ...
+    varargin{:});
 
 %%% ¡prop!
 MEASUREENSEMBLE (query, item) returns an ensemble-based measure.
@@ -130,33 +136,6 @@ else
 end
 
 value = me;
-
-%%% ¡_prop! % % %TBE???
-% % % PFGD (gui, item) contains the panel figure of the graph dictionary.
-%%%% ¡_settings!
-% % % 'PFAnalysisEnsemble'
-%%%% ¡_postprocessing!
-% % % if ~braph2_testing % to avoid problems with isqual when the element is recursive
-% % %     if isa(a.getr('PFGD'), 'NoValue')
-% % %         tmp_g = a.get('graph_template');
-% % %         
-% % %         if ~isempty(tmp_g) && Graph.is_graph(tmp_g) && ~Graph.is_multigraph(tmp_g)
-% % %             a.set('PFGD', PFAnalysisEnsemble('A', a))
-% % %         elseif ~isempty(tmp_g) && Graph.is_multigraph(tmp_g)
-% % %             a.set('PFGD', PFMultiAnalysisEnsemble('A', a))
-% % %         elseif ~isempty(tmp_g) && (Graph.is_multiplex(tmp_g) || Graph.is_ordered_multiplex(tmp_g)) && Graph.is_weighted(tmp_g)
-% % %             a.set('PFGD', PFMultiplexAnalysisEnsemble('A', a))
-% % %         elseif ~isempty(tmp_g) && (Graph.is_multiplex(tmp_g) || Graph.is_ordered_multiplex(tmp_g)) && Graph.is_binary(tmp_g)
-% % %             a.set('PFGD', PFMultiplexBinaryAnalysisEnsemble('A', a))
-% % %         else
-% % %             a.memorize('PFGD').set('A', a)
-% % %         end        
-% % %     end
-% % % end
-%%%% ¡_gui!
-% % % pr = PanelPropItem('EL', a, 'PROP', AnalyzeEnsemble.PFGD, ...
-% % %     'GUICLASS', 'GUIFig', ...
-% % %     varargin{:});
 
 %% ¡tests!
 
