@@ -61,10 +61,10 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 M (result, cell) is theaverage local efficiency.
 %%%% ¡calculate!
 local_efficiency = calculateValue@LocalEfficiency(m, prop);
-
 g = m.get('G');  % graph from measure class
 
-local_efficiency_av = cell(g.get('LAYERNUMBER'), 1);ls = g.get('PARTITIONS');
+local_efficiency_av = cell(g.get('LAYERNUMBER'), 1);
+ls = g.get('PARTITIONS');
 L = g.get('LAYERNUMBER');
 
 if L == 0
@@ -72,7 +72,7 @@ if L == 0
     return;
 end
 
-parfor li = 1:g.get('LAYERNUMBER')
+parfor li = 1:L
     local_efficiency_av(li) ={mean(local_efficiency{li})};
 end
 
@@ -96,18 +96,20 @@ B = [
     .1  0   .3  0
     ];
 
-known_local_efficiency = {mean([1/4 1/5 .1222 1/5]')};
+known_local_efficiency = {mean(round([1/4 1/5 .1222 1/5]', 3))};
 
 g = GraphWU('B', B);
 
-m_outside_g = LocalEfficiency('G', g);
-assert(isequal(m_outside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+m_outside_g = LocalEfficiencyAv('G', g);
+tmp_val = m_outside_g.get('M');
+assert(isequal(round(tmp_val{1}, 3), known_local_efficiency{1}), ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'LocalEfficiency');
-assert(isequal(m_inside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+m_inside_g = g.get('MEASURE', 'LocalEfficiencyAv');
+tmp_val = m_inside_g.get('M');
+assert(isequal(round(tmp_val{1}, 3), known_local_efficiency{1}), ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -127,14 +129,14 @@ known_local_efficiency = {mean([5/6 1 5/6 1]')};
 
 g = GraphBU('B', B);
 
-m_outside_g = LocalEfficiency('G', g);
+m_outside_g = LocalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'LocalEfficiency');
+m_inside_g = g.get('MEASURE', 'LocalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -158,14 +160,14 @@ known_local_efficiency = {...
 densities = [10 90];
 g = MultigraphBUD('B', B, 'DENSITIES', densities);
 
-m_outside_g = LocalEfficiency('G', g);
+m_outside_g = LocalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'LocalEfficiency');
+m_inside_g = g.get('MEASURE', 'LocalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -189,14 +191,14 @@ known_local_efficiency = {...
 thresholds = [0 1];
 g = MultigraphBUT('B', B, 'THRESHOLDS', thresholds);
 
-m_outside_g = LocalEfficiency('G', g);
+m_outside_g = LocalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'LocalEfficiency');
+m_inside_g = g.get('MEASURE', 'LocalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -226,14 +228,14 @@ known_local_efficiency = {
 
 g = MultiplexWU('B', B);
 
-m_outside_g = LocalEfficiency('G', g);
+m_outside_g = LocalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'LocalEfficiency');
+m_inside_g = g.get('MEASURE', 'LocalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -264,14 +266,14 @@ known_local_efficiency = {
 
 g = MultiplexBU('B', B);
 
-m_outside_g = LocalEfficiency('G', g);
+m_outside_g = LocalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'LocalEfficiency');
+m_inside_g = g.get('MEASURE', 'LocalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -304,14 +306,14 @@ known_local_efficiency = {
 
 g = MultiplexBUD('B', B, 'DENSITIES', [10 90]);
 
-m_outside_g = LocalEfficiency('G', g);
+m_outside_g = LocalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'LocalEfficiency');
+m_inside_g = g.get('MEASURE', 'LocalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
@@ -344,12 +346,12 @@ known_local_efficiency = {
 thresholds = [0 1];
 g = MultiplexBUT('B', B, 'THRESHOLDS', thresholds);
 
-m_outside_g = LocalEfficiency('G', g);
+m_outside_g = LocalEfficiencyAv('G', g);
 assert(isequal(m_outside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'LocalEfficiency');
+m_inside_g = g.get('MEASURE', 'LocalEfficiencyAv');
 assert(isequal(m_inside_g.get('M'), known_local_efficiency), ...
-    [BRAPH2.STR ':LocalEfficiency:' BRAPH2.FAIL_TEST], ...
+    [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
