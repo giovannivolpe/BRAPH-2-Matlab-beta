@@ -232,6 +232,8 @@ assert(isequal(m_inside_g.get('M'), known_multi_rich_club_degree), ...
 %%% ¡test!
 %%%% ¡name!
 MultiplexBUT
+%%%% ¡probability!
+.01
 %%%% ¡code!
 B11 = [
     0  1  1  0; 
@@ -266,6 +268,8 @@ assert(isequal(m_inside_g.get('M'), known_multi_rich_club_degree), ...
 %%% ¡test!
 %%%% ¡name!
 MultiplexBUD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 B11 = [
     0  1  1  0; 

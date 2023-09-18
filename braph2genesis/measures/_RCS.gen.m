@@ -172,11 +172,13 @@ known_rich_club_strength = {wrich};
 g = GraphWD('B', B);
 
 m_outside_g = RCS('G', g);
+m_outside_g.set('PARAMETRIC_VALUE', [1.5, 2]);
 assert(isequal(m_outside_g.get('M'), known_rich_club_strength), ...
     [BRAPH2.STR ':RCS:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'RCS');
+m_inside_g.set('PARAMETRIC_VALUE', [1.5, 2]);
 assert(isequal(m_inside_g.get('M'), known_rich_club_strength), ...
     [BRAPH2.STR ':RCS:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
