@@ -288,9 +288,9 @@ for m = numel(W_sorted):-number_of_weights:1
 end
 
 % calculate correlation of original vs reassinged in/out strength
-rpos_in = corrcoef(sum(W,1), sum(random_A,1));
-rpos_out = corrcoef(sum(W,2), sum(random_A,2));
-correlation_coefficients = [rpos_in(2) rpos_out(2)];
+% rpos_in = corrcoef(sum(W,1), sum(random_A,1));
+% rpos_out = corrcoef(sum(W,2), sum(random_A,2));
+% correlation_coefficients = [rpos_in(2) rpos_out(2)];
 value = random_A;
 
 %% ¡tests!

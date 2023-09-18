@@ -306,8 +306,8 @@ end
 random_A = (random_A + transpose(random_A))/2;
 
 % calculate correlation of original vs reassinged strength
-rpos = corrcoef(sum(W), sum(random_A));
-correlation_coefficients = rpos(2);
+% rpos = corrcoef(sum(W), sum(random_A));
+% correlation_coefficients = rpos(2);
 value = random_A;
 
 %% ¡tests!
