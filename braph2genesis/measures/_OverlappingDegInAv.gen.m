@@ -52,7 +52,7 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the overlapping in-degree.
+NAME (constant, string) is the name of the overlapping average in-degree.
 %%%% ¡default!
 'OverlappingDegInAv'
 
