@@ -85,7 +85,7 @@ NOTES (metadata, string) are some specific notes about a data point for regressi
 %%%% ¡default!
 'NNDataPoint_CON_REG notes'
 
-%%% ¡prop!  ¥\circled{1}\circlednote{1}{The property \code{INPUT} is the input value for this data point, which is obtained directly from the connectivity of \code{Subject\_CON} by the code under \code{¡calculate!}.}¥
+%%% ¡prop!  ¥\circled{1}\circlednote{1}{The property \code{INPUT} is the input value for this data point, which is obtained directly from the connectivity data of \code{Subject\_CON} by the code under \code{¡calculate!}.}¥
 INPUT (result, cell) is the input value for this data point.
 %%%% ¡calculate!
 value = {dp.get('SUB').get('CON')};
@@ -111,7 +111,7 @@ SUB (data, item) is a subject with connectivity data.
 %%%% ¡settings!
 'SubjectCON'
 
-%%% ¡prop! ¥\circled{2}\circlednote{2}{The property \code{TARGET\_IDS} defines the targets, where the targets should be from the subject's variable-of-interest IDs.}¥
+%%% ¡prop! ¥\circled{2}\circlednote{2}{The property \code{TARGET\_IDS} defines the IDs of target, where the target IDs should be from the subject's variable-of-interest IDs.}¥
 TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be used as regression targets.
 
 \end{lstlisting}
@@ -308,13 +308,13 @@ The parts of the code that are modified are highlighted.
 		}
 ]
 ¤%% ¡header!¤
-NNDataPoint_CON_CLA ¤< NNDataPoint¤ (dp, connectivity classification data point) is a data point for classification with connectivity data.
+NNDataPoint_CON_CLA ¤< NNDataPoint¤ (dp, connectivity classification data point) ¤is a data point for¤ classification ¤with connectivity data¤.
 
 ¤%%% ¡description!¤
-A data point for classification with connectivity data (NNDataPoint_CON_CLA) 
-contains the input and target for neural network analysis with a subject with connectivity data (SubjectCON).
+¤A data point for ¤classification¤ with connectivity data¤ (NNDataPoint_CON_CLA) 
+¤contains the input and target for neural network analysis with a subject with connectivity data (SubjectCON).
 The input is the connectivity data of the subject.
-The target is obtained from the variables of interest of the subject.
+The target is obtained from the variables of interest of the subject.¤
 \end{lstlisting}
 
 
@@ -362,7 +362,7 @@ INPUT (result, cell) is the input value for this data point.
 %%%% ¡calculate!
 value = {dp.get('SUB').get('CON')};¤
     
-¤%%% ¡prop!
+¤%%% ¡prop! ¥\circled{1}\circlednote{1}{defines the target value using the data point's label in the form of a string list, e.g., 'Group1'.}¥
 TARGET (result, stringlist) is the target values for this data point.
 %%%% ¡calculate!¤
 value = dp.get('TARGET_IDS'); 
@@ -383,7 +383,7 @@ SUB (data, item) is a subject with connectivity data.
 %%%% ¡settings!
 'SubjectCON'¤
 
-¤%%% ¡prop!¤ ¥\circled{1}\circlednote{1}{defines the target value using the data point's label in the form of a string list, e.g., 'Group1'.}¥
+¤%%% ¡prop!¤ 
 ¤TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be used as ¤the class targets.
 
 \end{lstlisting}
@@ -1058,7 +1058,7 @@ The modified parts of the code are highlighted.
 		}
 ]
 ¤%% ¡header!¤
-NNDataPoint_Graph_CLA < NNDataPoint (dp, graph classification data point) is a data point for classification with a graph.
+NNDataPoint_Graph_CLA ¤< NNDataPoint¤ (dp, graph classification data point) ¤is a data point for classification with ¤a graph.
 
 ¤%%% ¡description!¤
 A data point for classification with a graph (NNDataPoint_Graph_CLA) 
@@ -1557,7 +1557,7 @@ The modified parts of the code are highlighted.
 		}
 ]
 ¤%% ¡header!¤
-NNDataPoint_Measure_REG < NNDataPoint (dp, measure regression data point)  is a data point for regression with graph measures.
+NNDataPoint_Measure_REG ¤< NNDataPoint¤ (dp, measure regression data point) ¤is a data point for regression with¤ graph measures.
 
 ¤%%% ¡description!¤
 A data point for regression with graph measures (NNDataPoint_Measure_REG) 
@@ -1610,7 +1610,7 @@ NOTES (metadata, string) are some specific notes about a data point for regressi
 ¤%%% ¡prop!
 INPUT (result, cell) is the input value for this data point.
 %%%% ¡calculate!¤ 
-value = cellfun(@(m_class) dp.get('G').get('MEASURE', m_class).get('M'), dp.get('M_LIST'), 'UniformOutput', false);  ¥\circled{1}\circlednote{1}{calculates or extract the graph measures, which are specified with \code{M\_LIST} from a \code{Graph} element for this data point. Note that a \code{Graph} can be any kind of \code{Graph}, including \code{GraphWU}, \code{MultigraphBUD}, and \code{MultiplexBUT}, among others.}¥
+value = cellfun(@(m_class) dp.get('G').get('MEASURE', m_class).get('M'), dp.get('M_LIST'), 'UniformOutput', false);  ¥\circled{1}\circlednote{1}{calculates the graph measures, specified with \code{M\_LIST}, from a \code{Graph} element for this data point. Note that a \code{Graph} can be any kind of \code{Graph}, including \code{GraphWU}, \code{MultigraphBUD}, and \code{MultiplexBUT}, among others.}¥
     
 ¤%%% ¡prop!
 TARGET (result, cell) is the target value for this data point.
@@ -1662,7 +1662,7 @@ TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be u
 [NNDataPoint_Measure_REG.G NNDataPoint_Measure_REG.SUB]
 
 %%% ¡test!
-%%%% ¡name! ¥\circled{1}\fourcirclednotes{1}{2}{3}{4}{test adding various kinds of graph measure with the \code{GraphWU} element which contains weighted undirected adjacency matrix.}¥
+%%%% ¡name! ¥\circled{1}\fourcirclednotes{1}{2}{3}{4}{add various kinds of graph measure with the \code{GraphWU} element which contains weighted undirected adjacency matrix.}¥
 Construct the data point with the adjacency matrix derived from its weighted undirected graph (GraphWU) 
 %%%% ¡code!
 % ensure the example data is generated
@@ -1730,7 +1730,7 @@ for index = 1:1:gr.get('SUB_DICT').get('LENGTH')
 end
 
 %%% ¡test!
-%%%% ¡name! ¥\circled{5}\circlednote{5}{test adding various kinds of graph measure with the \code{MultigraphBUD}.}¥
+%%%% ¡name! ¥\circled{5}\circlednote{5}{tests various kinds of graph measure with the \code{MultigraphBUD}.}¥
 Construct the data point with the adjacency matrix derived from its binary undirected multigraph with fixed densities (MultigraphBUD)
 %%%% ¡code!
 % ensure the example data is generated
@@ -1801,7 +1801,7 @@ for index = 1:1:gr.get('SUB_DICT').get('LENGTH')
 end
 
 %%% ¡test!
-%%%% ¡name! ¥\circled{6}\circlednote{6}{test adding various kinds of graph measure with the \code{MultiplexWU}.}¥
+%%%% ¡name! ¥\circled{6}\circlednote{6}{tests various kinds of graph measure with the \code{MultiplexWU}.}¥
 Construct the data point with the adjacency matrix derived from its multiplex weighted undirected graph (MultiplexWU) 
 %%%% ¡code!
 % ensure the example data is generated
@@ -1888,7 +1888,7 @@ for index = 1:1:gr.get('SUB_DICT').get('LENGTH')
 end
 
 %%% ¡test!
-%%%% ¡name! ¥\circled{7}\circlednote{7}{test adding various kinds of graph measure with the \code{GraphWU} using example data.}¥
+%%%% ¡name! ¥\circled{7}\circlednote{7}{tests various kinds of graph measure with the \code{GraphWU} using example data.}¥
 Example script for weighted undirected graph (GraphWU) using connectivity data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
@@ -1897,7 +1897,7 @@ end
 example_NNCV_CON_WU_M_REG
 
 %%% ¡test!
-%%%% ¡name! ¥\circled{8}\circlednote{8}{test adding various kinds of graph measure with the \code{MultiplexWU} using example data.}¥
+%%%% ¡name! ¥\circled{8}\circlednote{8}{tests various kinds of graph measure with the \code{MultiplexWU} using example data.}¥
 Example script for weighted undirected multiplex (MultiplexWU) using connectivity data and functional data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_FUN_MP_REG')) filesep 'Example data NN REG CON_FUN_MP XLS' filesep 'atlas.xlsx'])
@@ -1923,7 +1923,7 @@ The modified parts of the code are highlighted.
 		}
 ]
 ¤%% ¡header!¤
-NNDataPoint_Measure_CLA < NNDataPoint (dp, measure classification data point) is a data point for classification with graph measures.
+NNDataPoint_Measure_CLA ¤< NNDataPoint¤ (dp, measure classification data point) ¤is a data point for classification with¤ graph measures.
 
 ¤%%% ¡description!¤
 A data point for classification with graph measures (NNDataPoint_Measure_CLA) 
@@ -2022,7 +2022,7 @@ TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be u
 [NNDataPoint_Measure_CLA.G]
 
 %%% ¡test!
-%%%% ¡name! ¥\circled{1}\fourcirclednotes{1}{2}{3}{4}{test adding various kinds of graph measure with the \code{GraphWU} element which contains weighted undirected adjacency matrix.}¥
+%%%% ¡name! ¥\circled{1}\fourcirclednotes{1}{2}{3}{4}{add various kinds of graph measure with the \code{GraphWU} element which contains weighted undirected adjacency matrix.}¥
 Construct the data point with the graph measures derived from its weighted undirected graph (GraphWU) 
 %%%% ¡code!
 % ensure the example data is generated
@@ -2136,7 +2136,7 @@ for index = 1:1:gr2.get('SUB_DICT').get('LENGTH')
 end
 
 %%% ¡test!
-%%%% ¡name! ¥\circled{5}\circlednote{5}{test adding various kinds of graph measure with the \code{MultigraphBUD}.}¥
+%%%% ¡name! ¥\circled{5}\circlednote{5}{tests various kinds of graph measure with the \code{MultigraphBUD}.}¥
 Construct the data point with the graph measures derived from its binary undirected multigraph with fixed densities (MultigraphBUD)
 %%%% ¡code!
 % ensure the example data is generated
@@ -2402,7 +2402,7 @@ for index = 1:1:gr2.get('SUB_DICT').get('LENGTH')
 end
 
 %%% ¡test!
-%%%% ¡name! ¥\circled{6}\circlednote{6}{test adding various kinds of graph measure with the \code{MultigraphBUD} using example connectivity data.}¥
+%%%% ¡name! ¥\circled{6}\circlednote{6}{tests various kinds of graph measure with the \code{MultigraphBUD} using example connectivity data.}¥
 Example script for binary undirected graph at fixed densities (GraphBUD) using connectivity data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
@@ -2411,7 +2411,7 @@ end
 example_NNCV_CON_BUD_M_CLA
 
 %%% ¡test!
-%%%% ¡name! ¥\circled{7}\circlednote{7}{test adding various kinds of graph measure with the \code{MultigraphBUT} using example data.}¥
+%%%% ¡name! ¥\circled{7}\circlednote{7}{tests various kinds of graph measure with the \code{MultigraphBUT} using example data.}¥
 Example script for binary undirected graph at fixed thresholds (MultigraphBUT) using connectivity data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
@@ -2420,7 +2420,7 @@ end
 example_NNCV_CON_BUT_M_CLA
 
 %%% ¡test!
-%%%% ¡name! ¥\circled{8}\circlednote{8}{test adding various kinds of graph measure with the \code{MultigraphBUD} using example connectivity data.}¥
+%%%% ¡name! ¥\circled{8}\circlednote{8}{tests various kinds of graph measure with the \code{MultigraphBUD} using example connectivity data.}¥
 Example script for binary undirected graph at fixed densities (MultigraphBUD) using connectivity data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
@@ -2429,7 +2429,7 @@ end
 example_NNCV_CON_BUD_M_CLA
 
 %%% ¡test!
-%%%% ¡name! ¥\circled{9}\circlednote{9}{test adding various kinds of graph measure with the \code{MultiplexBUD} using example functional data.}¥
+%%%% ¡name! ¥\circled{9}\circlednote{9}{tests various kinds of graph measure with the \code{MultiplexBUD} using example functional data.}¥
 Example script for binary undirected multiplex at fixed densities (MultiplexBUD) using connectivity data and functional data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'atlas.xlsx'])
@@ -2438,7 +2438,7 @@ end
 example_NNCV_CON_FUN_MP_BUD_M_CLA
 
 %%% ¡test!
-%%%% ¡name! ¥\circled{10}\circlednote{10}{test adding various kinds of graph measure with the \code{MultiplexBUT} using example functional data.}¥
+%%%% ¡name! ¥\circled{10}\circlednote{10}{tests various kinds of graph measure with the \code{MultiplexBUT} using example functional data.}¥
 Example script for binary undirected multiplex at fixed thresholds (MultiplexBUT) using connectivity data and functional data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'atlas.xlsx'])

@@ -33,7 +33,7 @@ A multi-layer perceptron regressor \code{NNRegressorMLP} comprises a multi-layer
 		}
 ]
 %% ¡header!
-NNRegressorMLP < NNBase (nn, multi-layer perceptron regressor) comprises a multi-layer perceptron regressor model and a given dataset. ¥\circled{1}\circlednote{1}{defines \code{NNRegressorMLP} as a subclass of \code{NNBase}. The moniker will be \code{nn}}¥
+NNRegressorMLP < NNBase (nn, multi-layer perceptron regressor) comprises a multi-layer perceptron regressor model and a given dataset. ¥\circled{1}\circlednote{1}{defines \code{NNRegressorMLP} as a subclass of \code{NNBase}. The moniker will be \code{nn}.}¥
 
 %%% ¡description!
 A neural network multi-layer perceptron regressor (NNRegressorMLP) comprises a multi-layer perceptron regressor model and a given dataset.
@@ -41,7 +41,7 @@ NNRegressorMLP trains the multi-layer perceptron regressor with a formatted inpu
 \end{lstlisting}
 
 \begin{lstlisting}[
-	label={cd:m:NNClassifierMLP:prop_update},
+	label={cd:m:NNRegressorMLP:prop_update},
 	caption={
 		{\bf NNRegressorMLP element prop update.}
 		The \code{props\_update} section of the generator code for \fn{\_NNRegressorMLP.gen.m} updates the properties of the \code{NNRegressorMLP} element. This defines the core properties of the data point.
@@ -150,7 +150,7 @@ end
 
 %%% ¡prop!
 MODEL (result, net) is a trained neural network model.
-%%%% ¡calculate! ¥\circled{5}\circlednote{5}{trains the regressor with the defined dataset.}¥
+%%%% ¡calculate! ¥\circled{5}\circlednote{5}{trains the regressor with the defined dataset by the code under \code{¡calculate!}.}¥
 inputs = cell2mat(nn.get('INPUTS', nn.get('D')));  ¥\circled{6}¥
 targets = cell2mat(nn.get('TARGETS', nn.get('D')));  ¥\circled{7}\twocirclednotes{6}{7}{firstly extract the inputs and targets with the corresponding format.}¥
 if isempty(inputs) || isempty(targets)
@@ -199,7 +199,7 @@ end
 ]
 %% ¡props!
 
-%%% ¡prop! ¥\circled{1}\circlednote{1}{defines the number of neuron per layer. For example, \code{[32 32]} repreents two layers, each contains 32 neurons.}¥
+%%% ¡prop! ¥\circled{1}\circlednote{1}{defines the number of neuron per layer. For example, \code{[32 32]} represents two layers, each containing 32 neurons.}¥
 LAYERS (data, rvector) defines the number of layers and their neurons.
 %%%% ¡default!
 [32 32]
@@ -335,7 +335,7 @@ d = NNDataset( ...
 nn = NNRegressorMLP('D', d, 'LAYERS', [20 20]);
 trained_model = nn.get('MODEL');
 
-% Check whether the number of fully-connected layer matches (excluding Dense_output layer)¥\circled{1}\circlednote{1}{check whether the number of layers from the trained model is correctly set.}¥
+% Check whether the number of fully-connected layer matches (excluding Dense_output layer)¥\circled{1}\circlednote{1}{checks whether the number of layers from the trained model is correctly set.}¥
 assert(length(nn.get('LAYERS')) == sum(contains({trained_model.Layers.Name}, 'Dense')) - 1, ...
     [BRAPH2.STR ':NNRegressorMLP:' BRAPH2.FAIL_TEST], ...
     'NNRegressorMLP does not construct the layers correctly. The number of the inputs should be the same as the length of dense layers the property.' ...
