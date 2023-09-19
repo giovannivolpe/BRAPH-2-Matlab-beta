@@ -122,6 +122,7 @@ known_flexibility = {[0 0 0 0]'};
 
 g = MultiplexBU('B', B);
 
+m_outside_g = Flexibility('G', g);
 assert(~isempty(m_outside_g.get('M')), ...
     [BRAPH2.STR ':Flexibility:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
@@ -247,6 +248,7 @@ known_flexibility = {[0 0 0 0]'};
 
 g = OrdMlWD('B', A);
 
+m_outside_g = Flexibility('G', g);
 assert(~isempty(m_outside_g.get('M')), ...
     [BRAPH2.STR ':Flexibility:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
