@@ -4,19 +4,6 @@ classdef ExporterBrainAtlasTXT < Exporter
 	%
 	% ExporterBrainAtlasTXT exports a brain atlas to a TXT file.
 	%
-	% The list of ExporterBrainAtlasTXT properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the brain atlas exporter in TXT.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the brain atlas exporter in TXT.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the brain atlas exporter in TXT.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the brain atlas exporter in TXT.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the brain atlas exporter in TXT.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the brain atlas exporter in TXT.
-	%  <strong>7</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-	%  <strong>8</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
-	%  <strong>9</strong> <strong>FILE</strong> 	FILE (data, string) is the TXT file where to save the brain atlas.
-	%  <strong>10</strong> <strong>PUT_FILE</strong> 	PUT_FILE (query, item) opens a dialog box to set the TXT file where to save the brain atlas.
-	%  <strong>11</strong> <strong>SAVE</strong> 	SAVE (result, empty) saves the brain atlas in the selected TXT file.
-	%
 	% ExporterBrainAtlasTXT methods (constructor):
 	%  ExporterBrainAtlasTXT - constructor
 	%
@@ -106,25 +93,25 @@ classdef ExporterBrainAtlasTXT < Exporter
 	% See also BrainAtlas, ImporterBrainAtlasTXT.
 	
 	properties (Constant) % properties
-		BA = 8; %CET: Computational Efficiency Trick
+		BA = Exporter.getPropNumber() + 1;
 		BA_TAG = 'BA';
-		BA_CATEGORY = 4;
-		BA_FORMAT = 8;
+		BA_CATEGORY = Category.DATA;
+		BA_FORMAT = Format.ITEM;
 		
-		FILE = 9; %CET: Computational Efficiency Trick
+		FILE = Exporter.getPropNumber() + 2;
 		FILE_TAG = 'FILE';
-		FILE_CATEGORY = 4;
-		FILE_FORMAT = 2;
+		FILE_CATEGORY = Category.DATA;
+		FILE_FORMAT = Format.STRING;
 		
-		PUT_FILE = 10; %CET: Computational Efficiency Trick
+		PUT_FILE = Exporter.getPropNumber() + 3;
 		PUT_FILE_TAG = 'PUT_FILE';
-		PUT_FILE_CATEGORY = 6;
-		PUT_FILE_FORMAT = 8;
+		PUT_FILE_CATEGORY = Category.QUERY;
+		PUT_FILE_FORMAT = Format.ITEM;
 		
-		SAVE = 11; %CET: Computational Efficiency Trick
+		SAVE = Exporter.getPropNumber() + 4;
 		SAVE_TAG = 'SAVE';
-		SAVE_CATEGORY = 5;
-		SAVE_FORMAT = 1;
+		SAVE_CATEGORY = Category.RESULT;
+		SAVE_FORMAT = Format.EMPTY;
 	end
 	methods % constructor
 		function ex = ExporterBrainAtlasTXT(varargin)
@@ -137,18 +124,6 @@ classdef ExporterBrainAtlasTXT < Exporter
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of ExporterBrainAtlasTXT properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the brain atlas exporter in TXT.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the brain atlas exporter in TXT.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the brain atlas exporter in TXT.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the brain atlas exporter in TXT.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the brain atlas exporter in TXT.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the brain atlas exporter in TXT.
-			%  <strong>7</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-			%  <strong>8</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
-			%  <strong>9</strong> <strong>FILE</strong> 	FILE (data, string) is the TXT file where to save the brain atlas.
-			%  <strong>10</strong> <strong>PUT_FILE</strong> 	PUT_FILE (query, item) opens a dialog box to set the TXT file where to save the brain atlas.
-			%  <strong>11</strong> <strong>SAVE</strong> 	SAVE (result, empty) saves the brain atlas in the selected TXT file.
 			%
 			% See also Category, Format.
 			
@@ -186,7 +161,7 @@ classdef ExporterBrainAtlasTXT < Exporter
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'ExporterBrainAtlasTXT' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('ExporterBrainAtlasTXT', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of exporter of brain atlas in TXT.
@@ -207,30 +182,58 @@ classdef ExporterBrainAtlasTXT < Exporter
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11];
+				prop_list = [ ...
+					Exporter.getProps() ...
+						ExporterBrainAtlasTXT.BA ...
+						ExporterBrainAtlasTXT.FILE ...
+						ExporterBrainAtlasTXT.PUT_FILE ...
+						ExporterBrainAtlasTXT.SAVE ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
-					prop_list = [4 8 9];
-				case 5 % Category.RESULT
-					prop_list = 11;
-				case 6 % Category.QUERY
-					prop_list = 10;
-				case 9 % Category.GUI
-					prop_list = 7;
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						Exporter.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						Exporter.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						Exporter.getProps(Category.PARAMETER) ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						Exporter.getProps(Category.DATA) ...
+						ExporterBrainAtlasTXT.BA ...
+						ExporterBrainAtlasTXT.FILE ...
+						];
+				case Category.RESULT
+					prop_list = [
+						Exporter.getProps(Category.RESULT) ...
+						ExporterBrainAtlasTXT.SAVE ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						Exporter.getProps(Category.QUERY) ...
+						ExporterBrainAtlasTXT.PUT_FILE ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						Exporter.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						Exporter.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						Exporter.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -251,31 +254,7 @@ classdef ExporterBrainAtlasTXT < Exporter
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 11;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 2;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 1;
-				case 4 % Category.DATA
-					prop_number = 3;
-				case 5 % Category.RESULT
-					prop_number = 1;
-				case 6 % Category.QUERY
-					prop_number = 1;
-				case 9 % Category.GUI
-					prop_number = 1;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(ExporterBrainAtlasTXT.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in exporter of brain atlas in TXT/error.
@@ -303,14 +282,14 @@ classdef ExporterBrainAtlasTXT < Exporter
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 11 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == ExporterBrainAtlasTXT.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':ExporterBrainAtlasTXT:' 'WrongInput'], ...
-					['BRAPH2' ':ExporterBrainAtlasTXT:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':ExporterBrainAtlasTXT:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':ExporterBrainAtlasTXT:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for ExporterBrainAtlasTXT.'] ...
 					)
 			end
@@ -341,14 +320,15 @@ classdef ExporterBrainAtlasTXT < Exporter
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'WAITBAR'  'BA'  'FILE'  'PUT_FILE'  'SAVE' })); %CET: Computational Efficiency Trick
+			exporterbrainatlastxt_tag_list = cellfun(@(x) ExporterBrainAtlasTXT.getPropTag(x), num2cell(ExporterBrainAtlasTXT.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, exporterbrainatlastxt_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':ExporterBrainAtlasTXT:' 'WrongInput'], ...
-					['BRAPH2' ':ExporterBrainAtlasTXT:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':ExporterBrainAtlasTXT:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':ExporterBrainAtlasTXT:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for ExporterBrainAtlasTXT.'] ...
 					)
 			end
@@ -374,7 +354,8 @@ classdef ExporterBrainAtlasTXT < Exporter
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'WAITBAR'  'BA'  'FILE'  'PUT_FILE'  'SAVE' })); % tag = pointer %CET: Computational Efficiency Trick
+				exporterbrainatlastxt_tag_list = cellfun(@(x) ExporterBrainAtlasTXT.getPropTag(x), num2cell(ExporterBrainAtlasTXT.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, exporterbrainatlastxt_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -402,9 +383,20 @@ classdef ExporterBrainAtlasTXT < Exporter
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				exporterbrainatlastxt_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'WAITBAR'  'BA'  'FILE'  'PUT_FILE'  'SAVE' };
-				tag = exporterbrainatlastxt_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case ExporterBrainAtlasTXT.BA
+						tag = ExporterBrainAtlasTXT.BA_TAG;
+					case ExporterBrainAtlasTXT.FILE
+						tag = ExporterBrainAtlasTXT.FILE_TAG;
+					case ExporterBrainAtlasTXT.PUT_FILE
+						tag = ExporterBrainAtlasTXT.PUT_FILE_TAG;
+					case ExporterBrainAtlasTXT.SAVE
+						tag = ExporterBrainAtlasTXT.SAVE_TAG;
+					otherwise
+						tag = getPropTag@Exporter(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -429,9 +421,18 @@ classdef ExporterBrainAtlasTXT < Exporter
 			
 			prop = ExporterBrainAtlasTXT.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			exporterbrainatlastxt_category_list = { 1  1  3  4  2  2  9  4  4  6  5 };
-			prop_category = exporterbrainatlastxt_category_list{prop};
+			switch prop
+				case ExporterBrainAtlasTXT.BA
+					prop_category = ExporterBrainAtlasTXT.BA_CATEGORY;
+				case ExporterBrainAtlasTXT.FILE
+					prop_category = ExporterBrainAtlasTXT.FILE_CATEGORY;
+				case ExporterBrainAtlasTXT.PUT_FILE
+					prop_category = ExporterBrainAtlasTXT.PUT_FILE_CATEGORY;
+				case ExporterBrainAtlasTXT.SAVE
+					prop_category = ExporterBrainAtlasTXT.SAVE_CATEGORY;
+				otherwise
+					prop_category = getPropCategory@Exporter(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -455,9 +456,18 @@ classdef ExporterBrainAtlasTXT < Exporter
 			
 			prop = ExporterBrainAtlasTXT.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			exporterbrainatlastxt_format_list = { 2  2  8  2  2  2  4  8  2  8  1 };
-			prop_format = exporterbrainatlastxt_format_list{prop};
+			switch prop
+				case ExporterBrainAtlasTXT.BA
+					prop_format = ExporterBrainAtlasTXT.BA_FORMAT;
+				case ExporterBrainAtlasTXT.FILE
+					prop_format = ExporterBrainAtlasTXT.FILE_FORMAT;
+				case ExporterBrainAtlasTXT.PUT_FILE
+					prop_format = ExporterBrainAtlasTXT.PUT_FILE_FORMAT;
+				case ExporterBrainAtlasTXT.SAVE
+					prop_format = ExporterBrainAtlasTXT.SAVE_FORMAT;
+				otherwise
+					prop_format = getPropFormat@Exporter(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -481,9 +491,30 @@ classdef ExporterBrainAtlasTXT < Exporter
 			
 			prop = ExporterBrainAtlasTXT.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			exporterbrainatlastxt_description_list = { 'NAME (constant, string) is the name of the brain atlas exporter in TXT.'  'DESCRIPTION (constant, string) is the description of the brain atlas exporter in TXT.'  'TEMPLATE (parameter, item) is the template of the brain atlas exporter in TXT.'  'ID (data, string) is a few-letter code for the brain atlas exporter in TXT.'  'LABEL (metadata, string) is an extended label of the brain atlas exporter in TXT.'  'NOTES (metadata, string) are some specific notes about the brain atlas exporter in TXT.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'BA (data, item) is a brain atlas.'  'FILE (data, string) is the TXT file where to save the brain atlas.'  'PUT_FILE (query, item) opens a dialog box to set the TXT file where to save the brain atlas.'  'SAVE (result, empty) saves the brain atlas in the selected TXT file.' };
-			prop_description = exporterbrainatlastxt_description_list{prop};
+			switch prop
+				case ExporterBrainAtlasTXT.BA
+					prop_description = 'BA (data, item) is a brain atlas.';
+				case ExporterBrainAtlasTXT.FILE
+					prop_description = 'FILE (data, string) is the TXT file where to save the brain atlas.';
+				case ExporterBrainAtlasTXT.PUT_FILE
+					prop_description = 'PUT_FILE (query, item) opens a dialog box to set the TXT file where to save the brain atlas.';
+				case ExporterBrainAtlasTXT.SAVE
+					prop_description = 'SAVE (result, empty) saves the brain atlas in the selected TXT file.';
+				case ExporterBrainAtlasTXT.NAME
+					prop_description = 'NAME (constant, string) is the name of the brain atlas exporter in TXT.';
+				case ExporterBrainAtlasTXT.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the brain atlas exporter in TXT.';
+				case ExporterBrainAtlasTXT.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the brain atlas exporter in TXT.';
+				case ExporterBrainAtlasTXT.ID
+					prop_description = 'ID (data, string) is a few-letter code for the brain atlas exporter in TXT.';
+				case ExporterBrainAtlasTXT.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the brain atlas exporter in TXT.';
+				case ExporterBrainAtlasTXT.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the brain atlas exporter in TXT.';
+				otherwise
+					prop_description = getPropDescription@Exporter(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -507,16 +538,16 @@ classdef ExporterBrainAtlasTXT < Exporter
 			
 			prop = ExporterBrainAtlasTXT.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 8 % ExporterBrainAtlasTXT.BA
+			switch prop
+				case ExporterBrainAtlasTXT.BA
 					prop_settings = 'BrainAtlas';
-				case 9 % ExporterBrainAtlasTXT.FILE
-					prop_settings = Format.getFormatSettings(2);
-				case 10 % ExporterBrainAtlasTXT.PUT_FILE
+				case ExporterBrainAtlasTXT.FILE
+					prop_settings = Format.getFormatSettings(Format.STRING);
+				case ExporterBrainAtlasTXT.PUT_FILE
 					prop_settings = 'ExporterBrainAtlasTXT';
-				case 11 % ExporterBrainAtlasTXT.SAVE
-					prop_settings = Format.getFormatSettings(1);
-				case 3 % ExporterBrainAtlasTXT.TEMPLATE
+				case ExporterBrainAtlasTXT.SAVE
+					prop_settings = Format.getFormatSettings(Format.EMPTY);
+				case ExporterBrainAtlasTXT.TEMPLATE
 					prop_settings = 'ExporterBrainAtlasTXT';
 				otherwise
 					prop_settings = getPropSettings@Exporter(prop);
@@ -544,26 +575,26 @@ classdef ExporterBrainAtlasTXT < Exporter
 			
 			prop = ExporterBrainAtlasTXT.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 8 % ExporterBrainAtlasTXT.BA
-					prop_default = Format.getFormatDefault(8, ExporterBrainAtlasTXT.getPropSettings(prop));
-				case 9 % ExporterBrainAtlasTXT.FILE
+			switch prop
+				case ExporterBrainAtlasTXT.BA
+					prop_default = Format.getFormatDefault(Format.ITEM, ExporterBrainAtlasTXT.getPropSettings(prop));
+				case ExporterBrainAtlasTXT.FILE
 					prop_default = [fileparts(which('test_braph2')) filesep 'default_txt_file_to_save_brain_atlas_most_likely_to_be_erased.txt'];
-				case 10 % ExporterBrainAtlasTXT.PUT_FILE
-					prop_default = Format.getFormatDefault(8, ExporterBrainAtlasTXT.getPropSettings(prop));
-				case 11 % ExporterBrainAtlasTXT.SAVE
-					prop_default = Format.getFormatDefault(1, ExporterBrainAtlasTXT.getPropSettings(prop));
-				case 1 % ExporterBrainAtlasTXT.NAME
+				case ExporterBrainAtlasTXT.PUT_FILE
+					prop_default = Format.getFormatDefault(Format.ITEM, ExporterBrainAtlasTXT.getPropSettings(prop));
+				case ExporterBrainAtlasTXT.SAVE
+					prop_default = Format.getFormatDefault(Format.EMPTY, ExporterBrainAtlasTXT.getPropSettings(prop));
+				case ExporterBrainAtlasTXT.NAME
 					prop_default = 'ExporterBrainAtlasTXT';
-				case 2 % ExporterBrainAtlasTXT.DESCRIPTION
+				case ExporterBrainAtlasTXT.DESCRIPTION
 					prop_default = 'ExporterBrainAtlasTXT exports a brain atlas to a TXT file.';
-				case 3 % ExporterBrainAtlasTXT.TEMPLATE
-					prop_default = Format.getFormatDefault(8, ExporterBrainAtlasTXT.getPropSettings(prop));
-				case 4 % ExporterBrainAtlasTXT.ID
+				case ExporterBrainAtlasTXT.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, ExporterBrainAtlasTXT.getPropSettings(prop));
+				case ExporterBrainAtlasTXT.ID
 					prop_default = 'ExporterBrainAtlasTXT ID';
-				case 5 % ExporterBrainAtlasTXT.LABEL
+				case ExporterBrainAtlasTXT.LABEL
 					prop_default = 'ExporterBrainAtlasTXT label';
-				case 6 % ExporterBrainAtlasTXT.NOTES
+				case ExporterBrainAtlasTXT.NOTES
 					prop_default = 'ExporterBrainAtlasTXT notes';
 				otherwise
 					prop_default = getPropDefault@Exporter(prop);
@@ -610,15 +641,15 @@ classdef ExporterBrainAtlasTXT < Exporter
 			% 
 			% EX.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:ExporterBrainAtlasTXT:WrongInput
+			%  Error id: €BRAPH2.STR€:ExporterBrainAtlasTXT:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  EX.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of EX.
-			%   Error id: BRAPH2:ExporterBrainAtlasTXT:WrongInput
+			%   Error id: €BRAPH2.STR€:ExporterBrainAtlasTXT:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(ExporterBrainAtlasTXT, PROP, VALUE) throws error if VALUE has not a valid format for PROP of ExporterBrainAtlasTXT.
-			%   Error id: BRAPH2:ExporterBrainAtlasTXT:WrongInput
+			%   Error id: €BRAPH2.STR€:ExporterBrainAtlasTXT:€BRAPH2.WRONG_INPUT€
 			%  EX.CHECKPROP(ExporterBrainAtlasTXT, PROP, VALUE) throws error if VALUE has not a valid format for PROP of ExporterBrainAtlasTXT.
-			%   Error id: BRAPH2:ExporterBrainAtlasTXT:WrongInput]
+			%   Error id: €BRAPH2.STR€:ExporterBrainAtlasTXT:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(EX) and Element.CHECKPROP('ExporterBrainAtlasTXT')
 			%  are less computationally efficient.
@@ -629,18 +660,18 @@ classdef ExporterBrainAtlasTXT < Exporter
 			prop = ExporterBrainAtlasTXT.getPropProp(pointer);
 			
 			switch prop
-				case 8 % ExporterBrainAtlasTXT.BA
-					check = Format.checkFormat(8, value, ExporterBrainAtlasTXT.getPropSettings(prop));
-				case 9 % ExporterBrainAtlasTXT.FILE
-					check = Format.checkFormat(2, value, ExporterBrainAtlasTXT.getPropSettings(prop));
-				case 10 % ExporterBrainAtlasTXT.PUT_FILE
-					check = Format.checkFormat(8, value, ExporterBrainAtlasTXT.getPropSettings(prop));
-				case 11 % ExporterBrainAtlasTXT.SAVE
-					check = Format.checkFormat(1, value, ExporterBrainAtlasTXT.getPropSettings(prop));
-				case 3 % ExporterBrainAtlasTXT.TEMPLATE
-					check = Format.checkFormat(8, value, ExporterBrainAtlasTXT.getPropSettings(prop));
+				case ExporterBrainAtlasTXT.BA % __ExporterBrainAtlasTXT.BA__
+					check = Format.checkFormat(Format.ITEM, value, ExporterBrainAtlasTXT.getPropSettings(prop));
+				case ExporterBrainAtlasTXT.FILE % __ExporterBrainAtlasTXT.FILE__
+					check = Format.checkFormat(Format.STRING, value, ExporterBrainAtlasTXT.getPropSettings(prop));
+				case ExporterBrainAtlasTXT.PUT_FILE % __ExporterBrainAtlasTXT.PUT_FILE__
+					check = Format.checkFormat(Format.ITEM, value, ExporterBrainAtlasTXT.getPropSettings(prop));
+				case ExporterBrainAtlasTXT.SAVE % __ExporterBrainAtlasTXT.SAVE__
+					check = Format.checkFormat(Format.EMPTY, value, ExporterBrainAtlasTXT.getPropSettings(prop));
+				case ExporterBrainAtlasTXT.TEMPLATE % __ExporterBrainAtlasTXT.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, ExporterBrainAtlasTXT.getPropSettings(prop));
 				otherwise
-					if prop <= 7
+					if prop <= Exporter.getPropNumber()
 						check = checkProp@Exporter(prop, value);
 					end
 			end
@@ -649,8 +680,8 @@ classdef ExporterBrainAtlasTXT < Exporter
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':ExporterBrainAtlasTXT:' 'WrongInput'], ...
-					['BRAPH2' ':ExporterBrainAtlasTXT:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':ExporterBrainAtlasTXT:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':ExporterBrainAtlasTXT:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' ExporterBrainAtlasTXT.getPropTag(prop) ' (' ExporterBrainAtlasTXT.getFormatTag(ExporterBrainAtlasTXT.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -661,19 +692,19 @@ classdef ExporterBrainAtlasTXT < Exporter
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with 5,
-			%  6, and 7. By default this function
+			%  PROP. It works only with properties with Category.RESULT,
+			%  Category.QUERY, and Category.EVANESCENT. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  6.
+			%  Category.QUERY.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 10 % ExporterBrainAtlasTXT.PUT_FILE
+				case ExporterBrainAtlasTXT.PUT_FILE % __ExporterBrainAtlasTXT.PUT_FILE__
 					[filename, filepath, filterindex] = uiputfile('*.txt', 'Select TXT file');
 					if filterindex
 					    file = [filepath filename];
@@ -681,8 +712,8 @@ classdef ExporterBrainAtlasTXT < Exporter
 					end
 					value = ex;
 					
-				case 11 % ExporterBrainAtlasTXT.SAVE
-					rng_settings_ = rng(); rng(ex.getPropSeed(11), 'twister')
+				case ExporterBrainAtlasTXT.SAVE % __ExporterBrainAtlasTXT.SAVE__
+					rng_settings_ = rng(); rng(ex.getPropSeed(ExporterBrainAtlasTXT.SAVE), 'twister')
 					
 					file = ex.get('FILE');
 					
@@ -755,7 +786,7 @@ classdef ExporterBrainAtlasTXT < Exporter
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 7
+					if prop <= Exporter.getPropNumber()
 						value = calculateValue@Exporter(ex, prop, varargin{:});
 					else
 						value = calculateValue@Element(ex, prop, varargin{:});

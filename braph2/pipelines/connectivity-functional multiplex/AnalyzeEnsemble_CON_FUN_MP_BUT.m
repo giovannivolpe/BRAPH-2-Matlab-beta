@@ -5,26 +5,6 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 	% This graph analysis (AnalyzeEnsemble_CON_FUN_MP_BUT) analyzes connectivity 
 	% and functional multiplex data using binary undirected graphs at fixed thresholds.
 	%
-	% The list of AnalyzeEnsemble_CON_FUN_MP_BUT properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-	%  <strong>7</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-	%  <strong>8</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectCON_FUN_MP.
-	%  <strong>9</strong> <strong>GRAPH_TEMPLATE</strong> 	GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
-	%  <strong>10</strong> <strong>G_DICT</strong> 	G_DICT (result, idict) is the multiplex (MultiplexBUT) ensemble obtained from this analysis.
-	%  <strong>11</strong> <strong>ME_DICT</strong> 	ME_DICT (result, idict) contains the calculated measures of the graph ensemble.
-	%  <strong>12</strong> <strong>MEASUREENSEMBLE</strong> 	MEASUREENSEMBLE (query, item) returns an ensemble-based measure.
-	%  <strong>13</strong> <strong>REPETITION</strong> 	REPETITION (parameter, scalar) is the number of repetitions for functional data.
-	%  <strong>14</strong> <strong>F_MIN</strong> 	F_MIN (parameter, scalar) is the minimum frequency value for functional data.
-	%  <strong>15</strong> <strong>F_MAX</strong> 	F_MAX (parameter, scalar) is the maximum frequency value for functional data.
-	%  <strong>16</strong> <strong>CORRELATION_RULE</strong> 	CORRELATION_RULE (parameter, option) is the correlation type for functional data.
-	%  <strong>17</strong> <strong>NEGATIVE_WEIGHT_RULE</strong> 	NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights of functional data.
-	%  <strong>18</strong> <strong>THRESHOLDS</strong> 	THRESHOLDS (parameter, rvector) is the vector of thresholds.
-	%
 	% AnalyzeEnsemble_CON_FUN_MP_BUT methods (constructor):
 	%  AnalyzeEnsemble_CON_FUN_MP_BUT - constructor
 	%
@@ -114,35 +94,35 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 	% See also SubjectCON_FUN_MP, MultiplexBUT.
 	
 	properties (Constant) % properties
-		REPETITION = 13; %CET: Computational Efficiency Trick
+		REPETITION = AnalyzeEnsemble.getPropNumber() + 1;
 		REPETITION_TAG = 'REPETITION';
-		REPETITION_CATEGORY = 3;
-		REPETITION_FORMAT = 11;
+		REPETITION_CATEGORY = Category.PARAMETER;
+		REPETITION_FORMAT = Format.SCALAR;
 		
-		F_MIN = 14; %CET: Computational Efficiency Trick
+		F_MIN = AnalyzeEnsemble.getPropNumber() + 2;
 		F_MIN_TAG = 'F_MIN';
-		F_MIN_CATEGORY = 3;
-		F_MIN_FORMAT = 11;
+		F_MIN_CATEGORY = Category.PARAMETER;
+		F_MIN_FORMAT = Format.SCALAR;
 		
-		F_MAX = 15; %CET: Computational Efficiency Trick
+		F_MAX = AnalyzeEnsemble.getPropNumber() + 3;
 		F_MAX_TAG = 'F_MAX';
-		F_MAX_CATEGORY = 3;
-		F_MAX_FORMAT = 11;
+		F_MAX_CATEGORY = Category.PARAMETER;
+		F_MAX_FORMAT = Format.SCALAR;
 		
-		CORRELATION_RULE = 16; %CET: Computational Efficiency Trick
+		CORRELATION_RULE = AnalyzeEnsemble.getPropNumber() + 4;
 		CORRELATION_RULE_TAG = 'CORRELATION_RULE';
-		CORRELATION_RULE_CATEGORY = 3;
-		CORRELATION_RULE_FORMAT = 5;
+		CORRELATION_RULE_CATEGORY = Category.PARAMETER;
+		CORRELATION_RULE_FORMAT = Format.OPTION;
 		
-		NEGATIVE_WEIGHT_RULE = 17; %CET: Computational Efficiency Trick
+		NEGATIVE_WEIGHT_RULE = AnalyzeEnsemble.getPropNumber() + 5;
 		NEGATIVE_WEIGHT_RULE_TAG = 'NEGATIVE_WEIGHT_RULE';
-		NEGATIVE_WEIGHT_RULE_CATEGORY = 3;
-		NEGATIVE_WEIGHT_RULE_FORMAT = 5;
+		NEGATIVE_WEIGHT_RULE_CATEGORY = Category.PARAMETER;
+		NEGATIVE_WEIGHT_RULE_FORMAT = Format.OPTION;
 		
-		THRESHOLDS = 18; %CET: Computational Efficiency Trick
+		THRESHOLDS = AnalyzeEnsemble.getPropNumber() + 6;
 		THRESHOLDS_TAG = 'THRESHOLDS';
-		THRESHOLDS_CATEGORY = 3;
-		THRESHOLDS_FORMAT = 12;
+		THRESHOLDS_CATEGORY = Category.PARAMETER;
+		THRESHOLDS_FORMAT = Format.RVECTOR;
 	end
 	methods % constructor
 		function a = AnalyzeEnsemble_CON_FUN_MP_BUT(varargin)
@@ -155,25 +135,6 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of AnalyzeEnsemble_CON_FUN_MP_BUT properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-			%  <strong>7</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-			%  <strong>8</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectCON_FUN_MP.
-			%  <strong>9</strong> <strong>GRAPH_TEMPLATE</strong> 	GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
-			%  <strong>10</strong> <strong>G_DICT</strong> 	G_DICT (result, idict) is the multiplex (MultiplexBUT) ensemble obtained from this analysis.
-			%  <strong>11</strong> <strong>ME_DICT</strong> 	ME_DICT (result, idict) contains the calculated measures of the graph ensemble.
-			%  <strong>12</strong> <strong>MEASUREENSEMBLE</strong> 	MEASUREENSEMBLE (query, item) returns an ensemble-based measure.
-			%  <strong>13</strong> <strong>REPETITION</strong> 	REPETITION (parameter, scalar) is the number of repetitions for functional data.
-			%  <strong>14</strong> <strong>F_MIN</strong> 	F_MIN (parameter, scalar) is the minimum frequency value for functional data.
-			%  <strong>15</strong> <strong>F_MAX</strong> 	F_MAX (parameter, scalar) is the maximum frequency value for functional data.
-			%  <strong>16</strong> <strong>CORRELATION_RULE</strong> 	CORRELATION_RULE (parameter, option) is the correlation type for functional data.
-			%  <strong>17</strong> <strong>NEGATIVE_WEIGHT_RULE</strong> 	NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights of functional data.
-			%  <strong>18</strong> <strong>THRESHOLDS</strong> 	THRESHOLDS (parameter, rvector) is the vector of thresholds.
 			%
 			% See also Category, Format.
 			
@@ -211,7 +172,7 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'AnalyzeEnsemble_CON_FUN_MP_BUT' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('AnalyzeEnsemble_CON_FUN_MP_BUT', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of graph analysis with connectivity and functional multiplex data of fixed threshold.
@@ -232,30 +193,62 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18];
+				prop_list = [ ...
+					AnalyzeEnsemble.getProps() ...
+						AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION ...
+						AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN ...
+						AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX ...
+						AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE ...
+						AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE ...
+						AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = [3 9 13 14 15 16 17 18];
-				case 4 % Category.DATA
-					prop_list = [4 8];
-				case 5 % Category.RESULT
-					prop_list = [10 11];
-				case 6 % Category.QUERY
-					prop_list = 12;
-				case 9 % Category.GUI
-					prop_list = 7;
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						AnalyzeEnsemble.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						AnalyzeEnsemble.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						AnalyzeEnsemble.getProps(Category.PARAMETER) ...
+						AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION ...
+						AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN ...
+						AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX ...
+						AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE ...
+						AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE ...
+						AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						AnalyzeEnsemble.getProps(Category.DATA) ...
+						];
+				case Category.RESULT
+					prop_list = [
+						AnalyzeEnsemble.getProps(Category.RESULT) ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						AnalyzeEnsemble.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						AnalyzeEnsemble.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						AnalyzeEnsemble.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						AnalyzeEnsemble.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -276,31 +269,7 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 18;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 2;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 8;
-				case 4 % Category.DATA
-					prop_number = 2;
-				case 5 % Category.RESULT
-					prop_number = 2;
-				case 6 % Category.QUERY
-					prop_number = 1;
-				case 9 % Category.GUI
-					prop_number = 1;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(AnalyzeEnsemble_CON_FUN_MP_BUT.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in graph analysis with connectivity and functional multiplex data of fixed threshold/error.
@@ -328,14 +297,14 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 18 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == AnalyzeEnsemble_CON_FUN_MP_BUT.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':AnalyzeEnsemble_CON_FUN_MP_BUT:' 'WrongInput'], ...
-					['BRAPH2' ':AnalyzeEnsemble_CON_FUN_MP_BUT:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':AnalyzeEnsemble_CON_FUN_MP_BUT:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':AnalyzeEnsemble_CON_FUN_MP_BUT:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for AnalyzeEnsemble_CON_FUN_MP_BUT.'] ...
 					)
 			end
@@ -366,14 +335,15 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'WAITBAR'  'GR'  'GRAPH_TEMPLATE'  'G_DICT'  'ME_DICT'  'MEASUREENSEMBLE'  'REPETITION'  'F_MIN'  'F_MAX'  'CORRELATION_RULE'  'NEGATIVE_WEIGHT_RULE'  'THRESHOLDS' })); %CET: Computational Efficiency Trick
+			analyzeensemble_con_fun_mp_but_tag_list = cellfun(@(x) AnalyzeEnsemble_CON_FUN_MP_BUT.getPropTag(x), num2cell(AnalyzeEnsemble_CON_FUN_MP_BUT.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, analyzeensemble_con_fun_mp_but_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':AnalyzeEnsemble_CON_FUN_MP_BUT:' 'WrongInput'], ...
-					['BRAPH2' ':AnalyzeEnsemble_CON_FUN_MP_BUT:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':AnalyzeEnsemble_CON_FUN_MP_BUT:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':AnalyzeEnsemble_CON_FUN_MP_BUT:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for AnalyzeEnsemble_CON_FUN_MP_BUT.'] ...
 					)
 			end
@@ -399,7 +369,8 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'WAITBAR'  'GR'  'GRAPH_TEMPLATE'  'G_DICT'  'ME_DICT'  'MEASUREENSEMBLE'  'REPETITION'  'F_MIN'  'F_MAX'  'CORRELATION_RULE'  'NEGATIVE_WEIGHT_RULE'  'THRESHOLDS' })); % tag = pointer %CET: Computational Efficiency Trick
+				analyzeensemble_con_fun_mp_but_tag_list = cellfun(@(x) AnalyzeEnsemble_CON_FUN_MP_BUT.getPropTag(x), num2cell(AnalyzeEnsemble_CON_FUN_MP_BUT.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, analyzeensemble_con_fun_mp_but_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -427,9 +398,24 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				analyzeensemble_con_fun_mp_but_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'WAITBAR'  'GR'  'GRAPH_TEMPLATE'  'G_DICT'  'ME_DICT'  'MEASUREENSEMBLE'  'REPETITION'  'F_MIN'  'F_MAX'  'CORRELATION_RULE'  'NEGATIVE_WEIGHT_RULE'  'THRESHOLDS' };
-				tag = analyzeensemble_con_fun_mp_but_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION
+						tag = AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION_TAG;
+					case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN
+						tag = AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN_TAG;
+					case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX
+						tag = AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX_TAG;
+					case AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE
+						tag = AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE_TAG;
+					case AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE
+						tag = AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE_TAG;
+					case AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS
+						tag = AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS_TAG;
+					otherwise
+						tag = getPropTag@AnalyzeEnsemble(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -454,9 +440,22 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			
 			prop = AnalyzeEnsemble_CON_FUN_MP_BUT.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			analyzeensemble_con_fun_mp_but_category_list = { 1  1  3  4  2  2  9  4  3  5  5  6  3  3  3  3  3  3 };
-			prop_category = analyzeensemble_con_fun_mp_but_category_list{prop};
+			switch prop
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION
+					prop_category = AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION_CATEGORY;
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN
+					prop_category = AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN_CATEGORY;
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX
+					prop_category = AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX_CATEGORY;
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE
+					prop_category = AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE_CATEGORY;
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE
+					prop_category = AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE_CATEGORY;
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS
+					prop_category = AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS_CATEGORY;
+				otherwise
+					prop_category = getPropCategory@AnalyzeEnsemble(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -480,9 +479,22 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			
 			prop = AnalyzeEnsemble_CON_FUN_MP_BUT.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			analyzeensemble_con_fun_mp_but_format_list = { 2  2  8  2  2  2  4  8  8  10  10  8  11  11  11  5  5  12 };
-			prop_format = analyzeensemble_con_fun_mp_but_format_list{prop};
+			switch prop
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION
+					prop_format = AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION_FORMAT;
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN
+					prop_format = AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN_FORMAT;
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX
+					prop_format = AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX_FORMAT;
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE
+					prop_format = AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE_FORMAT;
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE
+					prop_format = AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE_FORMAT;
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS
+					prop_format = AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS_FORMAT;
+				otherwise
+					prop_format = getPropFormat@AnalyzeEnsemble(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -506,9 +518,42 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			
 			prop = AnalyzeEnsemble_CON_FUN_MP_BUT.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			analyzeensemble_con_fun_mp_but_description_list = { 'NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'ID (data, string) is a few-letter code for the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'LABEL (metadata, string) is an extended label of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectCON_FUN_MP.'  'GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.'  'G_DICT (result, idict) is the multiplex (MultiplexBUT) ensemble obtained from this analysis.'  'ME_DICT (result, idict) contains the calculated measures of the graph ensemble.'  'MEASUREENSEMBLE (query, item) returns an ensemble-based measure.'  'REPETITION (parameter, scalar) is the number of repetitions for functional data.'  'F_MIN (parameter, scalar) is the minimum frequency value for functional data.'  'F_MAX (parameter, scalar) is the maximum frequency value for functional data.'  'CORRELATION_RULE (parameter, option) is the correlation type for functional data.'  'NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights of functional data.'  'THRESHOLDS (parameter, rvector) is the vector of thresholds.' };
-			prop_description = analyzeensemble_con_fun_mp_but_description_list{prop};
+			switch prop
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION
+					prop_description = 'REPETITION (parameter, scalar) is the number of repetitions for functional data.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN
+					prop_description = 'F_MIN (parameter, scalar) is the minimum frequency value for functional data.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX
+					prop_description = 'F_MAX (parameter, scalar) is the maximum frequency value for functional data.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE
+					prop_description = 'CORRELATION_RULE (parameter, option) is the correlation type for functional data.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE
+					prop_description = 'NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights of functional data.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS
+					prop_description = 'THRESHOLDS (parameter, rvector) is the vector of thresholds.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.NAME
+					prop_description = 'NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.ID
+					prop_description = 'ID (data, string) is a few-letter code for the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.GR
+					prop_description = 'GR (data, item) is the subject group, which also defines the subject class SubjectCON_FUN_MP.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.GRAPH_TEMPLATE
+					prop_description = 'GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.G_DICT
+					prop_description = 'G_DICT (result, idict) is the multiplex (MultiplexBUT) ensemble obtained from this analysis.';
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.ME_DICT
+					prop_description = 'ME_DICT (result, idict) contains the calculated measures of the graph ensemble.';
+				otherwise
+					prop_description = getPropDescription@AnalyzeEnsemble(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -532,24 +577,24 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			
 			prop = AnalyzeEnsemble_CON_FUN_MP_BUT.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 13 % AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION
-					prop_settings = Format.getFormatSettings(11);
-				case 14 % AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN
-					prop_settings = Format.getFormatSettings(11);
-				case 15 % AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX
-					prop_settings = Format.getFormatSettings(11);
-				case 16 % AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE
+			switch prop
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION
+					prop_settings = Format.getFormatSettings(Format.SCALAR);
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN
+					prop_settings = Format.getFormatSettings(Format.SCALAR);
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX
+					prop_settings = Format.getFormatSettings(Format.SCALAR);
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE
 					prop_settings = Correlation.CORRELATION_RULE_LIST(1:3);
-				case 17 % AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE
 					prop_settings = Correlation.NEGATIVE_WEIGHT_RULE_LIST;
-				case 18 % AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS
-					prop_settings = Format.getFormatSettings(12);
-				case 3 % AnalyzeEnsemble_CON_FUN_MP_BUT.TEMPLATE
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS
+					prop_settings = Format.getFormatSettings(Format.RVECTOR);
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.TEMPLATE
 					prop_settings = 'AnalyzeEnsemble_CON_FUN_MP_BUT';
-				case 9 % AnalyzeEnsemble_CON_FUN_MP_BUT.GRAPH_TEMPLATE
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.GRAPH_TEMPLATE
 					prop_settings = 'MultiplexBUT';
-				case 10 % AnalyzeEnsemble_CON_FUN_MP_BUT.G_DICT
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.G_DICT
 					prop_settings = 'MultiplexBUT';
 				otherwise
 					prop_settings = getPropSettings@AnalyzeEnsemble(prop);
@@ -577,37 +622,37 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			
 			prop = AnalyzeEnsemble_CON_FUN_MP_BUT.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 13 % AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION
+			switch prop
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION
 					prop_default = 1;
-				case 14 % AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN
 					prop_default = 0;
-				case 15 % AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX
 					prop_default = Inf;
-				case 16 % AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE
 					prop_default = Correlation.CORRELATION_RULE_LIST{1};
-				case 17 % AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE
 					prop_default = Correlation.NEGATIVE_WEIGHT_RULE_LIST{1};
-				case 18 % AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS
 					prop_default = [-1:.5:1];
-				case 1 % AnalyzeEnsemble_CON_FUN_MP_BUT.NAME
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.NAME
 					prop_default = 'AnalyzeEnsemble_CON_FUN_MP_BUT';
-				case 2 % AnalyzeEnsemble_CON_FUN_MP_BUT.DESCRIPTION
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.DESCRIPTION
 					prop_default = 'This graph analysis (AnalyzeEnsemble_CON_FUN_MP_BUT) analyzes connectivity and functional multiplex data using binary undirected graphs at fixed thresholds.';
-				case 3 % AnalyzeEnsemble_CON_FUN_MP_BUT.TEMPLATE
-					prop_default = Format.getFormatDefault(8, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
-				case 4 % AnalyzeEnsemble_CON_FUN_MP_BUT.ID
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.ID
 					prop_default = 'AnalyzeEnsemble_CON_FUN_MP_BUT ID';
-				case 5 % AnalyzeEnsemble_CON_FUN_MP_BUT.LABEL
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.LABEL
 					prop_default = 'AnalyzeEnsemble_CON_FUN_MP_BUT label';
-				case 6 % AnalyzeEnsemble_CON_FUN_MP_BUT.NOTES
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.NOTES
 					prop_default = 'AnalyzeEnsemble_CON_FUN_MP_BUT notes';
-				case 8 % AnalyzeEnsemble_CON_FUN_MP_BUT.GR
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.GR
 					prop_default = Group('SUB_CLASS', 'SubjectCON_FUN_MP');
-				case 9 % AnalyzeEnsemble_CON_FUN_MP_BUT.GRAPH_TEMPLATE
-					prop_default = Format.getFormatDefault(8, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
-				case 10 % AnalyzeEnsemble_CON_FUN_MP_BUT.G_DICT
-					prop_default = Format.getFormatDefault(10, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.GRAPH_TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.G_DICT
+					prop_default = Format.getFormatDefault(Format.IDICT, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
 				otherwise
 					prop_default = getPropDefault@AnalyzeEnsemble(prop);
 			end
@@ -653,15 +698,15 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			% 
 			% A.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:AnalyzeEnsemble_CON_FUN_MP_BUT:WrongInput
+			%  Error id: €BRAPH2.STR€:AnalyzeEnsemble_CON_FUN_MP_BUT:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  A.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of A.
-			%   Error id: BRAPH2:AnalyzeEnsemble_CON_FUN_MP_BUT:WrongInput
+			%   Error id: €BRAPH2.STR€:AnalyzeEnsemble_CON_FUN_MP_BUT:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(AnalyzeEnsemble_CON_FUN_MP_BUT, PROP, VALUE) throws error if VALUE has not a valid format for PROP of AnalyzeEnsemble_CON_FUN_MP_BUT.
-			%   Error id: BRAPH2:AnalyzeEnsemble_CON_FUN_MP_BUT:WrongInput
+			%   Error id: €BRAPH2.STR€:AnalyzeEnsemble_CON_FUN_MP_BUT:€BRAPH2.WRONG_INPUT€
 			%  A.CHECKPROP(AnalyzeEnsemble_CON_FUN_MP_BUT, PROP, VALUE) throws error if VALUE has not a valid format for PROP of AnalyzeEnsemble_CON_FUN_MP_BUT.
-			%   Error id: BRAPH2:AnalyzeEnsemble_CON_FUN_MP_BUT:WrongInput]
+			%   Error id: €BRAPH2.STR€:AnalyzeEnsemble_CON_FUN_MP_BUT:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(A) and Element.CHECKPROP('AnalyzeEnsemble_CON_FUN_MP_BUT')
 			%  are less computationally efficient.
@@ -672,26 +717,26 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			prop = AnalyzeEnsemble_CON_FUN_MP_BUT.getPropProp(pointer);
 			
 			switch prop
-				case 13 % AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION
-					check = Format.checkFormat(11, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
-				case 14 % AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN
-					check = Format.checkFormat(11, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
-				case 15 % AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX
-					check = Format.checkFormat(11, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
-				case 16 % AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE
-					check = Format.checkFormat(5, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
-				case 17 % AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE
-					check = Format.checkFormat(5, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
-				case 18 % AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS
-					check = Format.checkFormat(12, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
-				case 3 % AnalyzeEnsemble_CON_FUN_MP_BUT.TEMPLATE
-					check = Format.checkFormat(8, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
-				case 9 % AnalyzeEnsemble_CON_FUN_MP_BUT.GRAPH_TEMPLATE
-					check = Format.checkFormat(8, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
-				case 10 % AnalyzeEnsemble_CON_FUN_MP_BUT.G_DICT
-					check = Format.checkFormat(10, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION % __AnalyzeEnsemble_CON_FUN_MP_BUT.REPETITION__
+					check = Format.checkFormat(Format.SCALAR, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN % __AnalyzeEnsemble_CON_FUN_MP_BUT.F_MIN__
+					check = Format.checkFormat(Format.SCALAR, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX % __AnalyzeEnsemble_CON_FUN_MP_BUT.F_MAX__
+					check = Format.checkFormat(Format.SCALAR, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE % __AnalyzeEnsemble_CON_FUN_MP_BUT.CORRELATION_RULE__
+					check = Format.checkFormat(Format.OPTION, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE % __AnalyzeEnsemble_CON_FUN_MP_BUT.NEGATIVE_WEIGHT_RULE__
+					check = Format.checkFormat(Format.OPTION, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS % __AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS__
+					check = Format.checkFormat(Format.RVECTOR, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.TEMPLATE % __AnalyzeEnsemble_CON_FUN_MP_BUT.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.GRAPH_TEMPLATE % __AnalyzeEnsemble_CON_FUN_MP_BUT.GRAPH_TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.G_DICT % __AnalyzeEnsemble_CON_FUN_MP_BUT.G_DICT__
+					check = Format.checkFormat(Format.IDICT, value, AnalyzeEnsemble_CON_FUN_MP_BUT.getPropSettings(prop));
 				otherwise
-					if prop <= 12
+					if prop <= AnalyzeEnsemble.getPropNumber()
 						check = checkProp@AnalyzeEnsemble(prop, value);
 					end
 			end
@@ -700,8 +745,8 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':AnalyzeEnsemble_CON_FUN_MP_BUT:' 'WrongInput'], ...
-					['BRAPH2' ':AnalyzeEnsemble_CON_FUN_MP_BUT:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':AnalyzeEnsemble_CON_FUN_MP_BUT:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':AnalyzeEnsemble_CON_FUN_MP_BUT:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' AnalyzeEnsemble_CON_FUN_MP_BUT.getPropTag(prop) ' (' AnalyzeEnsemble_CON_FUN_MP_BUT.getFormatTag(AnalyzeEnsemble_CON_FUN_MP_BUT.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -712,20 +757,20 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with 5,
-			%  6, and 7. By default this function
+			%  PROP. It works only with properties with Category.RESULT,
+			%  Category.QUERY, and Category.EVANESCENT. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  6.
+			%  Category.QUERY.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 10 % AnalyzeEnsemble_CON_FUN_MP_BUT.G_DICT
-					rng_settings_ = rng(); rng(a.getPropSeed(10), 'twister')
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.G_DICT % __AnalyzeEnsemble_CON_FUN_MP_BUT.G_DICT__
+					rng_settings_ = rng(); rng(a.getPropSeed(AnalyzeEnsemble_CON_FUN_MP_BUT.G_DICT), 'twister')
 					
 					g_dict = IndexedDictionary('IT_CLASS', 'MultiplexBUT');
 					gr = a.get('GR');
@@ -783,7 +828,7 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 12
+					if prop <= AnalyzeEnsemble.getPropNumber()
 						value = calculateValue@AnalyzeEnsemble(a, prop, varargin{:});
 					else
 						value = calculateValue@Element(a, prop, varargin{:});
@@ -809,8 +854,8 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			%  PanelPropString, PanelPropStringList.
 			
 			switch prop
-				case 18 % AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS
-					pr = PanelPropRVectorSmart('EL', a, 'PROP', 18, ...
+				case AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS % __AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS__
+					pr = PanelPropRVectorSmart('EL', a, 'PROP', AnalyzeEnsemble_CON_FUN_MP_BUT.THRESHOLDS, ...
 					    'MIN', -1, 'MAX', 1, ...
 					    'DEFAULT', AnalyzeEnsemble_CON_FUN_MP_BUT.getPropDefault('THRESHOLDS'), ...
 					    varargin{:});

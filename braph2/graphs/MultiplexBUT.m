@@ -7,45 +7,6 @@ classdef MultiplexBUT < MultiplexWU
 	%  weighted supra-connectivity matrices binarized at different thresholds.
 	% The supra-connectivity matrix has a number of partitions equal to the number of thresholds.
 	%
-	% The list of MultiplexBUT properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the binary undirected multiplex with fixed thresholds.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the binary undirected multiplex with fixed thresholds.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the binary undirected multiplex with fixed thresholds.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the binary undirected multiplex with fixed thresholds.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the binary undirected multiplex with fixed thresholds.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the binary undirected multiplex with fixed thresholds.
-	%  <strong>7</strong> <strong>GRAPH_TYPE</strong> 	GRAPH_TYPE (constant, scalar) returns the graph type Graph.MULTIPLEX.
-	%  <strong>8</strong> <strong>CONNECTIVITY_TYPE</strong> 	CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).
-	%  <strong>9</strong> <strong>DIRECTIONALITY_TYPE</strong> 	DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.UNDIRECTED * ones(layernumber).
-	%  <strong>10</strong> <strong>SELFCONNECTIVITY_TYPE</strong> 	SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type Graph.NONSELFCONNECTED on the diagonal and Graph.SELFCONNECTED off diagonal.
-	%  <strong>11</strong> <strong>NEGATIVITY_TYPE</strong> 	NEGATIVITY_TYPE (query, smatrix) returns the negativity type Graph.NONNEGATIVE * ones(layernumber).
-	%  <strong>12</strong> <strong>LAYERTICKS</strong> 	LAYERTICKS (metadata, rvector) are the layer tick values.
-	%  <strong>13</strong> <strong>ALAYERTICKS</strong> 	ALAYERTICKS (query, rvector) returns the layer tick values.
-	%  <strong>14</strong> <strong>LAYERLABELS</strong> 	LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.
-	%  <strong>15</strong> <strong>ALAYERLABELS</strong> 	ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.
-	%  <strong>16</strong> <strong>NODELABELS</strong> 	NODELABELS (metadata, stringlist) are the node labels provided by the user.
-	%  <strong>17</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the nodel labels for each layer.
-	%  <strong>18</strong> <strong>RANDOMIZE</strong> 	RANDOMIZE (parameter, logical) determines whether to randomize the graph.
-	%  <strong>19</strong> <strong>RANDOM_SEED</strong> 	RANDOM_SEED (parameter, scalar) is the randomization seed.
-	%  <strong>20</strong> <strong>A</strong> 	A (result, cell) is the cell array containing the multiplex binary adjacency matrices of the binary undirected multiplex. 
-	%  <strong>21</strong> <strong>A_CHECK</strong> 	A_CHECK (query, logical) checks the format of the adjacency matrix.
-	%  <strong>22</strong> <strong>NODENUMBER</strong> 	NODENUMBER (result, rvector) returns the number of nodes in the graph; for non single layer graphs it returns an array with the number of nodes in each layer.
-	%  <strong>23</strong> <strong>LAYERNUMBER</strong> 	LAYERNUMBER (result, scalar) returns the number of layers in the graph.
-	%  <strong>24</strong> <strong>PARTITIONS</strong> 	PARTITIONS (result, rvector) returns the number of multiplex layers for each partition (threshold) of the graph.
-	%  <strong>25</strong> <strong>M_DICT</strong> 	M_DICT (result, idict) contains the calculated measures of the graph.
-	%  <strong>26</strong> <strong>COMPATIBLE_MEASURES</strong> 	COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
-	%  <strong>27</strong> <strong>MEASURE</strong> 	MEASURE (query, item) returns a measure.
-	%  <strong>28</strong> <strong>PFGA</strong> 	PFGA (gui, item) contains the panel figure of the graph adjacency matrix.
-	%  <strong>29</strong> <strong>PFGH</strong> 	PFGH (gui, item) contains the panel figure of the graph histogram.
-	%  <strong>30</strong> <strong>B</strong> 	B (data, cell) is the input cell containing the multiplex adjacency matrices on the diagonal.
-	%  <strong>31</strong> <strong>SYMMETRIZE_RULE</strong> 	SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.
-	%  <strong>32</strong> <strong>SEMIPOSITIVIZE_RULE</strong> 	SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.
-	%  <strong>33</strong> <strong>STANDARDIZE_RULE</strong> 	STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.
-	%  <strong>34</strong> <strong>ATTEMPTSPEREDGE</strong> 	ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-	%  <strong>35</strong> <strong>NUMBEROFWEIGHTS</strong> 	NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.
-	%  <strong>36</strong> <strong>RANDOMIZATION</strong> 	RANDOMIZATION (query, cell) is the attempts to rewire each edge.
-	%  <strong>37</strong> <strong>THRESHOLDS</strong> 	THRESHOLDS (parameter, rvector) is the vector of thresholds.
-	%
 	% MultiplexBUT methods (constructor):
 	%  MultiplexBUT - constructor
 	%
@@ -133,10 +94,10 @@ classdef MultiplexBUT < MultiplexWU
 	%
 	
 	properties (Constant) % properties
-		THRESHOLDS = 37; %CET: Computational Efficiency Trick
+		THRESHOLDS = MultiplexWU.getPropNumber() + 1;
 		THRESHOLDS_TAG = 'THRESHOLDS';
-		THRESHOLDS_CATEGORY = 3;
-		THRESHOLDS_FORMAT = 12;
+		THRESHOLDS_CATEGORY = Category.PARAMETER;
+		THRESHOLDS_FORMAT = Format.RVECTOR;
 	end
 	methods % constructor
 		function g = MultiplexBUT(varargin)
@@ -149,44 +110,6 @@ classdef MultiplexBUT < MultiplexWU
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of MultiplexBUT properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the binary undirected multiplex with fixed thresholds.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the binary undirected multiplex with fixed thresholds.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the binary undirected multiplex with fixed thresholds.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the binary undirected multiplex with fixed thresholds.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the binary undirected multiplex with fixed thresholds.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the binary undirected multiplex with fixed thresholds.
-			%  <strong>7</strong> <strong>GRAPH_TYPE</strong> 	GRAPH_TYPE (constant, scalar) returns the graph type Graph.MULTIPLEX.
-			%  <strong>8</strong> <strong>CONNECTIVITY_TYPE</strong> 	CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).
-			%  <strong>9</strong> <strong>DIRECTIONALITY_TYPE</strong> 	DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.UNDIRECTED * ones(layernumber).
-			%  <strong>10</strong> <strong>SELFCONNECTIVITY_TYPE</strong> 	SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type Graph.NONSELFCONNECTED on the diagonal and Graph.SELFCONNECTED off diagonal.
-			%  <strong>11</strong> <strong>NEGATIVITY_TYPE</strong> 	NEGATIVITY_TYPE (query, smatrix) returns the negativity type Graph.NONNEGATIVE * ones(layernumber).
-			%  <strong>12</strong> <strong>LAYERTICKS</strong> 	LAYERTICKS (metadata, rvector) are the layer tick values.
-			%  <strong>13</strong> <strong>ALAYERTICKS</strong> 	ALAYERTICKS (query, rvector) returns the layer tick values.
-			%  <strong>14</strong> <strong>LAYERLABELS</strong> 	LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.
-			%  <strong>15</strong> <strong>ALAYERLABELS</strong> 	ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.
-			%  <strong>16</strong> <strong>NODELABELS</strong> 	NODELABELS (metadata, stringlist) are the node labels provided by the user.
-			%  <strong>17</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the nodel labels for each layer.
-			%  <strong>18</strong> <strong>RANDOMIZE</strong> 	RANDOMIZE (parameter, logical) determines whether to randomize the graph.
-			%  <strong>19</strong> <strong>RANDOM_SEED</strong> 	RANDOM_SEED (parameter, scalar) is the randomization seed.
-			%  <strong>20</strong> <strong>A</strong> 	A (result, cell) is the cell array containing the multiplex binary adjacency matrices of the binary undirected multiplex. 
-			%  <strong>21</strong> <strong>A_CHECK</strong> 	A_CHECK (query, logical) checks the format of the adjacency matrix.
-			%  <strong>22</strong> <strong>NODENUMBER</strong> 	NODENUMBER (result, rvector) returns the number of nodes in the graph; for non single layer graphs it returns an array with the number of nodes in each layer.
-			%  <strong>23</strong> <strong>LAYERNUMBER</strong> 	LAYERNUMBER (result, scalar) returns the number of layers in the graph.
-			%  <strong>24</strong> <strong>PARTITIONS</strong> 	PARTITIONS (result, rvector) returns the number of multiplex layers for each partition (threshold) of the graph.
-			%  <strong>25</strong> <strong>M_DICT</strong> 	M_DICT (result, idict) contains the calculated measures of the graph.
-			%  <strong>26</strong> <strong>COMPATIBLE_MEASURES</strong> 	COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
-			%  <strong>27</strong> <strong>MEASURE</strong> 	MEASURE (query, item) returns a measure.
-			%  <strong>28</strong> <strong>PFGA</strong> 	PFGA (gui, item) contains the panel figure of the graph adjacency matrix.
-			%  <strong>29</strong> <strong>PFGH</strong> 	PFGH (gui, item) contains the panel figure of the graph histogram.
-			%  <strong>30</strong> <strong>B</strong> 	B (data, cell) is the input cell containing the multiplex adjacency matrices on the diagonal.
-			%  <strong>31</strong> <strong>SYMMETRIZE_RULE</strong> 	SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.
-			%  <strong>32</strong> <strong>SEMIPOSITIVIZE_RULE</strong> 	SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.
-			%  <strong>33</strong> <strong>STANDARDIZE_RULE</strong> 	STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.
-			%  <strong>34</strong> <strong>ATTEMPTSPEREDGE</strong> 	ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-			%  <strong>35</strong> <strong>NUMBEROFWEIGHTS</strong> 	NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.
-			%  <strong>36</strong> <strong>RANDOMIZATION</strong> 	RANDOMIZATION (query, cell) is the attempts to rewire each edge.
-			%  <strong>37</strong> <strong>THRESHOLDS</strong> 	THRESHOLDS (parameter, rvector) is the vector of thresholds.
 			%
 			% See also Category, Format.
 			
@@ -224,7 +147,7 @@ classdef MultiplexBUT < MultiplexWU
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'MultiplexBUT' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('MultiplexBUT', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of binary undirected multiplex with fixed thresholds.
@@ -245,30 +168,52 @@ classdef MultiplexBUT < MultiplexWU
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37];
+				prop_list = [ ...
+					MultiplexWU.getProps() ...
+						MultiplexBUT.THRESHOLDS ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2 7 26];
-				case 2 % Category.METADATA
-					prop_list = [5 6 12 14 16];
-				case 3 % Category.PARAMETER
-					prop_list = [3 18 19 31 32 33 34 35 37];
-				case 4 % Category.DATA
-					prop_list = [4 30];
-				case 5 % Category.RESULT
-					prop_list = [20 22 23 24 25];
-				case 6 % Category.QUERY
-					prop_list = [8 9 10 11 13 15 17 21 27 36];
-				case 9 % Category.GUI
-					prop_list = [28 29];
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						MultiplexWU.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						MultiplexWU.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						MultiplexWU.getProps(Category.PARAMETER) ...
+						MultiplexBUT.THRESHOLDS ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						MultiplexWU.getProps(Category.DATA) ...
+						];
+				case Category.RESULT
+					prop_list = [
+						MultiplexWU.getProps(Category.RESULT) ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						MultiplexWU.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						MultiplexWU.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						MultiplexWU.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						MultiplexWU.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -289,31 +234,7 @@ classdef MultiplexBUT < MultiplexWU
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 37;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 4;
-				case 2 % Category.METADATA
-					prop_number = 5;
-				case 3 % Category.PARAMETER
-					prop_number = 9;
-				case 4 % Category.DATA
-					prop_number = 2;
-				case 5 % Category.RESULT
-					prop_number = 5;
-				case 6 % Category.QUERY
-					prop_number = 10;
-				case 9 % Category.GUI
-					prop_number = 2;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(MultiplexBUT.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in binary undirected multiplex with fixed thresholds/error.
@@ -341,14 +262,14 @@ classdef MultiplexBUT < MultiplexWU
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 37 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == MultiplexBUT.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':MultiplexBUT:' 'WrongInput'], ...
-					['BRAPH2' ':MultiplexBUT:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':MultiplexBUT:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':MultiplexBUT:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for MultiplexBUT.'] ...
 					)
 			end
@@ -379,14 +300,15 @@ classdef MultiplexBUT < MultiplexWU
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'GRAPH_TYPE'  'CONNECTIVITY_TYPE'  'DIRECTIONALITY_TYPE'  'SELFCONNECTIVITY_TYPE'  'NEGATIVITY_TYPE'  'LAYERTICKS'  'ALAYERTICKS'  'LAYERLABELS'  'ALAYERLABELS'  'NODELABELS'  'ANODELABELS'  'RANDOMIZE'  'RANDOM_SEED'  'A'  'A_CHECK'  'NODENUMBER'  'LAYERNUMBER'  'PARTITIONS'  'M_DICT'  'COMPATIBLE_MEASURES'  'MEASURE'  'PFGA'  'PFGH'  'B'  'SYMMETRIZE_RULE'  'SEMIPOSITIVIZE_RULE'  'STANDARDIZE_RULE'  'ATTEMPTSPEREDGE'  'NUMBEROFWEIGHTS'  'RANDOMIZATION'  'THRESHOLDS' })); %CET: Computational Efficiency Trick
+			multiplexbut_tag_list = cellfun(@(x) MultiplexBUT.getPropTag(x), num2cell(MultiplexBUT.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, multiplexbut_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':MultiplexBUT:' 'WrongInput'], ...
-					['BRAPH2' ':MultiplexBUT:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':MultiplexBUT:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':MultiplexBUT:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for MultiplexBUT.'] ...
 					)
 			end
@@ -412,7 +334,8 @@ classdef MultiplexBUT < MultiplexWU
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'GRAPH_TYPE'  'CONNECTIVITY_TYPE'  'DIRECTIONALITY_TYPE'  'SELFCONNECTIVITY_TYPE'  'NEGATIVITY_TYPE'  'LAYERTICKS'  'ALAYERTICKS'  'LAYERLABELS'  'ALAYERLABELS'  'NODELABELS'  'ANODELABELS'  'RANDOMIZE'  'RANDOM_SEED'  'A'  'A_CHECK'  'NODENUMBER'  'LAYERNUMBER'  'PARTITIONS'  'M_DICT'  'COMPATIBLE_MEASURES'  'MEASURE'  'PFGA'  'PFGH'  'B'  'SYMMETRIZE_RULE'  'SEMIPOSITIVIZE_RULE'  'STANDARDIZE_RULE'  'ATTEMPTSPEREDGE'  'NUMBEROFWEIGHTS'  'RANDOMIZATION'  'THRESHOLDS' })); % tag = pointer %CET: Computational Efficiency Trick
+				multiplexbut_tag_list = cellfun(@(x) MultiplexBUT.getPropTag(x), num2cell(MultiplexBUT.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, multiplexbut_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -440,9 +363,14 @@ classdef MultiplexBUT < MultiplexWU
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				multiplexbut_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'GRAPH_TYPE'  'CONNECTIVITY_TYPE'  'DIRECTIONALITY_TYPE'  'SELFCONNECTIVITY_TYPE'  'NEGATIVITY_TYPE'  'LAYERTICKS'  'ALAYERTICKS'  'LAYERLABELS'  'ALAYERLABELS'  'NODELABELS'  'ANODELABELS'  'RANDOMIZE'  'RANDOM_SEED'  'A'  'A_CHECK'  'NODENUMBER'  'LAYERNUMBER'  'PARTITIONS'  'M_DICT'  'COMPATIBLE_MEASURES'  'MEASURE'  'PFGA'  'PFGH'  'B'  'SYMMETRIZE_RULE'  'SEMIPOSITIVIZE_RULE'  'STANDARDIZE_RULE'  'ATTEMPTSPEREDGE'  'NUMBEROFWEIGHTS'  'RANDOMIZATION'  'THRESHOLDS' };
-				tag = multiplexbut_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case MultiplexBUT.THRESHOLDS
+						tag = MultiplexBUT.THRESHOLDS_TAG;
+					otherwise
+						tag = getPropTag@MultiplexWU(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -467,9 +395,12 @@ classdef MultiplexBUT < MultiplexWU
 			
 			prop = MultiplexBUT.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			multiplexbut_category_list = { 1  1  3  4  2  2  1  6  6  6  6  2  6  2  6  2  6  3  3  5  6  5  5  5  5  1  6  9  9  4  3  3  3  3  3  6  3 };
-			prop_category = multiplexbut_category_list{prop};
+			switch prop
+				case MultiplexBUT.THRESHOLDS
+					prop_category = MultiplexBUT.THRESHOLDS_CATEGORY;
+				otherwise
+					prop_category = getPropCategory@MultiplexWU(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -493,9 +424,12 @@ classdef MultiplexBUT < MultiplexWU
 			
 			prop = MultiplexBUT.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			multiplexbut_format_list = { 2  2  8  2  2  2  11  15  15  15  11  12  12  3  3  3  3  4  11  16  4  12  11  12  10  7  8  8  8  16  5  5  5  11  11  16  12 };
-			prop_format = multiplexbut_format_list{prop};
+			switch prop
+				case MultiplexBUT.THRESHOLDS
+					prop_format = MultiplexBUT.THRESHOLDS_FORMAT;
+				otherwise
+					prop_format = getPropFormat@MultiplexWU(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -519,9 +453,48 @@ classdef MultiplexBUT < MultiplexWU
 			
 			prop = MultiplexBUT.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			multiplexbut_description_list = { 'NAME (constant, string) is the name of the binary undirected multiplex with fixed thresholds.'  'DESCRIPTION (constant, string) is the description of the binary undirected multiplex with fixed thresholds.'  'TEMPLATE (parameter, item) is the template of the binary undirected multiplex with fixed thresholds.'  'ID (data, string) is a few-letter code for the binary undirected multiplex with fixed thresholds.'  'LABEL (metadata, string) is an extended label of the binary undirected multiplex with fixed thresholds.'  'NOTES (metadata, string) are some specific notes about the binary undirected multiplex with fixed thresholds.'  'GRAPH_TYPE (constant, scalar) returns the graph type Graph.MULTIPLEX.'  'CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).'  'DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.UNDIRECTED * ones(layernumber).'  'SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type Graph.NONSELFCONNECTED on the diagonal and Graph.SELFCONNECTED off diagonal.'  'NEGATIVITY_TYPE (query, smatrix) returns the negativity type Graph.NONNEGATIVE * ones(layernumber).'  'LAYERTICKS (metadata, rvector) are the layer tick values.'  'ALAYERTICKS (query, rvector) returns the layer tick values.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.'  'NODELABELS (metadata, stringlist) are the node labels provided by the user.'  'ANODELABELS (query, stringlist) returns the nodel labels for each layer.'  'RANDOMIZE (parameter, logical) determines whether to randomize the graph.'  'RANDOM_SEED (parameter, scalar) is the randomization seed.'  'A (result, cell) is the cell array containing the multiplex binary adjacency matrices of the binary undirected multiplex. '  'A_CHECK (query, logical) checks the format of the adjacency matrix.'  'NODENUMBER (result, rvector) returns the number of nodes in the graph; for non single layer graphs it returns an array with the number of nodes in each layer.'  'LAYERNUMBER (result, scalar) returns the number of layers in the graph.'  'PARTITIONS (result, rvector) returns the number of multiplex layers for each partition (threshold) of the graph.'  'M_DICT (result, idict) contains the calculated measures of the graph.'  'COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.'  'MEASURE (query, item) returns a measure.'  'PFGA (gui, item) contains the panel figure of the graph adjacency matrix.'  'PFGH (gui, item) contains the panel figure of the graph histogram.'  'B (data, cell) is the input cell containing the multiplex adjacency matrices on the diagonal.'  'SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.'  'SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.'  'STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.'  'ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.'  'NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.'  'RANDOMIZATION (query, cell) is the attempts to rewire each edge.'  'THRESHOLDS (parameter, rvector) is the vector of thresholds.' };
-			prop_description = multiplexbut_description_list{prop};
+			switch prop
+				case MultiplexBUT.THRESHOLDS
+					prop_description = 'THRESHOLDS (parameter, rvector) is the vector of thresholds.';
+				case MultiplexBUT.NAME
+					prop_description = 'NAME (constant, string) is the name of the binary undirected multiplex with fixed thresholds.';
+				case MultiplexBUT.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the binary undirected multiplex with fixed thresholds.';
+				case MultiplexBUT.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the binary undirected multiplex with fixed thresholds.';
+				case MultiplexBUT.ID
+					prop_description = 'ID (data, string) is a few-letter code for the binary undirected multiplex with fixed thresholds.';
+				case MultiplexBUT.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the binary undirected multiplex with fixed thresholds.';
+				case MultiplexBUT.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the binary undirected multiplex with fixed thresholds.';
+				case MultiplexBUT.GRAPH_TYPE
+					prop_description = 'GRAPH_TYPE (constant, scalar) returns the graph type __Graph.MULTIPLEX__.';
+				case MultiplexBUT.CONNECTIVITY_TYPE
+					prop_description = 'CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type __Graph.BINARY__ * ones(layernumber).';
+				case MultiplexBUT.DIRECTIONALITY_TYPE
+					prop_description = 'DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type __Graph.UNDIRECTED__ * ones(layernumber).';
+				case MultiplexBUT.SELFCONNECTIVITY_TYPE
+					prop_description = 'SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type __Graph.NONSELFCONNECTED__ on the diagonal and __Graph.SELFCONNECTED__ off diagonal.';
+				case MultiplexBUT.NEGATIVITY_TYPE
+					prop_description = 'NEGATIVITY_TYPE (query, smatrix) returns the negativity type __Graph.NONNEGATIVE__ * ones(layernumber).';
+				case MultiplexBUT.A
+					prop_description = 'A (result, cell) is the cell array containing the multiplex binary adjacency matrices of the binary undirected multiplex. ';
+				case MultiplexBUT.PARTITIONS
+					prop_description = 'PARTITIONS (result, rvector) returns the number of multiplex layers for each partition (threshold) of the graph.';
+				case MultiplexBUT.ALAYERLABELS
+					prop_description = 'ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.';
+				case MultiplexBUT.COMPATIBLE_MEASURES
+					prop_description = 'COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.';
+				case MultiplexBUT.ATTEMPTSPEREDGE
+					prop_description = 'ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.';
+				case MultiplexBUT.RANDOMIZATION
+					prop_description = 'RANDOMIZATION (query, cell) is the attempts to rewire each edge.';
+				case MultiplexBUT.SUBGRAPH
+					prop_description = 'SUBGRAPH (query, item) returns a subgraph of original graph';
+				otherwise
+					prop_description = getPropDescription@MultiplexWU(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -545,10 +518,10 @@ classdef MultiplexBUT < MultiplexWU
 			
 			prop = MultiplexBUT.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 37 % MultiplexBUT.THRESHOLDS
-					prop_settings = Format.getFormatSettings(12);
-				case 3 % MultiplexBUT.TEMPLATE
+			switch prop
+				case MultiplexBUT.THRESHOLDS
+					prop_settings = Format.getFormatSettings(Format.RVECTOR);
+				case MultiplexBUT.TEMPLATE
 					prop_settings = 'MultiplexBUT';
 				otherwise
 					prop_settings = getPropSettings@MultiplexWU(prop);
@@ -576,26 +549,26 @@ classdef MultiplexBUT < MultiplexWU
 			
 			prop = MultiplexBUT.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 37 % MultiplexBUT.THRESHOLDS
-					prop_default = Format.getFormatDefault(12, MultiplexBUT.getPropSettings(prop));
-				case 1 % MultiplexBUT.NAME
+			switch prop
+				case MultiplexBUT.THRESHOLDS
+					prop_default = Format.getFormatDefault(Format.RVECTOR, MultiplexBUT.getPropSettings(prop));
+				case MultiplexBUT.NAME
 					prop_default = 'MultiplexBUT';
-				case 2 % MultiplexBUT.DESCRIPTION
+				case MultiplexBUT.DESCRIPTION
 					prop_default = 'In a binary undirected multiplex with fixed thresholds (BUT), the layers are those of binary undirected (BU) multiplex graphs derived from the same weighted supra-connectivity matrices binarized at different thresholds. The supra-connectivity matrix has a number of partitions equal to the number of thresholds.';
-				case 3 % MultiplexBUT.TEMPLATE
-					prop_default = Format.getFormatDefault(8, MultiplexBUT.getPropSettings(prop));
-				case 4 % MultiplexBUT.ID
+				case MultiplexBUT.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, MultiplexBUT.getPropSettings(prop));
+				case MultiplexBUT.ID
 					prop_default = 'MultiplexBUT ID';
-				case 5 % MultiplexBUT.LABEL
+				case MultiplexBUT.LABEL
 					prop_default = 'MultiplexBUT label';
-				case 6 % MultiplexBUT.NOTES
+				case MultiplexBUT.NOTES
 					prop_default = 'MultiplexBUT notes';
-				case 7 % MultiplexBUT.GRAPH_TYPE
-					prop_default = 4;
-				case 26 % MultiplexBUT.COMPATIBLE_MEASURES
-					prop_default = { 'Clustering'  'ClusteringAv'  'Degree'  'DegreeAv'  'Distance'  'GlobalEfficiency'  'GlobalEfficiencyAv'  'Triangles' };
-				case 34 % MultiplexBUT.ATTEMPTSPEREDGE
+				case MultiplexBUT.GRAPH_TYPE
+					prop_default = Graph.MULTIPLEX;
+				case MultiplexBUT.COMPATIBLE_MEASURES
+					prop_default = getCompatibleMeasures('MultiplexBUT');
+				case MultiplexBUT.ATTEMPTSPEREDGE
 					prop_default = 5;
 				otherwise
 					prop_default = getPropDefault@MultiplexWU(prop);
@@ -642,15 +615,15 @@ classdef MultiplexBUT < MultiplexWU
 			% 
 			% G.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:MultiplexBUT:WrongInput
+			%  Error id: €BRAPH2.STR€:MultiplexBUT:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  G.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of G.
-			%   Error id: BRAPH2:MultiplexBUT:WrongInput
+			%   Error id: €BRAPH2.STR€:MultiplexBUT:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(MultiplexBUT, PROP, VALUE) throws error if VALUE has not a valid format for PROP of MultiplexBUT.
-			%   Error id: BRAPH2:MultiplexBUT:WrongInput
+			%   Error id: €BRAPH2.STR€:MultiplexBUT:€BRAPH2.WRONG_INPUT€
 			%  G.CHECKPROP(MultiplexBUT, PROP, VALUE) throws error if VALUE has not a valid format for PROP of MultiplexBUT.
-			%   Error id: BRAPH2:MultiplexBUT:WrongInput]
+			%   Error id: €BRAPH2.STR€:MultiplexBUT:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(G) and Element.CHECKPROP('MultiplexBUT')
 			%  are less computationally efficient.
@@ -661,12 +634,12 @@ classdef MultiplexBUT < MultiplexWU
 			prop = MultiplexBUT.getPropProp(pointer);
 			
 			switch prop
-				case 37 % MultiplexBUT.THRESHOLDS
-					check = Format.checkFormat(12, value, MultiplexBUT.getPropSettings(prop));
-				case 3 % MultiplexBUT.TEMPLATE
-					check = Format.checkFormat(8, value, MultiplexBUT.getPropSettings(prop));
+				case MultiplexBUT.THRESHOLDS % __MultiplexBUT.THRESHOLDS__
+					check = Format.checkFormat(Format.RVECTOR, value, MultiplexBUT.getPropSettings(prop));
+				case MultiplexBUT.TEMPLATE % __MultiplexBUT.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, MultiplexBUT.getPropSettings(prop));
 				otherwise
-					if prop <= 36
+					if prop <= MultiplexWU.getPropNumber()
 						check = checkProp@MultiplexWU(prop, value);
 					end
 			end
@@ -675,8 +648,8 @@ classdef MultiplexBUT < MultiplexWU
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':MultiplexBUT:' 'WrongInput'], ...
-					['BRAPH2' ':MultiplexBUT:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':MultiplexBUT:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':MultiplexBUT:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' MultiplexBUT.getPropTag(prop) ' (' MultiplexBUT.getFormatTag(MultiplexBUT.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -687,53 +660,53 @@ classdef MultiplexBUT < MultiplexWU
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with 5,
-			%  6, and 7. By default this function
+			%  PROP. It works only with properties with Category.RESULT,
+			%  Category.QUERY, and Category.EVANESCENT. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  6.
+			%  Category.QUERY.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 8 % MultiplexBUT.CONNECTIVITY_TYPE
+				case MultiplexBUT.CONNECTIVITY_TYPE % __MultiplexBUT.CONNECTIVITY_TYPE__
 					if isempty(varargin)
 					    layernumber = 1;
 					else
 					    layernumber = varargin{1};
 					end
-					value = 2 * ones(layernumber);
+					value = Graph.BINARY * ones(layernumber);
 					
-				case 9 % MultiplexBUT.DIRECTIONALITY_TYPE
+				case MultiplexBUT.DIRECTIONALITY_TYPE % __MultiplexBUT.DIRECTIONALITY_TYPE__
 					if isempty(varargin)
 					    layernumber = 1;
 					else
 					    layernumber = varargin{1};
 					end
-					value = 2 * ones(layernumber);
+					value = Graph.UNDIRECTED * ones(layernumber);
 					
-				case 10 % MultiplexBUT.SELFCONNECTIVITY_TYPE
+				case MultiplexBUT.SELFCONNECTIVITY_TYPE % __MultiplexBUT.SELFCONNECTIVITY_TYPE__
 					if isempty(varargin)
 					    layernumber = 1;
 					else
 					    layernumber = varargin{1};
 					end
-					value = 2 * ones(layernumber);
-					value(1:layernumber+1:end) = 1;
+					value = Graph.SELFCONNECTED * ones(layernumber);
+					value(1:layernumber+1:end) = Graph.NONSELFCONNECTED;
 					
-				case 11 % MultiplexBUT.NEGATIVITY_TYPE
+				case MultiplexBUT.NEGATIVITY_TYPE % __MultiplexBUT.NEGATIVITY_TYPE__
 					if isempty(varargin)
 					    layernumber = 1;
 					else
 					    layernumber = varargin{1};
 					end
-					value =  ones(layernumber);
+					value = Graph.NONNEGATIVE * ones(layernumber);
 					
-				case 20 % MultiplexBUT.A
-					rng_settings_ = rng(); rng(g.getPropSeed(20), 'twister')
+				case MultiplexBUT.A % __MultiplexBUT.A__
+					rng_settings_ = rng(); rng(g.getPropSeed(MultiplexBUT.A), 'twister')
 					
 					A_WU = calculateValue@MultiplexWU(g, prop);
 					
@@ -759,8 +732,8 @@ classdef MultiplexBUT < MultiplexWU
 					
 					rng(rng_settings_)
 					
-				case 24 % MultiplexBUT.PARTITIONS
-					rng_settings_ = rng(); rng(g.getPropSeed(24), 'twister')
+				case MultiplexBUT.PARTITIONS % __MultiplexBUT.PARTITIONS__
+					rng_settings_ = rng(); rng(g.getPropSeed(MultiplexBUT.PARTITIONS), 'twister')
 					
 					l = g.get('LAYERNUMBER');
 					thresholds = g.get('THRESHOLDS');
@@ -768,7 +741,7 @@ classdef MultiplexBUT < MultiplexWU
 					
 					rng(rng_settings_)
 					
-				case 15 % MultiplexBUT.ALAYERLABELS
+				case MultiplexBUT.ALAYERLABELS % __MultiplexBUT.ALAYERLABELS__
 					alayerlabels = g.get('LAYERLABELS');
 					if ~isa(g.getr('A'), 'NoValue') && length(alayerlabels) ~= g.get('LAYERNUMBER') % ensures that it's not unecessarily calculated
 					    thresholds = cellfun(@num2str, num2cell(g.get('THRESHOLDS')), 'uniformoutput', false);
@@ -788,7 +761,7 @@ classdef MultiplexBUT < MultiplexWU
 					end
 					value = alayerlabels;
 					
-				case 36 % MultiplexBUT.RANDOMIZATION
+				case MultiplexBUT.RANDOMIZATION % __MultiplexBUT.RANDOMIZATION__
 					rng(g.get('RANDOM_SEED'), 'twister')
 					
 					if isempty(varargin)
@@ -809,8 +782,31 @@ classdef MultiplexBUT < MultiplexWU
 					end
 					value = A;
 					
+				case MultiplexBUT.SUBGRAPH % __MultiplexBUT.SUBGRAPH__
+					A = g.get('B');
+					L = length(A);
+					
+					if isempty(varargin)
+					    value = g;
+					    return
+					end
+					nodes = varargin{1};
+					if ~iscell(nodes)
+					    nodes = repmat({nodes}, 1, L);
+					end
+					for li = 1:1:L
+					    Aii = A{li};
+					    if ~isempty(Aii)
+					        B(li) = {Aii(nodes{li}, nodes{li})};
+					    end
+					end
+					value = MultiplexBUT('B', B, 'TEMPLATE', g, ...
+					    'ID', ['Subgraph of ' g.get('ID')], ...
+					    'LABEL', ['Subgraph - ' g.get('LABEL')], ...
+					    'NOTES', ['Subgraph - ' g.get('NOTES')]);
+					
 				otherwise
-					if prop <= 36
+					if prop <= MultiplexWU.getPropNumber()
 						value = calculateValue@MultiplexWU(g, prop, varargin{:});
 					else
 						value = calculateValue@Element(g, prop, varargin{:});
@@ -836,17 +832,17 @@ classdef MultiplexBUT < MultiplexWU
 			%  PanelPropString, PanelPropStringList.
 			
 			switch prop
-				case 37 % MultiplexBUT.THRESHOLDS
-					pr = PanelPropRVectorSmart('EL', g, 'PROP', 37, 'MAX', 1, 'MIN', -1, varargin{:});
+				case MultiplexBUT.THRESHOLDS % __MultiplexBUT.THRESHOLDS__
+					pr = PanelPropRVectorSmart('EL', g, 'PROP', MultiplexBUT.THRESHOLDS, 'MAX', 1, 'MIN', -1, varargin{:});
 					
-				case 20 % MultiplexBUT.A
-					pr = PanelPropCell('EL', g, 'PROP', 20, ...
-					    'TABLE_HEIGHT', 480, ...
+				case MultiplexBUT.A % __MultiplexBUT.A__
+					pr = PanelPropCell('EL', g, 'PROP', MultiplexBUT.A, ...
+					    'TABLE_HEIGHT', s(40), ...
 					    'XYSLIDERLOCK', true, ... 
 					    'XSLIDERSHOW', false, ...
 					    'YSLIDERSHOW', true, ...
 					    'YSLIDERLABELS', g.getCallback('ALAYERLABELS'), ...
-					    'YSLIDERWIDTH', 60, ...
+					    'YSLIDERWIDTH', s(5), ...
 					    'ROWNAME', g.getCallback('ANODELABELS'), ...
 					    'COLUMNNAME', g.getCallback('ANODELABELS'), ...
 					    varargin{:});

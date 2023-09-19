@@ -4,19 +4,6 @@ classdef MeasureEnsemble < ConcreteElement
 	%
 	% MeasureEnsemble provides the methods necessary for a graph ensemble measure.
 	%
-	% The list of MeasureEnsemble properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the graph ensemble measure.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the graph ensemble measure.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the graph ensemble measure.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graph ensemble measure.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graph ensemble measure.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graph ensemble measure.
-	%  <strong>7</strong> <strong>MEASURE</strong> 	MEASURE (data, class) is the measure class.
-	%  <strong>8</strong> <strong>A</strong> 	A (data, item) is the ensemble-based graph analysis.
-	%  <strong>9</strong> <strong>M</strong> 	M (result, cell) is the measure group-average result.
-	%  <strong>10</strong> <strong>PFME</strong> 	PFME (gui, item) contains the panel figure of the measure.
-	%  <strong>11</strong> <strong>PFBG</strong> 	PFBG (gui, item) contains the panel figure of the brain graph.
-	%
 	% MeasureEnsemble methods (constructor):
 	%  MeasureEnsemble - constructor
 	%
@@ -106,30 +93,30 @@ classdef MeasureEnsemble < ConcreteElement
 	% See also AnalyzeEnsemble, CompareEnsemble.
 	
 	properties (Constant) % properties
-		MEASURE = 7; %CET: Computational Efficiency Trick
+		MEASURE = ConcreteElement.getPropNumber() + 1;
 		MEASURE_TAG = 'MEASURE';
-		MEASURE_CATEGORY = 4;
-		MEASURE_FORMAT = 6;
+		MEASURE_CATEGORY = Category.DATA;
+		MEASURE_FORMAT = Format.CLASS;
 		
-		A = 8; %CET: Computational Efficiency Trick
+		A = ConcreteElement.getPropNumber() + 2;
 		A_TAG = 'A';
-		A_CATEGORY = 4;
-		A_FORMAT = 8;
+		A_CATEGORY = Category.DATA;
+		A_FORMAT = Format.ITEM;
 		
-		M = 9; %CET: Computational Efficiency Trick
+		M = ConcreteElement.getPropNumber() + 3;
 		M_TAG = 'M';
-		M_CATEGORY = 5;
-		M_FORMAT = 16;
+		M_CATEGORY = Category.RESULT;
+		M_FORMAT = Format.CELL;
 		
-		PFME = 10; %CET: Computational Efficiency Trick
+		PFME = ConcreteElement.getPropNumber() + 4;
 		PFME_TAG = 'PFME';
-		PFME_CATEGORY = 9;
-		PFME_FORMAT = 8;
+		PFME_CATEGORY = Category.GUI;
+		PFME_FORMAT = Format.ITEM;
 		
-		PFBG = 11; %CET: Computational Efficiency Trick
+		PFBG = ConcreteElement.getPropNumber() + 5;
 		PFBG_TAG = 'PFBG';
-		PFBG_CATEGORY = 9;
-		PFBG_FORMAT = 8;
+		PFBG_CATEGORY = Category.GUI;
+		PFBG_FORMAT = Format.ITEM;
 	end
 	methods % constructor
 		function me = MeasureEnsemble(varargin)
@@ -142,18 +129,6 @@ classdef MeasureEnsemble < ConcreteElement
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of MeasureEnsemble properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the graph ensemble measure.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the graph ensemble measure.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the graph ensemble measure.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graph ensemble measure.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graph ensemble measure.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graph ensemble measure.
-			%  <strong>7</strong> <strong>MEASURE</strong> 	MEASURE (data, class) is the measure class.
-			%  <strong>8</strong> <strong>A</strong> 	A (data, item) is the ensemble-based graph analysis.
-			%  <strong>9</strong> <strong>M</strong> 	M (result, cell) is the measure group-average result.
-			%  <strong>10</strong> <strong>PFME</strong> 	PFME (gui, item) contains the panel figure of the measure.
-			%  <strong>11</strong> <strong>PFBG</strong> 	PFBG (gui, item) contains the panel figure of the brain graph.
 			%
 			% See also Category, Format.
 			
@@ -191,7 +166,7 @@ classdef MeasureEnsemble < ConcreteElement
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'MeasureEnsemble' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('MeasureEnsemble', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of graph ensemble measure.
@@ -212,28 +187,60 @@ classdef MeasureEnsemble < ConcreteElement
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11];
+				prop_list = [ ...
+					ConcreteElement.getProps() ...
+						MeasureEnsemble.MEASURE ...
+						MeasureEnsemble.A ...
+						MeasureEnsemble.M ...
+						MeasureEnsemble.PFME ...
+						MeasureEnsemble.PFBG ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
-					prop_list = [4 7 8];
-				case 5 % Category.RESULT
-					prop_list = 9;
-				case 9 % Category.GUI
-					prop_list = [10 11];
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.PARAMETER) ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.DATA) ...
+						MeasureEnsemble.MEASURE ...
+						MeasureEnsemble.A ...
+						];
+				case Category.RESULT
+					prop_list = [
+						ConcreteElement.getProps(Category.RESULT) ...
+						MeasureEnsemble.M ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.GUI) ...
+						MeasureEnsemble.PFME ...
+						MeasureEnsemble.PFBG ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -254,29 +261,7 @@ classdef MeasureEnsemble < ConcreteElement
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 11;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 2;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 1;
-				case 4 % Category.DATA
-					prop_number = 3;
-				case 5 % Category.RESULT
-					prop_number = 1;
-				case 9 % Category.GUI
-					prop_number = 2;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(MeasureEnsemble.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in graph ensemble measure/error.
@@ -304,14 +289,14 @@ classdef MeasureEnsemble < ConcreteElement
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 11 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == MeasureEnsemble.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':MeasureEnsemble:' 'WrongInput'], ...
-					['BRAPH2' ':MeasureEnsemble:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':MeasureEnsemble:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':MeasureEnsemble:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for MeasureEnsemble.'] ...
 					)
 			end
@@ -342,14 +327,15 @@ classdef MeasureEnsemble < ConcreteElement
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'MEASURE'  'A'  'M'  'PFME'  'PFBG' })); %CET: Computational Efficiency Trick
+			measureensemble_tag_list = cellfun(@(x) MeasureEnsemble.getPropTag(x), num2cell(MeasureEnsemble.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, measureensemble_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':MeasureEnsemble:' 'WrongInput'], ...
-					['BRAPH2' ':MeasureEnsemble:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':MeasureEnsemble:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':MeasureEnsemble:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for MeasureEnsemble.'] ...
 					)
 			end
@@ -375,7 +361,8 @@ classdef MeasureEnsemble < ConcreteElement
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'MEASURE'  'A'  'M'  'PFME'  'PFBG' })); % tag = pointer %CET: Computational Efficiency Trick
+				measureensemble_tag_list = cellfun(@(x) MeasureEnsemble.getPropTag(x), num2cell(MeasureEnsemble.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, measureensemble_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -403,9 +390,22 @@ classdef MeasureEnsemble < ConcreteElement
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				measureensemble_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'MEASURE'  'A'  'M'  'PFME'  'PFBG' };
-				tag = measureensemble_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case MeasureEnsemble.MEASURE
+						tag = MeasureEnsemble.MEASURE_TAG;
+					case MeasureEnsemble.A
+						tag = MeasureEnsemble.A_TAG;
+					case MeasureEnsemble.M
+						tag = MeasureEnsemble.M_TAG;
+					case MeasureEnsemble.PFME
+						tag = MeasureEnsemble.PFME_TAG;
+					case MeasureEnsemble.PFBG
+						tag = MeasureEnsemble.PFBG_TAG;
+					otherwise
+						tag = getPropTag@ConcreteElement(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -430,9 +430,20 @@ classdef MeasureEnsemble < ConcreteElement
 			
 			prop = MeasureEnsemble.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			measureensemble_category_list = { 1  1  3  4  2  2  4  4  5  9  9 };
-			prop_category = measureensemble_category_list{prop};
+			switch prop
+				case MeasureEnsemble.MEASURE
+					prop_category = MeasureEnsemble.MEASURE_CATEGORY;
+				case MeasureEnsemble.A
+					prop_category = MeasureEnsemble.A_CATEGORY;
+				case MeasureEnsemble.M
+					prop_category = MeasureEnsemble.M_CATEGORY;
+				case MeasureEnsemble.PFME
+					prop_category = MeasureEnsemble.PFME_CATEGORY;
+				case MeasureEnsemble.PFBG
+					prop_category = MeasureEnsemble.PFBG_CATEGORY;
+				otherwise
+					prop_category = getPropCategory@ConcreteElement(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -456,9 +467,20 @@ classdef MeasureEnsemble < ConcreteElement
 			
 			prop = MeasureEnsemble.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			measureensemble_format_list = { 2  2  8  2  2  2  6  8  16  8  8 };
-			prop_format = measureensemble_format_list{prop};
+			switch prop
+				case MeasureEnsemble.MEASURE
+					prop_format = MeasureEnsemble.MEASURE_FORMAT;
+				case MeasureEnsemble.A
+					prop_format = MeasureEnsemble.A_FORMAT;
+				case MeasureEnsemble.M
+					prop_format = MeasureEnsemble.M_FORMAT;
+				case MeasureEnsemble.PFME
+					prop_format = MeasureEnsemble.PFME_FORMAT;
+				case MeasureEnsemble.PFBG
+					prop_format = MeasureEnsemble.PFBG_FORMAT;
+				otherwise
+					prop_format = getPropFormat@ConcreteElement(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -482,9 +504,32 @@ classdef MeasureEnsemble < ConcreteElement
 			
 			prop = MeasureEnsemble.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			measureensemble_description_list = { 'NAME (constant, string) is the name of the graph ensemble measure.'  'DESCRIPTION (constant, string) is the description of the graph ensemble measure.'  'TEMPLATE (parameter, item) is the template of the graph ensemble measure.'  'ID (data, string) is a few-letter code for the graph ensemble measure.'  'LABEL (metadata, string) is an extended label of the graph ensemble measure.'  'NOTES (metadata, string) are some specific notes about the graph ensemble measure.'  'MEASURE (data, class) is the measure class.'  'A (data, item) is the ensemble-based graph analysis.'  'M (result, cell) is the measure group-average result.'  'PFME (gui, item) contains the panel figure of the measure.'  'PFBG (gui, item) contains the panel figure of the brain graph.' };
-			prop_description = measureensemble_description_list{prop};
+			switch prop
+				case MeasureEnsemble.MEASURE
+					prop_description = 'MEASURE (data, class) is the measure class.';
+				case MeasureEnsemble.A
+					prop_description = 'A (data, item) is the ensemble-based graph analysis.';
+				case MeasureEnsemble.M
+					prop_description = 'M (result, cell) is the measure group-average result.';
+				case MeasureEnsemble.PFME
+					prop_description = 'PFME (gui, item) contains the panel figure of the measure.';
+				case MeasureEnsemble.PFBG
+					prop_description = 'PFBG (gui, item) contains the panel figure of the brain graph.';
+				case MeasureEnsemble.NAME
+					prop_description = 'NAME (constant, string) is the name of the graph ensemble measure.';
+				case MeasureEnsemble.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the graph ensemble measure.';
+				case MeasureEnsemble.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the graph ensemble measure.';
+				case MeasureEnsemble.ID
+					prop_description = 'ID (data, string) is a few-letter code for the graph ensemble measure.';
+				case MeasureEnsemble.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the graph ensemble measure.';
+				case MeasureEnsemble.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the graph ensemble measure.';
+				otherwise
+					prop_description = getPropDescription@ConcreteElement(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -508,18 +553,18 @@ classdef MeasureEnsemble < ConcreteElement
 			
 			prop = MeasureEnsemble.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 7 % MeasureEnsemble.MEASURE
+			switch prop
+				case MeasureEnsemble.MEASURE
 					prop_settings = 'Measure';
-				case 8 % MeasureEnsemble.A
+				case MeasureEnsemble.A
 					prop_settings = 'AnalyzeEnsemble';
-				case 9 % MeasureEnsemble.M
-					prop_settings = Format.getFormatSettings(16);
-				case 10 % MeasureEnsemble.PFME
-					prop_settings = Format.getFormatSettings(8);
-				case 11 % MeasureEnsemble.PFBG
-					prop_settings = Format.getFormatSettings(8);
-				case 3 % MeasureEnsemble.TEMPLATE
+				case MeasureEnsemble.M
+					prop_settings = Format.getFormatSettings(Format.CELL);
+				case MeasureEnsemble.PFME
+					prop_settings = Format.getFormatSettings(Format.ITEM);
+				case MeasureEnsemble.PFBG
+					prop_settings = Format.getFormatSettings(Format.ITEM);
+				case MeasureEnsemble.TEMPLATE
 					prop_settings = 'MeasureEnsemble';
 				otherwise
 					prop_settings = getPropSettings@ConcreteElement(prop);
@@ -547,28 +592,28 @@ classdef MeasureEnsemble < ConcreteElement
 			
 			prop = MeasureEnsemble.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 7 % MeasureEnsemble.MEASURE
-					prop_default = Format.getFormatDefault(6, MeasureEnsemble.getPropSettings(prop));
-				case 8 % MeasureEnsemble.A
-					prop_default = Format.getFormatDefault(8, MeasureEnsemble.getPropSettings(prop));
-				case 9 % MeasureEnsemble.M
-					prop_default = Format.getFormatDefault(16, MeasureEnsemble.getPropSettings(prop));
-				case 10 % MeasureEnsemble.PFME
-					prop_default = Format.getFormatDefault(8, MeasureEnsemble.getPropSettings(prop));
-				case 11 % MeasureEnsemble.PFBG
-					prop_default = Format.getFormatDefault(8, MeasureEnsemble.getPropSettings(prop));
-				case 1 % MeasureEnsemble.NAME
+			switch prop
+				case MeasureEnsemble.MEASURE
+					prop_default = Format.getFormatDefault(Format.CLASS, MeasureEnsemble.getPropSettings(prop));
+				case MeasureEnsemble.A
+					prop_default = Format.getFormatDefault(Format.ITEM, MeasureEnsemble.getPropSettings(prop));
+				case MeasureEnsemble.M
+					prop_default = Format.getFormatDefault(Format.CELL, MeasureEnsemble.getPropSettings(prop));
+				case MeasureEnsemble.PFME
+					prop_default = Format.getFormatDefault(Format.ITEM, MeasureEnsemble.getPropSettings(prop));
+				case MeasureEnsemble.PFBG
+					prop_default = Format.getFormatDefault(Format.ITEM, MeasureEnsemble.getPropSettings(prop));
+				case MeasureEnsemble.NAME
 					prop_default = 'MeasureEnsemble';
-				case 2 % MeasureEnsemble.DESCRIPTION
+				case MeasureEnsemble.DESCRIPTION
 					prop_default = 'MeasureEnsemble provides the methods necessary for a graph ensemble measure.';
-				case 3 % MeasureEnsemble.TEMPLATE
-					prop_default = Format.getFormatDefault(8, MeasureEnsemble.getPropSettings(prop));
-				case 4 % MeasureEnsemble.ID
+				case MeasureEnsemble.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, MeasureEnsemble.getPropSettings(prop));
+				case MeasureEnsemble.ID
 					prop_default = 'MeasureEnsemble ID';
-				case 5 % MeasureEnsemble.LABEL
+				case MeasureEnsemble.LABEL
 					prop_default = 'MeasureEnsemble label';
-				case 6 % MeasureEnsemble.NOTES
+				case MeasureEnsemble.NOTES
 					prop_default = 'MeasureEnsemble notes';
 				otherwise
 					prop_default = getPropDefault@ConcreteElement(prop);
@@ -615,15 +660,15 @@ classdef MeasureEnsemble < ConcreteElement
 			% 
 			% ME.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:MeasureEnsemble:WrongInput
+			%  Error id: €BRAPH2.STR€:MeasureEnsemble:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  ME.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of ME.
-			%   Error id: BRAPH2:MeasureEnsemble:WrongInput
+			%   Error id: €BRAPH2.STR€:MeasureEnsemble:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(MeasureEnsemble, PROP, VALUE) throws error if VALUE has not a valid format for PROP of MeasureEnsemble.
-			%   Error id: BRAPH2:MeasureEnsemble:WrongInput
+			%   Error id: €BRAPH2.STR€:MeasureEnsemble:€BRAPH2.WRONG_INPUT€
 			%  ME.CHECKPROP(MeasureEnsemble, PROP, VALUE) throws error if VALUE has not a valid format for PROP of MeasureEnsemble.
-			%   Error id: BRAPH2:MeasureEnsemble:WrongInput]
+			%   Error id: €BRAPH2.STR€:MeasureEnsemble:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(ME) and Element.CHECKPROP('MeasureEnsemble')
 			%  are less computationally efficient.
@@ -634,20 +679,20 @@ classdef MeasureEnsemble < ConcreteElement
 			prop = MeasureEnsemble.getPropProp(pointer);
 			
 			switch prop
-				case 7 % MeasureEnsemble.MEASURE
-					check = Format.checkFormat(6, value, MeasureEnsemble.getPropSettings(prop));
-				case 8 % MeasureEnsemble.A
-					check = Format.checkFormat(8, value, MeasureEnsemble.getPropSettings(prop));
-				case 9 % MeasureEnsemble.M
-					check = Format.checkFormat(16, value, MeasureEnsemble.getPropSettings(prop));
-				case 10 % MeasureEnsemble.PFME
-					check = Format.checkFormat(8, value, MeasureEnsemble.getPropSettings(prop));
-				case 11 % MeasureEnsemble.PFBG
-					check = Format.checkFormat(8, value, MeasureEnsemble.getPropSettings(prop));
-				case 3 % MeasureEnsemble.TEMPLATE
-					check = Format.checkFormat(8, value, MeasureEnsemble.getPropSettings(prop));
+				case MeasureEnsemble.MEASURE % __MeasureEnsemble.MEASURE__
+					check = Format.checkFormat(Format.CLASS, value, MeasureEnsemble.getPropSettings(prop));
+				case MeasureEnsemble.A % __MeasureEnsemble.A__
+					check = Format.checkFormat(Format.ITEM, value, MeasureEnsemble.getPropSettings(prop));
+				case MeasureEnsemble.M % __MeasureEnsemble.M__
+					check = Format.checkFormat(Format.CELL, value, MeasureEnsemble.getPropSettings(prop));
+				case MeasureEnsemble.PFME % __MeasureEnsemble.PFME__
+					check = Format.checkFormat(Format.ITEM, value, MeasureEnsemble.getPropSettings(prop));
+				case MeasureEnsemble.PFBG % __MeasureEnsemble.PFBG__
+					check = Format.checkFormat(Format.ITEM, value, MeasureEnsemble.getPropSettings(prop));
+				case MeasureEnsemble.TEMPLATE % __MeasureEnsemble.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, MeasureEnsemble.getPropSettings(prop));
 				otherwise
-					if prop <= 6
+					if prop <= ConcreteElement.getPropNumber()
 						check = checkProp@ConcreteElement(prop, value);
 					end
 			end
@@ -656,8 +701,8 @@ classdef MeasureEnsemble < ConcreteElement
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':MeasureEnsemble:' 'WrongInput'], ...
-					['BRAPH2' ':MeasureEnsemble:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':MeasureEnsemble:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':MeasureEnsemble:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' MeasureEnsemble.getPropTag(prop) ' (' MeasureEnsemble.getFormatTag(MeasureEnsemble.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -668,20 +713,20 @@ classdef MeasureEnsemble < ConcreteElement
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with 5,
-			%  6, and 7. By default this function
+			%  PROP. It works only with properties with Category.RESULT,
+			%  Category.QUERY, and Category.EVANESCENT. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  6.
+			%  Category.QUERY.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 9 % MeasureEnsemble.M
-					rng_settings_ = rng(); rng(me.getPropSeed(9), 'twister')
+				case MeasureEnsemble.M % __MeasureEnsemble.M__
+					rng_settings_ = rng(); rng(me.getPropSeed(MeasureEnsemble.M), 'twister')
 					
 					m_list = cellfun(@(x) x.get('MEASURE', me.get('MEASURE')).get('M'), me.get('A').get('G_DICT').get('IT_LIST'), 'UniformOutput', false);
 					
@@ -702,7 +747,7 @@ classdef MeasureEnsemble < ConcreteElement
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 6
+					if prop <= ConcreteElement.getPropNumber()
 						value = calculateValue@ConcreteElement(me, prop, varargin{:});
 					else
 						value = calculateValue@Element(me, prop, varargin{:});

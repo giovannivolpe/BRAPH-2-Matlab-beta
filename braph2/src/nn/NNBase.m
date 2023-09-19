@@ -11,27 +11,6 @@ classdef NNBase < ConcreteElement
 	% To train a neural network nn use: nn.get('TRAIN')
 	% To obtain the prediction on a dataset D use: predictions = nn.get('PREDICT', D)
 	%
-	% The list of NNBase properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the nerual network base.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the nerual network base.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the nerual network base.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the nerual network base.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the nerual network base.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the nerual network base.
-	%  <strong>7</strong> <strong>D</strong> 	D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.
-	%  <strong>8</strong> <strong>DP_CLASSES</strong> 	DP_CLASSES (parameter, classlist) is the list of compatible data points.
-	%  <strong>9</strong> <strong>EPOCHS</strong> 	EPOCHS (parameter, scalar) is the maximum number of epochs.
-	%  <strong>10</strong> <strong>BATCH</strong> 	BATCH (parameter, scalar) is the size of the mini-batch used for each training iteration.
-	%  <strong>11</strong> <strong>SHUFFLE</strong> 	SHUFFLE (parameter, option) is an option for data shuffling.
-	%  <strong>12</strong> <strong>SOLVER</strong> 	SOLVER (parameter, option) is an option for the solver.
-	%  <strong>13</strong> <strong>MODEL</strong> 	MODEL (result, net) is a trained neural network model with the given dataset.
-	%  <strong>14</strong> <strong>INPUTS</strong> 	INPUTS (query, cell) constructs the cell array of the data.
-	%  <strong>15</strong> <strong>TARGETS</strong> 	TARGETS (query, cell) constructs the cell array of the targets.
-	%  <strong>16</strong> <strong>TRAIN</strong> 	TRAIN (query, empty) trains the neural network model with the given dataset.
-	%  <strong>17</strong> <strong>VERBOSE</strong> 	VERBOSE (metadata, logical) is an indicator to display training progress information.
-	%  <strong>18</strong> <strong>PLOT_TRAINING</strong> 	PLOT_TRAINING (metadata, option) determines whether to plot the training progress.
-	%  <strong>19</strong> <strong>PREDICT</strong> 	PREDICT (query, cell) returns the predictions of the trained neural network for a dataset.
-	%
 	% NNBase methods (constructor):
 	%  NNBase - constructor
 	%
@@ -121,70 +100,70 @@ classdef NNBase < ConcreteElement
 	% See also NNDataPoint, NNDataset, NNEvaluator.
 	
 	properties (Constant) % properties
-		D = 7; %CET: Computational Efficiency Trick
+		D = ConcreteElement.getPropNumber() + 1;
 		D_TAG = 'D';
-		D_CATEGORY = 4;
-		D_FORMAT = 8;
+		D_CATEGORY = Category.DATA;
+		D_FORMAT = Format.ITEM;
 		
-		DP_CLASSES = 8; %CET: Computational Efficiency Trick
+		DP_CLASSES = ConcreteElement.getPropNumber() + 2;
 		DP_CLASSES_TAG = 'DP_CLASSES';
-		DP_CLASSES_CATEGORY = 3;
-		DP_CLASSES_FORMAT = 7;
+		DP_CLASSES_CATEGORY = Category.PARAMETER;
+		DP_CLASSES_FORMAT = Format.CLASSLIST;
 		
-		EPOCHS = 9; %CET: Computational Efficiency Trick
+		EPOCHS = ConcreteElement.getPropNumber() + 3;
 		EPOCHS_TAG = 'EPOCHS';
-		EPOCHS_CATEGORY = 3;
-		EPOCHS_FORMAT = 11;
+		EPOCHS_CATEGORY = Category.PARAMETER;
+		EPOCHS_FORMAT = Format.SCALAR;
 		
-		BATCH = 10; %CET: Computational Efficiency Trick
+		BATCH = ConcreteElement.getPropNumber() + 4;
 		BATCH_TAG = 'BATCH';
-		BATCH_CATEGORY = 3;
-		BATCH_FORMAT = 11;
+		BATCH_CATEGORY = Category.PARAMETER;
+		BATCH_FORMAT = Format.SCALAR;
 		
-		SHUFFLE = 11; %CET: Computational Efficiency Trick
+		SHUFFLE = ConcreteElement.getPropNumber() + 5;
 		SHUFFLE_TAG = 'SHUFFLE';
-		SHUFFLE_CATEGORY = 3;
-		SHUFFLE_FORMAT = 5;
+		SHUFFLE_CATEGORY = Category.PARAMETER;
+		SHUFFLE_FORMAT = Format.OPTION;
 		
-		SOLVER = 12; %CET: Computational Efficiency Trick
+		SOLVER = ConcreteElement.getPropNumber() + 6;
 		SOLVER_TAG = 'SOLVER';
-		SOLVER_CATEGORY = 3;
-		SOLVER_FORMAT = 5;
+		SOLVER_CATEGORY = Category.PARAMETER;
+		SOLVER_FORMAT = Format.OPTION;
 		
-		MODEL = 13; %CET: Computational Efficiency Trick
+		MODEL = ConcreteElement.getPropNumber() + 7;
 		MODEL_TAG = 'MODEL';
-		MODEL_CATEGORY = 5;
-		MODEL_FORMAT = 17;
+		MODEL_CATEGORY = Category.RESULT;
+		MODEL_FORMAT = Format.NET;
 		
-		INPUTS = 14; %CET: Computational Efficiency Trick
+		INPUTS = ConcreteElement.getPropNumber() + 8;
 		INPUTS_TAG = 'INPUTS';
-		INPUTS_CATEGORY = 6;
-		INPUTS_FORMAT = 16;
+		INPUTS_CATEGORY = Category.QUERY;
+		INPUTS_FORMAT = Format.CELL;
 		
-		TARGETS = 15; %CET: Computational Efficiency Trick
+		TARGETS = ConcreteElement.getPropNumber() + 9;
 		TARGETS_TAG = 'TARGETS';
-		TARGETS_CATEGORY = 6;
-		TARGETS_FORMAT = 16;
+		TARGETS_CATEGORY = Category.QUERY;
+		TARGETS_FORMAT = Format.CELL;
 		
-		TRAIN = 16; %CET: Computational Efficiency Trick
+		TRAIN = ConcreteElement.getPropNumber() + 10;
 		TRAIN_TAG = 'TRAIN';
-		TRAIN_CATEGORY = 6;
-		TRAIN_FORMAT = 1;
+		TRAIN_CATEGORY = Category.QUERY;
+		TRAIN_FORMAT = Format.EMPTY;
 		
-		VERBOSE = 17; %CET: Computational Efficiency Trick
+		VERBOSE = ConcreteElement.getPropNumber() + 11;
 		VERBOSE_TAG = 'VERBOSE';
-		VERBOSE_CATEGORY = 2;
-		VERBOSE_FORMAT = 4;
+		VERBOSE_CATEGORY = Category.METADATA;
+		VERBOSE_FORMAT = Format.LOGICAL;
 		
-		PLOT_TRAINING = 18; %CET: Computational Efficiency Trick
+		PLOT_TRAINING = ConcreteElement.getPropNumber() + 12;
 		PLOT_TRAINING_TAG = 'PLOT_TRAINING';
-		PLOT_TRAINING_CATEGORY = 2;
-		PLOT_TRAINING_FORMAT = 5;
+		PLOT_TRAINING_CATEGORY = Category.METADATA;
+		PLOT_TRAINING_FORMAT = Format.OPTION;
 		
-		PREDICT = 19; %CET: Computational Efficiency Trick
+		PREDICT = ConcreteElement.getPropNumber() + 13;
 		PREDICT_TAG = 'PREDICT';
-		PREDICT_CATEGORY = 6;
-		PREDICT_FORMAT = 16;
+		PREDICT_CATEGORY = Category.QUERY;
+		PREDICT_FORMAT = Format.CELL;
 	end
 	methods % constructor
 		function nn = NNBase(varargin)
@@ -197,26 +176,6 @@ classdef NNBase < ConcreteElement
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of NNBase properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the nerual network base.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the nerual network base.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the nerual network base.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the nerual network base.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the nerual network base.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the nerual network base.
-			%  <strong>7</strong> <strong>D</strong> 	D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.
-			%  <strong>8</strong> <strong>DP_CLASSES</strong> 	DP_CLASSES (parameter, classlist) is the list of compatible data points.
-			%  <strong>9</strong> <strong>EPOCHS</strong> 	EPOCHS (parameter, scalar) is the maximum number of epochs.
-			%  <strong>10</strong> <strong>BATCH</strong> 	BATCH (parameter, scalar) is the size of the mini-batch used for each training iteration.
-			%  <strong>11</strong> <strong>SHUFFLE</strong> 	SHUFFLE (parameter, option) is an option for data shuffling.
-			%  <strong>12</strong> <strong>SOLVER</strong> 	SOLVER (parameter, option) is an option for the solver.
-			%  <strong>13</strong> <strong>MODEL</strong> 	MODEL (result, net) is a trained neural network model with the given dataset.
-			%  <strong>14</strong> <strong>INPUTS</strong> 	INPUTS (query, cell) constructs the cell array of the data.
-			%  <strong>15</strong> <strong>TARGETS</strong> 	TARGETS (query, cell) constructs the cell array of the targets.
-			%  <strong>16</strong> <strong>TRAIN</strong> 	TRAIN (query, empty) trains the neural network model with the given dataset.
-			%  <strong>17</strong> <strong>VERBOSE</strong> 	VERBOSE (metadata, logical) is an indicator to display training progress information.
-			%  <strong>18</strong> <strong>PLOT_TRAINING</strong> 	PLOT_TRAINING (metadata, option) determines whether to plot the training progress.
-			%  <strong>19</strong> <strong>PREDICT</strong> 	PREDICT (query, cell) returns the predictions of the trained neural network for a dataset.
 			%
 			% See also Category, Format.
 			
@@ -254,7 +213,7 @@ classdef NNBase < ConcreteElement
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'NNBase'  'NNClassifierMLP'  'NNRegressorMLP' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('NNBase', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of neural network.
@@ -275,28 +234,76 @@ classdef NNBase < ConcreteElement
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19];
+				prop_list = [ ...
+					ConcreteElement.getProps() ...
+						NNBase.D ...
+						NNBase.DP_CLASSES ...
+						NNBase.EPOCHS ...
+						NNBase.BATCH ...
+						NNBase.SHUFFLE ...
+						NNBase.SOLVER ...
+						NNBase.MODEL ...
+						NNBase.INPUTS ...
+						NNBase.TARGETS ...
+						NNBase.TRAIN ...
+						NNBase.VERBOSE ...
+						NNBase.PLOT_TRAINING ...
+						NNBase.PREDICT ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2];
-				case 2 % Category.METADATA
-					prop_list = [5 6 17 18];
-				case 3 % Category.PARAMETER
-					prop_list = [3 8 9 10 11 12];
-				case 4 % Category.DATA
-					prop_list = [4 7];
-				case 5 % Category.RESULT
-					prop_list = 13;
-				case 6 % Category.QUERY
-					prop_list = [14 15 16 19];
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.METADATA) ...
+						NNBase.VERBOSE ...
+						NNBase.PLOT_TRAINING ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.PARAMETER) ...
+						NNBase.DP_CLASSES ...
+						NNBase.EPOCHS ...
+						NNBase.BATCH ...
+						NNBase.SHUFFLE ...
+						NNBase.SOLVER ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.DATA) ...
+						NNBase.D ...
+						];
+				case Category.RESULT
+					prop_list = [
+						ConcreteElement.getProps(Category.RESULT) ...
+						NNBase.MODEL ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.QUERY) ...
+						NNBase.INPUTS ...
+						NNBase.TARGETS ...
+						NNBase.TRAIN ...
+						NNBase.PREDICT ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -317,29 +324,7 @@ classdef NNBase < ConcreteElement
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 19;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 2;
-				case 2 % Category.METADATA
-					prop_number = 4;
-				case 3 % Category.PARAMETER
-					prop_number = 6;
-				case 4 % Category.DATA
-					prop_number = 2;
-				case 5 % Category.RESULT
-					prop_number = 1;
-				case 6 % Category.QUERY
-					prop_number = 4;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(NNBase.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in neural network/error.
@@ -367,14 +352,14 @@ classdef NNBase < ConcreteElement
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 19 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == NNBase.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':NNBase:' 'WrongInput'], ...
-					['BRAPH2' ':NNBase:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':NNBase:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':NNBase:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for NNBase.'] ...
 					)
 			end
@@ -405,14 +390,15 @@ classdef NNBase < ConcreteElement
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'D'  'DP_CLASSES'  'EPOCHS'  'BATCH'  'SHUFFLE'  'SOLVER'  'MODEL'  'INPUTS'  'TARGETS'  'TRAIN'  'VERBOSE'  'PLOT_TRAINING'  'PREDICT' })); %CET: Computational Efficiency Trick
+			nnbase_tag_list = cellfun(@(x) NNBase.getPropTag(x), num2cell(NNBase.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, nnbase_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':NNBase:' 'WrongInput'], ...
-					['BRAPH2' ':NNBase:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':NNBase:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':NNBase:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for NNBase.'] ...
 					)
 			end
@@ -438,7 +424,8 @@ classdef NNBase < ConcreteElement
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'D'  'DP_CLASSES'  'EPOCHS'  'BATCH'  'SHUFFLE'  'SOLVER'  'MODEL'  'INPUTS'  'TARGETS'  'TRAIN'  'VERBOSE'  'PLOT_TRAINING'  'PREDICT' })); % tag = pointer %CET: Computational Efficiency Trick
+				nnbase_tag_list = cellfun(@(x) NNBase.getPropTag(x), num2cell(NNBase.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, nnbase_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -466,9 +453,38 @@ classdef NNBase < ConcreteElement
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				nnbase_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'D'  'DP_CLASSES'  'EPOCHS'  'BATCH'  'SHUFFLE'  'SOLVER'  'MODEL'  'INPUTS'  'TARGETS'  'TRAIN'  'VERBOSE'  'PLOT_TRAINING'  'PREDICT' };
-				tag = nnbase_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case NNBase.D
+						tag = NNBase.D_TAG;
+					case NNBase.DP_CLASSES
+						tag = NNBase.DP_CLASSES_TAG;
+					case NNBase.EPOCHS
+						tag = NNBase.EPOCHS_TAG;
+					case NNBase.BATCH
+						tag = NNBase.BATCH_TAG;
+					case NNBase.SHUFFLE
+						tag = NNBase.SHUFFLE_TAG;
+					case NNBase.SOLVER
+						tag = NNBase.SOLVER_TAG;
+					case NNBase.MODEL
+						tag = NNBase.MODEL_TAG;
+					case NNBase.INPUTS
+						tag = NNBase.INPUTS_TAG;
+					case NNBase.TARGETS
+						tag = NNBase.TARGETS_TAG;
+					case NNBase.TRAIN
+						tag = NNBase.TRAIN_TAG;
+					case NNBase.VERBOSE
+						tag = NNBase.VERBOSE_TAG;
+					case NNBase.PLOT_TRAINING
+						tag = NNBase.PLOT_TRAINING_TAG;
+					case NNBase.PREDICT
+						tag = NNBase.PREDICT_TAG;
+					otherwise
+						tag = getPropTag@ConcreteElement(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -493,9 +509,36 @@ classdef NNBase < ConcreteElement
 			
 			prop = NNBase.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			nnbase_category_list = { 1  1  3  4  2  2  4  3  3  3  3  3  5  6  6  6  2  2  6 };
-			prop_category = nnbase_category_list{prop};
+			switch prop
+				case NNBase.D
+					prop_category = NNBase.D_CATEGORY;
+				case NNBase.DP_CLASSES
+					prop_category = NNBase.DP_CLASSES_CATEGORY;
+				case NNBase.EPOCHS
+					prop_category = NNBase.EPOCHS_CATEGORY;
+				case NNBase.BATCH
+					prop_category = NNBase.BATCH_CATEGORY;
+				case NNBase.SHUFFLE
+					prop_category = NNBase.SHUFFLE_CATEGORY;
+				case NNBase.SOLVER
+					prop_category = NNBase.SOLVER_CATEGORY;
+				case NNBase.MODEL
+					prop_category = NNBase.MODEL_CATEGORY;
+				case NNBase.INPUTS
+					prop_category = NNBase.INPUTS_CATEGORY;
+				case NNBase.TARGETS
+					prop_category = NNBase.TARGETS_CATEGORY;
+				case NNBase.TRAIN
+					prop_category = NNBase.TRAIN_CATEGORY;
+				case NNBase.VERBOSE
+					prop_category = NNBase.VERBOSE_CATEGORY;
+				case NNBase.PLOT_TRAINING
+					prop_category = NNBase.PLOT_TRAINING_CATEGORY;
+				case NNBase.PREDICT
+					prop_category = NNBase.PREDICT_CATEGORY;
+				otherwise
+					prop_category = getPropCategory@ConcreteElement(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -519,9 +562,36 @@ classdef NNBase < ConcreteElement
 			
 			prop = NNBase.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			nnbase_format_list = { 2  2  8  2  2  2  8  7  11  11  5  5  17  16  16  1  4  5  16 };
-			prop_format = nnbase_format_list{prop};
+			switch prop
+				case NNBase.D
+					prop_format = NNBase.D_FORMAT;
+				case NNBase.DP_CLASSES
+					prop_format = NNBase.DP_CLASSES_FORMAT;
+				case NNBase.EPOCHS
+					prop_format = NNBase.EPOCHS_FORMAT;
+				case NNBase.BATCH
+					prop_format = NNBase.BATCH_FORMAT;
+				case NNBase.SHUFFLE
+					prop_format = NNBase.SHUFFLE_FORMAT;
+				case NNBase.SOLVER
+					prop_format = NNBase.SOLVER_FORMAT;
+				case NNBase.MODEL
+					prop_format = NNBase.MODEL_FORMAT;
+				case NNBase.INPUTS
+					prop_format = NNBase.INPUTS_FORMAT;
+				case NNBase.TARGETS
+					prop_format = NNBase.TARGETS_FORMAT;
+				case NNBase.TRAIN
+					prop_format = NNBase.TRAIN_FORMAT;
+				case NNBase.VERBOSE
+					prop_format = NNBase.VERBOSE_FORMAT;
+				case NNBase.PLOT_TRAINING
+					prop_format = NNBase.PLOT_TRAINING_FORMAT;
+				case NNBase.PREDICT
+					prop_format = NNBase.PREDICT_FORMAT;
+				otherwise
+					prop_format = getPropFormat@ConcreteElement(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -545,9 +615,48 @@ classdef NNBase < ConcreteElement
 			
 			prop = NNBase.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			nnbase_description_list = { 'NAME (constant, string) is the name of the nerual network base.'  'DESCRIPTION (constant, string) is the description of the nerual network base.'  'TEMPLATE (parameter, item) is the template of the nerual network base.'  'ID (data, string) is a few-letter code for the nerual network base.'  'LABEL (metadata, string) is an extended label of the nerual network base.'  'NOTES (metadata, string) are some specific notes about the nerual network base.'  'D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.'  'DP_CLASSES (parameter, classlist) is the list of compatible data points.'  'EPOCHS (parameter, scalar) is the maximum number of epochs.'  'BATCH (parameter, scalar) is the size of the mini-batch used for each training iteration.'  'SHUFFLE (parameter, option) is an option for data shuffling.'  'SOLVER (parameter, option) is an option for the solver.'  'MODEL (result, net) is a trained neural network model with the given dataset.'  'INPUTS (query, cell) constructs the cell array of the data.'  'TARGETS (query, cell) constructs the cell array of the targets.'  'TRAIN (query, empty) trains the neural network model with the given dataset.'  'VERBOSE (metadata, logical) is an indicator to display training progress information.'  'PLOT_TRAINING (metadata, option) determines whether to plot the training progress.'  'PREDICT (query, cell) returns the predictions of the trained neural network for a dataset.' };
-			prop_description = nnbase_description_list{prop};
+			switch prop
+				case NNBase.D
+					prop_description = 'D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.';
+				case NNBase.DP_CLASSES
+					prop_description = 'DP_CLASSES (parameter, classlist) is the list of compatible data points.';
+				case NNBase.EPOCHS
+					prop_description = 'EPOCHS (parameter, scalar) is the maximum number of epochs.';
+				case NNBase.BATCH
+					prop_description = 'BATCH (parameter, scalar) is the size of the mini-batch used for each training iteration.';
+				case NNBase.SHUFFLE
+					prop_description = 'SHUFFLE (parameter, option) is an option for data shuffling.';
+				case NNBase.SOLVER
+					prop_description = 'SOLVER (parameter, option) is an option for the solver.';
+				case NNBase.MODEL
+					prop_description = 'MODEL (result, net) is a trained neural network model with the given dataset.';
+				case NNBase.INPUTS
+					prop_description = 'INPUTS (query, cell) constructs the cell array of the data.';
+				case NNBase.TARGETS
+					prop_description = 'TARGETS (query, cell) constructs the cell array of the targets.';
+				case NNBase.TRAIN
+					prop_description = 'TRAIN (query, empty) trains the neural network model with the given dataset.';
+				case NNBase.VERBOSE
+					prop_description = 'VERBOSE (metadata, logical) is an indicator to display training progress information.';
+				case NNBase.PLOT_TRAINING
+					prop_description = 'PLOT_TRAINING (metadata, option) determines whether to plot the training progress.';
+				case NNBase.PREDICT
+					prop_description = 'PREDICT (query, cell) returns the predictions of the trained neural network for a dataset.';
+				case NNBase.NAME
+					prop_description = 'NAME (constant, string) is the name of the nerual network base.';
+				case NNBase.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the nerual network base.';
+				case NNBase.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the nerual network base.';
+				case NNBase.ID
+					prop_description = 'ID (data, string) is a few-letter code for the nerual network base.';
+				case NNBase.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the nerual network base.';
+				case NNBase.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the nerual network base.';
+				otherwise
+					prop_description = getPropDescription@ConcreteElement(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -571,34 +680,34 @@ classdef NNBase < ConcreteElement
 			
 			prop = NNBase.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 7 % NNBase.D
+			switch prop
+				case NNBase.D
 					prop_settings = 'NNDataset';
-				case 8 % NNBase.DP_CLASSES
-					prop_settings = Format.getFormatSettings(7);
-				case 9 % NNBase.EPOCHS
-					prop_settings = Format.getFormatSettings(11);
-				case 10 % NNBase.BATCH
-					prop_settings = Format.getFormatSettings(11);
-				case 11 % NNBase.SHUFFLE
+				case NNBase.DP_CLASSES
+					prop_settings = Format.getFormatSettings(Format.CLASSLIST);
+				case NNBase.EPOCHS
+					prop_settings = Format.getFormatSettings(Format.SCALAR);
+				case NNBase.BATCH
+					prop_settings = Format.getFormatSettings(Format.SCALAR);
+				case NNBase.SHUFFLE
 					prop_settings = {'once' 'never' 'every-epoch'};
-				case 12 % NNBase.SOLVER
+				case NNBase.SOLVER
 					prop_settings = {'adam' 'sgdm' 'rmsprop'};
-				case 13 % NNBase.MODEL
-					prop_settings = Format.getFormatSettings(17);
-				case 14 % NNBase.INPUTS
-					prop_settings = Format.getFormatSettings(16);
-				case 15 % NNBase.TARGETS
-					prop_settings = Format.getFormatSettings(16);
-				case 16 % NNBase.TRAIN
-					prop_settings = Format.getFormatSettings(1);
-				case 17 % NNBase.VERBOSE
-					prop_settings = Format.getFormatSettings(4);
-				case 18 % NNBase.PLOT_TRAINING
+				case NNBase.MODEL
+					prop_settings = Format.getFormatSettings(Format.NET);
+				case NNBase.INPUTS
+					prop_settings = Format.getFormatSettings(Format.CELL);
+				case NNBase.TARGETS
+					prop_settings = Format.getFormatSettings(Format.CELL);
+				case NNBase.TRAIN
+					prop_settings = Format.getFormatSettings(Format.EMPTY);
+				case NNBase.VERBOSE
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case NNBase.PLOT_TRAINING
 					prop_settings = {'none' 'training-progress'};
-				case 19 % NNBase.PREDICT
-					prop_settings = Format.getFormatSettings(16);
-				case 3 % NNBase.TEMPLATE
+				case NNBase.PREDICT
+					prop_settings = Format.getFormatSettings(Format.CELL);
+				case NNBase.TEMPLATE
 					prop_settings = 'NNBase';
 				otherwise
 					prop_settings = getPropSettings@ConcreteElement(prop);
@@ -626,44 +735,44 @@ classdef NNBase < ConcreteElement
 			
 			prop = NNBase.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 7 % NNBase.D
+			switch prop
+				case NNBase.D
 					prop_default = NNDataset('DP_CLASS', 'NNDataPoint');
-				case 8 % NNBase.DP_CLASSES
+				case NNBase.DP_CLASSES
 					prop_default = {'NNDataPoint'};
-				case 9 % NNBase.EPOCHS
+				case NNBase.EPOCHS
 					prop_default = 20;
-				case 10 % NNBase.BATCH
+				case NNBase.BATCH
 					prop_default = 8;
-				case 11 % NNBase.SHUFFLE
-					prop_default = Format.getFormatDefault(5, NNBase.getPropSettings(prop));
-				case 12 % NNBase.SOLVER
-					prop_default = Format.getFormatDefault(5, NNBase.getPropSettings(prop));
-				case 13 % NNBase.MODEL
-					prop_default = Format.getFormatDefault(17, NNBase.getPropSettings(prop));
-				case 14 % NNBase.INPUTS
-					prop_default = Format.getFormatDefault(16, NNBase.getPropSettings(prop));
-				case 15 % NNBase.TARGETS
-					prop_default = Format.getFormatDefault(16, NNBase.getPropSettings(prop));
-				case 16 % NNBase.TRAIN
-					prop_default = Format.getFormatDefault(1, NNBase.getPropSettings(prop));
-				case 17 % NNBase.VERBOSE
+				case NNBase.SHUFFLE
+					prop_default = Format.getFormatDefault(Format.OPTION, NNBase.getPropSettings(prop));
+				case NNBase.SOLVER
+					prop_default = Format.getFormatDefault(Format.OPTION, NNBase.getPropSettings(prop));
+				case NNBase.MODEL
+					prop_default = Format.getFormatDefault(Format.NET, NNBase.getPropSettings(prop));
+				case NNBase.INPUTS
+					prop_default = Format.getFormatDefault(Format.CELL, NNBase.getPropSettings(prop));
+				case NNBase.TARGETS
+					prop_default = Format.getFormatDefault(Format.CELL, NNBase.getPropSettings(prop));
+				case NNBase.TRAIN
+					prop_default = Format.getFormatDefault(Format.EMPTY, NNBase.getPropSettings(prop));
+				case NNBase.VERBOSE
 					prop_default = false;
-				case 18 % NNBase.PLOT_TRAINING
-					prop_default = Format.getFormatDefault(5, NNBase.getPropSettings(prop));
-				case 19 % NNBase.PREDICT
-					prop_default = Format.getFormatDefault(16, NNBase.getPropSettings(prop));
-				case 1 % NNBase.NAME
+				case NNBase.PLOT_TRAINING
+					prop_default = Format.getFormatDefault(Format.OPTION, NNBase.getPropSettings(prop));
+				case NNBase.PREDICT
+					prop_default = Format.getFormatDefault(Format.CELL, NNBase.getPropSettings(prop));
+				case NNBase.NAME
 					prop_default = 'NNBase';
-				case 2 % NNBase.DESCRIPTION
+				case NNBase.DESCRIPTION
 					prop_default = 'A neural network base (NNBase) comprises a neural network model with a specific dataset. Instances of this class should not be created. Use one of its subclasses instead. Its subclasses need to implement the props MODEL, INPUTS and TARGETS.';
-				case 3 % NNBase.TEMPLATE
-					prop_default = Format.getFormatDefault(8, NNBase.getPropSettings(prop));
-				case 4 % NNBase.ID
+				case NNBase.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, NNBase.getPropSettings(prop));
+				case NNBase.ID
 					prop_default = 'NNBase ID';
-				case 5 % NNBase.LABEL
+				case NNBase.LABEL
 					prop_default = 'NNBase label';
-				case 6 % NNBase.NOTES
+				case NNBase.NOTES
 					prop_default = 'NNBase notes';
 				otherwise
 					prop_default = getPropDefault@ConcreteElement(prop);
@@ -710,15 +819,15 @@ classdef NNBase < ConcreteElement
 			% 
 			% NN.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:NNBase:WrongInput
+			%  Error id: €BRAPH2.STR€:NNBase:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  NN.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of NN.
-			%   Error id: BRAPH2:NNBase:WrongInput
+			%   Error id: €BRAPH2.STR€:NNBase:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(NNBase, PROP, VALUE) throws error if VALUE has not a valid format for PROP of NNBase.
-			%   Error id: BRAPH2:NNBase:WrongInput
+			%   Error id: €BRAPH2.STR€:NNBase:€BRAPH2.WRONG_INPUT€
 			%  NN.CHECKPROP(NNBase, PROP, VALUE) throws error if VALUE has not a valid format for PROP of NNBase.
-			%   Error id: BRAPH2:NNBase:WrongInput]
+			%   Error id: €BRAPH2.STR€:NNBase:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(NN) and Element.CHECKPROP('NNBase')
 			%  are less computationally efficient.
@@ -729,36 +838,36 @@ classdef NNBase < ConcreteElement
 			prop = NNBase.getPropProp(pointer);
 			
 			switch prop
-				case 7 % NNBase.D
-					check = Format.checkFormat(8, value, NNBase.getPropSettings(prop));
-				case 8 % NNBase.DP_CLASSES
-					check = Format.checkFormat(7, value, NNBase.getPropSettings(prop));
-				case 9 % NNBase.EPOCHS
-					check = Format.checkFormat(11, value, NNBase.getPropSettings(prop));
-				case 10 % NNBase.BATCH
-					check = Format.checkFormat(11, value, NNBase.getPropSettings(prop));
-				case 11 % NNBase.SHUFFLE
-					check = Format.checkFormat(5, value, NNBase.getPropSettings(prop));
-				case 12 % NNBase.SOLVER
-					check = Format.checkFormat(5, value, NNBase.getPropSettings(prop));
-				case 13 % NNBase.MODEL
-					check = Format.checkFormat(17, value, NNBase.getPropSettings(prop));
-				case 14 % NNBase.INPUTS
-					check = Format.checkFormat(16, value, NNBase.getPropSettings(prop));
-				case 15 % NNBase.TARGETS
-					check = Format.checkFormat(16, value, NNBase.getPropSettings(prop));
-				case 16 % NNBase.TRAIN
-					check = Format.checkFormat(1, value, NNBase.getPropSettings(prop));
-				case 17 % NNBase.VERBOSE
-					check = Format.checkFormat(4, value, NNBase.getPropSettings(prop));
-				case 18 % NNBase.PLOT_TRAINING
-					check = Format.checkFormat(5, value, NNBase.getPropSettings(prop));
-				case 19 % NNBase.PREDICT
-					check = Format.checkFormat(16, value, NNBase.getPropSettings(prop));
-				case 3 % NNBase.TEMPLATE
-					check = Format.checkFormat(8, value, NNBase.getPropSettings(prop));
+				case NNBase.D % __NNBase.D__
+					check = Format.checkFormat(Format.ITEM, value, NNBase.getPropSettings(prop));
+				case NNBase.DP_CLASSES % __NNBase.DP_CLASSES__
+					check = Format.checkFormat(Format.CLASSLIST, value, NNBase.getPropSettings(prop));
+				case NNBase.EPOCHS % __NNBase.EPOCHS__
+					check = Format.checkFormat(Format.SCALAR, value, NNBase.getPropSettings(prop));
+				case NNBase.BATCH % __NNBase.BATCH__
+					check = Format.checkFormat(Format.SCALAR, value, NNBase.getPropSettings(prop));
+				case NNBase.SHUFFLE % __NNBase.SHUFFLE__
+					check = Format.checkFormat(Format.OPTION, value, NNBase.getPropSettings(prop));
+				case NNBase.SOLVER % __NNBase.SOLVER__
+					check = Format.checkFormat(Format.OPTION, value, NNBase.getPropSettings(prop));
+				case NNBase.MODEL % __NNBase.MODEL__
+					check = Format.checkFormat(Format.NET, value, NNBase.getPropSettings(prop));
+				case NNBase.INPUTS % __NNBase.INPUTS__
+					check = Format.checkFormat(Format.CELL, value, NNBase.getPropSettings(prop));
+				case NNBase.TARGETS % __NNBase.TARGETS__
+					check = Format.checkFormat(Format.CELL, value, NNBase.getPropSettings(prop));
+				case NNBase.TRAIN % __NNBase.TRAIN__
+					check = Format.checkFormat(Format.EMPTY, value, NNBase.getPropSettings(prop));
+				case NNBase.VERBOSE % __NNBase.VERBOSE__
+					check = Format.checkFormat(Format.LOGICAL, value, NNBase.getPropSettings(prop));
+				case NNBase.PLOT_TRAINING % __NNBase.PLOT_TRAINING__
+					check = Format.checkFormat(Format.OPTION, value, NNBase.getPropSettings(prop));
+				case NNBase.PREDICT % __NNBase.PREDICT__
+					check = Format.checkFormat(Format.CELL, value, NNBase.getPropSettings(prop));
+				case NNBase.TEMPLATE % __NNBase.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, NNBase.getPropSettings(prop));
 				otherwise
-					if prop <= 6
+					if prop <= ConcreteElement.getPropNumber()
 						check = checkProp@ConcreteElement(prop, value);
 					end
 			end
@@ -767,8 +876,8 @@ classdef NNBase < ConcreteElement
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':NNBase:' 'WrongInput'], ...
-					['BRAPH2' ':NNBase:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':NNBase:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':NNBase:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' NNBase.getPropTag(prop) ' (' NNBase.getFormatTag(NNBase.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -779,40 +888,40 @@ classdef NNBase < ConcreteElement
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with 5,
-			%  6, and 7. By default this function
+			%  PROP. It works only with properties with Category.RESULT,
+			%  Category.QUERY, and Category.EVANESCENT. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  6.
+			%  Category.QUERY.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 13 % NNBase.MODEL
-					rng_settings_ = rng(); rng(nn.getPropSeed(13), 'twister')
+				case NNBase.MODEL % __NNBase.MODEL__
+					rng_settings_ = rng(); rng(nn.getPropSeed(NNBase.MODEL), 'twister')
 					
 					value = network();
 					
 					rng(rng_settings_)
 					
-				case 14 % NNBase.INPUTS
+				case NNBase.INPUTS % __NNBase.INPUTS__
 					% inputs = nn.get('inputs', D) returns a cell array with the
 					%  inputs for all data points in dataset D.
 					value = {};
 					
-				case 15 % NNBase.TARGETS
+				case NNBase.TARGETS % __NNBase.TARGETS__
 					% targets = nn.get('PREDICT', D) returns a cell array with the
 					%  targets for all data points in dataset D.
 					value = {};
 					
-				case 16 % NNBase.TRAIN
+				case NNBase.TRAIN % __NNBase.TRAIN__
 					nn.memorize('MODEL');
 					value = [];
 					
-				case 19 % NNBase.PREDICT
+				case NNBase.PREDICT % __NNBase.PREDICT__
 					% PREDICTIONS = nn.get('PREDICT', D) returns a cell array with the
 					%  predictions for all data points in dataset D.
 					if isempty(varargin)
@@ -831,7 +940,7 @@ classdef NNBase < ConcreteElement
 					value = predictions;
 					
 				otherwise
-					if prop <= 6
+					if prop <= ConcreteElement.getPropNumber()
 						value = calculateValue@ConcreteElement(nn, prop, varargin{:});
 					else
 						value = calculateValue@Element(nn, prop, varargin{:});
@@ -856,11 +965,11 @@ classdef NNBase < ConcreteElement
 			msg = ['Error while checking ' tostring(nn) ' ' nn.getPropTag(prop) '.'];
 			
 			switch prop
-				case 7 % NNBase.D
+				case NNBase.D % __NNBase.D__
 					check = ismember(value.get('DP_CLASS'), nn.get('DP_CLASSES'));
 					
 				otherwise
-					if prop <= 6
+					if prop <= ConcreteElement.getPropNumber()
 						[check, msg] = checkValue@ConcreteElement(nn, prop, value);
 					end
 			end

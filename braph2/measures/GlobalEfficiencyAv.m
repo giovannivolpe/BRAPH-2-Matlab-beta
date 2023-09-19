@@ -5,21 +5,6 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 	% The average global efficiency (GlobalEfficiencyAv) is the average of the 
 	% global efficiency within each layer.
 	%
-	% The list of GlobalEfficiencyAv properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the average global efficiency.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the average global efficiency.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the average global efficiency.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the average global efficiency.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the average global efficiency.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the average global efficiency.
-	%  <strong>7</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
-	%  <strong>8</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-	%  <strong>9</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-	%  <strong>10</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-	%  <strong>11</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-	%  <strong>12</strong> <strong>M</strong> 	M (result, cell) is the global efficiency.
-	%  <strong>13</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%
 	% GlobalEfficiencyAv methods (constructor):
 	%  GlobalEfficiencyAv - constructor
 	%
@@ -117,20 +102,6 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of GlobalEfficiencyAv properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the average global efficiency.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the average global efficiency.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the average global efficiency.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the average global efficiency.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the average global efficiency.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the average global efficiency.
-			%  <strong>7</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
-			%  <strong>8</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-			%  <strong>9</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-			%  <strong>10</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-			%  <strong>11</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-			%  <strong>12</strong> <strong>M</strong> 	M (result, cell) is the global efficiency.
-			%  <strong>13</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 			%
 			% See also Category, Format.
 			
@@ -168,7 +139,7 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'GlobalEfficiencyAv' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('GlobalEfficiencyAv', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of average global efficiency.
@@ -189,28 +160,50 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13];
+				prop_list = [ ...
+					GlobalEfficiency.getProps() ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2 7 8 9 10];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
-					prop_list = [4 11];
-				case 5 % Category.RESULT
-					prop_list = 12;
-				case 9 % Category.GUI
-					prop_list = 13;
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						GlobalEfficiency.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						GlobalEfficiency.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						GlobalEfficiency.getProps(Category.PARAMETER) ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						GlobalEfficiency.getProps(Category.DATA) ...
+						];
+				case Category.RESULT
+					prop_list = [
+						GlobalEfficiency.getProps(Category.RESULT) ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						GlobalEfficiency.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						GlobalEfficiency.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						GlobalEfficiency.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						GlobalEfficiency.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -231,29 +224,7 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 13;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 6;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 1;
-				case 4 % Category.DATA
-					prop_number = 2;
-				case 5 % Category.RESULT
-					prop_number = 1;
-				case 9 % Category.GUI
-					prop_number = 1;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(GlobalEfficiencyAv.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in average global efficiency/error.
@@ -281,14 +252,14 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 13 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == GlobalEfficiencyAv.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':GlobalEfficiencyAv:' 'WrongInput'], ...
-					['BRAPH2' ':GlobalEfficiencyAv:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':GlobalEfficiencyAv:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':GlobalEfficiencyAv:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for GlobalEfficiencyAv.'] ...
 					)
 			end
@@ -319,14 +290,15 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
+			globalefficiencyav_tag_list = cellfun(@(x) GlobalEfficiencyAv.getPropTag(x), num2cell(GlobalEfficiencyAv.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, globalefficiencyav_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':GlobalEfficiencyAv:' 'WrongInput'], ...
-					['BRAPH2' ':GlobalEfficiencyAv:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':GlobalEfficiencyAv:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':GlobalEfficiencyAv:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for GlobalEfficiencyAv.'] ...
 					)
 			end
@@ -352,7 +324,8 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
+				globalefficiencyav_tag_list = cellfun(@(x) GlobalEfficiencyAv.getPropTag(x), num2cell(GlobalEfficiencyAv.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, globalefficiencyav_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -380,9 +353,12 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				globalefficiencyav_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
-				tag = globalefficiencyav_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					otherwise
+						tag = getPropTag@GlobalEfficiency(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -407,9 +383,10 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			
 			prop = GlobalEfficiencyAv.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			globalefficiencyav_category_list = { 1  1  3  4  2  2  1  1  1  1  4  5  9 };
-			prop_category = globalefficiencyav_category_list{prop};
+			switch prop
+				otherwise
+					prop_category = getPropCategory@GlobalEfficiency(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -433,9 +410,10 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			
 			prop = GlobalEfficiencyAv.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			globalefficiencyav_format_list = { 2  2  8  2  2  2  11  11  11  7  8  16  8 };
-			prop_format = globalefficiencyav_format_list{prop};
+			switch prop
+				otherwise
+					prop_format = getPropFormat@GlobalEfficiency(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -459,9 +437,32 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			
 			prop = GlobalEfficiencyAv.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			globalefficiencyav_description_list = { 'NAME (constant, string) is the name of the average global efficiency.'  'DESCRIPTION (constant, string) is the description of the average global efficiency.'  'TEMPLATE (parameter, item) is the template of the average global efficiency.'  'ID (data, string) is a few-letter code of the average global efficiency.'  'LABEL (metadata, string) is an extended label of the average global efficiency.'  'NOTES (metadata, string) are some specific notes about the average global efficiency.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the global efficiency.'  'PFM (gui, item) contains the panel figure of the measure.' };
-			prop_description = globalefficiencyav_description_list{prop};
+			switch prop
+				case GlobalEfficiencyAv.NAME
+					prop_description = 'NAME (constant, string) is the name of the average global efficiency.';
+				case GlobalEfficiencyAv.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the average global efficiency.';
+				case GlobalEfficiencyAv.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the average global efficiency.';
+				case GlobalEfficiencyAv.ID
+					prop_description = 'ID (data, string) is a few-letter code of the average global efficiency.';
+				case GlobalEfficiencyAv.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the average global efficiency.';
+				case GlobalEfficiencyAv.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the average global efficiency.';
+				case GlobalEfficiencyAv.SHAPE
+					prop_description = 'SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.';
+				case GlobalEfficiencyAv.SCOPE
+					prop_description = 'SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.';
+				case GlobalEfficiencyAv.PARAMETRICITY
+					prop_description = 'PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.';
+				case GlobalEfficiencyAv.COMPATIBLE_GRAPHS
+					prop_description = 'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.';
+				case GlobalEfficiencyAv.M
+					prop_description = 'M (result, cell) is the global efficiency.';
+				otherwise
+					prop_description = getPropDescription@GlobalEfficiency(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -485,7 +486,7 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			
 			prop = GlobalEfficiencyAv.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
+			switch prop
 				otherwise
 					prop_settings = getPropSettings@GlobalEfficiency(prop);
 			end
@@ -512,24 +513,24 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			
 			prop = GlobalEfficiencyAv.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 1 % GlobalEfficiencyAv.NAME
+			switch prop
+				case GlobalEfficiencyAv.NAME
 					prop_default = 'GlobalEfficiencyAv';
-				case 2 % GlobalEfficiencyAv.DESCRIPTION
+				case GlobalEfficiencyAv.DESCRIPTION
 					prop_default = 'The average global efficiency (GlobalEfficiencyAv) is the average of the global efficiency within each layer.';
-				case 4 % GlobalEfficiencyAv.ID
+				case GlobalEfficiencyAv.ID
 					prop_default = 'GlobalEfficiencyAv ID';
-				case 5 % GlobalEfficiencyAv.LABEL
+				case GlobalEfficiencyAv.LABEL
 					prop_default = 'GlobalEfficiencyAv label';
-				case 6 % GlobalEfficiencyAv.NOTES
+				case GlobalEfficiencyAv.NOTES
 					prop_default = 'GlobalEfficiencyAv notes';
-				case 7 % GlobalEfficiencyAv.SHAPE
-					prop_default = 1;
-				case 8 % GlobalEfficiencyAv.SCOPE
-					prop_default = 2;
-				case 9 % GlobalEfficiencyAv.PARAMETRICITY
-					prop_default = 2;
-				case 10 % GlobalEfficiencyAv.COMPATIBLE_GRAPHS
+				case GlobalEfficiencyAv.SHAPE
+					prop_default = Measure.GLOBAL;
+				case GlobalEfficiencyAv.SCOPE
+					prop_default = Measure.UNILAYER;
+				case GlobalEfficiencyAv.PARAMETRICITY
+					prop_default = Measure.NONPARAMETRIC;
+				case GlobalEfficiencyAv.COMPATIBLE_GRAPHS
 					prop_default = {'GraphWU' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU' 'OrdMxBU' 'OrdMxBUT' 'OrdMxBUD' 'MultilayerWU' 'OrdMlWU' 'MultilayerBUT' 'MultilayerBU' 'MultilayerBUD' 'OrdMlBU' 'OrdMlBUD' 'OrdMlBUT'};
 				otherwise
 					prop_default = getPropDefault@GlobalEfficiency(prop);
@@ -576,15 +577,15 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			% 
 			% M.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:GlobalEfficiencyAv:WrongInput
+			%  Error id: €BRAPH2.STR€:GlobalEfficiencyAv:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  M.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of M.
-			%   Error id: BRAPH2:GlobalEfficiencyAv:WrongInput
+			%   Error id: €BRAPH2.STR€:GlobalEfficiencyAv:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(GlobalEfficiencyAv, PROP, VALUE) throws error if VALUE has not a valid format for PROP of GlobalEfficiencyAv.
-			%   Error id: BRAPH2:GlobalEfficiencyAv:WrongInput
+			%   Error id: €BRAPH2.STR€:GlobalEfficiencyAv:€BRAPH2.WRONG_INPUT€
 			%  M.CHECKPROP(GlobalEfficiencyAv, PROP, VALUE) throws error if VALUE has not a valid format for PROP of GlobalEfficiencyAv.
-			%   Error id: BRAPH2:GlobalEfficiencyAv:WrongInput]
+			%   Error id: €BRAPH2.STR€:GlobalEfficiencyAv:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(M) and Element.CHECKPROP('GlobalEfficiencyAv')
 			%  are less computationally efficient.
@@ -596,7 +597,7 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			
 			switch prop
 				otherwise
-					if prop <= 13
+					if prop <= GlobalEfficiency.getPropNumber()
 						check = checkProp@GlobalEfficiency(prop, value);
 					end
 			end
@@ -605,8 +606,8 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':GlobalEfficiencyAv:' 'WrongInput'], ...
-					['BRAPH2' ':GlobalEfficiencyAv:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':GlobalEfficiencyAv:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':GlobalEfficiencyAv:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' GlobalEfficiencyAv.getPropTag(prop) ' (' GlobalEfficiencyAv.getFormatTag(GlobalEfficiencyAv.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -617,20 +618,20 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with 5,
-			%  6, and 7. By default this function
+			%  PROP. It works only with properties with Category.RESULT,
+			%  Category.QUERY, and Category.EVANESCENT. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  6.
+			%  Category.QUERY.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 12 % GlobalEfficiencyAv.M
-					rng_settings_ = rng(); rng(m.getPropSeed(12), 'twister')
+				case GlobalEfficiencyAv.M % __GlobalEfficiencyAv.M__
+					rng_settings_ = rng(); rng(m.getPropSeed(GlobalEfficiencyAv.M), 'twister')
 					
 					global_efficiency = calculateValue@GlobalEfficiency(m, prop);
 					g = m.get('G');  % graph from measure class
@@ -646,7 +647,7 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 13
+					if prop <= GlobalEfficiency.getPropNumber()
 						value = calculateValue@GlobalEfficiency(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

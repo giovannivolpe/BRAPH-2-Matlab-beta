@@ -6,27 +6,6 @@ classdef SettingsAxis < Settings
 	%  including axis color, hold on/off, axis on/off, grid on/off, equal on/off, box on/off, and tight on/off.
 	% The handle can be an axes (uiaxes).
 	%
-	% The list of SettingsAxis properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the axis settings.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the axis settings.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the axis settings.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the axis settings.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the axis settings.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the axis settings.
-	%  <strong>7</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
-	%  <strong>8</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
-	%  <strong>9</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
-	%  <strong>10</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
-	%  <strong>11</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
-	%  <strong>12</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
-	%  <strong>13</strong> <strong>AXISCOLOR</strong> 	AXISCOLOR (figure, color) is the axis background color.
-	%  <strong>14</strong> <strong>HOLD</strong> 	HOLD (figure, logical) determines whether hold is on or off.
-	%  <strong>15</strong> <strong>GRID</strong> 	GRID (figure, logical) determines whether the grid is shown.
-	%  <strong>16</strong> <strong>AXIS</strong> 	AXIS (figure, logical) determines whether the axis is shown.
-	%  <strong>17</strong> <strong>EQUAL</strong> 	EQUAL (figure, logical) determines whether the axis are equal.
-	%  <strong>18</strong> <strong>TIGHT</strong> 	TIGHT (figure, logical) determines whether the axis are tight.
-	%  <strong>19</strong> <strong>BOX</strong> 	BOX (figure, logical) determines whether the axis are boxed.
-	%
 	% SettingsAxis methods (constructor):
 	%  SettingsAxis - constructor
 	%
@@ -116,40 +95,40 @@ classdef SettingsAxis < Settings
 	% See also uiaxes, SettingsAxisPP, PanelFig, GUIFig, check_graphics.
 	
 	properties (Constant) % properties
-		AXISCOLOR = 13; %CET: Computational Efficiency Trick
+		AXISCOLOR = Settings.getPropNumber() + 1;
 		AXISCOLOR_TAG = 'AXISCOLOR';
-		AXISCOLOR_CATEGORY = 8;
-		AXISCOLOR_FORMAT = 20;
+		AXISCOLOR_CATEGORY = Category.FIGURE;
+		AXISCOLOR_FORMAT = Format.COLOR;
 		
-		HOLD = 14; %CET: Computational Efficiency Trick
+		HOLD = Settings.getPropNumber() + 2;
 		HOLD_TAG = 'HOLD';
-		HOLD_CATEGORY = 8;
-		HOLD_FORMAT = 4;
+		HOLD_CATEGORY = Category.FIGURE;
+		HOLD_FORMAT = Format.LOGICAL;
 		
-		GRID = 15; %CET: Computational Efficiency Trick
+		GRID = Settings.getPropNumber() + 3;
 		GRID_TAG = 'GRID';
-		GRID_CATEGORY = 8;
-		GRID_FORMAT = 4;
+		GRID_CATEGORY = Category.FIGURE;
+		GRID_FORMAT = Format.LOGICAL;
 		
-		AXIS = 16; %CET: Computational Efficiency Trick
+		AXIS = Settings.getPropNumber() + 4;
 		AXIS_TAG = 'AXIS';
-		AXIS_CATEGORY = 8;
-		AXIS_FORMAT = 4;
+		AXIS_CATEGORY = Category.FIGURE;
+		AXIS_FORMAT = Format.LOGICAL;
 		
-		EQUAL = 17; %CET: Computational Efficiency Trick
+		EQUAL = Settings.getPropNumber() + 5;
 		EQUAL_TAG = 'EQUAL';
-		EQUAL_CATEGORY = 8;
-		EQUAL_FORMAT = 4;
+		EQUAL_CATEGORY = Category.FIGURE;
+		EQUAL_FORMAT = Format.LOGICAL;
 		
-		TIGHT = 18; %CET: Computational Efficiency Trick
+		TIGHT = Settings.getPropNumber() + 6;
 		TIGHT_TAG = 'TIGHT';
-		TIGHT_CATEGORY = 8;
-		TIGHT_FORMAT = 4;
+		TIGHT_CATEGORY = Category.FIGURE;
+		TIGHT_FORMAT = Format.LOGICAL;
 		
-		BOX = 19; %CET: Computational Efficiency Trick
+		BOX = Settings.getPropNumber() + 7;
 		BOX_TAG = 'BOX';
-		BOX_CATEGORY = 8;
-		BOX_FORMAT = 4;
+		BOX_CATEGORY = Category.FIGURE;
+		BOX_FORMAT = Format.LOGICAL;
 	end
 	methods % constructor
 		function st = SettingsAxis(varargin)
@@ -162,26 +141,6 @@ classdef SettingsAxis < Settings
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of SettingsAxis properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the axis settings.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the axis settings.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the axis settings.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the axis settings.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the axis settings.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the axis settings.
-			%  <strong>7</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
-			%  <strong>8</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
-			%  <strong>9</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
-			%  <strong>10</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
-			%  <strong>11</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
-			%  <strong>12</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
-			%  <strong>13</strong> <strong>AXISCOLOR</strong> 	AXISCOLOR (figure, color) is the axis background color.
-			%  <strong>14</strong> <strong>HOLD</strong> 	HOLD (figure, logical) determines whether hold is on or off.
-			%  <strong>15</strong> <strong>GRID</strong> 	GRID (figure, logical) determines whether the grid is shown.
-			%  <strong>16</strong> <strong>AXIS</strong> 	AXIS (figure, logical) determines whether the axis is shown.
-			%  <strong>17</strong> <strong>EQUAL</strong> 	EQUAL (figure, logical) determines whether the axis are equal.
-			%  <strong>18</strong> <strong>TIGHT</strong> 	TIGHT (figure, logical) determines whether the axis are tight.
-			%  <strong>19</strong> <strong>BOX</strong> 	BOX (figure, logical) determines whether the axis are boxed.
 			%
 			% See also Category, Format.
 			
@@ -219,7 +178,7 @@ classdef SettingsAxis < Settings
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'SettingsAxis' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('SettingsAxis', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of axis settings.
@@ -240,30 +199,64 @@ classdef SettingsAxis < Settings
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19];
+				prop_list = [ ...
+					Settings.getProps() ...
+						SettingsAxis.AXISCOLOR ...
+						SettingsAxis.HOLD ...
+						SettingsAxis.GRID ...
+						SettingsAxis.AXIS ...
+						SettingsAxis.EQUAL ...
+						SettingsAxis.TIGHT ...
+						SettingsAxis.BOX ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
-					prop_list = 4;
-				case 6 % Category.QUERY
-					prop_list = [11 12];
-				case 8 % Category.FIGURE
-					prop_list = [13 14 15 16 17 18 19];
-				case 9 % Category.GUI
-					prop_list = [7 8 9 10];
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						Settings.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						Settings.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						Settings.getProps(Category.PARAMETER) ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						Settings.getProps(Category.DATA) ...
+						];
+				case Category.RESULT
+					prop_list = [
+						Settings.getProps(Category.RESULT) ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						Settings.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						Settings.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						Settings.getProps(Category.FIGURE) ...
+						SettingsAxis.AXISCOLOR ...
+						SettingsAxis.HOLD ...
+						SettingsAxis.GRID ...
+						SettingsAxis.AXIS ...
+						SettingsAxis.EQUAL ...
+						SettingsAxis.TIGHT ...
+						SettingsAxis.BOX ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						Settings.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -284,31 +277,7 @@ classdef SettingsAxis < Settings
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 19;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 2;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 1;
-				case 4 % Category.DATA
-					prop_number = 1;
-				case 6 % Category.QUERY
-					prop_number = 2;
-				case 8 % Category.FIGURE
-					prop_number = 7;
-				case 9 % Category.GUI
-					prop_number = 4;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(SettingsAxis.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in axis settings/error.
@@ -336,14 +305,14 @@ classdef SettingsAxis < Settings
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 19 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == SettingsAxis.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':SettingsAxis:' 'WrongInput'], ...
-					['BRAPH2' ':SettingsAxis:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':SettingsAxis:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':SettingsAxis:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for SettingsAxis.'] ...
 					)
 			end
@@ -374,14 +343,15 @@ classdef SettingsAxis < Settings
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'AXISCOLOR'  'HOLD'  'GRID'  'AXIS'  'EQUAL'  'TIGHT'  'BOX' })); %CET: Computational Efficiency Trick
+			settingsaxis_tag_list = cellfun(@(x) SettingsAxis.getPropTag(x), num2cell(SettingsAxis.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, settingsaxis_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':SettingsAxis:' 'WrongInput'], ...
-					['BRAPH2' ':SettingsAxis:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':SettingsAxis:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':SettingsAxis:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for SettingsAxis.'] ...
 					)
 			end
@@ -407,7 +377,8 @@ classdef SettingsAxis < Settings
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'AXISCOLOR'  'HOLD'  'GRID'  'AXIS'  'EQUAL'  'TIGHT'  'BOX' })); % tag = pointer %CET: Computational Efficiency Trick
+				settingsaxis_tag_list = cellfun(@(x) SettingsAxis.getPropTag(x), num2cell(SettingsAxis.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, settingsaxis_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -435,9 +406,26 @@ classdef SettingsAxis < Settings
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				settingsaxis_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'AXISCOLOR'  'HOLD'  'GRID'  'AXIS'  'EQUAL'  'TIGHT'  'BOX' };
-				tag = settingsaxis_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case SettingsAxis.AXISCOLOR
+						tag = SettingsAxis.AXISCOLOR_TAG;
+					case SettingsAxis.HOLD
+						tag = SettingsAxis.HOLD_TAG;
+					case SettingsAxis.GRID
+						tag = SettingsAxis.GRID_TAG;
+					case SettingsAxis.AXIS
+						tag = SettingsAxis.AXIS_TAG;
+					case SettingsAxis.EQUAL
+						tag = SettingsAxis.EQUAL_TAG;
+					case SettingsAxis.TIGHT
+						tag = SettingsAxis.TIGHT_TAG;
+					case SettingsAxis.BOX
+						tag = SettingsAxis.BOX_TAG;
+					otherwise
+						tag = getPropTag@Settings(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -462,9 +450,24 @@ classdef SettingsAxis < Settings
 			
 			prop = SettingsAxis.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			settingsaxis_category_list = { 1  1  3  4  2  2  9  9  9  9  6  6  8  8  8  8  8  8  8 };
-			prop_category = settingsaxis_category_list{prop};
+			switch prop
+				case SettingsAxis.AXISCOLOR
+					prop_category = SettingsAxis.AXISCOLOR_CATEGORY;
+				case SettingsAxis.HOLD
+					prop_category = SettingsAxis.HOLD_CATEGORY;
+				case SettingsAxis.GRID
+					prop_category = SettingsAxis.GRID_CATEGORY;
+				case SettingsAxis.AXIS
+					prop_category = SettingsAxis.AXIS_CATEGORY;
+				case SettingsAxis.EQUAL
+					prop_category = SettingsAxis.EQUAL_CATEGORY;
+				case SettingsAxis.TIGHT
+					prop_category = SettingsAxis.TIGHT_CATEGORY;
+				case SettingsAxis.BOX
+					prop_category = SettingsAxis.BOX_CATEGORY;
+				otherwise
+					prop_category = getPropCategory@Settings(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -488,9 +491,24 @@ classdef SettingsAxis < Settings
 			
 			prop = SettingsAxis.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			settingsaxis_format_list = { 2  2  8  2  2  2  8  11  2  11  18  11  20  4  4  4  4  4  4 };
-			prop_format = settingsaxis_format_list{prop};
+			switch prop
+				case SettingsAxis.AXISCOLOR
+					prop_format = SettingsAxis.AXISCOLOR_FORMAT;
+				case SettingsAxis.HOLD
+					prop_format = SettingsAxis.HOLD_FORMAT;
+				case SettingsAxis.GRID
+					prop_format = SettingsAxis.GRID_FORMAT;
+				case SettingsAxis.AXIS
+					prop_format = SettingsAxis.AXIS_FORMAT;
+				case SettingsAxis.EQUAL
+					prop_format = SettingsAxis.EQUAL_FORMAT;
+				case SettingsAxis.TIGHT
+					prop_format = SettingsAxis.TIGHT_FORMAT;
+				case SettingsAxis.BOX
+					prop_format = SettingsAxis.BOX_FORMAT;
+				otherwise
+					prop_format = getPropFormat@Settings(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -514,9 +532,36 @@ classdef SettingsAxis < Settings
 			
 			prop = SettingsAxis.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			settingsaxis_description_list = { 'NAME (constant, string) is the name of the axis settings.'  'DESCRIPTION (constant, string) is the description of the axis settings.'  'TEMPLATE (parameter, item) is the template of the axis settings.'  'ID (data, string) is a few-letter code for the axis settings.'  'LABEL (metadata, string) is an extended label of the axis settings.'  'NOTES (metadata, string) are some specific notes about the axis settings.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.'  'AXISCOLOR (figure, color) is the axis background color.'  'HOLD (figure, logical) determines whether hold is on or off.'  'GRID (figure, logical) determines whether the grid is shown.'  'AXIS (figure, logical) determines whether the axis is shown.'  'EQUAL (figure, logical) determines whether the axis are equal.'  'TIGHT (figure, logical) determines whether the axis are tight.'  'BOX (figure, logical) determines whether the axis are boxed.' };
-			prop_description = settingsaxis_description_list{prop};
+			switch prop
+				case SettingsAxis.AXISCOLOR
+					prop_description = 'AXISCOLOR (figure, color) is the axis background color.';
+				case SettingsAxis.HOLD
+					prop_description = 'HOLD (figure, logical) determines whether hold is on or off.';
+				case SettingsAxis.GRID
+					prop_description = 'GRID (figure, logical) determines whether the grid is shown.';
+				case SettingsAxis.AXIS
+					prop_description = 'AXIS (figure, logical) determines whether the axis is shown.';
+				case SettingsAxis.EQUAL
+					prop_description = 'EQUAL (figure, logical) determines whether the axis are equal.';
+				case SettingsAxis.TIGHT
+					prop_description = 'TIGHT (figure, logical) determines whether the axis are tight.';
+				case SettingsAxis.BOX
+					prop_description = 'BOX (figure, logical) determines whether the axis are boxed.';
+				case SettingsAxis.NAME
+					prop_description = 'NAME (constant, string) is the name of the axis settings.';
+				case SettingsAxis.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the axis settings.';
+				case SettingsAxis.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the axis settings.';
+				case SettingsAxis.ID
+					prop_description = 'ID (data, string) is a few-letter code for the axis settings.';
+				case SettingsAxis.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the axis settings.';
+				case SettingsAxis.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the axis settings.';
+				otherwise
+					prop_description = getPropDescription@Settings(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -540,22 +585,22 @@ classdef SettingsAxis < Settings
 			
 			prop = SettingsAxis.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 13 % SettingsAxis.AXISCOLOR
-					prop_settings = Format.getFormatSettings(20);
-				case 14 % SettingsAxis.HOLD
-					prop_settings = Format.getFormatSettings(4);
-				case 15 % SettingsAxis.GRID
-					prop_settings = Format.getFormatSettings(4);
-				case 16 % SettingsAxis.AXIS
-					prop_settings = Format.getFormatSettings(4);
-				case 17 % SettingsAxis.EQUAL
-					prop_settings = Format.getFormatSettings(4);
-				case 18 % SettingsAxis.TIGHT
-					prop_settings = Format.getFormatSettings(4);
-				case 19 % SettingsAxis.BOX
-					prop_settings = Format.getFormatSettings(4);
-				case 3 % SettingsAxis.TEMPLATE
+			switch prop
+				case SettingsAxis.AXISCOLOR
+					prop_settings = Format.getFormatSettings(Format.COLOR);
+				case SettingsAxis.HOLD
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case SettingsAxis.GRID
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case SettingsAxis.AXIS
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case SettingsAxis.EQUAL
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case SettingsAxis.TIGHT
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case SettingsAxis.BOX
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case SettingsAxis.TEMPLATE
 					prop_settings = 'SettingsAxis';
 				otherwise
 					prop_settings = getPropSettings@Settings(prop);
@@ -583,32 +628,32 @@ classdef SettingsAxis < Settings
 			
 			prop = SettingsAxis.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 13 % SettingsAxis.AXISCOLOR
+			switch prop
+				case SettingsAxis.AXISCOLOR
 					prop_default = [1 1 1];
-				case 14 % SettingsAxis.HOLD
+				case SettingsAxis.HOLD
 					prop_default = true;
-				case 15 % SettingsAxis.GRID
+				case SettingsAxis.GRID
 					prop_default = false;
-				case 16 % SettingsAxis.AXIS
+				case SettingsAxis.AXIS
 					prop_default = true;
-				case 17 % SettingsAxis.EQUAL
+				case SettingsAxis.EQUAL
 					prop_default = true;
-				case 18 % SettingsAxis.TIGHT
+				case SettingsAxis.TIGHT
 					prop_default = false;
-				case 19 % SettingsAxis.BOX
+				case SettingsAxis.BOX
 					prop_default = false;
-				case 1 % SettingsAxis.NAME
+				case SettingsAxis.NAME
 					prop_default = 'SettingsAxis';
-				case 2 % SettingsAxis.DESCRIPTION
+				case SettingsAxis.DESCRIPTION
 					prop_default = 'SettingsAxis provides the settings for an axis, including axis color, hold on/off, axis on/off, grid on/off, equal on/off, and tight on/off.';
-				case 3 % SettingsAxis.TEMPLATE
-					prop_default = Format.getFormatDefault(8, SettingsAxis.getPropSettings(prop));
-				case 4 % SettingsAxis.ID
+				case SettingsAxis.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, SettingsAxis.getPropSettings(prop));
+				case SettingsAxis.ID
 					prop_default = 'SettingsAxis ID';
-				case 5 % SettingsAxis.LABEL
+				case SettingsAxis.LABEL
 					prop_default = 'SettingsAxis label';
-				case 6 % SettingsAxis.NOTES
+				case SettingsAxis.NOTES
 					prop_default = 'SettingsAxis notes';
 				otherwise
 					prop_default = getPropDefault@Settings(prop);
@@ -655,15 +700,15 @@ classdef SettingsAxis < Settings
 			% 
 			% ST.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:SettingsAxis:WrongInput
+			%  Error id: €BRAPH2.STR€:SettingsAxis:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  ST.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of ST.
-			%   Error id: BRAPH2:SettingsAxis:WrongInput
+			%   Error id: €BRAPH2.STR€:SettingsAxis:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(SettingsAxis, PROP, VALUE) throws error if VALUE has not a valid format for PROP of SettingsAxis.
-			%   Error id: BRAPH2:SettingsAxis:WrongInput
+			%   Error id: €BRAPH2.STR€:SettingsAxis:€BRAPH2.WRONG_INPUT€
 			%  ST.CHECKPROP(SettingsAxis, PROP, VALUE) throws error if VALUE has not a valid format for PROP of SettingsAxis.
-			%   Error id: BRAPH2:SettingsAxis:WrongInput]
+			%   Error id: €BRAPH2.STR€:SettingsAxis:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(ST) and Element.CHECKPROP('SettingsAxis')
 			%  are less computationally efficient.
@@ -674,24 +719,24 @@ classdef SettingsAxis < Settings
 			prop = SettingsAxis.getPropProp(pointer);
 			
 			switch prop
-				case 13 % SettingsAxis.AXISCOLOR
-					check = Format.checkFormat(20, value, SettingsAxis.getPropSettings(prop));
-				case 14 % SettingsAxis.HOLD
-					check = Format.checkFormat(4, value, SettingsAxis.getPropSettings(prop));
-				case 15 % SettingsAxis.GRID
-					check = Format.checkFormat(4, value, SettingsAxis.getPropSettings(prop));
-				case 16 % SettingsAxis.AXIS
-					check = Format.checkFormat(4, value, SettingsAxis.getPropSettings(prop));
-				case 17 % SettingsAxis.EQUAL
-					check = Format.checkFormat(4, value, SettingsAxis.getPropSettings(prop));
-				case 18 % SettingsAxis.TIGHT
-					check = Format.checkFormat(4, value, SettingsAxis.getPropSettings(prop));
-				case 19 % SettingsAxis.BOX
-					check = Format.checkFormat(4, value, SettingsAxis.getPropSettings(prop));
-				case 3 % SettingsAxis.TEMPLATE
-					check = Format.checkFormat(8, value, SettingsAxis.getPropSettings(prop));
+				case SettingsAxis.AXISCOLOR % __SettingsAxis.AXISCOLOR__
+					check = Format.checkFormat(Format.COLOR, value, SettingsAxis.getPropSettings(prop));
+				case SettingsAxis.HOLD % __SettingsAxis.HOLD__
+					check = Format.checkFormat(Format.LOGICAL, value, SettingsAxis.getPropSettings(prop));
+				case SettingsAxis.GRID % __SettingsAxis.GRID__
+					check = Format.checkFormat(Format.LOGICAL, value, SettingsAxis.getPropSettings(prop));
+				case SettingsAxis.AXIS % __SettingsAxis.AXIS__
+					check = Format.checkFormat(Format.LOGICAL, value, SettingsAxis.getPropSettings(prop));
+				case SettingsAxis.EQUAL % __SettingsAxis.EQUAL__
+					check = Format.checkFormat(Format.LOGICAL, value, SettingsAxis.getPropSettings(prop));
+				case SettingsAxis.TIGHT % __SettingsAxis.TIGHT__
+					check = Format.checkFormat(Format.LOGICAL, value, SettingsAxis.getPropSettings(prop));
+				case SettingsAxis.BOX % __SettingsAxis.BOX__
+					check = Format.checkFormat(Format.LOGICAL, value, SettingsAxis.getPropSettings(prop));
+				case SettingsAxis.TEMPLATE % __SettingsAxis.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, SettingsAxis.getPropSettings(prop));
 				otherwise
-					if prop <= 12
+					if prop <= Settings.getPropNumber()
 						check = checkProp@Settings(prop, value);
 					end
 			end
@@ -700,8 +745,8 @@ classdef SettingsAxis < Settings
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':SettingsAxis:' 'WrongInput'], ...
-					['BRAPH2' ':SettingsAxis:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':SettingsAxis:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':SettingsAxis:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' SettingsAxis.getPropTag(prop) ' (' SettingsAxis.getFormatTag(SettingsAxis.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -721,7 +766,7 @@ classdef SettingsAxis < Settings
 			%  checkValue.
 			
 			switch prop
-				case 13 % SettingsAxis.AXISCOLOR
+				case SettingsAxis.AXISCOLOR % __SettingsAxis.AXISCOLOR__
 					a = st.get('H');
 					if check_graphics(a, 'axes')
 					    if ~isequal(get(a, 'Color'), st.get('AXISCOLOR'))
@@ -729,7 +774,7 @@ classdef SettingsAxis < Settings
 					    end
 					end
 					
-				case 14 % SettingsAxis.HOLD
+				case SettingsAxis.HOLD % __SettingsAxis.HOLD__
 					a = st.get('H');
 					if check_graphics(a, 'axes')
 					    if st.get('HOLD')
@@ -739,7 +784,7 @@ classdef SettingsAxis < Settings
 					    end
 					end
 					
-				case 15 % SettingsAxis.GRID
+				case SettingsAxis.GRID % __SettingsAxis.GRID__
 					a = st.get('H');
 					if check_graphics(a, 'axes')
 					    if st.get('GRID')
@@ -749,7 +794,7 @@ classdef SettingsAxis < Settings
 					    end
 					end
 					
-				case 16 % SettingsAxis.AXIS
+				case SettingsAxis.AXIS % __SettingsAxis.AXIS__
 					a = st.get('H');
 					if check_graphics(a, 'axes')
 					    if st.get('AXIS')
@@ -759,7 +804,7 @@ classdef SettingsAxis < Settings
 					    end
 					end
 					
-				case 17 % SettingsAxis.EQUAL
+				case SettingsAxis.EQUAL % __SettingsAxis.EQUAL__
 					a = st.get('H');
 					if check_graphics(a, 'axes')
 					    if st.get('EQUAL')
@@ -769,7 +814,7 @@ classdef SettingsAxis < Settings
 					    end
 					end
 					
-				case 18 % SettingsAxis.TIGHT
+				case SettingsAxis.TIGHT % __SettingsAxis.TIGHT__
 					a = st.get('H');
 					if check_graphics(a, 'axes')
 					    if st.get('TIGHT')
@@ -777,7 +822,7 @@ classdef SettingsAxis < Settings
 					    end
 					end
 					
-				case 19 % SettingsAxis.BOX
+				case SettingsAxis.BOX % __SettingsAxis.BOX__
 					a = st.get('H');
 					if check_graphics(a, 'axes')
 					    if st.get('BOX')
@@ -788,7 +833,7 @@ classdef SettingsAxis < Settings
 					end
 					
 				otherwise
-					if prop <= 12
+					if prop <= Settings.getPropNumber()
 						postset@Settings(st, prop);
 					end
 			end

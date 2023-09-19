@@ -7,21 +7,6 @@ classdef Distance < Measure
 	% For weighted graphs, the distance is calculated with the Dijkstra algorithm
 	%  using the inverse weight as the distance associated to the edge.
 	%
-	% The list of Distance properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the distance.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the distance.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the distance.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the distance.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the distance.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the distance.
-	%  <strong>7</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.BINODAL.
-	%  <strong>8</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-	%  <strong>9</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-	%  <strong>10</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-	%  <strong>11</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-	%  <strong>12</strong> <strong>M</strong> 	M (result, cell) is the distance.
-	%  <strong>13</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%
 	% Distance methods (constructor):
 	%  Distance - constructor
 	%
@@ -119,20 +104,6 @@ classdef Distance < Measure
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of Distance properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the distance.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the distance.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the distance.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the distance.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the distance.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the distance.
-			%  <strong>7</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.BINODAL.
-			%  <strong>8</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-			%  <strong>9</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-			%  <strong>10</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-			%  <strong>11</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-			%  <strong>12</strong> <strong>M</strong> 	M (result, cell) is the distance.
-			%  <strong>13</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 			%
 			% See also Category, Format.
 			
@@ -170,7 +141,7 @@ classdef Distance < Measure
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'Distance'  'GlobalEfficiency'  'GlobalEfficiencyAv'  'GlobalEfficiencyIn'  'GlobalEfficiencyInAv'  'GlobalEfficiencyOut'  'GlobalEfficiencyOutAv' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('Distance', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of distance.
@@ -191,28 +162,50 @@ classdef Distance < Measure
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13];
+				prop_list = [ ...
+					Measure.getProps() ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2 7 8 9 10];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
-					prop_list = [4 11];
-				case 5 % Category.RESULT
-					prop_list = 12;
-				case 9 % Category.GUI
-					prop_list = 13;
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						Measure.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						Measure.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						Measure.getProps(Category.PARAMETER) ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						Measure.getProps(Category.DATA) ...
+						];
+				case Category.RESULT
+					prop_list = [
+						Measure.getProps(Category.RESULT) ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						Measure.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						Measure.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						Measure.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						Measure.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -233,29 +226,7 @@ classdef Distance < Measure
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 13;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 6;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 1;
-				case 4 % Category.DATA
-					prop_number = 2;
-				case 5 % Category.RESULT
-					prop_number = 1;
-				case 9 % Category.GUI
-					prop_number = 1;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(Distance.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in distance/error.
@@ -283,14 +254,14 @@ classdef Distance < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 13 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == Distance.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':Distance:' 'WrongInput'], ...
-					['BRAPH2' ':Distance:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':Distance:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':Distance:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for Distance.'] ...
 					)
 			end
@@ -321,14 +292,15 @@ classdef Distance < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
+			distance_tag_list = cellfun(@(x) Distance.getPropTag(x), num2cell(Distance.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, distance_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':Distance:' 'WrongInput'], ...
-					['BRAPH2' ':Distance:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':Distance:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':Distance:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for Distance.'] ...
 					)
 			end
@@ -354,7 +326,8 @@ classdef Distance < Measure
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
+				distance_tag_list = cellfun(@(x) Distance.getPropTag(x), num2cell(Distance.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, distance_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -382,9 +355,12 @@ classdef Distance < Measure
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				distance_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
-				tag = distance_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					otherwise
+						tag = getPropTag@Measure(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -409,9 +385,10 @@ classdef Distance < Measure
 			
 			prop = Distance.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			distance_category_list = { 1  1  3  4  2  2  1  1  1  1  4  5  9 };
-			prop_category = distance_category_list{prop};
+			switch prop
+				otherwise
+					prop_category = getPropCategory@Measure(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -435,9 +412,10 @@ classdef Distance < Measure
 			
 			prop = Distance.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			distance_format_list = { 2  2  8  2  2  2  11  11  11  7  8  16  8 };
-			prop_format = distance_format_list{prop};
+			switch prop
+				otherwise
+					prop_format = getPropFormat@Measure(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -461,9 +439,32 @@ classdef Distance < Measure
 			
 			prop = Distance.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			distance_description_list = { 'NAME (constant, string) is the name of the distance.'  'DESCRIPTION (constant, string) is the description of the distance.'  'TEMPLATE (parameter, item) is the template of the distance.'  'ID (data, string) is a few-letter code of the distance.'  'LABEL (metadata, string) is an extended label of the distance.'  'NOTES (metadata, string) are some specific notes about the distance.'  'SHAPE (constant, scalar) is the measure shape Measure.BINODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the distance.'  'PFM (gui, item) contains the panel figure of the measure.' };
-			prop_description = distance_description_list{prop};
+			switch prop
+				case Distance.NAME
+					prop_description = 'NAME (constant, string) is the name of the distance.';
+				case Distance.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the distance.';
+				case Distance.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the distance.';
+				case Distance.ID
+					prop_description = 'ID (data, string) is a few-letter code of the distance.';
+				case Distance.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the distance.';
+				case Distance.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the distance.';
+				case Distance.SHAPE
+					prop_description = 'SHAPE (constant, scalar) is the measure shape __Measure.BINODAL__.';
+				case Distance.SCOPE
+					prop_description = 'SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.';
+				case Distance.PARAMETRICITY
+					prop_description = 'PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.';
+				case Distance.COMPATIBLE_GRAPHS
+					prop_description = 'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.';
+				case Distance.M
+					prop_description = 'M (result, cell) is the distance.';
+				otherwise
+					prop_description = getPropDescription@Measure(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -487,8 +488,8 @@ classdef Distance < Measure
 			
 			prop = Distance.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 3 % Distance.TEMPLATE
+			switch prop
+				case Distance.TEMPLATE
 					prop_settings = 'Distance';
 				otherwise
 					prop_settings = getPropSettings@Measure(prop);
@@ -516,26 +517,26 @@ classdef Distance < Measure
 			
 			prop = Distance.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 1 % Distance.NAME
+			switch prop
+				case Distance.NAME
 					prop_default = 'Distance';
-				case 2 % Distance.DESCRIPTION
+				case Distance.DESCRIPTION
 					prop_default = 'The distance of a graph is the shortest path between all pairs of nodes within a layer of the graph. For weighted graphs, the distance is calculated with the Dijkstra algorithm using the inverse weight as the distance associated to the edge.';
-				case 3 % Distance.TEMPLATE
-					prop_default = Format.getFormatDefault(8, Distance.getPropSettings(prop));
-				case 4 % Distance.ID
+				case Distance.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, Distance.getPropSettings(prop));
+				case Distance.ID
 					prop_default = 'Distance ID';
-				case 5 % Distance.LABEL
+				case Distance.LABEL
 					prop_default = 'Distance label';
-				case 6 % Distance.NOTES
+				case Distance.NOTES
 					prop_default = 'Distance notes';
-				case 7 % Distance.SHAPE
-					prop_default = 3;
-				case 8 % Distance.SCOPE
-					prop_default = 2;
-				case 9 % Distance.PARAMETRICITY
-					prop_default = 2;
-				case 10 % Distance.COMPATIBLE_GRAPHS
+				case Distance.SHAPE
+					prop_default = Measure.BINODAL;
+				case Distance.SCOPE
+					prop_default = Measure.UNILAYER;
+				case Distance.PARAMETRICITY
+					prop_default = Measure.NONPARAMETRIC;
+				case Distance.COMPATIBLE_GRAPHS
 					prop_default = {'GraphBD' 'GraphBU' 'GraphWD' 'GraphWU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexBD' 'MultiplexBU' 'MultiplexWD' 'MultiplexWU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxBD' 'OrdMxBUD' 'OrdMxBU' 'OrdMxWD' 'OrdMxWU' 'OrdMxBUT' 'MultilayerWD' 'MultilayerBD' 'MultilayerWU' 'OrdMlWD' 'OrdMlWU' 'OrdMlBD' 'MultilayerBUT' 'MultilayerBU' 'MultilayerBUD' 'OrdMlBU' 'OrdMlBUD' 'OrdMlBUT'} ;%TBE % % % add tests for 'MultilayerWD' 'MultilayerBD';
 				otherwise
 					prop_default = getPropDefault@Measure(prop);
@@ -582,15 +583,15 @@ classdef Distance < Measure
 			% 
 			% M.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:Distance:WrongInput
+			%  Error id: €BRAPH2.STR€:Distance:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  M.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of M.
-			%   Error id: BRAPH2:Distance:WrongInput
+			%   Error id: €BRAPH2.STR€:Distance:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(Distance, PROP, VALUE) throws error if VALUE has not a valid format for PROP of Distance.
-			%   Error id: BRAPH2:Distance:WrongInput
+			%   Error id: €BRAPH2.STR€:Distance:€BRAPH2.WRONG_INPUT€
 			%  M.CHECKPROP(Distance, PROP, VALUE) throws error if VALUE has not a valid format for PROP of Distance.
-			%   Error id: BRAPH2:Distance:WrongInput]
+			%   Error id: €BRAPH2.STR€:Distance:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(M) and Element.CHECKPROP('Distance')
 			%  are less computationally efficient.
@@ -601,10 +602,10 @@ classdef Distance < Measure
 			prop = Distance.getPropProp(pointer);
 			
 			switch prop
-				case 3 % Distance.TEMPLATE
-					check = Format.checkFormat(8, value, Distance.getPropSettings(prop));
+				case Distance.TEMPLATE % __Distance.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, Distance.getPropSettings(prop));
 				otherwise
-					if prop <= 13
+					if prop <= Measure.getPropNumber()
 						check = checkProp@Measure(prop, value);
 					end
 			end
@@ -613,8 +614,8 @@ classdef Distance < Measure
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':Distance:' 'WrongInput'], ...
-					['BRAPH2' ':Distance:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':Distance:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':Distance:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' Distance.getPropTag(prop) ' (' Distance.getFormatTag(Distance.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -625,20 +626,20 @@ classdef Distance < Measure
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with 5,
-			%  6, and 7. By default this function
+			%  PROP. It works only with properties with Category.RESULT,
+			%  Category.QUERY, and Category.EVANESCENT. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  6.
+			%  Category.QUERY.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 12 % Distance.M
-					rng_settings_ = rng(); rng(m.getPropSeed(12), 'twister')
+				case Distance.M % __Distance.M__
+					rng_settings_ = rng(); rng(m.getPropSeed(Distance.M), 'twister')
 					
 					g = m.get('G'); % graph from measure class
 					A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
@@ -654,7 +655,7 @@ classdef Distance < Measure
 					    Aii = Aii_tmp{li};
 					    connectivity_layer = connectivity_type(li);
 					
-					    if connectivity_layer == 1  % weighted graphs
+					    if connectivity_layer == Graph.WEIGHTED  % weighted graphs
 					        distance(li) = {getWeightedCalculation(Aii)};
 					    else  % binary graphs
 					        distance(li) = {getBinaryCalculation(Aii)};
@@ -666,7 +667,7 @@ classdef Distance < Measure
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 13
+					if prop <= Measure.getPropNumber()
 						value = calculateValue@Measure(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

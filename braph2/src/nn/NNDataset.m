@@ -5,18 +5,6 @@ classdef NNDataset < ConcreteElement
 	% A neural network dataset (NNDataset) represents a dataset containing datapoints whose class is defined by the DP_CLASS property.
 	% NNDataset can contain all the necessary inputs and targets.
 	%
-	% The list of NNDataset properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the dataset for neural network analysis.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the dataset for neural network analysis.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the dataset for neural network analysis.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the dataset for neural network analysis.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the dataset for neural network analysis.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the dataset for neural network analysis.
-	%  <strong>7</strong> <strong>DP_CLASS</strong> 	DP_CLASS (parameter, class) is the class of the data points
-	%  <strong>8</strong> <strong>DP_DICT</strong> 	DP_DICT (data, idict) is an indexed dictionary containing the data points.
-	%  <strong>9</strong> <strong>INPUTS</strong> 	INPUTS (result, cell) is a collection of the inputs from all data points.
-	%  <strong>10</strong> <strong>TARGETS</strong> 	TARGETS (result, cell) is a collection of the targets from all data points.
-	%
 	% NNDataset methods (constructor):
 	%  NNDataset - constructor
 	%
@@ -106,25 +94,25 @@ classdef NNDataset < ConcreteElement
 	% See also NNDataPoint, NNDatasetCombine, NNDatasetSplit.
 	
 	properties (Constant) % properties
-		DP_CLASS = 7; %CET: Computational Efficiency Trick
+		DP_CLASS = ConcreteElement.getPropNumber() + 1;
 		DP_CLASS_TAG = 'DP_CLASS';
-		DP_CLASS_CATEGORY = 3;
-		DP_CLASS_FORMAT = 6;
+		DP_CLASS_CATEGORY = Category.PARAMETER;
+		DP_CLASS_FORMAT = Format.CLASS;
 		
-		DP_DICT = 8; %CET: Computational Efficiency Trick
+		DP_DICT = ConcreteElement.getPropNumber() + 2;
 		DP_DICT_TAG = 'DP_DICT';
-		DP_DICT_CATEGORY = 4;
-		DP_DICT_FORMAT = 10;
+		DP_DICT_CATEGORY = Category.DATA;
+		DP_DICT_FORMAT = Format.IDICT;
 		
-		INPUTS = 9; %CET: Computational Efficiency Trick
+		INPUTS = ConcreteElement.getPropNumber() + 3;
 		INPUTS_TAG = 'INPUTS';
-		INPUTS_CATEGORY = 5;
-		INPUTS_FORMAT = 16;
+		INPUTS_CATEGORY = Category.RESULT;
+		INPUTS_FORMAT = Format.CELL;
 		
-		TARGETS = 10; %CET: Computational Efficiency Trick
+		TARGETS = ConcreteElement.getPropNumber() + 4;
 		TARGETS_TAG = 'TARGETS';
-		TARGETS_CATEGORY = 5;
-		TARGETS_FORMAT = 16;
+		TARGETS_CATEGORY = Category.RESULT;
+		TARGETS_FORMAT = Format.CELL;
 	end
 	methods % constructor
 		function d = NNDataset(varargin)
@@ -137,17 +125,6 @@ classdef NNDataset < ConcreteElement
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of NNDataset properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the dataset for neural network analysis.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the dataset for neural network analysis.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the dataset for neural network analysis.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the dataset for neural network analysis.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the dataset for neural network analysis.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the dataset for neural network analysis.
-			%  <strong>7</strong> <strong>DP_CLASS</strong> 	DP_CLASS (parameter, class) is the class of the data points
-			%  <strong>8</strong> <strong>DP_DICT</strong> 	DP_DICT (data, idict) is an indexed dictionary containing the data points.
-			%  <strong>9</strong> <strong>INPUTS</strong> 	INPUTS (result, cell) is a collection of the inputs from all data points.
-			%  <strong>10</strong> <strong>TARGETS</strong> 	TARGETS (result, cell) is a collection of the targets from all data points.
 			%
 			% See also Category, Format.
 			
@@ -185,7 +162,7 @@ classdef NNDataset < ConcreteElement
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'NNDataset' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('NNDataset', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of neural network data.
@@ -206,26 +183,58 @@ classdef NNDataset < ConcreteElement
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10];
+				prop_list = [ ...
+					ConcreteElement.getProps() ...
+						NNDataset.DP_CLASS ...
+						NNDataset.DP_DICT ...
+						NNDataset.INPUTS ...
+						NNDataset.TARGETS ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = [3 7];
-				case 4 % Category.DATA
-					prop_list = [4 8];
-				case 5 % Category.RESULT
-					prop_list = [9 10];
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.PARAMETER) ...
+						NNDataset.DP_CLASS ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.DATA) ...
+						NNDataset.DP_DICT ...
+						];
+				case Category.RESULT
+					prop_list = [
+						ConcreteElement.getProps(Category.RESULT) ...
+						NNDataset.INPUTS ...
+						NNDataset.TARGETS ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -246,27 +255,7 @@ classdef NNDataset < ConcreteElement
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 10;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 2;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 2;
-				case 4 % Category.DATA
-					prop_number = 2;
-				case 5 % Category.RESULT
-					prop_number = 2;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(NNDataset.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in neural network data/error.
@@ -294,14 +283,14 @@ classdef NNDataset < ConcreteElement
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 10 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == NNDataset.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':NNDataset:' 'WrongInput'], ...
-					['BRAPH2' ':NNDataset:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':NNDataset:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':NNDataset:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for NNDataset.'] ...
 					)
 			end
@@ -332,14 +321,15 @@ classdef NNDataset < ConcreteElement
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'DP_CLASS'  'DP_DICT'  'INPUTS'  'TARGETS' })); %CET: Computational Efficiency Trick
+			nndataset_tag_list = cellfun(@(x) NNDataset.getPropTag(x), num2cell(NNDataset.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, nndataset_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':NNDataset:' 'WrongInput'], ...
-					['BRAPH2' ':NNDataset:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':NNDataset:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':NNDataset:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for NNDataset.'] ...
 					)
 			end
@@ -365,7 +355,8 @@ classdef NNDataset < ConcreteElement
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'DP_CLASS'  'DP_DICT'  'INPUTS'  'TARGETS' })); % tag = pointer %CET: Computational Efficiency Trick
+				nndataset_tag_list = cellfun(@(x) NNDataset.getPropTag(x), num2cell(NNDataset.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, nndataset_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -393,9 +384,20 @@ classdef NNDataset < ConcreteElement
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				nndataset_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'DP_CLASS'  'DP_DICT'  'INPUTS'  'TARGETS' };
-				tag = nndataset_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case NNDataset.DP_CLASS
+						tag = NNDataset.DP_CLASS_TAG;
+					case NNDataset.DP_DICT
+						tag = NNDataset.DP_DICT_TAG;
+					case NNDataset.INPUTS
+						tag = NNDataset.INPUTS_TAG;
+					case NNDataset.TARGETS
+						tag = NNDataset.TARGETS_TAG;
+					otherwise
+						tag = getPropTag@ConcreteElement(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -420,9 +422,18 @@ classdef NNDataset < ConcreteElement
 			
 			prop = NNDataset.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			nndataset_category_list = { 1  1  3  4  2  2  3  4  5  5 };
-			prop_category = nndataset_category_list{prop};
+			switch prop
+				case NNDataset.DP_CLASS
+					prop_category = NNDataset.DP_CLASS_CATEGORY;
+				case NNDataset.DP_DICT
+					prop_category = NNDataset.DP_DICT_CATEGORY;
+				case NNDataset.INPUTS
+					prop_category = NNDataset.INPUTS_CATEGORY;
+				case NNDataset.TARGETS
+					prop_category = NNDataset.TARGETS_CATEGORY;
+				otherwise
+					prop_category = getPropCategory@ConcreteElement(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -446,9 +457,18 @@ classdef NNDataset < ConcreteElement
 			
 			prop = NNDataset.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			nndataset_format_list = { 2  2  8  2  2  2  6  10  16  16 };
-			prop_format = nndataset_format_list{prop};
+			switch prop
+				case NNDataset.DP_CLASS
+					prop_format = NNDataset.DP_CLASS_FORMAT;
+				case NNDataset.DP_DICT
+					prop_format = NNDataset.DP_DICT_FORMAT;
+				case NNDataset.INPUTS
+					prop_format = NNDataset.INPUTS_FORMAT;
+				case NNDataset.TARGETS
+					prop_format = NNDataset.TARGETS_FORMAT;
+				otherwise
+					prop_format = getPropFormat@ConcreteElement(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -472,9 +492,30 @@ classdef NNDataset < ConcreteElement
 			
 			prop = NNDataset.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			nndataset_description_list = { 'NAME (constant, string) is the name of the dataset for neural network analysis.'  'DESCRIPTION (constant, string) is the description of the dataset for neural network analysis.'  'TEMPLATE (parameter, item) is the template of the dataset for neural network analysis.'  'ID (data, string) is a few-letter code for the dataset for neural network analysis.'  'LABEL (metadata, string) is an extended label of the dataset for neural network analysis.'  'NOTES (metadata, string) are some specific notes about the dataset for neural network analysis.'  'DP_CLASS (parameter, class) is the class of the data points'  'DP_DICT (data, idict) is an indexed dictionary containing the data points.'  'INPUTS (result, cell) is a collection of the inputs from all data points.'  'TARGETS (result, cell) is a collection of the targets from all data points.' };
-			prop_description = nndataset_description_list{prop};
+			switch prop
+				case NNDataset.DP_CLASS
+					prop_description = 'DP_CLASS (parameter, class) is the class of the data points';
+				case NNDataset.DP_DICT
+					prop_description = 'DP_DICT (data, idict) is an indexed dictionary containing the data points.';
+				case NNDataset.INPUTS
+					prop_description = 'INPUTS (result, cell) is a collection of the inputs from all data points.';
+				case NNDataset.TARGETS
+					prop_description = 'TARGETS (result, cell) is a collection of the targets from all data points.';
+				case NNDataset.NAME
+					prop_description = 'NAME (constant, string) is the name of the dataset for neural network analysis.';
+				case NNDataset.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the dataset for neural network analysis.';
+				case NNDataset.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the dataset for neural network analysis.';
+				case NNDataset.ID
+					prop_description = 'ID (data, string) is a few-letter code for the dataset for neural network analysis.';
+				case NNDataset.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the dataset for neural network analysis.';
+				case NNDataset.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the dataset for neural network analysis.';
+				otherwise
+					prop_description = getPropDescription@ConcreteElement(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -498,16 +539,16 @@ classdef NNDataset < ConcreteElement
 			
 			prop = NNDataset.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 7 % NNDataset.DP_CLASS
+			switch prop
+				case NNDataset.DP_CLASS
 					prop_settings = 'NNDataPoint';
-				case 8 % NNDataset.DP_DICT
+				case NNDataset.DP_DICT
 					prop_settings = 'NNDataPoint';
-				case 9 % NNDataset.INPUTS
-					prop_settings = Format.getFormatSettings(16);
-				case 10 % NNDataset.TARGETS
-					prop_settings = Format.getFormatSettings(16);
-				case 3 % NNDataset.TEMPLATE
+				case NNDataset.INPUTS
+					prop_settings = Format.getFormatSettings(Format.CELL);
+				case NNDataset.TARGETS
+					prop_settings = Format.getFormatSettings(Format.CELL);
+				case NNDataset.TEMPLATE
 					prop_settings = 'NNDataset';
 				otherwise
 					prop_settings = getPropSettings@ConcreteElement(prop);
@@ -535,26 +576,26 @@ classdef NNDataset < ConcreteElement
 			
 			prop = NNDataset.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 7 % NNDataset.DP_CLASS
-					prop_default = Format.getFormatDefault(6, NNDataset.getPropSettings(prop));
-				case 8 % NNDataset.DP_DICT
-					prop_default = Format.getFormatDefault(10, NNDataset.getPropSettings(prop));
-				case 9 % NNDataset.INPUTS
-					prop_default = Format.getFormatDefault(16, NNDataset.getPropSettings(prop));
-				case 10 % NNDataset.TARGETS
-					prop_default = Format.getFormatDefault(16, NNDataset.getPropSettings(prop));
-				case 1 % NNDataset.NAME
+			switch prop
+				case NNDataset.DP_CLASS
+					prop_default = Format.getFormatDefault(Format.CLASS, NNDataset.getPropSettings(prop));
+				case NNDataset.DP_DICT
+					prop_default = Format.getFormatDefault(Format.IDICT, NNDataset.getPropSettings(prop));
+				case NNDataset.INPUTS
+					prop_default = Format.getFormatDefault(Format.CELL, NNDataset.getPropSettings(prop));
+				case NNDataset.TARGETS
+					prop_default = Format.getFormatDefault(Format.CELL, NNDataset.getPropSettings(prop));
+				case NNDataset.NAME
 					prop_default = 'NNDataset';
-				case 2 % NNDataset.DESCRIPTION
+				case NNDataset.DESCRIPTION
 					prop_default = 'A neural network dataset (NNDataset) represents a dataset containing datapoints whose class is defined by the DP_CLASS property. NNDataset can contain all the necessary inputs and targets.';
-				case 3 % NNDataset.TEMPLATE
-					prop_default = Format.getFormatDefault(8, NNDataset.getPropSettings(prop));
-				case 4 % NNDataset.ID
+				case NNDataset.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, NNDataset.getPropSettings(prop));
+				case NNDataset.ID
 					prop_default = 'NNDataset ID';
-				case 5 % NNDataset.LABEL
+				case NNDataset.LABEL
 					prop_default = 'NNDataset label';
-				case 6 % NNDataset.NOTES
+				case NNDataset.NOTES
 					prop_default = 'NNDataset notes';
 				otherwise
 					prop_default = getPropDefault@ConcreteElement(prop);
@@ -601,15 +642,15 @@ classdef NNDataset < ConcreteElement
 			% 
 			% D.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:NNDataset:WrongInput
+			%  Error id: €BRAPH2.STR€:NNDataset:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  D.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of D.
-			%   Error id: BRAPH2:NNDataset:WrongInput
+			%   Error id: €BRAPH2.STR€:NNDataset:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(NNDataset, PROP, VALUE) throws error if VALUE has not a valid format for PROP of NNDataset.
-			%   Error id: BRAPH2:NNDataset:WrongInput
+			%   Error id: €BRAPH2.STR€:NNDataset:€BRAPH2.WRONG_INPUT€
 			%  D.CHECKPROP(NNDataset, PROP, VALUE) throws error if VALUE has not a valid format for PROP of NNDataset.
-			%   Error id: BRAPH2:NNDataset:WrongInput]
+			%   Error id: €BRAPH2.STR€:NNDataset:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(D) and Element.CHECKPROP('NNDataset')
 			%  are less computationally efficient.
@@ -620,18 +661,18 @@ classdef NNDataset < ConcreteElement
 			prop = NNDataset.getPropProp(pointer);
 			
 			switch prop
-				case 7 % NNDataset.DP_CLASS
-					check = Format.checkFormat(6, value, NNDataset.getPropSettings(prop));
-				case 8 % NNDataset.DP_DICT
-					check = Format.checkFormat(10, value, NNDataset.getPropSettings(prop));
-				case 9 % NNDataset.INPUTS
-					check = Format.checkFormat(16, value, NNDataset.getPropSettings(prop));
-				case 10 % NNDataset.TARGETS
-					check = Format.checkFormat(16, value, NNDataset.getPropSettings(prop));
-				case 3 % NNDataset.TEMPLATE
-					check = Format.checkFormat(8, value, NNDataset.getPropSettings(prop));
+				case NNDataset.DP_CLASS % __NNDataset.DP_CLASS__
+					check = Format.checkFormat(Format.CLASS, value, NNDataset.getPropSettings(prop));
+				case NNDataset.DP_DICT % __NNDataset.DP_DICT__
+					check = Format.checkFormat(Format.IDICT, value, NNDataset.getPropSettings(prop));
+				case NNDataset.INPUTS % __NNDataset.INPUTS__
+					check = Format.checkFormat(Format.CELL, value, NNDataset.getPropSettings(prop));
+				case NNDataset.TARGETS % __NNDataset.TARGETS__
+					check = Format.checkFormat(Format.CELL, value, NNDataset.getPropSettings(prop));
+				case NNDataset.TEMPLATE % __NNDataset.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, NNDataset.getPropSettings(prop));
 				otherwise
-					if prop <= 6
+					if prop <= ConcreteElement.getPropNumber()
 						check = checkProp@ConcreteElement(prop, value);
 					end
 			end
@@ -640,8 +681,8 @@ classdef NNDataset < ConcreteElement
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':NNDataset:' 'WrongInput'], ...
-					['BRAPH2' ':NNDataset:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':NNDataset:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':NNDataset:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' NNDataset.getPropTag(prop) ' (' NNDataset.getFormatTag(NNDataset.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -652,34 +693,34 @@ classdef NNDataset < ConcreteElement
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with 5,
-			%  6, and 7. By default this function
+			%  PROP. It works only with properties with Category.RESULT,
+			%  Category.QUERY, and Category.EVANESCENT. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  6.
+			%  Category.QUERY.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 9 % NNDataset.INPUTS
-					rng_settings_ = rng(); rng(d.getPropSeed(9), 'twister')
+				case NNDataset.INPUTS % __NNDataset.INPUTS__
+					rng_settings_ = rng(); rng(d.getPropSeed(NNDataset.INPUTS), 'twister')
 					
 					value = cellfun(@(dp) dp.get('INPUT'), d.get('DP_DICT').get('IT_LIST'), 'UniformOutput', false);
 					
 					rng(rng_settings_)
 					
-				case 10 % NNDataset.TARGETS
-					rng_settings_ = rng(); rng(d.getPropSeed(10), 'twister')
+				case NNDataset.TARGETS % __NNDataset.TARGETS__
+					rng_settings_ = rng(); rng(d.getPropSeed(NNDataset.TARGETS), 'twister')
 					
 					value = cellfun(@(dp) dp.get('TARGET'), d.get('DP_DICT').get('IT_LIST'), 'UniformOutput', false);
 					
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 6
+					if prop <= ConcreteElement.getPropNumber()
 						value = calculateValue@ConcreteElement(d, prop, varargin{:});
 					else
 						value = calculateValue@Element(d, prop, varargin{:});

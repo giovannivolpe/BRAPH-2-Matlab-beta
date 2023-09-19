@@ -4,15 +4,6 @@ classdef VOINumeric < VOI
 	%
 	% VOINumeric is a numerical variable of interest.
 	%
-	% The list of VOINumeric properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the concrete element.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the concrete element.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the concrete element.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the concrete element.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the concrete element.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the concrete element.
-	%  <strong>7</strong> <strong>V</strong> 	V (data, scalar) is the value of the variable of interest.
-	%
 	% VOINumeric methods (constructor):
 	%  VOINumeric - constructor
 	%
@@ -114,14 +105,6 @@ classdef VOINumeric < VOI
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of VOINumeric properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the concrete element.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the concrete element.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the concrete element.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the concrete element.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the concrete element.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the concrete element.
-			%  <strong>7</strong> <strong>V</strong> 	V (data, scalar) is the value of the variable of interest.
 			%
 			% See also Category, Format.
 			
@@ -159,7 +142,7 @@ classdef VOINumeric < VOI
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'VOINumeric' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('VOINumeric', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of numerical variable of interest.
@@ -180,24 +163,50 @@ classdef VOINumeric < VOI
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7];
+				prop_list = [ ...
+					VOI.getProps() ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
-					prop_list = [4 7];
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						VOI.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						VOI.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						VOI.getProps(Category.PARAMETER) ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						VOI.getProps(Category.DATA) ...
+						];
+				case Category.RESULT
+					prop_list = [
+						VOI.getProps(Category.RESULT) ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						VOI.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						VOI.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						VOI.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						VOI.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -218,25 +227,7 @@ classdef VOINumeric < VOI
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 7;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 2;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 1;
-				case 4 % Category.DATA
-					prop_number = 2;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(VOINumeric.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in numerical variable of interest/error.
@@ -264,14 +255,14 @@ classdef VOINumeric < VOI
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 7 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == VOINumeric.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':VOINumeric:' 'WrongInput'], ...
-					['BRAPH2' ':VOINumeric:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':VOINumeric:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':VOINumeric:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for VOINumeric.'] ...
 					)
 			end
@@ -302,14 +293,15 @@ classdef VOINumeric < VOI
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'V' })); %CET: Computational Efficiency Trick
+			voinumeric_tag_list = cellfun(@(x) VOINumeric.getPropTag(x), num2cell(VOINumeric.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, voinumeric_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':VOINumeric:' 'WrongInput'], ...
-					['BRAPH2' ':VOINumeric:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':VOINumeric:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':VOINumeric:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for VOINumeric.'] ...
 					)
 			end
@@ -335,7 +327,8 @@ classdef VOINumeric < VOI
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'V' })); % tag = pointer %CET: Computational Efficiency Trick
+				voinumeric_tag_list = cellfun(@(x) VOINumeric.getPropTag(x), num2cell(VOINumeric.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, voinumeric_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -363,9 +356,12 @@ classdef VOINumeric < VOI
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				voinumeric_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'V' };
-				tag = voinumeric_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					otherwise
+						tag = getPropTag@VOI(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -390,9 +386,10 @@ classdef VOINumeric < VOI
 			
 			prop = VOINumeric.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			voinumeric_category_list = { 1  1  3  4  2  2  4 };
-			prop_category = voinumeric_category_list{prop};
+			switch prop
+				otherwise
+					prop_category = getPropCategory@VOI(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -416,9 +413,10 @@ classdef VOINumeric < VOI
 			
 			prop = VOINumeric.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			voinumeric_format_list = { 2  2  8  2  2  2  11 };
-			prop_format = voinumeric_format_list{prop};
+			switch prop
+				otherwise
+					prop_format = getPropFormat@VOI(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -442,9 +440,10 @@ classdef VOINumeric < VOI
 			
 			prop = VOINumeric.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			voinumeric_description_list = { 'NAME (constant, string) is the name of the concrete element.'  'DESCRIPTION (constant, string) is the description of the concrete element.'  'TEMPLATE (parameter, item) is the template of the concrete element.'  'ID (data, string) is a few-letter code for the concrete element.'  'LABEL (metadata, string) is an extended label of the concrete element.'  'NOTES (metadata, string) are some specific notes about the concrete element.'  'V (data, scalar) is the value of the variable of interest.' };
-			prop_description = voinumeric_description_list{prop};
+			switch prop
+				otherwise
+					prop_description = getPropDescription@VOI(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -468,7 +467,7 @@ classdef VOINumeric < VOI
 			
 			prop = VOINumeric.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
+			switch prop
 				otherwise
 					prop_settings = getPropSettings@VOI(prop);
 			end
@@ -495,7 +494,7 @@ classdef VOINumeric < VOI
 			
 			prop = VOINumeric.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
+			switch prop
 				otherwise
 					prop_default = getPropDefault@VOI(prop);
 			end
@@ -541,15 +540,15 @@ classdef VOINumeric < VOI
 			% 
 			% VOI.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:VOINumeric:WrongInput
+			%  Error id: €BRAPH2.STR€:VOINumeric:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  VOI.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of VOI.
-			%   Error id: BRAPH2:VOINumeric:WrongInput
+			%   Error id: €BRAPH2.STR€:VOINumeric:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(VOINumeric, PROP, VALUE) throws error if VALUE has not a valid format for PROP of VOINumeric.
-			%   Error id: BRAPH2:VOINumeric:WrongInput
+			%   Error id: €BRAPH2.STR€:VOINumeric:€BRAPH2.WRONG_INPUT€
 			%  VOI.CHECKPROP(VOINumeric, PROP, VALUE) throws error if VALUE has not a valid format for PROP of VOINumeric.
-			%   Error id: BRAPH2:VOINumeric:WrongInput]
+			%   Error id: €BRAPH2.STR€:VOINumeric:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(VOI) and Element.CHECKPROP('VOINumeric')
 			%  are less computationally efficient.
@@ -561,7 +560,7 @@ classdef VOINumeric < VOI
 			
 			switch prop
 				otherwise
-					if prop <= 7
+					if prop <= VOI.getPropNumber()
 						check = checkProp@VOI(prop, value);
 					end
 			end
@@ -570,8 +569,8 @@ classdef VOINumeric < VOI
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':VOINumeric:' 'WrongInput'], ...
-					['BRAPH2' ':VOINumeric:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':VOINumeric:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':VOINumeric:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' VOINumeric.getPropTag(prop) ' (' VOINumeric.getFormatTag(VOINumeric.getPropFormat(prop)) ').'] ...
 					)
 			end

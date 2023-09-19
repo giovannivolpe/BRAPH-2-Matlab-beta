@@ -4,17 +4,6 @@ classdef SubjectCON < Subject
 	%
 	% Subject with a connectivity matrix (e.g. obtained from DTI).
 	%
-	% The list of SubjectCON properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the subject.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the subject.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the subject.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the subject.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the subject.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the subject.
-	%  <strong>7</strong> <strong>VOI_DICT</strong> 	VOI_DICT (data, idict) contains the variables of interest of the subject.
-	%  <strong>8</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
-	%  <strong>9</strong> <strong>CON</strong> 	CON (data, smatrix) is an adjacency matrix.
-	%
 	% SubjectCON methods (constructor):
 	%  SubjectCON - constructor
 	%
@@ -104,15 +93,15 @@ classdef SubjectCON < Subject
 	% See also ImporterGroupSubjectCON_TXT, ExporterGroupSubjectCON_TXT, ImporterGroupSubjectCON_XLS, ExporterGroupSubjectCON_XLS.
 	
 	properties (Constant) % properties
-		BA = 8; %CET: Computational Efficiency Trick
+		BA = Subject.getPropNumber() + 1;
 		BA_TAG = 'BA';
-		BA_CATEGORY = 4;
-		BA_FORMAT = 8;
+		BA_CATEGORY = Category.DATA;
+		BA_FORMAT = Format.ITEM;
 		
-		CON = 9; %CET: Computational Efficiency Trick
+		CON = Subject.getPropNumber() + 2;
 		CON_TAG = 'CON';
-		CON_CATEGORY = 4;
-		CON_FORMAT = 15;
+		CON_CATEGORY = Category.DATA;
+		CON_FORMAT = Format.SMATRIX;
 	end
 	methods % constructor
 		function sub = SubjectCON(varargin)
@@ -125,16 +114,6 @@ classdef SubjectCON < Subject
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of SubjectCON properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the subject.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the subject.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the subject.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the subject.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the subject.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the subject.
-			%  <strong>7</strong> <strong>VOI_DICT</strong> 	VOI_DICT (data, idict) contains the variables of interest of the subject.
-			%  <strong>8</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
-			%  <strong>9</strong> <strong>CON</strong> 	CON (data, smatrix) is an adjacency matrix.
 			%
 			% See also Category, Format.
 			
@@ -172,7 +151,7 @@ classdef SubjectCON < Subject
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'SubjectCON' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('SubjectCON', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of subject with connectivity matrix.
@@ -193,24 +172,54 @@ classdef SubjectCON < Subject
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9];
+				prop_list = [ ...
+					Subject.getProps() ...
+						SubjectCON.BA ...
+						SubjectCON.CON ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
-					prop_list = [4 7 8 9];
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						Subject.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						Subject.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						Subject.getProps(Category.PARAMETER) ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						Subject.getProps(Category.DATA) ...
+						SubjectCON.BA ...
+						SubjectCON.CON ...
+						];
+				case Category.RESULT
+					prop_list = [
+						Subject.getProps(Category.RESULT) ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						Subject.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						Subject.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						Subject.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						Subject.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -231,25 +240,7 @@ classdef SubjectCON < Subject
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 9;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 2;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 1;
-				case 4 % Category.DATA
-					prop_number = 4;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(SubjectCON.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in subject with connectivity matrix/error.
@@ -277,14 +268,14 @@ classdef SubjectCON < Subject
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 9 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == SubjectCON.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':SubjectCON:' 'WrongInput'], ...
-					['BRAPH2' ':SubjectCON:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':SubjectCON:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':SubjectCON:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for SubjectCON.'] ...
 					)
 			end
@@ -315,14 +306,15 @@ classdef SubjectCON < Subject
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'VOI_DICT'  'BA'  'CON' })); %CET: Computational Efficiency Trick
+			subjectcon_tag_list = cellfun(@(x) SubjectCON.getPropTag(x), num2cell(SubjectCON.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, subjectcon_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':SubjectCON:' 'WrongInput'], ...
-					['BRAPH2' ':SubjectCON:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':SubjectCON:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':SubjectCON:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for SubjectCON.'] ...
 					)
 			end
@@ -348,7 +340,8 @@ classdef SubjectCON < Subject
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'VOI_DICT'  'BA'  'CON' })); % tag = pointer %CET: Computational Efficiency Trick
+				subjectcon_tag_list = cellfun(@(x) SubjectCON.getPropTag(x), num2cell(SubjectCON.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, subjectcon_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -376,9 +369,16 @@ classdef SubjectCON < Subject
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				subjectcon_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'VOI_DICT'  'BA'  'CON' };
-				tag = subjectcon_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case SubjectCON.BA
+						tag = SubjectCON.BA_TAG;
+					case SubjectCON.CON
+						tag = SubjectCON.CON_TAG;
+					otherwise
+						tag = getPropTag@Subject(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -403,9 +403,14 @@ classdef SubjectCON < Subject
 			
 			prop = SubjectCON.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			subjectcon_category_list = { 1  1  3  4  2  2  4  4  4 };
-			prop_category = subjectcon_category_list{prop};
+			switch prop
+				case SubjectCON.BA
+					prop_category = SubjectCON.BA_CATEGORY;
+				case SubjectCON.CON
+					prop_category = SubjectCON.CON_CATEGORY;
+				otherwise
+					prop_category = getPropCategory@Subject(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -429,9 +434,14 @@ classdef SubjectCON < Subject
 			
 			prop = SubjectCON.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			subjectcon_format_list = { 2  2  8  2  2  2  10  8  15 };
-			prop_format = subjectcon_format_list{prop};
+			switch prop
+				case SubjectCON.BA
+					prop_format = SubjectCON.BA_FORMAT;
+				case SubjectCON.CON
+					prop_format = SubjectCON.CON_FORMAT;
+				otherwise
+					prop_format = getPropFormat@Subject(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -455,9 +465,26 @@ classdef SubjectCON < Subject
 			
 			prop = SubjectCON.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			subjectcon_description_list = { 'NAME (constant, string) is the name of the subject.'  'DESCRIPTION (constant, string) is the description of the subject.'  'TEMPLATE (parameter, item) is the template of the subject.'  'ID (data, string) is a few-letter code for the subject.'  'LABEL (metadata, string) is an extended label of the subject.'  'NOTES (metadata, string) are some specific notes about the subject.'  'VOI_DICT (data, idict) contains the variables of interest of the subject.'  'BA (data, item) is a brain atlas.'  'CON (data, smatrix) is an adjacency matrix.' };
-			prop_description = subjectcon_description_list{prop};
+			switch prop
+				case SubjectCON.BA
+					prop_description = 'BA (data, item) is a brain atlas.';
+				case SubjectCON.CON
+					prop_description = 'CON (data, smatrix) is an adjacency matrix.';
+				case SubjectCON.NAME
+					prop_description = 'NAME (constant, string) is the name of the subject.';
+				case SubjectCON.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the subject.';
+				case SubjectCON.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the subject.';
+				case SubjectCON.ID
+					prop_description = 'ID (data, string) is a few-letter code for the subject.';
+				case SubjectCON.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the subject.';
+				case SubjectCON.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the subject.';
+				otherwise
+					prop_description = getPropDescription@Subject(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -481,11 +508,11 @@ classdef SubjectCON < Subject
 			
 			prop = SubjectCON.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 8 % SubjectCON.BA
+			switch prop
+				case SubjectCON.BA
 					prop_settings = 'BrainAtlas';
-				case 9 % SubjectCON.CON
-					prop_settings = Format.getFormatSettings(15);
+				case SubjectCON.CON
+					prop_settings = Format.getFormatSettings(Format.SMATRIX);
 				otherwise
 					prop_settings = getPropSettings@Subject(prop);
 			end
@@ -512,20 +539,20 @@ classdef SubjectCON < Subject
 			
 			prop = SubjectCON.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 8 % SubjectCON.BA
-					prop_default = Format.getFormatDefault(8, SubjectCON.getPropSettings(prop));
-				case 9 % SubjectCON.CON
-					prop_default = Format.getFormatDefault(15, SubjectCON.getPropSettings(prop));
-				case 1 % SubjectCON.NAME
+			switch prop
+				case SubjectCON.BA
+					prop_default = Format.getFormatDefault(Format.ITEM, SubjectCON.getPropSettings(prop));
+				case SubjectCON.CON
+					prop_default = Format.getFormatDefault(Format.SMATRIX, SubjectCON.getPropSettings(prop));
+				case SubjectCON.NAME
 					prop_default = 'SubjectCON';
-				case 2 % SubjectCON.DESCRIPTION
+				case SubjectCON.DESCRIPTION
 					prop_default = 'SubjectCON with a connectivity matrix (e.g. obtained from DTI).';
-				case 4 % SubjectCON.ID
+				case SubjectCON.ID
 					prop_default = 'SubjectCON ID';
-				case 5 % SubjectCON.LABEL
+				case SubjectCON.LABEL
 					prop_default = 'SubjectCON label';
-				case 6 % SubjectCON.NOTES
+				case SubjectCON.NOTES
 					prop_default = 'SubjectCON notes';
 				otherwise
 					prop_default = getPropDefault@Subject(prop);
@@ -572,15 +599,15 @@ classdef SubjectCON < Subject
 			% 
 			% SUB.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:SubjectCON:WrongInput
+			%  Error id: €BRAPH2.STR€:SubjectCON:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  SUB.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of SUB.
-			%   Error id: BRAPH2:SubjectCON:WrongInput
+			%   Error id: €BRAPH2.STR€:SubjectCON:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(SubjectCON, PROP, VALUE) throws error if VALUE has not a valid format for PROP of SubjectCON.
-			%   Error id: BRAPH2:SubjectCON:WrongInput
+			%   Error id: €BRAPH2.STR€:SubjectCON:€BRAPH2.WRONG_INPUT€
 			%  SUB.CHECKPROP(SubjectCON, PROP, VALUE) throws error if VALUE has not a valid format for PROP of SubjectCON.
-			%   Error id: BRAPH2:SubjectCON:WrongInput]
+			%   Error id: €BRAPH2.STR€:SubjectCON:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(SUB) and Element.CHECKPROP('SubjectCON')
 			%  are less computationally efficient.
@@ -591,12 +618,12 @@ classdef SubjectCON < Subject
 			prop = SubjectCON.getPropProp(pointer);
 			
 			switch prop
-				case 8 % SubjectCON.BA
-					check = Format.checkFormat(8, value, SubjectCON.getPropSettings(prop));
-				case 9 % SubjectCON.CON
-					check = Format.checkFormat(15, value, SubjectCON.getPropSettings(prop));
+				case SubjectCON.BA % __SubjectCON.BA__
+					check = Format.checkFormat(Format.ITEM, value, SubjectCON.getPropSettings(prop));
+				case SubjectCON.CON % __SubjectCON.CON__
+					check = Format.checkFormat(Format.SMATRIX, value, SubjectCON.getPropSettings(prop));
 				otherwise
-					if prop <= 7
+					if prop <= Subject.getPropNumber()
 						check = checkProp@Subject(prop, value);
 					end
 			end
@@ -605,8 +632,8 @@ classdef SubjectCON < Subject
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':SubjectCON:' 'WrongInput'], ...
-					['BRAPH2' ':SubjectCON:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':SubjectCON:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':SubjectCON:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' SubjectCON.getPropTag(prop) ' (' SubjectCON.getFormatTag(SubjectCON.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -628,9 +655,9 @@ classdef SubjectCON < Subject
 			msg = ['Error while checking ' tostring(sub) ' ' sub.getPropTag(prop) '.'];
 			
 			switch prop
-				case 9 % SubjectCON.CON
+				case SubjectCON.CON % __SubjectCON.CON__
 					br_number = sub.get('BA').get('BR_DICT').get('LENGTH');
-					check = isequal(size(value), [br_number, br_number]); % Format.checkFormat(15, value) already checked
+					check = isequal(size(value), [br_number, br_number]); % Format.checkFormat(Format.SMATRIX, value) already checked
 					if check
 					    msg = 'All ok!';
 					else   
@@ -638,7 +665,7 @@ classdef SubjectCON < Subject
 					end
 					
 				otherwise
-					if prop <= 7
+					if prop <= Subject.getPropNumber()
 						[check, msg] = checkValue@Subject(sub, prop, value);
 					end
 			end
@@ -661,8 +688,8 @@ classdef SubjectCON < Subject
 			%  PanelPropString, PanelPropStringList.
 			
 			switch prop
-				case 9 % SubjectCON.CON
-					pr = PanelPropMatrix('EL', sub, 'PROP', 9, ...
+				case SubjectCON.CON % __SubjectCON.CON__
+					pr = PanelPropMatrix('EL', sub, 'PROP', SubjectCON.CON, ...
 					    'ROWNAME', sub.get('BA').get('BR_DICT').getCallback('KEYS'), ...
 					    'COLUMNNAME', sub.get('BA').get('BR_DICT').getCallback('KEYS'), ...
 					    varargin{:});

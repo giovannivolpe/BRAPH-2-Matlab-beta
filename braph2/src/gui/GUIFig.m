@@ -25,51 +25,6 @@ classdef GUIFig < GUI
 	%     gui.get('<strong>DELETE</strong>') - resets the handles (automatically called when the figure is deleted)
 	%     gui.get('<strong>CLOSE</strong>') - closes the figure and its dependent figures
 	%
-	% The list of GUIFig properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the figure GUI.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the figure GUI.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the figure GUI.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the figure GUI.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the figure GUI.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the figure GUI.
-	%  <strong>7</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-	%  <strong>8</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the contents of a GUI before showing it.
-	%  <strong>9</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the GUI has been drawn.
-	%  <strong>10</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the name of the GUI.
-	%  <strong>11</strong> <strong>POSITION</strong> 	POSITION (gui, rvector) is the normalized position of the GUI on the screen.
-	%  <strong>12</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (gui, color) is the GUI background color.
-	%  <strong>13</strong> <strong>H_MENUBAR</strong> 	H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.
-	%  <strong>14</strong> <strong>MENUBAR</strong> 	MENUBAR (gui, logical) determines whether to show the menubar.
-	%  <strong>15</strong> <strong>H_MENU_ABOUT</strong> 	H_MENU_ABOUT (evanescent, handle) is the handle of the menu about.
-	%  <strong>16</strong> <strong>MENU_ABOUT</strong> 	MENU_ABOUT (gui, logical) determines whether to show the menu about.
-	%  <strong>17</strong> <strong>H_TOOLBAR</strong> 	H_TOOLBAR (evanescent, handle) is the handle list of the toolbar.
-	%  <strong>18</strong> <strong>H_TOOLS</strong> 	H_TOOLS (evanescent, handlelist) is the handle list of the toolbar followed by the tools from the first.
-	%  <strong>19</strong> <strong>TOOLBAR</strong> 	TOOLBAR (gui, logical) determines whether to show the toolbar.
-	%  <strong>20</strong> <strong>TOOL_ABOUT</strong> 	TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons.
-	%  <strong>21</strong> <strong>CLOSEREQ</strong> 	CLOSEREQ (gui, logical) determines whether to confirm close.
-	%  <strong>22</strong> <strong>H</strong> 	H (evanescent, handle) is the figure handle.
-	%  <strong>23</strong> <strong>RESIZE</strong> 	RESIZE (query, logical) updates POSITION when figure size is changed.
-	%  <strong>24</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure and its dependent figures.
-	%  <strong>25</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure and its dependent figures.
-	%  <strong>26</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles and closes the dependent figures when the figure is deleted.
-	%  <strong>27</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure and its dependent figures.
-	%  <strong>28</strong> <strong>PF</strong> 	PF (data, item) is the panel figure.
-	%  <strong>29</strong> <strong>FILE</strong> 	FILE (metadata, string) is the B2 file where the element is saved.
-	%  <strong>30</strong> <strong>TEXT_FILE</strong> 	TEXT_FILE (evanescent, handle) is the label where the file name is shown.
-	%  <strong>31</strong> <strong>GUI_LAYOUT</strong> 	GUI_LAYOUT (data, item) is the handle to the figure to manage the layout.
-	%  <strong>32</strong> <strong>GUI_SETTINGS</strong> 	GUI_SETTINGS (data, item) is the handle to the figure to manage the figure settings.
-	%  <strong>33</strong> <strong>H_MENU_FILE</strong> 	H_MENU_FILE (evanescent, handle) is the handle of the menu file.
-	%  <strong>34</strong> <strong>MENU_FILE</strong> 	MENU_FILE (gui, logical) determines whether to show the menu file.
-	%  <strong>35</strong> <strong>H_MENU_PRINT</strong> 	H_MENU_PRINT (evanescent, handle) is the handle of the menu to print to image file.
-	%  <strong>36</strong> <strong>MENU_PRINT</strong> 	MENU_PRINT (gui, logical) determines whether to show the menu to print to image file.
-	%  <strong>37</strong> <strong>H_MENU_GUI_SETTINGS</strong> 	H_MENU_GUI_SETTINGS (evanescent, handle) is the handle of the menu settings.
-	%  <strong>38</strong> <strong>MENU_GUI_SETTINGS</strong> 	MENU_GUI_SETTINGS (gui, logical) determines whether to show the menu settings.
-	%  <strong>39</strong> <strong>H_MENU_PERSONALIZE</strong> 	H_MENU_PERSONALIZE (evanescent, handle) is the handle of the menu personalize.
-	%  <strong>40</strong> <strong>MENU_PERSONALIZE</strong> 	MENU_PERSONALIZE (gui, logical) determines whether to show the menu personalize.
-	%  <strong>41</strong> <strong>TOOL_FILE</strong> 	TOOL_FILE (gui, logical) determines whether to show the toolbar file buttons.
-	%  <strong>42</strong> <strong>TOOL_PRINT</strong> 	TOOL_PRINT (gui, logical) determines whether to show the toolbar print button.
-	%  <strong>43</strong> <strong>TOOL_GUI_SETTINGS</strong> 	TOOL_GUI_SETTINGS (gui, logical) determines whether to show the toolbar settings buttons.
-	%
 	% GUIFig methods (constructor):
 	%  GUIFig - constructor
 	%
@@ -159,85 +114,85 @@ classdef GUIFig < GUI
 	% See also uifigure, PanelFig.
 	
 	properties (Constant) % properties
-		PF = 28; %CET: Computational Efficiency Trick
+		PF = GUI.getPropNumber() + 1;
 		PF_TAG = 'PF';
-		PF_CATEGORY = 4;
-		PF_FORMAT = 8;
+		PF_CATEGORY = Category.DATA;
+		PF_FORMAT = Format.ITEM;
 		
-		FILE = 29; %CET: Computational Efficiency Trick
+		FILE = GUI.getPropNumber() + 2;
 		FILE_TAG = 'FILE';
-		FILE_CATEGORY = 2;
-		FILE_FORMAT = 2;
+		FILE_CATEGORY = Category.METADATA;
+		FILE_FORMAT = Format.STRING;
 		
-		TEXT_FILE = 30; %CET: Computational Efficiency Trick
+		TEXT_FILE = GUI.getPropNumber() + 3;
 		TEXT_FILE_TAG = 'TEXT_FILE';
-		TEXT_FILE_CATEGORY = 7;
-		TEXT_FILE_FORMAT = 18;
+		TEXT_FILE_CATEGORY = Category.EVANESCENT;
+		TEXT_FILE_FORMAT = Format.HANDLE;
 		
-		GUI_LAYOUT = 31; %CET: Computational Efficiency Trick
+		GUI_LAYOUT = GUI.getPropNumber() + 4;
 		GUI_LAYOUT_TAG = 'GUI_LAYOUT';
-		GUI_LAYOUT_CATEGORY = 4;
-		GUI_LAYOUT_FORMAT = 8;
+		GUI_LAYOUT_CATEGORY = Category.DATA;
+		GUI_LAYOUT_FORMAT = Format.ITEM;
 		
-		GUI_SETTINGS = 32; %CET: Computational Efficiency Trick
+		GUI_SETTINGS = GUI.getPropNumber() + 5;
 		GUI_SETTINGS_TAG = 'GUI_SETTINGS';
-		GUI_SETTINGS_CATEGORY = 4;
-		GUI_SETTINGS_FORMAT = 8;
+		GUI_SETTINGS_CATEGORY = Category.DATA;
+		GUI_SETTINGS_FORMAT = Format.ITEM;
 		
-		H_MENU_FILE = 33; %CET: Computational Efficiency Trick
+		H_MENU_FILE = GUI.getPropNumber() + 6;
 		H_MENU_FILE_TAG = 'H_MENU_FILE';
-		H_MENU_FILE_CATEGORY = 7;
-		H_MENU_FILE_FORMAT = 18;
+		H_MENU_FILE_CATEGORY = Category.EVANESCENT;
+		H_MENU_FILE_FORMAT = Format.HANDLE;
 		
-		MENU_FILE = 34; %CET: Computational Efficiency Trick
+		MENU_FILE = GUI.getPropNumber() + 7;
 		MENU_FILE_TAG = 'MENU_FILE';
-		MENU_FILE_CATEGORY = 9;
-		MENU_FILE_FORMAT = 4;
+		MENU_FILE_CATEGORY = Category.GUI;
+		MENU_FILE_FORMAT = Format.LOGICAL;
 		
-		H_MENU_PRINT = 35; %CET: Computational Efficiency Trick
+		H_MENU_PRINT = GUI.getPropNumber() + 8;
 		H_MENU_PRINT_TAG = 'H_MENU_PRINT';
-		H_MENU_PRINT_CATEGORY = 7;
-		H_MENU_PRINT_FORMAT = 18;
+		H_MENU_PRINT_CATEGORY = Category.EVANESCENT;
+		H_MENU_PRINT_FORMAT = Format.HANDLE;
 		
-		MENU_PRINT = 36; %CET: Computational Efficiency Trick
+		MENU_PRINT = GUI.getPropNumber() + 9;
 		MENU_PRINT_TAG = 'MENU_PRINT';
-		MENU_PRINT_CATEGORY = 9;
-		MENU_PRINT_FORMAT = 4;
+		MENU_PRINT_CATEGORY = Category.GUI;
+		MENU_PRINT_FORMAT = Format.LOGICAL;
 		
-		H_MENU_GUI_SETTINGS = 37; %CET: Computational Efficiency Trick
+		H_MENU_GUI_SETTINGS = GUI.getPropNumber() + 10;
 		H_MENU_GUI_SETTINGS_TAG = 'H_MENU_GUI_SETTINGS';
-		H_MENU_GUI_SETTINGS_CATEGORY = 7;
-		H_MENU_GUI_SETTINGS_FORMAT = 18;
+		H_MENU_GUI_SETTINGS_CATEGORY = Category.EVANESCENT;
+		H_MENU_GUI_SETTINGS_FORMAT = Format.HANDLE;
 		
-		MENU_GUI_SETTINGS = 38; %CET: Computational Efficiency Trick
+		MENU_GUI_SETTINGS = GUI.getPropNumber() + 11;
 		MENU_GUI_SETTINGS_TAG = 'MENU_GUI_SETTINGS';
-		MENU_GUI_SETTINGS_CATEGORY = 9;
-		MENU_GUI_SETTINGS_FORMAT = 4;
+		MENU_GUI_SETTINGS_CATEGORY = Category.GUI;
+		MENU_GUI_SETTINGS_FORMAT = Format.LOGICAL;
 		
-		H_MENU_PERSONALIZE = 39; %CET: Computational Efficiency Trick
+		H_MENU_PERSONALIZE = GUI.getPropNumber() + 12;
 		H_MENU_PERSONALIZE_TAG = 'H_MENU_PERSONALIZE';
-		H_MENU_PERSONALIZE_CATEGORY = 7;
-		H_MENU_PERSONALIZE_FORMAT = 18;
+		H_MENU_PERSONALIZE_CATEGORY = Category.EVANESCENT;
+		H_MENU_PERSONALIZE_FORMAT = Format.HANDLE;
 		
-		MENU_PERSONALIZE = 40; %CET: Computational Efficiency Trick
+		MENU_PERSONALIZE = GUI.getPropNumber() + 13;
 		MENU_PERSONALIZE_TAG = 'MENU_PERSONALIZE';
-		MENU_PERSONALIZE_CATEGORY = 9;
-		MENU_PERSONALIZE_FORMAT = 4;
+		MENU_PERSONALIZE_CATEGORY = Category.GUI;
+		MENU_PERSONALIZE_FORMAT = Format.LOGICAL;
 		
-		TOOL_FILE = 41; %CET: Computational Efficiency Trick
+		TOOL_FILE = GUI.getPropNumber() + 14;
 		TOOL_FILE_TAG = 'TOOL_FILE';
-		TOOL_FILE_CATEGORY = 9;
-		TOOL_FILE_FORMAT = 4;
+		TOOL_FILE_CATEGORY = Category.GUI;
+		TOOL_FILE_FORMAT = Format.LOGICAL;
 		
-		TOOL_PRINT = 42; %CET: Computational Efficiency Trick
+		TOOL_PRINT = GUI.getPropNumber() + 15;
 		TOOL_PRINT_TAG = 'TOOL_PRINT';
-		TOOL_PRINT_CATEGORY = 9;
-		TOOL_PRINT_FORMAT = 4;
+		TOOL_PRINT_CATEGORY = Category.GUI;
+		TOOL_PRINT_FORMAT = Format.LOGICAL;
 		
-		TOOL_GUI_SETTINGS = 43; %CET: Computational Efficiency Trick
+		TOOL_GUI_SETTINGS = GUI.getPropNumber() + 16;
 		TOOL_GUI_SETTINGS_TAG = 'TOOL_GUI_SETTINGS';
-		TOOL_GUI_SETTINGS_CATEGORY = 9;
-		TOOL_GUI_SETTINGS_FORMAT = 4;
+		TOOL_GUI_SETTINGS_CATEGORY = Category.GUI;
+		TOOL_GUI_SETTINGS_FORMAT = Format.LOGICAL;
 	end
 	methods % constructor
 		function gui = GUIFig(varargin)
@@ -250,50 +205,6 @@ classdef GUIFig < GUI
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of GUIFig properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the figure GUI.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the figure GUI.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the figure GUI.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the figure GUI.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the figure GUI.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the figure GUI.
-			%  <strong>7</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-			%  <strong>8</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the contents of a GUI before showing it.
-			%  <strong>9</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the GUI has been drawn.
-			%  <strong>10</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the name of the GUI.
-			%  <strong>11</strong> <strong>POSITION</strong> 	POSITION (gui, rvector) is the normalized position of the GUI on the screen.
-			%  <strong>12</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (gui, color) is the GUI background color.
-			%  <strong>13</strong> <strong>H_MENUBAR</strong> 	H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.
-			%  <strong>14</strong> <strong>MENUBAR</strong> 	MENUBAR (gui, logical) determines whether to show the menubar.
-			%  <strong>15</strong> <strong>H_MENU_ABOUT</strong> 	H_MENU_ABOUT (evanescent, handle) is the handle of the menu about.
-			%  <strong>16</strong> <strong>MENU_ABOUT</strong> 	MENU_ABOUT (gui, logical) determines whether to show the menu about.
-			%  <strong>17</strong> <strong>H_TOOLBAR</strong> 	H_TOOLBAR (evanescent, handle) is the handle list of the toolbar.
-			%  <strong>18</strong> <strong>H_TOOLS</strong> 	H_TOOLS (evanescent, handlelist) is the handle list of the toolbar followed by the tools from the first.
-			%  <strong>19</strong> <strong>TOOLBAR</strong> 	TOOLBAR (gui, logical) determines whether to show the toolbar.
-			%  <strong>20</strong> <strong>TOOL_ABOUT</strong> 	TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons.
-			%  <strong>21</strong> <strong>CLOSEREQ</strong> 	CLOSEREQ (gui, logical) determines whether to confirm close.
-			%  <strong>22</strong> <strong>H</strong> 	H (evanescent, handle) is the figure handle.
-			%  <strong>23</strong> <strong>RESIZE</strong> 	RESIZE (query, logical) updates POSITION when figure size is changed.
-			%  <strong>24</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure and its dependent figures.
-			%  <strong>25</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure and its dependent figures.
-			%  <strong>26</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles and closes the dependent figures when the figure is deleted.
-			%  <strong>27</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure and its dependent figures.
-			%  <strong>28</strong> <strong>PF</strong> 	PF (data, item) is the panel figure.
-			%  <strong>29</strong> <strong>FILE</strong> 	FILE (metadata, string) is the B2 file where the element is saved.
-			%  <strong>30</strong> <strong>TEXT_FILE</strong> 	TEXT_FILE (evanescent, handle) is the label where the file name is shown.
-			%  <strong>31</strong> <strong>GUI_LAYOUT</strong> 	GUI_LAYOUT (data, item) is the handle to the figure to manage the layout.
-			%  <strong>32</strong> <strong>GUI_SETTINGS</strong> 	GUI_SETTINGS (data, item) is the handle to the figure to manage the figure settings.
-			%  <strong>33</strong> <strong>H_MENU_FILE</strong> 	H_MENU_FILE (evanescent, handle) is the handle of the menu file.
-			%  <strong>34</strong> <strong>MENU_FILE</strong> 	MENU_FILE (gui, logical) determines whether to show the menu file.
-			%  <strong>35</strong> <strong>H_MENU_PRINT</strong> 	H_MENU_PRINT (evanescent, handle) is the handle of the menu to print to image file.
-			%  <strong>36</strong> <strong>MENU_PRINT</strong> 	MENU_PRINT (gui, logical) determines whether to show the menu to print to image file.
-			%  <strong>37</strong> <strong>H_MENU_GUI_SETTINGS</strong> 	H_MENU_GUI_SETTINGS (evanescent, handle) is the handle of the menu settings.
-			%  <strong>38</strong> <strong>MENU_GUI_SETTINGS</strong> 	MENU_GUI_SETTINGS (gui, logical) determines whether to show the menu settings.
-			%  <strong>39</strong> <strong>H_MENU_PERSONALIZE</strong> 	H_MENU_PERSONALIZE (evanescent, handle) is the handle of the menu personalize.
-			%  <strong>40</strong> <strong>MENU_PERSONALIZE</strong> 	MENU_PERSONALIZE (gui, logical) determines whether to show the menu personalize.
-			%  <strong>41</strong> <strong>TOOL_FILE</strong> 	TOOL_FILE (gui, logical) determines whether to show the toolbar file buttons.
-			%  <strong>42</strong> <strong>TOOL_PRINT</strong> 	TOOL_PRINT (gui, logical) determines whether to show the toolbar print button.
-			%  <strong>43</strong> <strong>TOOL_GUI_SETTINGS</strong> 	TOOL_GUI_SETTINGS (gui, logical) determines whether to show the toolbar settings buttons.
 			%
 			% See also Category, Format.
 			
@@ -331,7 +242,7 @@ classdef GUIFig < GUI
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'GUIFig' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('GUIFig', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of figure gui.
@@ -352,30 +263,82 @@ classdef GUIFig < GUI
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43];
+				prop_list = [ ...
+					GUI.getProps() ...
+						GUIFig.PF ...
+						GUIFig.FILE ...
+						GUIFig.TEXT_FILE ...
+						GUIFig.GUI_LAYOUT ...
+						GUIFig.GUI_SETTINGS ...
+						GUIFig.H_MENU_FILE ...
+						GUIFig.MENU_FILE ...
+						GUIFig.H_MENU_PRINT ...
+						GUIFig.MENU_PRINT ...
+						GUIFig.H_MENU_GUI_SETTINGS ...
+						GUIFig.MENU_GUI_SETTINGS ...
+						GUIFig.H_MENU_PERSONALIZE ...
+						GUIFig.MENU_PERSONALIZE ...
+						GUIFig.TOOL_FILE ...
+						GUIFig.TOOL_PRINT ...
+						GUIFig.TOOL_GUI_SETTINGS ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2];
-				case 2 % Category.METADATA
-					prop_list = [5 6 29];
-				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
-					prop_list = [4 28 31 32];
-				case 6 % Category.QUERY
-					prop_list = [8 9 23 24 25 26 27];
-				case 7 % Category.EVANESCENT
-					prop_list = [13 15 17 18 22 30 33 35 37 39];
-				case 9 % Category.GUI
-					prop_list = [7 10 11 12 14 16 19 20 21 34 36 38 40 41 42 43];
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						GUI.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						GUI.getProps(Category.METADATA) ...
+						GUIFig.FILE ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						GUI.getProps(Category.PARAMETER) ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						GUI.getProps(Category.DATA) ...
+						GUIFig.PF ...
+						GUIFig.GUI_LAYOUT ...
+						GUIFig.GUI_SETTINGS ...
+						];
+				case Category.RESULT
+					prop_list = [
+						GUI.getProps(Category.RESULT) ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						GUI.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						GUI.getProps(Category.EVANESCENT) ...
+						GUIFig.TEXT_FILE ...
+						GUIFig.H_MENU_FILE ...
+						GUIFig.H_MENU_PRINT ...
+						GUIFig.H_MENU_GUI_SETTINGS ...
+						GUIFig.H_MENU_PERSONALIZE ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						GUI.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						GUI.getProps(Category.GUI) ...
+						GUIFig.MENU_FILE ...
+						GUIFig.MENU_PRINT ...
+						GUIFig.MENU_GUI_SETTINGS ...
+						GUIFig.MENU_PERSONALIZE ...
+						GUIFig.TOOL_FILE ...
+						GUIFig.TOOL_PRINT ...
+						GUIFig.TOOL_GUI_SETTINGS ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -396,31 +359,7 @@ classdef GUIFig < GUI
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 43;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 2;
-				case 2 % Category.METADATA
-					prop_number = 3;
-				case 3 % Category.PARAMETER
-					prop_number = 1;
-				case 4 % Category.DATA
-					prop_number = 4;
-				case 6 % Category.QUERY
-					prop_number = 7;
-				case 7 % Category.EVANESCENT
-					prop_number = 10;
-				case 9 % Category.GUI
-					prop_number = 16;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(GUIFig.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in figure gui/error.
@@ -448,14 +387,14 @@ classdef GUIFig < GUI
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 43 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == GUIFig.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':GUIFig:' 'WrongInput'], ...
-					['BRAPH2' ':GUIFig:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':GUIFig:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':GUIFig:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for GUIFig.'] ...
 					)
 			end
@@ -486,14 +425,15 @@ classdef GUIFig < GUI
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'WAITBAR'  'DRAW'  'DRAWN'  'TITLE'  'POSITION'  'BKGCOLOR'  'H_MENUBAR'  'MENUBAR'  'H_MENU_ABOUT'  'MENU_ABOUT'  'H_TOOLBAR'  'H_TOOLS'  'TOOLBAR'  'TOOL_ABOUT'  'CLOSEREQ'  'H'  'RESIZE'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'PF'  'FILE'  'TEXT_FILE'  'GUI_LAYOUT'  'GUI_SETTINGS'  'H_MENU_FILE'  'MENU_FILE'  'H_MENU_PRINT'  'MENU_PRINT'  'H_MENU_GUI_SETTINGS'  'MENU_GUI_SETTINGS'  'H_MENU_PERSONALIZE'  'MENU_PERSONALIZE'  'TOOL_FILE'  'TOOL_PRINT'  'TOOL_GUI_SETTINGS' })); %CET: Computational Efficiency Trick
+			guifig_tag_list = cellfun(@(x) GUIFig.getPropTag(x), num2cell(GUIFig.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, guifig_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':GUIFig:' 'WrongInput'], ...
-					['BRAPH2' ':GUIFig:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':GUIFig:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':GUIFig:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for GUIFig.'] ...
 					)
 			end
@@ -519,7 +459,8 @@ classdef GUIFig < GUI
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'WAITBAR'  'DRAW'  'DRAWN'  'TITLE'  'POSITION'  'BKGCOLOR'  'H_MENUBAR'  'MENUBAR'  'H_MENU_ABOUT'  'MENU_ABOUT'  'H_TOOLBAR'  'H_TOOLS'  'TOOLBAR'  'TOOL_ABOUT'  'CLOSEREQ'  'H'  'RESIZE'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'PF'  'FILE'  'TEXT_FILE'  'GUI_LAYOUT'  'GUI_SETTINGS'  'H_MENU_FILE'  'MENU_FILE'  'H_MENU_PRINT'  'MENU_PRINT'  'H_MENU_GUI_SETTINGS'  'MENU_GUI_SETTINGS'  'H_MENU_PERSONALIZE'  'MENU_PERSONALIZE'  'TOOL_FILE'  'TOOL_PRINT'  'TOOL_GUI_SETTINGS' })); % tag = pointer %CET: Computational Efficiency Trick
+				guifig_tag_list = cellfun(@(x) GUIFig.getPropTag(x), num2cell(GUIFig.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, guifig_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -547,9 +488,44 @@ classdef GUIFig < GUI
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				guifig_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'WAITBAR'  'DRAW'  'DRAWN'  'TITLE'  'POSITION'  'BKGCOLOR'  'H_MENUBAR'  'MENUBAR'  'H_MENU_ABOUT'  'MENU_ABOUT'  'H_TOOLBAR'  'H_TOOLS'  'TOOLBAR'  'TOOL_ABOUT'  'CLOSEREQ'  'H'  'RESIZE'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'PF'  'FILE'  'TEXT_FILE'  'GUI_LAYOUT'  'GUI_SETTINGS'  'H_MENU_FILE'  'MENU_FILE'  'H_MENU_PRINT'  'MENU_PRINT'  'H_MENU_GUI_SETTINGS'  'MENU_GUI_SETTINGS'  'H_MENU_PERSONALIZE'  'MENU_PERSONALIZE'  'TOOL_FILE'  'TOOL_PRINT'  'TOOL_GUI_SETTINGS' };
-				tag = guifig_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case GUIFig.PF
+						tag = GUIFig.PF_TAG;
+					case GUIFig.FILE
+						tag = GUIFig.FILE_TAG;
+					case GUIFig.TEXT_FILE
+						tag = GUIFig.TEXT_FILE_TAG;
+					case GUIFig.GUI_LAYOUT
+						tag = GUIFig.GUI_LAYOUT_TAG;
+					case GUIFig.GUI_SETTINGS
+						tag = GUIFig.GUI_SETTINGS_TAG;
+					case GUIFig.H_MENU_FILE
+						tag = GUIFig.H_MENU_FILE_TAG;
+					case GUIFig.MENU_FILE
+						tag = GUIFig.MENU_FILE_TAG;
+					case GUIFig.H_MENU_PRINT
+						tag = GUIFig.H_MENU_PRINT_TAG;
+					case GUIFig.MENU_PRINT
+						tag = GUIFig.MENU_PRINT_TAG;
+					case GUIFig.H_MENU_GUI_SETTINGS
+						tag = GUIFig.H_MENU_GUI_SETTINGS_TAG;
+					case GUIFig.MENU_GUI_SETTINGS
+						tag = GUIFig.MENU_GUI_SETTINGS_TAG;
+					case GUIFig.H_MENU_PERSONALIZE
+						tag = GUIFig.H_MENU_PERSONALIZE_TAG;
+					case GUIFig.MENU_PERSONALIZE
+						tag = GUIFig.MENU_PERSONALIZE_TAG;
+					case GUIFig.TOOL_FILE
+						tag = GUIFig.TOOL_FILE_TAG;
+					case GUIFig.TOOL_PRINT
+						tag = GUIFig.TOOL_PRINT_TAG;
+					case GUIFig.TOOL_GUI_SETTINGS
+						tag = GUIFig.TOOL_GUI_SETTINGS_TAG;
+					otherwise
+						tag = getPropTag@GUI(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -574,9 +550,42 @@ classdef GUIFig < GUI
 			
 			prop = GUIFig.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			guifig_category_list = { 1  1  3  4  2  2  9  6  6  9  9  9  7  9  7  9  7  7  9  9  9  7  6  6  6  6  6  4  2  7  4  4  7  9  7  9  7  9  7  9  9  9  9 };
-			prop_category = guifig_category_list{prop};
+			switch prop
+				case GUIFig.PF
+					prop_category = GUIFig.PF_CATEGORY;
+				case GUIFig.FILE
+					prop_category = GUIFig.FILE_CATEGORY;
+				case GUIFig.TEXT_FILE
+					prop_category = GUIFig.TEXT_FILE_CATEGORY;
+				case GUIFig.GUI_LAYOUT
+					prop_category = GUIFig.GUI_LAYOUT_CATEGORY;
+				case GUIFig.GUI_SETTINGS
+					prop_category = GUIFig.GUI_SETTINGS_CATEGORY;
+				case GUIFig.H_MENU_FILE
+					prop_category = GUIFig.H_MENU_FILE_CATEGORY;
+				case GUIFig.MENU_FILE
+					prop_category = GUIFig.MENU_FILE_CATEGORY;
+				case GUIFig.H_MENU_PRINT
+					prop_category = GUIFig.H_MENU_PRINT_CATEGORY;
+				case GUIFig.MENU_PRINT
+					prop_category = GUIFig.MENU_PRINT_CATEGORY;
+				case GUIFig.H_MENU_GUI_SETTINGS
+					prop_category = GUIFig.H_MENU_GUI_SETTINGS_CATEGORY;
+				case GUIFig.MENU_GUI_SETTINGS
+					prop_category = GUIFig.MENU_GUI_SETTINGS_CATEGORY;
+				case GUIFig.H_MENU_PERSONALIZE
+					prop_category = GUIFig.H_MENU_PERSONALIZE_CATEGORY;
+				case GUIFig.MENU_PERSONALIZE
+					prop_category = GUIFig.MENU_PERSONALIZE_CATEGORY;
+				case GUIFig.TOOL_FILE
+					prop_category = GUIFig.TOOL_FILE_CATEGORY;
+				case GUIFig.TOOL_PRINT
+					prop_category = GUIFig.TOOL_PRINT_CATEGORY;
+				case GUIFig.TOOL_GUI_SETTINGS
+					prop_category = GUIFig.TOOL_GUI_SETTINGS_CATEGORY;
+				otherwise
+					prop_category = getPropCategory@GUI(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -600,9 +609,42 @@ classdef GUIFig < GUI
 			
 			prop = GUIFig.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			guifig_format_list = { 2  2  8  2  2  2  4  4  4  2  12  20  19  4  18  4  18  19  4  4  4  18  4  4  4  4  4  8  2  18  8  8  18  4  18  4  18  4  18  4  4  4  4 };
-			prop_format = guifig_format_list{prop};
+			switch prop
+				case GUIFig.PF
+					prop_format = GUIFig.PF_FORMAT;
+				case GUIFig.FILE
+					prop_format = GUIFig.FILE_FORMAT;
+				case GUIFig.TEXT_FILE
+					prop_format = GUIFig.TEXT_FILE_FORMAT;
+				case GUIFig.GUI_LAYOUT
+					prop_format = GUIFig.GUI_LAYOUT_FORMAT;
+				case GUIFig.GUI_SETTINGS
+					prop_format = GUIFig.GUI_SETTINGS_FORMAT;
+				case GUIFig.H_MENU_FILE
+					prop_format = GUIFig.H_MENU_FILE_FORMAT;
+				case GUIFig.MENU_FILE
+					prop_format = GUIFig.MENU_FILE_FORMAT;
+				case GUIFig.H_MENU_PRINT
+					prop_format = GUIFig.H_MENU_PRINT_FORMAT;
+				case GUIFig.MENU_PRINT
+					prop_format = GUIFig.MENU_PRINT_FORMAT;
+				case GUIFig.H_MENU_GUI_SETTINGS
+					prop_format = GUIFig.H_MENU_GUI_SETTINGS_FORMAT;
+				case GUIFig.MENU_GUI_SETTINGS
+					prop_format = GUIFig.MENU_GUI_SETTINGS_FORMAT;
+				case GUIFig.H_MENU_PERSONALIZE
+					prop_format = GUIFig.H_MENU_PERSONALIZE_FORMAT;
+				case GUIFig.MENU_PERSONALIZE
+					prop_format = GUIFig.MENU_PERSONALIZE_FORMAT;
+				case GUIFig.TOOL_FILE
+					prop_format = GUIFig.TOOL_FILE_FORMAT;
+				case GUIFig.TOOL_PRINT
+					prop_format = GUIFig.TOOL_PRINT_FORMAT;
+				case GUIFig.TOOL_GUI_SETTINGS
+					prop_format = GUIFig.TOOL_GUI_SETTINGS_FORMAT;
+				otherwise
+					prop_format = getPropFormat@GUI(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -626,9 +668,82 @@ classdef GUIFig < GUI
 			
 			prop = GUIFig.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			guifig_description_list = { 'NAME (constant, string) is the name of the figure GUI.'  'DESCRIPTION (constant, string) is the description of the figure GUI.'  'TEMPLATE (parameter, item) is the template of the figure GUI.'  'ID (data, string) is a few-letter code for the figure GUI.'  'LABEL (metadata, string) is an extended label of the figure GUI.'  'NOTES (metadata, string) are some specific notes about the figure GUI.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DRAW (query, logical) draws the contents of a GUI before showing it.'  'DRAWN (query, logical) returns whether the GUI has been drawn.'  'TITLE (gui, string) is the name of the GUI.'  'POSITION (gui, rvector) is the normalized position of the GUI on the screen.'  'BKGCOLOR (gui, color) is the GUI background color.'  'H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.'  'MENUBAR (gui, logical) determines whether to show the menubar.'  'H_MENU_ABOUT (evanescent, handle) is the handle of the menu about.'  'MENU_ABOUT (gui, logical) determines whether to show the menu about.'  'H_TOOLBAR (evanescent, handle) is the handle list of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the handle list of the toolbar followed by the tools from the first.'  'TOOLBAR (gui, logical) determines whether to show the toolbar.'  'TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons.'  'CLOSEREQ (gui, logical) determines whether to confirm close.'  'H (evanescent, handle) is the figure handle.'  'RESIZE (query, logical) updates POSITION when figure size is changed.'  'SHOW (query, logical) shows the figure and its dependent figures.'  'HIDE (query, logical) hides the figure and its dependent figures.'  'DELETE (query, logical) resets the handles and closes the dependent figures when the figure is deleted.'  'CLOSE (query, logical) closes the figure and its dependent figures.'  'PF (data, item) is the panel figure.'  'FILE (metadata, string) is the B2 file where the element is saved.'  'TEXT_FILE (evanescent, handle) is the label where the file name is shown.'  'GUI_LAYOUT (data, item) is the handle to the figure to manage the layout.'  'GUI_SETTINGS (data, item) is the handle to the figure to manage the figure settings.'  'H_MENU_FILE (evanescent, handle) is the handle of the menu file.'  'MENU_FILE (gui, logical) determines whether to show the menu file.'  'H_MENU_PRINT (evanescent, handle) is the handle of the menu to print to image file.'  'MENU_PRINT (gui, logical) determines whether to show the menu to print to image file.'  'H_MENU_GUI_SETTINGS (evanescent, handle) is the handle of the menu settings.'  'MENU_GUI_SETTINGS (gui, logical) determines whether to show the menu settings.'  'H_MENU_PERSONALIZE (evanescent, handle) is the handle of the menu personalize.'  'MENU_PERSONALIZE (gui, logical) determines whether to show the menu personalize.'  'TOOL_FILE (gui, logical) determines whether to show the toolbar file buttons.'  'TOOL_PRINT (gui, logical) determines whether to show the toolbar print button.'  'TOOL_GUI_SETTINGS (gui, logical) determines whether to show the toolbar settings buttons.' };
-			prop_description = guifig_description_list{prop};
+			switch prop
+				case GUIFig.PF
+					prop_description = 'PF (data, item) is the panel figure.';
+				case GUIFig.FILE
+					prop_description = 'FILE (metadata, string) is the B2 file where the element is saved.';
+				case GUIFig.TEXT_FILE
+					prop_description = 'TEXT_FILE (evanescent, handle) is the label where the file name is shown.';
+				case GUIFig.GUI_LAYOUT
+					prop_description = 'GUI_LAYOUT (data, item) is the handle to the figure to manage the layout.';
+				case GUIFig.GUI_SETTINGS
+					prop_description = 'GUI_SETTINGS (data, item) is the handle to the figure to manage the figure settings.';
+				case GUIFig.H_MENU_FILE
+					prop_description = 'H_MENU_FILE (evanescent, handle) is the handle of the menu file.';
+				case GUIFig.MENU_FILE
+					prop_description = 'MENU_FILE (gui, logical) determines whether to show the menu file.';
+				case GUIFig.H_MENU_PRINT
+					prop_description = 'H_MENU_PRINT (evanescent, handle) is the handle of the menu to print to image file.';
+				case GUIFig.MENU_PRINT
+					prop_description = 'MENU_PRINT (gui, logical) determines whether to show the menu to print to image file.';
+				case GUIFig.H_MENU_GUI_SETTINGS
+					prop_description = 'H_MENU_GUI_SETTINGS (evanescent, handle) is the handle of the menu settings.';
+				case GUIFig.MENU_GUI_SETTINGS
+					prop_description = 'MENU_GUI_SETTINGS (gui, logical) determines whether to show the menu settings.';
+				case GUIFig.H_MENU_PERSONALIZE
+					prop_description = 'H_MENU_PERSONALIZE (evanescent, handle) is the handle of the menu personalize.';
+				case GUIFig.MENU_PERSONALIZE
+					prop_description = 'MENU_PERSONALIZE (gui, logical) determines whether to show the menu personalize.';
+				case GUIFig.TOOL_FILE
+					prop_description = 'TOOL_FILE (gui, logical) determines whether to show the toolbar file buttons.';
+				case GUIFig.TOOL_PRINT
+					prop_description = 'TOOL_PRINT (gui, logical) determines whether to show the toolbar print button.';
+				case GUIFig.TOOL_GUI_SETTINGS
+					prop_description = 'TOOL_GUI_SETTINGS (gui, logical) determines whether to show the toolbar settings buttons.';
+				case GUIFig.NAME
+					prop_description = 'NAME (constant, string) is the name of the figure GUI.';
+				case GUIFig.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the figure GUI.';
+				case GUIFig.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the figure GUI.';
+				case GUIFig.ID
+					prop_description = 'ID (data, string) is a few-letter code for the figure GUI.';
+				case GUIFig.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the figure GUI.';
+				case GUIFig.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the figure GUI.';
+				case GUIFig.POSITION
+					prop_description = 'POSITION (gui, rvector) is the normalized position of the GUI on the screen.';
+				case GUIFig.BKGCOLOR
+					prop_description = 'BKGCOLOR (gui, color) is the GUI background color.';
+				case GUIFig.H_MENUBAR
+					prop_description = 'H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.';
+				case GUIFig.MENUBAR
+					prop_description = 'MENUBAR (gui, logical) determines whether to show the menubar.';
+				case GUIFig.MENU_ABOUT
+					prop_description = 'MENU_ABOUT (gui, logical) determines whether to show the menu about.';
+				case GUIFig.H_TOOLS
+					prop_description = 'H_TOOLS (evanescent, handlelist) is the handle list of the toolbar followed by the tools from the first.';
+				case GUIFig.TOOLBAR
+					prop_description = 'TOOLBAR (gui, logical) determines whether to show the toolbar.';
+				case GUIFig.TOOL_ABOUT
+					prop_description = 'TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons.';
+				case GUIFig.DRAW
+					prop_description = 'DRAW (query, logical) draws the contents of a GUI before showing it.';
+				case GUIFig.H
+					prop_description = 'H (evanescent, handle) is the figure handle.';
+				case GUIFig.SHOW
+					prop_description = 'SHOW (query, logical) shows the figure and its dependent figures.';
+				case GUIFig.HIDE
+					prop_description = 'HIDE (query, logical) hides the figure and its dependent figures.';
+				case GUIFig.DELETE
+					prop_description = 'DELETE (query, logical) resets the handles and closes the dependent figures when the figure is deleted.';
+				case GUIFig.CLOSE
+					prop_description = 'CLOSE (query, logical) closes the figure and its dependent figures.';
+				otherwise
+					prop_description = getPropDescription@GUI(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -652,40 +767,40 @@ classdef GUIFig < GUI
 			
 			prop = GUIFig.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 28 % GUIFig.PF
+			switch prop
+				case GUIFig.PF
 					prop_settings = 'PanelFig';
-				case 29 % GUIFig.FILE
-					prop_settings = Format.getFormatSettings(2);
-				case 30 % GUIFig.TEXT_FILE
-					prop_settings = Format.getFormatSettings(18);
-				case 31 % GUIFig.GUI_LAYOUT
+				case GUIFig.FILE
+					prop_settings = Format.getFormatSettings(Format.STRING);
+				case GUIFig.TEXT_FILE
+					prop_settings = Format.getFormatSettings(Format.HANDLE);
+				case GUIFig.GUI_LAYOUT
 					prop_settings = 'GUILayout';
-				case 32 % GUIFig.GUI_SETTINGS
+				case GUIFig.GUI_SETTINGS
 					prop_settings = 'GUIElement';
-				case 33 % GUIFig.H_MENU_FILE
-					prop_settings = Format.getFormatSettings(18);
-				case 34 % GUIFig.MENU_FILE
-					prop_settings = Format.getFormatSettings(4);
-				case 35 % GUIFig.H_MENU_PRINT
-					prop_settings = Format.getFormatSettings(18);
-				case 36 % GUIFig.MENU_PRINT
-					prop_settings = Format.getFormatSettings(4);
-				case 37 % GUIFig.H_MENU_GUI_SETTINGS
-					prop_settings = Format.getFormatSettings(18);
-				case 38 % GUIFig.MENU_GUI_SETTINGS
-					prop_settings = Format.getFormatSettings(4);
-				case 39 % GUIFig.H_MENU_PERSONALIZE
-					prop_settings = Format.getFormatSettings(18);
-				case 40 % GUIFig.MENU_PERSONALIZE
-					prop_settings = Format.getFormatSettings(4);
-				case 41 % GUIFig.TOOL_FILE
-					prop_settings = Format.getFormatSettings(4);
-				case 42 % GUIFig.TOOL_PRINT
-					prop_settings = Format.getFormatSettings(4);
-				case 43 % GUIFig.TOOL_GUI_SETTINGS
-					prop_settings = Format.getFormatSettings(4);
-				case 3 % GUIFig.TEMPLATE
+				case GUIFig.H_MENU_FILE
+					prop_settings = Format.getFormatSettings(Format.HANDLE);
+				case GUIFig.MENU_FILE
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case GUIFig.H_MENU_PRINT
+					prop_settings = Format.getFormatSettings(Format.HANDLE);
+				case GUIFig.MENU_PRINT
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case GUIFig.H_MENU_GUI_SETTINGS
+					prop_settings = Format.getFormatSettings(Format.HANDLE);
+				case GUIFig.MENU_GUI_SETTINGS
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case GUIFig.H_MENU_PERSONALIZE
+					prop_settings = Format.getFormatSettings(Format.HANDLE);
+				case GUIFig.MENU_PERSONALIZE
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case GUIFig.TOOL_FILE
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case GUIFig.TOOL_PRINT
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case GUIFig.TOOL_GUI_SETTINGS
+					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+				case GUIFig.TEMPLATE
 					prop_settings = 'GUIFig';
 				otherwise
 					prop_settings = getPropSettings@GUI(prop);
@@ -713,62 +828,62 @@ classdef GUIFig < GUI
 			
 			prop = GUIFig.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 28 % GUIFig.PF
-					prop_default = Format.getFormatDefault(8, GUIFig.getPropSettings(prop));
-				case 29 % GUIFig.FILE
-					prop_default = Format.getFormatDefault(2, GUIFig.getPropSettings(prop));
-				case 30 % GUIFig.TEXT_FILE
-					prop_default = Format.getFormatDefault(18, GUIFig.getPropSettings(prop));
-				case 31 % GUIFig.GUI_LAYOUT
-					prop_default = Format.getFormatDefault(8, GUIFig.getPropSettings(prop));
-				case 32 % GUIFig.GUI_SETTINGS
-					prop_default = Format.getFormatDefault(8, GUIFig.getPropSettings(prop));
-				case 33 % GUIFig.H_MENU_FILE
-					prop_default = Format.getFormatDefault(18, GUIFig.getPropSettings(prop));
-				case 34 % GUIFig.MENU_FILE
+			switch prop
+				case GUIFig.PF
+					prop_default = Format.getFormatDefault(Format.ITEM, GUIFig.getPropSettings(prop));
+				case GUIFig.FILE
+					prop_default = Format.getFormatDefault(Format.STRING, GUIFig.getPropSettings(prop));
+				case GUIFig.TEXT_FILE
+					prop_default = Format.getFormatDefault(Format.HANDLE, GUIFig.getPropSettings(prop));
+				case GUIFig.GUI_LAYOUT
+					prop_default = Format.getFormatDefault(Format.ITEM, GUIFig.getPropSettings(prop));
+				case GUIFig.GUI_SETTINGS
+					prop_default = Format.getFormatDefault(Format.ITEM, GUIFig.getPropSettings(prop));
+				case GUIFig.H_MENU_FILE
+					prop_default = Format.getFormatDefault(Format.HANDLE, GUIFig.getPropSettings(prop));
+				case GUIFig.MENU_FILE
 					prop_default = true;
-				case 35 % GUIFig.H_MENU_PRINT
-					prop_default = Format.getFormatDefault(18, GUIFig.getPropSettings(prop));
-				case 36 % GUIFig.MENU_PRINT
+				case GUIFig.H_MENU_PRINT
+					prop_default = Format.getFormatDefault(Format.HANDLE, GUIFig.getPropSettings(prop));
+				case GUIFig.MENU_PRINT
 					prop_default = true;
-				case 37 % GUIFig.H_MENU_GUI_SETTINGS
-					prop_default = Format.getFormatDefault(18, GUIFig.getPropSettings(prop));
-				case 38 % GUIFig.MENU_GUI_SETTINGS
+				case GUIFig.H_MENU_GUI_SETTINGS
+					prop_default = Format.getFormatDefault(Format.HANDLE, GUIFig.getPropSettings(prop));
+				case GUIFig.MENU_GUI_SETTINGS
 					prop_default = true;
-				case 39 % GUIFig.H_MENU_PERSONALIZE
-					prop_default = Format.getFormatDefault(18, GUIFig.getPropSettings(prop));
-				case 40 % GUIFig.MENU_PERSONALIZE
+				case GUIFig.H_MENU_PERSONALIZE
+					prop_default = Format.getFormatDefault(Format.HANDLE, GUIFig.getPropSettings(prop));
+				case GUIFig.MENU_PERSONALIZE
 					prop_default = true;
-				case 41 % GUIFig.TOOL_FILE
+				case GUIFig.TOOL_FILE
 					prop_default = true;
-				case 42 % GUIFig.TOOL_PRINT
+				case GUIFig.TOOL_PRINT
 					prop_default = true;
-				case 43 % GUIFig.TOOL_GUI_SETTINGS
+				case GUIFig.TOOL_GUI_SETTINGS
 					prop_default = true;
-				case 1 % GUIFig.NAME
+				case GUIFig.NAME
 					prop_default = 'GUIFig';
-				case 2 % GUIFig.DESCRIPTION
+				case GUIFig.DESCRIPTION
 					prop_default = 'GUIFIG renders a figure.';
-				case 3 % GUIFig.TEMPLATE
-					prop_default = Format.getFormatDefault(8, GUIFig.getPropSettings(prop));
-				case 4 % GUIFig.ID
+				case GUIFig.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, GUIFig.getPropSettings(prop));
+				case GUIFig.ID
 					prop_default = 'GUIFIG ID';
-				case 5 % GUIFig.LABEL
+				case GUIFig.LABEL
 					prop_default = 'GUIFIG label';
-				case 6 % GUIFig.NOTES
+				case GUIFig.NOTES
 					prop_default = 'GUIFIG notes';
-				case 11 % GUIFig.POSITION
+				case GUIFig.POSITION
 					prop_default = [.30 .40 .39 .47];
-				case 12 % GUIFig.BKGCOLOR
-					prop_default = [0.7 0.7 0.7];
-				case 14 % GUIFig.MENUBAR
+				case GUIFig.BKGCOLOR
+					prop_default = BRAPH2.COL_F;
+				case GUIFig.MENUBAR
 					prop_default = true;
-				case 16 % GUIFig.MENU_ABOUT
+				case GUIFig.MENU_ABOUT
 					prop_default = true;
-				case 19 % GUIFig.TOOLBAR
+				case GUIFig.TOOLBAR
 					prop_default = true;
-				case 20 % GUIFig.TOOL_ABOUT
+				case GUIFig.TOOL_ABOUT
 					prop_default = true;
 				otherwise
 					prop_default = getPropDefault@GUI(prop);
@@ -805,8 +920,8 @@ classdef GUIFig < GUI
 			%PRESET preprocesses the value of a property before setting it.
 			%
 			% VALUE = PRESET(EL, PROP, VALUE) prepropcesses the VALUE of the property
-			%  PROP. It works only with properties with 2,
-			%  3, 4, 8 and 9. By
+			%  PROP. It works only with properties with Category.METADATA,
+			%  Category.PARAMETER, Category.DATA, Category.FIGURE and Category.GUI. By
 			%  default, this function does not do anything, so it should be implemented
 			%  in the subclasses of Element when needed.
 			%
@@ -814,7 +929,7 @@ classdef GUIFig < GUI
 			%  calculateValue, checkValue.
 			
 			switch prop
-				case 31 % GUIFig.GUI_LAYOUT
+				case GUIFig.GUI_LAYOUT % __GUIFig.GUI_LAYOUT__
 					if isa(value.getr('EL_CLASS'), 'NoValue')
 					    f = gui.get('H');
 					    value.set( ...
@@ -824,14 +939,14 @@ classdef GUIFig < GUI
 					        )
 					end
 					
-				case 32 % GUIFig.GUI_SETTINGS
+				case GUIFig.GUI_SETTINGS % __GUIFig.GUI_SETTINGS__
 					if isa(value.getr('PE'), 'NoValue') % i.e., default initialization
 					    pf = gui.memorize('PF');
 					    f = gui.get('H');
 					    
 					    pe = PanelElement('EL', pf);
 					    
-					    pr_visible = int8(pe.get('PR_VISIBLE') & ismember(1:1:pf.getPropNumber(), pf.getProps(8))); % Category.FIGURE
+					    pr_visible = int8(pe.get('PR_VISIBLE') & ismember(1:1:pf.getPropNumber(), pf.getProps(Category.FIGURE))); % __Category.FIGURE__
 					
 					    pr_order = pe.get('PR_ORDER');
 					    pr_order(pr_visible == 0) = NaN;
@@ -862,7 +977,7 @@ classdef GUIFig < GUI
 					end
 					
 				otherwise
-					if prop <= 27
+					if prop <= GUI.getPropNumber()
 						value = preset@GUI(gui, prop, value);
 					end
 			end
@@ -883,15 +998,15 @@ classdef GUIFig < GUI
 			% 
 			% GUI.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:GUIFig:WrongInput
+			%  Error id: €BRAPH2.STR€:GUIFig:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  GUI.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of GUI.
-			%   Error id: BRAPH2:GUIFig:WrongInput
+			%   Error id: €BRAPH2.STR€:GUIFig:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(GUIFig, PROP, VALUE) throws error if VALUE has not a valid format for PROP of GUIFig.
-			%   Error id: BRAPH2:GUIFig:WrongInput
+			%   Error id: €BRAPH2.STR€:GUIFig:€BRAPH2.WRONG_INPUT€
 			%  GUI.CHECKPROP(GUIFig, PROP, VALUE) throws error if VALUE has not a valid format for PROP of GUIFig.
-			%   Error id: BRAPH2:GUIFig:WrongInput]
+			%   Error id: €BRAPH2.STR€:GUIFig:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(GUI) and Element.CHECKPROP('GUIFig')
 			%  are less computationally efficient.
@@ -902,42 +1017,42 @@ classdef GUIFig < GUI
 			prop = GUIFig.getPropProp(pointer);
 			
 			switch prop
-				case 28 % GUIFig.PF
-					check = Format.checkFormat(8, value, GUIFig.getPropSettings(prop));
-				case 29 % GUIFig.FILE
-					check = Format.checkFormat(2, value, GUIFig.getPropSettings(prop));
-				case 30 % GUIFig.TEXT_FILE
-					check = Format.checkFormat(18, value, GUIFig.getPropSettings(prop));
-				case 31 % GUIFig.GUI_LAYOUT
-					check = Format.checkFormat(8, value, GUIFig.getPropSettings(prop));
-				case 32 % GUIFig.GUI_SETTINGS
-					check = Format.checkFormat(8, value, GUIFig.getPropSettings(prop));
-				case 33 % GUIFig.H_MENU_FILE
-					check = Format.checkFormat(18, value, GUIFig.getPropSettings(prop));
-				case 34 % GUIFig.MENU_FILE
-					check = Format.checkFormat(4, value, GUIFig.getPropSettings(prop));
-				case 35 % GUIFig.H_MENU_PRINT
-					check = Format.checkFormat(18, value, GUIFig.getPropSettings(prop));
-				case 36 % GUIFig.MENU_PRINT
-					check = Format.checkFormat(4, value, GUIFig.getPropSettings(prop));
-				case 37 % GUIFig.H_MENU_GUI_SETTINGS
-					check = Format.checkFormat(18, value, GUIFig.getPropSettings(prop));
-				case 38 % GUIFig.MENU_GUI_SETTINGS
-					check = Format.checkFormat(4, value, GUIFig.getPropSettings(prop));
-				case 39 % GUIFig.H_MENU_PERSONALIZE
-					check = Format.checkFormat(18, value, GUIFig.getPropSettings(prop));
-				case 40 % GUIFig.MENU_PERSONALIZE
-					check = Format.checkFormat(4, value, GUIFig.getPropSettings(prop));
-				case 41 % GUIFig.TOOL_FILE
-					check = Format.checkFormat(4, value, GUIFig.getPropSettings(prop));
-				case 42 % GUIFig.TOOL_PRINT
-					check = Format.checkFormat(4, value, GUIFig.getPropSettings(prop));
-				case 43 % GUIFig.TOOL_GUI_SETTINGS
-					check = Format.checkFormat(4, value, GUIFig.getPropSettings(prop));
-				case 3 % GUIFig.TEMPLATE
-					check = Format.checkFormat(8, value, GUIFig.getPropSettings(prop));
+				case GUIFig.PF % __GUIFig.PF__
+					check = Format.checkFormat(Format.ITEM, value, GUIFig.getPropSettings(prop));
+				case GUIFig.FILE % __GUIFig.FILE__
+					check = Format.checkFormat(Format.STRING, value, GUIFig.getPropSettings(prop));
+				case GUIFig.TEXT_FILE % __GUIFig.TEXT_FILE__
+					check = Format.checkFormat(Format.HANDLE, value, GUIFig.getPropSettings(prop));
+				case GUIFig.GUI_LAYOUT % __GUIFig.GUI_LAYOUT__
+					check = Format.checkFormat(Format.ITEM, value, GUIFig.getPropSettings(prop));
+				case GUIFig.GUI_SETTINGS % __GUIFig.GUI_SETTINGS__
+					check = Format.checkFormat(Format.ITEM, value, GUIFig.getPropSettings(prop));
+				case GUIFig.H_MENU_FILE % __GUIFig.H_MENU_FILE__
+					check = Format.checkFormat(Format.HANDLE, value, GUIFig.getPropSettings(prop));
+				case GUIFig.MENU_FILE % __GUIFig.MENU_FILE__
+					check = Format.checkFormat(Format.LOGICAL, value, GUIFig.getPropSettings(prop));
+				case GUIFig.H_MENU_PRINT % __GUIFig.H_MENU_PRINT__
+					check = Format.checkFormat(Format.HANDLE, value, GUIFig.getPropSettings(prop));
+				case GUIFig.MENU_PRINT % __GUIFig.MENU_PRINT__
+					check = Format.checkFormat(Format.LOGICAL, value, GUIFig.getPropSettings(prop));
+				case GUIFig.H_MENU_GUI_SETTINGS % __GUIFig.H_MENU_GUI_SETTINGS__
+					check = Format.checkFormat(Format.HANDLE, value, GUIFig.getPropSettings(prop));
+				case GUIFig.MENU_GUI_SETTINGS % __GUIFig.MENU_GUI_SETTINGS__
+					check = Format.checkFormat(Format.LOGICAL, value, GUIFig.getPropSettings(prop));
+				case GUIFig.H_MENU_PERSONALIZE % __GUIFig.H_MENU_PERSONALIZE__
+					check = Format.checkFormat(Format.HANDLE, value, GUIFig.getPropSettings(prop));
+				case GUIFig.MENU_PERSONALIZE % __GUIFig.MENU_PERSONALIZE__
+					check = Format.checkFormat(Format.LOGICAL, value, GUIFig.getPropSettings(prop));
+				case GUIFig.TOOL_FILE % __GUIFig.TOOL_FILE__
+					check = Format.checkFormat(Format.LOGICAL, value, GUIFig.getPropSettings(prop));
+				case GUIFig.TOOL_PRINT % __GUIFig.TOOL_PRINT__
+					check = Format.checkFormat(Format.LOGICAL, value, GUIFig.getPropSettings(prop));
+				case GUIFig.TOOL_GUI_SETTINGS % __GUIFig.TOOL_GUI_SETTINGS__
+					check = Format.checkFormat(Format.LOGICAL, value, GUIFig.getPropSettings(prop));
+				case GUIFig.TEMPLATE % __GUIFig.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, GUIFig.getPropSettings(prop));
 				otherwise
-					if prop <= 27
+					if prop <= GUI.getPropNumber()
 						check = checkProp@GUI(prop, value);
 					end
 			end
@@ -946,8 +1061,8 @@ classdef GUIFig < GUI
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':GUIFig:' 'WrongInput'], ...
-					['BRAPH2' ':GUIFig:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':GUIFig:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':GUIFig:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' GUIFig.getPropTag(prop) ' (' GUIFig.getFormatTag(GUIFig.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -967,15 +1082,15 @@ classdef GUIFig < GUI
 			%  checkValue.
 			
 			switch prop
-				case 28 % GUIFig.PF
+				case GUIFig.PF % __GUIFig.PF__
 					pf = gui.get('PF');
 					pf.set('PARENT', gui)
 					if isa(gui.getr('TITLE'), 'NoValue')
-					    gui.set('TITLE', [pf.getClass() ' - ' pf.get('ID') ' - ' 'BRAPH2'])
+					    gui.set('TITLE', [pf.getClass() ' - ' pf.get('ID') ' - ' BRAPH2.STR])
 					end
 					gui.lock('PF', 'Iterative', false)
 					
-				case 29 % GUIFig.FILE
+				case GUIFig.FILE % __GUIFig.FILE__
 					if gui.get('DRAWN')
 					    set(gui.get('TEXT_FILE'), ...
 					        'Text', gui.get('FILE'), ...
@@ -984,7 +1099,7 @@ classdef GUIFig < GUI
 					end
 					
 				otherwise
-					if prop <= 27
+					if prop <= GUI.getPropNumber()
 						postset@GUI(gui, prop);
 					end
 			end
@@ -995,31 +1110,31 @@ classdef GUIFig < GUI
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with 5,
-			%  6, and 7. By default this function
+			%  PROP. It works only with properties with Category.RESULT,
+			%  Category.QUERY, and Category.EVANESCENT. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  6.
+			%  Category.QUERY.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 30 % GUIFig.TEXT_FILE
+				case GUIFig.TEXT_FILE % __GUIFig.TEXT_FILE__
 					text_file = uilabel( ...
 					    'Parent', gui.memorize('H'), ... % H = p for Panel
 					    'Tag', 'TEXT_FILE', ...    
 					    'Text', gui.get('FILE'), ...
-					    'FontSize', 12, ...
+					    'FontSize', BRAPH2.FONTSIZE, ...
 					    'Tooltip', gui.get('FILE'), ...
 					    'HorizontalAlignment', 'left', ...
-					    'Position', [5 0 w(gui.get('H'), 'pixels')-10 24] ...
+					    'Position', [5 0 w(gui.get('H'), 'pixels')-10 s(2)] ...
 					    );
 					value = text_file;
 					
-				case 33 % GUIFig.H_MENU_FILE
+				case GUIFig.H_MENU_FILE % __GUIFig.H_MENU_FILE__
 					menu_file = uimenu(gui.memorize('H'), ... % f for figure
 					    'Tag', 'MENU.File', ...
 					    'Label', 'File' ...
@@ -1049,7 +1164,7 @@ classdef GUIFig < GUI
 					
 					value = menu_file;
 					
-				case 35 % GUIFig.H_MENU_PRINT
+				case GUIFig.H_MENU_PRINT % __GUIFig.H_MENU_PRINT__
 					menu_print = uimenu(gui.memorize('H'), ... % f for figure
 					    'Tag', 'MENU.Print', ...
 					    'Label', 'Print' ...
@@ -1098,7 +1213,7 @@ classdef GUIFig < GUI
 					
 					value = menu_print;
 					
-				case 37 % GUIFig.H_MENU_GUI_SETTINGS
+				case GUIFig.H_MENU_GUI_SETTINGS % __GUIFig.H_MENU_GUI_SETTINGS__
 					menu_settings = uimenu(gui.memorize('H'), ... % f for figure
 					    'Tag', 'MENU.Settings', ...
 					    'Label', 'Settings' ...
@@ -1111,7 +1226,7 @@ classdef GUIFig < GUI
 					
 					value = menu_settings;
 					
-				case 39 % GUIFig.H_MENU_PERSONALIZE
+				case GUIFig.H_MENU_PERSONALIZE % __GUIFig.H_MENU_PERSONALIZE__
 					menu_personalize = uimenu(gui.memorize('H'), ... % f for figure
 					    'Tag', 'MENU.Personalize', ...
 					    'Label', 'Personalize' ...
@@ -1124,7 +1239,7 @@ classdef GUIFig < GUI
 					
 					value = menu_personalize;
 					
-				case 13 % GUIFig.H_MENUBAR
+				case GUIFig.H_MENUBAR % __GUIFig.H_MENUBAR__
 					value = {};
 					if gui.get('MENU_FILE')
 					    value = [value, gui.memorize('H_MENU_FILE')];
@@ -1142,10 +1257,10 @@ classdef GUIFig < GUI
 					    value = [value, gui.memorize('H_MENU_ABOUT')];
 					end
 					
-				case 18 % GUIFig.H_TOOLS
+				case GUIFig.H_TOOLS % __GUIFig.H_TOOLS__
 					toolbar = gui.memorize('H_TOOLBAR');
 					
-					children = calculateValue@GUI(gui, 18);
+					children = calculateValue@GUI(gui, GUI.H_TOOLS);
 					
 					pf = gui.memorize('PF');
 					
@@ -1197,7 +1312,7 @@ classdef GUIFig < GUI
 					% reorder tools
 					toolbar.Children = [value{end:-1:1}];
 					
-				case 8 % GUIFig.DRAW
+				case GUIFig.DRAW % __GUIFig.DRAW__
 					if check_graphics(gui.memorize('H'), 'figure')
 					
 					    if gui.get('MENUBAR')
@@ -1219,21 +1334,21 @@ classdef GUIFig < GUI
 					    value = true;
 					else
 					    warning( ...
-					        ['BRAPH2' ':' class(gui)], ...
-					        ['BRAPH2' ':' class(gui) '\n' ...
+					        [BRAPH2.STR ':' class(gui)], ...
+					        [BRAPH2.STR ':' class(gui) '\n' ...
 					        'The call gui.get(''DRAW'') did not work.\n' ...
 					        'This shouldn''t happen with well-written code!'] ...
 					        )
 					    value = false;
 					end
 					
-				case 22 % GUIFig.H
-					f = calculateValue@GUI(gui, 22);
+				case GUIFig.H % __GUIFig.H__
+					f = calculateValue@GUI(gui, GUI.H);
 					pf = gui.memorize('PF');
 					value = f;
 					
-				case 24 % GUIFig.SHOW
-					value = calculateValue@GUI(gui, 24, varargin{:}); % also warning
+				case GUIFig.SHOW % __GUIFig.SHOW__
+					value = calculateValue@GUI(gui, GUI.SHOW, varargin{:}); % also warning
 					if value
 					    % figure layout editor
 					    if isa(gui.getr('GUI_LAYOUT'), 'GUILayout') && gui.get('GUI_LAYOUT').get('DRAWN')
@@ -1246,8 +1361,8 @@ classdef GUIFig < GUI
 					    end
 					end
 					
-				case 25 % GUIFig.HIDE
-					value = calculateValue@GUI(gui, 25, varargin{:}); % also warning
+				case GUIFig.HIDE % __GUIFig.HIDE__
+					value = calculateValue@GUI(gui, GUI.HIDE, varargin{:}); % also warning
 					if value
 					    % figure layout editor
 					    if isa(gui.getr('GUI_LAYOUT'), 'GUILayout') && gui.get('GUI_LAYOUT').get('DRAWN')
@@ -1260,8 +1375,8 @@ classdef GUIFig < GUI
 					    end
 					end
 					
-				case 26 % GUIFig.DELETE
-					value = calculateValue@GUI(gui, 26, varargin{:}); % also warning
+				case GUIFig.DELETE % __GUIFig.DELETE__
+					value = calculateValue@GUI(gui, GUI.DELETE, varargin{:}); % also warning
 					if value
 						gui.set('TEXT_FILE', Element.getNoValue())
 					
@@ -1271,7 +1386,7 @@ classdef GUIFig < GUI
 					 	gui.set('H_MENU_PERSONALIZE', Element.getNoValue())
 					end
 					
-				case 27 % GUIFig.CLOSE
+				case GUIFig.CLOSE % __GUIFig.CLOSE__
 					if gui.get('DRAWN')
 					
 					    title = gui.get('TITLE');
@@ -1306,8 +1421,8 @@ classdef GUIFig < GUI
 					    value = true;
 					else
 					    warning( ...
-					        ['BRAPH2' ':' class(gui)], ...
-					        ['BRAPH2' ':' class(gui) '\n' ...
+					        [BRAPH2.STR ':' class(gui)], ...
+					        [BRAPH2.STR ':' class(gui) '\n' ...
 					        'The call gui.get(''CLOSE'') has NOT been executed.\n' ...
 					        'First, the gui ' gui.get('ID') ' should be drawn calling gui.get(''DRAW'').\n' ...
 					        'Probably, not a big deal, but this shouldn''t happen with well-written code!'] ...
@@ -1316,7 +1431,7 @@ classdef GUIFig < GUI
 					end
 					
 				otherwise
-					if prop <= 27
+					if prop <= GUI.getPropNumber()
 						value = calculateValue@GUI(gui, prop, varargin{:});
 					else
 						value = calculateValue@Element(gui, prop, varargin{:});

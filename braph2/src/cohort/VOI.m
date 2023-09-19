@@ -11,15 +11,6 @@ classdef VOI < ConcreteElement
 	%  
 	%  %% ¡props_update!
 	%
-	% The list of VOI properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the concrete element.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the concrete element.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the concrete element.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the concrete element.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the concrete element.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the concrete element.
-	%  <strong>7</strong> <strong>V</strong> 	V (data, scalar) is the value of the variable of interest.
-	%
 	% VOI methods (constructor):
 	%  VOI - constructor
 	%
@@ -107,10 +98,10 @@ classdef VOI < ConcreteElement
 	%
 	
 	properties (Constant) % properties
-		V = 7; %CET: Computational Efficiency Trick
+		V = ConcreteElement.getPropNumber() + 1;
 		V_TAG = 'V';
-		V_CATEGORY = 4;
-		V_FORMAT = 11;
+		V_CATEGORY = Category.DATA;
+		V_FORMAT = Format.SCALAR;
 	end
 	methods % constructor
 		function voi = VOI(varargin)
@@ -123,14 +114,6 @@ classdef VOI < ConcreteElement
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of VOI properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the concrete element.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the concrete element.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the concrete element.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the concrete element.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the concrete element.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the concrete element.
-			%  <strong>7</strong> <strong>V</strong> 	V (data, scalar) is the value of the variable of interest.
 			%
 			% See also Category, Format.
 			
@@ -168,7 +151,7 @@ classdef VOI < ConcreteElement
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'VOI'  'VOICategoric'  'VOINumeric' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('VOI', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of variable of interest.
@@ -189,24 +172,52 @@ classdef VOI < ConcreteElement
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7];
+				prop_list = [ ...
+					ConcreteElement.getProps() ...
+						VOI.V ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
-					prop_list = [4 7];
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.PARAMETER) ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.DATA) ...
+						VOI.V ...
+						];
+				case Category.RESULT
+					prop_list = [
+						ConcreteElement.getProps(Category.RESULT) ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						ConcreteElement.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -227,25 +238,7 @@ classdef VOI < ConcreteElement
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 7;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 2;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 1;
-				case 4 % Category.DATA
-					prop_number = 2;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(VOI.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in variable of interest/error.
@@ -273,14 +266,14 @@ classdef VOI < ConcreteElement
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 7 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == VOI.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':VOI:' 'WrongInput'], ...
-					['BRAPH2' ':VOI:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':VOI:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':VOI:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for VOI.'] ...
 					)
 			end
@@ -311,14 +304,15 @@ classdef VOI < ConcreteElement
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'V' })); %CET: Computational Efficiency Trick
+			voi_tag_list = cellfun(@(x) VOI.getPropTag(x), num2cell(VOI.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, voi_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':VOI:' 'WrongInput'], ...
-					['BRAPH2' ':VOI:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':VOI:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':VOI:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for VOI.'] ...
 					)
 			end
@@ -344,7 +338,8 @@ classdef VOI < ConcreteElement
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'V' })); % tag = pointer %CET: Computational Efficiency Trick
+				voi_tag_list = cellfun(@(x) VOI.getPropTag(x), num2cell(VOI.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, voi_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -372,9 +367,14 @@ classdef VOI < ConcreteElement
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				voi_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'V' };
-				tag = voi_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case VOI.V
+						tag = VOI.V_TAG;
+					otherwise
+						tag = getPropTag@ConcreteElement(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -399,9 +399,12 @@ classdef VOI < ConcreteElement
 			
 			prop = VOI.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			voi_category_list = { 1  1  3  4  2  2  4 };
-			prop_category = voi_category_list{prop};
+			switch prop
+				case VOI.V
+					prop_category = VOI.V_CATEGORY;
+				otherwise
+					prop_category = getPropCategory@ConcreteElement(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -425,9 +428,12 @@ classdef VOI < ConcreteElement
 			
 			prop = VOI.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			voi_format_list = { 2  2  8  2  2  2  11 };
-			prop_format = voi_format_list{prop};
+			switch prop
+				case VOI.V
+					prop_format = VOI.V_FORMAT;
+				otherwise
+					prop_format = getPropFormat@ConcreteElement(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -451,9 +457,12 @@ classdef VOI < ConcreteElement
 			
 			prop = VOI.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			voi_description_list = { 'NAME (constant, string) is the name of the concrete element.'  'DESCRIPTION (constant, string) is the description of the concrete element.'  'TEMPLATE (parameter, item) is the template of the concrete element.'  'ID (data, string) is a few-letter code for the concrete element.'  'LABEL (metadata, string) is an extended label of the concrete element.'  'NOTES (metadata, string) are some specific notes about the concrete element.'  'V (data, scalar) is the value of the variable of interest.' };
-			prop_description = voi_description_list{prop};
+			switch prop
+				case VOI.V
+					prop_description = 'V (data, scalar) is the value of the variable of interest.';
+				otherwise
+					prop_description = getPropDescription@ConcreteElement(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -477,9 +486,9 @@ classdef VOI < ConcreteElement
 			
 			prop = VOI.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 7 % VOI.V
-					prop_settings = Format.getFormatSettings(11);
+			switch prop
+				case VOI.V
+					prop_settings = Format.getFormatSettings(Format.SCALAR);
 				otherwise
 					prop_settings = getPropSettings@ConcreteElement(prop);
 			end
@@ -506,9 +515,9 @@ classdef VOI < ConcreteElement
 			
 			prop = VOI.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 7 % VOI.V
-					prop_default = Format.getFormatDefault(11, VOI.getPropSettings(prop));
+			switch prop
+				case VOI.V
+					prop_default = Format.getFormatDefault(Format.SCALAR, VOI.getPropSettings(prop));
 				otherwise
 					prop_default = getPropDefault@ConcreteElement(prop);
 			end
@@ -554,15 +563,15 @@ classdef VOI < ConcreteElement
 			% 
 			% VOI.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:VOI:WrongInput
+			%  Error id: €BRAPH2.STR€:VOI:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  VOI.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of VOI.
-			%   Error id: BRAPH2:VOI:WrongInput
+			%   Error id: €BRAPH2.STR€:VOI:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(VOI, PROP, VALUE) throws error if VALUE has not a valid format for PROP of VOI.
-			%   Error id: BRAPH2:VOI:WrongInput
+			%   Error id: €BRAPH2.STR€:VOI:€BRAPH2.WRONG_INPUT€
 			%  VOI.CHECKPROP(VOI, PROP, VALUE) throws error if VALUE has not a valid format for PROP of VOI.
-			%   Error id: BRAPH2:VOI:WrongInput]
+			%   Error id: €BRAPH2.STR€:VOI:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(VOI) and Element.CHECKPROP('VOI')
 			%  are less computationally efficient.
@@ -573,10 +582,10 @@ classdef VOI < ConcreteElement
 			prop = VOI.getPropProp(pointer);
 			
 			switch prop
-				case 7 % VOI.V
-					check = Format.checkFormat(11, value, VOI.getPropSettings(prop));
+				case VOI.V % __VOI.V__
+					check = Format.checkFormat(Format.SCALAR, value, VOI.getPropSettings(prop));
 				otherwise
-					if prop <= 6
+					if prop <= ConcreteElement.getPropNumber()
 						check = checkProp@ConcreteElement(prop, value);
 					end
 			end
@@ -585,8 +594,8 @@ classdef VOI < ConcreteElement
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':VOI:' 'WrongInput'], ...
-					['BRAPH2' ':VOI:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':VOI:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':VOI:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' VOI.getPropTag(prop) ' (' VOI.getFormatTag(VOI.getPropFormat(prop)) ').'] ...
 					)
 			end

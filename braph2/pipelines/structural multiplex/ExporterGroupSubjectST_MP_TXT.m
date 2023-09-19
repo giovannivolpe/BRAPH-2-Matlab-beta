@@ -17,19 +17,6 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 	%  The 1st row contains the headers, the 2nd row a string with the categorical
 	%  variables of interest, and each subsequent row the values for each subject.
 	%
-	% The list of ExporterGroupSubjectST_MP_TXT properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ST subject group exporter in TXT.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ST subject group exporter in TXT.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ST subject group exporter in TXT.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ST subject group exporter in TXT.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ST subject group exporter in TXT.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ST subject group exporter in TXT.
-	%  <strong>7</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-	%  <strong>8</strong> <strong>GR</strong> 	GR (data, item) is a group of subjects with structural multiplex data.
-	%  <strong>9</strong> <strong>DIRECTORY</strong> 	DIRECTORY (data, string) is the directory name where to save the group of subjects with structural multiplex data.
-	%  <strong>10</strong> <strong>PUT_DIR</strong> 	PUT_DIR (query, item) opens a dialog box to set the directory where to save the group of subjects with structural multiplex data.
-	%  <strong>11</strong> <strong>SAVE</strong> 	SAVE (result, empty) saves the group of subjects with structural multiplex data in TXT files in the selected directory.
-	%
 	% ExporterGroupSubjectST_MP_TXT methods (constructor):
 	%  ExporterGroupSubjectST_MP_TXT - constructor
 	%
@@ -119,25 +106,25 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 	% See also Group, SubjectST_MP, ImporterGroupSubjectST_MP_TXT.
 	
 	properties (Constant) % properties
-		GR = 8; %CET: Computational Efficiency Trick
+		GR = Exporter.getPropNumber() + 1;
 		GR_TAG = 'GR';
-		GR_CATEGORY = 4;
-		GR_FORMAT = 8;
+		GR_CATEGORY = Category.DATA;
+		GR_FORMAT = Format.ITEM;
 		
-		DIRECTORY = 9; %CET: Computational Efficiency Trick
+		DIRECTORY = Exporter.getPropNumber() + 2;
 		DIRECTORY_TAG = 'DIRECTORY';
-		DIRECTORY_CATEGORY = 4;
-		DIRECTORY_FORMAT = 2;
+		DIRECTORY_CATEGORY = Category.DATA;
+		DIRECTORY_FORMAT = Format.STRING;
 		
-		PUT_DIR = 10; %CET: Computational Efficiency Trick
+		PUT_DIR = Exporter.getPropNumber() + 3;
 		PUT_DIR_TAG = 'PUT_DIR';
-		PUT_DIR_CATEGORY = 6;
-		PUT_DIR_FORMAT = 8;
+		PUT_DIR_CATEGORY = Category.QUERY;
+		PUT_DIR_FORMAT = Format.ITEM;
 		
-		SAVE = 11; %CET: Computational Efficiency Trick
+		SAVE = Exporter.getPropNumber() + 4;
 		SAVE_TAG = 'SAVE';
-		SAVE_CATEGORY = 5;
-		SAVE_FORMAT = 1;
+		SAVE_CATEGORY = Category.RESULT;
+		SAVE_FORMAT = Format.EMPTY;
 	end
 	methods % constructor
 		function ex = ExporterGroupSubjectST_MP_TXT(varargin)
@@ -150,18 +137,6 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of ExporterGroupSubjectST_MP_TXT properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ST subject group exporter in TXT.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ST subject group exporter in TXT.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ST subject group exporter in TXT.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ST subject group exporter in TXT.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ST subject group exporter in TXT.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ST subject group exporter in TXT.
-			%  <strong>7</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-			%  <strong>8</strong> <strong>GR</strong> 	GR (data, item) is a group of subjects with structural multiplex data.
-			%  <strong>9</strong> <strong>DIRECTORY</strong> 	DIRECTORY (data, string) is the directory name where to save the group of subjects with structural multiplex data.
-			%  <strong>10</strong> <strong>PUT_DIR</strong> 	PUT_DIR (query, item) opens a dialog box to set the directory where to save the group of subjects with structural multiplex data.
-			%  <strong>11</strong> <strong>SAVE</strong> 	SAVE (result, empty) saves the group of subjects with structural multiplex data in TXT files in the selected directory.
 			%
 			% See also Category, Format.
 			
@@ -199,7 +174,7 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'ExporterGroupSubjectST_MP_TXT' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('ExporterGroupSubjectST_MP_TXT', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of exporter of ST MP subject group in TXT.
@@ -220,30 +195,58 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11];
+				prop_list = [ ...
+					Exporter.getProps() ...
+						ExporterGroupSubjectST_MP_TXT.GR ...
+						ExporterGroupSubjectST_MP_TXT.DIRECTORY ...
+						ExporterGroupSubjectST_MP_TXT.PUT_DIR ...
+						ExporterGroupSubjectST_MP_TXT.SAVE ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
-					prop_list = [4 8 9];
-				case 5 % Category.RESULT
-					prop_list = 11;
-				case 6 % Category.QUERY
-					prop_list = 10;
-				case 9 % Category.GUI
-					prop_list = 7;
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						Exporter.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						Exporter.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						Exporter.getProps(Category.PARAMETER) ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						Exporter.getProps(Category.DATA) ...
+						ExporterGroupSubjectST_MP_TXT.GR ...
+						ExporterGroupSubjectST_MP_TXT.DIRECTORY ...
+						];
+				case Category.RESULT
+					prop_list = [
+						Exporter.getProps(Category.RESULT) ...
+						ExporterGroupSubjectST_MP_TXT.SAVE ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						Exporter.getProps(Category.QUERY) ...
+						ExporterGroupSubjectST_MP_TXT.PUT_DIR ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						Exporter.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						Exporter.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						Exporter.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -264,31 +267,7 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 11;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 2;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 1;
-				case 4 % Category.DATA
-					prop_number = 3;
-				case 5 % Category.RESULT
-					prop_number = 1;
-				case 6 % Category.QUERY
-					prop_number = 1;
-				case 9 % Category.GUI
-					prop_number = 1;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(ExporterGroupSubjectST_MP_TXT.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in exporter of ST MP subject group in TXT/error.
@@ -316,14 +295,14 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 11 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == ExporterGroupSubjectST_MP_TXT.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':ExporterGroupSubjectST_MP_TXT:' 'WrongInput'], ...
-					['BRAPH2' ':ExporterGroupSubjectST_MP_TXT:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':ExporterGroupSubjectST_MP_TXT:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':ExporterGroupSubjectST_MP_TXT:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for ExporterGroupSubjectST_MP_TXT.'] ...
 					)
 			end
@@ -354,14 +333,15 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'WAITBAR'  'GR'  'DIRECTORY'  'PUT_DIR'  'SAVE' })); %CET: Computational Efficiency Trick
+			exportergroupsubjectst_mp_txt_tag_list = cellfun(@(x) ExporterGroupSubjectST_MP_TXT.getPropTag(x), num2cell(ExporterGroupSubjectST_MP_TXT.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, exportergroupsubjectst_mp_txt_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':ExporterGroupSubjectST_MP_TXT:' 'WrongInput'], ...
-					['BRAPH2' ':ExporterGroupSubjectST_MP_TXT:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':ExporterGroupSubjectST_MP_TXT:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':ExporterGroupSubjectST_MP_TXT:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for ExporterGroupSubjectST_MP_TXT.'] ...
 					)
 			end
@@ -387,7 +367,8 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'WAITBAR'  'GR'  'DIRECTORY'  'PUT_DIR'  'SAVE' })); % tag = pointer %CET: Computational Efficiency Trick
+				exportergroupsubjectst_mp_txt_tag_list = cellfun(@(x) ExporterGroupSubjectST_MP_TXT.getPropTag(x), num2cell(ExporterGroupSubjectST_MP_TXT.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, exportergroupsubjectst_mp_txt_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -415,9 +396,20 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				exportergroupsubjectst_mp_txt_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'WAITBAR'  'GR'  'DIRECTORY'  'PUT_DIR'  'SAVE' };
-				tag = exportergroupsubjectst_mp_txt_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case ExporterGroupSubjectST_MP_TXT.GR
+						tag = ExporterGroupSubjectST_MP_TXT.GR_TAG;
+					case ExporterGroupSubjectST_MP_TXT.DIRECTORY
+						tag = ExporterGroupSubjectST_MP_TXT.DIRECTORY_TAG;
+					case ExporterGroupSubjectST_MP_TXT.PUT_DIR
+						tag = ExporterGroupSubjectST_MP_TXT.PUT_DIR_TAG;
+					case ExporterGroupSubjectST_MP_TXT.SAVE
+						tag = ExporterGroupSubjectST_MP_TXT.SAVE_TAG;
+					otherwise
+						tag = getPropTag@Exporter(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -442,9 +434,18 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			
 			prop = ExporterGroupSubjectST_MP_TXT.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			exportergroupsubjectst_mp_txt_category_list = { 1  1  3  4  2  2  9  4  4  6  5 };
-			prop_category = exportergroupsubjectst_mp_txt_category_list{prop};
+			switch prop
+				case ExporterGroupSubjectST_MP_TXT.GR
+					prop_category = ExporterGroupSubjectST_MP_TXT.GR_CATEGORY;
+				case ExporterGroupSubjectST_MP_TXT.DIRECTORY
+					prop_category = ExporterGroupSubjectST_MP_TXT.DIRECTORY_CATEGORY;
+				case ExporterGroupSubjectST_MP_TXT.PUT_DIR
+					prop_category = ExporterGroupSubjectST_MP_TXT.PUT_DIR_CATEGORY;
+				case ExporterGroupSubjectST_MP_TXT.SAVE
+					prop_category = ExporterGroupSubjectST_MP_TXT.SAVE_CATEGORY;
+				otherwise
+					prop_category = getPropCategory@Exporter(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -468,9 +469,18 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			
 			prop = ExporterGroupSubjectST_MP_TXT.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			exportergroupsubjectst_mp_txt_format_list = { 2  2  8  2  2  2  4  8  2  8  1 };
-			prop_format = exportergroupsubjectst_mp_txt_format_list{prop};
+			switch prop
+				case ExporterGroupSubjectST_MP_TXT.GR
+					prop_format = ExporterGroupSubjectST_MP_TXT.GR_FORMAT;
+				case ExporterGroupSubjectST_MP_TXT.DIRECTORY
+					prop_format = ExporterGroupSubjectST_MP_TXT.DIRECTORY_FORMAT;
+				case ExporterGroupSubjectST_MP_TXT.PUT_DIR
+					prop_format = ExporterGroupSubjectST_MP_TXT.PUT_DIR_FORMAT;
+				case ExporterGroupSubjectST_MP_TXT.SAVE
+					prop_format = ExporterGroupSubjectST_MP_TXT.SAVE_FORMAT;
+				otherwise
+					prop_format = getPropFormat@Exporter(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -494,9 +504,30 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			
 			prop = ExporterGroupSubjectST_MP_TXT.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			exportergroupsubjectst_mp_txt_description_list = { 'NAME (constant, string) is the name of the ST subject group exporter in TXT.'  'DESCRIPTION (constant, string) is the description of the ST subject group exporter in TXT.'  'TEMPLATE (parameter, item) is the template of the ST subject group exporter in TXT.'  'ID (data, string) is a few-letter code for the ST subject group exporter in TXT.'  'LABEL (metadata, string) is an extended label of the ST subject group exporter in TXT.'  'NOTES (metadata, string) are some specific notes about the ST subject group exporter in TXT.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is a group of subjects with structural multiplex data.'  'DIRECTORY (data, string) is the directory name where to save the group of subjects with structural multiplex data.'  'PUT_DIR (query, item) opens a dialog box to set the directory where to save the group of subjects with structural multiplex data.'  'SAVE (result, empty) saves the group of subjects with structural multiplex data in TXT files in the selected directory.' };
-			prop_description = exportergroupsubjectst_mp_txt_description_list{prop};
+			switch prop
+				case ExporterGroupSubjectST_MP_TXT.GR
+					prop_description = 'GR (data, item) is a group of subjects with structural multiplex data.';
+				case ExporterGroupSubjectST_MP_TXT.DIRECTORY
+					prop_description = 'DIRECTORY (data, string) is the directory name where to save the group of subjects with structural multiplex data.';
+				case ExporterGroupSubjectST_MP_TXT.PUT_DIR
+					prop_description = 'PUT_DIR (query, item) opens a dialog box to set the directory where to save the group of subjects with structural multiplex data.';
+				case ExporterGroupSubjectST_MP_TXT.SAVE
+					prop_description = 'SAVE (result, empty) saves the group of subjects with structural multiplex data in TXT files in the selected directory.';
+				case ExporterGroupSubjectST_MP_TXT.NAME
+					prop_description = 'NAME (constant, string) is the name of the ST subject group exporter in TXT.';
+				case ExporterGroupSubjectST_MP_TXT.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the ST subject group exporter in TXT.';
+				case ExporterGroupSubjectST_MP_TXT.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the ST subject group exporter in TXT.';
+				case ExporterGroupSubjectST_MP_TXT.ID
+					prop_description = 'ID (data, string) is a few-letter code for the ST subject group exporter in TXT.';
+				case ExporterGroupSubjectST_MP_TXT.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the ST subject group exporter in TXT.';
+				case ExporterGroupSubjectST_MP_TXT.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the ST subject group exporter in TXT.';
+				otherwise
+					prop_description = getPropDescription@Exporter(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -520,16 +551,16 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			
 			prop = ExporterGroupSubjectST_MP_TXT.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 8 % ExporterGroupSubjectST_MP_TXT.GR
+			switch prop
+				case ExporterGroupSubjectST_MP_TXT.GR
 					prop_settings = 'Group';
-				case 9 % ExporterGroupSubjectST_MP_TXT.DIRECTORY
-					prop_settings = Format.getFormatSettings(2);
-				case 10 % ExporterGroupSubjectST_MP_TXT.PUT_DIR
+				case ExporterGroupSubjectST_MP_TXT.DIRECTORY
+					prop_settings = Format.getFormatSettings(Format.STRING);
+				case ExporterGroupSubjectST_MP_TXT.PUT_DIR
 					prop_settings = 'ExporterGroupSubjectST_MP_TXT';
-				case 11 % ExporterGroupSubjectST_MP_TXT.SAVE
-					prop_settings = Format.getFormatSettings(1);
-				case 3 % ExporterGroupSubjectST_MP_TXT.TEMPLATE
+				case ExporterGroupSubjectST_MP_TXT.SAVE
+					prop_settings = Format.getFormatSettings(Format.EMPTY);
+				case ExporterGroupSubjectST_MP_TXT.TEMPLATE
 					prop_settings = 'ExporterGroupSubjectST_MP_TXT';
 				otherwise
 					prop_settings = getPropSettings@Exporter(prop);
@@ -557,26 +588,26 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			
 			prop = ExporterGroupSubjectST_MP_TXT.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 8 % ExporterGroupSubjectST_MP_TXT.GR
+			switch prop
+				case ExporterGroupSubjectST_MP_TXT.GR
 					prop_default = Group('SUB_CLASS', 'SubjectST_MP', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectST_MP'));
-				case 9 % ExporterGroupSubjectST_MP_TXT.DIRECTORY
+				case ExporterGroupSubjectST_MP_TXT.DIRECTORY
 					prop_default = [fileparts(which('test_braph2')) filesep 'default_group_subjects_ST_ML_most_likely_to_be_erased'];
-				case 10 % ExporterGroupSubjectST_MP_TXT.PUT_DIR
-					prop_default = Format.getFormatDefault(8, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
-				case 11 % ExporterGroupSubjectST_MP_TXT.SAVE
-					prop_default = Format.getFormatDefault(1, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
-				case 1 % ExporterGroupSubjectST_MP_TXT.NAME
+				case ExporterGroupSubjectST_MP_TXT.PUT_DIR
+					prop_default = Format.getFormatDefault(Format.ITEM, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
+				case ExporterGroupSubjectST_MP_TXT.SAVE
+					prop_default = Format.getFormatDefault(Format.EMPTY, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
+				case ExporterGroupSubjectST_MP_TXT.NAME
 					prop_default = 'ExporterGroupSubjectST_MP_TXT';
-				case 2 % ExporterGroupSubjectST_MP_TXT.DESCRIPTION
+				case ExporterGroupSubjectST_MP_TXT.DESCRIPTION
 					prop_default = 'ExporterGroupSubjectST_MP_TXT exports a group of subjects with structural multiplex data to an TXT file and their covariates age and sex (if existing) to another TXT file.';
-				case 3 % ExporterGroupSubjectST_MP_TXT.TEMPLATE
-					prop_default = Format.getFormatDefault(8, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
-				case 4 % ExporterGroupSubjectST_MP_TXT.ID
+				case ExporterGroupSubjectST_MP_TXT.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
+				case ExporterGroupSubjectST_MP_TXT.ID
 					prop_default = 'ExporterGroupSubjectST_MP_TXT ID';
-				case 5 % ExporterGroupSubjectST_MP_TXT.LABEL
+				case ExporterGroupSubjectST_MP_TXT.LABEL
 					prop_default = 'ExporterGroupSubjectST_MP_TXT label';
-				case 6 % ExporterGroupSubjectST_MP_TXT.NOTES
+				case ExporterGroupSubjectST_MP_TXT.NOTES
 					prop_default = 'ExporterGroupSubjectST_MP_TXT notes';
 				otherwise
 					prop_default = getPropDefault@Exporter(prop);
@@ -623,15 +654,15 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			% 
 			% EX.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:ExporterGroupSubjectST_MP_TXT:WrongInput
+			%  Error id: €BRAPH2.STR€:ExporterGroupSubjectST_MP_TXT:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  EX.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of EX.
-			%   Error id: BRAPH2:ExporterGroupSubjectST_MP_TXT:WrongInput
+			%   Error id: €BRAPH2.STR€:ExporterGroupSubjectST_MP_TXT:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(ExporterGroupSubjectST_MP_TXT, PROP, VALUE) throws error if VALUE has not a valid format for PROP of ExporterGroupSubjectST_MP_TXT.
-			%   Error id: BRAPH2:ExporterGroupSubjectST_MP_TXT:WrongInput
+			%   Error id: €BRAPH2.STR€:ExporterGroupSubjectST_MP_TXT:€BRAPH2.WRONG_INPUT€
 			%  EX.CHECKPROP(ExporterGroupSubjectST_MP_TXT, PROP, VALUE) throws error if VALUE has not a valid format for PROP of ExporterGroupSubjectST_MP_TXT.
-			%   Error id: BRAPH2:ExporterGroupSubjectST_MP_TXT:WrongInput]
+			%   Error id: €BRAPH2.STR€:ExporterGroupSubjectST_MP_TXT:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(EX) and Element.CHECKPROP('ExporterGroupSubjectST_MP_TXT')
 			%  are less computationally efficient.
@@ -642,21 +673,21 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			prop = ExporterGroupSubjectST_MP_TXT.getPropProp(pointer);
 			
 			switch prop
-				case 8 % ExporterGroupSubjectST_MP_TXT.GR
-					check = Format.checkFormat(8, value, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
+				case ExporterGroupSubjectST_MP_TXT.GR % __ExporterGroupSubjectST_MP_TXT.GR__
+					check = Format.checkFormat(Format.ITEM, value, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
 					if check
-						check = any(strcmp(value.get('SUB_CLASS'), subclasses('SubjectST_MP', [], [], true)));
+						check = any(strcmp(value.get(Group.SUB_CLASS_TAG), subclasses('SubjectST_MP', [], [], true)));
 					end
-				case 9 % ExporterGroupSubjectST_MP_TXT.DIRECTORY
-					check = Format.checkFormat(2, value, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
-				case 10 % ExporterGroupSubjectST_MP_TXT.PUT_DIR
-					check = Format.checkFormat(8, value, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
-				case 11 % ExporterGroupSubjectST_MP_TXT.SAVE
-					check = Format.checkFormat(1, value, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
-				case 3 % ExporterGroupSubjectST_MP_TXT.TEMPLATE
-					check = Format.checkFormat(8, value, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
+				case ExporterGroupSubjectST_MP_TXT.DIRECTORY % __ExporterGroupSubjectST_MP_TXT.DIRECTORY__
+					check = Format.checkFormat(Format.STRING, value, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
+				case ExporterGroupSubjectST_MP_TXT.PUT_DIR % __ExporterGroupSubjectST_MP_TXT.PUT_DIR__
+					check = Format.checkFormat(Format.ITEM, value, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
+				case ExporterGroupSubjectST_MP_TXT.SAVE % __ExporterGroupSubjectST_MP_TXT.SAVE__
+					check = Format.checkFormat(Format.EMPTY, value, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
+				case ExporterGroupSubjectST_MP_TXT.TEMPLATE % __ExporterGroupSubjectST_MP_TXT.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, ExporterGroupSubjectST_MP_TXT.getPropSettings(prop));
 				otherwise
-					if prop <= 7
+					if prop <= Exporter.getPropNumber()
 						check = checkProp@Exporter(prop, value);
 					end
 			end
@@ -665,8 +696,8 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':ExporterGroupSubjectST_MP_TXT:' 'WrongInput'], ...
-					['BRAPH2' ':ExporterGroupSubjectST_MP_TXT:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':ExporterGroupSubjectST_MP_TXT:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':ExporterGroupSubjectST_MP_TXT:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' ExporterGroupSubjectST_MP_TXT.getPropTag(prop) ' (' ExporterGroupSubjectST_MP_TXT.getFormatTag(ExporterGroupSubjectST_MP_TXT.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -677,27 +708,27 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with 5,
-			%  6, and 7. By default this function
+			%  PROP. It works only with properties with Category.RESULT,
+			%  Category.QUERY, and Category.EVANESCENT. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  6.
+			%  Category.QUERY.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 10 % ExporterGroupSubjectST_MP_TXT.PUT_DIR
+				case ExporterGroupSubjectST_MP_TXT.PUT_DIR % __ExporterGroupSubjectST_MP_TXT.PUT_DIR__
 					directory = uigetdir('Select directory');
 					if ischar(directory) && isfolder(directory)
 					    ex.set('DIRECTORY', directory);
 					end
 					value = ex;
 					
-				case 11 % ExporterGroupSubjectST_MP_TXT.SAVE
-					rng_settings_ = rng(); rng(ex.getPropSeed(11), 'twister')
+				case ExporterGroupSubjectST_MP_TXT.SAVE % __ExporterGroupSubjectST_MP_TXT.SAVE__
+					rng_settings_ = rng(); rng(ex.getPropSeed(ExporterGroupSubjectST_MP_TXT.SAVE), 'twister')
 					
 					directory = ex.get('DIRECTORY');
 					
@@ -796,7 +827,7 @@ classdef ExporterGroupSubjectST_MP_TXT < Exporter
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 7
+					if prop <= Exporter.getPropNumber()
 						value = calculateValue@Exporter(ex, prop, varargin{:});
 					else
 						value = calculateValue@Element(ex, prop, varargin{:});

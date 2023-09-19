@@ -5,21 +5,6 @@ classdef DegreeOut < Measure
 	% The out-degree (DegreeOut) of a node is the number of outward edges connected to a node within a layer. 
 	% Connection weights are ignored in calculations.
 	%
-	% The list of DegreeOut properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the out-degree.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the out-degree.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the out-degree.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the out-degree.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the out-degree.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the out-degree.
-	%  <strong>7</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
-	%  <strong>8</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-	%  <strong>9</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-	%  <strong>10</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-	%  <strong>11</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-	%  <strong>12</strong> <strong>M</strong> 	M (result, cell) is the cell containing the degree-out value.
-	%  <strong>13</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%
 	% DegreeOut methods (constructor):
 	%  DegreeOut - constructor
 	%
@@ -117,20 +102,6 @@ classdef DegreeOut < Measure
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of DegreeOut properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the out-degree.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the out-degree.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the out-degree.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the out-degree.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the out-degree.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the out-degree.
-			%  <strong>7</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
-			%  <strong>8</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-			%  <strong>9</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-			%  <strong>10</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-			%  <strong>11</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-			%  <strong>12</strong> <strong>M</strong> 	M (result, cell) is the cell containing the degree-out value.
-			%  <strong>13</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 			%
 			% See also Category, Format.
 			
@@ -168,7 +139,7 @@ classdef DegreeOut < Measure
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'DegreeOut'  'DegreeOutAv' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('DegreeOut', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of out-degree.
@@ -189,28 +160,50 @@ classdef DegreeOut < Measure
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13];
+				prop_list = [ ...
+					Measure.getProps() ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2 7 8 9 10];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
-					prop_list = [4 11];
-				case 5 % Category.RESULT
-					prop_list = 12;
-				case 9 % Category.GUI
-					prop_list = 13;
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						Measure.getProps(Category.CONSTANT) ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						Measure.getProps(Category.METADATA) ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						Measure.getProps(Category.PARAMETER) ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						Measure.getProps(Category.DATA) ...
+						];
+				case Category.RESULT
+					prop_list = [
+						Measure.getProps(Category.RESULT) ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						Measure.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						Measure.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						Measure.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						Measure.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -231,29 +224,7 @@ classdef DegreeOut < Measure
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 13;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 6;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 1;
-				case 4 % Category.DATA
-					prop_number = 2;
-				case 5 % Category.RESULT
-					prop_number = 1;
-				case 9 % Category.GUI
-					prop_number = 1;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(DegreeOut.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in out-degree/error.
@@ -281,14 +252,14 @@ classdef DegreeOut < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 13 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == DegreeOut.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':DegreeOut:' 'WrongInput'], ...
-					['BRAPH2' ':DegreeOut:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':DegreeOut:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':DegreeOut:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for DegreeOut.'] ...
 					)
 			end
@@ -319,14 +290,15 @@ classdef DegreeOut < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
+			degreeout_tag_list = cellfun(@(x) DegreeOut.getPropTag(x), num2cell(DegreeOut.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, degreeout_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':DegreeOut:' 'WrongInput'], ...
-					['BRAPH2' ':DegreeOut:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':DegreeOut:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':DegreeOut:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for DegreeOut.'] ...
 					)
 			end
@@ -352,7 +324,8 @@ classdef DegreeOut < Measure
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
+				degreeout_tag_list = cellfun(@(x) DegreeOut.getPropTag(x), num2cell(DegreeOut.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, degreeout_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -380,9 +353,12 @@ classdef DegreeOut < Measure
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				degreeout_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
-				tag = degreeout_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					otherwise
+						tag = getPropTag@Measure(prop);
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -407,9 +383,10 @@ classdef DegreeOut < Measure
 			
 			prop = DegreeOut.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			degreeout_category_list = { 1  1  3  4  2  2  1  1  1  1  4  5  9 };
-			prop_category = degreeout_category_list{prop};
+			switch prop
+				otherwise
+					prop_category = getPropCategory@Measure(prop);
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -433,9 +410,10 @@ classdef DegreeOut < Measure
 			
 			prop = DegreeOut.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			degreeout_format_list = { 2  2  8  2  2  2  11  11  11  7  8  16  8 };
-			prop_format = degreeout_format_list{prop};
+			switch prop
+				otherwise
+					prop_format = getPropFormat@Measure(prop);
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -459,9 +437,32 @@ classdef DegreeOut < Measure
 			
 			prop = DegreeOut.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			degreeout_description_list = { 'NAME (constant, string) is the name of the out-degree.'  'DESCRIPTION (constant, string) is the description of the out-degree.'  'TEMPLATE (parameter, item) is the template of the out-degree.'  'ID (data, string) is a few-letter code of the out-degree.'  'LABEL (metadata, string) is an extended label of the out-degree.'  'NOTES (metadata, string) are some specific notes about the out-degree.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the cell containing the degree-out value.'  'PFM (gui, item) contains the panel figure of the measure.' };
-			prop_description = degreeout_description_list{prop};
+			switch prop
+				case DegreeOut.NAME
+					prop_description = 'NAME (constant, string) is the name of the out-degree.';
+				case DegreeOut.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the out-degree.';
+				case DegreeOut.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the out-degree.';
+				case DegreeOut.ID
+					prop_description = 'ID (data, string) is a few-letter code of the out-degree.';
+				case DegreeOut.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the out-degree.';
+				case DegreeOut.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the out-degree.';
+				case DegreeOut.SHAPE
+					prop_description = 'SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.';
+				case DegreeOut.SCOPE
+					prop_description = 'SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.';
+				case DegreeOut.PARAMETRICITY
+					prop_description = 'PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.';
+				case DegreeOut.COMPATIBLE_GRAPHS
+					prop_description = 'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.';
+				case DegreeOut.M
+					prop_description = 'M (result, cell) is the cell containing the degree-out value.';
+				otherwise
+					prop_description = getPropDescription@Measure(prop);
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -485,8 +486,8 @@ classdef DegreeOut < Measure
 			
 			prop = DegreeOut.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 3 % DegreeOut.TEMPLATE
+			switch prop
+				case DegreeOut.TEMPLATE
 					prop_settings = 'DegreeOut';
 				otherwise
 					prop_settings = getPropSettings@Measure(prop);
@@ -514,26 +515,26 @@ classdef DegreeOut < Measure
 			
 			prop = DegreeOut.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 1 % DegreeOut.NAME
+			switch prop
+				case DegreeOut.NAME
 					prop_default = 'DegreeOut';
-				case 2 % DegreeOut.DESCRIPTION
+				case DegreeOut.DESCRIPTION
 					prop_default = 'The out-degree (DegreeOut) of a node is the number of outward edges connected to a node within a layer. Connection weights are ignored in calculations.';
-				case 3 % DegreeOut.TEMPLATE
-					prop_default = Format.getFormatDefault(8, DegreeOut.getPropSettings(prop));
-				case 4 % DegreeOut.ID
+				case DegreeOut.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, DegreeOut.getPropSettings(prop));
+				case DegreeOut.ID
 					prop_default = 'DegreeOut ID';
-				case 5 % DegreeOut.LABEL
+				case DegreeOut.LABEL
 					prop_default = 'DegreeOut label';
-				case 6 % DegreeOut.NOTES
+				case DegreeOut.NOTES
 					prop_default = 'DegreeOut notes';
-				case 7 % DegreeOut.SHAPE
-					prop_default = 2;
-				case 8 % DegreeOut.SCOPE
-					prop_default = 2;
-				case 9 % DegreeOut.PARAMETRICITY
-					prop_default = 2;
-				case 10 % DegreeOut.COMPATIBLE_GRAPHS
+				case DegreeOut.SHAPE
+					prop_default = Measure.NODAL;
+				case DegreeOut.SCOPE
+					prop_default = Measure.UNILAYER;
+				case DegreeOut.PARAMETRICITY
+					prop_default = Measure.NONPARAMETRIC;
+				case DegreeOut.COMPATIBLE_GRAPHS
 					prop_default = {'GraphWD' 'GraphBD' 'MultiplexWD' 'MultiplexBD' 'OrdMxWD' 'OrdMxBD' 'OrdMlWD'} ;%TBE % % % add any missing tests;
 				otherwise
 					prop_default = getPropDefault@Measure(prop);
@@ -580,15 +581,15 @@ classdef DegreeOut < Measure
 			% 
 			% M.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:DegreeOut:WrongInput
+			%  Error id: €BRAPH2.STR€:DegreeOut:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  M.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of M.
-			%   Error id: BRAPH2:DegreeOut:WrongInput
+			%   Error id: €BRAPH2.STR€:DegreeOut:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(DegreeOut, PROP, VALUE) throws error if VALUE has not a valid format for PROP of DegreeOut.
-			%   Error id: BRAPH2:DegreeOut:WrongInput
+			%   Error id: €BRAPH2.STR€:DegreeOut:€BRAPH2.WRONG_INPUT€
 			%  M.CHECKPROP(DegreeOut, PROP, VALUE) throws error if VALUE has not a valid format for PROP of DegreeOut.
-			%   Error id: BRAPH2:DegreeOut:WrongInput]
+			%   Error id: €BRAPH2.STR€:DegreeOut:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(M) and Element.CHECKPROP('DegreeOut')
 			%  are less computationally efficient.
@@ -599,10 +600,10 @@ classdef DegreeOut < Measure
 			prop = DegreeOut.getPropProp(pointer);
 			
 			switch prop
-				case 3 % DegreeOut.TEMPLATE
-					check = Format.checkFormat(8, value, DegreeOut.getPropSettings(prop));
+				case DegreeOut.TEMPLATE % __DegreeOut.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, DegreeOut.getPropSettings(prop));
 				otherwise
-					if prop <= 13
+					if prop <= Measure.getPropNumber()
 						check = checkProp@Measure(prop, value);
 					end
 			end
@@ -611,8 +612,8 @@ classdef DegreeOut < Measure
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':DegreeOut:' 'WrongInput'], ...
-					['BRAPH2' ':DegreeOut:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':DegreeOut:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':DegreeOut:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' DegreeOut.getPropTag(prop) ' (' DegreeOut.getFormatTag(DegreeOut.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -623,20 +624,20 @@ classdef DegreeOut < Measure
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with 5,
-			%  6, and 7. By default this function
+			%  PROP. It works only with properties with Category.RESULT,
+			%  Category.QUERY, and Category.EVANESCENT. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  6.
+			%  Category.QUERY.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 12 % DegreeOut.M
-					rng_settings_ = rng(); rng(m.getPropSeed(12), 'twister')
+				case DegreeOut.M % __DegreeOut.M__
+					rng_settings_ = rng(); rng(m.getPropSeed(DegreeOut.M), 'twister')
 					
 					g = m.get('G'); % graph from measure class
 					A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
@@ -654,7 +655,7 @@ classdef DegreeOut < Measure
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 13
+					if prop <= Measure.getPropNumber()
 						value = calculateValue@Measure(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

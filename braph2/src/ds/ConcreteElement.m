@@ -8,14 +8,6 @@ classdef ConcreteElement < Element
 	% Even though it is possible to create instances of ConcreteElement, 
 	% typically one uses its subclasses.
 	%
-	% The list of ConcreteElement properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the concrete element.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the concrete element.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the concrete element.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the concrete element.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the concrete element.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the concrete element.
-	%
 	% ConcreteElement methods (constructor):
 	%  ConcreteElement - constructor
 	%
@@ -105,35 +97,35 @@ classdef ConcreteElement < Element
 	% See also NoValue, Callback.
 	
 	properties (Constant) % properties
-		NAME = 1; %CET: Computational Efficiency Trick
+		NAME = Element.getPropNumber() + 1;
 		NAME_TAG = 'NAME';
-		NAME_CATEGORY = 1;
-		NAME_FORMAT = 2;
+		NAME_CATEGORY = Category.CONSTANT;
+		NAME_FORMAT = Format.STRING;
 		
-		DESCRIPTION = 2; %CET: Computational Efficiency Trick
+		DESCRIPTION = Element.getPropNumber() + 2;
 		DESCRIPTION_TAG = 'DESCRIPTION';
-		DESCRIPTION_CATEGORY = 1;
-		DESCRIPTION_FORMAT = 2;
+		DESCRIPTION_CATEGORY = Category.CONSTANT;
+		DESCRIPTION_FORMAT = Format.STRING;
 		
-		TEMPLATE = 3; %CET: Computational Efficiency Trick
+		TEMPLATE = Element.getPropNumber() + 3;
 		TEMPLATE_TAG = 'TEMPLATE';
-		TEMPLATE_CATEGORY = 3;
-		TEMPLATE_FORMAT = 8;
+		TEMPLATE_CATEGORY = Category.PARAMETER;
+		TEMPLATE_FORMAT = Format.ITEM;
 		
-		ID = 4; %CET: Computational Efficiency Trick
+		ID = Element.getPropNumber() + 4;
 		ID_TAG = 'ID';
-		ID_CATEGORY = 4;
-		ID_FORMAT = 2;
+		ID_CATEGORY = Category.DATA;
+		ID_FORMAT = Format.STRING;
 		
-		LABEL = 5; %CET: Computational Efficiency Trick
+		LABEL = Element.getPropNumber() + 5;
 		LABEL_TAG = 'LABEL';
-		LABEL_CATEGORY = 2;
-		LABEL_FORMAT = 2;
+		LABEL_CATEGORY = Category.METADATA;
+		LABEL_FORMAT = Format.STRING;
 		
-		NOTES = 6; %CET: Computational Efficiency Trick
+		NOTES = Element.getPropNumber() + 6;
 		NOTES_TAG = 'NOTES';
-		NOTES_CATEGORY = 2;
-		NOTES_FORMAT = 2;
+		NOTES_CATEGORY = Category.METADATA;
+		NOTES_FORMAT = Format.STRING;
 	end
 	methods % constructor
 		function el = ConcreteElement(varargin)
@@ -146,13 +138,6 @@ classdef ConcreteElement < Element
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of ConcreteElement properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the concrete element.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the concrete element.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the concrete element.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the concrete element.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the concrete element.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the concrete element.
 			%
 			% See also Category, Format.
 			
@@ -190,7 +175,7 @@ classdef ConcreteElement < Element
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'ConcreteElement'  'GraphBD'  'GraphBU'  'GraphWD'  'GraphWU'  'MultigraphBUD'  'MultigraphBUT'  'MultilayerBD'  'MultilayerBU'  'MultilayerBUD'  'MultilayerBUT'  'MultilayerWD'  'MultilayerWU'  'MultiplexBD'  'MultiplexBU'  'MultiplexBUD'  'MultiplexBUT'  'MultiplexWD'  'MultiplexWU'  'OrdMlBD'  'OrdMlBU'  'OrdMlBUD'  'OrdMlBUT'  'OrdMlWD'  'OrdMlWU'  'OrdMxBD'  'OrdMxBU'  'OrdMxBUD'  'OrdMxBUT'  'OrdMxWD'  'OrdMxWU'  'Clustering'  'ClusteringAv'  'Degree'  'DegreeAv'  'DegreeIn'  'DegreeInAv'  'DegreeOut'  'DegreeOutAv'  'Distance'  'GlobalEfficiency'  'GlobalEfficiencyAv'  'GlobalEfficiencyIn'  'GlobalEfficiencyInAv'  'GlobalEfficiencyOut'  'GlobalEfficiencyOutAv'  'Triangles'  'NNClassifierMLP'  'NNClassifierMLP_CrossValidation'  'NNClassifierMLP_Evaluator'  'NNDataPoint_Graph_CLA'  'NNDataPoint_Graph_REG'  'NNDataPoint_Measure_CLA'  'NNDataPoint_Measure_REG'  'NNRegressorMLP'  'NNRegressorMLP_CrossValidation'  'NNRegressorMLP_Evaluator'  'AnalyzeEnsemble_CON_BUD'  'AnalyzeEnsemble_CON_BUT'  'AnalyzeEnsemble_CON_WU'  'ExporterGroupSubjectCON_TXT'  'ExporterGroupSubjectCON_XLS'  'ImporterGroupSubjectCON_TXT'  'ImporterGroupSubjectCON_XLS'  'SubjectCON'  'NNDataPoint_CON_CLA'  'NNDataPoint_CON_REG'  'AnalyzeGroup_CON_GA_WU'  'AnalyzeEnsemble_CON_MP_BUD'  'AnalyzeEnsemble_CON_MP_BUT'  'AnalyzeEnsemble_CON_MP_WU'  'ExporterGroupSubjectCON_MP_TXT'  'ExporterGroupSubjectCON_MP_XLS'  'ImporterGroupSubjectCON_MP_TXT'  'ImporterGroupSubjectCON_MP_XLS'  'SubjectCON_MP'  'AnalyzeGroup_CON_MP_GA_WU'  'AnalyzeEnsemble_CON_OMP_WU'  'AnalyzeGroup_CON_OMP_GA_WU'  'AnalyzeEnsemble_CON_FUN_MP_BUD'  'AnalyzeEnsemble_CON_FUN_MP_BUT'  'AnalyzeEnsemble_CON_FUN_MP_WU'  'CombineGroups_CON_FUN_MP'  'SeparateGroups_CON_FUN_MP'  'SubjectCON_FUN_MP'  'NNDataPoint_CON_FUN_MP_CLA'  'NNDataPoint_CON_FUN_MP_REG'  'AnalyzeGroup_CON_FUN_MP_GA_BUD'  'AnalyzeGroup_CON_FUN_MP_GA_WU'  'AnalyzeEnsemble_FUN_BUD'  'AnalyzeEnsemble_FUN_BUT'  'AnalyzeEnsemble_FUN_WU'  'ExporterGroupSubjectFUN_TXT'  'ExporterGroupSubjectFUN_XLS'  'ImporterGroupSubjectFUN_TXT'  'ImporterGroupSubjectFUN_XLS'  'SubjectFUN'  'AnalyzeGroup_FUN_GA_WU'  'AnalyzeEnsemble_FUN_MP_BUD'  'AnalyzeEnsemble_FUN_MP_BUT'  'AnalyzeEnsemble_FUN_MP_WU'  'ExporterGroupSubjectFUN_MP_TXT'  'ExporterGroupSubjectFUN_MP_XLS'  'ImporterGroupSubjectFUN_MP_TXT'  'ImporterGroupSubjectFUN_MP_XLS'  'SubjectFUN_MP'  'AnalyzeGroup_FUN_MP_GA_WU'  'AnalyzeEnsemble_FUN_OMP_WU'  'AnalyzeGroup_FUN_OMP_GA_WU'  'AnalyzeGroup_ST_BUD'  'AnalyzeGroup_ST_BUT'  'AnalyzeGroup_ST_WU'  'ExporterGroupSubjectST_TXT'  'ExporterGroupSubjectST_XLS'  'ImporterGroupSubjectST_TXT'  'ImporterGroupSubjectST_XLS'  'SubjectST'  'AnalyzeGroup_ST_MP_BUD'  'AnalyzeGroup_ST_MP_BUT'  'AnalyzeGroup_ST_MP_WU'  'ExporterGroupSubjectST_MP_TXT'  'ExporterGroupSubjectST_MP_XLS'  'ImporterGroupSubjectST_MP_TXT'  'ImporterGroupSubjectST_MP_XLS'  'SubjectST_MP'  'AnalyzeEnsemble'  'AnalyzeEnsemblePP_MeDict'  'AnalyzeGroup'  'AnalyzeGroupPP_G'  'CompareEnsemble'  'CompareEnsemblePP_CpDict'  'CompareGroup'  'CompareGroupPP_CpDict'  'ComparisonEnsemble'  'ComparisonGroup'  'ComparisonGroupPF'  'ComparisonGroupPF_BB'  'ComparisonGroupPF_BS'  'ComparisonGroupPF_BU'  'ComparisonGroupPF_GB'  'ComparisonGroupPF_GS'  'ComparisonGroupPF_GU'  'ComparisonGroupPF_NB'  'ComparisonGroupPF_NS'  'ComparisonGroupPF_NU'  'MeasureEnsemble'  'BrainAtlas'  'BrainAtlasPF'  'BrainRegion'  'BrainSurface'  'BrainSurfacePF'  'ExporterBrainAtlasTXT'  'ExporterBrainAtlasXLS'  'ImporterBrainAtlasTXT'  'ImporterBrainAtlasXLS'  'ImporterBrainSurfaceNV'  'Group'  'Subject'  'SubjectPP_VOIDict'  'VOI'  'VOICategoric'  'VOINumeric'  'IndexedDictionary'  'Graph'  'GraphAdjPF'  'GraphHistPF'  'GraphPP_MDict'  'LayersPP'  'Measure'  'MeasurePF'  'MeasurePF_BB'  'MeasurePF_BS'  'MeasurePF_BU'  'MeasurePF_GB'  'MeasurePF_GS'  'MeasurePF_GU'  'MeasurePF_NB'  'MeasurePF_NS'  'MeasurePF_NU'  'ExporterPipelineBRAPH2'  'GUI'  'GUIElement'  'GUIFig'  'GUILayout'  'ImporterPipelineBRAPH2'  'Panel'  'PanelElement'  'PanelFig'  'PanelProp'  'PanelPropAlpha'  'PanelPropCell'  'PanelPropClass'  'PanelPropClassList'  'PanelPropColor'  'PanelPropIDict'  'PanelPropIDictTable'  'PanelPropItem'  'PanelPropItemList'  'PanelPropLine'  'PanelPropLogical'  'PanelPropMarker'  'PanelPropMatrix'  'PanelPropNet'  'PanelPropOption'  'PanelPropRVectorSmart'  'PanelPropRVectorView'  'PanelPropScalar'  'PanelPropSize'  'PanelPropString'  'PanelPropStringList'  'PanelPropStringTextArea'  'Pipeline'  'PipelineCode'  'PipelinePP_PSDict'  'PipelineSection'  'Settings'  'SettingsAmbient'  'SettingsAmbientPP'  'SettingsArea'  'SettingsAreaPP'  'SettingsAxis'  'SettingsAxisPP'  'SettingsLine'  'SettingsLinePP'  'SettingsPP'  'SettingsPosition'  'SettingsPositionPP'  'SettingsSphere'  'SettingsSurface'  'SettingsSurfacePP'  'SettingsSymbol'  'SettingsText'  'SettingsTextPP'  'NNBase'  'NNCrossValidation'  'NNDataPoint'  'NNDataset'  'NNDatasetCombine'  'NNDatasetSplit'  'NNEvaluator'  'Exporter'  'Importer' }; %CET: Computational Efficiency Trick
+			subclass_list = subclasses('ConcreteElement', [], [], true);
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of concrete element.
@@ -211,24 +196,62 @@ classdef ConcreteElement < Element
 			%
 			% See also getPropNumber, Category.
 			
-			%CET: Computational Efficiency Trick
-			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6];
+				prop_list = [ ...
+					Element.getProps() ...
+						ConcreteElement.NAME ...
+						ConcreteElement.DESCRIPTION ...
+						ConcreteElement.TEMPLATE ...
+						ConcreteElement.ID ...
+						ConcreteElement.LABEL ...
+						ConcreteElement.NOTES ...
+						];
 				return
 			end
 			
 			switch category
-				case 1 % Category.CONSTANT
-					prop_list = [1 2];
-				case 2 % Category.METADATA
-					prop_list = [5 6];
-				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
-					prop_list = 4;
-				otherwise
-					prop_list = [];
+				case Category.CONSTANT
+					prop_list = [ ...
+						Element.getProps(Category.CONSTANT) ...
+						ConcreteElement.NAME ...
+						ConcreteElement.DESCRIPTION ...
+						];
+				case Category.METADATA
+					prop_list = [ ...
+						Element.getProps(Category.METADATA) ...
+						ConcreteElement.LABEL ...
+						ConcreteElement.NOTES ...
+						];
+				case Category.PARAMETER
+					prop_list = [ ...
+						Element.getProps(Category.PARAMETER) ...
+						ConcreteElement.TEMPLATE ...
+						];
+				case Category.DATA
+					prop_list = [ ...
+						Element.getProps(Category.DATA) ...
+						ConcreteElement.ID ...
+						];
+				case Category.RESULT
+					prop_list = [
+						Element.getProps(Category.RESULT) ...
+						];
+				case Category.QUERY
+					prop_list = [ ...
+						Element.getProps(Category.QUERY) ...
+						];
+				case Category.EVANESCENT
+					prop_list = [ ...
+						Element.getProps(Category.EVANESCENT) ...
+						];
+				case Category.FIGURE
+					prop_list = [ ...
+						Element.getProps(Category.FIGURE) ...
+						];
+				case Category.GUI
+					prop_list = [ ...
+						Element.getProps(Category.GUI) ...
+						];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
@@ -249,25 +272,7 @@ classdef ConcreteElement < Element
 			%
 			% See also getProps, Category.
 			
-			%CET: Computational Efficiency Trick
-			
-			if nargin == 0
-				prop_number = 6;
-				return
-			end
-			
-			switch varargin{1} % category = varargin{1}
-				case 1 % Category.CONSTANT
-					prop_number = 2;
-				case 2 % Category.METADATA
-					prop_number = 2;
-				case 3 % Category.PARAMETER
-					prop_number = 1;
-				case 4 % Category.DATA
-					prop_number = 1;
-				otherwise
-					prop_number = 0;
-			end
+			prop_number = numel(ConcreteElement.getProps(varargin{:}));
 		end
 		function check_out = existsProp(prop)
 			%EXISTSPROP checks whether property exists in concrete element/error.
@@ -295,14 +300,14 @@ classdef ConcreteElement < Element
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 6 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = any(prop == ConcreteElement.getProps());
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':ConcreteElement:' 'WrongInput'], ...
-					['BRAPH2' ':ConcreteElement:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':ConcreteElement:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':ConcreteElement:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for ConcreteElement.'] ...
 					)
 			end
@@ -333,14 +338,15 @@ classdef ConcreteElement < Element
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES' })); %CET: Computational Efficiency Trick
+			concreteelement_tag_list = cellfun(@(x) ConcreteElement.getPropTag(x), num2cell(ConcreteElement.getProps()), 'UniformOutput', false);
+			check = any(strcmp(tag, concreteelement_tag_list));
 			
 			if nargout == 1
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':ConcreteElement:' 'WrongInput'], ...
-					['BRAPH2' ':ConcreteElement:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':ConcreteElement:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':ConcreteElement:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tag ' is not a valid tag for ConcreteElement.'] ...
 					)
 			end
@@ -366,7 +372,8 @@ classdef ConcreteElement < Element
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES' })); % tag = pointer %CET: Computational Efficiency Trick
+				concreteelement_tag_list = cellfun(@(x) ConcreteElement.getPropTag(x), num2cell(ConcreteElement.getProps()), 'UniformOutput', false);
+				prop = find(strcmp(pointer, concreteelement_tag_list)); % tag = pointer
 			else % numeric
 				prop = pointer;
 			end
@@ -394,9 +401,22 @@ classdef ConcreteElement < Element
 			if ischar(pointer)
 				tag = pointer;
 			else % numeric
-				%CET: Computational Efficiency Trick
-				concreteelement_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES' };
-				tag = concreteelement_tag_list{pointer}; % prop = pointer
+				prop = pointer;
+				
+				switch prop
+					case ConcreteElement.NAME
+						tag = ConcreteElement.NAME_TAG;
+					case ConcreteElement.DESCRIPTION
+						tag = ConcreteElement.DESCRIPTION_TAG;
+					case ConcreteElement.TEMPLATE
+						tag = ConcreteElement.TEMPLATE_TAG;
+					case ConcreteElement.ID
+						tag = ConcreteElement.ID_TAG;
+					case ConcreteElement.LABEL
+						tag = ConcreteElement.LABEL_TAG;
+					case ConcreteElement.NOTES
+						tag = ConcreteElement.NOTES_TAG;
+				end
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -421,9 +441,20 @@ classdef ConcreteElement < Element
 			
 			prop = ConcreteElement.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			concreteelement_category_list = { 1  1  3  4  2  2 };
-			prop_category = concreteelement_category_list{prop};
+			switch prop
+				case ConcreteElement.NAME
+					prop_category = ConcreteElement.NAME_CATEGORY;
+				case ConcreteElement.DESCRIPTION
+					prop_category = ConcreteElement.DESCRIPTION_CATEGORY;
+				case ConcreteElement.TEMPLATE
+					prop_category = ConcreteElement.TEMPLATE_CATEGORY;
+				case ConcreteElement.ID
+					prop_category = ConcreteElement.ID_CATEGORY;
+				case ConcreteElement.LABEL
+					prop_category = ConcreteElement.LABEL_CATEGORY;
+				case ConcreteElement.NOTES
+					prop_category = ConcreteElement.NOTES_CATEGORY;
+			end
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -447,9 +478,20 @@ classdef ConcreteElement < Element
 			
 			prop = ConcreteElement.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			concreteelement_format_list = { 2  2  8  2  2  2 };
-			prop_format = concreteelement_format_list{prop};
+			switch prop
+				case ConcreteElement.NAME
+					prop_format = ConcreteElement.NAME_FORMAT;
+				case ConcreteElement.DESCRIPTION
+					prop_format = ConcreteElement.DESCRIPTION_FORMAT;
+				case ConcreteElement.TEMPLATE
+					prop_format = ConcreteElement.TEMPLATE_FORMAT;
+				case ConcreteElement.ID
+					prop_format = ConcreteElement.ID_FORMAT;
+				case ConcreteElement.LABEL
+					prop_format = ConcreteElement.LABEL_FORMAT;
+				case ConcreteElement.NOTES
+					prop_format = ConcreteElement.NOTES_FORMAT;
+			end
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -473,9 +515,20 @@ classdef ConcreteElement < Element
 			
 			prop = ConcreteElement.getPropProp(pointer);
 			
-			%CET: Computational Efficiency Trick
-			concreteelement_description_list = { 'NAME (constant, string) is the name of the concrete element.'  'DESCRIPTION (constant, string) is the description of the concrete element.'  'TEMPLATE (parameter, item) is the template of the concrete element.'  'ID (data, string) is a few-letter code for the concrete element.'  'LABEL (metadata, string) is an extended label of the concrete element.'  'NOTES (metadata, string) are some specific notes about the concrete element.' };
-			prop_description = concreteelement_description_list{prop};
+			switch prop
+				case ConcreteElement.NAME
+					prop_description = 'NAME (constant, string) is the name of the concrete element.';
+				case ConcreteElement.DESCRIPTION
+					prop_description = 'DESCRIPTION (constant, string) is the description of the concrete element.';
+				case ConcreteElement.TEMPLATE
+					prop_description = 'TEMPLATE (parameter, item) is the template of the concrete element.';
+				case ConcreteElement.ID
+					prop_description = 'ID (data, string) is a few-letter code for the concrete element.';
+				case ConcreteElement.LABEL
+					prop_description = 'LABEL (metadata, string) is an extended label of the concrete element.';
+				case ConcreteElement.NOTES
+					prop_description = 'NOTES (metadata, string) are some specific notes about the concrete element.';
+			end
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -499,19 +552,19 @@ classdef ConcreteElement < Element
 			
 			prop = ConcreteElement.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 1 % ConcreteElement.NAME
-					prop_settings = Format.getFormatSettings(2);
-				case 2 % ConcreteElement.DESCRIPTION
-					prop_settings = Format.getFormatSettings(2);
-				case 3 % ConcreteElement.TEMPLATE
+			switch prop
+				case ConcreteElement.NAME
+					prop_settings = Format.getFormatSettings(Format.STRING);
+				case ConcreteElement.DESCRIPTION
+					prop_settings = Format.getFormatSettings(Format.STRING);
+				case ConcreteElement.TEMPLATE
 					prop_settings = 'ConcreteElement';
-				case 4 % ConcreteElement.ID
-					prop_settings = Format.getFormatSettings(2);
-				case 5 % ConcreteElement.LABEL
-					prop_settings = Format.getFormatSettings(2);
-				case 6 % ConcreteElement.NOTES
-					prop_settings = Format.getFormatSettings(2);
+				case ConcreteElement.ID
+					prop_settings = Format.getFormatSettings(Format.STRING);
+				case ConcreteElement.LABEL
+					prop_settings = Format.getFormatSettings(Format.STRING);
+				case ConcreteElement.NOTES
+					prop_settings = Format.getFormatSettings(Format.STRING);
 			end
 		end
 		function prop_default = getPropDefault(pointer)
@@ -536,18 +589,18 @@ classdef ConcreteElement < Element
 			
 			prop = ConcreteElement.getPropProp(pointer);
 			
-			switch prop %CET: Computational Efficiency Trick
-				case 1 % ConcreteElement.NAME
+			switch prop
+				case ConcreteElement.NAME
 					prop_default = 'ConcreteElement';
-				case 2 % ConcreteElement.DESCRIPTION
+				case ConcreteElement.DESCRIPTION
 					prop_default = 'ConcreteElement provides the infrastructure necessary for all concrete elements. In particular, it has the constant properties NAME (string) and DESCRIPTION (string), the property TEMPLATE (item), and the indexing properties ID (string), LABEL (string), and NOTES (string). Even though it is possible to create instances of ConcreteElement, typically one uses its subclasses.';
-				case 3 % ConcreteElement.TEMPLATE
-					prop_default = Format.getFormatDefault(8, ConcreteElement.getPropSettings(prop));
-				case 4 % ConcreteElement.ID
+				case ConcreteElement.TEMPLATE
+					prop_default = Format.getFormatDefault(Format.ITEM, ConcreteElement.getPropSettings(prop));
+				case ConcreteElement.ID
 					prop_default = 'ConcreteElement ID';
-				case 5 % ConcreteElement.LABEL
+				case ConcreteElement.LABEL
 					prop_default = 'ConcreteElement label';
-				case 6 % ConcreteElement.NOTES
+				case ConcreteElement.NOTES
 					prop_default = 'ConcreteElement notes';
 			end
 		end
@@ -586,8 +639,8 @@ classdef ConcreteElement < Element
 			%  By default, this function does not do anything, so it should be
 			%  implemented in the subclasses of Element when needed.
 			%
-			% Conditioning is only used for props of 2,
-			%  3, 4, 8 and 9.
+			% Conditioning is only used for props of Category.METADATA,
+			%  Category.PARAMETER, Category.DATA, Category.FIGURE and Category.GUI.
 			%
 			% See also preset, checkProp, postset, postprocessing, calculateValue,
 			%  checkValue.
@@ -599,8 +652,8 @@ classdef ConcreteElement < Element
 			%PRESET preprocesses the value of a property before setting it.
 			%
 			% VALUE = PRESET(EL, PROP, VALUE) prepropcesses the VALUE of the property
-			%  PROP. It works only with properties with 2,
-			%  3, 4, 8 and 9. By
+			%  PROP. It works only with properties with Category.METADATA,
+			%  Category.PARAMETER, Category.DATA, Category.FIGURE and Category.GUI. By
 			%  default, this function does not do anything, so it should be implemented
 			%  in the subclasses of Element when needed.
 			%
@@ -608,11 +661,11 @@ classdef ConcreteElement < Element
 			%  calculateValue, checkValue.
 			
 			switch prop
-				case 3 % ConcreteElement.TEMPLATE
+				case ConcreteElement.TEMPLATE % __ConcreteElement.TEMPLATE__
 					if ~isa(el, class(value))
 					    error( ...
-					        ['BRAPH2' ':' class(el) ':' 'WrongInput'], ...
-					        ['BRAPH2' ':' class(el) ':' 'WrongInput' '\n' ...
+					        [BRAPH2.STR ':' class(el) ':' BRAPH2.WRONG_INPUT], ...
+					        [BRAPH2.STR ':' class(el) ':' BRAPH2.WRONG_INPUT '\n' ...
 					        'The element (' class(el) ') must be a template (' class(value) ').'] ...
 					        )
 					end
@@ -635,15 +688,15 @@ classdef ConcreteElement < Element
 			% 
 			% EL.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:ConcreteElement:WrongInput
+			%  Error id: €BRAPH2.STR€:ConcreteElement:€BRAPH2.WRONG_INPUT€
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  EL.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of EL.
-			%   Error id: BRAPH2:ConcreteElement:WrongInput
+			%   Error id: €BRAPH2.STR€:ConcreteElement:€BRAPH2.WRONG_INPUT€
 			%  Element.CHECKPROP(ConcreteElement, PROP, VALUE) throws error if VALUE has not a valid format for PROP of ConcreteElement.
-			%   Error id: BRAPH2:ConcreteElement:WrongInput
+			%   Error id: €BRAPH2.STR€:ConcreteElement:€BRAPH2.WRONG_INPUT€
 			%  EL.CHECKPROP(ConcreteElement, PROP, VALUE) throws error if VALUE has not a valid format for PROP of ConcreteElement.
-			%   Error id: BRAPH2:ConcreteElement:WrongInput]
+			%   Error id: €BRAPH2.STR€:ConcreteElement:€BRAPH2.WRONG_INPUT€]
 			% 
 			% Note that the Element.CHECKPROP(EL) and Element.CHECKPROP('ConcreteElement')
 			%  are less computationally efficient.
@@ -654,26 +707,26 @@ classdef ConcreteElement < Element
 			prop = ConcreteElement.getPropProp(pointer);
 			
 			switch prop
-				case 1 % ConcreteElement.NAME
-					check = Format.checkFormat(2, value, ConcreteElement.getPropSettings(prop));
-				case 2 % ConcreteElement.DESCRIPTION
-					check = Format.checkFormat(2, value, ConcreteElement.getPropSettings(prop));
-				case 3 % ConcreteElement.TEMPLATE
-					check = Format.checkFormat(8, value, ConcreteElement.getPropSettings(prop));
-				case 4 % ConcreteElement.ID
-					check = Format.checkFormat(2, value, ConcreteElement.getPropSettings(prop));
-				case 5 % ConcreteElement.LABEL
-					check = Format.checkFormat(2, value, ConcreteElement.getPropSettings(prop));
-				case 6 % ConcreteElement.NOTES
-					check = Format.checkFormat(2, value, ConcreteElement.getPropSettings(prop));
+				case ConcreteElement.NAME % __ConcreteElement.NAME__
+					check = Format.checkFormat(Format.STRING, value, ConcreteElement.getPropSettings(prop));
+				case ConcreteElement.DESCRIPTION % __ConcreteElement.DESCRIPTION__
+					check = Format.checkFormat(Format.STRING, value, ConcreteElement.getPropSettings(prop));
+				case ConcreteElement.TEMPLATE % __ConcreteElement.TEMPLATE__
+					check = Format.checkFormat(Format.ITEM, value, ConcreteElement.getPropSettings(prop));
+				case ConcreteElement.ID % __ConcreteElement.ID__
+					check = Format.checkFormat(Format.STRING, value, ConcreteElement.getPropSettings(prop));
+				case ConcreteElement.LABEL % __ConcreteElement.LABEL__
+					check = Format.checkFormat(Format.STRING, value, ConcreteElement.getPropSettings(prop));
+				case ConcreteElement.NOTES % __ConcreteElement.NOTES__
+					check = Format.checkFormat(Format.STRING, value, ConcreteElement.getPropSettings(prop));
 			end
 			
 			if nargout == 1
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':ConcreteElement:' 'WrongInput'], ...
-					['BRAPH2' ':ConcreteElement:' 'WrongInput' '\n' ...
+					[BRAPH2.STR ':ConcreteElement:' BRAPH2.WRONG_INPUT], ...
+					[BRAPH2.STR ':ConcreteElement:' BRAPH2.WRONG_INPUT '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' ConcreteElement.getPropTag(prop) ' (' ConcreteElement.getFormatTag(ConcreteElement.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -693,10 +746,10 @@ classdef ConcreteElement < Element
 			%  checkValue.
 			
 			switch prop
-				case 3 % ConcreteElement.TEMPLATE
+				case ConcreteElement.TEMPLATE % __ConcreteElement.TEMPLATE__
 					template = el.get('TEMPLATE');
 					
-					parameter_props = template.getProps(3);
+					parameter_props = template.getProps(Category.PARAMETER);
 					parameter_props = parameter_props(parameter_props ~= template.TEMPLATE);
 					
 					varargin = cell(1, 2 * length(parameter_props));
@@ -706,7 +759,7 @@ classdef ConcreteElement < Element
 					    varargin{2 * i} = template.getCallback(parameter_prop);    
 					end
 					
-					warning_backup = warning('off', ['BRAPH2' ':' class(el)]);
+					warning_backup = warning('off', [BRAPH2.STR ':' class(el)]);
 					el.set(varargin{:});
 					warning(warning_backup)
 					
@@ -730,8 +783,8 @@ classdef ConcreteElement < Element
 			%  PanelPropString, PanelPropStringList.
 			
 			switch prop
-				case 6 % ConcreteElement.NOTES
-					pr = PanelPropStringTextArea('EL', el, 'PROP', 6, varargin{:});
+				case ConcreteElement.NOTES % __ConcreteElement.NOTES__
+					pr = PanelPropStringTextArea('EL', el, 'PROP', ConcreteElement.NOTES, varargin{:});
 					
 				otherwise
 					pr = getPanelProp@Element(el, prop, varargin{:});
