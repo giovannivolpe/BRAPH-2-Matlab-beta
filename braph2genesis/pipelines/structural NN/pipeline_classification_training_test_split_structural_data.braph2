@@ -11,9 +11,9 @@
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
 
 %% Groups
-gr1 = ImporterGroupSubjectST_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group ST 1 from XLS % Group ST 1
-gr2 = ImporterGroupSubjectST_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group ST 2 from XLS % Group ST 2
-gr3 = ImporterGroupSubjectST_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group ST 3 from XLS % Group ST 3
+gr1 = ImporterGroupSubjectST_XLS('BA', ba, 'WAITBAR', true).get('GET_FILE').get('GR'); % Load Group ST 1 from XLS % Group ST 1
+gr2 = ImporterGroupSubjectST_XLS('BA', ba, 'WAITBAR', true).get('GET_FILE').get('GR'); % Load Group ST 2 from XLS % Group ST 2
+gr3 = ImporterGroupSubjectST_XLS('BA', ba, 'WAITBAR', true).get('GET_FILE').get('GR'); % Load Group ST 3 from XLS % Group ST 3
 
 %% Training-Test Split
 d_split1 = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_ST_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_ST_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_ST_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', {gr1.get('ID')}), gr1.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset for Group 1 % Dataset 1 Splitter
