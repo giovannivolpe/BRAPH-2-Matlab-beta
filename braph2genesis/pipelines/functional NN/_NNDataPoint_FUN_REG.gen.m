@@ -278,14 +278,3 @@ if ~isfile([fileparts(which('NNDataPoint_FUN_REG')) filesep 'Example data NN REG
 end
 
 example_NN_FUN_REG
-
-%%% ¡test! 
-%%%% ¡name!
-Example cross-validation regression
-%%%% ¡code!
-% ensure the example data is generated
-if ~isfile([fileparts(which('NNDataPoint_FUN_REG')) filesep 'Example data NN REG FUN XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_FUN_REG % create example files
-end
-
-example_NNCV_FUN_BUD_REG
