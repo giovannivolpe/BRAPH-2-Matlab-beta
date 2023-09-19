@@ -45,7 +45,7 @@ NOTES (metadata, string) are some specific notes about a data point for classifi
 %%% ¡prop!
 INPUT (result, cell) is the input value for this data point.
 %%%% ¡calculate!
-value = {dp.get('SUB').get('ST_MP')};
+value = dp.get('SUB').get('ST_MP');
     
 %%% ¡prop!
 TARGET (result, stringlist) is the target values for this data point.
@@ -438,7 +438,7 @@ assert(length(d2.get('TARGETS')) == gr2.get('SUB_DICT').get('LENGTH'), ...
 % Check whether the content of input for a single datapoint matches
 for index = 1:1:gr1.get('SUB_DICT').get('LENGTH')
     individual_input = d1.get('DP_DICT').get('IT', index).get('INPUT');
-    known_input = {gr.get('SUB_DICT').get('IT', index).get('ST_MP')};
+    known_input = gr.get('SUB_DICT').get('IT', index).get('ST_MP');
 
     assert(isequal(individual_input, known_input), ...
         [BRAPH2.STR ':NNDataPoint_ST_MM_CLA:' BRAPH2.FAIL_TEST], ...
@@ -447,7 +447,7 @@ for index = 1:1:gr1.get('SUB_DICT').get('LENGTH')
 end
 for index = 1:1:gr2.get('SUB_DICT').get('LENGTH')
     individual_input = d2.get('DP_DICT').get('IT', index).get('INPUT');
-    known_input = {gr.get('SUB_DICT').get('IT', index).get('ST_MP')};
+    known_input = gr.get('SUB_DICT').get('IT', index).get('ST_MP');
 
     assert(isequal(individual_input, known_input), ...
         [BRAPH2.STR ':NNDataPoint_ST_MM_CLA:' BRAPH2.FAIL_TEST], ...
