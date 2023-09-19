@@ -612,7 +612,7 @@ classdef NNRegressorMLP < NNBase
 				case NNRegressorMLP.D
 					prop_default = NNDataset('DP_CLASS', 'NNDataPoint_CON_REG');
 				case NNRegressorMLP.DP_CLASSES
-					prop_default = {'NNDataPoint_CON_REG' 'NNDataPoint_CON_FUN_MP_REG' 'NNDataPoint_Graph_REG' 'NNDataPoint_Measure_REG'};
+					prop_default = {'NNDataPoint_CON_REG' 'NNDataPoint_CON_FUN_MP_REG' 'NNDataPoint_FUN_REG' 'NNDataPoint_Graph_REG' 'NNDataPoint_Measure_REG'};
 				otherwise
 					prop_default = getPropDefault@NNBase(prop);
 			end
