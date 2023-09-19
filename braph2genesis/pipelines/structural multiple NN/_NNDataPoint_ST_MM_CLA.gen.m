@@ -290,10 +290,10 @@ if ~isdir(data_dir)
 
     % Create the table - Group 3
     R31 = [cellstr(sub_Tags3) cellstr(label_Tags3) cellstr(note_Tags3) num2cell(R31)];
-    T_group21 = array2table(R31, 'VariableNames', reg_Tags);
+    T_group31 = array2table(R31, 'VariableNames', reg_Tags);
 
     R32 = [cellstr(sub_Tags3) cellstr(label_Tags3) cellstr(note_Tags3) num2cell(R32)];
-    T_group22 = array2table(R32, 'VariableNames', reg_Tags);
+    T_group32 = array2table(R32, 'VariableNames', reg_Tags);
 
     % create the table
     gr3_dir = [data_dir filesep() gr3_name];
