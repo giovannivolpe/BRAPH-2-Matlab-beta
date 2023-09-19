@@ -45,7 +45,7 @@ NOTES (metadata, string) are some specific notes about a data point for regressi
 %%% ¡prop!
 INPUT (result, cell) is the input value for this data point.
 %%%% ¡calculate!
-value = {dp.get('SUB').get('ST_MP')};
+value = dp.get('SUB').get('ST_MP');
 
 %%% ¡prop!
 TARGET (result, cell) is the target value for this data point.
@@ -259,7 +259,7 @@ assert(length(d.get('TARGETS')) == gr.get('SUB_DICT').get('LENGTH'), ...
 % Check whether the content of input for a single datapoint matches
 for index = 1:1:gr.get('SUB_DICT').get('LENGTH')
     individual_input = d.get('DP_DICT').get('IT', index).get('INPUT');
-    known_input = {gr.get('SUB_DICT').get('IT', index).get('ST_MP')};
+    known_input = gr.get('SUB_DICT').get('IT', index).get('ST_MP');
 
     assert(isequal(individual_input, known_input), ...
         [BRAPH2.STR ':NNDataPoint_ST_MM_REG:' BRAPH2.FAIL_TEST], ...
