@@ -40,7 +40,7 @@ BRAPH 2.0's object-oriented programming architecture makes it easy to expand its
 
 - **Deep-learning Functionalities**: New functionalities for deep-learning analyses can be swiftly integrated into BRAPH 2.0 as well. Here are the tutorials for expanding BRAPH 2.0 with deep-learning features:
   - [Developer Tutorial to Implement a New Neural Network Data Point](dev_nn_datapoint/dev_nn_datapoint.pdf)
-  - [Developer Tutorial to Implement a New Neural Network Classifier](dev_nn_clas/dev_nn_clas.pdf)
+  - [Developer Tutorial to Implement a New Neural Network Classifier](dev_nn_cla/dev_nn_cla.pdf)
   - [Developer Tutorial to Implement a New Neural Network Regressor](dev_nn_reg/dev_nn_reg.pdf)
   - [Developer Tutorial to Implement a New Neural Network Cross Validation](dev_nn_cross_val/dev_nn_cross_val.pdf)
 
