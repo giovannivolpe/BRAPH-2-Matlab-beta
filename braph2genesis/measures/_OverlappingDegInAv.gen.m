@@ -82,12 +82,12 @@ NOTES (metadata, string) are some specific notes about the overlapping in-degree
 'OverlappingDegInAv notes'
 
 %%% ¡prop!
-SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
+SHAPE (constant, scalar) is the measure shape __Measure.GLOBAL__.
 %%%% ¡default!
 Measure.GLOBAL
 
 %%% ¡prop!
-SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
+SCOPE (constant, scalar) is the measure scope __Measure.SUPERGLOBAL__.
 %%%% ¡default!
 Measure.SUPERGLOBAL
 
