@@ -99,7 +99,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU' 'MaltilayerWU' 'OrdMlWU'};
+{'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU' 'MultilayerWU' 'OrdMlWU'};
 
 %%% ¡prop!
 M (result, cell) is the averge overlapping degree.

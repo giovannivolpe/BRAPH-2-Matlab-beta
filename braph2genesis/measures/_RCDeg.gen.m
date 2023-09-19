@@ -49,7 +49,7 @@ SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
 Measure.UNILAYER
 
 %%% ¡prop!
-PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
+PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.PARAMETRIC__.
 %%%% ¡default!
 Measure.PARAMETRIC
 

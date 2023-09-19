@@ -85,19 +85,19 @@ NOTES (metadata, string) are some specific notes about the multiplex rich-club s
 'WeightedRC notes'
 
 %%% ¡prop!
-SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
+SHAPE (constant, scalar) is the measure shape __Measure.GLOBAL__.
 %%%% ¡default!
-Measure.NODAL
+Measure.GLOBAL
 
 %%% ¡prop!
 SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
 %%%% ¡default!
-Measure.SUPERGLOBAL
+Measure.UNILAYER
 
 %%% ¡prop!
-PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
+PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.PARAMETRIC__.
 %%%% ¡default!
-Measure.NONPARAMETRIC
+Measure.PARAMETRIC
 
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
