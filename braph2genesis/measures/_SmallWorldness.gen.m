@@ -176,20 +176,22 @@ assert(tmp_val{2} > 1, ...
 %%%% ¡name!
 MultigraphBUT
 %%%% ¡code!
-thresholds = [0.2 1];
+thresholds = [0 1];
 small_sample = testBraph2WattsStrogatz(20, 5, 0.1);
+
+known_smallworldness = {1 0};
 
 g = MultigraphBUT('B', adjacency(small_sample), 'THRESHOLDS', thresholds);
 
 m_outside_g = SmallWorldness('G', g);
 tmp_val = m_outside_g.get('M');
-assert(tmp_val{1} > 1, ...
+assert(tmp_val{2} > 1, ...
     [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'SmallWorldness');
 tmp_val = m_inside_g.get('M');
-assert(tmp_val{1} > 1, ...
+assert(tmp_val{2} > 1, ...
     [BRAPH2.STR ':SmallWorldness:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 

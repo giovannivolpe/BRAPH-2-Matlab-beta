@@ -183,9 +183,9 @@ B = [
     1  0  1  0
     ];
 
-known_local_efficiency = {...    
-    mean([5/6 1 5/6 1]')
+known_local_efficiency = {...
     mean([0   0 0   0]')
+    mean([5/6 1 5/6 1]')
     };
 
 thresholds = [0 1];
@@ -222,23 +222,19 @@ B22 = [
 B = {B11 B22};
 
 known_local_efficiency = {
-    mean( round([1/4 1/5 .1222 1/5]', 3))
-    mean( round([1/4 1/5 .1222 1/5]', 3))
+    mean([1/4 1/5 .1222 1/5]')
+    mean([1/4 1/5 .1222 1/5]')
     };
 
 g = MultiplexWU('B', B);
 
 m_outside_g = LocalEfficiencyAv('G', g);
-tmp_val = m_outside_g.get('M');
-tmp_val = cellfun(@(x) round(x, 3), tmp_val, 'UniformOutput', false);
-assert(isequal(tmp_val, known_local_efficiency), ...
+assert(isequal(m_outside_g.get('M'), known_local_efficiency), ...
     [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'LocalEfficiencyAv');
-tmp_val = m_inside_g.get('M');
-tmp_val = cellfun(@(x) round(x, 3), tmp_val, 'UniformOutput', false);
-assert(isequal(tmp_val, known_local_efficiency), ...
+assert(isequal(m_inside_g.get('M'), known_local_efficiency), ...
     [BRAPH2.STR ':LocalEfficiencyAv:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
