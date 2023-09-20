@@ -2,7 +2,7 @@
 \usepackage{../braph2_dev}
 %\geometry{showframe} % display margins for debugging page layout
 
-\title{Implement a new Subject}
+\title{Implement, export and import groups of subjects}
 
 \author[The BRAPH~2 Developers]{The BRAPH~2 Developers}
 
@@ -11,9 +11,14 @@
 \maketitle
 
 \begin{abstract}
-\noindent
-This is the developer tutorial for implementing a new Subject. 
-In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new subject, which can then be compiled by \code{braph2genesis}. All types of subjects are extensions of the base element \code{Subject}. Here, we will use as examples the subjects \code{SubjectCon} (subject with connectivity data), \code{SubjectCON\_MP} (subject with connectivity multiplex data), \code{SubjectFUN} (subject with functional data), \code{SubjectFUN\_MP} (subject with functional multiplex data), \code{SubjectST} (subject with structural data), and \code{SubjectST\_MP} (subject with structural multiplex data).
+This is the developer tutorial for implementing, exporting and importing groups of subjects with a certain type of data.
+
+In this Tutorial, we will explain how to create generator files \fn{*.gen.m} for new subjects and well as exporting and importing subjects files. All  \fn{*.gen.m} files can then be compiled by \code{braph2genesis}. 
+
+All types of subjects are extensions of the base element \code{Subject}. In this tutorial, we will use as examples the subjects \code{SubjectCON} (subject with connectivity data), \code{SubjectCON\_MP} (subject with connectivity multiplex data), \code{SubjectFUN} (subject with functional data), \code{SubjectFUN\_MP} (subject with functional multiplex data), \code{SubjectST} (subject with structural data), and \code{SubjectST\_MP} (subject with structural multiplex data). 
+
+Furthermore, all types of exporters and importers are extensions of the base elements \code{Exporter} and \code{Importer} respectively. Here, we will use as examples \code{ExporterGroupSubjectCON\_TXT} (exports a group of subjects with connectivity data to a series of TXT file), \code{ExporterGroupSubjectCON\_XLS} (exports a group of subjects with connectivity data to a series of XLSX file), \code{ImporterGroupSubjectCON\_TXT} (imports a group of subjects with connectivity data to a series of TXT file) and \code{ImporterGroupSubjectCON\_XLS} (imports a group of subjects with connectivity data to a series of XLSX file).
+
 \end{abstract}
 
 \tableofcontents
@@ -22,7 +27,7 @@ In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} 
 \clearpage
 \section{Implementation of a subject with connectivity data}
 
-\subsection{subject with connectivity data (SubjectCON)}
+\subsection{Subject with connectivity data (SubjectCON)}
 
 We will start by implementing in detail \code{SubjectCON}. The connectivity matrix can be obtained from DTI data.
 
@@ -153,7 +158,7 @@ gui.get('CLOSE') ¥\circled{14}\circlednote{14}{closes the figure and its depend
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\subsection{subject with connectivity multiplex data (SubjectCON\_MP)}
+\subsection{Subject with connectivity multiplex data (SubjectCON\_MP)}
 
 We can now use \code{SubjectCON} as the basis to implement the \code{SubjectCON\_MP}. The parts of the code that are modified are highlighted.
 The multilayer data allows connections between any nodes across the multiple layers. The \code{SubjectCON\_MP} can also be used on ordinal multilayer data.
@@ -300,9 +305,9 @@ gui.get('CLOSE')
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\section{Importer and Exporter of the data (for SubjectCON)}
+\section{Implementation of Importer and Exporter of the data (for SubjectCON)}
 
-\subsection{importer of CON subject group from TXT (ImporterGroupSubjectCON\_TXT)}
+\subsection{Importer of a CON subject group from TXT (ImporterGroupSubjectCON\_TXT)}
 
 We will start by implementing in detail \code{ImporterGroupSubjectCON\_TXT}. The data should be stored in the folder 'Group1' and 'Group2', and the file format is '.txt'.
 
@@ -318,11 +323,7 @@ We will start by implementing in detail \code{ImporterGroupSubjectCON\_TXT}. The
 ImporterGroupSubjectCON_TXT < Importer (im, importer of CON subject group from TXT) imports a group of subjects with connectivity data from a series of TXT files. ¥\circled{1}\circlednote{1}{The element \code{ImporterGroupSubjectCON\_TXT} is defined as a subclass of \code{Importer}. The moniker will be \code{im}.}¥
 
 %%% ¡description!
-ImporterGroupSubjectCON_XLS imports a group of subjects with connectivity data from a series of XLS/XLSX files contained in a folder named "GROUP_ID". 
-All these files must be in the same folder; also, no other files should be in the folder. 
-Each file contains a table of values corresponding to the adjacency matrix. 
-The variables of interest are from another XLS/XLSX file named "GROUP_ID.vois.xlsx" (if exisitng) consisting of the following columns: Subject ID (column 1), covariates (subsequent columns). 
-The 1st row contains the headers, the 2nd row a string with the categorical variables of interest, and each subsequent row the values for each subject.
+ImporterGroupSubjectCON_XLS imports a group of subjects with connectivity data from a series of XLS/XLSX files contained in a folder named "GROUP_ID". All these files must be in the same folder; also, no other files should be in the folder. Each file contains a table of values corresponding to the adjacency matrix. The variables of interest are from another XLS/XLSX file named "GROUP_ID.vois.xlsx" (if exisitng) consisting of the following columns: Subject ID (column 1), covariates (subsequent columns). The 1st row contains the headers, the 2nd row a string with the categorical variables of interest, and each subsequent row the values for each subject.
 
 %%% ¡seealso!
 Group, SunbjectCON, ExporterGroupSubjectCON_TXT
@@ -651,9 +652,9 @@ gui.get('CLOSE')
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
 
-\subsection{importer of CON subject group from XLS/XLSX (ImporterGroupSubjectCON\_XLS)}
+\subsection{Importer of a CON subject group from XLS/XLSX (ImporterGroupSubjectCON\_XLS)}
 
-We will start by implementing in detail \code{ImporterGroupSubjectCON\_XLS}. The data should be stored in the folder 'Group1' and 'Group2', and the file format is '.xls' or '.xlsx'.
+In this section we will show how to implement in detail \code{ImporterGroupSubjectCON\_XLS}. The data should be stored in the folder 'Group1' and 'Group2', and the file format is '.xls' or '.xlsx'.
 
 \begin{lstlisting}[
 	label=cd:m:ImporterGroupSubjectCON_XLS:header,
@@ -667,16 +668,7 @@ We will start by implementing in detail \code{ImporterGroupSubjectCON\_XLS}. The
 ¤ImporterGroupSubjectCON_XLS¤ < Importer (im, ¤importer of CON subject group from XLS/XLSX) imports a group of subjects with connectivity data from a series of XLS/XLSX file.¤
 
 %%% ¡description!
-¤ImporterGroupSubjectCON_XLS imports a group of subjects with connectivity 
- data from a series of XLS/XLSX files contained in a folder named "GROUP_ID". 
- All these files must be in the same folder; also, no other files should be 
- in the folder. Each file contains a table of values corresponding to the 
- adjacency matrix.
-The variables of interest are from another XLS/XLSX file named "GROUP_ID.vois.xlsx" 
- (if exisitng) consisting of the following columns: 
- Subject ID (column 1), covariates (subsequent columns). 
- The 1st row contains the headers, the 2nd row a string with the categorical
- variables of interest, and each subsequent row the values for each subject.¤
+¤ImporterGroupSubjectCON_XLS imports a group of subjects with connectivity data from a series of XLS/XLSX files contained in a folder named "GROUP_ID". All these files must be in the same folder; also, no other files should be in the folder. Each file contains a table of values corresponding to the adjacency matrix. The variables of interest are from another XLS/XLSX file named "GROUP_ID.vois.xlsx" (if exisitng) consisting of the following columns: Subject ID (column 1), covariates (subsequent columns). The 1st row contains the headers, the 2nd row a string with the categorical variables of interest, and each subsequent row the values for each subject.¤
 
 %%% ¡seealso!
 Group, SubjectCON, ¤ExporterGroupSubjectCON_XLS
@@ -868,10 +860,10 @@ value = gr;
 \end{lstlisting}
 
 \clearpage
-\begin{lstlisting}[	label=cd:m:ImporterGroupSubjectCON\_XLS:tests,
+\begin{lstlisting}[	label=cd:m:ImporterGroupSubjectCON_XLS:tests,
 	caption={
-		{\bf ImporterGroupSubjectCON\_XLS element tests.}
-		The \code{tests} section from the element generator {\fn \_ImporterGroupSubjectCON\_XLS.gen.m}. \expand{cd:m:ImporterGroupSubjectCON_TXT:prop_update}
+		\bf {ImporterGroupSubjectCON\_XLS element tests.}
+		The \code{tests} section from the element generator \fn{\_ImporterGroupSubjectCON\_XLS.gen.m}. \expand{cd:m:ImporterGroupSubjectCON_TXT:prop_update}
 	}
 ]
 
@@ -1018,9 +1010,9 @@ gui.get('CLOSE')
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
 
-\subsection{exporter of CON subject group from TXT (ExporterGroupSubjectCON\_TXT)}
+\subsection{Exporter of a CON subject group from TXT (ExporterGroupSubjectCON\_TXT)}
 
-We will start by implementing in detail \code{ExporterGroupSubjectCON\_TXT}. The data should be stored in the folder 'Group1' and 'Group2', and the file format is '.txt'.
+In this section we will show how to implement in detail \code{ExporterGroupSubjectCON\_TXT}. The data should be stored in the folder 'Group1' and 'Group2', and the file format is '.txt'.
 
 \begin{lstlisting}[
 	label=cd:m:ExporterGroupSubjectCON_TXT:header,
@@ -1034,10 +1026,7 @@ We will start by implementing in detail \code{ExporterGroupSubjectCON\_TXT}. The
 ExporterGroupSubjectCON_TXT < Exporter (ex, exporter of CON subject group in TXT) exports a group of subjects with connectivity data to a series of TXT file. ¥\circled{1}\circlednote{1}{The element \code{ExporterGroupSubjectCON\_TXT} is defined as a subclass of \code{Exporter}. The moniker will be \code{ex}.}¥
 
 %%% ¡description!
-ExporterGroupSubjectCON_TXT exports a group of subjects with connectivity data to a series of tab-separated TXT files contained in a folder named "GROUP_ID". 
-All these files are saved in the same folder. Each file contains a table of values corresponding to the adjacency matrix. 
-The variables of interest (if existing) are saved in another tab-separated TXT file named "GROUP_ID.vois.txt" consisting of the following columns: Subject ID (column 1), covariates (subsequent columns). 
-The 1st row contains the headers, the 2nd row a string with the categorical variables of interest, and each subsequent row the values for each subject.
+ExporterGroupSubjectCON_TXT exports a group of subjects with connectivity data to a series of tab-separated TXT files contained in a folder named "GROUP_ID". All these files are saved in the same folder. Each file contains a table of values corresponding to the adjacency matrix. The variables of interest (if existing) are saved in another tab-separated TXT file named "GROUP_ID.vois.txt" consisting of the following columns: Subject ID (column 1), covariates (subsequent columns). The 1st row contains the headers, the 2nd row a string with the categorical variables of interest, and each subsequent row the values for each subject.
 
 %%% ¡seealso!
 Group, SunbjectCON, ExporterGroupSubjectCON_TXT
@@ -1359,9 +1348,9 @@ rmdir(directory, 's') ¥\circled{17}\circlednote{17}{deletes the testing data.}�
 \end{lstlisting}
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\subsection{exporter of CON subject group from XLS/XLSX (ExporterGroupSubjectCON\_XLS)}
+\subsection{Exporter of a CON subject group from XLS/XLSX (ExporterGroupSubjectCON\_XLS)}
 
-We will start by implementing in detail \code{ExporterGroupSubjectCON\_XLS}. The data should be stored in the folder 'Group1' and 'Group2', and the file format is '.txt'.
+In this section we will show how to implement in detail \code{ExporterGroupSubjectCON\_XLS}. The data should be stored in the folder 'Group1' and 'Group2', and the file format is '.txt'.
 
 \begin{lstlisting}[
 	label=cd:m:ExporterGroupSubjectCON_XLS:header,
@@ -1375,15 +1364,7 @@ We will start by implementing in detail \code{ExporterGroupSubjectCON\_XLS}. The
 ¤ExporterGroupSubjectCON_XLS < Exporter (ex, exporter of CON subject group in XLSX) exports a group of subjects with connectivity data to a series of XLSX file.¤
 
 %%% ¡description!
-¤ExporterGroupSubjectCON_XLS exports a group of subjects with connectivity 
- data to a series of XLSX files contained in a folder named "GROUP_ID". 
- All these files are saved in the same folder. Each file contains a table 
- of values corresponding to the adjacency matrix.
-The variables of interest (if existing) are saved in another XLSX file 
- named "GROUP_ID.vois.xlsx" consisting of the following columns: 
- Subject ID (column 1), covariates (subsequent columns). 
- The 1st row contains the headers, the 2nd row a string with the categorical
- variables of interest, and each subsequent row the values for each subject.¤
+¤ExporterGroupSubjectCON_XLS exports a group of subjects with connectivity data to a series of XLSX files contained in a folder named "GROUP_ID". All these files are saved in the same folder. Each file contains a table of values corresponding to the adjacency matrix.The variables of interest (if existing) are saved in another XLSX file  named "GROUP_ID.vois.xlsx" consisting of the following columns: Subject ID (column 1), covariates (subsequent columns). The 1st row contains the headers, the 2nd row a string with the categorical variables of interest, and each subsequent row the values for each subject.¤
 
 %%% ¡seealso!
 Group, SunbjectCON, ¤ImporterGroupSubjectCON_XLS
@@ -1706,9 +1687,9 @@ rmdir(directory, 's')
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
 \section{Implementation of a subject with functional data}
-\subsection{subject with functional data (SubjectFUN)}
+\subsection{Subject with functional data (SubjectFUN)}
 
-We will start by implementing in detail \code{SubjectFUN}. The connectivity matrix can be obtained from fMRI data.
+In this section we will show how to implement in detail \code{SubjectFUN}. The connectivity matrix can be obtained from fMRI data.
 
 \begin{lstlisting}[
 	label=cd:m:SubjectFUN:header,
@@ -1831,9 +1812,9 @@ gui.get('CLOSE')
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\subsection{subject with functional multiplex data (SubjectFUN\_MP)}
+\subsection{Subject with functional multiplex data (SubjectFUN\_MP)}
 
-We will start by implementing in detail \code{SubjectFUN\_MP}. The functional matrix can be obtained from fMRI data.
+In this section we will show how to implement in detail \code{SubjectFUN\_MP}. The functional matrix can be obtained from fMRI data.
 
 \begin{lstlisting}[
 	label=cd:m:SubjectFUN_MP:header,
@@ -1979,9 +1960,9 @@ gui.get('CLOSE')¤
 \clearpage
 \section{Implementation of a subject with connectivity and functional data}
 
-\subsection{subject with connectivity and functional multiplex data (SubjectCON\_FUN\_MP)}
+\subsection{Subject with connectivity and functional multiplex data (SubjectCON\_FUN\_MP)}
 
-We will start by implementing in detail \code{SubjectCON\_FUN\_MP}. The connectivity matrix can be obtained from DTI data and the functional matrix can be obtained from fMRI data.
+In this section we will show how to implement detail \code{SubjectCON\_FUN\_MP}. The connectivity matrix can be obtained from DTI data and the functional matrix can be obtained from fMRI data.
 
 \begin{lstlisting}[
 	label=cd:m:SubjectCON_FUN_MP:header,
@@ -2110,9 +2091,9 @@ gui.get('CLOSE')¤
 \clearpage
 \section{Implementation of a subject with structural data}
 
-\subsection{subject with structural data (SubjectST)}
+\subsection{Subject with structural data (SubjectST)}
 
-We will start by implementing in detail \code{SubjectST}. The structural matrix can be obtained from sMRI data.
+In this section we will show how to implement in detail \code{SubjectST}. The structural matrix can be obtained from sMRI data.
 
 \begin{lstlisting}[
 	label=cd:m:SubjectST:header,
@@ -2236,9 +2217,9 @@ gui.get('CLOSE')¤
 
 %%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\subsection{subject with structural multiplex data (SubjectST\_MP)}
+\subsection{Subject with structural multiplex data (SubjectST\_MP)}
 
-We will start by implementing in detail \code{SubjectST\_MP}. The structural matrix can be obtained from sMRI data.
+In this section we will show how to implement in detail \code{SubjectST\_MP}. The structural matrix can be obtained from sMRI data.
 
 \begin{lstlisting}[
 	label=cd:m:SubjectST_MP:header,
@@ -2261,7 +2242,7 @@ We will start by implementing in detail \code{SubjectST\_MP}. The structural mat
 	label={cd:m:SubjectST_MP:prop_update},
 	caption={
 		{\bf SubjectST\_MP element prop update.}
-		The \code{props\_update} section of the generator code for \fn{\_SubjectST_MP.gen.m} updates the properties of the \code{Subject} element. \expand{cd:m:SubjectCON_MP:prop_update}
+		The \code{props\_update} section of the generator code for \fn{\_SubjectST\_MP.gen.m} updates the properties of the \code{Subject} element. \expand{cd:m:SubjectCON_MP:prop_update}
 	}
 ]
 ¤%% ¡props_update!
