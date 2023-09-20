@@ -36,6 +36,12 @@ SUBJECT GROUP
 
 %%% ¡prop!
 %%%% ¡id!
+AnalyzeEnsemble_CON_BUD.GRAPH_TEMPLATE
+%%%% ¡title!
+GRAPH & MEASURE PARAMETERS
+
+%%% ¡prop!
+%%%% ¡id!
 AnalyzeEnsemble_CON_BUD.DENSITIES
 %%%% ¡title!
 DENSITIES [0% ... 100%]
@@ -119,7 +125,8 @@ for i = 1:1:gr.get('SUB_DICT').get('LENGTH')
 	sub = gr.get('SUB_DICT').get('IT', i);
     g = MultigraphBUD( ...
         'ID', ['graph ' sub.get('ID')], ... % % % 'BAS', ba ...
-        'B', sub.getCallback('CON') ... % % % 'LAYERTICKS', densities, ...
+        'B', sub.getCallback('CON'), ...
+        'DENSITIES', densities ...  ... % % % 'LAYERTICKS', densities, ...
         );
     g_dict.get('ADD', g)
 end
@@ -134,8 +141,6 @@ value = g_dict;
 
 %%% ¡prop!
 ME_DICT (result, idict) contains the calculated measures of the graph ensemble.
-%%%% ¡_gui!
-% % % pr = PPAnalyzeEnsemble_ME_DICT('EL', a, 'PROP', AnalyzeEnsemble_CON_BUD.ME_DICT, 'WAITBAR', true, varargin{:});
 
 %% ¡props!
 
@@ -150,6 +155,9 @@ pr = PanelPropRVectorSmart('EL', a, 'PROP', AnalyzeEnsemble_CON_BUD.DENSITIES, .
     varargin{:});
 
 %% ¡tests!
+
+%%% ¡excluded_props!
+[AnalyzeEnsemble_CON_BUD.TEMPLATE AnalyzeEnsemble_CON_BUD.GRAPH_TEMPLATE]
 
 %%% ¡test!
 %%%% ¡name!
