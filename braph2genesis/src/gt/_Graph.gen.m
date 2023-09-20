@@ -746,6 +746,11 @@ pr = PanelPropItem('EL', g, 'PROP', Graph.PFGH, ...
     'BUTTON_TEXT', 'Plot Histogram', ...
     varargin{:});
 
+%%% ¡prop!
+SUBGRAPH (query, item) is the subgraph
+%%%% ¡calculate!
+value = g;
+
 %% ¡tests!
 
 %%% ¡excluded_props!

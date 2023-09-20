@@ -49,7 +49,7 @@ SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
 Measure.UNILAYER
 
 %%% ¡prop!
-PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.PARAMETRIC__.
+PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
 %%%% ¡default!
 Measure.PARAMETRIC
 
@@ -393,13 +393,15 @@ known_richclubdegree = {
 
 g = MultiplexBU('B', A);
 m_outside_g = RCDeg('G', g, 'PARAMETRIC_VALUE', 2);
-assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
+tmp_val = m_outside_g.get('M');
+assert(isequal(tmp_val{1}, known_richclubdegree{1}), ...
     [BRAPH2.STR ':RCDeg:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'RCDeg');
-g.set('PARAMETRIC_VALUE', 2);
-assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
+m_inside_g.set('PARAMETRIC_VALUE', 2);
+tmp_val = m_inside_g.get('M');
+assert(isequal(tmp_val{2}, known_richclubdegree{2}), ...
     [BRAPH2.STR ':RCDeg:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
@@ -436,13 +438,15 @@ known_richclubdegree = {
                  };
 
 g = MultiplexBD('B', A);
-m_outside_g = RCDeg('G', g, 'PARAMETRIC_VALUE', 2);
-assert(isequal(m_outside_g.get('M'), known_richclubdegree), ...
+m_outside_g = RCDeg('G', g, 'PARAMETRIC_VALUE', 2);	
+tmp_val = m_outside_g.get('M');
+assert(isequal(tmp_val{1}, known_richclubdegree{1}), ...
     [BRAPH2.STR ':RCDeg:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'RCDeg');
-g.set('PARAMETRIC_VALUE', 2);
-assert(isequal(m_inside_g.get('M'), known_richclubdegree), ...
+m_inside_g.set('PARAMETRIC_VALUE', 2);
+tmp_val = m_inside_g.get('M');
+assert(isequal(tmp_val{2}, known_richclubdegree{2}), ...
     [BRAPH2.STR ':RCDeg:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
