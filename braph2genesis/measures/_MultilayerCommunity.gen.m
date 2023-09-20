@@ -1,86 +1,119 @@
 %% ¡header!
-MultilayerCommunityStructure < Measure (m, multilayer community structure) is the graph multilayer community structure.
+MultilayerCommunity < Measure (m, multilayer community structure) is the graph multilayer community structure.
 
 %%% ¡description!
 The multilayer community structure of a multilayer graph is a subdivision of 
-the network into non-overlapping groups of nodes which maximizes the number 
-of within group edges, and minimizes the number of between group edges.
+ the network into non-overlapping groups of nodes which maximizes the number 
+ of within group edges, and minimizes the number of between group edges.
 
-%%% ¡seealso!
-Measure
+%% ¡layout!
+    
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.ID
+%%%% ¡title!
+Measure ID
 
-%%% ¡shape!
-shape = Measure.NODAL;
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.LABEL
+%%%% ¡title!
+Measure NAME
 
-%%% ¡scope!
-scope = Measure.UNILAYER;
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.G
+%%%% ¡title!
+Graph
 
-%%% ¡parametricity!
-parametricity = Measure.NONPARAMETRIC;
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.M
+%%%% ¡title!
+MultilayerCommunity
 
-%%% ¡compatible_graphs!
-MultiplexBU
-MultiplexBUD
-MultiplexBUT
-MultiplexBD
-MultiplexWU
-MultiplexWD
-OrderedMultiplexWU
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.PFM
+%%%% ¡title!
+Measure Plot
 
-%% ¡props!
-%%% ¡prop! 
-LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.
-%%%% ¡default!
-10000
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.NOTES
+%%%% ¡title!
+Measure NOTES
 
-%%% ¡prop! 
-RANDORD (parameter, LOGICAL) is used to set randperm.
-%%%% ¡default!
-true
-
-%%% ¡prop! 
-RANDMOVE (parameter, LOGICAL) is the move function.
-%%%% ¡default!
-true
-
-%%% ¡prop! 
-gamma (parameter, SCALAR) is the resolution parameter.
-%%%% ¡default!
-1
-
-%%% ¡prop! 
-omega (parameter, SCALAR) is the inter-layer coupling parameter.
-%%%% ¡default!
-1
-
-%%% ¡prop! 
-S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.
-%%%% ¡default!
-[]
-
-%%% ¡prop! 
-OM (data, MATRIX) is the multilayer modularity matrix.
-%%%% ¡default!
-[]
-
-%%% ¡prop! 
-QUALITY_FUNCTION(data, MATRIX) is the multilayer modularity quality function.
-%%%% ¡default!
-[]
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
 
 %% ¡props_update!
 
 %%% ¡prop!
-M (result, cell) is the multilayer community structure.
+NAME (constant, string) is the name of the multilayer community structure.
+%%%% ¡default!
+'MultilayerCommunity'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the multilayer community structure.
+%%%% ¡default!
+'The multilayer community structure of a multilayer graph is a subdivision of the network into non-overlapping groups of nodes which maximizes the number of within group edges, and minimizes the number of between group edges.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the multilayer community structure.
+%%%% ¡settings!
+'MultilayerCommunity'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code of the multilayer community structure.
+%%%% ¡default!
+'MultilayerCommunity ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the multilayer community structure.
+%%%% ¡default!
+'MultilayerCommunity label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the multilayer community structure.
+%%%% ¡default!
+'MultilayerCommunity notes'
+
+%%% ¡prop!
+SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
+%%%% ¡default!
+Measure.NODAL
+
+%%% ¡prop!
+SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
+%%%% ¡default!
+Measure.UNILAYER
+
+%%% ¡prop!
+PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
+%%%% ¡default!
+Measure.NONPARAMETRIC
+
+%%% ¡prop!
+COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+%%%% ¡default!
+{'MultiplexBU' 'MultiplexBUT' 'MultilayerBU'} ;%TBE % % % add any missing tests
+
+%%% ¡prop!
+M (result, cell) is the triangles.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
-N = g.nodenumber();
-L = g.layernumber();  % number of layers
+L = g.get('LAYERNUMBER');
+N = g.get('NODENUMBER');
+graph_type = g.get('GRAPH_TYPE');
 limit = m.get('LIMIT');  % set default for maximum size of multilayer modularity matrix
-randord = m.get('randord');  % set randperm
-randmove = m.get('randmove');  % set move function
-gamma = m.get('gamma');
-omega = m.get('omega');
+randord = m.get('RANDORD');  % set randperm
+randmove = m.get('RANDMOVE');  % set move function
+gamma = m.get('GAMMA');
+omega = m.get('OMEGA');
 S0 = m.get('S0');
 OM = m.get('OM');
 
@@ -112,24 +145,24 @@ else
 end
 
 if isempty(OM)
-    directionality_type =  g.getDirectionalityType(g.layernumber());
+    directionality_type =  g.get('DIRECTIONALITY_TYPE', L);
     directionality_firstlayer = directionality_type(1, 1);
     A = cell(L, 1);
     A_hold = g.get('A');
     for i=1:L
         A(i) = {A_hold{i, i}};
     end
-    if g.is_multiplex(g) || g.is_multilayer(g)
+    if graph_type == Graph.MULTIPLEX || graph_type == Graph.MULTILAYER
         if directionality_firstlayer == Graph.UNDIRECTED  % undirected
-            [OM, twom] = m.multicat_undirected(A, gamma, omega, N(1), L);
+            [OM, twom] = multicat_undirected(m, A, gamma, omega, N(1), L);
         else  % directed
-            [OM, twom] = m.multicat_directed(A, gamma, omega, N(1), L);
+            [OM, twom] = multicat_directed(m, A, gamma, omega, N(1), L);
         end
-    elseif g.is_ordered_multiplex(g) || g.is_ordered_multilayer(g)
+    elseif graph_type== Graph.ORDERED_MULTIPLEX || graph_type== Graph.ORDERED_MULTILAYER
         if directionality_firstlayer == Graph.UNDIRECTED  % undirected
-            [OM, twom] = m.multiord_undirected(A, gamma, omega, N(1), L);
+            [OM, twom] = multiord_undirected(m, A, gamma, omega, N(1), L);
         else  % directed
-            [OM, twom] = m.multiord_directed(A, gamma, omega, N(1), L);
+            [OM, twom] = multiord_directed(m, A, gamma, omega, N(1), L);
         end
     end
 end
@@ -146,7 +179,7 @@ if isa(OM,'function_handle')
             group_handler('assign', S0);
             S0 = group_handler('return'); % tidy config
         else
-            error([BRAPH2.STR ':MultilayerCommunityStructure:' BRAPH2.WRONG_INPUT], ...
+            error([BRAPH2.STR ':MultilayerCommunity:' BRAPH2.WRONG_INPUT], ...
                 ['Initial partition size for the modularity matrix should be equal to %i,' ...
                 ' while it is ' tostring(numel(S0))], n)
         end
@@ -162,7 +195,7 @@ if isa(OM,'function_handle')
     end
     it = it(ii,:);
 %     if norm(full(it-it')) > 2*eps
-%         error([BRAPH2.STR ':MultilayerCommunityStructure:' BRAPH2.WRONG_INPUT], ...
+%         error([BRAPH2.STR ':MultilayerCommunity:' BRAPH2.WRONG_INPUT], ...
 %             'Function handle does not correspond to a symmetric matrix. Deviation: %i', norm(full(it-it')))
 %     end
 else
@@ -176,7 +209,7 @@ else
             group_handler('assign', S0);
             S0 = group_handler('return');
         else
-            error([BRAPH2.STR ':MultilayerCommunityStructure:' BRAPH2.WRONG_INPUT], ...
+            error([BRAPH2.STR ':MultilayerCommunity:' BRAPH2.WRONG_INPUT], ...
                 ['Initial partition size for the modularity matrix should be equal to %i,' ...
                 ' while it is ' tostring(numel(S0))], n)
         end
@@ -240,12 +273,12 @@ while (isa(M,'function_handle'))  % loop around each "pass" (in language of Blon
     t = length(unique(S));
     if (t > limit)
         metanetwork_reduce('assign', S);  % inputs group information to metanetwork_reduce
-        M = @(i) m.metanetwork_i(OM,i);  % use function handle if #groups > limit
+        M = @(i) metanetwork_i(m,OM,i);  % use function handle if #groups > limit
     else
         metanetwork_reduce('assign', S);
         J = zeros(t);  % convert to matrix if #groups small enough
         for c=1:t
-            J(:,c) = m.metanetwork_i(OM,c);
+            J(:,c) = metanetwork_i(m,OM,c);
         end
         OM = J;
         M = OM;
@@ -291,7 +324,7 @@ while ~isequal(Sb, S2)  % loop around each "pass" (in language of Blondel et al)
         return
     end
     
-    M = m.metanetwork(OM, S2);
+    M = metanetwork(m, OM, S2);
     y = unique(S2);  % unique also puts elements in ascending order
 end
 m.set('QUALITY_FUNCTION', Q/twom);  % save normalized quality function
@@ -303,7 +336,7 @@ end
 
 value = multilayer_community_structure;
 
-%% ¡methods!
+%%%% ¡calculate_callbacks!
 function [OM, twom] = multiord_undirected(m, A, gamma, omega, N, T)
 % MULTIORDUNDIRECTED returns the multilayer modularity matrix for ordered undirected networks
 %
@@ -695,33 +728,113 @@ end
 Mi = metanetwork_reduce('return');
 end
 
+%% ¡props!
+
+%%% ¡prop! 
+LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.
+%%%% ¡default!
+10000
+
+%%% ¡prop! 
+RANDORD (parameter, LOGICAL) is used to set randperm.
+%%%% ¡default!
+true
+
+%%% ¡prop! 
+RANDMOVE (parameter, LOGICAL) is the move function.
+%%%% ¡default!
+true
+
+%%% ¡prop! 
+GAMMA (parameter, SCALAR) is the resolution parameter.
+%%%% ¡default!
+1
+
+%%% ¡prop! 
+OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.
+%%%% ¡default!
+1
+
+%%% ¡prop! 
+S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.
+%%%% ¡default!
+[]
+
+%%% ¡prop! 
+OM (data, MATRIX) is the multilayer modularity matrix.
+%%%% ¡default!
+[]
+
+%%% ¡prop! 
+QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.
+%%%% ¡default!
+[]
+
 %% ¡tests!
+
+%%% ¡excluded_props!
+[MultilayerCommunity.PFM]
 
 %%% ¡test!
 %%%% ¡name!
 MultiplexBU
+%%%% ¡probability!
+.01
 %%%% ¡code!
-
 A = rand(5, 5);
 B = {A A};
 g = MultiplexBU('B', B);
-mcs = MultilayerCommunityStructure('G', g).get('M');
 
-assert(~isempty(mcs), ...
-    [BRAPH2.STR ':MultilayerCommunityStructure:' BRAPH2.BUG_ERR], ...
-    'MultilayerCommunityStructure is not being calculated correctly for MultiplexBU.')
+m_outside_g = MultilayerCommunity('G', g);
+assert(~isempty(m_outside_g.get('M')), ...
+    [BRAPH2.STR ':MultilayerCommunity:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'MultilayerCommunity');
+assert(~isempty(m_inside_g.get('M')), ...
+    [BRAPH2.STR ':MultilayerCommunity:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
 MultiplexBUT
+%%%% ¡probability!
+.01
 %%%% ¡code!
-
 A = rand(5, 5);
 B = {A A};
 g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
-mcs = MultilayerCommunityStructure('G', g).get('M');
 
-assert(~isempty(mcs), ...
-    [BRAPH2.STR ':MultilayerCommunityStructure:' BRAPH2.BUG_ERR], ...
-    'MultilayerCommunityStructure is not being calculated correctly for MultiplexBUT.')
+m_outside_g = MultilayerCommunity('G', g);
+assert(~isempty(m_outside_g.get('M')), ...
+    [BRAPH2.STR ':MultilayerCommunity:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
+m_inside_g = g.get('MEASURE', 'MultilayerCommunity');
+assert(~isempty(m_inside_g.get('M')), ...
+    [BRAPH2.STR ':MultilayerCommunity:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultilayerBU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+A11 = rand(5, 5);
+A22 = rand(5, 5);
+A12 = rand(size(A11, 1),size(A22, 2));
+A21 = A12';
+A = {A11 A12;
+    A21 A22};
+g = MultilayerBU('B', A);
+
+m_outside_g = MultilayerCommunity('G', g);
+assert(~isempty(m_outside_g.get('M')), ...
+    [BRAPH2.STR ':MultilayerCommunity:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'MultilayerCommunity');
+assert(~isempty(m_inside_g.get('M')), ...
+    [BRAPH2.STR ':MultilayerCommunity:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
