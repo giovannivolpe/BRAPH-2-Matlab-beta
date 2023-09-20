@@ -988,4 +988,32 @@ classdef CompareEnsemble < ConcreteElement
 			end
 		end
 	end
+	methods % GUI
+		function pr = getPanelProp(c, prop, varargin)
+			%GETPANELPROP returns a prop panel.
+			%
+			% PR = GETPANELPROP(EL, PROP) returns the panel of prop PROP.
+			%
+			% PR = GETPANELPROP(EL, PROP, 'Name', Value, ...) sets the properties 
+			%  of the panel prop.
+			%
+			% See also PanelProp, PanelPropAlpha, PanelPropCell, PanelPropClass,
+			%  PanelPropClassList, PanelPropColor, PanelPropHandle,
+			%  PanelPropHandleList, PanelPropIDict, PanelPropItem, PanelPropLine,
+			%  PanelPropItemList, PanelPropLogical, PanelPropMarker, PanelPropMatrix,
+			%  PanelPropNet, PanelPropOption, PanelPropScalar, PanelPropSize,
+			%  PanelPropString, PanelPropStringList.
+			
+			switch prop
+				case 18 % CompareEnsemble.CP_DICT
+					pr = CompareEnsemblePP_CpDict('EL', c, 'PROP', 18, ...
+					    'WAITBAR', c.getCallback('WAITBAR'), ...
+					    varargin{:});
+					
+				otherwise
+					pr = getPanelProp@ConcreteElement(c, prop, varargin{:});
+					
+			end
+		end
+	end
 end
