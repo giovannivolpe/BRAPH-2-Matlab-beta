@@ -280,7 +280,7 @@ example_NN_ST_MM_REG
 
 %%% ¡test! 
 %%%% ¡name!
-Example cross-validation regression WU
+Example cross-validation regression
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_ST_MM_REG')) filesep 'Example data NN REG ST_MM XLS' filesep 'atlas.xlsx'])

@@ -465,3 +465,14 @@ if ~isfile([fileparts(which('NNDataPoint_ST_MM_CLA')) filesep 'Example data NN C
 end
 
 example_NN_ST_MM_CLA
+
+%%% ¡test! 
+%%%% ¡name!
+Example cross-validation classification
+%%%% ¡code!
+% ensure the example data is generated
+if ~isfile([fileparts(which('NNDataPoint_ST_MM_CLA')) filesep 'Example data NN CLA ST_MM XLS' filesep 'atlas.xlsx'])
+    test_NNDataPoint_ST_MM_CLA % create example files
+end
+
+example_NNCV_ST_MM_CLA
