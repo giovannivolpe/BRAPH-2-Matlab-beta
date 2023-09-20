@@ -234,7 +234,7 @@ else
 end
 
 %%% ¡prop!
-AV_FEATURE_IMPORTANCE (result, cell) averages the feature importances across k folds. ¥\circled{6}\circlednote{6}{calculate the average feature importance.}¥
+AV_FEATURE_IMPORTANCE (result, cell) averages the feature importances across k folds. ¥\circled{6}\circlednote{6}{calculates the average feature importance. The feature importance obtained from each fold is by performing permutation feature importance. For a detailed explanation, please refer to \fn{dev\_nn\_reg.pdf}}¥
 %%%% ¡calculate!
 e_list = nncv.get('EVALUATOR_LIST');
 

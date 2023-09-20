@@ -26,9 +26,9 @@ We will start by implementing in detail \code{NNRegressorMLP}, which is a direct
 A multi-layer perceptron regressor \code{NNRegressorMLP} comprises a multi-layer perceptron regressor model and a given dataset.
 
 \begin{lstlisting}[
-	label=cd:m:NNClassifierMLP:header,
+	label=cd:m:NNRegressorMLP:header,
 	caption={
-		{\bf NNClassifierMLP element header.}
+		{\bf NNRegressorMLP element header.}
 		The \code{header} section of the generator code for \fn{\_NNRegressorMLP.gen.m} provides the general information about the \code{NNRegressorMLP} element.
 		}
 ]
@@ -219,7 +219,7 @@ INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interrupt
 %%%% ¡default!
 .001
 
-%%% ¡prop! ¥\circled{2}\circlednote{2}{is a query that calculates the permuation feature importance. Note that, other neural network architectures, such as convolutional neural network, have other technique to obtain feature importance.}¥
+%%% ¡prop! ¥\circled{2}\circlednote{2}{is a query that calculates the permuation feature importance. Note that, other neural network architectures, such as convolutional neural network, have other techniques to obtain feature importance.}¥
 FEATURE_IMPORTANCE (query, cell) evaluates the average significance of each feature by iteratively shuffling its values P times and measuring the resulting average decrease in model performance.
 %%%% ¡calculate!
 % fi = nn.get('FEATURE_IMPORTANCE', D) retrieves a cell array containing
@@ -335,7 +335,7 @@ d = NNDataset( ...
 nn = NNRegressorMLP('D', d, 'LAYERS', [20 20]);
 trained_model = nn.get('MODEL');
 
-% Check whether the number of fully-connected layer matches (excluding Dense_output layer)¥\circled{1}\circlednote{1}{checks whether the number of layers from the trained model is correctly set.}¥
+% Check whether the number of fully-connected layers matches (excluding Dense_output layer)¥\circled{1}\circlednote{1}{checks whether the number of layers from the trained model is correctly set.}¥
 assert(length(nn.get('LAYERS')) == sum(contains({trained_model.Layers.Name}, 'Dense')) - 1, ...
     [BRAPH2.STR ':NNRegressorMLP:' BRAPH2.FAIL_TEST], ...
     'NNRegressorMLP does not construct the layers correctly. The number of the inputs should be the same as the length of dense layers the property.' ...
