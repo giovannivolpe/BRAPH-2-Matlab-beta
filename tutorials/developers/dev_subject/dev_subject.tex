@@ -398,7 +398,7 @@ GR (result, item) is a group of subjects with connectivity data.
 %%%% ¡settings!
 'Group'
 %%%% ¡check_value!
-check = any(strcmp(value.get(Group.SUB_CLASS_TAG), subclasses('SubjectCON', [], [], true))); ¥\circled{3}\circlednote{3}{checks class of subejcts of the group is same with \code{'SubjectCON'}.}¥
+check = any(strcmp(value.get(Group.SUB_CLASS_TAG), subclasses('SubjectCON', [], [], true))); ¥\circled{3}\circlednote{3}{checks that the class of subjects of the group is the same as \code{'SubjectCON'}.}¥
 %%%% ¡default!
 Group('SUB_CLASS', 'SubjectCON', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectCON')) ¥\circled{4}\circlednote{4}{represents a group of subjects whose class is defined in the property \code{'SUB\_CLASS'}. \code{'SUB\_DICT'} manages the subjects as an indexed dictionary of subjects.}¥
 
@@ -411,8 +411,8 @@ gr = Group( ...
 gr.lock('SUB_CLASS'); ¥\circled{6}\circlednote{6}{locks the property \code{'SUB\_CLASS'} irreversibly.}¥
 
 directory = im.get('DIRECTORY'); ¥\circled{7}\circlednote{7}{returns the data directory from previous saving \circled{2}.}¥
-if isfolder(directory) ¥\circled{8}\circlednote{8}{checks the folder is exist.}¥
-    wb = braph2waitbar(im.get('WAITBAR'), 0, 'Reading directory ...'); ¥\circled{9}\circlednote{9}{creates the waitbar with an initial progress of \code{0}. Displaying the character \code{'Reading directory ...'}.}¥
+if isfolder(directory) ¥\circled{8}\circlednote{8}{checks that folder exists.}¥
+    wb = braph2waitbar(im.get('WAITBAR'), 0, 'Reading directory ...'); ¥\circled{9}\circlednote{9}{creates the waitbar with an initial progress of \code{0} displaying \code{'Reading directory ...'}.}¥
     
     [~, name] = fileparts(directory); ¥\circled{10}\circlednote{10}{returns the folder name from folder directory.}¥
     gr.set( ... ¥\circled{11}\circlednote{11}{sets the properties \code{'ID'}, \code{'LABEL'} and \code{'NOTES'} for Group.}¥
@@ -424,12 +424,12 @@ if isfolder(directory) ¥\circled{8}\circlednote{8}{checks the folder is exist.}
     try
         braph2waitbar(wb, .15, 'Loading subjecy group ...')
 
-        files = dir(fullfile(directory, '*.txt'));¥\circled{12}\circlednote{12}{finds all all txt files in the \code{directory}.}¥
+        files = dir(fullfile(directory, '*.txt'));¥\circled{12}\circlednote{12}{finds all .txt files in the \code{directory}.}¥
 
         if ~isempty(files) 
             % brain atlas
             ba = im.get('BA'); ¥\circled{13}\circlednote{13}{returns the brain atlas.}¥
-            if ba.get('BR_DICT').get('LENGTH') == 0 ¥\circled{14}\circlednote{14}{checks the number of nodes in brain atlas is equal to 0.}¥
+            if ba.get('BR_DICT').get('LENGTH') == 0 ¥\circled{14}\circlednote{14}{checks that the number of nodes in brain atlas is equal to 0.}¥
                 br_number = size(readtable(fullfile(directory, files(1).name), 'Delimiter', '\t'), 1); ¥\circled{15}\circlednote{15}{adds the number of regions of the first file to the brain atlas.}¥
                 br_dict = ba.memorize('BR_DICT');
                 for j = 1:1:br_number
@@ -443,8 +443,8 @@ if isfolder(directory) ¥\circled{8}\circlednote{8}{checks the folder is exist.}
                 braph2waitbar(wb, .15 + .85 * i / length(files), ['Loading subject ' num2str(i) ' of ' num2str(length(files)) ' ...']) ¥\circled{18}\circlednote{18}{updates the waitbar for each file.}¥
 
                 [~, sub_id] = fileparts(files(i).name);
-                CON = table2array(readtable(fullfile(directory, files(i).name), 'Delimiter', '\t')); ¥\circled{19}\circlednote{19}{reads each file with \code{Delimiter} of tab.}¥
-                if size(CON, 1) ~= ba.get('BR_DICT').get('LENGTH') || size(CON, 2) ~= ba.get('BR_DICT').get('LENGTH') ¥\circled{20}\circlednote{20}{checks the number of the nodes in file is equal to the number of nodes in atlas.}¥
+                CON = table2array(readtable(fullfile(directory, files(i).name), 'Delimiter', '\t')); ¥\circled{19}\circlednote{19}{reads each file with a delimiter specified in \code{Delimiter}.}¥
+                if size(CON, 1) ~= ba.get('BR_DICT').get('LENGTH') || size(CON, 2) ~= ba.get('BR_DICT').get('LENGTH') ¥\circled{20}\circlednote{20}{checks that the number of the nodes in file is equal to the number of nodes in atlas.}¥
                     error( ...
                         [BRAPH2.STR ':' class(im) ':' BRAPH2.ERR_IO], ...
                         [BRAPH2.STR ':' class(im) ':' BRAPH2.ERR_IO '\\n' ...
@@ -464,20 +464,20 @@ if isfolder(directory) ¥\circled{8}\circlednote{8}{checks the folder is exist.}
             
             if isfile([directory '.vois.txt']) ¥\circled{22}\circlednote{22}{adds the variables of interest (\code{vois}).}¥
                 vois = textread([directory '.vois.txt'], '%s', 'delimiter', '\t', 'whitespace', ''); ¥\circled{23}\circlednote{23}{reads the file \code{vois.txt}.}¥
-                vois = reshape(vois, find(strcmp('', vois), 1) - 1, [])'; ¥\circled{24}\circlednote{24}{reshaps the \code{vois}.}¥
+                vois = reshape(vois, find(strcmp('', vois), 1) - 1, [])'; ¥\circled{24}\circlednote{24}{reshape the \code{vois}.}¥
                 for i = 3:1:size(vois, 1)
                     sub_id = vois{i, 1};
                     sub = sub_dict.get('IT', sub_id);
                     for v = 2:1:size(vois, 2)
                         voi_id = vois{1, v};
-                        if isempty(vois{2, v}) ¥\circled{25}\circlednote{25}{checks the variable is Numeric.}¥
+                        if isempty(vois{2, v}) ¥\circled{25}\circlednote{25}{checks that the variable is Numeric.}¥
                             sub.memorize('VOI_DICT').get('ADD', ...
                                 VOINumeric( ...
                                     'ID', voi_id, ...
                                     'V', str2num(vois{i, v}) ...
                                     ) ...
                                 );¥\circled{26}\circlednote{26}{adds the variable of interest witt \code{'ID'} and value \code{'V'}.}¥
-                        elseif ~isempty(vois{2, v}) ¥\circled{27}\circlednote{27}{checks the variable is CATEGORIES.}¥
+                        elseif ~isempty(vois{2, v}) ¥\circled{27}\circlednote{27}{checks that the variable is CATEGORIES.}¥
                             categories = eval(vois{2, v});
                             sub.memorize('VOI_DICT').get('ADD', ...
                                 VOICategoric( ...
@@ -1079,7 +1079,7 @@ GR (data, item) is a group of subjects with connectivity data.
 %%%% ¡settings!
 'Group'
 %%%% ¡check_value!
-check = any(strcmp(value.get(Group.SUB_CLASS_TAG), subclasses('SubjectCON', [], [], true))); ¥\circled{1}\circlednote{1}{checks the \code{SUB\_CLASS\_TAG} is equal to \code{'SubjectCON'}.}¥
+check = any(strcmp(value.get(Group.SUB_CLASS_TAG), subclasses('SubjectCON', [], [], true))); ¥\circled{1}\circlednote{1}{checks that the \code{SUB\_CLASS\_TAG} is equal to \code{'SubjectCON'}.}¥
 %%%% ¡default!
 Group('SUB_CLASS', 'SubjectCON', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectCON'))
 
@@ -1094,7 +1094,7 @@ PUT_DIR (query, item) opens a dialog box to set the directory where to save the 
 'ExporterGroupSubjectCON_TXT'
 %%%% ¡calculate!
 directory = uigetdir('Select directory'); ¥\circled{3}\circlednote{3}{selects the export directory.}¥
-if ischar(directory) && isfolder(directory) ¥\circled{4}\circlednote{4}{checks the export directory is correct.}¥
+if ischar(directory) && isfolder(directory) ¥\circled{4}\circlednote{4}{checks that the export directory is correct.}¥
 	ex.set('DIRECTORY', directory);
 end
 value = ex;
