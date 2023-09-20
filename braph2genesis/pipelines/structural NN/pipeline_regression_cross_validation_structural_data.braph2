@@ -3,8 +3,7 @@
 % This is the pipeline script to execute cross-validation with multi-layer perceptron regressor using structural data.
 % 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
 % 2. It loads data for a group of subjects from the directory (e.g., ST_Group_XLS) containing XLS files for each subject.
-% 3. It analyzes the group using structural data.
-% 4. It executes the cross-validation process.
+% 3. It executes the cross-validation process.
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
