@@ -15,7 +15,9 @@ This Tutorial explains how to work with the Graphical User Interface (GUI) to ma
 
 ## Open the GUI
 
-The brain atlas GUI is the first step in most BRAPH 2.0 pipelines. You can open it by typing `braph2` in MatLab's terminal, which allows you to select a pipeline containing the steps required to perform your analysis. The initial step is typically to upload the brain atlas directly Figure 3c-d after clicking "Load Atlas". You can also open the GUI and upload the brain atlas using the command line (i.e., without opening an analysis pipeline) by typing the commands referenced below. In that case, you can upload the atlas as shown in Figure 3a-d.
+The brain atlas GUI is the first step in most BRAPH 2.0 pipelines. You can open it by typing `braph2` in MatLab's terminal, which allows you to select a pipeline containing the steps required to perform your analysis. The initial step is typically to upload the brain atlas directly Figure 3c-d after clicking "Load Atlas". 
+
+You can also open the GUI and upload the brain atlas using the command line (i.e., without opening an analysis pipeline) by typing the commands referenced below. In that case, you can upload the atlas as shown in Figure 3a-d.
 
 > ![Upload a brain atlas](fig03.jpg)
 > 

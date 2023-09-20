@@ -36,7 +36,9 @@ In this Tutorial, we will explain you how to upload a brain atlas, how to visual
 \clearpage
 \section{Open the GUI}
 
-The brain atlas GUI is the first step in most BRAPH~2.0 pipelines. You can open it by typing \code{braph2} in MatLab's terminal, which allows you to select a pipeline containing the steps required to perform your analysis. The initial step is typically to upload the brain atlas directly (\Figref{fig:03}c-d) after clicking ``Load Atlas''. You can also open the GUI and upload the brain atlas using the command line (i.e., without opening an analysis pipeline) by typing the commands in \Coderef{cd:launch}. In that case, you can upload the atlas as shown in \Figref{fig:03}a-d.
+The brain atlas GUI is the first step in most BRAPH~2.0 pipelines. You can open it by typing \code{braph2} in MatLab's terminal, which allows you to select a pipeline containing the steps required to perform your analysis. The initial step is typically to upload the brain atlas directly (\Figref{fig:03}c-d) after clicking ``Load Atlas''. 
+
+You can also open the GUI and upload the brain atlas using the command line (i.e., without opening an analysis pipeline) by typing the commands in \Coderef{cd:launch}. In that case, you can upload the atlas as shown in \Figref{fig:03}a-d.
 
 \fig{figure*}
 	{fig:03}
@@ -61,9 +63,10 @@ The brain atlas GUI is the first step in most BRAPH~2.0 pipelines. You can open 
 		This code can be used in the MatLab command line to launch the  Brain Atlas GUI without having to open a pipeline.
 	}
 ]
-ba = BrainAtlas(); ¥\circled{1}\circlednote{1}{creates a new object \code{BrainAtlas}.}¥
+ba = BrainAtlas(); ¥\circled{1}¥
 
-gui = GUIElement('PE', ba); ¥\circled{2}\circlednote{2}{creates a GUI to upload the brain atlas.}¥
+gui = GUIElement('PE', ba); ¥\circled{2}\circlednote{1}{creates a new object \code{BrainAtlas}.}
+\circlednote{2}{creates a GUI to upload the brain atlas.}¥
 gui.get('DRAW') ¥\circled{3}\circlednote{3}{draws the GUI.}¥
 gui.get('SHOW') ¥\circled{4}\circlednote{4}{shows the GUI.}¥
 \end{lstlisting}

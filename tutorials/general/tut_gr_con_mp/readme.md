@@ -11,7 +11,9 @@ For *connectivity multiplex data*, a connectivity matrix per subject is already 
 
 ## Open the GUI
 
-In most analyses, the group GUI is the second step after you have selected a brain atlas. You can open it by typing `braph2` in MatLab's terminal, which allows you to select a pipeline containing the steps required to perform your analysis and upload a brain atlas. After these steps have been completed you can upload your group's data directly (Figure 2c-f) after clicking "Load Group". You can also open the GUI and upload the brain connectivity multiplex data using the command line (i.e., without opening an analysis pipeline) by typing the commands referenced below. In that case, you can upload the data as shown in Figure 2a-f.
+In most analyses, the group GUI is the second step after you have selected a brain atlas. You can open it by typing `braph2` in MatLab's terminal, which allows you to select a pipeline containing the steps required to perform your analysis and upload a brain atlas. After these steps have been completed you can upload your group's data directly (Figure 2c-f) after clicking "Load Group". 
+
+You can also open the GUI and upload the brain connectivity multiplex data using the command line (i.e., without opening an analysis pipeline) by typing the commands referenced below. In that case, you can upload the data as shown in Figure 2a-f.
 
 > ![Upload the data of a group of subjects](fig02.jpg)
 > 
