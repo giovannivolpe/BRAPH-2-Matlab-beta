@@ -2,8 +2,8 @@
 NNDataPoint_ST_CLA < NNDataPoint (dp, structural classification data point) is a data point for classification with structural data.
 
 %%% ¡description!
-A data point for regression with structural data (NNDataPoint_ST_CLA) 
-contains the input and target for neural network analysis with a subject with structural data (SubjectST).
+A data point for classification with structural data (NNDataPoint_ST_CLA) 
+ contains the input and target for neural network analysis with a subject with structural data (SubjectST).
 The input is the structural data of the subject.
 The target is obtained from the variables of interest of the subject.
 
@@ -19,7 +19,7 @@ NAME (constant, string) is the name of a data point for classification with stru
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of a data point for classification with structural data.
 %%%% ¡default!
-'A data point for regression with structural data (NNDataPoint_ST_CLA) contains the input and target for neural network analysis with a subject with structural data (SubjectST). The input is the structural data of the subject. The target is obtained from the variables of interest of the subject.'
+'A data point for classification with structural data (NNDataPoint_ST_CLA) contains the input and target for neural network analysis with a subject with structural data (SubjectST). The input is the structural data of the subject. The target is obtained from the variables of interest of the subject.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of a data point for classification with structural data.
@@ -196,7 +196,7 @@ if ~isdir(data_dir)
     end
     writetable(table(vois2), [data_dir filesep() 'ST_Group_2.vois.xlsx'], 'WriteVariableNames', false)
 
- % Group 3
+    % Group 3
     K3 = K1; % degree (mean node degree is 2K) - group 2
     beta3 = 0.9; % Rewiring probability - group 2
 

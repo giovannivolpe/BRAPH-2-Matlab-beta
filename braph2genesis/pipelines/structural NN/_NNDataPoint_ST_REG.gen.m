@@ -3,7 +3,7 @@ NNDataPoint_ST_REG < NNDataPoint (dp, structural regression data point) is a dat
 
 %%% ¡description!
 A data point for regression with structural data (NNDataPoint_ST_REG) 
-contains the input and target for neural network analysis with a subject with structural data (SubjectST).
+ contains the input and target for neural network analysis with a subject with structural data (SubjectST).
 The input is the structural data of the subject.
 The target is obtained from the variables of interest of the subject.
 
