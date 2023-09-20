@@ -8,6 +8,86 @@ NNRegressorMLP trains the multi-layer perceptron regressor with a formatted inpu
 %%% ¡seealso!
 NNDataPoint_CON_REG, NNRegressor_Evaluator
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.ID
+%%%% ¡title!
+Neural Networks ID
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.LABEL
+%%%% ¡title!
+Neural Networks LABEL
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.WAITBAR
+%%%% ¡title!
+WAITBAR ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.VERBOSE
+%%%% ¡title!
+VERBOSE ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.PLOT_TRAINING
+%%%% ¡title!
+PLOT TRAINING PROGRESS
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.EPOCHS
+%%%% ¡title!
+Training EPOCHS
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.BATCH
+%%%% ¡title!
+Training BATCH
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.SHUFFLE
+%%%% ¡title!
+Training SHUFFLE
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.SOLVER
+%%%% ¡title!
+Training SOLVER
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.D
+%%%% ¡title!
+DATASET
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.LAYERS
+%%%% ¡title!
+Number of Neurons per Layer
+
+%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.MODEL
+%%%% ¡title!
+Neural Network REGRESSOR
+
+E%%% ¡prop!
+%%%% ¡id!
+NNRegressorMLP.NOTES
+%%%% ¡title!
+Neural Networks NOTES
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -50,7 +130,7 @@ NNDataset('DP_CLASS', 'NNDataPoint_CON_REG')
 %%% ¡prop!
 DP_CLASSES (parameter, classlist) is the list of compatible data points.
 %%%% ¡default!
-{'NNDataPoint_CON_REG'}
+{'NNDataPoint_CON_REG' 'NNDataPoint_CON_FUN_MP_REG' 'NNDataPoint_FUN_REG' 'NNDataPoint_ST_REG' 'NNDataPoint_ST_MM_REG' 'NNDataPoint_Graph_REG' 'NNDataPoint_Measure_REG'}
 
 %%% ¡prop!
 INPUTS (query, cell) constructs the data in the CB (channel-batch) format.
@@ -62,16 +142,29 @@ if isempty(varargin)
     return
 end
 d = varargin{1};
-inputs = d.get('INPUTS');
-if isempty(inputs)
+inputs_group = d.get('INPUTS');
+if isempty(inputs_group)
     value = {};
 else
-    nn_inputs = [];
-    for i = 1:1:length(inputs)
-        input = cell2mat(inputs{i});
-        nn_inputs = [nn_inputs; input(:)'];
+    flattened_inputs_group = [];
+    for i = 1:1:length(inputs_group)
+        inputs_individual = inputs_group{i};
+        flattened_inputs_individual = [];
+        while ~isempty(inputs_individual)
+            currentData = inputs_individual{end};  % Get the last element from the stack
+            inputs_individual = inputs_individual(1:end-1);   % Remove the last element
+
+            if iscell(currentData)
+                % If it's a cell array, add its contents to the stack
+                inputs_individual = [inputs_individual currentData{:}];
+            else
+                % If it's numeric or other data, append it to the vector
+                flattened_inputs_individual = [currentData(:); flattened_inputs_individual];
+            end
+        end
+        flattened_inputs_group = [flattened_inputs_group; flattened_inputs_individual'];
     end
-    value = {nn_inputs};
+    value = {flattened_inputs_group};
 end
 
 %%% ¡prop!
@@ -142,6 +235,74 @@ end
 LAYERS (data, rvector) defines the number of layers and their neurons.
 %%%% ¡default!
 [32 32]
+%%%% ¡gui!
+pr = PanelPropRVectorSmart('EL', nn, 'PROP', NNRegressorMLP.LAYERS, ...
+    'MIN', 0, 'MAX', 2000, ...
+    'DEFAULT', NNRegressorMLP.getPropDefault('LAYERS'), ...
+    varargin{:});
+
+%%% ¡prop!
+WAITBAR (gui, logical) detemines whether to show the waitbar.
+%%%% ¡default!
+true
+
+%%% ¡prop!
+INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.
+%%%% ¡default!
+.001
+
+%%% ¡prop!
+FEATURE_IMPORTANCE (query, cell) evaluates the average significance of each feature by iteratively shuffling its values P times and measuring the resulting average decrease in model performance.
+%%%% ¡calculate!
+% fi = nn.get('FEATURE_IMPORTANCE', D) retrieves a cell array containing
+%  the feature importance values for the trained model, as assessed by
+%  evaluating it on the input dataset D.
+if isempty(varargin)
+    value = {};
+    return
+end
+d = varargin{1};
+P = varargin{2};
+seeds = varargin{3};
+
+inputs = cell2mat(nn.get('INPUTS', d));
+if isempty(inputs)
+    value = {};
+    return
+end
+targets = cell2mat(nn.get('TARGETS', d));
+net = nn.get('MODEL');
+
+number_features = size(inputs, 2);
+original_loss = crossentropy(net.predict(inputs), targets);
+
+wb = braph2waitbar(nn.get('WAITBAR'), 0, ['Feature importance permutation ...']);
+
+start = tic;
+for i = 1:1:P
+    rng(seeds(i), 'twister')
+    parfor j = 1:1:number_features
+        scrambled_inputs = inputs;
+        permuted_value = squeeze(normrnd(mean(inputs(:, j)), std(inputs(:, j)), squeeze(size(inputs(:, j))))) + squeeze(randn(size(inputs(:, j)))) + mean(inputs(:, j));
+        scrambled_inputs(:, j) = permuted_value;
+        scrambled_loss = crossentropy(net.predict(scrambled_inputs), targets);
+        feature_importance(j) = scrambled_loss;
+    end
+
+    feature_importance_all_permutations{i} = feature_importance / original_loss;
+
+    braph2waitbar(wb, i / P, ['Feature importance permutation ' num2str(i) ' of ' num2str(P) ' - ' int2str(toc(start)) '.' int2str(mod(toc(start), 1) * 10) 's ...'])
+    if nn.get('VERBOSE')
+        disp(['** PERMUTATION FEATURE IMPORTANCE - sampling #' int2str(i) '/' int2str(P) ' - ' int2str(toc(start)) '.' int2str(mod(toc(start), 1) * 10) 's'])
+    end
+    if nn.get('INTERRUPTIBLE')
+        pause(nn.get('INTERRUPTIBLE'))
+    end
+end
+
+braph2waitbar(wb, 'close')
+
+value = feature_importance_all_permutations;
 
 %% ¡tests!
 

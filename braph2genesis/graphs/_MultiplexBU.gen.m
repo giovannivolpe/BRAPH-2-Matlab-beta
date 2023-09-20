@@ -60,6 +60,24 @@ NEGATIVE EDGE RULE
 
 %%% ¡prop!
 %%%% ¡id!
+MultiplexBU.RANDOMIZE
+%%%% ¡title!
+RANDOMIZATION ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MultiplexBU.RANDOM_SEED
+%%%% ¡title!
+RANDOMIZATION SEED
+
+%%% ¡prop!
+%%%% ¡id!
+MultiplexBU.ATTEMPTSPEREDGE
+%%%% ¡title!
+RANDOMIZATION ATTEMPTS PER EDGE
+
+%%% ¡prop!
+%%%% ¡id!
 MultiplexBU.A
 %%%% ¡title!
 Binary Undirected ADJACENCY MATRICES
@@ -186,7 +204,9 @@ for i = 1:1:L
         end
     end
 end
-
+if g.get('RANDOMIZE')
+    A = g.get('RANDOMIZATION', A);
+end
 value = A;
 %%%% ¡gui!
 pr = PanelPropCell('EL', g, 'PROP', MultiplexBU.A, ...
@@ -199,11 +219,6 @@ pr = PanelPropCell('EL', g, 'PROP', MultiplexBU.A, ...
     'ROWNAME', g.getCallback('ANODELABELS'), ...
     'COLUMNNAME', g.getCallback('ANODELABELS'), ...
     varargin{:});
-
-%%% ¡prop!
-PARTITIONS (result, rvector) returns the number of layers in the partitions of the graph.
-%%%% ¡calculate!
-value = ones(1, g.get('LAYERNUMBER'));
 
 %%% ¡prop!
 ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.
@@ -245,6 +260,34 @@ SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.
 SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.
 %%%% ¡settings!
 {'zero', 'absolute'}
+
+%%% ¡prop!
+ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
+%%%% ¡default!
+5
+
+%%% ¡prop!
+RANDOMIZATION (query, cell) is the attempts to rewire each edge.
+%%%% ¡calculate!
+rng(g.get('RANDOM_SEED'), 'twister')
+
+if isempty(varargin)
+    value = {};
+    return
+end
+
+A = varargin{1};
+attempts_per_edge = g.get('ATTEMPTSPEREDGE');
+
+for i = 1:length(A)
+    tmp_a = A{i,i};
+
+    tmp_g = GraphBU();
+    tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
+    random_A = tmp_g.get('RANDOMIZATION', {tmp_a});
+    A{i, i} = random_A;
+end
+value = A;
 
 %% ¡tests!
 
@@ -447,55 +490,54 @@ assert(isequal(g_absolute_min.get('A'), A_absolute_min), ...
     'MultiplexBU is not constructing well.')
 
 
+%%% ¡test!
+%%%% ¡name!
+Randomize Rules
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B1 = randn(10);
+B = {B1, B1, B1};
 
+g = MultiplexBU('B', B);
+g.set('RANDOMIZE', true);
+g.set('ATTEMPTSPEREDGE', 4);
+g.get('A_CHECK')
 
+A = g.get('A');
 
+assert(isequal(size(A{1}), size(B{1})), ...
+    [BRAPH2.STR ':MultiplexBU:' BRAPH2.FAIL_TEST], ...
+    'MultiplexBU Randomize is not functioning well.')
 
+g2 = MultiplexBU('B', B);
+g2.set('RANDOMIZE', false);
+g2.set('ATTEMPTSPEREDGE', 4);
+g2.get('A_CHECK')
 
-%% ¡_props!
+A2 = g2.get('A');
+random_A = g2.get('RANDOMIZATION', A2);
 
-%%% ¡_prop!
-ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
-%%%% ¡_default!
-5
-
-%% ¡_methods!
-function random_g = randomize(g)
-    % RANDOMIZE returns a randomized graph
-    %
-    % RANDOMIZED_G = RANDOMIZE(G) returns the randomized
-    % graph RANDOM_G obtained with a randomized correlation
-    % matrix via the static function randomize_A while preserving
-    % degree distributions. The randomization it is done layer by
-    % layer and then integrated in the 2-D supra-adjacency matrix
-    % cell array.
-    %
-    % RANDOMIZED_G = RANDOMIZE(G, 'AttemptsPerEdge', VALUE)
-    % returns the randomized graph RANDOM_G obtained with a
-    % randomized correlation matrix via the static function
-    % randomize_A while preserving  degree distributions.
-    % The multiplex is randomized layer by layer where randomized
-    % adjacency matrix of each layer are then integrated in the
-    % 2-D supra-adjacency matrix cell array.
-    %
-    % See also GraphBD
-
-    % get rules
-    attempts_per_edge = g.get('ATTEMPTSPEREDGE');
-
-    if nargin<2
-        attempts_per_edge = 5;
+for i = 1:length(A2)
+    if all(A2{i, i}==0, "all") %if all nodes are zero, the random matrix is also all zeros
+        assert(isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':MultiplexBU:' BRAPH2.FAIL_TEST], ...
+            'MultiplexBU Randomize is not functioning well.')
+    elseif isequal((length(A2{i, i}).^2)- length(A2{i, i}), sum(A2{i, i}==1, "all")) %if all nodes (except diagonal) are one, the random matrix is the same as original
+        assert(isequal(A2{i, i}, random_A{i, i}), ...
+            [BRAPH2.STR ':MultiplexBU:' BRAPH2.FAIL_TEST], ...
+            'MultiplexBU Randomize is not functioning well.')
+    else
+%         assert(~isequal(A2{i, i}, random_A{i, i}), ...
+%             [BRAPH2.STR ':MultiplexBU:' BRAPH2.FAIL_TEST], ...
+%             'MultiplexBU Randomize is not functioning well.')
     end
 
-    % get A
-    A = g.get('A');
-    L = g.layernumber();
-    random_multi_A = cell(1, L);
-
-    for li = 1:1:L
-        Aii = A{li, li};
-        random_A = GraphBU.randomize_A(Aii, attempts_per_edge);
-        random_multi_A(li) = {random_A};
-    end
-    random_g = MultiplexBU('B', random_multi_A);
+    assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check same number of nodes
+        [BRAPH2.STR ':MultiplexBU:' BRAPH2.FAIL_TEST], ...
+        'MultiplexBU Randomize is not functioning well.')
+        
+    assert(issymmetric(random_A{i, i}), ... % check symmetry 
+    [BRAPH2.STR ':MultiplexBU:' BRAPH2.FAIL_TEST], ...
+    'MultiplexBU Randomize is not functioning well.')
 end

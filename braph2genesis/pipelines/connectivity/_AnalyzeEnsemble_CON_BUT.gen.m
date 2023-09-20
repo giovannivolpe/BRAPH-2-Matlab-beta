@@ -36,6 +36,12 @@ SUBJECT GROUP
 
 %%% ¡prop!
 %%%% ¡id!
+AnalyzeEnsemble_CON_BUT.GRAPH_TEMPLATE
+%%%% ¡title!
+GRAPH & MEASURE PARAMETERS
+
+%%% ¡prop!
+%%%% ¡id!
 AnalyzeEnsemble_CON_BUT.THRESHOLDS
 %%%% ¡title!
 THRESHOLDS [-1 ... 1]
@@ -119,7 +125,8 @@ for i = 1:1:gr.get('SUB_DICT').get('LENGTH')
     sub = gr.get('SUB_DICT').get('IT', i);
     g = MultigraphBUT( ...
         'ID', ['graph ' sub.get('ID')], ... % % % 'BAS', ba ...
-        'B', sub.getCallback('CON') ... % % % 'LAYERTICKS', thresholds, ... 
+        'B', sub.getCallback('CON'), ...
+        'THRESHOLDS', thresholds ... % % % 'LAYERTICKS', thresholds, ... 
         );
     g_dict.get('ADD', g)
 end
@@ -134,8 +141,6 @@ value = g_dict;
 
 %%% ¡prop!
 ME_DICT (result, idict) contains the calculated measures of the graph ensemble.
-%%%% ¡_gui!
-% % % pr = PPAnalyzeEnsemble_ME_DICT('EL', a, 'PROP', AnalyzeEnsemble_CON_BUT.ME_DICT, 'WAITBAR', true, varargin{:});
 
 %% ¡props!
 
@@ -150,6 +155,9 @@ pr = PanelPropRVectorSmart('EL', a, 'PROP', AnalyzeEnsemble_CON_BUT.THRESHOLDS, 
     varargin{:});
 
 %% ¡tests!
+
+%%% ¡excluded_props!
+[AnalyzeEnsemble_CON_BUT.TEMPLATE AnalyzeEnsemble_CON_BUT.GRAPH_TEMPLATE]
 
 %%% ¡test!
 %%%% ¡name!

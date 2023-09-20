@@ -108,12 +108,12 @@ nn.memorize('MODEL');
 value = [];
 
 %%% ¡prop!
-VERBOSE (parameter, logical) is an indicator to display training progress information.
+VERBOSE (metadata, logical) is an indicator to display training progress information.
 %%%% ¡default!
 false
 
 %%% ¡prop!
-PLOT_TRAINING (parameter, option) determines whether to plot the training progress.
+PLOT_TRAINING (metadata, option) determines whether to plot the training progress.
 %%%% ¡settings!
 {'none' 'training-progress'}
 
@@ -129,7 +129,7 @@ end
 
 d = varargin{1};
 inputs = nn.get('INPUTS', d);
-if isempty(inputs)
+if isempty(cell2mat(inputs))
     predictions = {};
 else
     net = nn.get('MODEL');
