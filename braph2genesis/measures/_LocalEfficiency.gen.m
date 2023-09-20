@@ -66,14 +66,14 @@ L = g.get('LAYERNUMBER');
 local_efficiency = cell(L, 1);
 N = g.get('NODENUMBER');
 
-parfor li = 1:L
+for li = 1:L
     Aii = A{li, li};    
     local_efficiency_layer = zeros(N(li), 1);
     for i = 1:1:N(li)
         nodes = find(Aii(i, :)  | Aii(:, i).');  % neighbours of u
         if numel(nodes) > 1
            sub_graph_Aii = Aii(nodes, nodes);
-           global_efficiency = global_Efficiency(sub_graph_Aii, g)
+           global_efficiency = global_Efficiency(sub_graph_Aii, g, li);
            local_efficiency_layer(i) = mean(global_efficiency);
         end
     end
@@ -82,21 +82,21 @@ end
 
 value = local_efficiency;
 %%%% ¡calculate_callbacks!
-function global_efficiency = global_Efficiency(A, g)
-    N = length(A);
-    distance = local_efficiency_distance(A, g);
+function global_efficiency = global_Efficiency(A, g, li)
+    N_A = length(A);
+    distance = local_efficiency_distance(A, g, li);
     inverse_distance = distance.^-1;  % inverse distance
-    inverse_distance(1:N(li)+1:end) = 0;
-    global_efficiency = (sum(inverse_distance, 2) / (N - 1));
+    inverse_distance(1:N_A+1:end) = 0;
+    global_efficiency = (sum(inverse_distance, 2) / (N_A - 1));
 end
 function distance = local_efficiency_distance(A, g, li)
     connectivity_type =  g.get('CONNECTIVITY_TYPE', g.get('LAYERNUMBER'));
     connectivity_type = diag(connectivity_type);
     connectivity_layer = connectivity_type(li);
     if connectivity_layer == Graph.WEIGHTED  % weighted graphs
-        distance = getWeightedCalculation(Aii);
+        distance = getWeightedCalculation(A);
     else  % binary graphs
-        distance = getBinaryCalculation(Aii);
+        distance = getBinaryCalculation(A);
     end
 end
 function weighted_distance = getWeightedCalculation(A)
