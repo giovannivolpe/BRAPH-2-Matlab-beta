@@ -627,50 +627,48 @@ QVALUE (metadata, scalar) is the selected qvalue threshold.
 
 %%% ¡prop!
 PFC (gui, item) contains the panel figure of the comparison.
-%%%% ¡_settings!
-% % % 'PFComparisonEnsemble'
-%%%% ¡_postprocessing!
-% % % if ~braph2_testing % to avoid problems with isqual when the element is recursive
-% % %     if isa(cp.getr('PFC'), 'NoValue')
-% % %         measure = cp.get('MEASURE');
-% % %         g_dict = cp.get('C').get('A1').get('G_DICT');
-% % %         
-% % %         if ~isempty(measure) && ...
-% % %                 ((Measure.is_global(measure) && Measure.is_unilayer(measure)) || ...
-% % %                 (Measure.is_global(measure) && Measure.is_superglobal(measure)))
-% % %             g = g_dict.getItem(1);
-% % %             if (Graph.is_multiplex(g) || Graph.is_ordered_multiplex(g)) && Measure.is_unilayer(measure)
-% % %                 cp.set('PFC', PFComparisonEnsembleMultiplexGU('CP', cp))
-% % %             else
-% % %                 cp.set('PFC', PFComparisonEnsembleGU('CP', cp))
-% % %             end
-% % %         elseif ~isempty(measure) && ...
-% % %                 ((Measure.is_nodal(measure) && Measure.is_unilayer(measure)) || ...
-% % %                 (Measure.is_nodal(measure) && Measure.is_superglobal(measure)))
-% % %             g = g_dict.getItem(1);
-% % %             if (Graph.is_multiplex(g) || Graph.is_ordered_multiplex(g)) && Measure.is_unilayer(measure)
-% % %                 cp.set('PFC', PFComparisonEnsembleMultiplexNU('CP', cp))
-% % %             else
-% % %                 cp.set('PFC', PFComparisonEnsembleNU('CP', cp))
-% % %             end
-% % %         elseif ~isempty(measure) && ...
-% % %                 ((Measure.is_binodal(measure) && Measure.is_unilayer(measure)) || ...
-% % %                 (Measure.is_binodal(measure) && Measure.is_superglobal(measure)))
-% % %             g = g_dict.getItem(1);
-% % %             if (Graph.is_multiplex(g) || Graph.is_ordered_multiplex(g)) && Measure.is_unilayer(measure)
-% % %                 cp.set('PFC', PFComparisonEnsembleMultiplexBU('CP', cp))
-% % %             else
-% % %                 cp.set('PFC', PFComparisonEnsembleBU('CP', cp))
-% % %             end
-% % %         else
-% % %             cp.memorize('PFC').set('CP', cp)
-% % %         end
-% % %     end
-% % % end
-%%%% ¡_gui!
-% % % pr = PanelPropItem('EL', cp, 'PROP', ComparisonEnsemble.PFC, ...
-% % %     'GUICLASS', 'GUIFig', ...
-% % %     varargin{:});
+%%%% ¡settings!
+'ComparisonGroupPF'
+%%%% ¡postprocessing!
+if isa(cp.getr('PFC'), 'NoValue')
+    
+    measure = cp.get('MEASURE');
+
+    switch Element.getPropDefault(measure, 'SHAPE')
+        case Measure.GLOBAL % __Measure.GLOBAL__
+            switch Element.getPropDefault(measure, 'SCOPE')
+                case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
+                    cp.set('PFC', ComparisonGroupPF_GS('CP', cp))
+                case Measure.UNILAYER % __Measure.UNILAYER__
+                    cp.set('PFC', ComparisonGroupPF_GU('CP', cp))
+                case Measure.BILAYER % __Measure.BILAYER__
+                    cp.set('PFC', ComparisonGroupPF_GB('CP', cp))
+            end
+        case Measure.NODAL % __Measure.NODAL__
+            switch Element.getPropDefault(measure, 'SCOPE')
+                case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
+                    cp.set('PFC', ComparisonGroupPF_NS('CP', cp))
+                case Measure.UNILAYER % __Measure.UNILAYER__
+                    cp.set('PFC', ComparisonGroupPF_NU('CP', cp))
+                case Measure.BILAYER % __Measure.BILAYER__
+                    cp.set('PFC', ComparisonGroupPF_NB('CP', cp))
+            end
+        case Measure.BINODAL % __Measure.BINODAL__
+            switch Element.getPropDefault(measure, 'SCOPE')
+                case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
+                    cp.set('PFC', ComparisonGroupPF_BS('CP', cp))
+                case Measure.UNILAYER % __Measure.UNILAYER__
+                    cp.set('PFC', ComparisonGroupPF_BU('CP', cp))
+                case Measure.BILAYER % __Measure.BILAYER__
+                    cp.set('PFC', ComparisonGroupPF_BB('CP', cp))
+            end
+    end
+end
+%%%% ¡gui!
+pr = PanelPropItem('EL', cp, 'PROP', ComparisonGroup.PFC, ...
+    'GUICLASS', 'GUIFig', ...
+	'BUTTON_TEXT', ['Plot ' cp.get('MEASURE') ' Comparison'], ...
+    varargin{:});
 
 %%% ¡_prop!
 PFBG (gui, item) contains the panel figure of the brain graph.
