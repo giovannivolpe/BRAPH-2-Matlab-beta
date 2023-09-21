@@ -74,12 +74,12 @@ a_WU2 = AnalyzeGroup_CON_FUN_MP_GA_WU( ...
 
 % measure calculation
 g_WU1 = a_WU1.memorize('G'); % essential to memorize in case there are measures with non-default rules
-wmpc_WU1 = g_WU1.get('MEASURE', 'WeightedMxP').get('M');
+mcommunities_WU1 = g_WU1.get('MEASURE', 'MultilayerCommunity').get('M');
 wmpc_av_WU1 = g_WU1.get('MEASURE', 'WeightedMxPAv').get('M');
 wedgeov_WU1 = g_WU1.get('MEASURE', 'WeightedEdgeOvlp').get('M');
 
 g_WU2 = a_WU2.get('G');
-wmpc_WU2 = g_WU2.get('MEASURE', 'WeightedMxP').get('M');
+mcommunities_WU2 = g_WU2.get('MEASURE', 'MultilayerCommunity').get('M');
 wmpc_av_WU2 = g_WU2.get('MEASURE', 'WeightedMxPAv').get('M');
 wedgeov_WU2 = g_WU2.get('MEASURE', 'WeightedEdgeOvlp').get('M');
 
