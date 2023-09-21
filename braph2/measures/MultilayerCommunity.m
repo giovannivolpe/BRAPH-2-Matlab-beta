@@ -624,7 +624,7 @@ classdef MultilayerCommunity < Measure
 				case 9 % MultilayerCommunity.PARAMETRICITY
 					prop_default = 2;
 				case 10 % MultilayerCommunity.COMPATIBLE_GRAPHS
-					prop_default = {'MultiplexBU' 'MultiplexBUT' 'MultilayerBU'} ;%TBE % % % add any missing tests;
+					prop_default = {'MultiplexWU' 'MultiplexBU' 'MultiplexBUT' 'MultilayerBU' 'OrdMxWU'} ;%TBE % % % add any missing tests;
 				otherwise
 					prop_default = getPropDefault@Measure(prop);
 			end
