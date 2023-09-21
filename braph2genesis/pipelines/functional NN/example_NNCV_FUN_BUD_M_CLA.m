@@ -54,16 +54,16 @@ a_BUD3 = AnalyzeEnsemble_FUN_BUD( ...
     'GR', gr3 ...
     );
 
-a_BUD1.get('MEASUREENSEMBLE', 'Degree').get('M');
-a_BUD1.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
+a_BUD1.get('MEASUREENSEMBLE', 'OverlappingDeg').get('M');
+a_BUD1.get('MEASUREENSEMBLE', 'OverlappingDegAv').get('M');
 a_BUD1.get('MEASUREENSEMBLE', 'Distance').get('M');
 
-a_BUD2.get('MEASUREENSEMBLE', 'Degree').get('M');
-a_BUD2.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
+a_BUD2.get('MEASUREENSEMBLE', 'OverlappingDeg').get('M');
+a_BUD2.get('MEASUREENSEMBLE', 'OverlappingDegAv').get('M');
 a_BUD2.get('MEASUREENSEMBLE', 'Distance').get('M');
 
-a_BUD3.get('MEASUREENSEMBLE', 'Degree').get('M');
-a_BUD3.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
+a_BUD3.get('MEASUREENSEMBLE', 'OverlappingDeg').get('M');
+a_BUD3.get('MEASUREENSEMBLE', 'OverlappingDegAv').get('M');
 a_BUD3.get('MEASUREENSEMBLE', 'Distance').get('M');
 
 %% Create NNData composed of corresponding NNDataPoints

@@ -25,9 +25,9 @@ a_WU = AnalyzeEnsemble_FUN_WU( ...
     'GR', gr ...
     );
 
-a_WU.get('MEASUREENSEMBLE', 'Degree').get('M');
-a_WU.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
-a_WU.get('MEASUREENSEMBLE', 'Distance').get('M');
+a_WU.get('MEASUREENSEMBLE', 'OverlappingS').get('M');
+a_WU.get('MEASUREENSEMBLE', 'OverlappingSAv').get('M');
+a_WU.get('MEASUREENSEMBLE', 'WeightedEdgeOvlp').get('M');
 
 %% Create NNData composed of corresponding NNDataPoints
 % create a item list of NNDataPoint_FUN_REG
