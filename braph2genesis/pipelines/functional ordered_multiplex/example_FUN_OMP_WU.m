@@ -44,7 +44,7 @@ wmpc_av_WU1 = a_WU1.get('MEASUREENSEMBLE', 'WeightedMxPAv').get('M');
 weo_WU1 = a_WU1.get('MEASUREENSEMBLE', 'WeightedEdgeOvlp').get('M');
 
 wmpc_WU2 = a_WU2.get('MEASUREENSEMBLE', 'WeightedMxP').get('M');
-wmpc_av_WU2 = a_WU2.get('MEASUREENSEMBLE', 'WeightedMultiplexParticipationAv').get('M');
+wmpc_av_WU2 = a_WU2.get('MEASUREENSEMBLE', 'WeightedMxPAv').get('M');
 weo_WU2 = a_WU2.get('MEASUREENSEMBLE', 'WeightedEdgeOvlp').get('M');
 
 % comparison
