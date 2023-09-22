@@ -135,7 +135,7 @@ NOTES (metadata, string) are some specific notes about the panel figure binodal 
 SETUP (query, empty) calculates the group comparison figure value and stores it.
 %%%% ¡calculate!
 cp = pf.get('CP');
-g = cp.get('C').get('A1').get('G');
+g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 
 x = g.get('ALAYERTICKS');
 

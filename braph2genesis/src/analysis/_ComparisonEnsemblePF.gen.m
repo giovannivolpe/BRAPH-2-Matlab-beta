@@ -1,8 +1,8 @@
 %% ¡header!
-ComparisonEnsemblePF < PanelFig (pf, panel ensemble comparison figure) is the base element to plot a ensemble comparison.
+ComparisonEnsemblePF < PanelFig (pf, panel ensemble-based comparison figure) is the base element to plot an ensemble-based comparison.
 
 %%% ¡description!
-ComparisonEnsemblePF manages the basic functionalities to plot of a ensemble comparison.
+ComparisonEnsemblePF manages the basic functionalities to plot of an ensemble-based comparison.
 
 %%% ¡seealso!
 ComparisonEnsemble
@@ -96,32 +96,32 @@ Y-LABEL
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the panel ensemble comparison figure.
+NAME (constant, string) is the name of the panel ensemble-based comparison figure.
 %%%% ¡default!
 'ComparisonEnsemblePF'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the panel ensemble comparison figure.
+DESCRIPTION (constant, string) is the description of the panel ensemble-based comparison figure.
 %%%% ¡default!
-'ComparisonEnsemblePF manages the basic functionalities to plot of a ensemble comparison.'
+'ComparisonEnsemblePF manages the basic functionalities to plot of an ensemble-based comparison.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the panel ensemble comparison figure.
+TEMPLATE (parameter, item) is the template of the panel ensemble-based comparison figure.
 %%%% ¡settings!
 'ComparisonEnsemblePF'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the panel ensemble comparison figure.
+ID (data, string) is a few-letter code for the panel ensemble-based comparison figure.
 %%%% ¡default!
 'ComparisonEnsemblePF ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the panel ensemble comparison figure.
+LABEL (metadata, string) is an extended label of the panel ensemble-based comparison figure.
 %%%% ¡default!
 'ComparisonEnsemblePF label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the panel ensemble comparison figure.
+NOTES (metadata, string) are some specific notes about the panel ensemble-based comparison figure.
 %%%% ¡default!
 'ComparisonEnsemblePF notes'
 
@@ -341,17 +341,17 @@ function cb_listener_st_axis(~, ~)
 end
 
 %%% ¡prop!
-CP (metadata, item) is the ensemble comparison.
+CP (metadata, item) is the ensemble-based comparison.
 %%%% ¡settings!
 'ComparisonEnsemble'
 
 %%% ¡prop!
-SETUP (query, empty) calculates the ensemble comparison value and stores it to be implemented in the subelements.
+SETUP (query, empty) calculates the ensemble-based comparison value and stores it to be implemented in the subelements.
 %%%% ¡calculate!
 value = [];
 
 %%% ¡prop!
-H_AREA (evanescent, handle) is the handle for the ensemble comparison confidence area.
+H_AREA (evanescent, handle) is the handle for the ensemble-based comparison confidence area.
 %%%% ¡calculate!
 value = fill(pf.get('H_AXES'), [0], [0], 'k');
 
@@ -377,7 +377,7 @@ function cb_listener_st_area(~, ~)
 end
 
 %%% ¡prop!
-H_LINE_DIFF (evanescent, handle) is the handle for the ensemble comparison line.
+H_LINE_DIFF (evanescent, handle) is the handle for the ensemble-based comparison line.
 %%%% ¡calculate!
 value = plot(pf.get('H_AXES'), [0], [0], 'b', 'LineWidth', 2);
 
@@ -403,7 +403,7 @@ function cb_listener_st_line_diff(~, ~)
 end
 
 %%% ¡prop!
-H_LINE_CIL (evanescent, handle) is the handle for the lower confidence interval of the ensemble comparison line.
+H_LINE_CIL (evanescent, handle) is the handle for the lower confidence interval of the ensemble-based comparison line.
 %%%% ¡calculate!
 value = plot(pf.get('H_AXES'), [0], [0], 'b', 'LineWidth', 2);
 
@@ -431,7 +431,7 @@ function cb_listener_st_line_cil(~, ~)
 end
 
 %%% ¡prop!
-H_LINE_CIU (evanescent, handle) is the handle for the upper confidence interval of the ensemble comparison line.
+H_LINE_CIU (evanescent, handle) is the handle for the upper confidence interval of the ensemble-based comparison line.
 %%%% ¡calculate!
 value = plot(pf.get('H_AXES'), [0], [0], 'b', 'LineWidth', 2);
 

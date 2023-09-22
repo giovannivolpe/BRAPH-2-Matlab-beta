@@ -63,7 +63,7 @@ DIFF (result, cell) is the ensemble comparison value.
 %%%% ¡calculate!
 results = cp.memorize('CALCULATE_RESULTS');
 value = results{1}; % diff
-%%%% ¡_gui!
+%%%% ¡gui!
 g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 measure = cp.get('MEASURE');
 
@@ -129,7 +129,7 @@ P1 (result, cell) is the one-tailed p-value.
 %%%% ¡calculate!
 results = cp.memorize('CALCULATE_RESULTS');
 value = results{2}; % p1
-%%%% ¡_gui!
+%%%% ¡gui!
 g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 measure = cp.get('MEASURE');
 
@@ -195,7 +195,7 @@ P2 (result, cell) is the two-tailed p-value.
 %%%% ¡calculate!
 results = cp.memorize('CALCULATE_RESULTS');
 value = results{3}; % p2
-%%%% ¡_gui!
+%%%% ¡gui!
 g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 measure = cp.get('MEASURE');
 
@@ -261,7 +261,7 @@ CIL (result, cell) is the lower value of the 95%% confidence interval.
 %%%% ¡calculate!
 results = cp.memorize('CALCULATE_RESULTS');
 value = results{4}; % ci_lower
-%%%% ¡_gui!
+%%%% ¡gui!
 g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 measure = cp.get('MEASURE');
 
@@ -327,7 +327,7 @@ CIU (result, cell) is the upper value of the 95%% confidence interval.
 %%%% ¡calculate!
 results = cp.memorize('CALCULATE_RESULTS');
 value = results{5}; % ci_upper
-%%%% ¡_gui!
+%%%% ¡gui!
 g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 measure = cp.get('MEASURE');
 
@@ -440,7 +440,7 @@ pr = PanelPropItem('EL', cp, 'PROP', ComparisonEnsemble.PFC, ...
 	'BUTTON_TEXT', ['Plot ' cp.get('MEASURE') ' Comparison'], ...
     varargin{:});
 
-%%% ¡_prop!
+%%% ¡prop!
 PFBG (gui, item) contains the panel figure of the brain graph.
 %%%% ¡_settings!
 % % % 'PFBrainGraphComparison'
@@ -592,4 +592,4 @@ value = {diff, p1, p2, ci_lower, ci_upper};
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonEnsemble.CALCULATE_RESULTS]
+[ComparisonEnsemble.PFC ComparisonEnsemble.PFBG ComparisonEnsemble.CALCULATE_RESULTS]
