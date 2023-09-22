@@ -534,7 +534,7 @@ classdef OverlappingDegAv < OverlappingDeg
 				case 9 % OverlappingDegAv.PARAMETRICITY
 					prop_default = 2;
 				case 10 % OverlappingDegAv.COMPATIBLE_GRAPHS
-					prop_default = {'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU' 'MultilayerWU' 'OrdMlWU' 'MultilayerBU'}
+					prop_default = {'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU' 'MultilayerWU' 'OrdMlWU' 'MultilayerBU'};
 				otherwise
 					prop_default = getPropDefault@OverlappingDeg(prop);
 			end
