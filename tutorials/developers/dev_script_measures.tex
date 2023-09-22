@@ -10,7 +10,7 @@
 
 \begin{abstract}
 \noindent
-This is the developer tutorial for adapting a script for calculating different graph measures. In this tutorial, we will explain how to edit an example script to calculate different graph measures in braph2genesis. Here, we use EXAMPLE\_ST\_MP\_WU as an example to show how to edit this script to calculate different graph measures for structural data using a multiplex weighted undirected graph.
+This is the developer tutorial for adapting a script for calculating different graph measures. In this tutorial, we will explain how to edit an example script to calculate different graph measures in braph2genesis. Here, we use. \fn{EXAMPLE\_ST\_MP\_WU} as an example to show how to edit this script to calculate different graph measures for structural data using a multiplex weighted undirected graph.
 \end{abstract}
 
 \tableofcontents
@@ -64,7 +64,7 @@ im_gr1 = ImporterGroupSubjectST_MP_XLS( ...¥\circled{1}\circlednote{1}{Importer
 
 gr1 = im_gr1.get('GR');
 
-im_gr2 = ImporterGroupSubjectST_MP_XLS( ...¥\circled{1}¥
+im_gr2 = ImporterGroupSubjectST_MP_XLS( ...¥\circled{2}\circlednote{2}{imports a second group of subjects with structural data and their covariates (optional) from another XLS/XLSX file.}¥
     'DIRECTORY', [fileparts(which('SubjectST_MP')) filesep 'Example data ST_MP XLS' filesep 'ST_MP_Group_2_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
@@ -84,7 +84,7 @@ This section is to initialize the group data analysis.
 		The group data analysis provides code for initialization of group data analysis.
 	}
 ]
-a_WU1 = AnalyzeGroup_ST_MP_WU( ...¥\circled{1}\circlednote{1}{The script initialize the group analysis with the loaded atlas and group data.}¥
+a_WU1 = AnalyzeGroup_ST_MP_WU( ...¥\circled{1}\circlednote{1}{creation of the group analysis with the loaded atlas and groups data.}¥
     'GR', gr1, ...
     'CORRELATION_RULE', Correlation.PEARSON ...
     );
@@ -97,7 +97,7 @@ a_WU2 = AnalyzeGroup_ST_MP_WU( ...¥\circled{1}¥
 \end{lstlisting}
 %\clearpage
 \section{Measure Calculation}
-The last step is to calculate graph measures with data loaded in previous step. Here we use degree as an example.
+The last step is to calculate graph measures with data loaded in previous step. Here we use \fn{degree} as an example.
 \begin{lstlisting}[
 	label=cd:m:degreeav:header,
 	caption={
@@ -107,8 +107,8 @@ The last step is to calculate graph measures with data loaded in previous step. 
 ]
 
 g_WU1 = a_WU1.memorize('G');¥\circled{1}\circlednote{1}{memorize in case there are measures with non-default rules.}¥
-degree_WU1 = g_WU1.get('MEASURE', 'Degree').get('M');¥\circled{2}\circlednote{2}{The function calculates graph measure. In this case, Degree is calculated. \\
-Other measures can also be calculated by changing the measure names}¥
+degree_WU1 = g_WU1.get('MEASURE', 'Degree').get('M');¥\circled{2}\circlednote{2}{The function calculates graph measure. In this case, \fn{degree} is calculated. \\
+Other measures can also be calculated by changing the measure name}¥
 
 g_WU2 = a_WU2.get('G');
 degree_WU2 = g_WU2.get('MEASURE', 'Degree').get('M');¥\circled{2}¥
