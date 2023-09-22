@@ -175,6 +175,7 @@ g_template_WD1 = a_WD1.get('GRAPH_TEMPLATE');
 g_template_WD1.set( ...
     'RANDOMIZE', randomize, ...
     'RANDOM_SEED', random_seed, ...
+    'SYMMETRIZE_RULE', symmetrize_rule, ...
     'SEMIPOSITIVIZE_RULE', semipositivize_rule, ...
     'STANDARDIZE_RULE', standardize_rule, ...
     'ATTEMPTSPEREDGE', attemptsperedge, ...
@@ -183,6 +184,7 @@ g_template_WD1.set( ...
 g_template_WD2 = a_WD2.get('GRAPH_TEMPLATE'); 
 assert(isequal(g_template_WD2.get('RANDOMIZE'), randomize))
 assert(isequal(g_template_WD2.get('RANDOM_SEED'), random_seed))
+assert(isequal(g_template_WD2.get('SYMMETRIZE_RULE'), symmetrize_rule))
 assert(isequal(g_template_WD2.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
 assert(isequal(g_template_WD2.get('STANDARDIZE_RULE'), standardize_rule))
 assert(isequal(g_template_WD2.get('ATTEMPTSPEREDGE'), attemptsperedge))
@@ -204,6 +206,7 @@ i = randi(a_WD1.get('G_DICT').get('LENGTH'));
 g_WD1_i = a_WD1.get('G_DICT').get('IT', i);
 assert(isequal(g_WD1_i.get('RANDOMIZE'), randomize))
 assert(isequal(g_WD1_i.get('RANDOM_SEED'), random_seed))
+assert(isequal(g_WD1_i.get('SYMMETRIZE_RULE'), symmetrize_rule))
 assert(isequal(g_WD1_i.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
 assert(isequal(g_WD1_i.get('STANDARDIZE_RULE'), standardize_rule))
 assert(isequal(g_WD1_i.get('ATTEMPTSPEREDGE'), attemptsperedge))
@@ -214,6 +217,7 @@ assert(isequal(g_WD1_i.get('MEASURE', 'Triangles').get('RULE'), triangles_rule))
 g_WD2_i = a_WD2.get('G_DICT').get('IT', i);
 assert(isequal(g_WD2_i.get('RANDOMIZE'), randomize))
 assert(isequal(g_WD2_i.get('RANDOM_SEED'), random_seed))
+assert(isequal(g_WD2_i.get('SYMMETRIZE_RULE'), symmetrize_rule))
 assert(isequal(g_WD2_i.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
 assert(isequal(g_WD2_i.get('STANDARDIZE_RULE'), standardize_rule))
 assert(isequal(g_WD2_i.get('ATTEMPTSPEREDGE'), attemptsperedge))
@@ -233,12 +237,14 @@ g_template_WD1_perm = a_WD1_perm.get('GRAPH_TEMPLATE');
 g_template_WD2_perm = a_WD2_perm.get('GRAPH_TEMPLATE');
 assert(isequal(g_template_WD1_perm.get('RANDOMIZE'), randomize))
 assert(isequal(g_template_WD1_perm.get('RANDOM_SEED'), random_seed))
+assert(isequal(g_template_WD1_perm.get('SYMMETRIZE_RULE'), symmetrize_rule))
 assert(isequal(g_template_WD1_perm.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
 assert(isequal(g_template_WD1_perm.get('STANDARDIZE_RULE'), standardize_rule))
 assert(isequal(g_template_WD1_perm.get('ATTEMPTSPEREDGE'), attemptsperedge))
 assert(isequal(g_template_WD1_perm.get('NUMBEROFWEIGHTS'), numberofweights))
 assert(isequal(g_template_WD2_perm.get('RANDOMIZE'), randomize))
 assert(isequal(g_template_WD2_perm.get('RANDOM_SEED'), random_seed))
+assert(isequal(g_template_WD2_perm.get('SYMMETRIZE_RULE'), symmetrize_rule))
 assert(isequal(g_template_WD2_perm.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
 assert(isequal(g_template_WD2_perm.get('STANDARDIZE_RULE'), standardize_rule))
 assert(isequal(g_template_WD2_perm.get('ATTEMPTSPEREDGE'), attemptsperedge))
@@ -248,12 +254,14 @@ g_WD1_perm_i = a_WD1_perm.get('G_DICT').get('IT', i);
 g_WD2_perm_i = a_WD2_perm.get('G_DICT').get('IT', i);
 assert(isequal(g_WD1_perm_i.get('RANDOMIZE'), randomize))
 assert(isequal(g_WD1_perm_i.get('RANDOM_SEED'), random_seed))
+assert(isequal(g_WD1_perm_i.get('SYMMETRIZE_RULE'), symmetrize_rule))
 assert(isequal(g_WD1_perm_i.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
 assert(isequal(g_WD1_perm_i.get('STANDARDIZE_RULE'), standardize_rule))
 assert(isequal(g_WD1_perm_i.get('ATTEMPTSPEREDGE'), attemptsperedge))
 assert(isequal(g_WD1_perm_i.get('NUMBEROFWEIGHTS'), numberofweights))
 assert(isequal(g_WD2_perm_i.get('RANDOMIZE'), randomize))
 assert(isequal(g_WD2_perm_i.get('RANDOM_SEED'), random_seed))
+assert(isequal(g_WD2_perm_i.get('SYMMETRIZE_RULE'), symmetrize_rule))
 assert(isequal(g_WD2_perm_i.get('SEMIPOSITIVIZE_RULE'), semipositivize_rule))
 assert(isequal(g_WD2_perm_i.get('STANDARDIZE_RULE'), standardize_rule))
 assert(isequal(g_WD2_perm_i.get('ATTEMPTSPEREDGE'), attemptsperedge))
