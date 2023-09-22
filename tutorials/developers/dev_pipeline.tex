@@ -58,7 +58,11 @@ a_BUD2 = AnalyzeGroup_ST_MP_BUD('GR', gr2, 'TEMPLATE', a_BUD1); ¥\circled{8}\ci
 a_BUD3 = AnalyzeGroup_ST_MP_BUD('GR', gr3, 'TEMPLATE', a_BUD1); ¥\circled{9}\circlednote{9}{performs the graph analysis for group 3 while maintaining the same template \code{'TEMPLATE'} with group 1 \code{'a\_BUD1'}.}¥
 
 %% Comparison
-c_BUD = CompareGroup('P', 1000, 'A1', a_BUD1, 'A2', a_BUD2, 'MEMORIZE', true); ¥\circled{10}\circlednote{10}{compares graph measures between the group 1 and group 2. The default value of the number of permutation test \code{'P'} is \code{1000}.}¥
+c_BUD1 = CompareGroup('P', 1000, 'A1', a_BUD1, 'A2', a_BUD2, 'MEMORIZE', true); ¥\circled{10}\circlednote{10}{compares graph measures between the group 1 and group 2. The default value of the number of permutation test \code{'P'} is \code{1000}.}¥
+
+c_BUD2 = CompareGroup('P', 1000, 'A1', a_BUD1, 'A3', a_BUD3, 'MEMORIZE', true); ¥\circled{11}\circlednote{11}{compares graph measures between the group 1 and group 3.}¥
+
+c_BUD3 = CompareGroup('P', 1000, 'A2', a_BUD2, 'A3', a_BUD3, 'MEMORIZE', true); ¥\circled{12}\circlednote{12}{compares graph measures between the group 2 and group 3.}¥
 \end{lstlisting}
 
 \end{document}
