@@ -649,7 +649,7 @@ classdef OrdMxWU < Graph
 				case 7 % OrdMxWU.GRAPH_TYPE
 					prop_default = 3;
 				case 26 % OrdMxWU.COMPATIBLE_MEASURES
-					prop_default = { 'Degree'  'DegreeAv'  'Diameter'  'Distance'  'Eccentricity'  'EccentricityAv'  'Flexibility'  'FlexibilityAv'  'GlobalEfficiency'  'GlobalEfficiencyAv'  'MultiRC'  'MultiplexCP'  'MultiplexCl'  'MultiplexClAv'  'MultiplexKCor'  'MultiplexKCorC'  'MultiplexP'  'MultiplexPAv'  'MultiplexRCDeg'  'MultiplexRCS'  'MultiplexT'  'OverlappingDegAv'  'OverlappingS'  'OverlappingSAv'  'RCDeg'  'Radius'  'Strength'  'StrengthAv'  'Triangles'  'WeightedEdgeOvlp'  'WeightedMxP'  'WeightedMxPAv' };
+					prop_default = { 'Degree'  'DegreeAv'  'Diameter'  'Distance'  'Eccentricity'  'EccentricityAv'  'Flexibility'  'FlexibilityAv'  'GlobalEfficiency'  'GlobalEfficiencyAv'  'MultiRC'  'MultilayerCommunity'  'MultiplexCP'  'MultiplexCl'  'MultiplexClAv'  'MultiplexKCor'  'MultiplexKCorC'  'MultiplexP'  'MultiplexPAv'  'MultiplexRCDeg'  'MultiplexRCS'  'MultiplexT'  'OverlappingDegAv'  'OverlappingS'  'OverlappingSAv'  'RCDeg'  'Radius'  'Strength'  'StrengthAv'  'Triangles'  'WeightedEdgeOvlp'  'WeightedMxP'  'WeightedMxPAv' };
 				otherwise
 					prop_default = getPropDefault@Graph(prop);
 			end
