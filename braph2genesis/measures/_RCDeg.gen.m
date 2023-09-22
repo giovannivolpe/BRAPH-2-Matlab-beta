@@ -11,7 +11,7 @@ The rich-club degree of a node at level k is the sum of
 %%% ¡prop!
 NAME (constant, string) is the name of the rich-club degree.
 %%%% ¡default!
-'RCDeg'
+'RichClubDegree'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the rich-club degree.
@@ -31,12 +31,12 @@ ID (data, string) is a few-letter code of the rich-club degree.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the rich-club degree.
 %%%% ¡default!
-'RCDeg label'
+'RichClubDegree label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the rich-club degree.
 %%%% ¡default!
-'RCDeg notes'
+'RichClubDegree notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
