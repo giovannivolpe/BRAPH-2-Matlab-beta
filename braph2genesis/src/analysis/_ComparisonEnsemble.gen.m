@@ -9,6 +9,68 @@ and the 95%% confidence interval.
 %%% ¡seealso!
 CompareEnsemble, AnalyzeEnsemble
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsemble.ID
+%%%% ¡title!
+Measure Comparison ID
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsemble.LABEL
+%%%% ¡title!
+Measure Comparison NAME
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsemble.MEASURE
+%%%% ¡title!
+Measure
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsemble.DIFF
+%%%% ¡title!
+DIFFERENCE
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsemble.P1
+%%%% ¡title!
+P1
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsemble.P2
+%%%% ¡title!
+P2
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsemble.CIL
+%%%% ¡title!
+Lower value of 95% confidence interval
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsemble.CIU
+%%%% ¡title!
+Upper value of 95% confidence interval
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsemble.PFC
+%%%% ¡title!
+Measure Comparison Plot
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsemble.PFBG
+%%%% ¡title!
+Measure Comparison Brain Graph
+
 %% ¡props_update!
 
 %%% ¡prop!
