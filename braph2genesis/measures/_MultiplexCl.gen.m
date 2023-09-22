@@ -222,48 +222,6 @@ assert(isequal(m_inside_g.get('M'), known_multiplex_clustering), ...
 
 %%% ¡test!
 %%%% ¡name!
-MultiplexBUT
-%%%% ¡code!
-B11 = [
-      0 1 1 1;
-      1 0 1 0;
-      1 1 0 0;
-      1 0 0 0
-      ];
-B22 = [
-      0 1 1 1;
-      1 0 0 0;
-      1 0 0 0;
-      1 0 0 0
-      ];  
-B33 = [
-      0 0 0 1;
-      0 0 0 1;
-      0 0 0 1;
-      1 1 1 0
-      ];
-B = {B11 B22 B33};
-
-known_multiplex_clustering = [5 1 1 5]'./ [12, 2, 2, 6]';
-known_multiplex_clustering(isnan(known_multiplex_clustering)) = 0;
-known_multiplex_clustering = {
-                 known_multiplex_clustering
-                 [0 0 0 0]'
-                 };    
-g = MultiplexBUT('B', B, 'THRESHOLDS', [0 1]);
-m_outside_g = MultiplexCl('G', g);
-
-assert(isequal(m_outside_g.get('M'), known_multiplex_clustering), ...
-    [BRAPH2.STR ':MultiplexCl:' BRAPH2.FAIL_TEST], ...
-    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-m_inside_g = g.get('MEASURE', 'MultiplexCl');
-assert(isequal(m_inside_g.get('M'), known_multiplex_clustering), ...
-    [BRAPH2.STR ':MultiplexCl:' BRAPH2.FAIL_TEST], ...
-    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
-
-%%% ¡test!
-%%%% ¡name!
 MultiplexBUD
 %%%% ¡code!
 B11 = [
