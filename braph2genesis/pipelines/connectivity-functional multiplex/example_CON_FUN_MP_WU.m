@@ -75,7 +75,7 @@ a_WU2 = AnalyzeEnsemble_CON_FUN_MP_WU( ...
 % measure calculation
 wmultiplexparticipation_WU1 = a_WU1.get('MEASUREENSEMBLE', 'WeightedMxP').get('M');
 wmultiplexparticipation_av_WU1 = a_WU1.get('MEASUREENSEMBLE', 'WeightedMxPAv').get('M');
-wedgeov_WU1 = a_WU1.get('MEASUREENSEMBLE', 'WeightedEdgeOverlap').get('M');
+wedgeov_WU1 = a_WU1.get('MEASUREENSEMBLE', 'WeightedEdgeOvlp').get('M');
 
 wmultiplexparticipation_WU2 = a_WU2.get('MEASUREENSEMBLE', 'WeightedMxP').get('M');
 wmultiplexparticipation_av_WU2 = a_WU2.get('MEASUREENSEMBLE', 'WeightedMxPAv').get('M');
