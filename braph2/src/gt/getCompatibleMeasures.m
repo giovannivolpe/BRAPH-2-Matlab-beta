@@ -19,8 +19,7 @@ for i = 1:1:length(measure_code_list)
     compatible_graph_list = Element.getPropDefault(measure_code, 'COMPATIBLE_GRAPHS');
 
     if any(strcmp(compatible_graph_list, graph_class))
-        measure_element = eval(measure_code);
-        list{i} = measure_element.get('NAME');
+        list{i} = measure_code;
     end
 end
 list(cellfun('isempty', list)) = [];
