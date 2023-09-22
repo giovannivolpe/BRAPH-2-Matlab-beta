@@ -54,16 +54,16 @@ a_BUT3 = AnalyzeEnsemble_FUN_BUT( ...
     'GR', gr3 ...
     );
 
-a_BUT1.get('MEASUREENSEMBLE', 'OverlappingDeg').get('M');
-a_BUT1.get('MEASUREENSEMBLE', 'OverlappingDegAv').get('M');
+a_BUT1.get('MEASUREENSEMBLE', 'Degree').get('M');
+a_BUT1.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
 a_BUT1.get('MEASUREENSEMBLE', 'Distance').get('M');
 
-a_BUT2.get('MEASUREENSEMBLE', 'OverlappingDeg').get('M');
-a_BUT2.get('MEASUREENSEMBLE', 'OverlappingDegAv').get('M');
+a_BUT2.get('MEASUREENSEMBLE', 'Degree').get('M');
+a_BUT2.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
 a_BUT2.get('MEASUREENSEMBLE', 'Distance').get('M');
 
-a_BUT3.get('MEASUREENSEMBLE', 'OverlappingDeg').get('M');
-a_BUT3.get('MEASUREENSEMBLE', 'OverlappingDegAv').get('M');
+a_BUT3.get('MEASUREENSEMBLE', 'Degree').get('M');
+a_BUT3.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
 a_BUT3.get('MEASUREENSEMBLE', 'Distance').get('M');
 
 %% Create NNData composed of corresponding NNDataPoints
