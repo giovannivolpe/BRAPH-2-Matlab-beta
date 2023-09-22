@@ -103,17 +103,17 @@ a_BUD3 = AnalyzeEnsemble_CON_FUN_MP_BUD( ...
     'DENSITIES', densities ...
     );
 
-a_BUD1.get('MEASUREENSEMBLE', 'Degree').get('M');
-a_BUD1.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
-a_BUD1.get('MEASUREENSEMBLE', 'Distance').get('M');
+a_BUD1.get('MEASUREENSEMBLE', 'OverlappingDeg').get('M');
+a_BUD1.get('MEASUREENSEMBLE', 'OverlappingDegAv').get('M');
+a_BUD1.get('MEASUREENSEMBLE', 'EdgeOverlap').get('M');
 
-a_BUD2.get('MEASUREENSEMBLE', 'Degree').get('M');
-a_BUD2.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
-a_BUD2.get('MEASUREENSEMBLE', 'Distance').get('M');
+a_BUD2.get('MEASUREENSEMBLE', 'OverlappingDeg').get('M');
+a_BUD2.get('MEASUREENSEMBLE', 'OverlappingDegAv').get('M');
+a_BUD2.get('MEASUREENSEMBLE', 'EdgeOverlap').get('M');
 
-a_BUD3.get('MEASUREENSEMBLE', 'Degree').get('M');
-a_BUD3.get('MEASUREENSEMBLE', 'DegreeAv').get('M');
-a_BUD3.get('MEASUREENSEMBLE', 'Distance').get('M');
+a_BUD3.get('MEASUREENSEMBLE', 'OverlappingDeg').get('M');
+a_BUD3.get('MEASUREENSEMBLE', 'OverlappingDegAv').get('M');
+a_BUD3.get('MEASUREENSEMBLE', 'EdgeOverlap').get('M');
 
 %% Create NNData composed of corresponding NNDataPoints
 [~, group_folder_name] = fileparts(im_gr1.get('DIRECTORY'));
@@ -175,15 +175,12 @@ d3 = NNDataset( ...
     'DP_DICT', dp_list3 ...
     );
 
-d = NNDatasetCombine('D_LIST', {d1, d2, d3}).get('D');
-
 %% Create a classifier cross-validation
 nne_template = NNClassifierMLP_Evaluator('P', 2);
-nncv = NNClassifierMLP_CrossValidation('D', d, 'KFOLDS', 5, 'NNEVALUATOR_TEMPLATE', nne_template);
+nncv = NNClassifierMLP_CrossValidation('D', {d1, d2, d3}, 'KFOLDS', 5, 'NNEVALUATOR_TEMPLATE', nne_template);
 nncv.get('TRAIN');
 
 %% Evaluate the performance
 confusion_matrix = nncv.get('C_MATRIX');
 av_auc = nncv.get('AV_AUC');
 av_macro_auc = nncv.get('AV_MACRO_AUC');
-av_fi = nncv.get('AV_FEATURE_IMPORTANCE');

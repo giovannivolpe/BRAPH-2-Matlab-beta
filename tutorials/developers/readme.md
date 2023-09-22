@@ -39,10 +39,10 @@ BRAPH 2.0's object-oriented programming architecture makes it easy to expand its
   - [Developer Tutorial to Implement a New Ensemble Analysis](dev_analysis_ensemble/dev_analysis_ensemble.pdf)
 
 - **Deep-learning Functionalities**: New functionalities for deep-learning analyses can be swiftly integrated into BRAPH 2.0 as well. Here are the tutorials for expanding BRAPH 2.0 with deep-learning features:
-  - [Developer Tutorial to Implement a New Neural Network Classifier](dev_nn_clas/dev_nn_clas.pdf)
+  - [Developer Tutorial to Implement a New Neural Network Data Point](dev_nn_datapoint/dev_nn_datapoint.pdf)
+  - [Developer Tutorial to Implement a New Neural Network Classifier](dev_nn_cla/dev_nn_cla.pdf)
   - [Developer Tutorial to Implement a New Neural Network Regressor](dev_nn_reg/dev_nn_reg.pdf)
-  - [Developer Tutorial to Implement a New Neural Network Evaluator for Classification](dev_nn_clas_eval/dev_nn_clas_eval.pdf)
-  - [Developer Tutorial to Implement a New Neural Network Evaluator for Regression](dev_nn_reg_eval/dev_nn_reg_eval.pdf)
+  - [Developer Tutorial to Implement a New Neural Network Cross Validation](dev_nn_cross_val/dev_nn_cross_val.pdf)
 
 - **Analysis Pipelines**: Developers can also contribute to the evolution of BRAPH 2.0 by introducing new analysis pipelines tailored to specific research requirements. The [Developer Tutorial to Implement a New Analysis Pipeline](dev_new_pipeline/dev_new_pipeline.pdf) provides a comprehensive guide on creating custom analysis pipelines within the BRAPH framework. This tutorial covers the entire pipeline development process, including data handling, calculation of measures, statistical analysis, and results visualization. By developing new analysis pipelines, users can enhance the capabilities of BRAPH 2.0 and enable the exploration of novel analytical approaches.
 
@@ -52,7 +52,7 @@ BRAPH 2.0's object-oriented programming architecture also simplifies the process
 
 - **Property Panels**: New property panels can be implemented by extending the `PanelProp` element. The [Developer Tutorial to Implement a New Property Panel](dev_panelprop/dev_panelprop.pdf) provides a step-by-step guide on creating new property panel.
 
-- **Figure Panels**: New figure panels can be added to BRAPH 2.0 by extending the `GUIFig` element. The [Developer Tutorial to Implement a New Figure Panel](dev_guifig/dev_guifig.pdf) explains the process of implementing custom figures.
+- **Figure Panels**: New figure panels can be added to BRAPH 2.0 by extending the `GUIFig` element. The [Developer Tutorial to Implement a New Figure Panel](dev_panelfig/dev_panelfig.pdf) explains the process of implementing custom figures.
 
 These tutorials provide step-by-step instructions and examples to guide developers in expanding BRAPH 2.0 with new functionalities and graphical elements. We encourage developers to contribute to the growth and improvement of BRAPH 2.0 by introducing new elements, measures, and analyses. Feel free to share your implementations, ask questions, and engage with the BRAPH community through the [BRAPH forum](http://braph.org/forums) and [GitHub page](https://github.com/softmatterlab/BRAPH-2-Matlab).
 

@@ -12,27 +12,27 @@ NAME (constant, string) is the name of the average in-global efficiency.
 'GlobalEfficiencyInAv'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the GlobalEfficiencyInAv.
+DESCRIPTION (constant, string) is the description of the average graph in-global efficiency.
 %%%% ¡default!
 'The average in-global efficiency is the average inverse shortest in-path length within each layer.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the GlobalEfficiencyInAv.
+TEMPLATE (parameter, item) is the template of the average graph in-global efficiency.
 %%%% ¡settings!
 'GlobalEfficiencyInAv'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the GlobalEfficiencyInAv.
+ID (data, string) is a few-letter code of the average graph in-global efficiency.
 %%%% ¡default!
 'GlobalEfficiencyInAv ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the GlobalEfficiencyInAv.
+LABEL (metadata, string) is an extended label of the average graph in-global efficiency.
 %%%% ¡default!
 'GlobalEfficiencyInAv label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the GlobalEfficiencyInAv.
+NOTES (metadata, string) are some specific notes about the average graph in-global efficiency.
 %%%% ¡default!
 'GlobalEfficiencyInAv notes'
 
@@ -54,7 +54,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphWD' 'GraphBD' 'MultiplexWD' 'MultiplexBD' 'OrdMxBD' 'OrdMxWD'} ;%TBE % % % add multilayerWD multilayerBD ordmlwd ordmlbd tests
+{'GraphWD' 'GraphBD' 'MultiplexWD' 'MultiplexBD' 'OrdMxBD' 'OrdMxWD'};
 
 %%% ¡prop!
 M (result, cell) is the average in-global efficiency.

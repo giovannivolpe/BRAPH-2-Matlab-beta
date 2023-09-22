@@ -35,6 +35,12 @@ Brain Atlas NOTES
 
 %%% ¡prop!
 %%%% ¡id!
+MeasurePF_NU.NODE
+%%%% ¡title!
+NODE SELECTION
+
+%%% ¡prop!
+%%%% ¡id!
 MeasurePF_NU.BKGCOLOR
 %%%% ¡title!
 BACKGROUND COLOR
@@ -80,12 +86,6 @@ X-LABEL
 MeasurePF_NU.ST_YLABEL
 %%%% ¡title!
 Y-LABEL
-
-%%% ¡prop!
-%%%% ¡id!
-MeasurePF_NU.NODE
-%%%% ¡title!
-NODE SELECTION
 
 %% ¡props_update!
 
@@ -169,13 +169,8 @@ NODE (figure, scalar) is the node number of the nodal measure.
 1
 %%%% ¡postset!
 pf.get('SETUP')
-%%%% ¡_gui!
-% % % bas = pf.get('M').get('G').get('BAS');
-% % % ba = bas{1};
-% % % 
-% % % pr = PP_BrainRegion('EL', pf, 'PROP', PFMeasureNU.BR1_ID, ...
-% % %     'BA', ba, ...
-% % %     varargin{:});
+%%%% ¡gui!
+pr = MeasurePF_NxPP_Node('EL', pf, 'PROP', MeasurePF_NU.NODE);
 
 %% ¡tests!
 
