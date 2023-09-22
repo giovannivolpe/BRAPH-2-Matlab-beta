@@ -1,5 +1,5 @@
 %% ¡header!
-WeightedMxPOut < Measure (m, weighted mxpart-out) is the graph weighted multiplex out-participation.
+WeightedMxPOut < Measure (m, weighted out-participation) is the graph weighted multiplex out-participation.
 
 %%% ¡description!
 The weighted multiplex out-participation of a graph is the nodal homogeneity 

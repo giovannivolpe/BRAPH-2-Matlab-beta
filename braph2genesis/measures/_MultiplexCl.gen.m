@@ -1,5 +1,5 @@
 %% ¡header!
-MultiplexCl < MultiplexT (m, weighted clustering) is the graph weighted multiplex clustering.
+MultiplexCl < MultiplexT (m, multiplex clustering) is the graph multiplex clustering.
 
 %%% ¡description!
 The two-multiplex clustering coefficient of a node i is the fraction 
@@ -53,32 +53,32 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the weighted multiplex particiption.
+NAME (constant, string) is the name of the multiplex clustering.
 %%%% ¡default!
 'MultiplexCl'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the weighted multiplex particiption.
+DESCRIPTION (constant, string) is the description of the multiplex clustering.
 %%%% ¡default!
 'The two-multiplex clustering coefficient of a node i is the fraction of two-multiplex triangles (triangles which use edges from two different layers) with a vertex in node i and the number of one-triads centered in i.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the weighted multiplex particiption.
+TEMPLATE (parameter, item) is the template of the multiplex clustering.
 %%%% ¡settings!
 'MultiplexCl'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the weighted multiplex particiption.
+ID (data, string) is a few-letter code of the multiplex clustering.
 %%%% ¡default!
 'MultiplexCl ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the weighted multiplex particiption.
+LABEL (metadata, string) is an extended label of the multiplex clustering.
 %%%% ¡default!
 'MultiplexCl label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the weighted multiplex particiption.
+NOTES (metadata, string) are some specific notes about the multiplex clustering.
 %%%% ¡default!
 'MultiplexCl notes'
 
@@ -103,7 +103,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU'};
 
 %%% ¡prop!
-M (result, cell) is the weighted multiplex particiption.
+M (result, cell) is the multiplex clustering.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)

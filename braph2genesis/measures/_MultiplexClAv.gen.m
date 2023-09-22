@@ -1,5 +1,5 @@
 %% ¡header!
-MultiplexClAv < MultiplexCl (m, average weighted clustering) is the graph average weighted multiplex clustering.
+MultiplexClAv < MultiplexCl (m, average multiplex clustering) is the graph average multiplex clustering.
 
 %%% ¡description!
 The average multiplex clustering coefficient of a multilayer graph is 
@@ -52,31 +52,31 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the weighted multiplex particiption.
+NAME (constant, string) is the name of the average multiplex clustering.
 %%%% ¡default!
 'MultiplexClAv'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the weighted multiplex particiption.
+DESCRIPTION (constant, string) is the description of the average multiplex clustering.
 %%%% ¡default!
 'The average multiplex clustering coefficient of a multilayer graph is the average of the two-multiplex clustering coefficients of all nodes.'
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the weighted multiplex particiption.
+TEMPLATE (parameter, item) is the template of the average multiplex clustering.
 %%%% ¡settings!
 'MultiplexClAv'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the weighted multiplex particiption.
+ID (data, string) is a few-letter code of the average multiplex clustering.
 %%%% ¡default!
 'MultiplexClAv ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the weighted multiplex particiption.
+LABEL (metadata, string) is an extended label of the average multiplex clustering.
 %%%% ¡default!
 'MultiplexClAv label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the weighted multiplex particiption.
+NOTES (metadata, string) are some specific notes about the average multiplex clustering.
 %%%% ¡default!
 'MultiplexClAv notes'
 
@@ -101,7 +101,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU'};
 
 %%% ¡prop!
-M (result, cell) is the weighted multiplex particiption.
+M (result, cell) is the average multiplex clustering.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)

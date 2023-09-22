@@ -1,5 +1,5 @@
 %% ¡header!
-WeightedMxP < Measure (m, weighted mxpart) is the graph weighted multiplex participation.
+WeightedMxP < Measure (m, weighted multiplex participation) is the graph weighted multiplex participation.
 
 %%% ¡description!
 The weighted multiplex participation of a graph is the nodal homogeneity 

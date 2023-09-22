@@ -1,5 +1,5 @@
 %% ¡header!
-WeightedMxPIn < Measure (m, weighted mxpart-in) is the graph weighted multiplex in-participation.
+WeightedMxPIn < Measure (m, weighted in-participation) is the graph weighted multiplex in-participation.
 
 %%% ¡description!
 The weighted multiplex in-participation of a graph is the nodal homogeneity 
