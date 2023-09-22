@@ -550,7 +550,7 @@ classdef MultilayerM < MultilayerCommunity
 				case 9 % MultilayerM.PARAMETRICITY
 					prop_default = 2;
 				case 10 % MultilayerM.COMPATIBLE_GRAPHS
-					prop_default = {'MultiplexBU'} ;%TBE % % % add any missing tests;
+					prop_default = {'MultiplexWU' 'OrdMxWU' 'MultiplexBU' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};
 				otherwise
 					prop_default = getPropDefault@MultilayerCommunity(prop);
 			end
