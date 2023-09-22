@@ -35,6 +35,12 @@ Brain Atlas NOTES
 
 %%% ¡prop!
 %%%% ¡id!
+ComparisonGroupPF_BB.NODES
+%%%% ¡title!
+NODES SELECTION
+
+%%% ¡prop!
+%%%% ¡id!
 ComparisonGroupPF_BB.BKGCOLOR
 %%%% ¡title!
 BACKGROUND COLOR
@@ -50,12 +56,6 @@ PANEL POSITION
 ComparisonGroupPF_BB.ST_AXIS
 %%%% ¡title!
 AXIS
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupPF_BB.NODES
-%%%% ¡title!
-NODES SELECTION
 
 %%% ¡prop!
 %%%% ¡id!
@@ -141,13 +141,8 @@ value = [];
 
 %%% ¡prop!
 NODES (figure, rvector) are the node numbers of the binodal group comparison figure.
-%%%% ¡_gui!
-% % % bas = pf.get('M').get('G').get('BAS');
-% % % ba = bas{1};
-% % % 
-% % % pr = PP_BrainRegion('EL', pf, 'PROP', PFMeasureNU.BR1_ID, ...
-% % %     'BA', ba, ...
-% % %     varargin{:});
+%%%% ¡gui!
+pr = ComparisonGroupPF_BxPP_Node('EL', pf, 'PROP', ComparisonGroupPF_BB.NODES);
 
 %% ¡tests!
 
