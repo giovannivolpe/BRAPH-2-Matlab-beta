@@ -88,7 +88,13 @@ function set_table()
     end
 
     mlist = g.get('COMPATIBLE_MEASURES');
-
+    mlist2 = mlist;% to have the complete name in the table
+    for ml = 1:1:length(mlist)
+        measure_code = mlist{ml};
+        measure_element_name = eval(measure_code).get('NAME');
+        mlist2{ml} = measure_element_name;
+    end
+    
     if isa(g.getr('M_DICT'), 'NoValue')
         mlist_already_calculated = {};
     else
@@ -110,7 +116,7 @@ function set_table()
             data{mi, 1} = false;
         end
 
-        data{mi, 2} = mlist{mi};
+        data{mi, 2} = mlist2{mi};
 
         if Element.getPropDefault(mlist{mi}, 'SHAPE') == Measure.NODAL
             data{mi, 3} = 'NODAL';
