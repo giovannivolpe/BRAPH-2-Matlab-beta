@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex k-coreness centrality.
 %%%% ¡default!
-'MultiplexKCorC'
+'MultiplexKCorenessCentrality'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex k-coreness centrality.
@@ -74,12 +74,12 @@ ID (data, string) is a few-letter code of the multiplex k-coreness centrality.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex k-coreness centrality.
 %%%% ¡default!
-'MultiplexKCorC label'
+'MultiplexKCorenessCentrality label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex k-coreness centrality.
 %%%% ¡default!
-'MultiplexKCorC notes'
+'MultiplexKCorenessCentrality notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.

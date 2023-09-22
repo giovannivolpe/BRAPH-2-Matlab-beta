@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the averge overlapping degree.
 %%%% ¡default!
-'OverlappingDegAv'
+'OverlappingDegreeAv'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the average overlapping degree.
@@ -74,12 +74,12 @@ ID (data, string) is a few-letter code of the average overlapping degree.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the average overlapping degree.
 %%%% ¡default!
-'OverlappingDegAv label'
+'OverlappingDegreeAv label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the average overlapping degree.
 %%%% ¡default!
-'OverlappingDegAv notes'
+'OverlappingDegreeAv notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.GLOBAL__.

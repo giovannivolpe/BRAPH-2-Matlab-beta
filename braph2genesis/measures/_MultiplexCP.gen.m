@@ -57,7 +57,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex core-periphery.
 %%%% ¡default!
-'MultiplexCP'
+'MultiplexCorePeriphery'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex core-periphery.
@@ -77,12 +77,12 @@ ID (data, string) is a few-letter code of the multiplex core-periphery.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex core-periphery.
 %%%% ¡default!
-'MultiplexCP label'
+'MultiplexCorePeriphery label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex core-periphery.
 %%%% ¡default!
-'MultiplexCP notes'
+'MultiplexCorePeriphery notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.

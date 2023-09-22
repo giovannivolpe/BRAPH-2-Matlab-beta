@@ -55,7 +55,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex clustering.
 %%%% ¡default!
-'MultiplexCl'
+'MultiplexClustering'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex clustering.
@@ -75,12 +75,12 @@ ID (data, string) is a few-letter code of the multiplex clustering.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex clustering.
 %%%% ¡default!
-'MultiplexCl label'
+'MultiplexClustering label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex clustering.
 %%%% ¡default!
-'MultiplexCl notes'
+'MultiplexClustering notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.

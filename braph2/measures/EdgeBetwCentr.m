@@ -521,15 +521,15 @@ classdef EdgeBetwCentr < Measure
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % EdgeBetwCentr.NAME
-					prop_default = 'EdgeBetwCentr';
+					prop_default = 'EdgeBetweennessCentrality';
 				case 2 % EdgeBetwCentr.DESCRIPTION
 					prop_default = 'The edge betweenness centrality of a graph is the fraction of all shortest paths in the graph that pass through a given edge within a layer. Edges with high values of betweenness centrality participate in a large number of shortest paths.';
 				case 4 % EdgeBetwCentr.ID
 					prop_default = 'EdgeBetwCentr ID';
 				case 5 % EdgeBetwCentr.LABEL
-					prop_default = 'EdgeBetwCentr label';
+					prop_default = 'EdgeBetweennessCentrality label';
 				case 6 % EdgeBetwCentr.NOTES
-					prop_default = 'EdgeBetwCentr notes';
+					prop_default = 'EdgeBetweennessCentrality notes';
 				case 8 % EdgeBetwCentr.SHAPE
 					prop_default = 3;
 				case 9 % EdgeBetwCentr.SCOPE

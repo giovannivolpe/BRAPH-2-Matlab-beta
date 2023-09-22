@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the overlapping degree.
 %%%% ¡default!
-'OverlappingDeg'
+'OverlappingDegree'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the overlapping degree.
@@ -74,12 +74,12 @@ ID (data, string) is a few-letter code of the overlapping degree.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the overlapping degree.
 %%%% ¡default!
-'OverlappingDeg label'
+'OverlappingDegree label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the overlapping degree.
 %%%% ¡default!
-'OverlappingDeg notes'
+'OverlappingDegree notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.

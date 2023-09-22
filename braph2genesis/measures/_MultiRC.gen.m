@@ -56,7 +56,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the multirichness.
 %%%% ¡default!
-'MultiRC'
+'Multirichness'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multirichness.
@@ -76,12 +76,12 @@ ID (data, string) is a few-letter code of the multirichness.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multirichness.
 %%%% ¡default!
-'MultiRC label'
+'Multirichness label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multirichness.
 %%%% ¡default!
-'MultiRC notes'
+'Multirichness notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
