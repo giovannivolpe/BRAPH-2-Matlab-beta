@@ -1,11 +1,11 @@
 %% ¡header!
-ComparisonEnsemblePF_BS < ComparisonGroupPF (pf, panel binodal superglobal group comparison figure) is the base element to plot a binodal superglobal group comparison figure.
+ComparisonEnsemblePF_BS < ComparisonEnsemblePF (pf, panel binodal superglobal group comparison figure) is the base element to plot a binodal superglobal group comparison figure.
 
 %%% ¡description!
 ComparisonEnsemblePF_BS manages the basic functionalities to plot of a binodal superglobal group comparison figure.
 
 %%% ¡seealso!
-ComparisonGroup
+ComparisonEnsemble
 
 %% ¡layout!
 

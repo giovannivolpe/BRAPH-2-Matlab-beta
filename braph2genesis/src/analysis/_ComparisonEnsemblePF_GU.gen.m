@@ -1,11 +1,11 @@
 %% ¡header!
-ComparisonEnsemblePF_GU < ComparisonGroupPF (pf, panel global unilayer group comparison figure) is the base element to plot a global unilayer group comparison figure.
+ComparisonEnsemblePF_GU < ComparisonEnsemblePF (pf, panel global unilayer group comparison figure) is the base element to plot a global unilayer group comparison figure.
 
 %%% ¡description!
 ComparisonEnsemblePF_GU manages the basic functionalities to plot of a global unilayer group comparison figure.
 
 %%% ¡seealso!
-ComparisonGroup
+ComparisonEnsemble
 
 %% ¡layout!
 
@@ -129,7 +129,7 @@ NOTES (metadata, string) are some specific notes about the panel figure global u
 SETUP (query, empty) calculates the group comparison figure value and stores it.
 %%%% ¡calculate!
 cp = pf.get('CP');
-g = cp.get('C').get('A1').get('G');
+g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 
 x = g.get('ALAYERTICKS');
 

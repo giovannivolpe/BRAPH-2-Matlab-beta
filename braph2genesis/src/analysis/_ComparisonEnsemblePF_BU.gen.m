@@ -1,11 +1,11 @@
 %% ¡header!
-ComparisonEnsemblePF_BU < ComparisonGroupPF (pf, panel binodal unilayer group comparison figure) is the base element to plot a binodal unilayer group comparison figure.
+ComparisonEnsemblePF_BU < ComparisonEnsemblePF (pf, panel binodal unilayer group comparison figure) is the base element to plot a binodal unilayer group comparison figure.
 
 %%% ¡description!
 ComparisonEnsemblePF_BU manages the basic functionalities to plot of a binodal unilayer group comparison figure.
 
 %%% ¡seealso!
-ComparisonGroup
+ComparisonEnsemble
 
 %% ¡layout!
 

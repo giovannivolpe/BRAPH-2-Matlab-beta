@@ -1,11 +1,11 @@
 %% ¡header!
-ComparisonEnsemblePF_GS < ComparisonGroupPF (pf, panel global superglobal group comparison figure) is the base element to plot a global superglobal group comparison figure.
+ComparisonEnsemblePF_GS < ComparisonEnsemblePF (pf, panel global superglobal group comparison figure) is the base element to plot a global superglobal group comparison figure.
 
 %%% ¡description!
 ComparisonEnsemblePF_GS manages the basic functionalities to plot of a global superglobal group comparison figure.
 
 %%% ¡seealso!
-ComparisonGroup
+ComparisonEnsemble
 
 %% ¡layout!
 

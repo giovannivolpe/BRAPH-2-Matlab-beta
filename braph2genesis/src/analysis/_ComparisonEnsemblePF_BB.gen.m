@@ -1,11 +1,11 @@
 %% ¡header!
-ComparisonEnsemblePF_BB < ComparisonGroupPF (pf, panel binodal bilayer group comparison figure) is the base element to plot a binodal bilayer group comparison figure.
+ComparisonEnsemblePF_BB < ComparisonEnsemblePF (pf, panel binodal bilayer group comparison figure) is the base element to plot a binodal bilayer group comparison figure.
 
 %%% ¡description!
 ComparisonEnsemblePF_BB manages the basic functionalities to plot of a binodal bilayer group comparison figure.
 
 %%% ¡seealso!
-ComparisonGroup
+ComparisonEnsemble
 
 %% ¡layout!
 

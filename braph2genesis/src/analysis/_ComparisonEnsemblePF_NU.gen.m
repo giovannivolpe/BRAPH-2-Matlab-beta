@@ -1,11 +1,11 @@
 %% ¡header!
-ComparisonEnsemblePF_NU < ComparisonGroupPF (pf, panel nodal unilayer group comparison figure) is the base element to plot a nodal unilayer group comparison figure.
+ComparisonEnsemblePF_NU < ComparisonEnsemblePF (pf, panel nodal unilayer group comparison figure) is the base element to plot a nodal unilayer group comparison figure.
 
 %%% ¡description!
 ComparisonEnsemblePF_NU manages the basic functionalities to plot of a nodal unilayer group comparison figure.
 
 %%% ¡seealso!
-ComparisonGroup
+ComparisonEnsemble
 
 %% ¡layout!
 
@@ -135,7 +135,7 @@ NOTES (metadata, string) are some specific notes about the panel figure nodal un
 SETUP (query, empty) calculates the group comparison figure value and stores it.
 %%%% ¡calculate!
 cp = pf.get('CP');
-g = cp.get('C').get('A1').get('G');
+g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 
 x = g.get('ALAYERTICKS');
 

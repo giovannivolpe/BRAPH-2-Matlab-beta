@@ -1,11 +1,11 @@
 %% ¡header!
-ComparisonEnsemblePF_NB < ComparisonGroupPF (pf, panel nodal bilayer group comparison figure) is the base element to plot a nodal bilayer group comparison figure.
+ComparisonEnsemblePF_NB < ComparisonEnsemblePF (pf, panel nodal bilayer group comparison figure) is the base element to plot a nodal bilayer group comparison figure.
 
 %%% ¡description!
 ComparisonEnsemblePF_NB manages the basic functionalities to plot of a nodal bilayer group comparison figure.
 
 %%% ¡seealso!
-ComparisonGroup
+ComparisonEnsemble
 
 %% ¡layout!
 

@@ -1,11 +1,11 @@
 %% ¡header!
-ComparisonEnsemblePF_NS < ComparisonGroupPF (pf, panel nodal superglobal group comparison figure) is the base element to plot a nodal superglobal group comparison figure.
+ComparisonEnsemblePF_NS < ComparisonEnsemblePF (pf, panel nodal superglobal group comparison figure) is the base element to plot a nodal superglobal group comparison figure.
 
 %%% ¡description!
 ComparisonEnsemblePF_NS manages the basic functionalities to plot of a nodal superglobal group comparison figure.
 
 %%% ¡seealso!
-ComparisonGroup
+ComparisonEnsemble
 
 %% ¡layout!
 

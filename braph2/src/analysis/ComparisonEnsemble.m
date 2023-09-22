@@ -567,7 +567,7 @@ classdef ComparisonEnsemble < ConcreteElement
 				case 14 % ComparisonEnsemble.QVALUE
 					prop_settings = Format.getFormatSettings(11);
 				case 15 % ComparisonEnsemble.PFC
-					prop_settings = Format.getFormatSettings(8);
+					prop_settings = 'ComparisonEnsemblePF';
 				case 16 % ComparisonEnsemble.CALCULATE_RESULTS
 					prop_settings = Format.getFormatSettings(16);
 				case 3 % ComparisonEnsemble.TEMPLATE
@@ -734,6 +734,63 @@ classdef ComparisonEnsemble < ConcreteElement
 			end
 		end
 	end
+	methods (Access=protected) % postprocessing
+		function postprocessing(cp, prop)
+			%POSTPROCESSING postprocessesing after setting.
+			%
+			% POSTPROCESSING(EL, PROP) postprocessesing of PROP after setting. By
+			%  default, this function does not do anything, so it should be implemented
+			%  in the subclasses of Element when needed.
+			%
+			% The postprocessing of all properties occurs each time set is called.
+			%
+			% See also conditioning, preset, checkProp, postset, calculateValue,
+			%  checkValue.
+			
+			switch prop
+				case 15 % ComparisonEnsemble.PFC
+					if isa(cp.getr('PFC'), 'NoValue')
+					
+					    measure = cp.get('MEASURE');
+					
+					    switch Element.getPropDefault(measure, 'SHAPE')
+					        case 1 % Measure.GLOBAL
+					            switch Element.getPropDefault(measure, 'SCOPE')
+					                case 1 % Measure.SUPERGLOBAL
+					                    cp.set('PFC', ComparisonEnsemblePF_GS('CP', cp))
+					                case 2 % Measure.UNILAYER
+					                    cp.set('PFC', ComparisonEnsemblePF_GU('CP', cp))
+					                case 3 % Measure.BILAYER
+					                    cp.set('PFC', ComparisonEnsemblePF_GB('CP', cp))
+					            end
+					        case 2 % Measure.NODAL
+					            switch Element.getPropDefault(measure, 'SCOPE')
+					                case 1 % Measure.SUPERGLOBAL
+					                    cp.set('PFC', ComparisonEnsemblePF_NS('CP', cp))
+					                case 2 % Measure.UNILAYER
+					                    cp.set('PFC', ComparisonEnsemblePF_NU('CP', cp))
+					                case 3 % Measure.BILAYER
+					                    cp.set('PFC', ComparisonEnsemblePF_NB('CP', cp))
+					            end
+					        case 3 % Measure.BINODAL
+					            switch Element.getPropDefault(measure, 'SCOPE')
+					                case 1 % Measure.SUPERGLOBAL
+					                    cp.set('PFC', ComparisonEnsemblePF_BS('CP', cp))
+					                case 2 % Measure.UNILAYER
+					                    cp.set('PFC', ComparisonEnsemblePF_BU('CP', cp))
+					                case 3 % Measure.BILAYER
+					                    cp.set('PFC',ComparisonEnsemblePF_BB('CP', cp))
+					            end
+					    end
+					end
+					
+				otherwise
+					if prop <= 6
+						postprocessing@ConcreteElement(cp, prop);
+					end
+			end
+		end
+	end
 	methods (Access=protected) % calculate value
 		function value = calculateValue(cp, prop, varargin)
 			%CALCULATEVALUE calculates the value of a property.
@@ -895,6 +952,35 @@ classdef ComparisonEnsemble < ConcreteElement
 					end
 			end
 			
+		end
+	end
+	methods % GUI
+		function pr = getPanelProp(cp, prop, varargin)
+			%GETPANELPROP returns a prop panel.
+			%
+			% PR = GETPANELPROP(EL, PROP) returns the panel of prop PROP.
+			%
+			% PR = GETPANELPROP(EL, PROP, 'Name', Value, ...) sets the properties 
+			%  of the panel prop.
+			%
+			% See also PanelProp, PanelPropAlpha, PanelPropCell, PanelPropClass,
+			%  PanelPropClassList, PanelPropColor, PanelPropHandle,
+			%  PanelPropHandleList, PanelPropIDict, PanelPropItem, PanelPropLine,
+			%  PanelPropItemList, PanelPropLogical, PanelPropMarker, PanelPropMatrix,
+			%  PanelPropNet, PanelPropOption, PanelPropScalar, PanelPropSize,
+			%  PanelPropString, PanelPropStringList.
+			
+			switch prop
+				case 15 % ComparisonEnsemble.PFC
+					pr = PanelPropItem('EL', cp, 'PROP', 15, ...
+					    'GUICLASS', 'GUIFig', ...
+						'BUTTON_TEXT', ['Plot ' cp.get('MEASURE') ' Comparison'], ...
+					    varargin{:});
+					
+				otherwise
+					pr = getPanelProp@ConcreteElement(cp, prop, varargin{:});
+					
+			end
 		end
 	end
 end

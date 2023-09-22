@@ -1,11 +1,11 @@
 %% ¡header!
-ComparisonEnsemblePF_GB < ComparisonGroupPF (pf, panel global bilayer group comparison figure) is the base element to plot a global bilayer group comparison figure.
+ComparisonEnsemblePF_GB < ComparisonEnsemblePF (pf, panel global bilayer group comparison figure) is the base element to plot a global bilayer group comparison figure.
 
 %%% ¡description!
 ComparisonEnsemblePF_GB manages the basic functionalities to plot of a global bilayer group comparison figure.
 
 %%% ¡seealso!
-ComparisonGroup
+ComparisonEnsemble
 
 %% ¡layout!
 
