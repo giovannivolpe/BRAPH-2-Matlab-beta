@@ -522,7 +522,7 @@ classdef WeightedEdgeOvlp < Measure
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % WeightedEdgeOvlp.NAME
-					prop_default = 'WeightedEdgeOvlp';
+					prop_default = 'WeightedEdgeOverlap';
 				case 2 % WeightedEdgeOvlp.DESCRIPTION
 					prop_default = 'The weighted edge overlap of a graph is the average weight of an edge across all layers.';
 				case 3 % WeightedEdgeOvlp.TEMPLATE
@@ -530,9 +530,9 @@ classdef WeightedEdgeOvlp < Measure
 				case 4 % WeightedEdgeOvlp.ID
 					prop_default = 'WeightedEdgeOvlp ID';
 				case 5 % WeightedEdgeOvlp.LABEL
-					prop_default = 'WeightedEdgeOvlp label';
+					prop_default = 'WeightedEdgeOverlap label';
 				case 6 % WeightedEdgeOvlp.NOTES
-					prop_default = 'WeightedEdgeOvlp notes';
+					prop_default = 'WeightedEdgeOverlap notes';
 				case 8 % WeightedEdgeOvlp.SHAPE
 					prop_default = 3;
 				case 9 % WeightedEdgeOvlp.SCOPE

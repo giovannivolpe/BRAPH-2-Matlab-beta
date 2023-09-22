@@ -522,7 +522,7 @@ classdef WeightedMxPAv < WeightedMxP
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % WeightedMxPAv.NAME
-					prop_default = 'WeightedMxPAv';
+					prop_default = 'WeightedMultiplexParticipationAv';
 				case 2 % WeightedMxPAv.DESCRIPTION
 					prop_default = 'The weighted multiplex participation of a graph is the nodal homogeneity of its number of inward neighbours across the layers.';
 				case 3 % WeightedMxPAv.TEMPLATE
@@ -530,9 +530,9 @@ classdef WeightedMxPAv < WeightedMxP
 				case 4 % WeightedMxPAv.ID
 					prop_default = 'WeightedMxPAv ID';
 				case 5 % WeightedMxPAv.LABEL
-					prop_default = 'WeightedMxPAv label';
+					prop_default = 'WeightedMultiplexParticipationAv label';
 				case 6 % WeightedMxPAv.NOTES
-					prop_default = 'WeightedMxPAv notes';
+					prop_default = 'WeightedMultiplexParticipationAv notes';
 				case 8 % WeightedMxPAv.SHAPE
 					prop_default = 1;
 				case 9 % WeightedMxPAv.SCOPE

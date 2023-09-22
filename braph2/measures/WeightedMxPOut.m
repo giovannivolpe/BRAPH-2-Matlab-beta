@@ -522,7 +522,7 @@ classdef WeightedMxPOut < Measure
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % WeightedMxPOut.NAME
-					prop_default = 'WeightedMxPOut ';
+					prop_default = 'WeightedMultiplexOutParticipation';
 				case 2 % WeightedMxPOut.DESCRIPTION
 					prop_default = 'The weighted multiplex out-participation of a graph is the nodal homogeneity of its number of outward neighbours across the layers.';
 				case 3 % WeightedMxPOut.TEMPLATE
@@ -530,9 +530,9 @@ classdef WeightedMxPOut < Measure
 				case 4 % WeightedMxPOut.ID
 					prop_default = 'WeightedMxPOut ID';
 				case 5 % WeightedMxPOut.LABEL
-					prop_default = 'WeightedMxPOut label';
+					prop_default = 'WeightedMultiplexOutParticipation label';
 				case 6 % WeightedMxPOut.NOTES
-					prop_default = 'WeightedMxPOut notes';
+					prop_default = 'WeightedMultiplexOutParticipation notes';
 				case 8 % WeightedMxPOut.SHAPE
 					prop_default = 2;
 				case 9 % WeightedMxPOut.SCOPE

@@ -537,7 +537,7 @@ classdef WeightedRC < Strength
 				case 15 % WeightedRC.WRC_PARAMETER
 					prop_default = 1;
 				case 1 % WeightedRC.NAME
-					prop_default = 'WeightedRC';
+					prop_default = 'WeightedRichClub';
 				case 2 % WeightedRC.DESCRIPTION
 					prop_default = 'The weighted rich-club coefficient of a node at level s is the fraction of the edges weights that connect nodes of strength s or higher out of the maxium number of edges weights that such nodes might share within a layer. s is set by the user and it can be a vector containting all the strength thresholds; the default value is equal to 1.';
 				case 3 % WeightedRC.TEMPLATE
@@ -545,9 +545,9 @@ classdef WeightedRC < Strength
 				case 4 % WeightedRC.ID
 					prop_default = 'WeightedRC ID';
 				case 5 % WeightedRC.LABEL
-					prop_default = 'WeightedRC label';
+					prop_default = 'WeightedRichClub label';
 				case 6 % WeightedRC.NOTES
-					prop_default = 'WeightedRC notes';
+					prop_default = 'WeightedRichClub notes';
 				case 8 % WeightedRC.SHAPE
 					prop_default = 2;
 				case 9 % WeightedRC.SCOPE

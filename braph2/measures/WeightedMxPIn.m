@@ -522,7 +522,7 @@ classdef WeightedMxPIn < Measure
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % WeightedMxPIn.NAME
-					prop_default = 'WeightedMxPIn';
+					prop_default = 'WeightedMultiplexInParticipation';
 				case 2 % WeightedMxPIn.DESCRIPTION
 					prop_default = 'The weighted multiplex in-participation of a graph is the nodal homogeneity of its number of inward neighbours across the layers.';
 				case 3 % WeightedMxPIn.TEMPLATE
@@ -530,9 +530,9 @@ classdef WeightedMxPIn < Measure
 				case 4 % WeightedMxPIn.ID
 					prop_default = 'WeightedMxPIn ID';
 				case 5 % WeightedMxPIn.LABEL
-					prop_default = 'WeightedMxPIn label';
+					prop_default = 'WeightedMultiplexInParticipation label';
 				case 6 % WeightedMxPIn.NOTES
-					prop_default = 'WeightedMxPIn notes';
+					prop_default = 'WeightedMultiplexInParticipation notes';
 				case 8 % WeightedMxPIn.SHAPE
 					prop_default = 2;
 				case 9 % WeightedMxPIn.SCOPE
