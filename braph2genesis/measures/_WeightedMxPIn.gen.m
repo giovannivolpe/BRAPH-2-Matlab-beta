@@ -99,7 +99,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWD' 'OrdMxWD'}
+{'MultiplexWD' 'OrdMxWD' 'MultilayerWD' 'OrdMlWD'}
 
 %%% ¡prop!
 M (result, cell) is the weighted multiplex in-particiption.
@@ -107,7 +107,6 @@ M (result, cell) is the weighted multiplex in-particiption.
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 l = g.get('LAYERNUMBER');
-ls = g.get('PARTITIONS');
 
 if l == 0
     value = {};
