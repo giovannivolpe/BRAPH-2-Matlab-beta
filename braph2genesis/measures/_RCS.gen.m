@@ -11,7 +11,7 @@ The rich-club strength of a node at level s is the sum of the weighted edges
 %%% ¡prop!
 NAME (constant, string) is the name of the rich-club strength.
 %%%% ¡default!
-'RCS'
+'RichClubStrength'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the rich-club strength.
@@ -31,12 +31,12 @@ ID (data, string) is a few-letter code of the rich-club strength.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the rich-club strength.
 %%%% ¡default!
-'RCS label'
+'RichClubStrength label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the rich-club strength.
 %%%% ¡default!
-'RCS notes'
+'RichClubStrength notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
