@@ -522,7 +522,7 @@ classdef MultiplexKCorC < Measure
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % MultiplexKCorC.NAME
-					prop_default = 'MultiplexKCorC';
+					prop_default = 'MultiplexKCorenessCentrality';
 				case 2 % MultiplexKCorC.DESCRIPTION
 					prop_default = 'The multiplex k-coreness centrality of a node is k if the node belongs to the k-core but not to the (k+1)-core.';
 				case 3 % MultiplexKCorC.TEMPLATE
@@ -530,9 +530,9 @@ classdef MultiplexKCorC < Measure
 				case 4 % MultiplexKCorC.ID
 					prop_default = 'MultiplexKCorC ID';
 				case 5 % MultiplexKCorC.LABEL
-					prop_default = 'MultiplexKCorC label';
+					prop_default = 'MultiplexKCorenessCentrality label';
 				case 6 % MultiplexKCorC.NOTES
-					prop_default = 'MultiplexKCorC notes';
+					prop_default = 'MultiplexKCorenessCentrality notes';
 				case 8 % MultiplexKCorC.SHAPE
 					prop_default = 2;
 				case 9 % MultiplexKCorC.SCOPE

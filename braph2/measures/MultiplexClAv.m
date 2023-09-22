@@ -522,7 +522,7 @@ classdef MultiplexClAv < MultiplexCl
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % MultiplexClAv.NAME
-					prop_default = 'MultiplexClAv';
+					prop_default = 'MultiplexClusteringAv';
 				case 2 % MultiplexClAv.DESCRIPTION
 					prop_default = 'The average multiplex clustering coefficient of a multilayer graph is the average of the two-multiplex clustering coefficients of all nodes.';
 				case 3 % MultiplexClAv.TEMPLATE
@@ -530,9 +530,9 @@ classdef MultiplexClAv < MultiplexCl
 				case 4 % MultiplexClAv.ID
 					prop_default = 'MultiplexClAv ID';
 				case 5 % MultiplexClAv.LABEL
-					prop_default = 'MultiplexClAv label';
+					prop_default = 'MultiplexClusteringAv label';
 				case 6 % MultiplexClAv.NOTES
-					prop_default = 'MultiplexClAv notes';
+					prop_default = 'MultiplexClusteringAv notes';
 				case 8 % MultiplexClAv.SHAPE
 					prop_default = 1;
 				case 9 % MultiplexClAv.SCOPE

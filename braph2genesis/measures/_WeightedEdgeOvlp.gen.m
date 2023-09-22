@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the weighted edge overlap.
 %%%% ¡default!
-'WeightedEdgeOvlp'
+'WeightedEdgeOverlap'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the weighted edge overlap.
@@ -74,12 +74,12 @@ ID (data, string) is a few-letter code of the weighted edge overlap.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the weighted edge overlap.
 %%%% ¡default!
-'WeightedEdgeOvlp label'
+'WeightedEdgeOverlap label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the weighted edge overlap.
 %%%% ¡default!
-'WeightedEdgeOvlp notes'
+'WeightedEdgeOverlap notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.

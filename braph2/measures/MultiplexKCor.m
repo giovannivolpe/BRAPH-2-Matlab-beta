@@ -534,7 +534,7 @@ classdef MultiplexKCor < Measure
 				case 15 % MultiplexKCor.MULTIPLEXKCORETHRESHOLD
 					prop_default = 1;
 				case 1 % MultiplexKCor.NAME
-					prop_default = 'MultiplexKCor';
+					prop_default = 'MultiplexKCore';
 				case 2 % MultiplexKCor.DESCRIPTION
 					prop_default = 'The multiplex k-core of a graph is the largest subnetwork comprising nodes of overlapping degree k or higher. k is set by the user; the default value is equal to 1.';
 				case 3 % MultiplexKCor.TEMPLATE
@@ -542,9 +542,9 @@ classdef MultiplexKCor < Measure
 				case 4 % MultiplexKCor.ID
 					prop_default = 'MultiplexKCor ID';
 				case 5 % MultiplexKCor.LABEL
-					prop_default = 'MultiplexKCor label';
+					prop_default = 'MultiplexKCore label';
 				case 6 % MultiplexKCor.NOTES
-					prop_default = 'MultiplexKCor notes';
+					prop_default = 'MultiplexKCore notes';
 				case 8 % MultiplexKCor.SHAPE
 					prop_default = 3;
 				case 9 % MultiplexKCor.SCOPE

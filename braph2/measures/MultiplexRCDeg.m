@@ -538,7 +538,7 @@ classdef MultiplexRCDeg < RCDeg
 				case 16 % MultiplexRCDeg.MULTIRICHCLUB_COEFFICIENTS
 					prop_default = [0];
 				case 1 % Multiplex1
-					prop_default = 'MultiplexRCDeg';
+					prop_default = 'MultiplexRichClubDegree';
 				case 2 % Multiplex2
 					prop_default = 'The multi rich-club degree of a node at level k is the sum of the edges that connect nodes of degree k or higher in all layers. The relevance of each layer is controlled by the coefficients c that are between 0 and 1; the default coefficients are (1/layernumber).';
 				case 3 % Multiplex3
@@ -546,9 +546,9 @@ classdef MultiplexRCDeg < RCDeg
 				case 4 % Multiplex4
 					prop_default = 'MultiplexRCDeg ID';
 				case 5 % Multiplex5
-					prop_default = 'MultiplexRCDeg label';
+					prop_default = 'MultiplexRichClubDegree label';
 				case 6 % Multiplex6
-					prop_default = 'MultiplexRCDeg notes';
+					prop_default = 'MultiplexRichClubDegree notes';
 				case 8 % Multiplex8
 					prop_default = 2;
 				case 9 % Multiplex9

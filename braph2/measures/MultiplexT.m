@@ -524,7 +524,7 @@ classdef MultiplexT < Measure
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % MultiplexT.NAME
-					prop_default = 'MultiplexT';
+					prop_default = 'MultiplexTriangles';
 				case 2 % MultiplexT.DESCRIPTION
 					prop_default = 'The multiplex triangles are calculated as the number of neighbors of a node that are also neighbors of each other between each pair of layers. In weighted graphs, the multiplex triangles are calculated as geometric mean of the weights of the edges forming the multiplex triangle.';
 				case 3 % MultiplexT.TEMPLATE
@@ -532,9 +532,9 @@ classdef MultiplexT < Measure
 				case 4 % MultiplexT.ID
 					prop_default = 'MultiplexT ID';
 				case 5 % MultiplexT.LABEL
-					prop_default = 'MultiplexT label';
+					prop_default = 'MultiplexTriangles label';
 				case 6 % MultiplexT.NOTES
-					prop_default = 'MultiplexT notes';
+					prop_default = 'MultiplexTriangles notes';
 				case 8 % MultiplexT.SHAPE
 					prop_default = 2;
 				case 9 % MultiplexT.SCOPE

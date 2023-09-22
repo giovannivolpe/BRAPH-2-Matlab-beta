@@ -522,7 +522,7 @@ classdef MultiplexPAv < MultiplexP
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % MultiplexPAv.NAME
-					prop_default = 'MultiplexPAv';
+					prop_default = 'MultiplexParticipationAv';
 				case 2 % MultiplexPAv.DESCRIPTION
 					prop_default = 'The average multiplex participation of a graph is the average homogeneity of its number of neighbours across the layers.';
 				case 3 % MultiplexPAv.TEMPLATE
@@ -530,9 +530,9 @@ classdef MultiplexPAv < MultiplexP
 				case 4 % MultiplexPAv.ID
 					prop_default = 'MultiplexPAv ID';
 				case 5 % MultiplexPAv.LABEL
-					prop_default = 'MultiplexPAv label';
+					prop_default = 'MultiplexParticipationAv label';
 				case 6 % MultiplexPAv.NOTES
-					prop_default = 'MultiplexPAv notes';
+					prop_default = 'MultiplexParticipationAv notes';
 				case 8 % MultiplexPAv.SHAPE
 					prop_default = 1;
 				case 9 % MultiplexPAv.SCOPE

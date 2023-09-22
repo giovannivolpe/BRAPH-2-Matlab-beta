@@ -524,7 +524,7 @@ classdef AssortOutIn < Measure
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % AssortOutIn.NAME
-					prop_default = 'AssortOutIn';
+					prop_default = 'OutInAssortativity';
 				case 2 % AssortOutIn.DESCRIPTION
 					prop_default = 'The out-in-assortativity coefficient of a graph is the correlation coefficient between the degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of in-out-degree/in-out-strength.';
 				case 3 % AssortOutIn.TEMPLATE
@@ -532,9 +532,9 @@ classdef AssortOutIn < Measure
 				case 4 % AssortOutIn.ID
 					prop_default = 'AssortOutIn ID';
 				case 5 % AssortOutIn.LABEL
-					prop_default = 'AssortOutIn label';
+					prop_default = 'OutInAssortativity label';
 				case 6 % AssortOutIn.NOTES
-					prop_default = 'AssortOutIn notes';
+					prop_default = 'OutInAssortativity notes';
 				case 8 % AssortOutIn.SHAPE
 					prop_default = 1;
 				case 9 % AssortOutIn.SCOPE

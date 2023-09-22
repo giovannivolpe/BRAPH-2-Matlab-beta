@@ -522,7 +522,7 @@ classdef OverlappingDegIn < DegreeIn
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % OverlappingDegIn.NAME
-					prop_default = 'OverlappingDegIn';
+					prop_default = 'OverlappingInDegree';
 				case 2 % OverlappingDegIn.DESCRIPTION
 					prop_default = 'The overlapping in-degree of a graph is the sum of the in-degrees of a node in all layers.';
 				case 3 % OverlappingDegIn.TEMPLATE
@@ -530,9 +530,9 @@ classdef OverlappingDegIn < DegreeIn
 				case 4 % OverlappingDegIn.ID
 					prop_default = 'OverlappingDegIn ID';
 				case 5 % OverlappingDegIn.LABEL
-					prop_default = 'OverlappingDegIn label';
+					prop_default = 'OverlappingInDegree label';
 				case 6 % OverlappingDegIn.NOTES
-					prop_default = 'OverlappingDegIn notes';
+					prop_default = 'OverlappingInDegree notes';
 				case 8 % OverlappingDegIn.SHAPE
 					prop_default = 2;
 				case 9 % OverlappingDegIn.SCOPE

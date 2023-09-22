@@ -522,7 +522,7 @@ classdef MultiplexPOut < Measure
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % MultiplexPOut.NAME
-					prop_default = 'MultiplexPOut';
+					prop_default = 'MultiplexOutParticipation';
 				case 2 % MultiplexPOut.DESCRIPTION
 					prop_default = 'The multiplex out-participation is the homogeneity of the number of outward neighbours of a node across the layers.';
 				case 3 % MultiplexPOut.TEMPLATE
@@ -530,9 +530,9 @@ classdef MultiplexPOut < Measure
 				case 4 % MultiplexPOut.ID
 					prop_default = 'MultiplexPOut ID';
 				case 5 % MultiplexPOut.LABEL
-					prop_default = 'MultiplexPOut label';
+					prop_default = 'MultiplexOutParticipation label';
 				case 6 % MultiplexPOut.NOTES
-					prop_default = 'MultiplexPOut notes';
+					prop_default = 'MultiplexOutParticipation notes';
 				case 8 % MultiplexPOut.SHAPE
 					prop_default = 2;
 				case 9 % MultiplexPOut.SCOPE

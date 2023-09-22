@@ -57,7 +57,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the weighted rich-club.
 %%%% ¡default!
-'WeightedRC'
+'WeightedRichClub'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the weighted rich-club.
@@ -77,12 +77,12 @@ ID (data, string) is a few-letter code of the weighted rich-club.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the weighted rich-club.
 %%%% ¡default!
-'WeightedRC label'
+'WeightedRichClub label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the weighted rich-club.
 %%%% ¡default!
-'WeightedRC notes'
+'WeightedRichClub notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.

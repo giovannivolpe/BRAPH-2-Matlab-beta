@@ -527,7 +527,7 @@ classdef MultiplexCP < MultiRC
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % MultiplexCP.NAME
-					prop_default = 'MultiplexCP';
+					prop_default = 'MultiplexCorePeriphery';
 				case 2 % MultiplexCP.DESCRIPTION
 					prop_default = 'The multiplex core-periphery of a node is the value of the rank corresponding to the maximum multirichness nodes. It returns 1 for a node belonging to the  core and zero otherwise. The relevance of each layer is controlled by the  multirichness coefficients that are between 0 and 1, and add up to one;  the default coefficients are (1/layernumber).';
 				case 3 % MultiplexCP.TEMPLATE
@@ -535,9 +535,9 @@ classdef MultiplexCP < MultiRC
 				case 4 % MultiplexCP.ID
 					prop_default = 'MultiplexCP ID';
 				case 5 % MultiplexCP.LABEL
-					prop_default = 'MultiplexCP label';
+					prop_default = 'MultiplexCorePeriphery label';
 				case 6 % MultiplexCP.NOTES
-					prop_default = 'MultiplexCP notes';
+					prop_default = 'MultiplexCorePeriphery notes';
 				case 8 % MultiplexCP.SHAPE
 					prop_default = 2;
 				case 9 % MultiplexCP.SCOPE

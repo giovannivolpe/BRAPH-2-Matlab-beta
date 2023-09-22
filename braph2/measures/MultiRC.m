@@ -536,7 +536,7 @@ classdef MultiRC < Richness
 				case 15 % MultiRC.MULTIRICHNESS_COEFFICIENTS
 					prop_default = [0];
 				case 1 % MultiRC.NAME
-					prop_default = 'MultiRC';
+					prop_default = 'Multirichness';
 				case 2 % MultiRC.DESCRIPTION
 					prop_default = 'The multirichness of a node is the sum of the edges that connect nodes of degree k or higher in all layers. The relevance of each layer is controlled by the coefficients c that are between 0 and 1; the default coefficients are (1/layernumber).';
 				case 3 % MultiRC.TEMPLATE
@@ -544,9 +544,9 @@ classdef MultiRC < Richness
 				case 4 % MultiRC.ID
 					prop_default = 'MultiRC ID';
 				case 5 % MultiRC.LABEL
-					prop_default = 'MultiRC label';
+					prop_default = 'Multirichness label';
 				case 6 % MultiRC.NOTES
-					prop_default = 'MultiRC notes';
+					prop_default = 'Multirichness notes';
 				case 8 % MultiRC.SHAPE
 					prop_default = 2;
 				case 9 % MultiRC.SCOPE

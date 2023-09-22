@@ -524,15 +524,15 @@ classdef AssortOutOut < Measure
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % AssortOutOut.NAME
-					prop_default = 'AssortOutOut';
+					prop_default = 'OutOutAssortativity';
 				case 2 % AssortOutOut.DESCRIPTION
 					prop_default = 'The out-out-assortativity coefficient of a graph is the correlation coefficient between the degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of out-degree/out-strength.';
 				case 3 % AssortOutOut.TEMPLATE
 					prop_default = Format.getFormatDefault(8, AssortOutOut.getPropSettings(prop));
 				case 4 % AssortOutOut.ID
-					prop_default = 'AssortOutOut ID';
+					prop_default = 'OutOutAssortativity ID';
 				case 5 % AssortOutOut.LABEL
-					prop_default = 'AssortOutOut label';
+					prop_default = 'OutOutAssortativity label';
 				case 6 % AssortOutOut.NOTES
 					prop_default = 'AssortOutOut notes';
 				case 8 % AssortOutOut.SHAPE

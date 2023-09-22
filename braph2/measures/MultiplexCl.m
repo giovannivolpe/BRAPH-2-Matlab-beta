@@ -523,7 +523,7 @@ classdef MultiplexCl < MultiplexT
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % MultiplexCl.NAME
-					prop_default = 'MultiplexCl';
+					prop_default = 'MultiplexClustering';
 				case 2 % MultiplexCl.DESCRIPTION
 					prop_default = 'The two-multiplex clustering coefficient of a node i is the fraction of two-multiplex triangles (triangles which use edges from two different layers) with a vertex in node i and the number of one-triads centered in i.';
 				case 3 % MultiplexCl.TEMPLATE
@@ -531,9 +531,9 @@ classdef MultiplexCl < MultiplexT
 				case 4 % MultiplexCl.ID
 					prop_default = 'MultiplexCl ID';
 				case 5 % MultiplexCl.LABEL
-					prop_default = 'MultiplexCl label';
+					prop_default = 'MultiplexClustering label';
 				case 6 % MultiplexCl.NOTES
-					prop_default = 'MultiplexCl notes';
+					prop_default = 'MultiplexClustering notes';
 				case 8 % MultiplexCl.SHAPE
 					prop_default = 2;
 				case 9 % MultiplexCl.SCOPE

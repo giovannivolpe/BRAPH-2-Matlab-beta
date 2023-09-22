@@ -522,7 +522,7 @@ classdef MultiplexPIn < Measure
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % MultiplexPIn.NAME
-					prop_default = 'MultiplexPIn';
+					prop_default = 'MultiplexInParticipation';
 				case 2 % MultiplexPIn.DESCRIPTION
 					prop_default = 'The multiplex in-participation is the homogeneity of the number of inward neighbours of a node across the layers.';
 				case 3 % MultiplexPIn.TEMPLATE
@@ -530,9 +530,9 @@ classdef MultiplexPIn < Measure
 				case 4 % MultiplexPIn.ID
 					prop_default = 'MultiplexPIn ID';
 				case 5 % MultiplexPIn.LABEL
-					prop_default = 'MultiplexPIn label';
+					prop_default = 'MultiplexInParticipation label';
 				case 6 % MultiplexPIn.NOTES
-					prop_default = 'MultiplexPIn notes';
+					prop_default = 'MultiplexInParticipation notes';
 				case 8 % MultiplexPIn.SHAPE
 					prop_default = 2;
 				case 9 % MultiplexPIn.SCOPE

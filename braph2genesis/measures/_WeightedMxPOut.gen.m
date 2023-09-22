@@ -54,7 +54,7 @@ Compatible Graphs
 %%% ¡prop!
 NAME (constant, string) is the name of the weighted multiplex out-particiption.
 %%%% ¡default!
-'WeightedMxPOut '
+'WeightedMultiplexOutParticipation'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the weighted multiplex out-particiption.
@@ -74,12 +74,12 @@ ID (data, string) is a few-letter code of the weighted multiplex out-participtio
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the weighted multiplex out-particiption.
 %%%% ¡default!
-'WeightedMxPOut label'
+'WeightedMultiplexOutParticipation label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the weighted multiplex out-particiption.
 %%%% ¡default!
-'WeightedMxPOut notes'
+'WeightedMultiplexOutParticipation notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.

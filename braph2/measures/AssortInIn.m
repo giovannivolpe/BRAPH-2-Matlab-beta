@@ -524,7 +524,7 @@ classdef AssortInIn < Measure
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 1 % AssortInIn.NAME
-					prop_default = 'AssortInIn';
+					prop_default = 'InInAssortativity';
 				case 2 % AssortInIn.DESCRIPTION
 					prop_default = 'The in-in-assortativity coefficient of a graph is the correlation coefficient between the degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of in-degree/in-strength.';
 				case 3 % AssortInIn.TEMPLATE
@@ -532,9 +532,9 @@ classdef AssortInIn < Measure
 				case 4 % AssortInIn.ID
 					prop_default = 'AssortInIn ID';
 				case 5 % AssortInIn.LABEL
-					prop_default = 'AssortInIn label';
+					prop_default = 'InInAssortativity label';
 				case 6 % AssortInIn.NOTES
-					prop_default = 'AssortInIn notes';
+					prop_default = 'InInAssortativity notes';
 				case 8 % AssortInIn.SHAPE
 					prop_default = 1;
 				case 9 % AssortInIn.SCOPE

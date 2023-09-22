@@ -538,7 +538,7 @@ classdef MultiplexRCS < RCS
 				case 16 % MultiplexRCS.WEIGHTED_MULTIRICHCLUB_COEFFICIENTS
 					prop_default = [0];
 				case 1 % Multiplex1
-					prop_default = 'MultiplexRCS';
+					prop_default = 'MultiplexRichClubStrength';
 				case 2 % Multiplex2
 					prop_default = 'The multi rich-club strength of a node at level s is the sum of the weighted edges that connect nodes of strength s or higher in all layers. The relevance of each layer is controlled by the coefficients c that are between 0 and 1; the default coefficients are (1/layernumber).';
 				case 3 % Multiplex3
@@ -546,9 +546,9 @@ classdef MultiplexRCS < RCS
 				case 4 % Multiplex4
 					prop_default = 'MultiplexRCS ID';
 				case 5 % Multiplex5
-					prop_default = 'MultiplexRCS label';
+					prop_default = 'MultiplexRichClubStrength label';
 				case 6 % Multiplex6
-					prop_default = 'MultiplexRCS notes';
+					prop_default = 'MultiplexRichClubStrength notes';
 				case 8 % Multiplex8
 					prop_default = 2;
 				case 9 % Multiplex9
