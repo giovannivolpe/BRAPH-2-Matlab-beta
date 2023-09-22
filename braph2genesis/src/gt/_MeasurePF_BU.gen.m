@@ -35,6 +35,12 @@ Brain Atlas NOTES
 
 %%% ¡prop!
 %%%% ¡id!
+MeasurePF_BU.NODES
+%%%% ¡title!
+NODES SELECTION
+
+%%% ¡prop!
+%%%% ¡id!
 MeasurePF_BU.BKGCOLOR
 %%%% ¡title!
 BACKGROUND COLOR
@@ -80,12 +86,6 @@ X-LABEL
 MeasurePF_BU.ST_YLABEL
 %%%% ¡title!
 Y-LABEL
-
-%%% ¡prop!
-%%%% ¡id!
-MeasurePF_BU.NODES
-%%%% ¡title!
-NODES SELECTION
 
 %% ¡props_update!
 
@@ -169,13 +169,8 @@ NODES (figure, rvector) are the node numbers of the binodal measure.
 [1 1]
 %%%% ¡postset!
 pf.get('SETUP')
-%%%% ¡_gui!
-% % % bas = pf.get('M').get('G').get('BAS');
-% % % ba = bas{1};
-% % % 
-% % % pr = PP_BrainRegion('EL', pf, 'PROP', PFMeasureNU.BR1_ID, ...
-% % %     'BA', ba, ...
-% % %     varargin{:});
+%%%% ¡gui!
+pr = MeasurePF_BxPP_Node('EL', pf, 'PROP', MeasurePF_BU.NODE);
 
 %% ¡tests!
 
