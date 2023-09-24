@@ -59,27 +59,9 @@ NODE SELECTION
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureEnsemblePF_NB.ST_LINE_DIFF
+MeasureEnsemblePF_NB.ST_LINE_M
 %%%% ¡title!
-DIFFERENCE
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemblePF_NB.ST_AREA
-%%%% ¡title!
-CONFIDENCE AREA (95%)
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemblePF_NB.ST_LINE_CIL
-%%%% ¡title!
-LOWER CONFIDENCE LINE
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemblePF_NB.ST_LINE_CIU
-%%%% ¡title!
-UPPER CONFIDENCE LINE
+MEASURE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -152,7 +134,7 @@ NODE (figure, scalar) is the node number of the nodal group comparison figure.
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsemblePF_NB.PARENT MeasureEnsemblePF_NB.H MeasureEnsemblePF_NB.ST_POSITION MeasureEnsemblePF_NB.ST_AXIS MeasureEnsemblePF_NB.ST_AREA MeasureEnsemblePF_NB.ST_LINE_DIFF MeasureEnsemblePF_NB.ST_LINE_CIL MeasureEnsemblePF_NB.ST_LINE_CIU MeasureEnsemblePF_NB.ST_TITLE MeasureEnsemblePF_NB.ST_XLABEL MeasureEnsemblePF_NB.ST_YLABEL] 
+[MeasureEnsemblePF_NB.PARENT MeasureEnsemblePF_NB.H MeasureEnsemblePF_NB.ST_POSITION MeasureEnsemblePF_NB.ST_AXIS MeasureEnsemblePF_NB.ST_AREA MeasureEnsemblePF_NB.ST_LINE_M MeasureEnsemblePF_NB.ST_TITLE MeasureEnsemblePF_NB.ST_XLABEL MeasureEnsemblePF_NB.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

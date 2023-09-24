@@ -53,27 +53,9 @@ AXIS
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureEnsemblePF_GU.ST_LINE_DIFF
+MeasureEnsemblePF_GU.ST_LINE_M
 %%%% ¡title!
-DIFFERENCE
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemblePF_GU.ST_AREA
-%%%% ¡title!
-CONFIDENCE AREA (95%)
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemblePF_GU.ST_LINE_CIL
-%%%% ¡title!
-LOWER CONFIDENCE LINE
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemblePF_GU.ST_LINE_CIU
-%%%% ¡title!
-UPPER CONFIDENCE LINE
+MEASURE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -163,7 +145,7 @@ value = [];
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsemblePF_GU.PARENT MeasureEnsemblePF_GU.H MeasureEnsemblePF_GU.ST_POSITION MeasureEnsemblePF_GU.ST_AXIS MeasureEnsemblePF_GU.ME MeasureEnsemblePF_GU.ST_AREA MeasureEnsemblePF_GU.ST_LINE_DIFF MeasureEnsemblePF_GU.ST_LINE_CIL MeasureEnsemblePF_GU.ST_LINE_CIU MeasureEnsemblePF_GU.ST_TITLE MeasureEnsemblePF_GU.ST_XLABEL MeasureEnsemblePF_GU.ST_YLABEL] 
+[MeasureEnsemblePF_GU.PARENT MeasureEnsemblePF_GU.H MeasureEnsemblePF_GU.ST_POSITION MeasureEnsemblePF_GU.ST_AXIS MeasureEnsemblePF_GU.ME MeasureEnsemblePF_GU.ST_AREA MeasureEnsemblePF_GU.ST_LINE_M MeasureEnsemblePF_GU.ST_TITLE MeasureEnsemblePF_GU.ST_XLABEL MeasureEnsemblePF_GU.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

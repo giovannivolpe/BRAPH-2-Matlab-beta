@@ -59,27 +59,9 @@ NODE SELECTION
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureEnsemblePF_NU.ST_LINE_DIFF
+MeasureEnsemblePF_NU.ST_LINE_M
 %%%% ¡title!
-DIFFERENCE
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemblePF_NU.ST_AREA
-%%%% ¡title!
-CONFIDENCE AREA (95%)
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemblePF_NU.ST_LINE_CIL
-%%%% ¡title!
-LOWER CONFIDENCE LINE
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemblePF_NU.ST_LINE_CIU
-%%%% ¡title!
-UPPER CONFIDENCE LINE
+MEASURE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -192,7 +174,7 @@ pf.get('SETUP')
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsemblePF_NU.PARENT MeasureEnsemblePF_NU.H MeasureEnsemblePF_NU.ST_POSITION MeasureEnsemblePF_NU.ST_AXIS MeasureEnsemblePF_NU.ME MeasureEnsemblePF_NU.ST_AREA MeasureEnsemblePF_NU.ST_LINE_DIFF MeasureEnsemblePF_NU.ST_LINE_CIL MeasureEnsemblePF_NU.ST_LINE_CIU MeasureEnsemblePF_NU.ST_TITLE MeasureEnsemblePF_NU.ST_XLABEL MeasureEnsemblePF_NU.ST_YLABEL] 
+[MeasureEnsemblePF_NU.PARENT MeasureEnsemblePF_NU.H MeasureEnsemblePF_NU.ST_POSITION MeasureEnsemblePF_NU.ST_AXIS MeasureEnsemblePF_NU.ME MeasureEnsemblePF_NU.ST_AREA MeasureEnsemblePF_NU.ST_LINE_M MeasureEnsemblePF_NU.ST_TITLE MeasureEnsemblePF_NU.ST_XLABEL MeasureEnsemblePF_NU.ST_YLABEL] 
 
 %%% ¡warning_off!
 true
