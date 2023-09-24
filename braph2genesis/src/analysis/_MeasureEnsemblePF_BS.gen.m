@@ -84,7 +84,7 @@ Y-LABEL
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the panel figure binodal superglobal group comparison figure.
 %%%% ¡default!
 'MeasureEnsemblePF_BS'
 
