@@ -59,9 +59,27 @@ NODES SELECTION
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureEnsemblePF_BB.ST_LINE_M
+MeasureEnsemblePF_BU.ST_LINE_DIFF
 %%%% ¡title!
-MEASURE
+DIFFERENCE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemblePF_BU.ST_AREA
+%%%% ¡title!
+CONFIDENCE AREA (95%)
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemblePF_BU.ST_LINE_CIL
+%%%% ¡title!
+LOWER CONFIDENCE LINE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemblePF_BU.ST_LINE_CIU
+%%%% ¡title!
+UPPER CONFIDENCE LINE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -82,11 +100,6 @@ MeasureEnsemblePF_BU.ST_YLABEL
 Y-LABEL
 
 %% ¡props_update!
-
-%%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
-%%%% ¡default!
-'MeasureEnsemblePF_BU'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the panel figure binodal unilayer group comparison figure.
@@ -179,7 +192,7 @@ pf.get('SETUP')
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsemblePF_BU.PARENT MeasureEnsemblePF_BU.H MeasureEnsemblePF_BU.ST_POSITION MeasureEnsemblePF_BU.ST_AXIS MeasureEnsemblePF_BU.ME MeasureEnsemblePF_BU.ST_AREA MeasureEnsemblePF_BU.ST_LINE_M MeasureEnsemblePF_BU.ST_TITLE MeasureEnsemblePF_BU.ST_XLABEL MeasureEnsemblePF_BU.ST_YLABEL] 
+[MeasureEnsemblePF_BU.PARENT MeasureEnsemblePF_BU.H MeasureEnsemblePF_BU.ST_POSITION MeasureEnsemblePF_BU.ST_AXIS MeasureEnsemblePF_BU.ME MeasureEnsemblePF_BU.ST_AREA MeasureEnsemblePF_BU.ST_LINE_DIFF MeasureEnsemblePF_BU.ST_LINE_CIL MeasureEnsemblePF_BU.ST_LINE_CIU MeasureEnsemblePF_BU.ST_TITLE MeasureEnsemblePF_BU.ST_XLABEL MeasureEnsemblePF_BU.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

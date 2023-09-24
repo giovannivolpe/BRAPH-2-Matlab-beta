@@ -53,9 +53,27 @@ AXIS
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureEnsemblePF_GS.ST_LINE_M
+MeasureEnsemblePF_GS.ST_LINE_DIFF
 %%%% ¡title!
-MEASURE
+DIFFERENCE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemblePF_GS.ST_AREA
+%%%% ¡title!
+CONFIDENCE AREA (95%)
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemblePF_GS.ST_LINE_CIL
+%%%% ¡title!
+LOWER CONFIDENCE LINE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemblePF_GS.ST_LINE_CIU
+%%%% ¡title!
+UPPER CONFIDENCE LINE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -76,11 +94,6 @@ MeasureEnsemblePF_GS.ST_YLABEL
 Y-LABEL
 
 %% ¡props_update!
-
-%%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
-%%%% ¡default!
-'MeasureEnsemblePF_GS'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the panel figure global superglobal group comparison figure.
@@ -121,7 +134,7 @@ value = [];
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsemblePF_GS.PARENT MeasureEnsemblePF_GS.H MeasureEnsemblePF_GS.ST_POSITION MeasureEnsemblePF_GS.ST_AXIS MeasureEnsemblePF_GS.ST_AREA MeasureEnsemblePF_GS.ST_LINE_M MeasureEnsemblePF_GS.ST_TITLE MeasureEnsemblePF_GS.ST_XLABEL MeasureEnsemblePF_GS.ST_YLABEL] 
+[MeasureEnsemblePF_GS.PARENT MeasureEnsemblePF_GS.H MeasureEnsemblePF_GS.ST_POSITION MeasureEnsemblePF_GS.ST_AXIS MeasureEnsemblePF_GS.ST_AREA MeasureEnsemblePF_GS.ST_LINE_DIFF MeasureEnsemblePF_GS.ST_LINE_CIL MeasureEnsemblePF_GS.ST_LINE_CIU MeasureEnsemblePF_GS.ST_TITLE MeasureEnsemblePF_GS.ST_XLABEL MeasureEnsemblePF_GS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

@@ -7,50 +7,6 @@ MeasureEnsemble provides the methods necessary for a graph ensemble measure.
 %%% ¡seealso!
 AnalyzeEnsemble, CompareEnsemble
 
-%% ¡layout!
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemble.ID
-%%%% ¡title!
-Measure Ensemble ID
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemble.LABEL
-%%%% ¡title!
-Measure Ensemble NAME
-
-%%% ¡_prop! % % % %TBE
-%%%% ¡id!
-MeasureEnsemble.MEASURE_TEMPLATE
-%%%% ¡title!
-Measure TEMPLATE
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemble.MEASURE
-%%%% ¡title!
-Measure Ensemble
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemble.M
-%%%% ¡title!
-Measure Ensemble VALUE
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemble.PFME
-%%%% ¡title!
-Measure Ensemble Plot
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemble.PFBG
-%%%% ¡title!
-Measure Ensemble Brain Graph
-
 %% ¡props_update!
 
 %%% ¡prop!
@@ -95,10 +51,10 @@ MEASURE (data, class) is the measure class.
 %%%% ¡settings!
 'Measure'
 
-%%% ¡_prop! % % % %TBE
-MEASURE_TEMPLATE (parameter, item) provides the measure parameters. 
-%%%% ¡settings!
-'Measure'
+%%% ¡_prop!
+% % % MEASURE_TEMPLATE (parameter, item) provides the measure parameters. 
+% % % %%%% ¡settings!
+% % % 'Measure'
 
 %%% ¡prop!
 A (data, item) is the ensemble-based graph analysis.
@@ -123,11 +79,11 @@ else
 end
 
 value = m_av;
-%%%% ¡gui!
+%%%% ¡_gui!
 g = me.get('A').get('GRAPH_TEMPLATE');
 measure = me.get('MEASURE');
 
-pr = PanelPropCell('EL', me, 'PROP', MeasureEnsemble.M, varargin{:});
+pr = PanelPropCell('EL', cp, 'PROP', MeasureEnsemble.M, varargin{:});
 
 if Element.getPropDefault(measure, 'SHAPE') == Measure.GLOBAL % __Measure.GLOBAL__
     pr.set( ...
@@ -188,7 +144,7 @@ end
 PFME (gui, item) contains the panel figure of the measure.
 %%%% ¡_settings!
 'MeasureEnsemblePF'
-%%%% ¡postprocessing!
+%%%% ¡_postprocessing!
 if isa(me.getr('PFME'), 'NoValue')
 
     measure = me.get('MEASURE');
@@ -280,8 +236,3 @@ PFBG (gui, item) contains the panel figure of the brain graph.
 % % % pr = PanelPropItem('EL', me, 'PROP', MeasureEnsemble.PFBG, ...
 % % %     'GUICLASS', 'GUIFig', ...
 % % %     varargin{:});
-
-%% ¡tests!
-
-%%% ¡excluded_props!
-[MeasureEnsemble.PFME MeasureEnsemble.PFBG]

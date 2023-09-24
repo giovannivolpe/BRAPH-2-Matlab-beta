@@ -59,9 +59,27 @@ NODES SELECTION
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureEnsemblePF_BS.ST_LINE_M
+MeasureEnsemblePF_BS.ST_LINE_DIFF
 %%%% ¡title!
-MEASURE
+DIFFERENCE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemblePF_BS.ST_AREA
+%%%% ¡title!
+CONFIDENCE AREA (95%)
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemblePF_BS.ST_LINE_CIL
+%%%% ¡title!
+LOWER CONFIDENCE LINE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemblePF_BS.ST_LINE_CIU
+%%%% ¡title!
+UPPER CONFIDENCE LINE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -82,11 +100,6 @@ MeasureEnsemblePF_BS.ST_YLABEL
 Y-LABEL
 
 %% ¡props_update!
-
-%%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
-%%%% ¡default!
-'MeasureEnsemblePF_BS'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the panel figure binodal superglobal group comparison figure.
@@ -139,7 +152,7 @@ NODES (figure, rvector) are the node numbers of the binodal group comparison fig
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsemblePF_BS.PARENT MeasureEnsemblePF_BS.H MeasureEnsemblePF_BS.ST_POSITION MeasureEnsemblePF_BS.ST_AXIS MeasureEnsemblePF_BS.ST_AREA MeasureEnsemblePF_BS.ST_LINE_M MeasureEnsemblePF_BS.ST_TITLE MeasureEnsemblePF_BS.ST_XLABEL MeasureEnsemblePF_BS.ST_YLABEL] 
+[MeasureEnsemblePF_BS.PARENT MeasureEnsemblePF_BS.H MeasureEnsemblePF_BS.ST_POSITION MeasureEnsemblePF_BS.ST_AXIS MeasureEnsemblePF_BS.ST_AREA MeasureEnsemblePF_BS.ST_LINE_DIFF MeasureEnsemblePF_BS.ST_LINE_CIL MeasureEnsemblePF_BS.ST_LINE_CIU MeasureEnsemblePF_BS.ST_TITLE MeasureEnsemblePF_BS.ST_XLABEL MeasureEnsemblePF_BS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

@@ -59,9 +59,27 @@ NODES SELECTION
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureEnsemblePF_BB.ST_LINE_M
+MeasureEnsemblePF_BB.ST_LINE_DIFF
 %%%% ¡title!
-MEASURE
+DIFFERENCE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemblePF_BB.ST_AREA
+%%%% ¡title!
+CONFIDENCE AREA (95%)
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemblePF_BB.ST_LINE_CIL
+%%%% ¡title!
+LOWER CONFIDENCE LINE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemblePF_BB.ST_LINE_CIU
+%%%% ¡title!
+UPPER CONFIDENCE LINE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -82,11 +100,6 @@ MeasureEnsemblePF_BB.ST_YLABEL
 Y-LABEL
 
 %% ¡props_update!
-
-%%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
-%%%% ¡default!
-'MeasureEnsemblePF_BB'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the panel figure binodal bilayer group comparison figure.
@@ -139,7 +152,7 @@ NODES (figure, rvector) are the node numbers of the binodal group comparison fig
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsemblePF_BB.PARENT MeasureEnsemblePF_BB.H MeasureEnsemblePF_BB.ST_POSITION MeasureEnsemblePF_BB.ST_AXIS MeasureEnsemblePF_BB.ST_AREA MeasureEnsemblePF_BB.ST_LINE_M MeasureEnsemblePF_BB.ST_TITLE MeasureEnsemblePF_BB.ST_XLABEL MeasureEnsemblePF_BB.ST_YLABEL] 
+[MeasureEnsemblePF_BB.PARENT MeasureEnsemblePF_BB.H MeasureEnsemblePF_BB.ST_POSITION MeasureEnsemblePF_BB.ST_AXIS MeasureEnsemblePF_BB.ST_AREA MeasureEnsemblePF_BB.ST_LINE_DIFF MeasureEnsemblePF_BB.ST_LINE_CIL MeasureEnsemblePF_BB.ST_LINE_CIU MeasureEnsemblePF_BB.ST_TITLE MeasureEnsemblePF_BB.ST_XLABEL MeasureEnsemblePF_BB.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

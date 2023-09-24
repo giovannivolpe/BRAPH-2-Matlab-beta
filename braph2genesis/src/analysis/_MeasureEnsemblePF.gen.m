@@ -78,11 +78,6 @@ Y-LABEL
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
-%%%% ¡default!
-'MeasureEnsemblePF'
-
-%%% ¡prop!
 NAME (constant, string) is the name of the panel ensemble-based comparison figure.
 %%%% ¡default!
 'MeasureEnsemblePF'
@@ -194,11 +189,11 @@ if check_graphics(toolbar, 'uitoolbar')
 
     tool_separator_2 = uipushtool(toolbar, 'Separator', 'on', 'Visible', 'off');
     
-    % Measure Line
+    % Difference Line
     tool_LINE_M = uitoggletool(toolbar, ...
         'Tag', 'TOOL.LINE_M', ...
         'State', pf.get('ST_LINE_M').get('VISIBLE'), ...
-        'Tooltip', 'Show Measure line', ...
+        'Tooltip', 'Show difference line', ...
         'CData', imresize(imread('icon_line.png'), [24 24]), ... % % % make icon 16x16
         'OnCallback', {@cb_LINE_M, true}, ...
         'OffCallback', {@cb_LINE_M, false});
@@ -405,7 +400,7 @@ if isa(pf.getr('ST_YLABEL'), 'NoValue')
     
     position = get(value, 'Position');
     st.set( ...
-        'TXT', 'Measure', ...
+        'TXT', 'Difference', ...
         'X', position(1), ...
         'Y', position(2), ...
         'Z', position(3) ...
@@ -424,7 +419,7 @@ pr = SettingsTextPP('EL', pf, 'PROP', MeasureEnsemblePF.ST_YLABEL, varargin{:});
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsemblePF.PARENT MeasureEnsemblePF.H MeasureEnsemblePF.ST_POSITION MeasureEnsemblePF.ST_AXIS MeasureEnsemblePF.ST_AREA MeasureEnsemblePF.ST_LINE_M MeasureEnsemblePF.ST_TITLE MeasureEnsemblePF.ST_XLABEL MeasureEnsemblePF.ST_YLABEL] 
+[MeasureEnsemblePF.PARENT MeasureEnsemblePF.H MeasureEnsemblePF.ST_POSITION MeasureEnsemblePF.ST_AXIS MeasureEnsemblePF.ST_AREA MeasureEnsemblePF.ST_LINE_M MeasureEnsemblePF.ST_LINE_CIL MeasureEnsemblePF.ST_LINE_CIU MeasureEnsemblePF.ST_TITLE MeasureEnsemblePF.ST_XLABEL MeasureEnsemblePF.ST_YLABEL] 
 
 %%% ¡warning_off!
 true
