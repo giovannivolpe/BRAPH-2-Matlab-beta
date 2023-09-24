@@ -59,27 +59,9 @@ NODES SELECTION
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureEnsemblePF_BB.ST_LINE_DIFF
+MeasureEnsemblePF_BB.ST_LINE_M
 %%%% ¡title!
-DIFFERENCE
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemblePF_BB.ST_AREA
-%%%% ¡title!
-CONFIDENCE AREA (95%)
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemblePF_BB.ST_LINE_CIL
-%%%% ¡title!
-LOWER CONFIDENCE LINE
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureEnsemblePF_BB.ST_LINE_CIU
-%%%% ¡title!
-UPPER CONFIDENCE LINE
+MEASURE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -152,7 +134,7 @@ NODES (figure, rvector) are the node numbers of the binodal group comparison fig
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsemblePF_BB.PARENT MeasureEnsemblePF_BB.H MeasureEnsemblePF_BB.ST_POSITION MeasureEnsemblePF_BB.ST_AXIS MeasureEnsemblePF_BB.ST_AREA MeasureEnsemblePF_BB.ST_LINE_DIFF MeasureEnsemblePF_BB.ST_LINE_CIL MeasureEnsemblePF_BB.ST_LINE_CIU MeasureEnsemblePF_BB.ST_TITLE MeasureEnsemblePF_BB.ST_XLABEL MeasureEnsemblePF_BB.ST_YLABEL] 
+[MeasureEnsemblePF_BB.PARENT MeasureEnsemblePF_BB.H MeasureEnsemblePF_BB.ST_POSITION MeasureEnsemblePF_BB.ST_AXIS MeasureEnsemblePF_BB.ST_AREA MeasureEnsemblePF_BB.ST_LINE_M MeasureEnsemblePF_BB.ST_TITLE MeasureEnsemblePF_BB.ST_XLABEL MeasureEnsemblePF_BB.ST_YLABEL] 
 
 %%% ¡warning_off!
 true
