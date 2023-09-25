@@ -301,6 +301,11 @@ COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 getCompatibleMeasures('OrdMlBUT')
 
 %%% ¡prop!
+COMPATIBLE_MEASURE_NAMES (constant, stringlist) is the list of compatible measure names.
+%%%% ¡default!
+getCompatibleMeasureNames('OrdMlBUT')
+
+%%% ¡prop!
 ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
 %%%% ¡default!
 5

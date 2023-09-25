@@ -675,6 +675,9 @@ COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 'Measure'
 
 %%% ¡prop!
+COMPATIBLE_MEASURE_NAMES (constant, stringlist) is the list of compatible measure names.
+
+%%% ¡prop!
 MEASURE (query, item) returns a measure.
 %%%% ¡settings!
 'Measure'

@@ -250,6 +250,11 @@ COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 getCompatibleMeasures('MultigraphBUT')
 
 %%% ¡prop!
+COMPATIBLE_MEASURE_NAMES (constant, stringlist) is the list of compatible measure names.
+%%%% ¡default!
+getCompatibleMeasureNames('MultigraphBUT')
+
+%%% ¡prop!
 ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
 %%%% ¡default!
 5

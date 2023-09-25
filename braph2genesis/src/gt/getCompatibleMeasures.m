@@ -1,5 +1,5 @@
 function list = getCompatibleMeasures(g)
-%GETCOMPATIBLEMEASURELIST returns the list of measures.
+%GETCOMPATIBLEMEASURES returns the list of measures.
 %
 % CELL ARRAY = GETCOMPATIBLEMEASURES(G) returns a cell array of
 %  measures compatible with the concrete graph G.
@@ -7,7 +7,7 @@ function list = getCompatibleMeasures(g)
 % CELL ARRAY = GETCOMPATIBLEMEASURES(GRAPH_CLASS) returns a cell array
 %  of compatible measures to a graph whose class is GRAPH_CLASS.
 %
-% See also Graph, Measure.
+% See also Graph, Measure, getCompatibleMeasureNames.
 
 graph_class = Element.getClass(g);
 

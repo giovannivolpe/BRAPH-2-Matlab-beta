@@ -263,6 +263,11 @@ COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('OrdMxWU')
 
+%%% ¡prop!
+COMPATIBLE_MEASURE_NAMES (constant, stringlist) is the list of compatible measure names.
+%%%% ¡default!
+getCompatibleMeasureNames('OrdMxWU')
+
 %% ¡props!
 
 %%% ¡prop!

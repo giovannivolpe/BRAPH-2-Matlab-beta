@@ -259,13 +259,16 @@ if isempty(constants)
         constants{end, 2} = ['Format\.' upper(Format.getFormatName(format)) '_DESCRIPTION'];
     end
     
-    % getCompatibleMeasures
+    % getCompatibleMeasures, getCompatibleMeasureNames
     graph_code_list = Graph.getSubclasses();
     for i = 1:1:length(graph_code_list)
         graph_code = graph_code_list{i};
         compatible_measures = getCompatibleMeasures(graph_code);
         constants{end+1, 1} = ['getCompatibleMeasures\(''' graph_code '''\)'];
         constants{end, 2} = ['{' sprintf(' ''%s'' ', compatible_measures{:}) '}'];
+        compatible_measure_names = getCompatibleMeasureNames(graph_code);
+        constants{end+1, 1} = ['getCompatibleMeasureNames\(''' graph_code '''\)'];
+        constants{end, 2} = ['{' sprintf(' ''%s'' ', compatible_measure_names{:}) '}'];
     end
     
     % Fine-tuning
