@@ -1,5 +1,5 @@
 %% ¡header!
-ComparisonGroupBrainPF < BrainAtlasPF (bapf, brain group comparison on brain surface figure) is the base element to plot a group comparison on brain surface.
+ComparisonGroupBrainPF < BrainAtlasPF (bapf, brain panel group comparison on brain surface figure) is the base element to plot a group comparison on brain surface.
 
 %%% ¡description!
 ComparisonGroupBrainPF manages the basic functionalities to plot of a group comparison on brain surface.
@@ -101,39 +101,39 @@ ELCLASS (constant, string) is the class of the % % % .
 'ComparisonGroupBrainPF'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the panel group comparison on brain surface figure.
+NAME (constant, string) is the name of the brain panel group comparison on brain surface figure.
 %%%% ¡default!
 'ComparisonGroupBrainPF'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the panel group comparison on brain surface figure.
+DESCRIPTION (constant, string) is the description of the brain panel group comparison on brain surface figure.
 %%%% ¡default!
 'ComparisonGroupBrainPF manages the basic functionalities to plot of a group comparison on brain surface.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the panel group comparison on brain surface figure.
+TEMPLATE (parameter, item) is the template of the brain panel group comparison on brain surface figure.
 %%%% ¡settings!
 'ComparisonGroupBrainPF'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the panel group comparison on brain surface figure.
+ID (data, string) is a few-letter code for the brain panel group comparison on brain surface figure.
 %%%% ¡default!
 'ComparisonGroupBrainPF ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the panel group comparison on brain surface figure.
+LABEL (metadata, string) is an extended label of the brain panel group comparison on brain surface figure.
 %%%% ¡default!
 'ComparisonGroupBrainPF label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the panel group comparison on brain surface figure.
+NOTES (metadata, string) are some specific notes about the brain panel group comparison on brain surface figure.
 %%%% ¡default!
 'ComparisonGroupBrainPF notes'
 
 %%% ¡prop!
 DRAW (query, logical) draws the figure comparison figure.
 %%%% ¡calculate!
-value = calculateValue@PanelFig(bapf, BrainAtlasPF.DRAW, varargin{:}); % also warning
+value = calculateValue@BrainAtlasPF(bapf, BrainAtlasPF.DRAW, varargin{:}); % also warning
 if value
     bapf.memorize('H_AXES')
     
@@ -169,9 +169,9 @@ if value
 end
 
 %%% ¡prop!
-DELETE (query, logical) resets the handles when the panel figure graph is deleted.
+DELETE (query, logical) resets the handles when the brain panel figure graph is deleted.
 %%%% ¡calculate!
-value = calculateValue@PanelFig(bapf, PanelFig.DELETE, varargin{:}); % also warning
+value = calculateValue@BrainAtlasPF(bapf, BrainAtlasPF.DELETE, varargin{:}); % also warning
 if value
     bapf.set('H_AXES', Element.getNoValue())
 
