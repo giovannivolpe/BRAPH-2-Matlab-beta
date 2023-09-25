@@ -188,7 +188,7 @@ end
 PFME (gui, item) contains the panel figure of the measure.
 %%%% ¡_settings!
 'MeasureEnsemblePF'
-%%%% ¡_postprocessing!
+%%%% ¡postprocessing!
 if isa(me.getr('PFME'), 'NoValue')
 
     measure = me.get('MEASURE');
@@ -280,3 +280,8 @@ PFBG (gui, item) contains the panel figure of the brain graph.
 % % % pr = PanelPropItem('EL', me, 'PROP', MeasureEnsemble.PFBG, ...
 % % %     'GUICLASS', 'GUIFig', ...
 % % %     varargin{:});
+
+%% ¡tests!
+
+%%% ¡excluded_props!
+[MeasureEnsemble.PFME MeasureEnsemble.PFBG]
