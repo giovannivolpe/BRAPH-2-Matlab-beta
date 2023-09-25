@@ -103,7 +103,7 @@ function set_table()
     rowname = cell(length(m_list), 1);
     data = cell(length(m_list), 5);
     for mi = 1:1:length(m_list)
-        if any(cellfun(@(y) isequal(m_list{mi}, y), m_list_already_calculated)) && ~isa(g.get('MEASURE', m_list{mi}).getr('M'), 'NoValue')
+        if any(cellfun(@(y) isequal(m_list{mi}, y), mlist_already_calculated)) && ~isa(g.get('MEASURE', m_list{mi}).getr('M'), 'NoValue')
             rowname{mi} = 'C';
         else
             rowname{mi} = '';
@@ -134,22 +134,8 @@ function set_table()
         end
         
         data{mi, 5} = eval([m_list{mi} '.getPropDefault(''DESCRIPTION'')']);
-    
-        set(pr.get('TABLE'), ...
-            'RowName', rowname, ...
-            'Data', data ...
-            )
-    
-        % style SELECTED
-        styles_row = find(pr.get('TABLE').StyleConfigurations.Target == 'row');
-        if ~isempty(styles_row)
-            removeStyle(pr.get('TABLE'), styles_row)
-        end
-        if ~isempty(pr.get('SELECTED'))
-            addStyle(pr.get('TABLE'), uistyle('FontWeight', 'bold'), 'row', pr.get('SELECTED'))
-        end
     end
-end
+
 %%% ¡prop!
 REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
 %%%% ¡calculate!
@@ -349,7 +335,7 @@ menu_calculate = uimenu( ...
     'Text', 'Calculate Selected Measures', ...
 	'MenuSelectedFcn', {@cb_calculate} ...
     );
-menu_open_plots = uimenu( ... 
+menu_open_plots = uimenu( ...
 	'Separator', 'on', ...
 	'Parent', contextmenu, ...
 	'Tag', 'MENU_OPEN_PLOTS', ...
@@ -420,7 +406,6 @@ function cb_calculate(~, ~)
     a = pr.get('EL');
     g = a.get('GRAPH_TEMPLATE'); 
     m_list = g.get('COMPATIBLE_MEASURES');
-
     selected = pr.get('SELECTED');
     
     wb = braph2waitbar(pr.get('WAITBAR'), 0, ['Calculating ' num2str(length(selected))  ' measures ...']);
@@ -428,7 +413,6 @@ function cb_calculate(~, ~)
     for i = 1:1:length(m_list)
         if ismember(i, selected)
             measure = m_list{i};
-
             me = a.get('MEASUREENSEMBLE', measure);
 
             braph2waitbar(wb, .1 + .9 * i / length(selected), ['Calculating measure ' int2str(i) ' (' measure ') of ' int2str(length(selected)) ' ...'])
