@@ -90,7 +90,7 @@ if value
 end
 
 %%% ¡prop!
-SHOWMEASURE (query, logical) resets the handles when the panel figure brain surface is deleted.
+SHOWMEASURE (figure, logical) resets the handles when the panel figure brain surface is deleted.
 %%%% ¡default!
 false
 %%%% ¡postset!
