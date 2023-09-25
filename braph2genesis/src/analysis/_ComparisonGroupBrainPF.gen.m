@@ -1,5 +1,5 @@
 %% ¡header!
-ComparisonGroupBrainPF < PanelFig (pf, panel group comparison on brain surface figure) is the base element to plot a group comparison on brain surface.
+ComparisonGroupBrainPF < BrainAtlasPF (bapf, brain group comparison on brain surface figure) is the base element to plot a group comparison on brain surface.
 
 %%% ¡description!
 ComparisonGroupBrainPF manages the basic functionalities to plot of a group comparison on brain surface.
@@ -133,75 +133,75 @@ NOTES (metadata, string) are some specific notes about the panel group compariso
 %%% ¡prop!
 DRAW (query, logical) draws the figure comparison figure.
 %%%% ¡calculate!
-value = calculateValue@PanelFig(pf, PanelFig.DRAW, varargin{:}); % also warning
+value = calculateValue@PanelFig(bapf, BrainAtlasPF.DRAW, varargin{:}); % also warning
 if value
-    pf.memorize('H_AXES')
+    bapf.memorize('H_AXES')
     
-    pf.memorize('ST_AXIS').set('PANEL', pf, 'PROP', ComparisonGroupBrainPF.H_AXES).get('SETUP')
-    pf.memorize('LISTENER_ST_AXIS');
+    bapf.memorize('ST_AXIS').set('PANEL', bapf, 'PROP', ComparisonGroupBrainPF.H_AXES).get('SETUP')
+    bapf.memorize('LISTENER_ST_AXIS');
     
-    pf.memorize('H_AREA')
-    pf.memorize('ST_AREA').set('PANEL', pf, 'PROP', ComparisonGroupBrainPF.H_AREA).get('SETUP')
-    pf.memorize('LISTENER_ST_AREA');
+    bapf.memorize('H_AREA')
+    bapf.memorize('ST_AREA').set('PANEL', bapf, 'PROP', ComparisonGroupBrainPF.H_AREA).get('SETUP')
+    bapf.memorize('LISTENER_ST_AREA');
 
-    pf.memorize('H_LINE_DIFF')
-    pf.memorize('ST_LINE_DIFF').set('PANEL', pf, 'PROP', ComparisonGroupBrainPF.H_LINE_DIFF).get('SETUP')
-	pf.memorize('LISTENER_ST_LINE_DIFF');
+    bapf.memorize('H_LINE_DIFF')
+    bapf.memorize('ST_LINE_DIFF').set('PANEL', bapf, 'PROP', ComparisonGroupBrainPF.H_LINE_DIFF).get('SETUP')
+	bapf.memorize('LISTENER_ST_LINE_DIFF');
     
-    pf.memorize('H_LINE_CIL')
-    pf.memorize('ST_LINE_CIL').set('PANEL', pf, 'PROP', ComparisonGroupBrainPF.H_LINE_CIL).get('SETUP')
-	pf.memorize('LISTENER_ST_LINE_CIL');
+    bapf.memorize('H_LINE_CIL')
+    bapf.memorize('ST_LINE_CIL').set('PANEL', bapf, 'PROP', ComparisonGroupBrainPF.H_LINE_CIL).get('SETUP')
+	bapf.memorize('LISTENER_ST_LINE_CIL');
 
-    pf.memorize('H_LINE_CIU')
-    pf.memorize('ST_LINE_CIU').set('PANEL', pf, 'PROP', ComparisonGroupBrainPF.H_LINE_CIU).get('SETUP')
-	pf.memorize('LISTENER_ST_LINE_CIU');
+    bapf.memorize('H_LINE_CIU')
+    bapf.memorize('ST_LINE_CIU').set('PANEL', bapf, 'PROP', ComparisonGroupBrainPF.H_LINE_CIU).get('SETUP')
+	bapf.memorize('LISTENER_ST_LINE_CIU');
 
-    pf.memorize('H_TITLE')
-    pf.memorize('ST_TITLE').set('PANEL', pf, 'PROP', ComparisonGroupBrainPF.H_TITLE).get('SETUP')
+    bapf.memorize('H_TITLE')
+    bapf.memorize('ST_TITLE').set('PANEL', bapf, 'PROP', ComparisonGroupBrainPF.H_TITLE).get('SETUP')
 
-    pf.memorize('H_XLABEL')
-    pf.memorize('ST_XLABEL').set('PANEL', pf, 'PROP', ComparisonGroupBrainPF.H_XLABEL).get('SETUP')
+    bapf.memorize('H_XLABEL')
+    bapf.memorize('ST_XLABEL').set('PANEL', bapf, 'PROP', ComparisonGroupBrainPF.H_XLABEL).get('SETUP')
     
-    pf.memorize('H_YLABEL')
-    pf.memorize('ST_YLABEL').set('PANEL', pf, 'PROP', ComparisonGroupBrainPF.H_YLABEL).get('SETUP')
+    bapf.memorize('H_YLABEL')
+    bapf.memorize('ST_YLABEL').set('PANEL', bapf, 'PROP', ComparisonGroupBrainPF.H_YLABEL).get('SETUP')
 
-    pf.get('SETUP')
+    bapf.get('SETUP')
 end
 
 %%% ¡prop!
 DELETE (query, logical) resets the handles when the panel figure graph is deleted.
 %%%% ¡calculate!
-value = calculateValue@PanelFig(pf, PanelFig.DELETE, varargin{:}); % also warning
+value = calculateValue@PanelFig(bapf, PanelFig.DELETE, varargin{:}); % also warning
 if value
-    pf.set('H_AXES', Element.getNoValue())
+    bapf.set('H_AXES', Element.getNoValue())
 
-    pf.set('LISTENER_ST_AXIS', Element.getNoValue())
+    bapf.set('LISTENER_ST_AXIS', Element.getNoValue())
     
-    pf.set('H_AREA', Element.getNoValue())
-    pf.set('LISTENER_ST_AREA', Element.getNoValue())
+    bapf.set('H_AREA', Element.getNoValue())
+    bapf.set('LISTENER_ST_AREA', Element.getNoValue())
  
-    pf.set('H_LINE_DIFF', Element.getNoValue())
-    pf.set('LISTENER_ST_LINE_DIFF', Element.getNoValue())
+    bapf.set('H_LINE_DIFF', Element.getNoValue())
+    bapf.set('LISTENER_ST_LINE_DIFF', Element.getNoValue())
 
-    pf.set('H_LINE_CIL', Element.getNoValue())
-    pf.set('LISTENER_ST_LINE_CIL', Element.getNoValue())
+    bapf.set('H_LINE_CIL', Element.getNoValue())
+    bapf.set('LISTENER_ST_LINE_CIL', Element.getNoValue())
 
-    pf.set('H_LINE_CIU', Element.getNoValue())
-    pf.set('LISTENER_ST_LINE_CIU', Element.getNoValue())
+    bapf.set('H_LINE_CIU', Element.getNoValue())
+    bapf.set('LISTENER_ST_LINE_CIU', Element.getNoValue())
 
-    pf.set('H_TITLE', Element.getNoValue())
+    bapf.set('H_TITLE', Element.getNoValue())
 
-    pf.set('H_XLABEL', Element.getNoValue())
+    bapf.set('H_XLABEL', Element.getNoValue())
     
-    pf.set('H_YLABEL', Element.getNoValue())
+    bapf.set('H_YLABEL', Element.getNoValue())
 end
 
 %%% ¡prop!
 H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.
 %%%% ¡calculate!
-toolbar = pf.memorize('H_TOOLBAR');
+toolbar = bapf.memorize('H_TOOLBAR');
 if check_graphics(toolbar, 'uitoolbar')
-    value = calculateValue@PanelFig(pf, PanelFig.H_TOOLS);
+    value = calculateValue@BrainAtlasPF(bapf, BrainAtlasPF.H_TOOLS);
     
     tool_separator_1 = uipushtool(toolbar, 'Separator', 'on', 'Visible', 'off');
 
@@ -209,7 +209,7 @@ if check_graphics(toolbar, 'uitoolbar')
     tool_axis = uitoggletool(toolbar, ...
         'Tag', 'TOOL.Axis', ...
         'Separator', 'on', ...
-        'State', pf.get('ST_AXIS').get('AXIS'), ...
+        'State', bapf.get('ST_AXIS').get('AXIS'), ...
         'Tooltip', 'Show axis', ...
         'CData', imread('icon_axis.png'), ...
         'OnCallback', {@cb_axis, true}, ...
@@ -218,7 +218,7 @@ if check_graphics(toolbar, 'uitoolbar')
     % Grid
     tool_grid = uitoggletool(toolbar, ...
         'Tag', 'TOOL.Grid', ...
-        'State', pf.get('ST_AXIS').get('GRID'), ...
+        'State', bapf.get('ST_AXIS').get('GRID'), ...
         'Tooltip', 'Show grid', ...
         'CData', imread('icon_grid.png'), ...
         'OnCallback', {@cb_grid, true}, ...
@@ -229,7 +229,7 @@ if check_graphics(toolbar, 'uitoolbar')
     % Difference Line
     tool_line_diff = uitoggletool(toolbar, ...
         'Tag', 'TOOL.Line_Diff', ...
-        'State', pf.get('ST_LINE_DIFF').get('VISIBLE'), ...
+        'State', bapf.get('ST_LINE_DIFF').get('VISIBLE'), ...
         'Tooltip', 'Show difference line', ...
         'CData', imresize(imread('icon_line.png'), [24 24]), ... % % % make icon 16x16
         'OnCallback', {@cb_line_diff, true}, ...
@@ -238,7 +238,7 @@ if check_graphics(toolbar, 'uitoolbar')
     % Difference Line
     tool_line_ci = uitoggletool(toolbar, ...
         'Tag', 'TOOL.Line_CI', ...
-        'State', pf.get('ST_LINE_DIFF').get('VISIBLE'), ...
+        'State', bapf.get('ST_LINE_DIFF').get('VISIBLE'), ...
         'Tooltip', 'Show confidence lines (95%)', ...
         'CData', imresize(imread('icon_line.png'), [24 24]), ... % % % imread('icon_lines_two.png'), ...
         'OnCallback', {@cb_line_ci, true}, ...
@@ -247,7 +247,7 @@ if check_graphics(toolbar, 'uitoolbar')
     % Confidence Area
     tool_area = uitoggletool(toolbar, ...
         'Tag', 'TOOL.Area', ...
-        'State', pf.get('ST_AREA').get('VISIBLE'), ...
+        'State', bapf.get('ST_AREA').get('VISIBLE'), ...
         'Tooltip', 'Show confidence area (95%)', ...
         'CData', imresize(imread('icon_area.png'), [24 24]), ... % % % make icon 16x16
         'OnCallback', {@cb_area, true}, ...
@@ -264,36 +264,36 @@ else
 end
 %%%% ¡calculate_callbacks!
 function cb_axis(~, ~, axis) % (src, event)
-    pf.get('ST_AXIS').set('AXIS', axis);
+    bapf.get('ST_AXIS').set('AXIS', axis);
     
     % triggers the update of ST_AXIS
-    pf.set('ST_AXIS', pf.get('ST_AXIS'))
+    bapf.set('ST_AXIS', bapf.get('ST_AXIS'))
 end
 function cb_grid(~, ~, grid) % (src, event)
-    pf.get('ST_AXIS').set('GRID', grid);
+    bapf.get('ST_AXIS').set('GRID', grid);
 
     % triggers the update of ST_AXIS
-    pf.set('ST_AXIS', pf.get('ST_AXIS'))
+    bapf.set('ST_AXIS', bapf.get('ST_AXIS'))
 end
 function cb_line_diff(~, ~, visible) % (src, event)
-	pf.get('ST_LINE_DIFF').set('VISIBLE', visible)
+	bapf.get('ST_LINE_DIFF').set('VISIBLE', visible)
 
     % triggers the update of ST_LINE_DIFF
-    pf.set('ST_LINE_DIFF', pf.get('ST_LINE_DIFF'))
+    bapf.set('ST_LINE_DIFF', bapf.get('ST_LINE_DIFF'))
 end
 function cb_line_ci(~, ~, visible) % (src, event)
-	pf.get('ST_LINE_CIL').set('VISIBLE', visible)
-	pf.get('ST_LINE_CIU').set('VISIBLE', visible)
+	bapf.get('ST_LINE_CIL').set('VISIBLE', visible)
+	bapf.get('ST_LINE_CIU').set('VISIBLE', visible)
 
     % triggers the update of ST_LINE_CIL and ST_LINE_CIU
-    pf.set('ST_LINE_CIL', pf.get('ST_LINE_CIL'))
-    pf.set('ST_LINE_CIU', pf.get('ST_LINE_CIU'))
+    bapf.set('ST_LINE_CIL', bapf.get('ST_LINE_CIL'))
+    bapf.set('ST_LINE_CIU', bapf.get('ST_LINE_CIU'))
 end
 function cb_area(~, ~, visible) % (src, event)
-    pf.get('ST_AREA').set('VISIBLE', visible)
+    bapf.get('ST_AREA').set('VISIBLE', visible)
 
     % triggers the update of ST_AREA
-    pf.set('ST_AREA', pf.get('ST_AREA'))
+    bapf.set('ST_AREA', bapf.get('ST_AREA'))
 end
 
 %% ¡props!
@@ -302,7 +302,7 @@ end
 H_AXES (evanescent, handle) is the handle for the axes.
 %%%% ¡calculate!
 h_axes = uiaxes( ...
-    'Parent', pf.memorize('H'), ...
+    'Parent', bapf.memorize('H'), ...
     'Tag', 'H_AXES', ...
     'Units', 'normalized', ...
     'OuterPosition', [.2 .2 .6 .6] ... % % % %TODO transform this into a prop?
@@ -320,27 +320,27 @@ ST_AXIS (figure, item) determines the axis settings.
 %%%% ¡default!
 SettingsAxis('AXIS', true, 'GRID', false, 'EQUAL', false)
 %%%% ¡postset!
-if pf.get('DRAWN')
-    toolbar = pf.get('H_TOOLBAR');
+if bapf.get('DRAWN')
+    toolbar = bapf.get('H_TOOLBAR');
     if check_graphics(toolbar, 'uitoolbar')
-        set(findobj(toolbar, 'Tag', 'TOOL.Grid'), 'State', pf.get('ST_AXIS').get('GRID'))
-        set(findobj(toolbar, 'Tag', 'TOOL.Axis'), 'State', pf.get('ST_AXIS').get('AXIS'))
+        set(findobj(toolbar, 'Tag', 'TOOL.Grid'), 'State', bapf.get('ST_AXIS').get('GRID'))
+        set(findobj(toolbar, 'Tag', 'TOOL.Axis'), 'State', bapf.get('ST_AXIS').get('AXIS'))
     end
 end
 %%%% ¡gui!
-pr = SettingsAxisPP('EL', pf, 'PROP', ComparisonGroupBrainPF.ST_AXIS, varargin{:});
+pr = SettingsAxisPP('EL', bapf, 'PROP', ComparisonGroupBrainPF.ST_AXIS, varargin{:});
 
 %%% ¡prop!
 LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.
 %%%% ¡calculate!
-value = listener(pf.get('ST_AXIS'), 'PropSet', @cb_listener_st_axis); 
+value = listener(bapf.get('ST_AXIS'), 'PropSet', @cb_listener_st_axis); 
 %%%% ¡calculate_callbacks!
 function cb_listener_st_axis(~, ~)
-    if pf.get('DRAWN')
-        toolbar = pf.get('H_TOOLBAR');
+    if bapf.get('DRAWN')
+        toolbar = bapf.get('H_TOOLBAR');
         if check_graphics(toolbar, 'uitoolbar')
-            set(findobj(toolbar, 'Tag', 'TOOL.Grid'), 'State', pf.get('ST_AXIS').get('GRID'))
-            set(findobj(toolbar, 'Tag', 'TOOL.Axis'), 'State', pf.get('ST_AXIS').get('AXIS'))
+            set(findobj(toolbar, 'Tag', 'TOOL.Grid'), 'State', bapf.get('ST_AXIS').get('GRID'))
+            set(findobj(toolbar, 'Tag', 'TOOL.Axis'), 'State', bapf.get('ST_AXIS').get('AXIS'))
         end
     end
 end
@@ -358,25 +358,25 @@ value = [];
 %%% ¡prop!
 H_AREA (evanescent, handle) is the handle for the group comparison on brain surface confidence area.
 %%%% ¡calculate!
-value = fill(pf.get('H_AXES'), [0], [0], 'k');
+value = fill(bapf.get('H_AXES'), [0], [0], 'k');
 
 %%% ¡prop!
 ST_AREA (figure, item) determines the area settings.
 %%%% ¡settings!
 'SettingsArea'
 %%%% ¡gui!
-pr = SettingsAreaPP('EL', pf, 'PROP', ComparisonGroupBrainPF.ST_AREA, varargin{:});
+pr = SettingsAreaPP('EL', bapf, 'PROP', ComparisonGroupBrainPF.ST_AREA, varargin{:});
 
 %%% ¡prop!
 LISTENER_ST_AREA (evanescent, handle) contains the listener to the measure area settings to update the pushbutton.
 %%%% ¡calculate!
-value = listener(pf.get('ST_AREA'), 'PropSet', @cb_listener_st_area); 
+value = listener(bapf.get('ST_AREA'), 'PropSet', @cb_listener_st_area); 
 %%%% ¡calculate_callbacks!
 function cb_listener_st_area(~, ~)
-    if pf.get('DRAWN')
-        toolbar = pf.get('H_TOOLBAR');
+    if bapf.get('DRAWN')
+        toolbar = bapf.get('H_TOOLBAR');
         if check_graphics(toolbar, 'uitoolbar')
-            set(findobj(toolbar, 'Tag', 'TOOL.Area'), 'State', pf.get('ST_AREA').get('VISIBLE'))
+            set(findobj(toolbar, 'Tag', 'TOOL.Area'), 'State', bapf.get('ST_AREA').get('VISIBLE'))
         end
     end
 end
@@ -384,25 +384,25 @@ end
 %%% ¡prop!
 H_LINE_DIFF (evanescent, handle) is the handle for the group comparison on brain surface line.
 %%%% ¡calculate!
-value = plot(pf.get('H_AXES'), [0], [0], 'b', 'LineWidth', 2);
+value = plot(bapf.get('H_AXES'), [0], [0], 'b', 'LineWidth', 2);
 
 %%% ¡prop!
 ST_LINE_DIFF (figure, item) determines the line settings.
 %%%% ¡settings!
 'SettingsLine'
 %%%% ¡gui!
-pr = SettingsLinePP('EL', pf, 'PROP', ComparisonGroupBrainPF.ST_LINE_DIFF, varargin{:});
+pr = SettingsLinePP('EL', bapf, 'PROP', ComparisonGroupBrainPF.ST_LINE_DIFF, varargin{:});
 
 %%% ¡prop!
 LISTENER_ST_LINE_DIFF (evanescent, handle) contains the listener to the measure line settings to update the pushbutton.
 %%%% ¡calculate!
-value = listener(pf.get('ST_LINE_DIFF'), 'PropSet', @cb_listener_st_line_diff); 
+value = listener(bapf.get('ST_LINE_DIFF'), 'PropSet', @cb_listener_st_line_diff); 
 %%%% ¡calculate_callbacks!
 function cb_listener_st_line_diff(~, ~)
-    if pf.get('DRAWN')
-        toolbar = pf.get('H_TOOLBAR');
+    if bapf.get('DRAWN')
+        toolbar = bapf.get('H_TOOLBAR');
         if check_graphics(toolbar, 'uitoolbar')
-            set(findobj(toolbar, 'Tag', 'TOOL.Line_DIff'), 'State', pf.get('ST_LINE_DIFF').get('VISIBLE'))
+            set(findobj(toolbar, 'Tag', 'TOOL.Line_DIff'), 'State', bapf.get('ST_LINE_DIFF').get('VISIBLE'))
         end
     end
 end
@@ -410,7 +410,7 @@ end
 %%% ¡prop!
 H_LINE_CIL (evanescent, handle) is the handle for the lower confidence interval of the group comparison on brain surface line.
 %%%% ¡calculate!
-value = plot(pf.get('H_AXES'), [0], [0], 'b', 'LineWidth', 2);
+value = plot(bapf.get('H_AXES'), [0], [0], 'b', 'LineWidth', 2);
 
 %%% ¡prop!
 ST_LINE_CIL (figure, item) determines the line settings.
@@ -419,18 +419,18 @@ ST_LINE_CIL (figure, item) determines the line settings.
 %%%% ¡default!
 SettingsLine('SYMBOLSIZE', 6, 'FACECOLOR', [.5 .5 .5])
 %%%% ¡gui!
-pr = SettingsLinePP('EL', pf, 'PROP', ComparisonGroupBrainPF.ST_LINE_CIL, varargin{:});
+pr = SettingsLinePP('EL', bapf, 'PROP', ComparisonGroupBrainPF.ST_LINE_CIL, varargin{:});
 
 %%% ¡prop!
 LISTENER_ST_LINE_CIL (evanescent, handle) contains the listener to the measure line settings to update the pushbutton.
 %%%% ¡calculate!
-value = listener(pf.get('ST_LINE_DIFF'), 'PropSet', @cb_listener_st_line_cil); 
+value = listener(bapf.get('ST_LINE_DIFF'), 'PropSet', @cb_listener_st_line_cil); 
 %%%% ¡calculate_callbacks!
 function cb_listener_st_line_cil(~, ~)
-    if pf.get('DRAWN')
-        toolbar = pf.get('H_TOOLBAR');
+    if bapf.get('DRAWN')
+        toolbar = bapf.get('H_TOOLBAR');
         if check_graphics(toolbar, 'uitoolbar')
-            set(findobj(toolbar, 'Tag', 'TOOL.Line_CI'), 'State', pf.get('ST_LINE_CIL').get('VISIBLE'))
+            set(findobj(toolbar, 'Tag', 'TOOL.Line_CI'), 'State', bapf.get('ST_LINE_CIL').get('VISIBLE'))
         end
     end
 end
@@ -438,7 +438,7 @@ end
 %%% ¡prop!
 H_LINE_CIU (evanescent, handle) is the handle for the upper confidence interval of the group comparison on brain surface line.
 %%%% ¡calculate!
-value = plot(pf.get('H_AXES'), [0], [0], 'b', 'LineWidth', 2);
+value = plot(bapf.get('H_AXES'), [0], [0], 'b', 'LineWidth', 2);
 
 %%% ¡prop!
 ST_LINE_CIU (figure, item) determines the line settings.
@@ -447,18 +447,18 @@ ST_LINE_CIU (figure, item) determines the line settings.
 %%%% ¡default!
 SettingsLine('SYMBOLSIZE', 6, 'FACECOLOR', [.5 .5 .5])
 %%%% ¡gui!
-pr = SettingsLinePP('EL', pf, 'PROP', ComparisonGroupBrainPF.ST_LINE_CIU, varargin{:});
+pr = SettingsLinePP('EL', bapf, 'PROP', ComparisonGroupBrainPF.ST_LINE_CIU, varargin{:});
 
 %%% ¡prop!
 LISTENER_ST_LINE_CIU (evanescent, handle) contains the listener to the measure line settings to update the pushbutton.
 %%%% ¡calculate!
-value = listener(pf.get('ST_LINE_CIU'), 'PropSet', @cb_listener_st_line_ciu); 
+value = listener(bapf.get('ST_LINE_CIU'), 'PropSet', @cb_listener_st_line_ciu); 
 %%%% ¡calculate_callbacks!
 function cb_listener_st_line_ciu(~, ~)
-    if pf.get('DRAWN')
-        toolbar = pf.get('H_TOOLBAR');
+    if bapf.get('DRAWN')
+        toolbar = bapf.get('H_TOOLBAR');
         if check_graphics(toolbar, 'uitoolbar')
-            set(findobj(toolbar, 'Tag', 'TOOL.Line_CI'), 'State', pf.get('ST_LINE_CIU').get('VISIBLE'))
+            set(findobj(toolbar, 'Tag', 'TOOL.Line_CI'), 'State', bapf.get('ST_LINE_CIU').get('VISIBLE'))
         end
     end
 end
@@ -466,14 +466,14 @@ end
 %%% ¡prop!
 H_TITLE (evanescent, handle) is the axis title.
 %%%% ¡calculate!
-value = title(pf.get('H_AXES'), '');
+value = title(bapf.get('H_AXES'), '');
 
-if isa(pf.getr('ST_TITLE'), 'NoValue')
-    st = pf.memorize('ST_TITLE');
+if isa(bapf.getr('ST_TITLE'), 'NoValue')
+    st = bapf.memorize('ST_TITLE');
     
     position = get(value, 'Position');
     st.set( ...
-        'TXT', pf.get('CP').get('LABEL'), ...
+        'TXT', bapf.get('CP').get('LABEL'), ...
         'X', position(1), ...
         'Y', position(2), ...
         'Z', position(3) ...
@@ -487,15 +487,15 @@ ST_TITLE (figure, item) determines the title settings.
 %%%% ¡default!
 SettingsText('VISIBLE', true, 'FONTSIZE', s(2), 'HALIGN', 'center', 'VALIGN', 'middle')
 %%%% ¡gui!
-pr = SettingsTextPP('EL', pf, 'PROP', ComparisonGroupBrainPF.ST_TITLE, varargin{:});
+pr = SettingsTextPP('EL', bapf, 'PROP', ComparisonGroupBrainPF.ST_TITLE, varargin{:});
 
 %%% ¡prop!
 H_XLABEL (evanescent, handle) is the axis x-label.
 %%%% ¡calculate!
-value = xlabel(pf.get('H_AXES'), '');
+value = xlabel(bapf.get('H_AXES'), '');
 
-if isa(pf.getr('ST_XLABEL'), 'NoValue')
-    st = pf.memorize('ST_XLABEL');
+if isa(bapf.getr('ST_XLABEL'), 'NoValue')
+    st = bapf.memorize('ST_XLABEL');
     
     position = get(value, 'Position');
     st.set( ...
@@ -513,15 +513,15 @@ ST_XLABEL (figure, item) determines the x-label settings.
 %%%% ¡default!
 SettingsText('VISIBLE', true, 'FONTSIZE', s(2), 'HALIGN', 'center', 'VALIGN', 'middle')
 %%%% ¡gui!
-pr = SettingsTextPP('EL', pf, 'PROP', ComparisonGroupBrainPF.ST_XLABEL, varargin{:});
+pr = SettingsTextPP('EL', bapf, 'PROP', ComparisonGroupBrainPF.ST_XLABEL, varargin{:});
 
 %%% ¡prop!
 H_YLABEL (evanescent, handle) is the axis y-label.
 %%%% ¡calculate!
-value = ylabel(pf.get('H_AXES'), '');
+value = ylabel(bapf.get('H_AXES'), '');
 
-if isa(pf.getr('ST_YLABEL'), 'NoValue')
-    st = pf.memorize('ST_YLABEL');
+if isa(bapf.getr('ST_YLABEL'), 'NoValue')
+    st = bapf.memorize('ST_YLABEL');
     
     position = get(value, 'Position');
     st.set( ...
@@ -539,7 +539,7 @@ ST_YLABEL (figure, item) determines the y-label settings.
 %%%% ¡default!
 SettingsText('VISIBLE', true, 'FONTSIZE', s(2), 'HALIGN', 'center', 'VALIGN', 'middle', 'ROTATION', 90)
 %%%% ¡gui!
-pr = SettingsTextPP('EL', pf, 'PROP', ComparisonGroupBrainPF.ST_YLABEL, varargin{:});
+pr = SettingsTextPP('EL', bapf, 'PROP', ComparisonGroupBrainPF.ST_YLABEL, varargin{:});
 
 %% ¡tests!
 
