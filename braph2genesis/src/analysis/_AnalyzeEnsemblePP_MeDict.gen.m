@@ -84,13 +84,13 @@ if value
 end
 %%%% ¡calculate_callbacks!
 function set_table()
-    a = pr.get('EL');
-    prop = pr.get('PROP');
-    if isa(a.getr(prop), 'NoValue')
-        g = a.getPropDefaultConditioned(prop); % default graph
-    else
-        g = a.get(prop); % actual graph
-    end
+a = pr.get('EL');
+prop = pr.get('PROP');
+if isa(a.getr('GRAPH_TEMPLATE'), 'NoValue')
+    g = a.getPropDefaultConditioned('GRAPH_TEMPLATE'); % default graph
+else
+    g = a.get('GRAPH_TEMPLATE'); % actual graph
+end
 
     m_list = g.get('COMPATIBLE_MEASURES');
 
@@ -584,8 +584,9 @@ function cb_hide_plots(~, ~)
     end
 end
 function cb_open_elements(~, ~)
-    g = pr.get('EL').get(pr.get('PROP')); % actual graph
-    m_list = g.get('COMPATIBLE_MEASURES');
+    a = pr.get('EL');    
+    g = a.get('GRAPH_TEMPLATE'); % actual graph
+    mlist = g.get('COMPATIBLE_MEASURES');
     
     f = ancestor(pr.get('H'), 'figure'); % parent GUI 
     N = ceil(sqrt(length(m_list))); % number of row and columns of figures
@@ -598,12 +599,12 @@ function cb_open_elements(~, ~)
         
         measure = m_list{i}; % also key
 
-        m = g.get('MEASURE', measure);
+        me = a.get('MEASUREENSEMBLE', measure);
         
         if ~gui_m_dict.get('CONTAINS_KEY', measure)
             gui = GUIElement( ...
                 'ID', measure, ... % this is the dictionary key
-                'PE', m, ... 
+                'PE', me, ... 
                 'POSITION', [ ...
                     x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ... % x = (f_gr_x + f_gr_w) / screen_w + mod(selected_it - 1, N) * (screen_w - f_gr_x - 2 * f_gr_w) / N / screen_w;
                     y0(f, 'normalized') ... % y = f_gr_y / screen_h;
