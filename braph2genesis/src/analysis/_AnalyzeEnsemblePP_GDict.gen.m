@@ -11,6 +11,11 @@ uitable, AnalyzeEnsemble, Graph, Measure
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'AnalyzeEnsemblePP_GDict'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the graph and measure panel.
 %%%% ¡default!
 'AnalyzeEnsemblePP_GDict'
