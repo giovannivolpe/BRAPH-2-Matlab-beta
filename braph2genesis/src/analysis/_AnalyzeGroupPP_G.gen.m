@@ -535,6 +535,65 @@ function cb_calculate(~, ~)
 
 	pr.get('UPDATE');
 end
+function cb_open_mbrain(~, ~)
+    g = pr.gt('EL').get(pr.get('PROP'));
+    m_list = g.get('COMPATIBLE_MEASURES');
+    
+    f = ancestor(pr.get('H'), 'figure'); % parent GUI
+    N = ceil(sqrt(length(m_list))); % number of row and columns of figures
+    
+    gui_b_dict = pr.memorize('GUI_B_DICT');
+    selected = pr.get('SELECTED');
+    for s = 1:1:length(selected)
+        i = selected(s);
+    
+        measure = m_list{i}; % also key
+    
+        m = g.get('MEASURE', measure);
+    
+        if ~gui_f_dict.get('CONTAINS_KEY', measure)
+            gui = GUIFig( ...
+                'ID', measure, ... % this is the dictionary key
+                'PF', m.get('PFB'), ... % check with yuwei
+                'POSITION', [ ...
+                x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ...
+                y0(f, 'normalized') ...
+                w(f, 'normalized') * 3 ...
+                .5 * h(f, 'normalized') + .5 * h(f, 'normalized') * (N - floor((i - .5) / N )) / N ...
+                ], ...
+                'WAITBAR', pr.getCallback('WAITBAR'), ...
+                'CLOSEREQ', false ...
+                );
+            gui_f_dict.get('ADD', gui)
+        end
+    
+        gui = gui_b_dict.get('IT', measure);
+        if ~gui.get('DRAWN')
+            gui.get('DRAW')
+        end
+        gui.get('SHOW')
+    end
+end
+function cb_hide_mbrain(~, ~)
+    g = pr.get('EL').getPropDefaultConditioned(pr.get('PROP')); % default graph
+    m_list = g.get('COMPATIBLE_MEASURES');
+    
+    gui_b_dict = pr.memorize('GUI_B_DICT');
+    
+    selected = pr.get('SELECTED');
+    for s = 1:1:length(selected)
+        i = selected(s);
+    
+        measure = m_list{i}; % also key
+    
+        if gui_b_dict.get('CONTAINS_KEY', measure)
+            gui = gui_b_dict.get('IT', measure);
+            if gui.get('DRAWN')
+                gui.get('HIDE')
+            end
+        end
+    end
+end
 function cb_open_plots(~, ~)
     g = pr.get('EL').get(pr.get('PROP')); % actual graph
     m_list = g.get('COMPATIBLE_MEASURES');
@@ -673,6 +732,11 @@ GUI_F_DICT (gui, idict) contains the GUIs for the measure figures.
 
 %%% ¡prop!
 GUI_M_DICT (gui, idict) contains the GUIs for the measures.
+%%%% ¡settings!
+'GUIElement'
+
+%%% ¡prop!
+GUI_B_DICT (gui, idict) contains the GUIs for the brain measures.
 %%%% ¡settings!
 'GUIElement'
  
