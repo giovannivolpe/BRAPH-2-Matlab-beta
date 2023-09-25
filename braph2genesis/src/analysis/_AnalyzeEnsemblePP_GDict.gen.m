@@ -222,7 +222,7 @@ contextmenu = uicontextmenu( ...
     'Parent', ancestor(pr.get('H'), 'figure'), ...
     'Tag', 'CONTEXTMENU' ...
     );
-menu_open_g_pl = uimenu( ...
+menu_open_g_pl = uimenu( ... % yw add graph hist
 	'Parent', contextmenu, ...
 	'Tag', 'MENU_OPEN_G_PL', ...
 	'Text', 'Plot Selected Graph Figure', ...
@@ -277,7 +277,6 @@ function cb_open_g_pl(~, ~)
     glist = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false); % key
 
     selected = pr.get('SELECTED');
-    cb_open_g_el();
     gui_g_dict = pr.memorize('GUI_G_DICT');
     
     for s = 1:1:length(selected)
@@ -300,7 +299,7 @@ function cb_open_g_pl(~, ~)
             gui_g_dict.get('ADD', gui)
         end
 
-        gui_item = gui_g_dict.get('IT', g).get('PE').get('PR_DICT').get('IT', 15).memorize('GUI_ITEM'); % get PFGA PR
+        gui_item = gui_g_dict.get('IT', g).get('PE').get('PR_DICT').get('IT', 15).memorize('GUI_ITEM'); % get PFGA PR % yw use smarter way
     
         if ~gui_item.get('DRAWN')
             gui_item.get('DRAW')
