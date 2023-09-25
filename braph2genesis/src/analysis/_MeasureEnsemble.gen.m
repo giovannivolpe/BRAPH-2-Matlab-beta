@@ -7,6 +7,50 @@ MeasureEnsemble provides the methods necessary for a graph ensemble measure.
 %%% ¡seealso!
 AnalyzeEnsemble, CompareEnsemble
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemble.ID
+%%%% ¡title!
+Measure Ensemble ID
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemble.LABEL
+%%%% ¡title!
+Measure Ensemble NAME
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemble.MEASURE_TEMPLATE
+%%%% ¡title!
+Measure TEMPLATE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemble.MEASURE
+%%%% ¡title!
+Measure Ensemble
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemble.M
+%%%% ¡title!
+Measure VALUE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemble.PFME
+%%%% ¡title!
+Measure Ensemble Plot
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureEnsemble.PFBG
+%%%% ¡title!
+Measure Ensemble Brain Graph
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -51,10 +95,10 @@ MEASURE (data, class) is the measure class.
 %%%% ¡settings!
 'Measure'
 
-%%% ¡_prop!
-% % % MEASURE_TEMPLATE (parameter, item) provides the measure parameters. 
-% % % %%%% ¡settings!
-% % % 'Measure'
+%%% ¡prop!
+MEASURE_TEMPLATE (parameter, item) provides the measure parameters. 
+%%%% ¡settings!
+'Measure'
 
 %%% ¡prop!
 A (data, item) is the ensemble-based graph analysis.
