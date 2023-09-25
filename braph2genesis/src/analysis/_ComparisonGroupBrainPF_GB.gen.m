@@ -1,5 +1,5 @@
 %% ¡header!
-ComparisonGroupBrainPF_GB < ComparisonGroupPF (pf, panel global bilayer group comparison on brain surface figure) is the base element to plot a global bilayer group comparison on brain surface figure.
+ComparisonGroupBrainPF_GB < ComparisonGroupBrainPF (pf, panel global bilayer group comparison on brain surface figure) is the base element to plot a global bilayer group comparison on brain surface figure.
 
 %%% ¡description!
 ComparisonGroupBrainPF_GB manages the basic functionalities to plot of a global bilayer group comparison on brain surface figure.

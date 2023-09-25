@@ -1,5 +1,5 @@
 %% ¡header!
-ComparisonGroupBrainPF_GS < ComparisonGroupPF (pf, panel global superglobal group comparison on brain surface figure) is the base element to plot a global superglobal group comparison on brain surface figure.
+ComparisonGroupBrainPF_GS < ComparisonGroupBrainPF (pf, panel global superglobal group comparison on brain surface figure) is the base element to plot a global superglobal group comparison on brain surface figure.
 
 %%% ¡description!
 ComparisonGroupBrainPF_GS manages the basic functionalities to plot of a global superglobal group comparison on brain surface figure.

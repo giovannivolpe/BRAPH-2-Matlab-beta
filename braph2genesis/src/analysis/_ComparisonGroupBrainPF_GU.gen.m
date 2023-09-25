@@ -1,5 +1,5 @@
 %% ¡header!
-ComparisonGroupBrainPF_GU < ComparisonGroupPF (pf, panel global unilayer group comparison on brain surface figure) is the base element to plot a global unilayer group comparison on brain surface figure.
+ComparisonGroupBrainPF_GU < ComparisonGroupBrainPF (pf, panel global unilayer group comparison on brain surface figure) is the base element to plot a global unilayer group comparison on brain surface figure.
 
 %%% ¡description!
 ComparisonGroupBrainPF_GU manages the basic functionalities to plot of a global unilayer group comparison on brain surface figure.

@@ -1,5 +1,5 @@
 %% ¡header!
-ComparisonGroupBrainPF_BU < ComparisonGroupPF (pf, panel binodal unilayer group comparison on brain surface figure) is the base element to plot a binodal unilayer group comparison on brain surface figure.
+ComparisonGroupBrainPF_BU < ComparisonGroupBrainPF (pf, panel binodal unilayer group comparison on brain surface figure) is the base element to plot a binodal unilayer group comparison on brain surface figure.
 
 %%% ¡description!
 ComparisonGroupBrainPF_BU manages the basic functionalities to plot of a binodal unilayer group comparison on brain surface figure.

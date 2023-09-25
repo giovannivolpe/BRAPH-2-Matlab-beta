@@ -1,5 +1,5 @@
 %% ¡header!
-ComparisonGroupBrainPF_NS < ComparisonGroupPF (pf, panel nodal superglobal group comparison on brain surface figure) is the base element to plot a nodal superglobal group comparison on brain surface figure.
+ComparisonGroupBrainPF_NS < ComparisonGroupBrainPF (pf, panel nodal superglobal group comparison on brain surface figure) is the base element to plot a nodal superglobal group comparison on brain surface figure.
 
 %%% ¡description!
 ComparisonGroupBrainPF_NS manages the basic functionalities to plot of a nodal superglobal group comparison on brain surface figure.

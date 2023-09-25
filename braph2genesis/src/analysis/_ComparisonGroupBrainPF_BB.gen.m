@@ -1,5 +1,5 @@
 %% ¡header!
-ComparisonGroupBrainPF_BB < ComparisonGroupPF (pf, panel binodal bilayer group comparison on brain surface figure) is the base element to plot a binodal bilayer group comparison on brain surface figure.
+ComparisonGroupBrainPF_BB < ComparisonGroupBrainPF (pf, panel binodal bilayer group comparison on brain surface figure) is the base element to plot a binodal bilayer group comparison on brain surface figure.
 
 %%% ¡description!
 ComparisonGroupBrainPF_BB manages the basic functionalities to plot of a binodal bilayer group comparison on brain surface figure.

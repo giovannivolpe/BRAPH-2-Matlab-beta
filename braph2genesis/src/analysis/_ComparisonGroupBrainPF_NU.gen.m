@@ -1,5 +1,5 @@
 %% ¡header!
-ComparisonGroupBrainPF_NU < ComparisonGroupPF (pf, panel nodal unilayer group comparison on brain surface figure) is the base element to plot a nodal unilayer group comparison on brain surface figure.
+ComparisonGroupBrainPF_NU < ComparisonGroupBrainPF (pf, panel nodal unilayer group comparison on brain surface figure) is the base element to plot a nodal unilayer group comparison on brain surface figure.
 
 %%% ¡description!
 ComparisonGroupBrainPF_NU manages the basic functionalities to plot of a nodal unilayer group comparison on brain surface figure.

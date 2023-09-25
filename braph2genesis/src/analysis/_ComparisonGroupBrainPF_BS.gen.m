@@ -1,5 +1,5 @@
 %% ¡header!
-ComparisonGroupBrainPF_BS < ComparisonGroupPF (pf, panel binodal superglobal group comparison on brain surface figure) is the base element to plot a binodal superglobal group comparison on brain surface figure.
+ComparisonGroupBrainPF_BS < ComparisonGroupBrainPF (pf, panel binodal superglobal group comparison on brain surface figure) is the base element to plot a binodal superglobal group comparison on brain surface figure.
 
 %%% ¡description!
 ComparisonGroupBrainPF_BS manages the basic functionalities to plot of a binodal superglobal group comparison on brain surface figure.
