@@ -11,7 +11,7 @@ uitable, AnalyzeEnsemble, Graph, Measure
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the graph and measure panel.
 %%%% ¡default!
 'AnalyzeEnsemblePP_GDict'
 
@@ -93,11 +93,13 @@ function set_table()
     end
     
     g_dict = a.get(prop);
+    
     g_key_list = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false);
     
     rowname = cell(length(g_key_list), 1);
     data = cell(length(g_key_list), 3);
     for gi = 1:1:length(g_key_list)
+
         if any(pr.get('SELECTED') == gi)
             data{gi, 1} = true;
         else
@@ -291,12 +293,14 @@ value = contextmenu;
 function cb_open_g_pl(~, ~)
     a = pr.get('EL');
     g_dict = a.get(pr.get('PROP')); 
+
     g_key_list = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false); % The graph ID is the key
 
     f = ancestor(pr.get('H'), 'figure'); % parent GUI
     N = ceil(sqrt(length(g_key_list))); % number of row and columns of figures
 
     selected = pr.get('SELECTED');
+
     gui_g_dict = pr.memorize('GUI_G_DICT');
     
     for s = 1:1:length(selected)
@@ -423,6 +427,7 @@ end
 function cb_open_g_el(~, ~)
     a = pr.get('EL');
     g_dict = a.get(pr.get('PROP'));
+
     g_key_list = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false); % The graph ID is the key
     
     f = ancestor(pr.get('H'), 'figure'); % parent GUI
@@ -453,6 +458,7 @@ function cb_open_g_el(~, ~)
             gui_g_dict.get('ADD', gui)
         end
         gui = gui_g_dict.get('IT', g_key);
+
         if ~gui.get('DRAWN')
             gui.get('DRAW')
         end
@@ -461,6 +467,7 @@ function cb_open_g_el(~, ~)
 end
 function cb_hide_g_el(~, ~)
     g_dict = pr.get('EL').get(pr.get('PROP'));
+
     g_key_list =  cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false); % The graph ID is the key
     
     gui_g_dict = pr.memorize('GUI_G_DICT');
@@ -494,9 +501,11 @@ function cb_clear_selection(~, ~)
 end
 function cb_invert_selection(~, ~) 
     g_dict = pr.get('EL').get(pr.get('PROP'));
+
     g_key_list = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false);
 
     selected_tmp = [1:1:length(g_key_list)];
+
     selected_tmp(pr.get('SELECTED')) = [];
     pr.set('SELECTED', selected_tmp);
 
