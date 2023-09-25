@@ -134,6 +134,20 @@ function set_table()
         end
         
         data{mi, 5} = eval([m_list{mi} '.getPropDefault(''DESCRIPTION'')']);
+    
+        set(pr.get('TABLE'), ...
+            'RowName', rowname, ...
+            'Data', data ...
+            )
+    
+        % style SELECTED
+        styles_row = find(pr.get('TABLE').StyleConfigurations.Target == 'row');
+        if ~isempty(styles_row)
+            removeStyle(pr.get('TABLE'), styles_row)
+        end
+        if ~isempty(pr.get('SELECTED'))
+            addStyle(pr.get('TABLE'), uistyle('FontWeight', 'bold'), 'row', pr.get('SELECTED'))
+        end
     end
 
 %%% ¡prop!
