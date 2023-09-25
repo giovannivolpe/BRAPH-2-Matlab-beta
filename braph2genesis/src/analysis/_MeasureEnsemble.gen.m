@@ -79,11 +79,11 @@ else
 end
 
 value = m_av;
-%%%% ¡_gui!
+%%%% ¡gui!
 g = me.get('A').get('GRAPH_TEMPLATE');
 measure = me.get('MEASURE');
 
-pr = PanelPropCell('EL', cp, 'PROP', MeasureEnsemble.M, varargin{:});
+pr = PanelPropCell('EL', me, 'PROP', MeasureEnsemble.M, varargin{:});
 
 if Element.getPropDefault(measure, 'SHAPE') == Measure.GLOBAL % __Measure.GLOBAL__
     pr.set( ...
