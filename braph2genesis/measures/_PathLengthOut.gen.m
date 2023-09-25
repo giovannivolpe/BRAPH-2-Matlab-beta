@@ -7,6 +7,11 @@ The out-path length is the average shortest out-path lengths of one node to all 
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'PathLengthOut'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the out-path length.
 %%%% ¡default!
 'PathLengthOut'
@@ -18,6 +23,8 @@ DESCRIPTION (constant, string) is the description of the out-path length.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the out-path length.
+%%%% ¡settings!
+'PathLengthOut'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the out-path length.

@@ -8,6 +8,11 @@ of all nodes.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'FlexibilityAv'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the average flexibility.
 %%%% ¡default!
 'FlexibilityAv '
@@ -19,6 +24,8 @@ DESCRIPTION (constant, string) is the description of the average flexibility.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the average flexibility.
+%%%% ¡settings!
+'FlexibilityAv'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the average flexibility.

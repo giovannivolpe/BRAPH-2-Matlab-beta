@@ -54,9 +54,14 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the multiplex triangles.
+ELCLASS (constant, string) is the class of the % % % .
 %%%% ¡default!
 'MultiplexT'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the multiplex triangles.
+%%%% ¡default!
+'MultiplexTriangles'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex triangles.
@@ -76,12 +81,12 @@ ID (data, string) is a few-letter code of the multiplex triangles.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex triangles.
 %%%% ¡default!
-'MultiplexT label'
+'MultiplexTriangles label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex triangles.
 %%%% ¡default!
-'MultiplexT notes'
+'MultiplexTriangles notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.

@@ -2,29 +2,31 @@ classdef SettingsAmbient < Settings
 	%SettingsAmbient contains the ambient settings.
 	% It is a subclass of <a href="matlab:help Settings">Settings</a>.
 	%
-	% SettingsAmbient provides the settings for the ambient lightning and material, 
-	%  including lighting, material, camlight, shading, and colormap.
+	% An Ambient Settings (SettingsAmbient) provides the settings 
+	%  for the ambient lightning and material, including lighting, material, 
+	%  camlight, shading, and colormap.
 	% The handle can be an axes (uiaxes).
 	%
 	% The list of SettingsAmbient properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ambient settings.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ambient settings.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ambient settings.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ambient settings.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ambient settings.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ambient settings.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
-	%  <strong>9</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
-	%  <strong>10</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
-	%  <strong>11</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
-	%  <strong>12</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
-	%  <strong>13</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
-	%  <strong>14</strong> <strong>LIGHTING</strong> 	LIGHTING (figure, option) is the lighting value.
-	%  <strong>15</strong> <strong>MATERIAL</strong> 	MATERIAL (figure, option) is the material value.
-	%  <strong>16</strong> <strong>CAMLIGHT</strong> 	CAMLIGHT (figure, option) is the camlight value.
-	%  <strong>17</strong> <strong>SHADING</strong> 	SHADING (figure, option) is the shading value.
-	%  <strong>18</strong> <strong>COLORMAP</strong> 	COLORMAP (figure, option) is the colormap.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ambient settings.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ambient settings.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ambient settings.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ambient settings.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ambient settings.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ambient settings.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ambient settings.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
+	%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
+	%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
+	%  <strong>12</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
+	%  <strong>13</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
+	%  <strong>14</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
+	%  <strong>15</strong> <strong>LIGHTING</strong> 	LIGHTING (figure, option) is the lighting value.
+	%  <strong>16</strong> <strong>MATERIAL</strong> 	MATERIAL (figure, option) is the material value.
+	%  <strong>17</strong> <strong>CAMLIGHT</strong> 	CAMLIGHT (figure, option) is the camlight value.
+	%  <strong>18</strong> <strong>SHADING</strong> 	SHADING (figure, option) is the shading value.
+	%  <strong>19</strong> <strong>COLORMAP</strong> 	COLORMAP (figure, option) is the colormap.
 	%
 	% SettingsAmbient methods (constructor):
 	%  SettingsAmbient - constructor
@@ -115,27 +117,27 @@ classdef SettingsAmbient < Settings
 	% See also uiaxes, SettingsAmbientPP, PanelFig, GUIFig, check_graphics.
 	
 	properties (Constant) % properties
-		LIGHTING = 14; %CET: Computational Efficiency Trick
+		LIGHTING = 15; %CET: Computational Efficiency Trick
 		LIGHTING_TAG = 'LIGHTING';
 		LIGHTING_CATEGORY = 8;
 		LIGHTING_FORMAT = 5;
 		
-		MATERIAL = 15; %CET: Computational Efficiency Trick
+		MATERIAL = 16; %CET: Computational Efficiency Trick
 		MATERIAL_TAG = 'MATERIAL';
 		MATERIAL_CATEGORY = 8;
 		MATERIAL_FORMAT = 5;
 		
-		CAMLIGHT = 16; %CET: Computational Efficiency Trick
+		CAMLIGHT = 17; %CET: Computational Efficiency Trick
 		CAMLIGHT_TAG = 'CAMLIGHT';
 		CAMLIGHT_CATEGORY = 8;
 		CAMLIGHT_FORMAT = 5;
 		
-		SHADING = 17; %CET: Computational Efficiency Trick
+		SHADING = 18; %CET: Computational Efficiency Trick
 		SHADING_TAG = 'SHADING';
 		SHADING_CATEGORY = 8;
 		SHADING_FORMAT = 5;
 		
-		COLORMAP = 18; %CET: Computational Efficiency Trick
+		COLORMAP = 19; %CET: Computational Efficiency Trick
 		COLORMAP_TAG = 'COLORMAP';
 		COLORMAP_CATEGORY = 8;
 		COLORMAP_FORMAT = 5;
@@ -152,24 +154,25 @@ classdef SettingsAmbient < Settings
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of SettingsAmbient properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ambient settings.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ambient settings.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ambient settings.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ambient settings.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ambient settings.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ambient settings.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
-			%  <strong>9</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
-			%  <strong>10</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
-			%  <strong>11</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
-			%  <strong>12</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
-			%  <strong>13</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
-			%  <strong>14</strong> <strong>LIGHTING</strong> 	LIGHTING (figure, option) is the lighting value.
-			%  <strong>15</strong> <strong>MATERIAL</strong> 	MATERIAL (figure, option) is the material value.
-			%  <strong>16</strong> <strong>CAMLIGHT</strong> 	CAMLIGHT (figure, option) is the camlight value.
-			%  <strong>17</strong> <strong>SHADING</strong> 	SHADING (figure, option) is the shading value.
-			%  <strong>18</strong> <strong>COLORMAP</strong> 	COLORMAP (figure, option) is the colormap.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ambient settings.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ambient settings.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ambient settings.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ambient settings.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ambient settings.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ambient settings.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ambient settings.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
+			%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
+			%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
+			%  <strong>12</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
+			%  <strong>13</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
+			%  <strong>14</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
+			%  <strong>15</strong> <strong>LIGHTING</strong> 	LIGHTING (figure, option) is the lighting value.
+			%  <strong>16</strong> <strong>MATERIAL</strong> 	MATERIAL (figure, option) is the material value.
+			%  <strong>17</strong> <strong>CAMLIGHT</strong> 	CAMLIGHT (figure, option) is the camlight value.
+			%  <strong>18</strong> <strong>SHADING</strong> 	SHADING (figure, option) is the shading value.
+			%  <strong>19</strong> <strong>COLORMAP</strong> 	COLORMAP (figure, option) is the colormap.
 			%
 			% See also Category, Format.
 			
@@ -231,25 +234,25 @@ classdef SettingsAmbient < Settings
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2];
+					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
 					prop_list = 4;
+				case 4 % Category.DATA
+					prop_list = 5;
 				case 6 % Category.QUERY
-					prop_list = [7 12 13];
+					prop_list = [8 13 14];
 				case 8 % Category.FIGURE
-					prop_list = [14 15 16 17 18];
+					prop_list = [15 16 17 18 19];
 				case 9 % Category.GUI
-					prop_list = [8 9 10 11];
+					prop_list = [9 10 11 12];
 				otherwise
 					prop_list = [];
 			end
@@ -275,13 +278,13 @@ classdef SettingsAmbient < Settings
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 18;
+				prop_number = 19;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 2;
+					prop_number = 3;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -324,7 +327,7 @@ classdef SettingsAmbient < Settings
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 18 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 19 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -362,7 +365,7 @@ classdef SettingsAmbient < Settings
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'LIGHTING'  'MATERIAL'  'CAMLIGHT'  'SHADING'  'COLORMAP' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'LIGHTING'  'MATERIAL'  'CAMLIGHT'  'SHADING'  'COLORMAP' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -395,7 +398,7 @@ classdef SettingsAmbient < Settings
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'LIGHTING'  'MATERIAL'  'CAMLIGHT'  'SHADING'  'COLORMAP' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'LIGHTING'  'MATERIAL'  'CAMLIGHT'  'SHADING'  'COLORMAP' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -424,7 +427,7 @@ classdef SettingsAmbient < Settings
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				settingsambient_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'LIGHTING'  'MATERIAL'  'CAMLIGHT'  'SHADING'  'COLORMAP' };
+				settingsambient_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'LIGHTING'  'MATERIAL'  'CAMLIGHT'  'SHADING'  'COLORMAP' };
 				tag = settingsambient_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -451,7 +454,7 @@ classdef SettingsAmbient < Settings
 			prop = SettingsAmbient.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingsambient_category_list = { 1  1  3  4  2  2  6  9  9  9  9  6  6  8  8  8  8  8 };
+			settingsambient_category_list = { 1  1  1  3  4  2  2  6  9  9  9  9  6  6  8  8  8  8  8 };
 			prop_category = settingsambient_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -477,7 +480,7 @@ classdef SettingsAmbient < Settings
 			prop = SettingsAmbient.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingsambient_format_list = { 2  2  8  2  2  2  2  8  11  2  11  18  11  5  5  5  5  5 };
+			settingsambient_format_list = { 2  2  2  8  2  2  2  2  8  11  2  11  18  11  5  5  5  5  5 };
 			prop_format = settingsambient_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -503,7 +506,7 @@ classdef SettingsAmbient < Settings
 			prop = SettingsAmbient.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingsambient_description_list = { 'NAME (constant, string) is the name of the ambient settings.'  'DESCRIPTION (constant, string) is the description of the ambient settings.'  'TEMPLATE (parameter, item) is the template of the ambient settings.'  'ID (data, string) is a few-letter code for the ambient settings.'  'LABEL (metadata, string) is an extended label of the ambient settings.'  'NOTES (metadata, string) are some specific notes about the ambient settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.'  'LIGHTING (figure, option) is the lighting value.'  'MATERIAL (figure, option) is the material value.'  'CAMLIGHT (figure, option) is the camlight value.'  'SHADING (figure, option) is the shading value.'  'COLORMAP (figure, option) is the colormap.' };
+			settingsambient_description_list = { 'ELCLASS (constant, string) is the class of the ambient settings.'  'NAME (constant, string) is the name of the ambient settings.'  'DESCRIPTION (constant, string) is the description of the ambient settings.'  'TEMPLATE (parameter, item) is the template of the ambient settings.'  'ID (data, string) is a few-letter code for the ambient settings.'  'LABEL (metadata, string) is an extended label of the ambient settings.'  'NOTES (metadata, string) are some specific notes about the ambient settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.'  'LIGHTING (figure, option) is the lighting value.'  'MATERIAL (figure, option) is the material value.'  'CAMLIGHT (figure, option) is the camlight value.'  'SHADING (figure, option) is the shading value.'  'COLORMAP (figure, option) is the colormap.' };
 			prop_description = settingsambient_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -529,17 +532,17 @@ classdef SettingsAmbient < Settings
 			prop = SettingsAmbient.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 14 % SettingsAmbient.LIGHTING
+				case 15 % SettingsAmbient.LIGHTING
 					prop_settings = {'none' 'phong' 'flat' 'gouraud'};
-				case 15 % SettingsAmbient.MATERIAL
+				case 16 % SettingsAmbient.MATERIAL
 					prop_settings = {'shiny' 'dull' 'metal'};
-				case 16 % SettingsAmbient.CAMLIGHT
+				case 17 % SettingsAmbient.CAMLIGHT
 					prop_settings = {'none' 'headlight' 'headlight (x2)' 'headlight (x3)' 'right' 'right (x2)' 'right (x3)' 'left' 'left (x2)' 'left (x3)'};
-				case 17 % SettingsAmbient.SHADING
+				case 18 % SettingsAmbient.SHADING
 					prop_settings = {'none' 'interp' 'flat' 'faceted'};
-				case 18 % SettingsAmbient.COLORMAP
+				case 19 % SettingsAmbient.COLORMAP
 					prop_settings = {'none', 'white', 'parula', 'jet', 'hsv', 'hot', 'cool', 'spring', 'summer', 'autumn', 'winter', 'gray', 'bone', 'copper', 'pink', 'lines', 'colorcube', 'prism', 'flag'};
-				case 3 % SettingsAmbient.TEMPLATE
+				case 4 % SettingsAmbient.TEMPLATE
 					prop_settings = 'SettingsAmbient';
 				otherwise
 					prop_settings = getPropSettings@Settings(prop);
@@ -568,27 +571,29 @@ classdef SettingsAmbient < Settings
 			prop = SettingsAmbient.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 14 % SettingsAmbient.LIGHTING
+				case 15 % SettingsAmbient.LIGHTING
 					prop_default = 'gouraud';
-				case 15 % SettingsAmbient.MATERIAL
+				case 16 % SettingsAmbient.MATERIAL
 					prop_default = 'shiny';
-				case 16 % SettingsAmbient.CAMLIGHT
+				case 17 % SettingsAmbient.CAMLIGHT
 					prop_default = 'headlight (x2)';
-				case 17 % SettingsAmbient.SHADING
+				case 18 % SettingsAmbient.SHADING
 					prop_default = 'none';
-				case 18 % SettingsAmbient.COLORMAP
+				case 19 % SettingsAmbient.COLORMAP
 					prop_default = 'none';
-				case 1 % SettingsAmbient.NAME
+				case 1 % SettingsAmbient.ELCLASS
 					prop_default = 'SettingsAmbient';
-				case 2 % SettingsAmbient.DESCRIPTION
-					prop_default = 'SettingsAmbient provides the settings for the ambient lightning and material, including lighting, material, camlight, shading, and colormap.';
-				case 3 % SettingsAmbient.TEMPLATE
+				case 2 % SettingsAmbient.NAME
+					prop_default = 'Ambient Settings';
+				case 3 % SettingsAmbient.DESCRIPTION
+					prop_default = 'An Ambient Settings (SettingsAmbient) provides the settings for the ambient lightning and material, including lighting, material, camlight, shading, and colormap. The handle can be an axes (uiaxes).';
+				case 4 % SettingsAmbient.TEMPLATE
 					prop_default = Format.getFormatDefault(8, SettingsAmbient.getPropSettings(prop));
-				case 4 % SettingsAmbient.ID
+				case 5 % SettingsAmbient.ID
 					prop_default = 'SettingsAmbient ID';
-				case 5 % SettingsAmbient.LABEL
+				case 6 % SettingsAmbient.LABEL
 					prop_default = 'SettingsAmbient label';
-				case 6 % SettingsAmbient.NOTES
+				case 7 % SettingsAmbient.NOTES
 					prop_default = 'SettingsAmbient notes';
 				otherwise
 					prop_default = getPropDefault@Settings(prop);
@@ -654,20 +659,20 @@ classdef SettingsAmbient < Settings
 			prop = SettingsAmbient.getPropProp(pointer);
 			
 			switch prop
-				case 14 % SettingsAmbient.LIGHTING
+				case 15 % SettingsAmbient.LIGHTING
 					check = Format.checkFormat(5, value, SettingsAmbient.getPropSettings(prop));
-				case 15 % SettingsAmbient.MATERIAL
+				case 16 % SettingsAmbient.MATERIAL
 					check = Format.checkFormat(5, value, SettingsAmbient.getPropSettings(prop));
-				case 16 % SettingsAmbient.CAMLIGHT
+				case 17 % SettingsAmbient.CAMLIGHT
 					check = Format.checkFormat(5, value, SettingsAmbient.getPropSettings(prop));
-				case 17 % SettingsAmbient.SHADING
+				case 18 % SettingsAmbient.SHADING
 					check = Format.checkFormat(5, value, SettingsAmbient.getPropSettings(prop));
-				case 18 % SettingsAmbient.COLORMAP
+				case 19 % SettingsAmbient.COLORMAP
 					check = Format.checkFormat(5, value, SettingsAmbient.getPropSettings(prop));
-				case 3 % SettingsAmbient.TEMPLATE
+				case 4 % SettingsAmbient.TEMPLATE
 					check = Format.checkFormat(8, value, SettingsAmbient.getPropSettings(prop));
 				otherwise
-					if prop <= 13
+					if prop <= 14
 						check = checkProp@Settings(prop, value);
 					end
 			end
@@ -697,19 +702,19 @@ classdef SettingsAmbient < Settings
 			%  checkValue.
 			
 			switch prop
-				case 14 % SettingsAmbient.LIGHTING
+				case 15 % SettingsAmbient.LIGHTING
 					a = st.get('H');
 					if check_graphics(a, 'axes')
 					    lighting(a, st.get('LIGHTING'))
 					end
 					
-				case 15 % SettingsAmbient.MATERIAL
+				case 16 % SettingsAmbient.MATERIAL
 					a = st.get('H');
 					if check_graphics(a, 'axes')
 					    material(a, st.get('MATERIAL'))
 					end
 					
-				case 16 % SettingsAmbient.CAMLIGHT
+				case 17 % SettingsAmbient.CAMLIGHT
 					a = st.get('H');
 					if check_graphics(a, 'axes')
 					    delete(findall(a, 'Type', 'light'))    
@@ -744,7 +749,7 @@ classdef SettingsAmbient < Settings
 					    end
 					end
 					
-				case 17 % SettingsAmbient.SHADING
+				case 18 % SettingsAmbient.SHADING
 					a = st.get('H');
 					if check_graphics(a, 'axes')
 					    if ~strcmpi(st.get('SHADING'), 'none') && ~strcmpi(st.get('COLORMAP'), 'none')
@@ -753,7 +758,7 @@ classdef SettingsAmbient < Settings
 					    end
 					end
 					
-				case 18 % SettingsAmbient.COLORMAP
+				case 19 % SettingsAmbient.COLORMAP
 					a = st.get('H');
 					if check_graphics(a, 'axes')
 					    if ~strcmpi(st.get('SHADING'), 'none') && ~strcmpi(st.get('COLORMAP'), 'none')
@@ -763,7 +768,7 @@ classdef SettingsAmbient < Settings
 					end
 					
 				otherwise
-					if prop <= 13
+					if prop <= 14
 						postset@Settings(st, prop);
 					end
 			end

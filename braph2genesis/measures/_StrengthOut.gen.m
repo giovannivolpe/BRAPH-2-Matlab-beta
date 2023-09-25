@@ -9,6 +9,11 @@ the adjacency matrix.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'StrengthOut'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the out-strength.
 %%%% ¡default!
 'StrengthOut'
@@ -17,8 +22,11 @@ NAME (constant, string) is the name of the out-strength.
 DESCRIPTION (constant, string) is the description of the out-strength.
 %%%% ¡default!
 'The out-strength of a graph is the sum of all weights of the outward edges connected to a node within a layer, i.e., it is the sum of the rows of the adjacency matrix.'
+
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the out-strength.
+%%%% ¡settings!
+'StrengthOut'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the out-strength.

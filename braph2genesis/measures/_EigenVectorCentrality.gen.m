@@ -8,6 +8,11 @@ to the largest eigenvalue of the largest eigenvalue of the graphs adjacency matr
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'EigenVectorCentrality'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the eigenvector centrality.
 %%%% ¡default!
 'EigenVectorCentrality'
@@ -19,6 +24,8 @@ DESCRIPTION (constant, string) is the description of the eigenvector centrality.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the eigenvector centrality.
+%%%% ¡settings!
+'EigenVectorCentrality'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the eigenvector centrality.

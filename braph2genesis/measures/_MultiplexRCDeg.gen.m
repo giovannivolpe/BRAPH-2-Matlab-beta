@@ -54,9 +54,14 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the multiplex rich-club degree.
+ELCLASS (constant, string) is the class of the % % % .
 %%%% ¡default!
 'MultiplexRCDeg'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the multiplex rich-club degree.
+%%%% ¡default!
+'MultiplexRichClubDegree'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex rich-club degree.
@@ -76,12 +81,12 @@ ID (data, string) is a few-letter code of the multiplex rich-club degree.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex rich-club degree.
 %%%% ¡default!
-'MultiplexRCDeg label'
+'MultiplexRichClubDegree label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex rich-club degree.
 %%%% ¡default!
-'MultiplexRCDeg notes'
+'MultiplexRichClubDegree notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.

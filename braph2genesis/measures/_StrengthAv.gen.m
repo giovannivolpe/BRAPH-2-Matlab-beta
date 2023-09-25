@@ -8,6 +8,11 @@ the edges connected to a node within a layer.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'StrengthAv'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the average strength.
 %%%% ¡default!
 'StrengthAv'
@@ -19,6 +24,8 @@ DESCRIPTION (constant, string) is the description of the average strength.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the average strength.
+%%%% ¡settings!
+'StrengthAv'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the average strength.

@@ -1,8 +1,8 @@
 classdef PanelPropMatrix < PanelProp
-	%PanelPropMatrix plots the panel of a property matrix-like.
+	%PanelPropMatrix plots the panel of a prop matrix-like.
 	% It is a subclass of <a href="matlab:help PanelProp">PanelProp</a>.
 	%
-	% PanelPropMatrix plots the panel for a RVECTOR, CVECTOR, MATRIX or SMATRIX property with a table.
+	% A Matrix Prop Panel (PanelPropMatrix) plots the panel for a RVECTOR, CVECTOR, MATRIX or SMATRIX prop with a table.
 	% It works for all categories.
 	% 
 	% It can be personalized with the following props:
@@ -12,47 +12,48 @@ classdef PanelPropMatrix < PanelProp
 	%  MENU_EXPORT - Whether to show the export menu. To be defined before drawing.
 	%
 	% The list of PanelPropMatrix properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the matrix-like property panel.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the matrix-like property panel.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the matrix-like property panel.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the matrix-like property panel.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the matrix-like property panel.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the matrix-like property panel.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-	%  <strong>9</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-	%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
-	%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
-	%  <strong>12</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
-	%  <strong>13</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
-	%  <strong>14</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
-	%  <strong>15</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
-	%  <strong>16</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
-	%  <strong>17</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
-	%  <strong>18</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
-	%  <strong>19</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
-	%  <strong>20</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the table.
-	%  <strong>21</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
-	%  <strong>22</strong> <strong>EL</strong> 	EL (data, item) is the element.
-	%  <strong>23</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-	%  <strong>24</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the property panel.
-	%  <strong>25</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
-	%  <strong>26</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
-	%  <strong>27</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
-	%  <strong>28</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
-	%  <strong>29</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
-	%  <strong>30</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
-	%  <strong>31</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
-	%  <strong>32</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
-	%  <strong>33</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
-	%  <strong>34</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-	%  <strong>35</strong> <strong>ENABLE</strong> 	ENABLE (gui, option) switches table between on and off.
-	%  <strong>36</strong> <strong>ROWNAME</strong> 	ROWNAME (gui, stringlist) determines the table row names.
-	%  <strong>37</strong> <strong>COLUMNNAME</strong> 	COLUMNNAME (gui, stringlist) determines the table column names.
-	%  <strong>38</strong> <strong>MENU_EXPORT</strong> 	MENU_EXPORT (gui, logical) determines whether to show the context menu to export data.
-	%  <strong>39</strong> <strong>TABLE_HEIGHT</strong> 	TABLE_HEIGHT (gui, size) is the pixel height of the property panel when the table is shown.
-	%  <strong>40</strong> <strong>TABLE</strong> 	TABLE (evanescent, handle) is the table.
-	%  <strong>41</strong> <strong>CONTEXTMENU</strong> 	CONTEXTMENU (evanescent, handle) is the context menu.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the matrix-like prop panel.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the matrix-like prop panel.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the matrix-like prop panel.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the matrix-like prop panel.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the matrix-like prop panel.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the matrix-like prop panel.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the matrix-like prop panel.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
+	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
+	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+	%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
+	%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
+	%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
+	%  <strong>15</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
+	%  <strong>16</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
+	%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
+	%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
+	%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
+	%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the prop panel.
+	%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the table.
+	%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the prop panel and repositions its graphical objects.
+	%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
+	%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the prop number.
+	%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the prop panel.
+	%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
+	%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
+	%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
+	%  <strong>29</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
+	%  <strong>30</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
+	%  <strong>31</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
+	%  <strong>32</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
+	%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
+	%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
+	%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
+	%  <strong>36</strong> <strong>ENABLE</strong> 	ENABLE (gui, option) switches table between on and off.
+	%  <strong>37</strong> <strong>ROWNAME</strong> 	ROWNAME (gui, stringlist) determines the table row names.
+	%  <strong>38</strong> <strong>COLUMNNAME</strong> 	COLUMNNAME (gui, stringlist) determines the table column names.
+	%  <strong>39</strong> <strong>MENU_EXPORT</strong> 	MENU_EXPORT (gui, logical) determines whether to show the context menu to export data.
+	%  <strong>40</strong> <strong>TABLE_HEIGHT</strong> 	TABLE_HEIGHT (gui, size) is the pixel height of the prop panel when the table is shown.
+	%  <strong>41</strong> <strong>TABLE</strong> 	TABLE (evanescent, handle) is the table.
+	%  <strong>42</strong> <strong>CONTEXTMENU</strong> 	CONTEXTMENU (evanescent, handle) is the context menu.
 	%
 	% PanelPropMatrix methods (constructor):
 	%  PanelPropMatrix - constructor
@@ -72,33 +73,33 @@ classdef PanelPropMatrix < PanelProp
 	%  unchecked - sets a property to NOT checked
 	%
 	% PanelPropMatrix methods (display):
-	%  tostring - string with information about the panel property matrix
-	%  disp - displays information about the panel property matrix
-	%  tree - displays the tree of the panel property matrix
+	%  tostring - string with information about the matrix-like prop panel
+	%  disp - displays information about the matrix-like prop panel
+	%  tree - displays the tree of the matrix-like prop panel
 	%
 	% PanelPropMatrix methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two panel property matrix are equal (values, locked)
+	%  isequal - determines whether two matrix-like prop panel are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the panel property matrix
+	%  copy - copies the matrix-like prop panel
 	%
 	% PanelPropMatrix methods (save/load, Static):
-	%  save - saves BRAPH2 panel property matrix as b2 file
-	%  load - loads a BRAPH2 panel property matrix from a b2 file
+	%  save - saves BRAPH2 matrix-like prop panel as b2 file
+	%  load - loads a BRAPH2 matrix-like prop panel from a b2 file
 	%
 	% PanelPropMatrix method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the panel property matrix
+	%  encodeJSON - returns a JSON string encoding the matrix-like prop panel
 	%
 	% PanelPropMatrix method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the panel property matrix
+	%   decodeJSON - returns a JSON string encoding the matrix-like prop panel
 	%
 	% PanelPropMatrix methods (inspection, Static):
-	%  getClass - returns the class of the panel property matrix
+	%  getClass - returns the class of the matrix-like prop panel
 	%  getSubclasses - returns all subclasses of PanelPropMatrix
-	%  getProps - returns the property list of the panel property matrix
-	%  getPropNumber - returns the property number of the panel property matrix
+	%  getProps - returns the property list of the matrix-like prop panel
+	%  getPropNumber - returns the property number of the matrix-like prop panel
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -143,44 +144,44 @@ classdef PanelPropMatrix < PanelProp
 	% See also uitable, GUI, PanelElement.
 	
 	properties (Constant) % properties
-		ENABLE = 35; %CET: Computational Efficiency Trick
+		ENABLE = 36; %CET: Computational Efficiency Trick
 		ENABLE_TAG = 'ENABLE';
 		ENABLE_CATEGORY = 9;
 		ENABLE_FORMAT = 5;
 		
-		ROWNAME = 36; %CET: Computational Efficiency Trick
+		ROWNAME = 37; %CET: Computational Efficiency Trick
 		ROWNAME_TAG = 'ROWNAME';
 		ROWNAME_CATEGORY = 9;
 		ROWNAME_FORMAT = 3;
 		
-		COLUMNNAME = 37; %CET: Computational Efficiency Trick
+		COLUMNNAME = 38; %CET: Computational Efficiency Trick
 		COLUMNNAME_TAG = 'COLUMNNAME';
 		COLUMNNAME_CATEGORY = 9;
 		COLUMNNAME_FORMAT = 3;
 		
-		MENU_EXPORT = 38; %CET: Computational Efficiency Trick
+		MENU_EXPORT = 39; %CET: Computational Efficiency Trick
 		MENU_EXPORT_TAG = 'MENU_EXPORT';
 		MENU_EXPORT_CATEGORY = 9;
 		MENU_EXPORT_FORMAT = 4;
 		
-		TABLE_HEIGHT = 39; %CET: Computational Efficiency Trick
+		TABLE_HEIGHT = 40; %CET: Computational Efficiency Trick
 		TABLE_HEIGHT_TAG = 'TABLE_HEIGHT';
 		TABLE_HEIGHT_CATEGORY = 9;
 		TABLE_HEIGHT_FORMAT = 22;
 		
-		TABLE = 40; %CET: Computational Efficiency Trick
+		TABLE = 41; %CET: Computational Efficiency Trick
 		TABLE_TAG = 'TABLE';
 		TABLE_CATEGORY = 7;
 		TABLE_FORMAT = 18;
 		
-		CONTEXTMENU = 41; %CET: Computational Efficiency Trick
+		CONTEXTMENU = 42; %CET: Computational Efficiency Trick
 		CONTEXTMENU_TAG = 'CONTEXTMENU';
 		CONTEXTMENU_CATEGORY = 7;
 		CONTEXTMENU_FORMAT = 18;
 	end
 	methods % constructor
 		function pr = PanelPropMatrix(varargin)
-			%PanelPropMatrix() creates a panel property matrix.
+			%PanelPropMatrix() creates a matrix-like prop panel.
 			%
 			% PanelPropMatrix(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -190,47 +191,48 @@ classdef PanelPropMatrix < PanelProp
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of PanelPropMatrix properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the matrix-like property panel.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the matrix-like property panel.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the matrix-like property panel.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the matrix-like property panel.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the matrix-like property panel.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the matrix-like property panel.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-			%  <strong>9</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-			%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
-			%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
-			%  <strong>12</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
-			%  <strong>13</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
-			%  <strong>14</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
-			%  <strong>15</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
-			%  <strong>16</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
-			%  <strong>17</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
-			%  <strong>18</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
-			%  <strong>19</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
-			%  <strong>20</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the table.
-			%  <strong>21</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
-			%  <strong>22</strong> <strong>EL</strong> 	EL (data, item) is the element.
-			%  <strong>23</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-			%  <strong>24</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the property panel.
-			%  <strong>25</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
-			%  <strong>26</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
-			%  <strong>27</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
-			%  <strong>28</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
-			%  <strong>29</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
-			%  <strong>30</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
-			%  <strong>31</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
-			%  <strong>32</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
-			%  <strong>33</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
-			%  <strong>34</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-			%  <strong>35</strong> <strong>ENABLE</strong> 	ENABLE (gui, option) switches table between on and off.
-			%  <strong>36</strong> <strong>ROWNAME</strong> 	ROWNAME (gui, stringlist) determines the table row names.
-			%  <strong>37</strong> <strong>COLUMNNAME</strong> 	COLUMNNAME (gui, stringlist) determines the table column names.
-			%  <strong>38</strong> <strong>MENU_EXPORT</strong> 	MENU_EXPORT (gui, logical) determines whether to show the context menu to export data.
-			%  <strong>39</strong> <strong>TABLE_HEIGHT</strong> 	TABLE_HEIGHT (gui, size) is the pixel height of the property panel when the table is shown.
-			%  <strong>40</strong> <strong>TABLE</strong> 	TABLE (evanescent, handle) is the table.
-			%  <strong>41</strong> <strong>CONTEXTMENU</strong> 	CONTEXTMENU (evanescent, handle) is the context menu.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the matrix-like prop panel.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the matrix-like prop panel.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the matrix-like prop panel.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the matrix-like prop panel.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the matrix-like prop panel.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the matrix-like prop panel.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the matrix-like prop panel.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
+			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
+			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+			%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
+			%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
+			%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
+			%  <strong>15</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
+			%  <strong>16</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
+			%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
+			%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
+			%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
+			%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the prop panel.
+			%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the table.
+			%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the prop panel and repositions its graphical objects.
+			%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
+			%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the prop number.
+			%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the prop panel.
+			%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
+			%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
+			%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
+			%  <strong>29</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
+			%  <strong>30</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
+			%  <strong>31</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
+			%  <strong>32</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
+			%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
+			%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
+			%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
+			%  <strong>36</strong> <strong>ENABLE</strong> 	ENABLE (gui, option) switches table between on and off.
+			%  <strong>37</strong> <strong>ROWNAME</strong> 	ROWNAME (gui, stringlist) determines the table row names.
+			%  <strong>38</strong> <strong>COLUMNNAME</strong> 	COLUMNNAME (gui, stringlist) determines the table column names.
+			%  <strong>39</strong> <strong>MENU_EXPORT</strong> 	MENU_EXPORT (gui, logical) determines whether to show the context menu to export data.
+			%  <strong>40</strong> <strong>TABLE_HEIGHT</strong> 	TABLE_HEIGHT (gui, size) is the pixel height of the prop panel when the table is shown.
+			%  <strong>41</strong> <strong>TABLE</strong> 	TABLE (evanescent, handle) is the table.
+			%  <strong>42</strong> <strong>CONTEXTMENU</strong> 	CONTEXTMENU (evanescent, handle) is the context menu.
 			%
 			% See also Category, Format.
 			
@@ -239,12 +241,12 @@ classdef PanelPropMatrix < PanelProp
 	end
 	methods (Static) % inspection
 		function pr_class = getClass()
-			%GETCLASS returns the class of the panel property matrix.
+			%GETCLASS returns the class of the matrix-like prop panel.
 			%
 			% CLASS = PanelPropMatrix.GETCLASS() returns the class 'PanelPropMatrix'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = PR.GETCLASS() returns the class of the panel property matrix PR.
+			%  CLASS = PR.GETCLASS() returns the class of the matrix-like prop panel PR.
 			%  CLASS = Element.GETCLASS(PR) returns the class of 'PR'.
 			%  CLASS = Element.GETCLASS('PanelPropMatrix') returns 'PanelPropMatrix'.
 			%
@@ -254,12 +256,12 @@ classdef PanelPropMatrix < PanelProp
 			pr_class = 'PanelPropMatrix';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the panel property matrix.
+			%GETSUBCLASSES returns all subclasses of the matrix-like prop panel.
 			%
 			% LIST = PanelPropMatrix.GETSUBCLASSES() returns all subclasses of 'PanelPropMatrix'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = PR.GETSUBCLASSES() returns all subclasses of the panel property matrix PR.
+			%  LIST = PR.GETSUBCLASSES() returns all subclasses of the matrix-like prop panel PR.
 			%  LIST = Element.GETSUBCLASSES(PR) returns all subclasses of 'PR'.
 			%  LIST = Element.GETSUBCLASSES('PanelPropMatrix') returns all subclasses of 'PanelPropMatrix'.
 			%
@@ -271,16 +273,16 @@ classdef PanelPropMatrix < PanelProp
 			subclass_list = { 'PanelPropMatrix' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of panel property matrix.
+			%GETPROPS returns the property list of matrix-like prop panel.
 			%
-			% PROPS = PanelPropMatrix.GETPROPS() returns the property list of panel property matrix
+			% PROPS = PanelPropMatrix.GETPROPS() returns the property list of matrix-like prop panel
 			%  as a row vector.
 			%
 			% PROPS = PanelPropMatrix.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = PR.GETPROPS([CATEGORY]) returns the property list of the panel property matrix PR.
+			%  PROPS = PR.GETPROPS([CATEGORY]) returns the property list of the matrix-like prop panel PR.
 			%  PROPS = Element.GETPROPS(PR[, CATEGORY]) returns the property list of 'PR'.
 			%  PROPS = Element.GETPROPS('PanelPropMatrix'[, CATEGORY]) returns the property list of 'PanelPropMatrix'.
 			%
@@ -292,41 +294,41 @@ classdef PanelPropMatrix < PanelProp
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2];
+					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
+					prop_list = 4;
 				case 4 % Category.DATA
-					prop_list = [4 22 23 28];
+					prop_list = [5 23 24 29];
 				case 6 % Category.QUERY
-					prop_list = [7 10 11 15 16 17 18 19 20 21];
+					prop_list = [8 11 12 16 17 18 19 20 21 22];
 				case 7 % Category.EVANESCENT
-					prop_list = [9 14 26 27 29 30 31 32 33 34 40 41];
+					prop_list = [10 15 27 28 30 31 32 33 34 35 41 42];
 				case 8 % Category.FIGURE
-					prop_list = 13;
+					prop_list = 14;
 				case 9 % Category.GUI
-					prop_list = [8 12 24 25 35 36 37 38 39];
+					prop_list = [9 13 25 26 36 37 38 39 40];
 				otherwise
 					prop_list = [];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of panel property matrix.
+			%GETPROPNUMBER returns the property number of matrix-like prop panel.
 			%
-			% N = PanelPropMatrix.GETPROPNUMBER() returns the property number of panel property matrix.
+			% N = PanelPropMatrix.GETPROPNUMBER() returns the property number of matrix-like prop panel.
 			%
-			% N = PanelPropMatrix.GETPROPNUMBER(CATEGORY) returns the property number of panel property matrix
+			% N = PanelPropMatrix.GETPROPNUMBER(CATEGORY) returns the property number of matrix-like prop panel
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = PR.GETPROPNUMBER([CATEGORY]) returns the property number of the panel property matrix PR.
+			%  N = PR.GETPROPNUMBER([CATEGORY]) returns the property number of the matrix-like prop panel PR.
 			%  N = Element.GETPROPNUMBER(PR) returns the property number of 'PR'.
 			%  N = Element.GETPROPNUMBER('PanelPropMatrix') returns the property number of 'PanelPropMatrix'.
 			%
@@ -338,13 +340,13 @@ classdef PanelPropMatrix < PanelProp
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 41;
+				prop_number = 42;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 2;
+					prop_number = 3;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -364,7 +366,7 @@ classdef PanelPropMatrix < PanelProp
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in panel property matrix/error.
+			%EXISTSPROP checks whether property exists in matrix-like prop panel/error.
 			%
 			% CHECK = PanelPropMatrix.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -389,7 +391,7 @@ classdef PanelPropMatrix < PanelProp
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 41 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 42 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -402,7 +404,7 @@ classdef PanelPropMatrix < PanelProp
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in panel property matrix/error.
+			%EXISTSTAG checks whether tag exists in matrix-like prop panel/error.
 			%
 			% CHECK = PanelPropMatrix.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -427,7 +429,7 @@ classdef PanelPropMatrix < PanelProp
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'ROWNAME'  'COLUMNNAME'  'MENU_EXPORT'  'TABLE_HEIGHT'  'TABLE'  'CONTEXTMENU' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'ROWNAME'  'COLUMNNAME'  'MENU_EXPORT'  'TABLE_HEIGHT'  'TABLE'  'CONTEXTMENU' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -460,7 +462,7 @@ classdef PanelPropMatrix < PanelProp
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'ROWNAME'  'COLUMNNAME'  'MENU_EXPORT'  'TABLE_HEIGHT'  'TABLE'  'CONTEXTMENU' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'ROWNAME'  'COLUMNNAME'  'MENU_EXPORT'  'TABLE_HEIGHT'  'TABLE'  'CONTEXTMENU' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -489,7 +491,7 @@ classdef PanelPropMatrix < PanelProp
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				panelpropmatrix_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'ROWNAME'  'COLUMNNAME'  'MENU_EXPORT'  'TABLE_HEIGHT'  'TABLE'  'CONTEXTMENU' };
+				panelpropmatrix_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'ROWNAME'  'COLUMNNAME'  'MENU_EXPORT'  'TABLE_HEIGHT'  'TABLE'  'CONTEXTMENU' };
 				tag = panelpropmatrix_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -516,7 +518,7 @@ classdef PanelPropMatrix < PanelProp
 			prop = PanelPropMatrix.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			panelpropmatrix_category_list = { 1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  6  6  6  4  4  9  9  7  7  4  7  7  7  7  7  7  9  9  9  9  9  7  7 };
+			panelpropmatrix_category_list = { 1  1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  6  6  6  4  4  9  9  7  7  4  7  7  7  7  7  7  9  9  9  9  9  7  7 };
 			prop_category = panelpropmatrix_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -542,7 +544,7 @@ classdef PanelPropMatrix < PanelProp
 			prop = PanelPropMatrix.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			panelpropmatrix_format_list = { 2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  4  4  4  8  11  22  2  18  18  8  18  18  18  19  19  19  5  3  3  4  22  18  18 };
+			panelpropmatrix_format_list = { 2  2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  4  4  4  8  11  22  2  18  18  8  18  18  18  19  19  19  5  3  3  4  22  18  18 };
 			prop_format = panelpropmatrix_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -568,7 +570,7 @@ classdef PanelPropMatrix < PanelProp
 			prop = PanelPropMatrix.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			panelpropmatrix_description_list = { 'NAME (constant, string) is the name of the matrix-like property panel.'  'DESCRIPTION (constant, string) is the description of the matrix-like property panel.'  'TEMPLATE (parameter, item) is the template of the matrix-like property panel.'  'ID (data, string) is a few-letter code for the matrix-like property panel.'  'LABEL (metadata, string) is an extended label of the matrix-like property panel.'  'NOTES (metadata, string) are some specific notes about the matrix-like property panel.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the property panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the table.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the property panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'ENABLE (gui, option) switches table between on and off.'  'ROWNAME (gui, stringlist) determines the table row names.'  'COLUMNNAME (gui, stringlist) determines the table column names.'  'MENU_EXPORT (gui, logical) determines whether to show the context menu to export data.'  'TABLE_HEIGHT (gui, size) is the pixel height of the property panel when the table is shown.'  'TABLE (evanescent, handle) is the table.'  'CONTEXTMENU (evanescent, handle) is the context menu.' };
+			panelpropmatrix_description_list = { 'ELCLASS (constant, string) is the class of the matrix-like prop panel.'  'NAME (constant, string) is the name of the matrix-like prop panel.'  'DESCRIPTION (constant, string) is the description of the matrix-like prop panel.'  'TEMPLATE (parameter, item) is the template of the matrix-like prop panel.'  'ID (data, string) is a few-letter code for the matrix-like prop panel.'  'LABEL (metadata, string) is an extended label of the matrix-like prop panel.'  'NOTES (metadata, string) are some specific notes about the matrix-like prop panel.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the prop panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the prop panel.'  'UPDATE (query, logical) updates the content and permissions of the table.'  'REDRAW (query, logical) resizes the prop panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the prop number.'  'HEIGHT (gui, size) is the pixel height of the prop panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'ENABLE (gui, option) switches table between on and off.'  'ROWNAME (gui, stringlist) determines the table row names.'  'COLUMNNAME (gui, stringlist) determines the table column names.'  'MENU_EXPORT (gui, logical) determines whether to show the context menu to export data.'  'TABLE_HEIGHT (gui, size) is the pixel height of the prop panel when the table is shown.'  'TABLE (evanescent, handle) is the table.'  'CONTEXTMENU (evanescent, handle) is the context menu.' };
 			prop_description = panelpropmatrix_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -594,21 +596,21 @@ classdef PanelPropMatrix < PanelProp
 			prop = PanelPropMatrix.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 35 % PanelPropMatrix.ENABLE
+				case 36 % PanelPropMatrix.ENABLE
 					prop_settings = {'on', 'off'};
-				case 36 % PanelPropMatrix.ROWNAME
+				case 37 % PanelPropMatrix.ROWNAME
 					prop_settings = Format.getFormatSettings(3);
-				case 37 % PanelPropMatrix.COLUMNNAME
+				case 38 % PanelPropMatrix.COLUMNNAME
 					prop_settings = Format.getFormatSettings(3);
-				case 38 % PanelPropMatrix.MENU_EXPORT
+				case 39 % PanelPropMatrix.MENU_EXPORT
 					prop_settings = Format.getFormatSettings(4);
-				case 39 % PanelPropMatrix.TABLE_HEIGHT
+				case 40 % PanelPropMatrix.TABLE_HEIGHT
 					prop_settings = Format.getFormatSettings(22);
-				case 40 % PanelPropMatrix.TABLE
+				case 41 % PanelPropMatrix.TABLE
 					prop_settings = Format.getFormatSettings(18);
-				case 41 % PanelPropMatrix.CONTEXTMENU
+				case 42 % PanelPropMatrix.CONTEXTMENU
 					prop_settings = Format.getFormatSettings(18);
-				case 3 % PanelPropMatrix.TEMPLATE
+				case 4 % PanelPropMatrix.TEMPLATE
 					prop_settings = 'PanelPropMatrix';
 				otherwise
 					prop_settings = getPropSettings@PanelProp(prop);
@@ -637,36 +639,38 @@ classdef PanelPropMatrix < PanelProp
 			prop = PanelPropMatrix.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 35 % PanelPropMatrix.ENABLE
+				case 36 % PanelPropMatrix.ENABLE
 					prop_default = 'on';
-				case 36 % PanelPropMatrix.ROWNAME
+				case 37 % PanelPropMatrix.ROWNAME
 					prop_default = {'numbered'};
-				case 37 % PanelPropMatrix.COLUMNNAME
+				case 38 % PanelPropMatrix.COLUMNNAME
 					prop_default = {'numbered'};
-				case 38 % PanelPropMatrix.MENU_EXPORT
+				case 39 % PanelPropMatrix.MENU_EXPORT
 					prop_default = true;
-				case 39 % PanelPropMatrix.TABLE_HEIGHT
+				case 40 % PanelPropMatrix.TABLE_HEIGHT
 					prop_default = 240;
-				case 40 % PanelPropMatrix.TABLE
+				case 41 % PanelPropMatrix.TABLE
 					prop_default = Format.getFormatDefault(18, PanelPropMatrix.getPropSettings(prop));
-				case 41 % PanelPropMatrix.CONTEXTMENU
+				case 42 % PanelPropMatrix.CONTEXTMENU
 					prop_default = Format.getFormatDefault(18, PanelPropMatrix.getPropSettings(prop));
-				case 1 % PanelPropMatrix.NAME
+				case 1 % PanelPropMatrix.ELCLASS
 					prop_default = 'PanelPropMatrix';
-				case 2 % PanelPropMatrix.DESCRIPTION
-					prop_default = 'PanelPropMatrix plots the panel for a RVECTOR, CVECTOR, MATRIX or SMATRIX property with a table. It works for all categories. It can be personalized with the following props: TABLE_HEIGHT, ROWNAME, COLUMNAME, MENU_EXPORT.';
-				case 3 % PanelPropMatrix.TEMPLATE
+				case 2 % PanelPropMatrix.NAME
+					prop_default = 'Matrix Prop Panel';
+				case 3 % PanelPropMatrix.DESCRIPTION
+					prop_default = 'A Matrix Prop Panel (PanelPropMatrix) plots the panel for a RVECTOR, CVECTOR, MATRIX or SMATRIX prop with a table. It works for all categories. It can be personalized with the following props: TABLE_HEIGHT, ROWNAME, COLUMNAME, MENU_EXPORT.';
+				case 4 % PanelPropMatrix.TEMPLATE
 					prop_default = Format.getFormatDefault(8, PanelPropMatrix.getPropSettings(prop));
-				case 4 % PanelPropMatrix.ID
+				case 5 % PanelPropMatrix.ID
 					prop_default = 'PanelPropMatrix ID';
-				case 5 % PanelPropMatrix.LABEL
+				case 6 % PanelPropMatrix.LABEL
 					prop_default = 'PanelPropMatrix label';
-				case 6 % PanelPropMatrix.NOTES
+				case 7 % PanelPropMatrix.NOTES
 					prop_default = 'PanelPropMatrix notes';
-				case 22 % PanelPropMatrix.EL
+				case 23 % PanelPropMatrix.EL
 					prop_default = IndexedDictionary();
-				case 23 % PanelPropMatrix.PROP
-					prop_default = 33;
+				case 24 % PanelPropMatrix.PROP
+					prop_default = 34;
 				otherwise
 					prop_default = getPropDefault@PanelProp(prop);
 			end
@@ -731,24 +735,24 @@ classdef PanelPropMatrix < PanelProp
 			prop = PanelPropMatrix.getPropProp(pointer);
 			
 			switch prop
-				case 35 % PanelPropMatrix.ENABLE
+				case 36 % PanelPropMatrix.ENABLE
 					check = Format.checkFormat(5, value, PanelPropMatrix.getPropSettings(prop));
-				case 36 % PanelPropMatrix.ROWNAME
+				case 37 % PanelPropMatrix.ROWNAME
 					check = Format.checkFormat(3, value, PanelPropMatrix.getPropSettings(prop));
-				case 37 % PanelPropMatrix.COLUMNNAME
+				case 38 % PanelPropMatrix.COLUMNNAME
 					check = Format.checkFormat(3, value, PanelPropMatrix.getPropSettings(prop));
-				case 38 % PanelPropMatrix.MENU_EXPORT
+				case 39 % PanelPropMatrix.MENU_EXPORT
 					check = Format.checkFormat(4, value, PanelPropMatrix.getPropSettings(prop));
-				case 39 % PanelPropMatrix.TABLE_HEIGHT
+				case 40 % PanelPropMatrix.TABLE_HEIGHT
 					check = Format.checkFormat(22, value, PanelPropMatrix.getPropSettings(prop));
-				case 40 % PanelPropMatrix.TABLE
+				case 41 % PanelPropMatrix.TABLE
 					check = Format.checkFormat(18, value, PanelPropMatrix.getPropSettings(prop));
-				case 41 % PanelPropMatrix.CONTEXTMENU
+				case 42 % PanelPropMatrix.CONTEXTMENU
 					check = Format.checkFormat(18, value, PanelPropMatrix.getPropSettings(prop));
-				case 3 % PanelPropMatrix.TEMPLATE
+				case 4 % PanelPropMatrix.TEMPLATE
 					check = Format.checkFormat(8, value, PanelPropMatrix.getPropSettings(prop));
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						check = checkProp@PanelProp(prop, value);
 					end
 			end
@@ -778,18 +782,18 @@ classdef PanelPropMatrix < PanelProp
 			%  checkValue.
 			
 			switch prop
-				case 36 % PanelPropMatrix.ROWNAME
+				case 37 % PanelPropMatrix.ROWNAME
 					if pr.get('DRAWN')
 					    pr.get('UPDATE')
 					end
 					
-				case 37 % PanelPropMatrix.COLUMNNAME
+				case 38 % PanelPropMatrix.COLUMNNAME
 					if pr.get('DRAWN')
 					    pr.get('UPDATE')
 					end
 					
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						postset@PanelProp(pr, prop);
 					end
 			end
@@ -812,7 +816,7 @@ classdef PanelPropMatrix < PanelProp
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 40 % PanelPropMatrix.TABLE
+				case 41 % PanelPropMatrix.TABLE
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					
@@ -826,7 +830,7 @@ classdef PanelPropMatrix < PanelProp
 					
 					value = table;
 					
-				case 41 % PanelPropMatrix.CONTEXTMENU
+				case 42 % PanelPropMatrix.CONTEXTMENU
 					contextmenu = uicontextmenu(...
 					    'Parent', ancestor(pr.get('H'), 'figure'), ...
 					    'Tag', 'CONTEXTMENU' ...
@@ -842,15 +846,15 @@ classdef PanelPropMatrix < PanelProp
 					end
 					value = contextmenu;
 					
-				case 19 % PanelPropMatrix.X_DRAW
-					value = calculateValue@PanelProp(pr, 19, varargin{:}); % also warning
+				case 20 % PanelPropMatrix.X_DRAW
+					value = calculateValue@PanelProp(pr, 20, varargin{:}); % also warning
 					if value
 					    pr.memorize('TABLE')
 					    pr.memorize('CONTEXTMENU')
 					end
 					
-				case 20 % PanelPropMatrix.UPDATE
-					value = calculateValue@PanelProp(pr, 20, varargin{:}); % also warning
+				case 21 % PanelPropMatrix.UPDATE
+					value = calculateValue@PanelProp(pr, 21, varargin{:}); % also warning
 					if value
 					    el = pr.get('EL');
 					    prop = pr.get('PROP');
@@ -922,23 +926,23 @@ classdef PanelPropMatrix < PanelProp
 					    end
 					end
 					
-				case 21 % PanelPropMatrix.REDRAW
-					value = calculateValue@PanelProp(pr, 21, varargin{:}); % also warning
+				case 22 % PanelPropMatrix.REDRAW
+					value = calculateValue@PanelProp(pr, 22, varargin{:}); % also warning
 					if value
 					    w_p = get_from_varargin(w(pr.get('H'), 'pixels'), 'Width', varargin);
 					    
 					    set(pr.get('TABLE'), 'Position', [4 4 w_p-8 max(1, pr.get('HEIGHT')-27)])
 					end
 					
-				case 17 % PanelPropMatrix.DELETE
-					value = calculateValue@PanelProp(pr, 17, varargin{:}); % also warning
+				case 18 % PanelPropMatrix.DELETE
+					value = calculateValue@PanelProp(pr, 18, varargin{:}); % also warning
 					if value
 					    pr.set('TABLE', Element.getNoValue())
 					    pr.set('CONTEXTMENU', Element.getNoValue())
 					end
 					
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						value = calculateValue@PanelProp(pr, prop, varargin{:});
 					else
 						value = calculateValue@Element(pr, prop, varargin{:});

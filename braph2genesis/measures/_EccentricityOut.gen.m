@@ -8,6 +8,11 @@ between a node and any other node within a layer.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'EccentricityOut'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the out-eccentricity.
 %%%% ¡default!
 'EccentricityOut'
@@ -19,6 +24,8 @@ DESCRIPTION (constant, string) is the description of the out-eccentricity.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the out-eccentricity.
+%%%% ¡settings!
+'EccentricityOut'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the out-eccentricity.

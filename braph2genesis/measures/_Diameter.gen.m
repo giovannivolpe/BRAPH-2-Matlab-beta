@@ -7,6 +7,11 @@ The diameter is the maximum eccentricity among the vertice within a layer.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'Diameter'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the diameter.
 %%%% ¡default!
 'Diameter'
@@ -18,6 +23,8 @@ DESCRIPTION (constant, string) is the description of the diameter.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the diameter.
+%%%% !settings!
+'Diameter'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the diameter.

@@ -53,9 +53,14 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the multilayer community structure.
+ELCLASS (constant, string) is the class of the % % % .
 %%%% ¡default!
 'MultilayerCommunity'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the multilayer community structure.
+%%%% ¡default!
+'MultilayerCommunityStructure'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multilayer community structure.
@@ -75,12 +80,12 @@ ID (data, string) is a few-letter code of the multilayer community structure.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multilayer community structure.
 %%%% ¡default!
-'MultilayerCommunity label'
+'MultilayerCommunityStructure label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multilayer community structure.
 %%%% ¡default!
-'MultilayerCommunity notes'
+'MultilayerCommunityStructure notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.

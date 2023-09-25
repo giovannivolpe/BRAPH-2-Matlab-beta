@@ -9,9 +9,14 @@ of betweenness centrality participate in a large number of shortest paths.
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the edge betweenness centrality.
+ELCLASS (constant, string) is the class of the % % % .
 %%%% ¡default!
 'EdgeBetwCentr'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the edge betweenness centrality.
+%%%% ¡default!
+'EdgeBetweennessCentrality'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the edge betweenness centrality.
@@ -20,6 +25,8 @@ DESCRIPTION (constant, string) is the description of the edge betweenness centra
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the edge betweenness centrality.
+%%%% ¡settings!
+'EdgeBetwCentr'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the edge betweenness centrality.
@@ -29,12 +36,12 @@ ID (data, string) is a few-letter code of the edge betweenness centrality.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the edge betweenness centrality.
 %%%% ¡default!
-'EdgeBetwCentr label'
+'EdgeBetweennessCentrality label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the edge betweenness centrality.
 %%%% ¡default!
-'EdgeBetwCentr notes'
+'EdgeBetweennessCentrality notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.BINODAL__.

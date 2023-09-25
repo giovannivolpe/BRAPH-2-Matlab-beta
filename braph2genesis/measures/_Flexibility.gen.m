@@ -12,9 +12,14 @@ community assignment changes are possible between any pairs of layers.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'Flexibility'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the flexibility.
 %%%% ¡default!
-'Flexibility '
+'Flexibility'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the flexibility.
@@ -23,6 +28,8 @@ DESCRIPTION (constant, string) is the description of the flexibility.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the flexibility.
+%%%% ¡settings!
+'Flexibility'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the flexibility.

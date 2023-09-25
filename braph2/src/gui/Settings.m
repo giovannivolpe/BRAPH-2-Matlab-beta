@@ -2,7 +2,7 @@ classdef Settings < ConcreteElement
 	%Settings contains some graphics settings.
 	% It is a subclass of <a href="matlab:help ConcreteElement">ConcreteElement</a>.
 	%
-	% Settings provides the base element for all graphics settings.
+	% A Graphics Settings (Settings) provides the base element for all graphics settings.
 	%  Typically, only its subclasses are employed.
 	% 
 	%  The graphics objects is identified by its handle(list), which can be retrieved as:
@@ -30,19 +30,20 @@ classdef Settings < ConcreteElement
 	%  It might be necessary to add some listeners (e.g., to update toogle buttons).
 	%
 	% The list of Settings properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the graphics settings.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the graphics settings.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the line graphics settings.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graphics settings.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graphics settings.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the element panel.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
-	%  <strong>9</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
-	%  <strong>10</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
-	%  <strong>11</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
-	%  <strong>12</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
-	%  <strong>13</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the graphics settings.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the graphics settings.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the graphics settings.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the line graphics settings.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graphics settings.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graphics settings.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graphics settings.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
+	%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
+	%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
+	%  <strong>12</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
+	%  <strong>13</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
+	%  <strong>14</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
 	%
 	% Settings methods (constructor):
 	%  Settings - constructor
@@ -133,32 +134,32 @@ classdef Settings < ConcreteElement
 	% See also Panel, listener.
 	
 	properties (Constant) % properties
-		PANEL = 8; %CET: Computational Efficiency Trick
+		PANEL = 9; %CET: Computational Efficiency Trick
 		PANEL_TAG = 'PANEL';
 		PANEL_CATEGORY = 9;
 		PANEL_FORMAT = 8;
 		
-		PROP = 9; %CET: Computational Efficiency Trick
+		PROP = 10; %CET: Computational Efficiency Trick
 		PROP_TAG = 'PROP';
 		PROP_CATEGORY = 9;
 		PROP_FORMAT = 11;
 		
-		TAG = 10; %CET: Computational Efficiency Trick
+		TAG = 11; %CET: Computational Efficiency Trick
 		TAG_TAG = 'TAG';
 		TAG_CATEGORY = 9;
 		TAG_FORMAT = 2;
 		
-		I = 11; %CET: Computational Efficiency Trick
+		I = 12; %CET: Computational Efficiency Trick
 		I_TAG = 'I';
 		I_CATEGORY = 9;
 		I_FORMAT = 11;
 		
-		H = 12; %CET: Computational Efficiency Trick
+		H = 13; %CET: Computational Efficiency Trick
 		H_TAG = 'H';
 		H_CATEGORY = 6;
 		H_FORMAT = 18;
 		
-		SETUP = 13; %CET: Computational Efficiency Trick
+		SETUP = 14; %CET: Computational Efficiency Trick
 		SETUP_TAG = 'SETUP';
 		SETUP_CATEGORY = 6;
 		SETUP_FORMAT = 11;
@@ -175,19 +176,20 @@ classdef Settings < ConcreteElement
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of Settings properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the graphics settings.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the graphics settings.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the line graphics settings.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graphics settings.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graphics settings.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the element panel.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
-			%  <strong>9</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
-			%  <strong>10</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
-			%  <strong>11</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
-			%  <strong>12</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
-			%  <strong>13</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the graphics settings.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the graphics settings.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the graphics settings.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the line graphics settings.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graphics settings.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graphics settings.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graphics settings.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
+			%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
+			%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
+			%  <strong>12</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
+			%  <strong>13</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
+			%  <strong>14</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
 			%
 			% See also Category, Format.
 			
@@ -249,23 +251,23 @@ classdef Settings < ConcreteElement
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2];
+					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
 					prop_list = 4;
+				case 4 % Category.DATA
+					prop_list = 5;
 				case 6 % Category.QUERY
-					prop_list = [7 12 13];
+					prop_list = [8 13 14];
 				case 9 % Category.GUI
-					prop_list = [8 9 10 11];
+					prop_list = [9 10 11 12];
 				otherwise
 					prop_list = [];
 			end
@@ -291,13 +293,13 @@ classdef Settings < ConcreteElement
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 13;
+				prop_number = 14;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 2;
+					prop_number = 3;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -338,7 +340,7 @@ classdef Settings < ConcreteElement
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 13 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 14 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -376,7 +378,7 @@ classdef Settings < ConcreteElement
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -409,7 +411,7 @@ classdef Settings < ConcreteElement
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -438,7 +440,7 @@ classdef Settings < ConcreteElement
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				settings_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP' };
+				settings_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP' };
 				tag = settings_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -465,7 +467,7 @@ classdef Settings < ConcreteElement
 			prop = Settings.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settings_category_list = { 1  1  3  4  2  2  6  9  9  9  9  6  6 };
+			settings_category_list = { 1  1  1  3  4  2  2  6  9  9  9  9  6  6 };
 			prop_category = settings_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -491,7 +493,7 @@ classdef Settings < ConcreteElement
 			prop = Settings.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settings_format_list = { 2  2  8  2  2  2  2  8  11  2  11  18  11 };
+			settings_format_list = { 2  2  2  8  2  2  2  2  8  11  2  11  18  11 };
 			prop_format = settings_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -517,7 +519,7 @@ classdef Settings < ConcreteElement
 			prop = Settings.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settings_description_list = { 'NAME (constant, string) is the name of the graphics settings.'  'DESCRIPTION (constant, string) is the description of the graphics settings.'  'TEMPLATE (parameter, item) is the template of the line graphics settings.'  'ID (data, string) is a few-letter code for the graphics settings.'  'LABEL (metadata, string) is an extended label of the graphics settings.'  'NOTES (metadata, string) are some specific notes about the element panel.'  'TOSTRING (query, string) returns a string that represents the object.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.' };
+			settings_description_list = { 'ELCLASS (constant, string) is the class of the graphics settings.'  'NAME (constant, string) is the name of the graphics settings.'  'DESCRIPTION (constant, string) is the description of the graphics settings.'  'TEMPLATE (parameter, item) is the template of the line graphics settings.'  'ID (data, string) is a few-letter code for the graphics settings.'  'LABEL (metadata, string) is an extended label of the graphics settings.'  'NOTES (metadata, string) are some specific notes about the graphics settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.' };
 			prop_description = settings_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -543,19 +545,19 @@ classdef Settings < ConcreteElement
 			prop = Settings.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 8 % Settings.PANEL
+				case 9 % Settings.PANEL
 					prop_settings = 'Panel';
-				case 9 % Settings.PROP
+				case 10 % Settings.PROP
 					prop_settings = Format.getFormatSettings(11);
-				case 10 % Settings.TAG
+				case 11 % Settings.TAG
 					prop_settings = Format.getFormatSettings(2);
-				case 11 % Settings.I
+				case 12 % Settings.I
 					prop_settings = Format.getFormatSettings(11);
-				case 12 % Settings.H
+				case 13 % Settings.H
 					prop_settings = Format.getFormatSettings(18);
-				case 13 % Settings.SETUP
+				case 14 % Settings.SETUP
 					prop_settings = Format.getFormatSettings(11);
-				case 3 % Settings.TEMPLATE
+				case 4 % Settings.TEMPLATE
 					prop_settings = 'Settings';
 				otherwise
 					prop_settings = getPropSettings@ConcreteElement(prop);
@@ -584,29 +586,31 @@ classdef Settings < ConcreteElement
 			prop = Settings.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 8 % Settings.PANEL
+				case 9 % Settings.PANEL
 					prop_default = Format.getFormatDefault(8, Settings.getPropSettings(prop));
-				case 9 % Settings.PROP
-					prop_default = 14;
-				case 10 % Settings.TAG
+				case 10 % Settings.PROP
+					prop_default = 15;
+				case 11 % Settings.TAG
 					prop_default = 'H';
-				case 11 % Settings.I
+				case 12 % Settings.I
 					prop_default = Format.getFormatDefault(11, Settings.getPropSettings(prop));
-				case 12 % Settings.H
+				case 13 % Settings.H
 					prop_default = Format.getFormatDefault(18, Settings.getPropSettings(prop));
-				case 13 % Settings.SETUP
+				case 14 % Settings.SETUP
 					prop_default = Format.getFormatDefault(11, Settings.getPropSettings(prop));
-				case 1 % Settings.NAME
+				case 1 % Settings.ELCLASS
 					prop_default = 'Settings';
-				case 2 % Settings.DESCRIPTION
-					prop_default = 'Settings provides the base element for all graphics settings. Typically, only its subclasses are employed.';
-				case 3 % Settings.TEMPLATE
+				case 2 % Settings.NAME
+					prop_default = 'Graphics Settings';
+				case 3 % Settings.DESCRIPTION
+					prop_default = 'A Graphics Settings (Settings) provides the base element for all graphics settings. Typically, only its subclasses are employed.';
+				case 4 % Settings.TEMPLATE
 					prop_default = Format.getFormatDefault(8, Settings.getPropSettings(prop));
-				case 4 % Settings.ID
+				case 5 % Settings.ID
 					prop_default = 'Settings ID';
-				case 5 % Settings.LABEL
+				case 6 % Settings.LABEL
 					prop_default = 'Settings label';
-				case 6 % Settings.NOTES
+				case 7 % Settings.NOTES
 					prop_default = 'Settings notes';
 				otherwise
 					prop_default = getPropDefault@ConcreteElement(prop);
@@ -672,22 +676,22 @@ classdef Settings < ConcreteElement
 			prop = Settings.getPropProp(pointer);
 			
 			switch prop
-				case 8 % Settings.PANEL
+				case 9 % Settings.PANEL
 					check = Format.checkFormat(8, value, Settings.getPropSettings(prop));
-				case 9 % Settings.PROP
+				case 10 % Settings.PROP
 					check = Format.checkFormat(11, value, Settings.getPropSettings(prop));
-				case 10 % Settings.TAG
+				case 11 % Settings.TAG
 					check = Format.checkFormat(2, value, Settings.getPropSettings(prop));
-				case 11 % Settings.I
+				case 12 % Settings.I
 					check = Format.checkFormat(11, value, Settings.getPropSettings(prop));
-				case 12 % Settings.H
+				case 13 % Settings.H
 					check = Format.checkFormat(18, value, Settings.getPropSettings(prop));
-				case 13 % Settings.SETUP
+				case 14 % Settings.SETUP
 					check = Format.checkFormat(11, value, Settings.getPropSettings(prop));
-				case 3 % Settings.TEMPLATE
+				case 4 % Settings.TEMPLATE
 					check = Format.checkFormat(8, value, Settings.getPropSettings(prop));
 				otherwise
-					if prop <= 7
+					if prop <= 8
 						check = checkProp@ConcreteElement(prop, value);
 					end
 			end
@@ -717,14 +721,14 @@ classdef Settings < ConcreteElement
 			%  checkValue.
 			
 			switch prop
-				case 9 % Settings.PROP
+				case 10 % Settings.PROP
 					pn = st.get('PANEL');
 					prop = st.get('PROP');
 					if ~strcmp(st.get('TAG'), pn.getPropTag(prop))
 					    st.set('TAG', pn.getPropTag(prop));
 					end
 					
-				case 10 % Settings.TAG
+				case 11 % Settings.TAG
 					pn = st.get('PANEL');
 					tag = st.get('TAG');
 					if st.get('PROP') ~= pn.getPropProp(tag)
@@ -732,7 +736,7 @@ classdef Settings < ConcreteElement
 					end
 					
 				otherwise
-					if prop <= 7
+					if prop <= 8
 						postset@ConcreteElement(st, prop);
 					end
 			end
@@ -755,7 +759,7 @@ classdef Settings < ConcreteElement
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 12 % Settings.H
+				case 13 % Settings.H
 					pn = st.get('PANEL');
 					prop = st.get('PROP');
 					switch pn.getPropFormat(prop)
@@ -776,7 +780,7 @@ classdef Settings < ConcreteElement
 					        end
 					end
 					
-				case 13 % Settings.SETUP
+				case 14 % Settings.SETUP
 					figure_props = st.getProps(8);
 					settings = cell(1, 2 * length(figure_props));
 					for i = 1:1:length(figure_props)
@@ -788,7 +792,7 @@ classdef Settings < ConcreteElement
 					value = length(figure_props);
 					
 				otherwise
-					if prop <= 7
+					if prop <= 8
 						value = calculateValue@ConcreteElement(st, prop, varargin{:});
 					else
 						value = calculateValue@Element(st, prop, varargin{:});
@@ -813,7 +817,7 @@ classdef Settings < ConcreteElement
 			msg = ['Error while checking ' tostring(st) ' ' st.getPropTag(prop) '.'];
 			
 			switch prop
-				case 9 % Settings.PROP
+				case 10 % Settings.PROP
 					check = st.get('PANEL').getPropCategory(value) == 7 && any(st.get('PANEL').getPropFormat(value) == [18 19]);
 					if check
 					    msg = 'All ok';
@@ -823,7 +827,7 @@ classdef Settings < ConcreteElement
 					        ' ' Format.getFormatName(st.get('PANEL').getPropFormat(value)) '.'];
 					end
 					
-				case 10 % Settings.TAG
+				case 11 % Settings.TAG
 					check = st.get('PANEL').getPropCategory(value) == 7 && any(st.get('PANEL').getPropFormat(value) == [18 19]);
 					if check
 					    msg = 'All ok';
@@ -834,7 +838,7 @@ classdef Settings < ConcreteElement
 					end
 					
 				otherwise
-					if prop <= 7
+					if prop <= 8
 						[check, msg] = checkValue@ConcreteElement(st, prop, value);
 					end
 			end

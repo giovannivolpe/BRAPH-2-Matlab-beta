@@ -9,6 +9,11 @@ the adjacency matrix.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'StrengthIn'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the in-strength.
 %%%% ¡default!
 'StrengthIn'
@@ -17,8 +22,11 @@ NAME (constant, string) is the name of the in-strength.
 DESCRIPTION (constant, string) is the description of the in-strength.
 %%%% ¡default!
 'The in-strength of a graph is the sum of all weights of the inward edges connected to a node within a layer, i.e., it is the sum of the columns of the adjacency matrix.'
+
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the in-strength.
+%%%% ¡settings!
+'StrengthIn'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the in-strength.

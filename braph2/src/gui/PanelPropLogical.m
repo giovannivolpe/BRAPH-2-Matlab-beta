@@ -1,46 +1,47 @@
 classdef PanelPropLogical < PanelProp
-	%PanelPropLogical plots the panel of a property logical.
+	%PanelPropLogical plots the panel of a prop logical.
 	% It is a subclass of <a href="matlab:help PanelProp">PanelProp</a>.
 	%
-	% PanelPropLogical plots the panel for a LOGICAL property with a checkbox.
+	% A Logical Prop Panel (PanelPropLogical) plots the panel for a LOGICAL prop with a checkbox.
 	% It works for all categories.
 	%
 	% The list of PanelPropLogical properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the logical property panel.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the logical property panel.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the logical property panel.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the logical property panel.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the logical property panel.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the logical property panel.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-	%  <strong>9</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-	%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
-	%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
-	%  <strong>12</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
-	%  <strong>13</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
-	%  <strong>14</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
-	%  <strong>15</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
-	%  <strong>16</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
-	%  <strong>17</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
-	%  <strong>18</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
-	%  <strong>19</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
-	%  <strong>20</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the checkbox.
-	%  <strong>21</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
-	%  <strong>22</strong> <strong>EL</strong> 	EL (data, item) is the element.
-	%  <strong>23</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-	%  <strong>24</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the property panel.
-	%  <strong>25</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
-	%  <strong>26</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
-	%  <strong>27</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
-	%  <strong>28</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
-	%  <strong>29</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
-	%  <strong>30</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
-	%  <strong>31</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
-	%  <strong>32</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
-	%  <strong>33</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
-	%  <strong>34</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-	%  <strong>35</strong> <strong>CHECKBOX</strong> 	CHECKBOX (evanescent, handle) is the logical value checkbox.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the logical prop panel.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the logical prop panel.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the logical prop panel.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the logical prop panel.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the logical prop panel.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the logical prop panel.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the logical prop panel.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
+	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
+	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+	%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
+	%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
+	%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
+	%  <strong>15</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
+	%  <strong>16</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
+	%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
+	%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
+	%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
+	%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the prop panel.
+	%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the checkbox.
+	%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the prop panel and repositions its graphical objects.
+	%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
+	%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the prop number.
+	%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the prop panel.
+	%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
+	%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
+	%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
+	%  <strong>29</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
+	%  <strong>30</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
+	%  <strong>31</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
+	%  <strong>32</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
+	%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
+	%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
+	%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
+	%  <strong>36</strong> <strong>CHECKBOX</strong> 	CHECKBOX (evanescent, handle) is the logical value checkbox.
 	%
 	% PanelPropLogical methods (constructor):
 	%  PanelPropLogical - constructor
@@ -60,33 +61,33 @@ classdef PanelPropLogical < PanelProp
 	%  unchecked - sets a property to NOT checked
 	%
 	% PanelPropLogical methods (display):
-	%  tostring - string with information about the panel property logical
-	%  disp - displays information about the panel property logical
-	%  tree - displays the tree of the panel property logical
+	%  tostring - string with information about the logical prop panel
+	%  disp - displays information about the logical prop panel
+	%  tree - displays the tree of the logical prop panel
 	%
 	% PanelPropLogical methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two panel property logical are equal (values, locked)
+	%  isequal - determines whether two logical prop panel are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the panel property logical
+	%  copy - copies the logical prop panel
 	%
 	% PanelPropLogical methods (save/load, Static):
-	%  save - saves BRAPH2 panel property logical as b2 file
-	%  load - loads a BRAPH2 panel property logical from a b2 file
+	%  save - saves BRAPH2 logical prop panel as b2 file
+	%  load - loads a BRAPH2 logical prop panel from a b2 file
 	%
 	% PanelPropLogical method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the panel property logical
+	%  encodeJSON - returns a JSON string encoding the logical prop panel
 	%
 	% PanelPropLogical method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the panel property logical
+	%   decodeJSON - returns a JSON string encoding the logical prop panel
 	%
 	% PanelPropLogical methods (inspection, Static):
-	%  getClass - returns the class of the panel property logical
+	%  getClass - returns the class of the logical prop panel
 	%  getSubclasses - returns all subclasses of PanelPropLogical
-	%  getProps - returns the property list of the panel property logical
-	%  getPropNumber - returns the property number of the panel property logical
+	%  getProps - returns the property list of the logical prop panel
+	%  getPropNumber - returns the property number of the logical prop panel
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -131,14 +132,14 @@ classdef PanelPropLogical < PanelProp
 	% See also uicheckbox, GUI, PanelElement.
 	
 	properties (Constant) % properties
-		CHECKBOX = 35; %CET: Computational Efficiency Trick
+		CHECKBOX = 36; %CET: Computational Efficiency Trick
 		CHECKBOX_TAG = 'CHECKBOX';
 		CHECKBOX_CATEGORY = 7;
 		CHECKBOX_FORMAT = 18;
 	end
 	methods % constructor
 		function pr = PanelPropLogical(varargin)
-			%PanelPropLogical() creates a panel property logical.
+			%PanelPropLogical() creates a logical prop panel.
 			%
 			% PanelPropLogical(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -148,41 +149,42 @@ classdef PanelPropLogical < PanelProp
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of PanelPropLogical properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the logical property panel.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the logical property panel.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the logical property panel.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the logical property panel.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the logical property panel.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the logical property panel.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-			%  <strong>9</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-			%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
-			%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
-			%  <strong>12</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
-			%  <strong>13</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
-			%  <strong>14</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
-			%  <strong>15</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
-			%  <strong>16</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
-			%  <strong>17</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
-			%  <strong>18</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
-			%  <strong>19</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
-			%  <strong>20</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the checkbox.
-			%  <strong>21</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
-			%  <strong>22</strong> <strong>EL</strong> 	EL (data, item) is the element.
-			%  <strong>23</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-			%  <strong>24</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the property panel.
-			%  <strong>25</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
-			%  <strong>26</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
-			%  <strong>27</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
-			%  <strong>28</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
-			%  <strong>29</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
-			%  <strong>30</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
-			%  <strong>31</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
-			%  <strong>32</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
-			%  <strong>33</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
-			%  <strong>34</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-			%  <strong>35</strong> <strong>CHECKBOX</strong> 	CHECKBOX (evanescent, handle) is the logical value checkbox.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the logical prop panel.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the logical prop panel.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the logical prop panel.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the logical prop panel.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the logical prop panel.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the logical prop panel.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the logical prop panel.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
+			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
+			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+			%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
+			%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
+			%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
+			%  <strong>15</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
+			%  <strong>16</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
+			%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
+			%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
+			%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
+			%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the prop panel.
+			%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the checkbox.
+			%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the prop panel and repositions its graphical objects.
+			%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
+			%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the prop number.
+			%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the prop panel.
+			%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
+			%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
+			%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
+			%  <strong>29</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
+			%  <strong>30</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
+			%  <strong>31</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
+			%  <strong>32</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
+			%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
+			%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
+			%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
+			%  <strong>36</strong> <strong>CHECKBOX</strong> 	CHECKBOX (evanescent, handle) is the logical value checkbox.
 			%
 			% See also Category, Format.
 			
@@ -191,12 +193,12 @@ classdef PanelPropLogical < PanelProp
 	end
 	methods (Static) % inspection
 		function pr_class = getClass()
-			%GETCLASS returns the class of the panel property logical.
+			%GETCLASS returns the class of the logical prop panel.
 			%
 			% CLASS = PanelPropLogical.GETCLASS() returns the class 'PanelPropLogical'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = PR.GETCLASS() returns the class of the panel property logical PR.
+			%  CLASS = PR.GETCLASS() returns the class of the logical prop panel PR.
 			%  CLASS = Element.GETCLASS(PR) returns the class of 'PR'.
 			%  CLASS = Element.GETCLASS('PanelPropLogical') returns 'PanelPropLogical'.
 			%
@@ -206,12 +208,12 @@ classdef PanelPropLogical < PanelProp
 			pr_class = 'PanelPropLogical';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the panel property logical.
+			%GETSUBCLASSES returns all subclasses of the logical prop panel.
 			%
 			% LIST = PanelPropLogical.GETSUBCLASSES() returns all subclasses of 'PanelPropLogical'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = PR.GETSUBCLASSES() returns all subclasses of the panel property logical PR.
+			%  LIST = PR.GETSUBCLASSES() returns all subclasses of the logical prop panel PR.
 			%  LIST = Element.GETSUBCLASSES(PR) returns all subclasses of 'PR'.
 			%  LIST = Element.GETSUBCLASSES('PanelPropLogical') returns all subclasses of 'PanelPropLogical'.
 			%
@@ -223,16 +225,16 @@ classdef PanelPropLogical < PanelProp
 			subclass_list = { 'PanelPropLogical' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of panel property logical.
+			%GETPROPS returns the property list of logical prop panel.
 			%
-			% PROPS = PanelPropLogical.GETPROPS() returns the property list of panel property logical
+			% PROPS = PanelPropLogical.GETPROPS() returns the property list of logical prop panel
 			%  as a row vector.
 			%
 			% PROPS = PanelPropLogical.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = PR.GETPROPS([CATEGORY]) returns the property list of the panel property logical PR.
+			%  PROPS = PR.GETPROPS([CATEGORY]) returns the property list of the logical prop panel PR.
 			%  PROPS = Element.GETPROPS(PR[, CATEGORY]) returns the property list of 'PR'.
 			%  PROPS = Element.GETPROPS('PanelPropLogical'[, CATEGORY]) returns the property list of 'PanelPropLogical'.
 			%
@@ -244,41 +246,41 @@ classdef PanelPropLogical < PanelProp
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2];
+					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
+					prop_list = 4;
 				case 4 % Category.DATA
-					prop_list = [4 22 23 28];
+					prop_list = [5 23 24 29];
 				case 6 % Category.QUERY
-					prop_list = [7 10 11 15 16 17 18 19 20 21];
+					prop_list = [8 11 12 16 17 18 19 20 21 22];
 				case 7 % Category.EVANESCENT
-					prop_list = [9 14 26 27 29 30 31 32 33 34 35];
+					prop_list = [10 15 27 28 30 31 32 33 34 35 36];
 				case 8 % Category.FIGURE
-					prop_list = 13;
+					prop_list = 14;
 				case 9 % Category.GUI
-					prop_list = [8 12 24 25];
+					prop_list = [9 13 25 26];
 				otherwise
 					prop_list = [];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of panel property logical.
+			%GETPROPNUMBER returns the property number of logical prop panel.
 			%
-			% N = PanelPropLogical.GETPROPNUMBER() returns the property number of panel property logical.
+			% N = PanelPropLogical.GETPROPNUMBER() returns the property number of logical prop panel.
 			%
-			% N = PanelPropLogical.GETPROPNUMBER(CATEGORY) returns the property number of panel property logical
+			% N = PanelPropLogical.GETPROPNUMBER(CATEGORY) returns the property number of logical prop panel
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = PR.GETPROPNUMBER([CATEGORY]) returns the property number of the panel property logical PR.
+			%  N = PR.GETPROPNUMBER([CATEGORY]) returns the property number of the logical prop panel PR.
 			%  N = Element.GETPROPNUMBER(PR) returns the property number of 'PR'.
 			%  N = Element.GETPROPNUMBER('PanelPropLogical') returns the property number of 'PanelPropLogical'.
 			%
@@ -290,13 +292,13 @@ classdef PanelPropLogical < PanelProp
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 35;
+				prop_number = 36;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 2;
+					prop_number = 3;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -316,7 +318,7 @@ classdef PanelPropLogical < PanelProp
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in panel property logical/error.
+			%EXISTSPROP checks whether property exists in logical prop panel/error.
 			%
 			% CHECK = PanelPropLogical.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -341,7 +343,7 @@ classdef PanelPropLogical < PanelProp
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 35 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 36 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -354,7 +356,7 @@ classdef PanelPropLogical < PanelProp
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in panel property logical/error.
+			%EXISTSTAG checks whether tag exists in logical prop panel/error.
 			%
 			% CHECK = PanelPropLogical.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -379,7 +381,7 @@ classdef PanelPropLogical < PanelProp
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'CHECKBOX' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'CHECKBOX' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -412,7 +414,7 @@ classdef PanelPropLogical < PanelProp
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'CHECKBOX' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'CHECKBOX' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -441,7 +443,7 @@ classdef PanelPropLogical < PanelProp
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				panelproplogical_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'CHECKBOX' };
+				panelproplogical_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'CHECKBOX' };
 				tag = panelproplogical_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -468,7 +470,7 @@ classdef PanelPropLogical < PanelProp
 			prop = PanelPropLogical.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			panelproplogical_category_list = { 1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  6  6  6  4  4  9  9  7  7  4  7  7  7  7  7  7  7 };
+			panelproplogical_category_list = { 1  1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  6  6  6  4  4  9  9  7  7  4  7  7  7  7  7  7  7 };
 			prop_category = panelproplogical_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -494,7 +496,7 @@ classdef PanelPropLogical < PanelProp
 			prop = PanelPropLogical.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			panelproplogical_format_list = { 2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  4  4  4  8  11  22  2  18  18  8  18  18  18  19  19  19  18 };
+			panelproplogical_format_list = { 2  2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  4  4  4  8  11  22  2  18  18  8  18  18  18  19  19  19  18 };
 			prop_format = panelproplogical_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -520,7 +522,7 @@ classdef PanelPropLogical < PanelProp
 			prop = PanelPropLogical.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			panelproplogical_description_list = { 'NAME (constant, string) is the name of the logical property panel.'  'DESCRIPTION (constant, string) is the description of the logical property panel.'  'TEMPLATE (parameter, item) is the template of the logical property panel.'  'ID (data, string) is a few-letter code for the logical property panel.'  'LABEL (metadata, string) is an extended label of the logical property panel.'  'NOTES (metadata, string) are some specific notes about the logical property panel.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the property panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the checkbox.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the property panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'CHECKBOX (evanescent, handle) is the logical value checkbox.' };
+			panelproplogical_description_list = { 'ELCLASS (constant, string) is the class of the logical prop panel.'  'NAME (constant, string) is the name of the logical prop panel.'  'DESCRIPTION (constant, string) is the description of the logical prop panel.'  'TEMPLATE (parameter, item) is the template of the logical prop panel.'  'ID (data, string) is a few-letter code for the logical prop panel.'  'LABEL (metadata, string) is an extended label of the logical prop panel.'  'NOTES (metadata, string) are some specific notes about the logical prop panel.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the prop panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the prop panel.'  'UPDATE (query, logical) updates the content and permissions of the checkbox.'  'REDRAW (query, logical) resizes the prop panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the prop number.'  'HEIGHT (gui, size) is the pixel height of the prop panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'CHECKBOX (evanescent, handle) is the logical value checkbox.' };
 			prop_description = panelproplogical_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -546,9 +548,9 @@ classdef PanelPropLogical < PanelProp
 			prop = PanelPropLogical.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 35 % PanelPropLogical.CHECKBOX
+				case 36 % PanelPropLogical.CHECKBOX
 					prop_settings = Format.getFormatSettings(18);
-				case 3 % PanelPropLogical.TEMPLATE
+				case 4 % PanelPropLogical.TEMPLATE
 					prop_settings = 'PanelPropLogical';
 				otherwise
 					prop_settings = getPropSettings@PanelProp(prop);
@@ -577,25 +579,27 @@ classdef PanelPropLogical < PanelProp
 			prop = PanelPropLogical.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 35 % PanelPropLogical.CHECKBOX
+				case 36 % PanelPropLogical.CHECKBOX
 					prop_default = Format.getFormatDefault(18, PanelPropLogical.getPropSettings(prop));
-				case 1 % PanelPropLogical.NAME
+				case 1 % PanelPropLogical.ELCLASS
 					prop_default = 'PanelPropLogical';
-				case 2 % PanelPropLogical.DESCRIPTION
-					prop_default = 'PanelPropLogical plots the panel for a LOGICAL property with a checkbox. It works for all categories.';
-				case 3 % PanelPropLogical.TEMPLATE
+				case 2 % PanelPropLogical.NAME
+					prop_default = 'Logical Prop Panel';
+				case 3 % PanelPropLogical.DESCRIPTION
+					prop_default = 'A Logical Prop Panel (PanelPropLogical) plots the panel for a LOGICAL prop with a checkbox. It works for all categories.';
+				case 4 % PanelPropLogical.TEMPLATE
 					prop_default = Format.getFormatDefault(8, PanelPropLogical.getPropSettings(prop));
-				case 4 % PanelPropLogical.ID
+				case 5 % PanelPropLogical.ID
 					prop_default = 'PanelPropLogical ID';
-				case 5 % PanelPropLogical.LABEL
+				case 6 % PanelPropLogical.LABEL
 					prop_default = 'PanelPropLogical label';
-				case 6 % PanelPropLogical.NOTES
+				case 7 % PanelPropLogical.NOTES
 					prop_default = 'PanelPropLogical notes';
-				case 22 % PanelPropLogical.EL
+				case 23 % PanelPropLogical.EL
 					prop_default = PanelProp();
-				case 23 % PanelPropLogical.PROP
-					prop_default = 10;
-				case 24 % PanelPropLogical.HEIGHT
+				case 24 % PanelPropLogical.PROP
+					prop_default = 11;
+				case 25 % PanelPropLogical.HEIGHT
 					prop_default = 48;
 				otherwise
 					prop_default = getPropDefault@PanelProp(prop);
@@ -661,12 +665,12 @@ classdef PanelPropLogical < PanelProp
 			prop = PanelPropLogical.getPropProp(pointer);
 			
 			switch prop
-				case 35 % PanelPropLogical.CHECKBOX
+				case 36 % PanelPropLogical.CHECKBOX
 					check = Format.checkFormat(18, value, PanelPropLogical.getPropSettings(prop));
-				case 3 % PanelPropLogical.TEMPLATE
+				case 4 % PanelPropLogical.TEMPLATE
 					check = Format.checkFormat(8, value, PanelPropLogical.getPropSettings(prop));
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						check = checkProp@PanelProp(prop, value);
 					end
 			end
@@ -699,7 +703,7 @@ classdef PanelPropLogical < PanelProp
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 35 % PanelPropLogical.CHECKBOX
+				case 36 % PanelPropLogical.CHECKBOX
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					
@@ -714,14 +718,14 @@ classdef PanelPropLogical < PanelProp
 					
 					value = checkbox;
 					
-				case 19 % PanelPropLogical.X_DRAW
-					value = calculateValue@PanelProp(pr, 19, varargin{:}); % also warning
+				case 20 % PanelPropLogical.X_DRAW
+					value = calculateValue@PanelProp(pr, 20, varargin{:}); % also warning
 					if value
 					    pr.memorize('CHECKBOX')
 					end
 					
-				case 20 % PanelPropLogical.UPDATE
-					value = calculateValue@PanelProp(pr, 20, varargin{:}); % also warning
+				case 21 % PanelPropLogical.UPDATE
+					value = calculateValue@PanelProp(pr, 21, varargin{:}); % also warning
 					if value
 					
 					    el = pr.get('EL');
@@ -762,22 +766,22 @@ classdef PanelPropLogical < PanelProp
 					    end
 					end
 					
-				case 21 % PanelPropLogical.REDRAW
-					value = calculateValue@PanelProp(pr, 21, varargin{:}); % also warning
+				case 22 % PanelPropLogical.REDRAW
+					value = calculateValue@PanelProp(pr, 22, varargin{:}); % also warning
 					if value
 					    w_p = get_from_varargin(w(pr.get('H'), 'pixels'), 'Width', varargin);
 					    
 					    set(pr.get('CHECKBOX'), 'Position', [4 4 .70*w_p 21])
 					end
 					
-				case 17 % PanelPropLogical.DELETE
-					value = calculateValue@PanelProp(pr, 17, varargin{:}); % also warning
+				case 18 % PanelPropLogical.DELETE
+					value = calculateValue@PanelProp(pr, 18, varargin{:}); % also warning
 					if value
 					    pr.set('CHECKBOX', Element.getNoValue())
 					end
 					
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						value = calculateValue@PanelProp(pr, prop, varargin{:});
 					else
 						value = calculateValue@Element(pr, prop, varargin{:});

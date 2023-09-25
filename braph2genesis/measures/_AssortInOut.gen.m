@@ -10,9 +10,14 @@ The corresponding coefficient for directed and weighted networks is calculated b
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the in-out-assortativity.
+ELCLASS (constant, string) is the class of the % % % .
 %%%% ¡default!
 'AssortInOut'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the in-out-assortativity.
+%%%% ¡default!
+'InOutAssortativity'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the in-out-assortativity.
@@ -32,12 +37,12 @@ ID (data, string) is a few-letter code of the in-out-assortativity.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the in-out-assortativity.
 %%%% ¡default!
-'AssortInOut label'
+'InOutAssortativity label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the in-out-assortativity.
 %%%% ¡default!
-'AssortInOut notes'
+'InOutAssortativity notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.GLOBAL__.

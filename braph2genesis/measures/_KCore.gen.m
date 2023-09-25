@@ -8,6 +8,11 @@ The k-core of a graph is the largest subnetwork comprising nodes of degree k or 
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'KCore'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the kcore.
 %%%% ¡default!
 'KCore'
@@ -19,6 +24,8 @@ DESCRIPTION (constant, string) is the description of the kcore.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the kcore.
+%%%% ¡settings!
+'KCore'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the kcore.

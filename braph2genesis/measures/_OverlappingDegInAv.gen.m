@@ -52,9 +52,14 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the average overlapping in-degree.
+ELCLASS (constant, string) is the class of the % % % .
 %%%% ¡default!
 'OverlappingDegInAv'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the average overlapping in-degree.
+%%%% ¡default!
+'OverlappingInDegreeAv'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the average overlapping in-degree.
@@ -74,12 +79,12 @@ ID (data, string) is a few-letter code of the average overlapping in-degree.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the average overlapping in-degree.
 %%%% ¡default!
-'OverlappingDegInAv label'
+'OverlappingInDegreeAv label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the average overlapping in-degree.
 %%%% ¡default!
-'OverlappingDegInAv notes'
+'OverlappingInDegreeAv notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.

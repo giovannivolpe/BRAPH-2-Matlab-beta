@@ -10,6 +10,11 @@ The corresponding coefficient for directed and weighted networks is calculated
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'Assortativity'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the assortativity.
 %%%% ¡default!
 'Assortativity'
@@ -21,6 +26,8 @@ DESCRIPTION (constant, string) is the description of the assortativity.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the assortativity.
+%%%% ¡settings!
+'Assortativity'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the assortativity.

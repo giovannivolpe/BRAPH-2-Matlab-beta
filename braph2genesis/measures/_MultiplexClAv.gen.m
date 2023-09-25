@@ -52,9 +52,14 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the average multiplex clustering.
+ELCLASS (constant, string) is the class of the % % % .
 %%%% ¡default!
 'MultiplexClAv'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the average multiplex clustering.
+%%%% ¡default!
+'MultiplexClusteringAv'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the average multiplex clustering.
@@ -73,12 +78,12 @@ ID (data, string) is a few-letter code of the average multiplex clustering.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the average multiplex clustering.
 %%%% ¡default!
-'MultiplexClAv label'
+'MultiplexClusteringAv label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the average multiplex clustering.
 %%%% ¡default!
-'MultiplexClAv notes'
+'MultiplexClusteringAv notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
