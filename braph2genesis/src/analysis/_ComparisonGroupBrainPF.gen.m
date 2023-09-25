@@ -298,52 +298,8 @@ end
 
 %% ¡props!
 
-%%% ¡prop!
-H_AXES (evanescent, handle) is the handle for the axes.
-%%%% ¡calculate!
-h_axes = uiaxes( ...
-    'Parent', pf.memorize('H'), ...
-    'Tag', 'H_AXES', ...
-    'Units', 'normalized', ...
-    'OuterPosition', [.2 .2 .6 .6] ... % % % %TODO transform this into a prop?
-    );
-h_axes.Toolbar.Visible = 'off';
-h_axes.Interactions = [];
-box(h_axes, 'on')
-hold(h_axes, 'on')
-value = h_axes;
-
-%%% ¡prop!
-ST_AXIS (figure, item) determines the axis settings.
-%%%% ¡settings!
-'SettingsAxis'
-%%%% ¡default!
-SettingsAxis('AXIS', true, 'GRID', false, 'EQUAL', false)
-%%%% ¡postset!
-if pf.get('DRAWN')
-    toolbar = pf.get('H_TOOLBAR');
-    if check_graphics(toolbar, 'uitoolbar')
-        set(findobj(toolbar, 'Tag', 'TOOL.Grid'), 'State', pf.get('ST_AXIS').get('GRID'))
-        set(findobj(toolbar, 'Tag', 'TOOL.Axis'), 'State', pf.get('ST_AXIS').get('AXIS'))
-    end
-end
 %%%% ¡gui!
 pr = SettingsAxisPP('EL', pf, 'PROP', ComparisonGroupBrainPF.ST_AXIS, varargin{:});
-
-%%% ¡prop!
-LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.
-%%%% ¡calculate!
-value = listener(pf.get('ST_AXIS'), 'PropSet', @cb_listener_st_axis); 
-%%%% ¡calculate_callbacks!
-function cb_listener_st_axis(~, ~)
-    if pf.get('DRAWN')
-        toolbar = pf.get('H_TOOLBAR');
-        if check_graphics(toolbar, 'uitoolbar')
-            set(findobj(toolbar, 'Tag', 'TOOL.Grid'), 'State', pf.get('ST_AXIS').get('GRID'))
-            set(findobj(toolbar, 'Tag', 'TOOL.Axis'), 'State', pf.get('ST_AXIS').get('AXIS'))
-        end
-    end
-end
 
 %%% ¡prop!
 CP (metadata, item) is the group comparison on brain surface.
