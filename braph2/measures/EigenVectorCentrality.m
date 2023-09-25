@@ -1,25 +1,26 @@
 classdef EigenVectorCentrality < Measure
-	%EigenVectorCentrality is the graph eigenvectorcentrality.
+	%EigenVectorCentrality is the graph eigenvector centrality.
 	% It is a subclass of <a href="matlab:help Measure">Measure</a>.
 	%
 	% The eigen vector centrality of a node is the ith element in the eigenvector corresponding 
 	% to the largest eigenvalue of the largest eigenvalue of the graphs adjacency matrix.
 	%
 	% The list of EigenVectorCentrality properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the eigenvectorcentrality.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the eigenvectorcentrality.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the eigenvectorcentrality.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the eigenvectorcentrality.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the eigenvectorcentrality.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the eigenvectorcentrality.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
-	%  <strong>9</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-	%  <strong>10</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-	%  <strong>11</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-	%  <strong>12</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-	%  <strong>13</strong> <strong>M</strong> 	M (result, cell) is the eigenvectorcentrality.
-	%  <strong>14</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the eigenvector centrality.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the eigenvector centrality.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the eigenvector centrality.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the eigenvector centrality.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the eigenvector centrality.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the eigenvector centrality.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
+	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
+	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
+	%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
+	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the eigenvector centrality.
+	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 	%
 	% EigenVectorCentrality methods (constructor):
 	%  EigenVectorCentrality - constructor
@@ -39,33 +40,33 @@ classdef EigenVectorCentrality < Measure
 	%  unchecked - sets a property to NOT checked
 	%
 	% EigenVectorCentrality methods (display):
-	%  tostring - string with information about the eigenvectorcentrality
-	%  disp - displays information about the eigenvectorcentrality
-	%  tree - displays the tree of the eigenvectorcentrality
+	%  tostring - string with information about the eigenvector centrality
+	%  disp - displays information about the eigenvector centrality
+	%  tree - displays the tree of the eigenvector centrality
 	%
 	% EigenVectorCentrality methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two eigenvectorcentrality are equal (values, locked)
+	%  isequal - determines whether two eigenvector centrality are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the eigenvectorcentrality
+	%  copy - copies the eigenvector centrality
 	%
 	% EigenVectorCentrality methods (save/load, Static):
-	%  save - saves BRAPH2 eigenvectorcentrality as b2 file
-	%  load - loads a BRAPH2 eigenvectorcentrality from a b2 file
+	%  save - saves BRAPH2 eigenvector centrality as b2 file
+	%  load - loads a BRAPH2 eigenvector centrality from a b2 file
 	%
 	% EigenVectorCentrality method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the eigenvectorcentrality
+	%  encodeJSON - returns a JSON string encoding the eigenvector centrality
 	%
 	% EigenVectorCentrality method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the eigenvectorcentrality
+	%   decodeJSON - returns a JSON string encoding the eigenvector centrality
 	%
 	% EigenVectorCentrality methods (inspection, Static):
-	%  getClass - returns the class of the eigenvectorcentrality
+	%  getClass - returns the class of the eigenvector centrality
 	%  getSubclasses - returns all subclasses of EigenVectorCentrality
-	%  getProps - returns the property list of the eigenvectorcentrality
-	%  getPropNumber - returns the property number of the eigenvectorcentrality
+	%  getProps - returns the property list of the eigenvector centrality
+	%  getPropNumber - returns the property number of the eigenvector centrality
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -109,7 +110,7 @@ classdef EigenVectorCentrality < Measure
 	
 	methods % constructor
 		function m = EigenVectorCentrality(varargin)
-			%EigenVectorCentrality() creates a eigenvectorcentrality.
+			%EigenVectorCentrality() creates a eigenvector centrality.
 			%
 			% EigenVectorCentrality(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -119,20 +120,21 @@ classdef EigenVectorCentrality < Measure
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of EigenVectorCentrality properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the eigenvectorcentrality.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the eigenvectorcentrality.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the eigenvectorcentrality.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the eigenvectorcentrality.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the eigenvectorcentrality.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the eigenvectorcentrality.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
-			%  <strong>9</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-			%  <strong>10</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-			%  <strong>11</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-			%  <strong>12</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-			%  <strong>13</strong> <strong>M</strong> 	M (result, cell) is the eigenvectorcentrality.
-			%  <strong>14</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the eigenvector centrality.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the eigenvector centrality.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the eigenvector centrality.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the eigenvector centrality.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the eigenvector centrality.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the eigenvector centrality.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
+			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
+			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
+			%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
+			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the eigenvector centrality.
+			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 			%
 			% See also Category, Format.
 			
@@ -141,12 +143,12 @@ classdef EigenVectorCentrality < Measure
 	end
 	methods (Static) % inspection
 		function m_class = getClass()
-			%GETCLASS returns the class of the eigenvectorcentrality.
+			%GETCLASS returns the class of the eigenvector centrality.
 			%
 			% CLASS = EigenVectorCentrality.GETCLASS() returns the class 'EigenVectorCentrality'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = M.GETCLASS() returns the class of the eigenvectorcentrality M.
+			%  CLASS = M.GETCLASS() returns the class of the eigenvector centrality M.
 			%  CLASS = Element.GETCLASS(M) returns the class of 'M'.
 			%  CLASS = Element.GETCLASS('EigenVectorCentrality') returns 'EigenVectorCentrality'.
 			%
@@ -156,12 +158,12 @@ classdef EigenVectorCentrality < Measure
 			m_class = 'EigenVectorCentrality';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the eigenvectorcentrality.
+			%GETSUBCLASSES returns all subclasses of the eigenvector centrality.
 			%
 			% LIST = EigenVectorCentrality.GETSUBCLASSES() returns all subclasses of 'EigenVectorCentrality'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = M.GETSUBCLASSES() returns all subclasses of the eigenvectorcentrality M.
+			%  LIST = M.GETSUBCLASSES() returns all subclasses of the eigenvector centrality M.
 			%  LIST = Element.GETSUBCLASSES(M) returns all subclasses of 'M'.
 			%  LIST = Element.GETSUBCLASSES('EigenVectorCentrality') returns all subclasses of 'EigenVectorCentrality'.
 			%
@@ -173,16 +175,16 @@ classdef EigenVectorCentrality < Measure
 			subclass_list = { 'EigenVectorCentrality' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of eigenvectorcentrality.
+			%GETPROPS returns the property list of eigenvector centrality.
 			%
-			% PROPS = EigenVectorCentrality.GETPROPS() returns the property list of eigenvectorcentrality
+			% PROPS = EigenVectorCentrality.GETPROPS() returns the property list of eigenvector centrality
 			%  as a row vector.
 			%
 			% PROPS = EigenVectorCentrality.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = M.GETPROPS([CATEGORY]) returns the property list of the eigenvectorcentrality M.
+			%  PROPS = M.GETPROPS([CATEGORY]) returns the property list of the eigenvector centrality M.
 			%  PROPS = Element.GETPROPS(M[, CATEGORY]) returns the property list of 'M'.
 			%  PROPS = Element.GETPROPS('EigenVectorCentrality'[, CATEGORY]) returns the property list of 'EigenVectorCentrality'.
 			%
@@ -194,39 +196,39 @@ classdef EigenVectorCentrality < Measure
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2 8 9 10 11];
+					prop_list = [1 2 3 9 10 11 12];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
+					prop_list = 4;
 				case 4 % Category.DATA
-					prop_list = [4 12];
+					prop_list = [5 13];
 				case 5 % Category.RESULT
-					prop_list = 13;
-				case 6 % Category.QUERY
-					prop_list = 7;
-				case 9 % Category.GUI
 					prop_list = 14;
+				case 6 % Category.QUERY
+					prop_list = 8;
+				case 9 % Category.GUI
+					prop_list = 15;
 				otherwise
 					prop_list = [];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of eigenvectorcentrality.
+			%GETPROPNUMBER returns the property number of eigenvector centrality.
 			%
-			% N = EigenVectorCentrality.GETPROPNUMBER() returns the property number of eigenvectorcentrality.
+			% N = EigenVectorCentrality.GETPROPNUMBER() returns the property number of eigenvector centrality.
 			%
-			% N = EigenVectorCentrality.GETPROPNUMBER(CATEGORY) returns the property number of eigenvectorcentrality
+			% N = EigenVectorCentrality.GETPROPNUMBER(CATEGORY) returns the property number of eigenvector centrality
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = M.GETPROPNUMBER([CATEGORY]) returns the property number of the eigenvectorcentrality M.
+			%  N = M.GETPROPNUMBER([CATEGORY]) returns the property number of the eigenvector centrality M.
 			%  N = Element.GETPROPNUMBER(M) returns the property number of 'M'.
 			%  N = Element.GETPROPNUMBER('EigenVectorCentrality') returns the property number of 'EigenVectorCentrality'.
 			%
@@ -238,13 +240,13 @@ classdef EigenVectorCentrality < Measure
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 14;
+				prop_number = 15;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 6;
+					prop_number = 7;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -262,7 +264,7 @@ classdef EigenVectorCentrality < Measure
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in eigenvectorcentrality/error.
+			%EXISTSPROP checks whether property exists in eigenvector centrality/error.
 			%
 			% CHECK = EigenVectorCentrality.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -287,7 +289,7 @@ classdef EigenVectorCentrality < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 14 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 15 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -300,7 +302,7 @@ classdef EigenVectorCentrality < Measure
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in eigenvectorcentrality/error.
+			%EXISTSTAG checks whether tag exists in eigenvector centrality/error.
 			%
 			% CHECK = EigenVectorCentrality.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -325,7 +327,7 @@ classdef EigenVectorCentrality < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -358,7 +360,7 @@ classdef EigenVectorCentrality < Measure
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -387,7 +389,7 @@ classdef EigenVectorCentrality < Measure
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				eigenvectorcentrality_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
+				eigenvectorcentrality_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
 				tag = eigenvectorcentrality_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -414,7 +416,7 @@ classdef EigenVectorCentrality < Measure
 			prop = EigenVectorCentrality.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			eigenvectorcentrality_category_list = { 1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
+			eigenvectorcentrality_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
 			prop_category = eigenvectorcentrality_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -440,7 +442,7 @@ classdef EigenVectorCentrality < Measure
 			prop = EigenVectorCentrality.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			eigenvectorcentrality_format_list = { 2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
+			eigenvectorcentrality_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
 			prop_format = eigenvectorcentrality_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -466,7 +468,7 @@ classdef EigenVectorCentrality < Measure
 			prop = EigenVectorCentrality.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			eigenvectorcentrality_description_list = { 'NAME (constant, string) is the name of the eigenvectorcentrality.'  'DESCRIPTION (constant, string) is the description of the eigenvectorcentrality.'  'TEMPLATE (parameter, item) is the template of the eigenvectorcentrality.'  'ID (data, string) is a few-letter code of the eigenvectorcentrality.'  'LABEL (metadata, string) is an extended label of the eigenvectorcentrality.'  'NOTES (metadata, string) are some specific notes about the eigenvectorcentrality.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the eigenvectorcentrality.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			eigenvectorcentrality_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the eigenvector centrality.'  'DESCRIPTION (constant, string) is the description of the eigenvector centrality.'  'TEMPLATE (parameter, item) is the template of the eigenvector centrality.'  'ID (data, string) is a few-letter code of the eigenvector centrality.'  'LABEL (metadata, string) is an extended label of the eigenvector centrality.'  'NOTES (metadata, string) are some specific notes about the eigenvector centrality.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the eigenvector centrality.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = eigenvectorcentrality_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -492,6 +494,8 @@ classdef EigenVectorCentrality < Measure
 			prop = EigenVectorCentrality.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
+				case 4 % EigenVectorCentrality.TEMPLATE
+					prop_settings = 'EigenVectorCentrality';
 				otherwise
 					prop_settings = getPropSettings@Measure(prop);
 			end
@@ -519,23 +523,27 @@ classdef EigenVectorCentrality < Measure
 			prop = EigenVectorCentrality.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 1 % EigenVectorCentrality.NAME
+				case 1 % EigenVectorCentrality.ELCLASS
 					prop_default = 'EigenVectorCentrality';
-				case 2 % EigenVectorCentrality.DESCRIPTION
+				case 2 % EigenVectorCentrality.NAME
+					prop_default = 'EigenVectorCentrality';
+				case 3 % EigenVectorCentrality.DESCRIPTION
 					prop_default = 'The eigen vector centrality of a node is the ith element in the eigenvector corresponding to the largest eigenvalue of the largest eigenvalue of the graphs adjacency matrix.';
-				case 4 % EigenVectorCentrality.ID
+				case 4 % EigenVectorCentrality.TEMPLATE
+					prop_default = Format.getFormatDefault(8, EigenVectorCentrality.getPropSettings(prop));
+				case 5 % EigenVectorCentrality.ID
 					prop_default = 'EigenVectorCentrality ID';
-				case 5 % EigenVectorCentrality.LABEL
+				case 6 % EigenVectorCentrality.LABEL
 					prop_default = 'EigenVectorCentrality label';
-				case 6 % EigenVectorCentrality.NOTES
+				case 7 % EigenVectorCentrality.NOTES
 					prop_default = 'EigenVectorCentrality notes';
-				case 8 % EigenVectorCentrality.SHAPE
+				case 9 % EigenVectorCentrality.SHAPE
 					prop_default = 2;
-				case 9 % EigenVectorCentrality.SCOPE
+				case 10 % EigenVectorCentrality.SCOPE
 					prop_default = 2;
-				case 10 % EigenVectorCentrality.PARAMETRICITY
+				case 11 % EigenVectorCentrality.PARAMETRICITY
 					prop_default = 2;
-				case 11 % EigenVectorCentrality.COMPATIBLE_GRAPHS
+				case 12 % EigenVectorCentrality.COMPATIBLE_GRAPHS
 					prop_default = {'GraphWU' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT'} ;;
 				otherwise
 					prop_default = getPropDefault@Measure(prop);
@@ -601,8 +609,10 @@ classdef EigenVectorCentrality < Measure
 			prop = EigenVectorCentrality.getPropProp(pointer);
 			
 			switch prop
+				case 4 % EigenVectorCentrality.TEMPLATE
+					check = Format.checkFormat(8, value, EigenVectorCentrality.getPropSettings(prop));
 				otherwise
-					if prop <= 14
+					if prop <= 15
 						check = checkProp@Measure(prop, value);
 					end
 			end
@@ -635,8 +645,8 @@ classdef EigenVectorCentrality < Measure
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 13 % EigenVectorCentrality.M
-					rng_settings_ = rng(); rng(m.getPropSeed(13), 'twister')
+				case 14 % EigenVectorCentrality.M
+					rng_settings_ = rng(); rng(m.getPropSeed(14), 'twister')
 					
 					g = m.get('G'); % graph from measure class
 					A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
@@ -661,7 +671,7 @@ classdef EigenVectorCentrality < Measure
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 14
+					if prop <= 15
 						value = calculateValue@Measure(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

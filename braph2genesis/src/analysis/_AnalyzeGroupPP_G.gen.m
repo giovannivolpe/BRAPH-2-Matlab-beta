@@ -11,6 +11,11 @@ uitable, AnalyzeGroup, Graph, Measure
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'AnalyzeGroupPP_G'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the graph and measure panel.
 %%%% ¡default!
 'AnalyzeGroupPP_G'
@@ -92,7 +97,7 @@ function set_table()
     if isa(g.getr('M_DICT'), 'NoValue')
         mlist_already_calculated = {};
     else
-        mlist_already_calculated = cellfun(@(x) x.get('NAME'), g.get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
+        mlist_already_calculated = cellfun(@(x) x.get('ELCLASS'), g.get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
     end
     
     rowname = cell(length(mlist), 1);

@@ -2,53 +2,54 @@ classdef SettingsAreaPP < SettingsPP
 	%SettingsAreaPP is the panel with area settings.
 	% It is a subclass of <a href="matlab:help SettingsPP">SettingsPP</a>.
 	%
-	% SettingsAreaPP plots the panel for area settings,
-	% including visibility, face color, face alpha, edge color, and edge alpha.
+	% A Prop Panel for Area Settings (SettingsAreaPP) plots the panel for area settings,
+	%  including visibility, face color, face alpha, edge color, and edge alpha.
 	% It works for all categories.
 	%
 	% The list of SettingsAreaPP properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the settings area panel.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the settings area panel.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the settings area panel.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the settings area panel.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the settings area panel.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the settings area panel.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-	%  <strong>9</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-	%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
-	%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
-	%  <strong>12</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
-	%  <strong>13</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
-	%  <strong>14</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
-	%  <strong>15</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
-	%  <strong>16</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
-	%  <strong>17</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
-	%  <strong>18</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
-	%  <strong>19</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
-	%  <strong>20</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.
-	%  <strong>21</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
-	%  <strong>22</strong> <strong>EL</strong> 	EL (data, item) is the element.
-	%  <strong>23</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-	%  <strong>24</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the settings position panel.
-	%  <strong>25</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
-	%  <strong>26</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
-	%  <strong>27</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
-	%  <strong>28</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
-	%  <strong>29</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
-	%  <strong>30</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
-	%  <strong>31</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
-	%  <strong>32</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
-	%  <strong>33</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
-	%  <strong>34</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-	%  <strong>35</strong> <strong>ENABLE</strong> 	ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.
-	%  <strong>36</strong> <strong>CHECKBOX_VISIBLE</strong> 	CHECKBOX_VISIBLE (evanescent, handle) determines whether the area is visible.
-	%  <strong>37</strong> <strong>BUTTON_FACECOLOR</strong> 	BUTTON_FACECOLOR (evanescent, handle) is the face color button.
-	%  <strong>38</strong> <strong>EDITFIELD_FACEALPHA</strong> 	EDITFIELD_FACEALPHA (evanescent, handle) is the face alpha edit field.
-	%  <strong>39</strong> <strong>SLIDER_FACEALPHA</strong> 	SLIDER_FACEALPHA (evanescent, handle) is the face alpha slider.
-	%  <strong>40</strong> <strong>BUTTON_EDGECOLOR</strong> 	BUTTON_EDGECOLOR (evanescent, handle) is the edge color button.
-	%  <strong>41</strong> <strong>EDITFIELD_EDGEALPHA</strong> 	EDITFIELD_EDGEALPHA (evanescent, handle) is the edge alpha edit field.
-	%  <strong>42</strong> <strong>SLIDER_EDGEALPHA</strong> 	SLIDER_EDGEALPHA (evanescent, handle) is the edge alpha slider.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the prop panel for area settings.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the prop panel for area settings.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the prop panel for area settings.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the prop panel for area settings.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the prop panel for area settings.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the prop panel for area settings.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the prop panel for area settings.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
+	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
+	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+	%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
+	%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
+	%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
+	%  <strong>15</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
+	%  <strong>16</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
+	%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
+	%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
+	%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
+	%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
+	%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.
+	%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
+	%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
+	%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
+	%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the settings position panel.
+	%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
+	%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
+	%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
+	%  <strong>29</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
+	%  <strong>30</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
+	%  <strong>31</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
+	%  <strong>32</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
+	%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
+	%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
+	%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
+	%  <strong>36</strong> <strong>ENABLE</strong> 	ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.
+	%  <strong>37</strong> <strong>CHECKBOX_VISIBLE</strong> 	CHECKBOX_VISIBLE (evanescent, handle) determines whether the area is visible.
+	%  <strong>38</strong> <strong>BUTTON_FACECOLOR</strong> 	BUTTON_FACECOLOR (evanescent, handle) is the face color button.
+	%  <strong>39</strong> <strong>EDITFIELD_FACEALPHA</strong> 	EDITFIELD_FACEALPHA (evanescent, handle) is the face alpha edit field.
+	%  <strong>40</strong> <strong>SLIDER_FACEALPHA</strong> 	SLIDER_FACEALPHA (evanescent, handle) is the face alpha slider.
+	%  <strong>41</strong> <strong>BUTTON_EDGECOLOR</strong> 	BUTTON_EDGECOLOR (evanescent, handle) is the edge color button.
+	%  <strong>42</strong> <strong>EDITFIELD_EDGEALPHA</strong> 	EDITFIELD_EDGEALPHA (evanescent, handle) is the edge alpha edit field.
+	%  <strong>43</strong> <strong>SLIDER_EDGEALPHA</strong> 	SLIDER_EDGEALPHA (evanescent, handle) is the edge alpha slider.
 	%
 	% SettingsAreaPP methods (constructor):
 	%  SettingsAreaPP - constructor
@@ -68,33 +69,33 @@ classdef SettingsAreaPP < SettingsPP
 	%  unchecked - sets a property to NOT checked
 	%
 	% SettingsAreaPP methods (display):
-	%  tostring - string with information about the settings area panel
-	%  disp - displays information about the settings area panel
-	%  tree - displays the tree of the settings area panel
+	%  tostring - string with information about the prop panel for area settings
+	%  disp - displays information about the prop panel for area settings
+	%  tree - displays the tree of the prop panel for area settings
 	%
 	% SettingsAreaPP methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two settings area panel are equal (values, locked)
+	%  isequal - determines whether two prop panel for area settings are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the settings area panel
+	%  copy - copies the prop panel for area settings
 	%
 	% SettingsAreaPP methods (save/load, Static):
-	%  save - saves BRAPH2 settings area panel as b2 file
-	%  load - loads a BRAPH2 settings area panel from a b2 file
+	%  save - saves BRAPH2 prop panel for area settings as b2 file
+	%  load - loads a BRAPH2 prop panel for area settings from a b2 file
 	%
 	% SettingsAreaPP method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the settings area panel
+	%  encodeJSON - returns a JSON string encoding the prop panel for area settings
 	%
 	% SettingsAreaPP method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the settings area panel
+	%   decodeJSON - returns a JSON string encoding the prop panel for area settings
 	%
 	% SettingsAreaPP methods (inspection, Static):
-	%  getClass - returns the class of the settings area panel
+	%  getClass - returns the class of the prop panel for area settings
 	%  getSubclasses - returns all subclasses of SettingsAreaPP
-	%  getProps - returns the property list of the settings area panel
-	%  getPropNumber - returns the property number of the settings area panel
+	%  getProps - returns the property list of the prop panel for area settings
+	%  getPropNumber - returns the property number of the prop panel for area settings
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -139,49 +140,49 @@ classdef SettingsAreaPP < SettingsPP
 	% See also SettingsArea, uicheckbox, , uipushbutton, uieditfield, uislider.
 	
 	properties (Constant) % properties
-		ENABLE = 35; %CET: Computational Efficiency Trick
+		ENABLE = 36; %CET: Computational Efficiency Trick
 		ENABLE_TAG = 'ENABLE';
 		ENABLE_CATEGORY = 9;
 		ENABLE_FORMAT = 4;
 		
-		CHECKBOX_VISIBLE = 36; %CET: Computational Efficiency Trick
+		CHECKBOX_VISIBLE = 37; %CET: Computational Efficiency Trick
 		CHECKBOX_VISIBLE_TAG = 'CHECKBOX_VISIBLE';
 		CHECKBOX_VISIBLE_CATEGORY = 7;
 		CHECKBOX_VISIBLE_FORMAT = 18;
 		
-		BUTTON_FACECOLOR = 37; %CET: Computational Efficiency Trick
+		BUTTON_FACECOLOR = 38; %CET: Computational Efficiency Trick
 		BUTTON_FACECOLOR_TAG = 'BUTTON_FACECOLOR';
 		BUTTON_FACECOLOR_CATEGORY = 7;
 		BUTTON_FACECOLOR_FORMAT = 18;
 		
-		EDITFIELD_FACEALPHA = 38; %CET: Computational Efficiency Trick
+		EDITFIELD_FACEALPHA = 39; %CET: Computational Efficiency Trick
 		EDITFIELD_FACEALPHA_TAG = 'EDITFIELD_FACEALPHA';
 		EDITFIELD_FACEALPHA_CATEGORY = 7;
 		EDITFIELD_FACEALPHA_FORMAT = 18;
 		
-		SLIDER_FACEALPHA = 39; %CET: Computational Efficiency Trick
+		SLIDER_FACEALPHA = 40; %CET: Computational Efficiency Trick
 		SLIDER_FACEALPHA_TAG = 'SLIDER_FACEALPHA';
 		SLIDER_FACEALPHA_CATEGORY = 7;
 		SLIDER_FACEALPHA_FORMAT = 18;
 		
-		BUTTON_EDGECOLOR = 40; %CET: Computational Efficiency Trick
+		BUTTON_EDGECOLOR = 41; %CET: Computational Efficiency Trick
 		BUTTON_EDGECOLOR_TAG = 'BUTTON_EDGECOLOR';
 		BUTTON_EDGECOLOR_CATEGORY = 7;
 		BUTTON_EDGECOLOR_FORMAT = 18;
 		
-		EDITFIELD_EDGEALPHA = 41; %CET: Computational Efficiency Trick
+		EDITFIELD_EDGEALPHA = 42; %CET: Computational Efficiency Trick
 		EDITFIELD_EDGEALPHA_TAG = 'EDITFIELD_EDGEALPHA';
 		EDITFIELD_EDGEALPHA_CATEGORY = 7;
 		EDITFIELD_EDGEALPHA_FORMAT = 18;
 		
-		SLIDER_EDGEALPHA = 42; %CET: Computational Efficiency Trick
+		SLIDER_EDGEALPHA = 43; %CET: Computational Efficiency Trick
 		SLIDER_EDGEALPHA_TAG = 'SLIDER_EDGEALPHA';
 		SLIDER_EDGEALPHA_CATEGORY = 7;
 		SLIDER_EDGEALPHA_FORMAT = 18;
 	end
 	methods % constructor
 		function pr = SettingsAreaPP(varargin)
-			%SettingsAreaPP() creates a settings area panel.
+			%SettingsAreaPP() creates a prop panel for area settings.
 			%
 			% SettingsAreaPP(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -191,48 +192,49 @@ classdef SettingsAreaPP < SettingsPP
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of SettingsAreaPP properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the settings area panel.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the settings area panel.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the settings area panel.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the settings area panel.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the settings area panel.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the settings area panel.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-			%  <strong>9</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-			%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
-			%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
-			%  <strong>12</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
-			%  <strong>13</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
-			%  <strong>14</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
-			%  <strong>15</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
-			%  <strong>16</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
-			%  <strong>17</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
-			%  <strong>18</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
-			%  <strong>19</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
-			%  <strong>20</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.
-			%  <strong>21</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
-			%  <strong>22</strong> <strong>EL</strong> 	EL (data, item) is the element.
-			%  <strong>23</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-			%  <strong>24</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the settings position panel.
-			%  <strong>25</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
-			%  <strong>26</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
-			%  <strong>27</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
-			%  <strong>28</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
-			%  <strong>29</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
-			%  <strong>30</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
-			%  <strong>31</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
-			%  <strong>32</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
-			%  <strong>33</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
-			%  <strong>34</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-			%  <strong>35</strong> <strong>ENABLE</strong> 	ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.
-			%  <strong>36</strong> <strong>CHECKBOX_VISIBLE</strong> 	CHECKBOX_VISIBLE (evanescent, handle) determines whether the area is visible.
-			%  <strong>37</strong> <strong>BUTTON_FACECOLOR</strong> 	BUTTON_FACECOLOR (evanescent, handle) is the face color button.
-			%  <strong>38</strong> <strong>EDITFIELD_FACEALPHA</strong> 	EDITFIELD_FACEALPHA (evanescent, handle) is the face alpha edit field.
-			%  <strong>39</strong> <strong>SLIDER_FACEALPHA</strong> 	SLIDER_FACEALPHA (evanescent, handle) is the face alpha slider.
-			%  <strong>40</strong> <strong>BUTTON_EDGECOLOR</strong> 	BUTTON_EDGECOLOR (evanescent, handle) is the edge color button.
-			%  <strong>41</strong> <strong>EDITFIELD_EDGEALPHA</strong> 	EDITFIELD_EDGEALPHA (evanescent, handle) is the edge alpha edit field.
-			%  <strong>42</strong> <strong>SLIDER_EDGEALPHA</strong> 	SLIDER_EDGEALPHA (evanescent, handle) is the edge alpha slider.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the prop panel for area settings.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the prop panel for area settings.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the prop panel for area settings.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the prop panel for area settings.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the prop panel for area settings.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the prop panel for area settings.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the prop panel for area settings.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
+			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
+			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+			%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
+			%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
+			%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
+			%  <strong>15</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
+			%  <strong>16</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
+			%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
+			%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
+			%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
+			%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
+			%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.
+			%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
+			%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
+			%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
+			%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the settings position panel.
+			%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
+			%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
+			%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
+			%  <strong>29</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
+			%  <strong>30</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
+			%  <strong>31</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
+			%  <strong>32</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
+			%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
+			%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
+			%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
+			%  <strong>36</strong> <strong>ENABLE</strong> 	ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.
+			%  <strong>37</strong> <strong>CHECKBOX_VISIBLE</strong> 	CHECKBOX_VISIBLE (evanescent, handle) determines whether the area is visible.
+			%  <strong>38</strong> <strong>BUTTON_FACECOLOR</strong> 	BUTTON_FACECOLOR (evanescent, handle) is the face color button.
+			%  <strong>39</strong> <strong>EDITFIELD_FACEALPHA</strong> 	EDITFIELD_FACEALPHA (evanescent, handle) is the face alpha edit field.
+			%  <strong>40</strong> <strong>SLIDER_FACEALPHA</strong> 	SLIDER_FACEALPHA (evanescent, handle) is the face alpha slider.
+			%  <strong>41</strong> <strong>BUTTON_EDGECOLOR</strong> 	BUTTON_EDGECOLOR (evanescent, handle) is the edge color button.
+			%  <strong>42</strong> <strong>EDITFIELD_EDGEALPHA</strong> 	EDITFIELD_EDGEALPHA (evanescent, handle) is the edge alpha edit field.
+			%  <strong>43</strong> <strong>SLIDER_EDGEALPHA</strong> 	SLIDER_EDGEALPHA (evanescent, handle) is the edge alpha slider.
 			%
 			% See also Category, Format.
 			
@@ -241,12 +243,12 @@ classdef SettingsAreaPP < SettingsPP
 	end
 	methods (Static) % inspection
 		function pr_class = getClass()
-			%GETCLASS returns the class of the settings area panel.
+			%GETCLASS returns the class of the prop panel for area settings.
 			%
 			% CLASS = SettingsAreaPP.GETCLASS() returns the class 'SettingsAreaPP'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = PR.GETCLASS() returns the class of the settings area panel PR.
+			%  CLASS = PR.GETCLASS() returns the class of the prop panel for area settings PR.
 			%  CLASS = Element.GETCLASS(PR) returns the class of 'PR'.
 			%  CLASS = Element.GETCLASS('SettingsAreaPP') returns 'SettingsAreaPP'.
 			%
@@ -256,12 +258,12 @@ classdef SettingsAreaPP < SettingsPP
 			pr_class = 'SettingsAreaPP';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the settings area panel.
+			%GETSUBCLASSES returns all subclasses of the prop panel for area settings.
 			%
 			% LIST = SettingsAreaPP.GETSUBCLASSES() returns all subclasses of 'SettingsAreaPP'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = PR.GETSUBCLASSES() returns all subclasses of the settings area panel PR.
+			%  LIST = PR.GETSUBCLASSES() returns all subclasses of the prop panel for area settings PR.
 			%  LIST = Element.GETSUBCLASSES(PR) returns all subclasses of 'PR'.
 			%  LIST = Element.GETSUBCLASSES('SettingsAreaPP') returns all subclasses of 'SettingsAreaPP'.
 			%
@@ -273,16 +275,16 @@ classdef SettingsAreaPP < SettingsPP
 			subclass_list = { 'SettingsAreaPP' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of settings area panel.
+			%GETPROPS returns the property list of prop panel for area settings.
 			%
-			% PROPS = SettingsAreaPP.GETPROPS() returns the property list of settings area panel
+			% PROPS = SettingsAreaPP.GETPROPS() returns the property list of prop panel for area settings
 			%  as a row vector.
 			%
 			% PROPS = SettingsAreaPP.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = PR.GETPROPS([CATEGORY]) returns the property list of the settings area panel PR.
+			%  PROPS = PR.GETPROPS([CATEGORY]) returns the property list of the prop panel for area settings PR.
 			%  PROPS = Element.GETPROPS(PR[, CATEGORY]) returns the property list of 'PR'.
 			%  PROPS = Element.GETPROPS('SettingsAreaPP'[, CATEGORY]) returns the property list of 'SettingsAreaPP'.
 			%
@@ -294,41 +296,41 @@ classdef SettingsAreaPP < SettingsPP
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2];
+					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
+					prop_list = 4;
 				case 4 % Category.DATA
-					prop_list = [4 22 23 28];
+					prop_list = [5 23 24 29];
 				case 6 % Category.QUERY
-					prop_list = [7 10 11 15 16 17 18 19 20 21];
+					prop_list = [8 11 12 16 17 18 19 20 21 22];
 				case 7 % Category.EVANESCENT
-					prop_list = [9 14 26 27 29 30 31 32 33 34 36 37 38 39 40 41 42];
+					prop_list = [10 15 27 28 30 31 32 33 34 35 37 38 39 40 41 42 43];
 				case 8 % Category.FIGURE
-					prop_list = 13;
+					prop_list = 14;
 				case 9 % Category.GUI
-					prop_list = [8 12 24 25 35];
+					prop_list = [9 13 25 26 36];
 				otherwise
 					prop_list = [];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of settings area panel.
+			%GETPROPNUMBER returns the property number of prop panel for area settings.
 			%
-			% N = SettingsAreaPP.GETPROPNUMBER() returns the property number of settings area panel.
+			% N = SettingsAreaPP.GETPROPNUMBER() returns the property number of prop panel for area settings.
 			%
-			% N = SettingsAreaPP.GETPROPNUMBER(CATEGORY) returns the property number of settings area panel
+			% N = SettingsAreaPP.GETPROPNUMBER(CATEGORY) returns the property number of prop panel for area settings
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = PR.GETPROPNUMBER([CATEGORY]) returns the property number of the settings area panel PR.
+			%  N = PR.GETPROPNUMBER([CATEGORY]) returns the property number of the prop panel for area settings PR.
 			%  N = Element.GETPROPNUMBER(PR) returns the property number of 'PR'.
 			%  N = Element.GETPROPNUMBER('SettingsAreaPP') returns the property number of 'SettingsAreaPP'.
 			%
@@ -340,13 +342,13 @@ classdef SettingsAreaPP < SettingsPP
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 42;
+				prop_number = 43;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 2;
+					prop_number = 3;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -366,7 +368,7 @@ classdef SettingsAreaPP < SettingsPP
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in settings area panel/error.
+			%EXISTSPROP checks whether property exists in prop panel for area settings/error.
 			%
 			% CHECK = SettingsAreaPP.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -391,7 +393,7 @@ classdef SettingsAreaPP < SettingsPP
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 42 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 43 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -404,7 +406,7 @@ classdef SettingsAreaPP < SettingsPP
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in settings area panel/error.
+			%EXISTSTAG checks whether tag exists in prop panel for area settings/error.
 			%
 			% CHECK = SettingsAreaPP.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -429,7 +431,7 @@ classdef SettingsAreaPP < SettingsPP
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'CHECKBOX_VISIBLE'  'BUTTON_FACECOLOR'  'EDITFIELD_FACEALPHA'  'SLIDER_FACEALPHA'  'BUTTON_EDGECOLOR'  'EDITFIELD_EDGEALPHA'  'SLIDER_EDGEALPHA' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'CHECKBOX_VISIBLE'  'BUTTON_FACECOLOR'  'EDITFIELD_FACEALPHA'  'SLIDER_FACEALPHA'  'BUTTON_EDGECOLOR'  'EDITFIELD_EDGEALPHA'  'SLIDER_EDGEALPHA' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -462,7 +464,7 @@ classdef SettingsAreaPP < SettingsPP
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'CHECKBOX_VISIBLE'  'BUTTON_FACECOLOR'  'EDITFIELD_FACEALPHA'  'SLIDER_FACEALPHA'  'BUTTON_EDGECOLOR'  'EDITFIELD_EDGEALPHA'  'SLIDER_EDGEALPHA' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'CHECKBOX_VISIBLE'  'BUTTON_FACECOLOR'  'EDITFIELD_FACEALPHA'  'SLIDER_FACEALPHA'  'BUTTON_EDGECOLOR'  'EDITFIELD_EDGEALPHA'  'SLIDER_EDGEALPHA' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -491,7 +493,7 @@ classdef SettingsAreaPP < SettingsPP
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				settingsareapp_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'CHECKBOX_VISIBLE'  'BUTTON_FACECOLOR'  'EDITFIELD_FACEALPHA'  'SLIDER_FACEALPHA'  'BUTTON_EDGECOLOR'  'EDITFIELD_EDGEALPHA'  'SLIDER_EDGEALPHA' };
+				settingsareapp_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'CHECKBOX_VISIBLE'  'BUTTON_FACECOLOR'  'EDITFIELD_FACEALPHA'  'SLIDER_FACEALPHA'  'BUTTON_EDGECOLOR'  'EDITFIELD_EDGEALPHA'  'SLIDER_EDGEALPHA' };
 				tag = settingsareapp_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -518,7 +520,7 @@ classdef SettingsAreaPP < SettingsPP
 			prop = SettingsAreaPP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingsareapp_category_list = { 1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  6  6  6  4  4  9  9  7  7  4  7  7  7  7  7  7  9  7  7  7  7  7  7  7 };
+			settingsareapp_category_list = { 1  1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  6  6  6  4  4  9  9  7  7  4  7  7  7  7  7  7  9  7  7  7  7  7  7  7 };
 			prop_category = settingsareapp_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -544,7 +546,7 @@ classdef SettingsAreaPP < SettingsPP
 			prop = SettingsAreaPP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingsareapp_format_list = { 2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  4  4  4  8  11  22  2  18  18  8  18  18  18  19  19  19  4  18  18  18  18  18  18  18 };
+			settingsareapp_format_list = { 2  2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  4  4  4  8  11  22  2  18  18  8  18  18  18  19  19  19  4  18  18  18  18  18  18  18 };
 			prop_format = settingsareapp_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -570,7 +572,7 @@ classdef SettingsAreaPP < SettingsPP
 			prop = SettingsAreaPP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingsareapp_description_list = { 'NAME (constant, string) is the name of the settings area panel.'  'DESCRIPTION (constant, string) is the description of the settings area panel.'  'TEMPLATE (parameter, item) is the template of the settings area panel.'  'ID (data, string) is a few-letter code for the settings area panel.'  'LABEL (metadata, string) is an extended label of the settings area panel.'  'NOTES (metadata, string) are some specific notes about the settings area panel.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the property panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the settings position panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.'  'CHECKBOX_VISIBLE (evanescent, handle) determines whether the area is visible.'  'BUTTON_FACECOLOR (evanescent, handle) is the face color button.'  'EDITFIELD_FACEALPHA (evanescent, handle) is the face alpha edit field.'  'SLIDER_FACEALPHA (evanescent, handle) is the face alpha slider.'  'BUTTON_EDGECOLOR (evanescent, handle) is the edge color button.'  'EDITFIELD_EDGEALPHA (evanescent, handle) is the edge alpha edit field.'  'SLIDER_EDGEALPHA (evanescent, handle) is the edge alpha slider.' };
+			settingsareapp_description_list = { 'ELCLASS (constant, string) is the class of the prop panel for area settings.'  'NAME (constant, string) is the name of the prop panel for area settings.'  'DESCRIPTION (constant, string) is the description of the prop panel for area settings.'  'TEMPLATE (parameter, item) is the template of the prop panel for area settings.'  'ID (data, string) is a few-letter code for the prop panel for area settings.'  'LABEL (metadata, string) is an extended label of the prop panel for area settings.'  'NOTES (metadata, string) are some specific notes about the prop panel for area settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the prop panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the settings position panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.'  'CHECKBOX_VISIBLE (evanescent, handle) determines whether the area is visible.'  'BUTTON_FACECOLOR (evanescent, handle) is the face color button.'  'EDITFIELD_FACEALPHA (evanescent, handle) is the face alpha edit field.'  'SLIDER_FACEALPHA (evanescent, handle) is the face alpha slider.'  'BUTTON_EDGECOLOR (evanescent, handle) is the edge color button.'  'EDITFIELD_EDGEALPHA (evanescent, handle) is the edge alpha edit field.'  'SLIDER_EDGEALPHA (evanescent, handle) is the edge alpha slider.' };
 			prop_description = settingsareapp_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -596,23 +598,23 @@ classdef SettingsAreaPP < SettingsPP
 			prop = SettingsAreaPP.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 35 % SettingsAreaPP.ENABLE
+				case 36 % SettingsAreaPP.ENABLE
 					prop_settings = Format.getFormatSettings(4);
-				case 36 % SettingsAreaPP.CHECKBOX_VISIBLE
+				case 37 % SettingsAreaPP.CHECKBOX_VISIBLE
 					prop_settings = Format.getFormatSettings(18);
-				case 37 % SettingsAreaPP.BUTTON_FACECOLOR
+				case 38 % SettingsAreaPP.BUTTON_FACECOLOR
 					prop_settings = Format.getFormatSettings(18);
-				case 38 % SettingsAreaPP.EDITFIELD_FACEALPHA
+				case 39 % SettingsAreaPP.EDITFIELD_FACEALPHA
 					prop_settings = Format.getFormatSettings(18);
-				case 39 % SettingsAreaPP.SLIDER_FACEALPHA
+				case 40 % SettingsAreaPP.SLIDER_FACEALPHA
 					prop_settings = Format.getFormatSettings(18);
-				case 40 % SettingsAreaPP.BUTTON_EDGECOLOR
+				case 41 % SettingsAreaPP.BUTTON_EDGECOLOR
 					prop_settings = Format.getFormatSettings(18);
-				case 41 % SettingsAreaPP.EDITFIELD_EDGEALPHA
+				case 42 % SettingsAreaPP.EDITFIELD_EDGEALPHA
 					prop_settings = Format.getFormatSettings(18);
-				case 42 % SettingsAreaPP.SLIDER_EDGEALPHA
+				case 43 % SettingsAreaPP.SLIDER_EDGEALPHA
 					prop_settings = Format.getFormatSettings(18);
-				case 3 % SettingsAreaPP.TEMPLATE
+				case 4 % SettingsAreaPP.TEMPLATE
 					prop_settings = 'SettingsAreaPP';
 				otherwise
 					prop_settings = getPropSettings@SettingsPP(prop);
@@ -641,39 +643,41 @@ classdef SettingsAreaPP < SettingsPP
 			prop = SettingsAreaPP.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 35 % SettingsAreaPP.ENABLE
+				case 36 % SettingsAreaPP.ENABLE
 					prop_default = true;
-				case 36 % SettingsAreaPP.CHECKBOX_VISIBLE
+				case 37 % SettingsAreaPP.CHECKBOX_VISIBLE
 					prop_default = Format.getFormatDefault(18, SettingsAreaPP.getPropSettings(prop));
-				case 37 % SettingsAreaPP.BUTTON_FACECOLOR
+				case 38 % SettingsAreaPP.BUTTON_FACECOLOR
 					prop_default = Format.getFormatDefault(18, SettingsAreaPP.getPropSettings(prop));
-				case 38 % SettingsAreaPP.EDITFIELD_FACEALPHA
+				case 39 % SettingsAreaPP.EDITFIELD_FACEALPHA
 					prop_default = Format.getFormatDefault(18, SettingsAreaPP.getPropSettings(prop));
-				case 39 % SettingsAreaPP.SLIDER_FACEALPHA
+				case 40 % SettingsAreaPP.SLIDER_FACEALPHA
 					prop_default = Format.getFormatDefault(18, SettingsAreaPP.getPropSettings(prop));
-				case 40 % SettingsAreaPP.BUTTON_EDGECOLOR
+				case 41 % SettingsAreaPP.BUTTON_EDGECOLOR
 					prop_default = Format.getFormatDefault(18, SettingsAreaPP.getPropSettings(prop));
-				case 41 % SettingsAreaPP.EDITFIELD_EDGEALPHA
+				case 42 % SettingsAreaPP.EDITFIELD_EDGEALPHA
 					prop_default = Format.getFormatDefault(18, SettingsAreaPP.getPropSettings(prop));
-				case 42 % SettingsAreaPP.SLIDER_EDGEALPHA
+				case 43 % SettingsAreaPP.SLIDER_EDGEALPHA
 					prop_default = Format.getFormatDefault(18, SettingsAreaPP.getPropSettings(prop));
-				case 1 % SettingsAreaPP.NAME
+				case 1 % SettingsAreaPP.ELCLASS
 					prop_default = 'SettingsAreaPP';
-				case 2 % SettingsAreaPP.DESCRIPTION
-					prop_default = 'SettingsAreaPP plots the panel for area settings, including visibility, face color, face alpha, edge color, and edge alpha.';
-				case 3 % SettingsAreaPP.TEMPLATE
+				case 2 % SettingsAreaPP.NAME
+					prop_default = 'Prop Panel for Area Settings';
+				case 3 % SettingsAreaPP.DESCRIPTION
+					prop_default = 'A Prop Panel for Area Settings (SettingsAreaPP) plots the panel for area settings, including visibility, face color, face alpha, edge color, and edge alpha. It works for all categories.';
+				case 4 % SettingsAreaPP.TEMPLATE
 					prop_default = Format.getFormatDefault(8, SettingsAreaPP.getPropSettings(prop));
-				case 4 % SettingsAreaPP.ID
+				case 5 % SettingsAreaPP.ID
 					prop_default = 'SettingsAreaPP ID';
-				case 5 % SettingsAreaPP.LABEL
+				case 6 % SettingsAreaPP.LABEL
 					prop_default = 'SettingsAreaPP label';
-				case 6 % SettingsAreaPP.NOTES
+				case 7 % SettingsAreaPP.NOTES
 					prop_default = 'SettingsAreaPP notes';
-				case 22 % SettingsAreaPP.EL
+				case 23 % SettingsAreaPP.EL
 					prop_default = GraphHistPF();
-				case 23 % SettingsAreaPP.PROP
-					prop_default = 32;
-				case 24 % SettingsAreaPP.HEIGHT
+				case 24 % SettingsAreaPP.PROP
+					prop_default = 33;
+				case 25 % SettingsAreaPP.HEIGHT
 					prop_default = 111;
 				otherwise
 					prop_default = getPropDefault@SettingsPP(prop);
@@ -739,26 +743,26 @@ classdef SettingsAreaPP < SettingsPP
 			prop = SettingsAreaPP.getPropProp(pointer);
 			
 			switch prop
-				case 35 % SettingsAreaPP.ENABLE
+				case 36 % SettingsAreaPP.ENABLE
 					check = Format.checkFormat(4, value, SettingsAreaPP.getPropSettings(prop));
-				case 36 % SettingsAreaPP.CHECKBOX_VISIBLE
+				case 37 % SettingsAreaPP.CHECKBOX_VISIBLE
 					check = Format.checkFormat(18, value, SettingsAreaPP.getPropSettings(prop));
-				case 37 % SettingsAreaPP.BUTTON_FACECOLOR
+				case 38 % SettingsAreaPP.BUTTON_FACECOLOR
 					check = Format.checkFormat(18, value, SettingsAreaPP.getPropSettings(prop));
-				case 38 % SettingsAreaPP.EDITFIELD_FACEALPHA
+				case 39 % SettingsAreaPP.EDITFIELD_FACEALPHA
 					check = Format.checkFormat(18, value, SettingsAreaPP.getPropSettings(prop));
-				case 39 % SettingsAreaPP.SLIDER_FACEALPHA
+				case 40 % SettingsAreaPP.SLIDER_FACEALPHA
 					check = Format.checkFormat(18, value, SettingsAreaPP.getPropSettings(prop));
-				case 40 % SettingsAreaPP.BUTTON_EDGECOLOR
+				case 41 % SettingsAreaPP.BUTTON_EDGECOLOR
 					check = Format.checkFormat(18, value, SettingsAreaPP.getPropSettings(prop));
-				case 41 % SettingsAreaPP.EDITFIELD_EDGEALPHA
+				case 42 % SettingsAreaPP.EDITFIELD_EDGEALPHA
 					check = Format.checkFormat(18, value, SettingsAreaPP.getPropSettings(prop));
-				case 42 % SettingsAreaPP.SLIDER_EDGEALPHA
+				case 43 % SettingsAreaPP.SLIDER_EDGEALPHA
 					check = Format.checkFormat(18, value, SettingsAreaPP.getPropSettings(prop));
-				case 3 % SettingsAreaPP.TEMPLATE
+				case 4 % SettingsAreaPP.TEMPLATE
 					check = Format.checkFormat(8, value, SettingsAreaPP.getPropSettings(prop));
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						check = checkProp@SettingsPP(prop, value);
 					end
 			end
@@ -791,7 +795,7 @@ classdef SettingsAreaPP < SettingsPP
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 36 % SettingsAreaPP.CHECKBOX_VISIBLE
+				case 37 % SettingsAreaPP.CHECKBOX_VISIBLE
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					checkbox_visible = uicheckbox( ...
@@ -804,7 +808,7 @@ classdef SettingsAreaPP < SettingsPP
 					    );
 					value = checkbox_visible;
 					
-				case 37 % SettingsAreaPP.BUTTON_FACECOLOR
+				case 38 % SettingsAreaPP.BUTTON_FACECOLOR
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					button_facecolor = uibutton( ...
@@ -818,7 +822,7 @@ classdef SettingsAreaPP < SettingsPP
 					    );
 					value = button_facecolor;
 					
-				case 38 % SettingsAreaPP.EDITFIELD_FACEALPHA
+				case 39 % SettingsAreaPP.EDITFIELD_FACEALPHA
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					editfield_facealpha = uieditfield('numeric', ...
@@ -831,7 +835,7 @@ classdef SettingsAreaPP < SettingsPP
 					    );
 					value = editfield_facealpha;
 					
-				case 39 % SettingsAreaPP.SLIDER_FACEALPHA
+				case 40 % SettingsAreaPP.SLIDER_FACEALPHA
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					slider_facealpha = uislider( ...
@@ -844,7 +848,7 @@ classdef SettingsAreaPP < SettingsPP
 					    );
 					value = slider_facealpha;
 					
-				case 40 % SettingsAreaPP.BUTTON_EDGECOLOR
+				case 41 % SettingsAreaPP.BUTTON_EDGECOLOR
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					button_edgecolor = uibutton( ...
@@ -858,7 +862,7 @@ classdef SettingsAreaPP < SettingsPP
 					    );
 					value = button_edgecolor;
 					
-				case 41 % SettingsAreaPP.EDITFIELD_EDGEALPHA
+				case 42 % SettingsAreaPP.EDITFIELD_EDGEALPHA
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					editfield_edgealpha = uieditfield('numeric', ...
@@ -871,7 +875,7 @@ classdef SettingsAreaPP < SettingsPP
 					    );
 					value = editfield_edgealpha;
 					
-				case 42 % SettingsAreaPP.SLIDER_EDGEALPHA
+				case 43 % SettingsAreaPP.SLIDER_EDGEALPHA
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					slider_edgealpha = uislider( ...
@@ -884,8 +888,8 @@ classdef SettingsAreaPP < SettingsPP
 					    );
 					value = slider_edgealpha;
 					
-				case 19 % SettingsAreaPP.X_DRAW
-					value = calculateValue@PanelProp(pr, 19, varargin{:}); % also warning
+				case 20 % SettingsAreaPP.X_DRAW
+					value = calculateValue@PanelProp(pr, 20, varargin{:}); % also warning
 					if value
 					    pr.memorize('CHECKBOX_VISIBLE')
 					
@@ -898,8 +902,8 @@ classdef SettingsAreaPP < SettingsPP
 					    pr.memorize('SLIDER_EDGEALPHA')
 					end
 					
-				case 20 % SettingsAreaPP.UPDATE
-					value = calculateValue@PanelProp(pr, 20, varargin{:}); % also warning
+				case 21 % SettingsAreaPP.UPDATE
+					value = calculateValue@PanelProp(pr, 21, varargin{:}); % also warning
 					if value
 					    el = pr.get('EL');
 					    prop = pr.get('PROP');
@@ -1043,8 +1047,8 @@ classdef SettingsAreaPP < SettingsPP
 					    end
 					end
 					
-				case 21 % SettingsAreaPP.REDRAW
-					value = calculateValue@PanelProp(pr, 21, varargin{:}); % also warning
+				case 22 % SettingsAreaPP.REDRAW
+					value = calculateValue@PanelProp(pr, 22, varargin{:}); % also warning
 					if value
 					    w_p = get_from_varargin(w(pr.get('H'), 'pixels'), 'Width', varargin);
 					    
@@ -1059,8 +1063,8 @@ classdef SettingsAreaPP < SettingsPP
 					    set(pr.get('SLIDER_EDGEALPHA'),    'Position', [8+.35*w_p+21   27 .50*w_p   3]) % the height of a slider cannot be changed
 					end
 					
-				case 17 % SettingsAreaPP.DELETE
-					value = calculateValue@PanelProp(pr, 17, varargin{:}); % also warning
+				case 18 % SettingsAreaPP.DELETE
+					value = calculateValue@PanelProp(pr, 18, varargin{:}); % also warning
 					if value
 					    pr.set('CHECKBOX_VISIBLE', Element.getNoValue())
 					
@@ -1074,7 +1078,7 @@ classdef SettingsAreaPP < SettingsPP
 					end
 					
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						value = calculateValue@SettingsPP(pr, prop, varargin{:});
 					else
 						value = calculateValue@Element(pr, prop, varargin{:});

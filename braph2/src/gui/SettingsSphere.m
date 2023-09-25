@@ -2,33 +2,34 @@ classdef SettingsSphere < SettingsSurface
 	%SettingsSphere contains the sphere settings.
 	% It is a subclass of <a href="matlab:help SettingsSurface">SettingsSurface</a>.
 	%
-	% SettingsSphere provides the settings for a sphere, 
+	% A Sphere Settings (SettingsSphere) provides the settings for a sphere, 
 	%  including visibility, x, y, z, radius, face color and alpha, edge color and alpha.
 	% The handle can be either a patch or a surface.
 	%
 	% The list of SettingsSphere properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the sphere settings.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the sphere settings.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the sphere settings.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the sphere settings.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the sphere settings.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the sphere settings.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
-	%  <strong>9</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
-	%  <strong>10</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
-	%  <strong>11</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
-	%  <strong>12</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
-	%  <strong>13</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
-	%  <strong>14</strong> <strong>EDGECOLOR</strong> 	EDGECOLOR (figure, color) is the RGB edge color.
-	%  <strong>15</strong> <strong>EDGEALPHA</strong> 	EDGEALPHA (figure, alpha) is the edge transparency.
-	%  <strong>16</strong> <strong>FACECOLOR</strong> 	FACECOLOR (figure, color) is the RGB face color.
-	%  <strong>17</strong> <strong>FACEALPHA</strong> 	FACEALPHA (figure, alpha) is the face transparency.
-	%  <strong>18</strong> <strong>VISIBLE</strong> 	VISIBLE (figure, logical) determines whether the sphere is visible.
-	%  <strong>19</strong> <strong>X</strong> 	X (figure, scalar) is the x-coordinate.
-	%  <strong>20</strong> <strong>Y</strong> 	Y (figure, scalar) is the y-coordinate.
-	%  <strong>21</strong> <strong>Z</strong> 	Z (figure, scalar) is the z-coordinate.
-	%  <strong>22</strong> <strong>SPHERESIZE</strong> 	SPHERESIZE (figure, size) is the sphere size.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the sphere settings.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the sphere settings.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the sphere settings.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the sphere settings.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the sphere settings.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the sphere settings.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the sphere settings.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
+	%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
+	%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
+	%  <strong>12</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
+	%  <strong>13</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
+	%  <strong>14</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
+	%  <strong>15</strong> <strong>EDGECOLOR</strong> 	EDGECOLOR (figure, color) is the RGB edge color.
+	%  <strong>16</strong> <strong>EDGEALPHA</strong> 	EDGEALPHA (figure, alpha) is the edge transparency.
+	%  <strong>17</strong> <strong>FACECOLOR</strong> 	FACECOLOR (figure, color) is the RGB face color.
+	%  <strong>18</strong> <strong>FACEALPHA</strong> 	FACEALPHA (figure, alpha) is the face transparency.
+	%  <strong>19</strong> <strong>VISIBLE</strong> 	VISIBLE (figure, logical) determines whether the sphere is visible.
+	%  <strong>20</strong> <strong>X</strong> 	X (figure, scalar) is the x-coordinate.
+	%  <strong>21</strong> <strong>Y</strong> 	Y (figure, scalar) is the y-coordinate.
+	%  <strong>22</strong> <strong>Z</strong> 	Z (figure, scalar) is the z-coordinate.
+	%  <strong>23</strong> <strong>SPHERESIZE</strong> 	SPHERESIZE (figure, size) is the sphere size.
 	%
 	% SettingsSphere methods (constructor):
 	%  SettingsSphere - constructor
@@ -119,27 +120,27 @@ classdef SettingsSphere < SettingsSurface
 	% See also patch, surface, PanelFig, GUIFig, check_graphics.
 	
 	properties (Constant) % properties
-		VISIBLE = 18; %CET: Computational Efficiency Trick
+		VISIBLE = 19; %CET: Computational Efficiency Trick
 		VISIBLE_TAG = 'VISIBLE';
 		VISIBLE_CATEGORY = 8;
 		VISIBLE_FORMAT = 4;
 		
-		X = 19; %CET: Computational Efficiency Trick
+		X = 20; %CET: Computational Efficiency Trick
 		X_TAG = 'X';
 		X_CATEGORY = 8;
 		X_FORMAT = 11;
 		
-		Y = 20; %CET: Computational Efficiency Trick
+		Y = 21; %CET: Computational Efficiency Trick
 		Y_TAG = 'Y';
 		Y_CATEGORY = 8;
 		Y_FORMAT = 11;
 		
-		Z = 21; %CET: Computational Efficiency Trick
+		Z = 22; %CET: Computational Efficiency Trick
 		Z_TAG = 'Z';
 		Z_CATEGORY = 8;
 		Z_FORMAT = 11;
 		
-		SPHERESIZE = 22; %CET: Computational Efficiency Trick
+		SPHERESIZE = 23; %CET: Computational Efficiency Trick
 		SPHERESIZE_TAG = 'SPHERESIZE';
 		SPHERESIZE_CATEGORY = 8;
 		SPHERESIZE_FORMAT = 22;
@@ -156,28 +157,29 @@ classdef SettingsSphere < SettingsSurface
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of SettingsSphere properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the sphere settings.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the sphere settings.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the sphere settings.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the sphere settings.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the sphere settings.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the sphere settings.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
-			%  <strong>9</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
-			%  <strong>10</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
-			%  <strong>11</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
-			%  <strong>12</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
-			%  <strong>13</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
-			%  <strong>14</strong> <strong>EDGECOLOR</strong> 	EDGECOLOR (figure, color) is the RGB edge color.
-			%  <strong>15</strong> <strong>EDGEALPHA</strong> 	EDGEALPHA (figure, alpha) is the edge transparency.
-			%  <strong>16</strong> <strong>FACECOLOR</strong> 	FACECOLOR (figure, color) is the RGB face color.
-			%  <strong>17</strong> <strong>FACEALPHA</strong> 	FACEALPHA (figure, alpha) is the face transparency.
-			%  <strong>18</strong> <strong>VISIBLE</strong> 	VISIBLE (figure, logical) determines whether the sphere is visible.
-			%  <strong>19</strong> <strong>X</strong> 	X (figure, scalar) is the x-coordinate.
-			%  <strong>20</strong> <strong>Y</strong> 	Y (figure, scalar) is the y-coordinate.
-			%  <strong>21</strong> <strong>Z</strong> 	Z (figure, scalar) is the z-coordinate.
-			%  <strong>22</strong> <strong>SPHERESIZE</strong> 	SPHERESIZE (figure, size) is the sphere size.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the sphere settings.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the sphere settings.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the sphere settings.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the sphere settings.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the sphere settings.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the sphere settings.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the sphere settings.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
+			%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
+			%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
+			%  <strong>12</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
+			%  <strong>13</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
+			%  <strong>14</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
+			%  <strong>15</strong> <strong>EDGECOLOR</strong> 	EDGECOLOR (figure, color) is the RGB edge color.
+			%  <strong>16</strong> <strong>EDGEALPHA</strong> 	EDGEALPHA (figure, alpha) is the edge transparency.
+			%  <strong>17</strong> <strong>FACECOLOR</strong> 	FACECOLOR (figure, color) is the RGB face color.
+			%  <strong>18</strong> <strong>FACEALPHA</strong> 	FACEALPHA (figure, alpha) is the face transparency.
+			%  <strong>19</strong> <strong>VISIBLE</strong> 	VISIBLE (figure, logical) determines whether the sphere is visible.
+			%  <strong>20</strong> <strong>X</strong> 	X (figure, scalar) is the x-coordinate.
+			%  <strong>21</strong> <strong>Y</strong> 	Y (figure, scalar) is the y-coordinate.
+			%  <strong>22</strong> <strong>Z</strong> 	Z (figure, scalar) is the z-coordinate.
+			%  <strong>23</strong> <strong>SPHERESIZE</strong> 	SPHERESIZE (figure, size) is the sphere size.
 			%
 			% See also Category, Format.
 			
@@ -239,25 +241,25 @@ classdef SettingsSphere < SettingsSurface
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2];
+					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
 					prop_list = 4;
+				case 4 % Category.DATA
+					prop_list = 5;
 				case 6 % Category.QUERY
-					prop_list = [7 12 13];
+					prop_list = [8 13 14];
 				case 8 % Category.FIGURE
-					prop_list = [14 15 16 17 18 19 20 21 22];
+					prop_list = [15 16 17 18 19 20 21 22 23];
 				case 9 % Category.GUI
-					prop_list = [8 9 10 11];
+					prop_list = [9 10 11 12];
 				otherwise
 					prop_list = [];
 			end
@@ -283,13 +285,13 @@ classdef SettingsSphere < SettingsSurface
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 22;
+				prop_number = 23;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 2;
+					prop_number = 3;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -332,7 +334,7 @@ classdef SettingsSphere < SettingsSurface
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 22 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 23 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -370,7 +372,7 @@ classdef SettingsSphere < SettingsSurface
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'EDGECOLOR'  'EDGEALPHA'  'FACECOLOR'  'FACEALPHA'  'VISIBLE'  'X'  'Y'  'Z'  'SPHERESIZE' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'EDGECOLOR'  'EDGEALPHA'  'FACECOLOR'  'FACEALPHA'  'VISIBLE'  'X'  'Y'  'Z'  'SPHERESIZE' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -403,7 +405,7 @@ classdef SettingsSphere < SettingsSurface
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'EDGECOLOR'  'EDGEALPHA'  'FACECOLOR'  'FACEALPHA'  'VISIBLE'  'X'  'Y'  'Z'  'SPHERESIZE' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'EDGECOLOR'  'EDGEALPHA'  'FACECOLOR'  'FACEALPHA'  'VISIBLE'  'X'  'Y'  'Z'  'SPHERESIZE' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -432,7 +434,7 @@ classdef SettingsSphere < SettingsSurface
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				settingssphere_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'EDGECOLOR'  'EDGEALPHA'  'FACECOLOR'  'FACEALPHA'  'VISIBLE'  'X'  'Y'  'Z'  'SPHERESIZE' };
+				settingssphere_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'EDGECOLOR'  'EDGEALPHA'  'FACECOLOR'  'FACEALPHA'  'VISIBLE'  'X'  'Y'  'Z'  'SPHERESIZE' };
 				tag = settingssphere_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -459,7 +461,7 @@ classdef SettingsSphere < SettingsSurface
 			prop = SettingsSphere.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingssphere_category_list = { 1  1  3  4  2  2  6  9  9  9  9  6  6  8  8  8  8  8  8  8  8  8 };
+			settingssphere_category_list = { 1  1  1  3  4  2  2  6  9  9  9  9  6  6  8  8  8  8  8  8  8  8  8 };
 			prop_category = settingssphere_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -485,7 +487,7 @@ classdef SettingsSphere < SettingsSurface
 			prop = SettingsSphere.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingssphere_format_list = { 2  2  8  2  2  2  2  8  11  2  11  18  11  20  21  20  21  4  11  11  11  22 };
+			settingssphere_format_list = { 2  2  2  8  2  2  2  2  8  11  2  11  18  11  20  21  20  21  4  11  11  11  22 };
 			prop_format = settingssphere_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -511,7 +513,7 @@ classdef SettingsSphere < SettingsSurface
 			prop = SettingsSphere.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingssphere_description_list = { 'NAME (constant, string) is the name of the sphere settings.'  'DESCRIPTION (constant, string) is the description of the sphere settings.'  'TEMPLATE (parameter, item) is the template of the sphere settings.'  'ID (data, string) is a few-letter code for the sphere settings.'  'LABEL (metadata, string) is an extended label of the sphere settings.'  'NOTES (metadata, string) are some specific notes about the sphere settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.'  'EDGECOLOR (figure, color) is the RGB edge color.'  'EDGEALPHA (figure, alpha) is the edge transparency.'  'FACECOLOR (figure, color) is the RGB face color.'  'FACEALPHA (figure, alpha) is the face transparency.'  'VISIBLE (figure, logical) determines whether the sphere is visible.'  'X (figure, scalar) is the x-coordinate.'  'Y (figure, scalar) is the y-coordinate.'  'Z (figure, scalar) is the z-coordinate.'  'SPHERESIZE (figure, size) is the sphere size.' };
+			settingssphere_description_list = { 'ELCLASS (constant, string) is the class of the sphere settings.'  'NAME (constant, string) is the name of the sphere settings.'  'DESCRIPTION (constant, string) is the description of the sphere settings.'  'TEMPLATE (parameter, item) is the template of the sphere settings.'  'ID (data, string) is a few-letter code for the sphere settings.'  'LABEL (metadata, string) is an extended label of the sphere settings.'  'NOTES (metadata, string) are some specific notes about the sphere settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.'  'EDGECOLOR (figure, color) is the RGB edge color.'  'EDGEALPHA (figure, alpha) is the edge transparency.'  'FACECOLOR (figure, color) is the RGB face color.'  'FACEALPHA (figure, alpha) is the face transparency.'  'VISIBLE (figure, logical) determines whether the sphere is visible.'  'X (figure, scalar) is the x-coordinate.'  'Y (figure, scalar) is the y-coordinate.'  'Z (figure, scalar) is the z-coordinate.'  'SPHERESIZE (figure, size) is the sphere size.' };
 			prop_description = settingssphere_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -537,17 +539,17 @@ classdef SettingsSphere < SettingsSurface
 			prop = SettingsSphere.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 18 % SettingsSphere.VISIBLE
+				case 19 % SettingsSphere.VISIBLE
 					prop_settings = Format.getFormatSettings(4);
-				case 19 % SettingsSphere.X
+				case 20 % SettingsSphere.X
 					prop_settings = Format.getFormatSettings(11);
-				case 20 % SettingsSphere.Y
+				case 21 % SettingsSphere.Y
 					prop_settings = Format.getFormatSettings(11);
-				case 21 % SettingsSphere.Z
+				case 22 % SettingsSphere.Z
 					prop_settings = Format.getFormatSettings(11);
-				case 22 % SettingsSphere.SPHERESIZE
+				case 23 % SettingsSphere.SPHERESIZE
 					prop_settings = Format.getFormatSettings(22);
-				case 3 % SettingsSphere.TEMPLATE
+				case 4 % SettingsSphere.TEMPLATE
 					prop_settings = 'SettingsSphere';
 				otherwise
 					prop_settings = getPropSettings@SettingsSurface(prop);
@@ -576,27 +578,29 @@ classdef SettingsSphere < SettingsSurface
 			prop = SettingsSphere.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 18 % SettingsSphere.VISIBLE
+				case 19 % SettingsSphere.VISIBLE
 					prop_default = Format.getFormatDefault(4, SettingsSphere.getPropSettings(prop));
-				case 19 % SettingsSphere.X
+				case 20 % SettingsSphere.X
 					prop_default = Format.getFormatDefault(11, SettingsSphere.getPropSettings(prop));
-				case 20 % SettingsSphere.Y
+				case 21 % SettingsSphere.Y
 					prop_default = Format.getFormatDefault(11, SettingsSphere.getPropSettings(prop));
-				case 21 % SettingsSphere.Z
+				case 22 % SettingsSphere.Z
 					prop_default = Format.getFormatDefault(11, SettingsSphere.getPropSettings(prop));
-				case 22 % SettingsSphere.SPHERESIZE
+				case 23 % SettingsSphere.SPHERESIZE
 					prop_default = 5;
-				case 1 % SettingsSphere.NAME
+				case 1 % SettingsSphere.ELCLASS
 					prop_default = 'SettingsSphere';
-				case 2 % SettingsSphere.DESCRIPTION
-					prop_default = 'SettingsSphere provides the settings for a sphere, including visibility, x, y, z, radius, face color and alpha, edge color and alpha.';
-				case 3 % SettingsSphere.TEMPLATE
+				case 2 % SettingsSphere.NAME
+					prop_default = 'Sphere Settings';
+				case 3 % SettingsSphere.DESCRIPTION
+					prop_default = 'A Sphere Settings (SettingsSphere) provides the settings for a sphere, including visibility, x, y, z, radius, face color and alpha, edge color and alpha.';
+				case 4 % SettingsSphere.TEMPLATE
 					prop_default = Format.getFormatDefault(8, SettingsSphere.getPropSettings(prop));
-				case 4 % SettingsSphere.ID
+				case 5 % SettingsSphere.ID
 					prop_default = 'SettingsSphere ID';
-				case 5 % SettingsSphere.LABEL
+				case 6 % SettingsSphere.LABEL
 					prop_default = 'SettingsSphere label';
-				case 6 % SettingsSphere.NOTES
+				case 7 % SettingsSphere.NOTES
 					prop_default = 'SettingsSphere notes';
 				otherwise
 					prop_default = getPropDefault@SettingsSurface(prop);
@@ -662,20 +666,20 @@ classdef SettingsSphere < SettingsSurface
 			prop = SettingsSphere.getPropProp(pointer);
 			
 			switch prop
-				case 18 % SettingsSphere.VISIBLE
+				case 19 % SettingsSphere.VISIBLE
 					check = Format.checkFormat(4, value, SettingsSphere.getPropSettings(prop));
-				case 19 % SettingsSphere.X
+				case 20 % SettingsSphere.X
 					check = Format.checkFormat(11, value, SettingsSphere.getPropSettings(prop));
-				case 20 % SettingsSphere.Y
+				case 21 % SettingsSphere.Y
 					check = Format.checkFormat(11, value, SettingsSphere.getPropSettings(prop));
-				case 21 % SettingsSphere.Z
+				case 22 % SettingsSphere.Z
 					check = Format.checkFormat(11, value, SettingsSphere.getPropSettings(prop));
-				case 22 % SettingsSphere.SPHERESIZE
+				case 23 % SettingsSphere.SPHERESIZE
 					check = Format.checkFormat(22, value, SettingsSphere.getPropSettings(prop));
-				case 3 % SettingsSphere.TEMPLATE
+				case 4 % SettingsSphere.TEMPLATE
 					check = Format.checkFormat(8, value, SettingsSphere.getPropSettings(prop));
 				otherwise
-					if prop <= 17
+					if prop <= 18
 						check = checkProp@SettingsSurface(prop, value);
 					end
 			end
@@ -705,7 +709,7 @@ classdef SettingsSphere < SettingsSurface
 			%  checkValue.
 			
 			switch prop
-				case 18 % SettingsSphere.VISIBLE
+				case 19 % SettingsSphere.VISIBLE
 					h = st.get('H');
 					if (check_graphics(h, 'patch') || check_graphics(h, 'surface')) && ( ...
 					        get(h, 'Visible') ~= st.get('VISIBLE') || ...
@@ -726,7 +730,7 @@ classdef SettingsSphere < SettingsSurface
 					end
 					
 				otherwise
-					if prop <= 17
+					if prop <= 18
 						postprocessing@SettingsSurface(st, prop);
 					end
 			end

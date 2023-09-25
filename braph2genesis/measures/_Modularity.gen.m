@@ -51,6 +51,11 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'Modularity'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the modularity.
 %%%% ¡default!
 'Modularity'
@@ -98,7 +103,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphBU' 'MultigraphBUT' 'MultiplexBU'};
+{'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUT' 'MultigraphBUD'};
 
 %%% ¡prop!
 M (result, cell) is the modularity.

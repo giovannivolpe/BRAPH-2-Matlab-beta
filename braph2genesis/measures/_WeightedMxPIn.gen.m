@@ -1,5 +1,5 @@
 %% ¡header!
-WeightedMxPIn < Measure (m, weighted mxpart-in) is the graph weighted multiplex in-participation.
+WeightedMxPIn < Measure (m, weighted in-participation) is the graph weighted multiplex in-participation.
 
 %%% ¡description!
 The weighted multiplex in-participation of a graph is the nodal homogeneity 
@@ -52,6 +52,11 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'WeightedMxPIn'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the weighted multiplex in-particiption.
 %%%% ¡default!
 'WeightedMxPIn'
@@ -99,7 +104,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWD' 'OrdMxWD'}
+{'MultiplexWD' 'OrdMxWD' 'MultilayerWD' 'OrdMlWD'}
 
 %%% ¡prop!
 M (result, cell) is the weighted multiplex in-particiption.
@@ -107,7 +112,6 @@ M (result, cell) is the weighted multiplex in-particiption.
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 l = g.get('LAYERNUMBER');
-ls = g.get('PARTITIONS');
 
 if l == 0
     value = {};

@@ -9,6 +9,11 @@ centrality participate in a large number of shortest paths.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'BetweennessCentrality'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the betweenness centrality.
 %%%% ¡default!
 'BetweennessCentrality'
@@ -20,6 +25,8 @@ DESCRIPTION (constant, string) is the description of the betweenness centrality.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the betweenness centrality.
+%%%% ¡settings!
+'BetweennessCentrality'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the betweenness centrality.

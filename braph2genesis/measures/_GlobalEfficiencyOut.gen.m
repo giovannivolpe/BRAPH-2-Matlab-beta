@@ -8,32 +8,37 @@ It is inversely related to the characteristic in-path length.
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the GlobalEfficiencyOut.
+ELCLASS (constant, string) is the class of the % % % .
 %%%% ¡default!
 'GlobalEfficiencyOut'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the GlobalEfficiencyOut.
+NAME (constant, string) is the name of the out-global efficiency.
 %%%% ¡default!
-'The out-global efficiency is the average inverse shortest in-path length within each layer. It is inversely related to the characteristic in-path length.'
+'GlobalEfficiencyOut'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the GlobalEfficiencyOut.
+DESCRIPTION (constant, string) is the description of the out-global efficiency.
+%%%% ¡default!
+'The out-global efficiency is the average inverse shortest out-path length within each layer. It is inversely related to the characteristic out-path length.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the out-global efficiency.
 %%%% ¡settings!
 'GlobalEfficiencyOut'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the GlobalEfficiencyOut.
+ID (data, string) is a few-letter code of the out-global efficiency.
 %%%% ¡default!
 'GlobalEfficiencyOut ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the GlobalEfficiencyOut.
+LABEL (metadata, string) is an extended label of the out-global efficiency.
 %%%% ¡default!
 'GlobalEfficiencyOut label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the GlobalEfficiencyOut.
+NOTES (metadata, string) are some specific notes about the out-global efficiency.
 %%%% ¡default!
 'GlobalEfficiencyOut notes'
 

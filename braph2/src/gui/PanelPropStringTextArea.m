@@ -1,47 +1,48 @@
 classdef PanelPropStringTextArea < PanelProp
-	%PanelPropStringTextArea plots the panel of a property string.
+	%PanelPropStringTextArea plots the panel of a prop string with a text-area.
 	% It is a subclass of <a href="matlab:help PanelProp">PanelProp</a>.
 	%
-	% PanelPropStringTextArea plots the panel for a STRING property with a text area.
+	% A String Prop Panel with Text-Area (PanelPropStringTextArea) plots the panel for a STRING prop with a text-area.
 	% It works for all categories.
 	%
 	% The list of PanelPropStringTextArea properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the string property panel with a text area.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the string property panel with a text area.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the string property panel with a text area.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the string property panel with a text area.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the string property panel with a text area.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the string property panel with a text area.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-	%  <strong>9</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-	%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
-	%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
-	%  <strong>12</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
-	%  <strong>13</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
-	%  <strong>14</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
-	%  <strong>15</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
-	%  <strong>16</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
-	%  <strong>17</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
-	%  <strong>18</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
-	%  <strong>19</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
-	%  <strong>20</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the editfield.
-	%  <strong>21</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
-	%  <strong>22</strong> <strong>EL</strong> 	EL (data, item) is the element.
-	%  <strong>23</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-	%  <strong>24</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the property panel.
-	%  <strong>25</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
-	%  <strong>26</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
-	%  <strong>27</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
-	%  <strong>28</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
-	%  <strong>29</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
-	%  <strong>30</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
-	%  <strong>31</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
-	%  <strong>32</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
-	%  <strong>33</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
-	%  <strong>34</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-	%  <strong>35</strong> <strong>ENABLE</strong> 	ENABLE (gui, logical) switches the editfield between active and inactive appearance when not editable.
-	%  <strong>36</strong> <strong>TEXTAREA</strong> 	TEXTAREA (evanescent, handle) is the string value text area.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the string prop panel with a text-area.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the string prop panel with a text-area.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the string prop panel with a text-area.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the string prop panel with a text-area.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the string prop panel with a text-area.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the string prop panel with a text-area.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the string prop panel with a text-area.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
+	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
+	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+	%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
+	%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
+	%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
+	%  <strong>15</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
+	%  <strong>16</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
+	%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
+	%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
+	%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
+	%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the prop panel.
+	%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the editfield.
+	%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the prop panel and repositions its graphical objects.
+	%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
+	%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the prop number.
+	%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the prop panel.
+	%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
+	%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
+	%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
+	%  <strong>29</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
+	%  <strong>30</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
+	%  <strong>31</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
+	%  <strong>32</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
+	%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
+	%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
+	%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
+	%  <strong>36</strong> <strong>ENABLE</strong> 	ENABLE (gui, logical) switches the editfield between active and inactive appearance when not editable.
+	%  <strong>37</strong> <strong>TEXTAREA</strong> 	TEXTAREA (evanescent, handle) is the string value text-area.
 	%
 	% PanelPropStringTextArea methods (constructor):
 	%  PanelPropStringTextArea - constructor
@@ -61,33 +62,33 @@ classdef PanelPropStringTextArea < PanelProp
 	%  unchecked - sets a property to NOT checked
 	%
 	% PanelPropStringTextArea methods (display):
-	%  tostring - string with information about the panel property string
-	%  disp - displays information about the panel property string
-	%  tree - displays the tree of the panel property string
+	%  tostring - string with information about the string prop panel with text-area 
+	%  disp - displays information about the string prop panel with text-area 
+	%  tree - displays the tree of the string prop panel with text-area 
 	%
 	% PanelPropStringTextArea methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two panel property string are equal (values, locked)
+	%  isequal - determines whether two string prop panel with text-area  are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the panel property string
+	%  copy - copies the string prop panel with text-area 
 	%
 	% PanelPropStringTextArea methods (save/load, Static):
-	%  save - saves BRAPH2 panel property string as b2 file
-	%  load - loads a BRAPH2 panel property string from a b2 file
+	%  save - saves BRAPH2 string prop panel with text-area  as b2 file
+	%  load - loads a BRAPH2 string prop panel with text-area  from a b2 file
 	%
 	% PanelPropStringTextArea method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the panel property string
+	%  encodeJSON - returns a JSON string encoding the string prop panel with text-area 
 	%
 	% PanelPropStringTextArea method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the panel property string
+	%   decodeJSON - returns a JSON string encoding the string prop panel with text-area 
 	%
 	% PanelPropStringTextArea methods (inspection, Static):
-	%  getClass - returns the class of the panel property string
+	%  getClass - returns the class of the string prop panel with text-area 
 	%  getSubclasses - returns all subclasses of PanelPropStringTextArea
-	%  getProps - returns the property list of the panel property string
-	%  getPropNumber - returns the property number of the panel property string
+	%  getProps - returns the property list of the string prop panel with text-area 
+	%  getPropNumber - returns the property number of the string prop panel with text-area 
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -132,19 +133,19 @@ classdef PanelPropStringTextArea < PanelProp
 	% See also uitextarea, GUI, PanelElement.
 	
 	properties (Constant) % properties
-		ENABLE = 35; %CET: Computational Efficiency Trick
+		ENABLE = 36; %CET: Computational Efficiency Trick
 		ENABLE_TAG = 'ENABLE';
 		ENABLE_CATEGORY = 9;
 		ENABLE_FORMAT = 4;
 		
-		TEXTAREA = 36; %CET: Computational Efficiency Trick
+		TEXTAREA = 37; %CET: Computational Efficiency Trick
 		TEXTAREA_TAG = 'TEXTAREA';
 		TEXTAREA_CATEGORY = 7;
 		TEXTAREA_FORMAT = 18;
 	end
 	methods % constructor
 		function pr = PanelPropStringTextArea(varargin)
-			%PanelPropStringTextArea() creates a panel property string.
+			%PanelPropStringTextArea() creates a string prop panel with text-area .
 			%
 			% PanelPropStringTextArea(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -154,42 +155,43 @@ classdef PanelPropStringTextArea < PanelProp
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of PanelPropStringTextArea properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the string property panel with a text area.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the string property panel with a text area.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the string property panel with a text area.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the string property panel with a text area.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the string property panel with a text area.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the string property panel with a text area.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-			%  <strong>9</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-			%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
-			%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
-			%  <strong>12</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
-			%  <strong>13</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
-			%  <strong>14</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
-			%  <strong>15</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
-			%  <strong>16</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
-			%  <strong>17</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
-			%  <strong>18</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
-			%  <strong>19</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
-			%  <strong>20</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the editfield.
-			%  <strong>21</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
-			%  <strong>22</strong> <strong>EL</strong> 	EL (data, item) is the element.
-			%  <strong>23</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-			%  <strong>24</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the property panel.
-			%  <strong>25</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
-			%  <strong>26</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
-			%  <strong>27</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
-			%  <strong>28</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
-			%  <strong>29</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
-			%  <strong>30</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
-			%  <strong>31</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
-			%  <strong>32</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
-			%  <strong>33</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
-			%  <strong>34</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-			%  <strong>35</strong> <strong>ENABLE</strong> 	ENABLE (gui, logical) switches the editfield between active and inactive appearance when not editable.
-			%  <strong>36</strong> <strong>TEXTAREA</strong> 	TEXTAREA (evanescent, handle) is the string value text area.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the string prop panel with a text-area.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the string prop panel with a text-area.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the string prop panel with a text-area.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the string prop panel with a text-area.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the string prop panel with a text-area.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the string prop panel with a text-area.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the string prop panel with a text-area.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
+			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
+			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+			%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
+			%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
+			%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
+			%  <strong>15</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
+			%  <strong>16</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
+			%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
+			%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
+			%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
+			%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the prop panel.
+			%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the editfield.
+			%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the prop panel and repositions its graphical objects.
+			%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
+			%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the prop number.
+			%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the prop panel.
+			%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
+			%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
+			%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
+			%  <strong>29</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
+			%  <strong>30</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
+			%  <strong>31</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
+			%  <strong>32</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
+			%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
+			%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
+			%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
+			%  <strong>36</strong> <strong>ENABLE</strong> 	ENABLE (gui, logical) switches the editfield between active and inactive appearance when not editable.
+			%  <strong>37</strong> <strong>TEXTAREA</strong> 	TEXTAREA (evanescent, handle) is the string value text-area.
 			%
 			% See also Category, Format.
 			
@@ -198,12 +200,12 @@ classdef PanelPropStringTextArea < PanelProp
 	end
 	methods (Static) % inspection
 		function pr_class = getClass()
-			%GETCLASS returns the class of the panel property string.
+			%GETCLASS returns the class of the string prop panel with text-area .
 			%
 			% CLASS = PanelPropStringTextArea.GETCLASS() returns the class 'PanelPropStringTextArea'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = PR.GETCLASS() returns the class of the panel property string PR.
+			%  CLASS = PR.GETCLASS() returns the class of the string prop panel with text-area  PR.
 			%  CLASS = Element.GETCLASS(PR) returns the class of 'PR'.
 			%  CLASS = Element.GETCLASS('PanelPropStringTextArea') returns 'PanelPropStringTextArea'.
 			%
@@ -213,12 +215,12 @@ classdef PanelPropStringTextArea < PanelProp
 			pr_class = 'PanelPropStringTextArea';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the panel property string.
+			%GETSUBCLASSES returns all subclasses of the string prop panel with text-area .
 			%
 			% LIST = PanelPropStringTextArea.GETSUBCLASSES() returns all subclasses of 'PanelPropStringTextArea'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = PR.GETSUBCLASSES() returns all subclasses of the panel property string PR.
+			%  LIST = PR.GETSUBCLASSES() returns all subclasses of the string prop panel with text-area  PR.
 			%  LIST = Element.GETSUBCLASSES(PR) returns all subclasses of 'PR'.
 			%  LIST = Element.GETSUBCLASSES('PanelPropStringTextArea') returns all subclasses of 'PanelPropStringTextArea'.
 			%
@@ -230,16 +232,16 @@ classdef PanelPropStringTextArea < PanelProp
 			subclass_list = { 'PanelPropStringTextArea' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of panel property string.
+			%GETPROPS returns the property list of string prop panel with text-area .
 			%
-			% PROPS = PanelPropStringTextArea.GETPROPS() returns the property list of panel property string
+			% PROPS = PanelPropStringTextArea.GETPROPS() returns the property list of string prop panel with text-area 
 			%  as a row vector.
 			%
 			% PROPS = PanelPropStringTextArea.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = PR.GETPROPS([CATEGORY]) returns the property list of the panel property string PR.
+			%  PROPS = PR.GETPROPS([CATEGORY]) returns the property list of the string prop panel with text-area  PR.
 			%  PROPS = Element.GETPROPS(PR[, CATEGORY]) returns the property list of 'PR'.
 			%  PROPS = Element.GETPROPS('PanelPropStringTextArea'[, CATEGORY]) returns the property list of 'PanelPropStringTextArea'.
 			%
@@ -251,41 +253,41 @@ classdef PanelPropStringTextArea < PanelProp
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2];
+					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
+					prop_list = 4;
 				case 4 % Category.DATA
-					prop_list = [4 22 23 28];
+					prop_list = [5 23 24 29];
 				case 6 % Category.QUERY
-					prop_list = [7 10 11 15 16 17 18 19 20 21];
+					prop_list = [8 11 12 16 17 18 19 20 21 22];
 				case 7 % Category.EVANESCENT
-					prop_list = [9 14 26 27 29 30 31 32 33 34 36];
+					prop_list = [10 15 27 28 30 31 32 33 34 35 37];
 				case 8 % Category.FIGURE
-					prop_list = 13;
+					prop_list = 14;
 				case 9 % Category.GUI
-					prop_list = [8 12 24 25 35];
+					prop_list = [9 13 25 26 36];
 				otherwise
 					prop_list = [];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of panel property string.
+			%GETPROPNUMBER returns the property number of string prop panel with text-area .
 			%
-			% N = PanelPropStringTextArea.GETPROPNUMBER() returns the property number of panel property string.
+			% N = PanelPropStringTextArea.GETPROPNUMBER() returns the property number of string prop panel with text-area .
 			%
-			% N = PanelPropStringTextArea.GETPROPNUMBER(CATEGORY) returns the property number of panel property string
+			% N = PanelPropStringTextArea.GETPROPNUMBER(CATEGORY) returns the property number of string prop panel with text-area 
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = PR.GETPROPNUMBER([CATEGORY]) returns the property number of the panel property string PR.
+			%  N = PR.GETPROPNUMBER([CATEGORY]) returns the property number of the string prop panel with text-area  PR.
 			%  N = Element.GETPROPNUMBER(PR) returns the property number of 'PR'.
 			%  N = Element.GETPROPNUMBER('PanelPropStringTextArea') returns the property number of 'PanelPropStringTextArea'.
 			%
@@ -297,13 +299,13 @@ classdef PanelPropStringTextArea < PanelProp
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 36;
+				prop_number = 37;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 2;
+					prop_number = 3;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -323,7 +325,7 @@ classdef PanelPropStringTextArea < PanelProp
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in panel property string/error.
+			%EXISTSPROP checks whether property exists in string prop panel with text-area /error.
 			%
 			% CHECK = PanelPropStringTextArea.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -348,7 +350,7 @@ classdef PanelPropStringTextArea < PanelProp
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 36 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 37 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -361,7 +363,7 @@ classdef PanelPropStringTextArea < PanelProp
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in panel property string/error.
+			%EXISTSTAG checks whether tag exists in string prop panel with text-area /error.
 			%
 			% CHECK = PanelPropStringTextArea.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -386,7 +388,7 @@ classdef PanelPropStringTextArea < PanelProp
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'TEXTAREA' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'TEXTAREA' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -419,7 +421,7 @@ classdef PanelPropStringTextArea < PanelProp
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'TEXTAREA' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'TEXTAREA' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -448,7 +450,7 @@ classdef PanelPropStringTextArea < PanelProp
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				panelpropstringtextarea_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'TEXTAREA' };
+				panelpropstringtextarea_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'TEXTAREA' };
 				tag = panelpropstringtextarea_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -475,7 +477,7 @@ classdef PanelPropStringTextArea < PanelProp
 			prop = PanelPropStringTextArea.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			panelpropstringtextarea_category_list = { 1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  6  6  6  4  4  9  9  7  7  4  7  7  7  7  7  7  9  7 };
+			panelpropstringtextarea_category_list = { 1  1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  6  6  6  4  4  9  9  7  7  4  7  7  7  7  7  7  9  7 };
 			prop_category = panelpropstringtextarea_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -501,7 +503,7 @@ classdef PanelPropStringTextArea < PanelProp
 			prop = PanelPropStringTextArea.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			panelpropstringtextarea_format_list = { 2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  4  4  4  8  11  22  2  18  18  8  18  18  18  19  19  19  4  18 };
+			panelpropstringtextarea_format_list = { 2  2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  4  4  4  8  11  22  2  18  18  8  18  18  18  19  19  19  4  18 };
 			prop_format = panelpropstringtextarea_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -527,7 +529,7 @@ classdef PanelPropStringTextArea < PanelProp
 			prop = PanelPropStringTextArea.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			panelpropstringtextarea_description_list = { 'NAME (constant, string) is the name of the string property panel with a text area.'  'DESCRIPTION (constant, string) is the description of the string property panel with a text area.'  'TEMPLATE (parameter, item) is the template of the string property panel with a text area.'  'ID (data, string) is a few-letter code for the string property panel with a text area.'  'LABEL (metadata, string) is an extended label of the string property panel with a text area.'  'NOTES (metadata, string) are some specific notes about the string property panel with a text area.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the property panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the editfield.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the property panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'ENABLE (gui, logical) switches the editfield between active and inactive appearance when not editable.'  'TEXTAREA (evanescent, handle) is the string value text area.' };
+			panelpropstringtextarea_description_list = { 'ELCLASS (constant, string) is the class of the string prop panel with a text-area.'  'NAME (constant, string) is the name of the string prop panel with a text-area.'  'DESCRIPTION (constant, string) is the description of the string prop panel with a text-area.'  'TEMPLATE (parameter, item) is the template of the string prop panel with a text-area.'  'ID (data, string) is a few-letter code for the string prop panel with a text-area.'  'LABEL (metadata, string) is an extended label of the string prop panel with a text-area.'  'NOTES (metadata, string) are some specific notes about the string prop panel with a text-area.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the prop panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the prop panel.'  'UPDATE (query, logical) updates the content and permissions of the editfield.'  'REDRAW (query, logical) resizes the prop panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the prop number.'  'HEIGHT (gui, size) is the pixel height of the prop panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'ENABLE (gui, logical) switches the editfield between active and inactive appearance when not editable.'  'TEXTAREA (evanescent, handle) is the string value text-area.' };
 			prop_description = panelpropstringtextarea_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -553,11 +555,11 @@ classdef PanelPropStringTextArea < PanelProp
 			prop = PanelPropStringTextArea.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 35 % PanelPropStringTextArea.ENABLE
+				case 36 % PanelPropStringTextArea.ENABLE
 					prop_settings = Format.getFormatSettings(4);
-				case 36 % PanelPropStringTextArea.TEXTAREA
+				case 37 % PanelPropStringTextArea.TEXTAREA
 					prop_settings = Format.getFormatSettings(18);
-				case 3 % PanelPropStringTextArea.TEMPLATE
+				case 4 % PanelPropStringTextArea.TEMPLATE
 					prop_settings = 'PanelPropStringTextArea';
 				otherwise
 					prop_settings = getPropSettings@PanelProp(prop);
@@ -586,27 +588,29 @@ classdef PanelPropStringTextArea < PanelProp
 			prop = PanelPropStringTextArea.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 35 % PanelPropStringTextArea.ENABLE
+				case 36 % PanelPropStringTextArea.ENABLE
 					prop_default = true;
-				case 36 % PanelPropStringTextArea.TEXTAREA
+				case 37 % PanelPropStringTextArea.TEXTAREA
 					prop_default = Format.getFormatDefault(18, PanelPropStringTextArea.getPropSettings(prop));
-				case 1 % PanelPropStringTextArea.NAME
+				case 1 % PanelPropStringTextArea.ELCLASS
 					prop_default = 'PanelPropStringTextArea';
-				case 2 % PanelPropStringTextArea.DESCRIPTION
-					prop_default = 'PanelPropStringTextArea plots the panel for a STRING property with a text area. It works for all categories.';
-				case 3 % PanelPropStringTextArea.TEMPLATE
+				case 2 % PanelPropStringTextArea.NAME
+					prop_default = 'String Prop Panel with Text-Area';
+				case 3 % PanelPropStringTextArea.DESCRIPTION
+					prop_default = 'A String Prop Panel with Text-Area (PanelPropStringTextArea) plots the panel for a STRING prop with a text-area. It works for all categories.';
+				case 4 % PanelPropStringTextArea.TEMPLATE
 					prop_default = Format.getFormatDefault(8, PanelPropStringTextArea.getPropSettings(prop));
-				case 4 % PanelPropStringTextArea.ID
+				case 5 % PanelPropStringTextArea.ID
 					prop_default = 'PanelPropStringTextArea ID';
-				case 5 % PanelPropStringTextArea.LABEL
+				case 6 % PanelPropStringTextArea.LABEL
 					prop_default = 'PanelPropStringTextArea label';
-				case 6 % PanelPropStringTextArea.NOTES
+				case 7 % PanelPropStringTextArea.NOTES
 					prop_default = 'PanelPropStringTextArea notes';
-				case 22 % PanelPropStringTextArea.EL
+				case 23 % PanelPropStringTextArea.EL
 					prop_default = ConcreteElement();
-				case 23 % PanelPropStringTextArea.PROP
-					prop_default = 6;
-				case 24 % PanelPropStringTextArea.HEIGHT
+				case 24 % PanelPropStringTextArea.PROP
+					prop_default = 7;
+				case 25 % PanelPropStringTextArea.HEIGHT
 					prop_default = 84;
 				otherwise
 					prop_default = getPropDefault@PanelProp(prop);
@@ -672,14 +676,14 @@ classdef PanelPropStringTextArea < PanelProp
 			prop = PanelPropStringTextArea.getPropProp(pointer);
 			
 			switch prop
-				case 35 % PanelPropStringTextArea.ENABLE
+				case 36 % PanelPropStringTextArea.ENABLE
 					check = Format.checkFormat(4, value, PanelPropStringTextArea.getPropSettings(prop));
-				case 36 % PanelPropStringTextArea.TEXTAREA
+				case 37 % PanelPropStringTextArea.TEXTAREA
 					check = Format.checkFormat(18, value, PanelPropStringTextArea.getPropSettings(prop));
-				case 3 % PanelPropStringTextArea.TEMPLATE
+				case 4 % PanelPropStringTextArea.TEMPLATE
 					check = Format.checkFormat(8, value, PanelPropStringTextArea.getPropSettings(prop));
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						check = checkProp@PanelProp(prop, value);
 					end
 			end
@@ -712,7 +716,7 @@ classdef PanelPropStringTextArea < PanelProp
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 36 % PanelPropStringTextArea.TEXTAREA
+				case 37 % PanelPropStringTextArea.TEXTAREA
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					
@@ -726,14 +730,14 @@ classdef PanelPropStringTextArea < PanelProp
 					
 					value = textarea;
 					
-				case 19 % PanelPropStringTextArea.X_DRAW
-					value = calculateValue@PanelProp(pr, 19, varargin{:}); % also warning
+				case 20 % PanelPropStringTextArea.X_DRAW
+					value = calculateValue@PanelProp(pr, 20, varargin{:}); % also warning
 					if value
 					    pr.memorize('TEXTAREA')
 					end
 					
-				case 20 % PanelPropStringTextArea.UPDATE
-					value = calculateValue@PanelProp(pr, 20, varargin{:}); % also warning
+				case 21 % PanelPropStringTextArea.UPDATE
+					value = calculateValue@PanelProp(pr, 21, varargin{:}); % also warning
 					if value
 					
 					    el = pr.get('EL');
@@ -784,22 +788,22 @@ classdef PanelPropStringTextArea < PanelProp
 					    end
 					end
 					
-				case 21 % PanelPropStringTextArea.REDRAW
-					value = calculateValue@PanelProp(pr, 21, varargin{:}); % also warning
+				case 22 % PanelPropStringTextArea.REDRAW
+					value = calculateValue@PanelProp(pr, 22, varargin{:}); % also warning
 					if value
 					    w_p = get_from_varargin(w(pr.get('H'), 'pixels'), 'Width', varargin);
 					    
 					    set(pr.get('TEXTAREA'), 'Position', [4 4 w_p-8 max(1, pr.get('HEIGHT')-27)])
 					end
 					
-				case 17 % PanelPropStringTextArea.DELETE
-					value = calculateValue@PanelProp(pr, 17, varargin{:}); % also warning
+				case 18 % PanelPropStringTextArea.DELETE
+					value = calculateValue@PanelProp(pr, 18, varargin{:}); % also warning
 					if value
 					    pr.set('TEXTAREA', Element.getNoValue())
 					end
 					
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						value = calculateValue@PanelProp(pr, prop, varargin{:});
 					else
 						value = calculateValue@Element(pr, prop, varargin{:});

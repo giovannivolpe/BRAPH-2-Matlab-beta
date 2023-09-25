@@ -1,5 +1,5 @@
 classdef EdgeBetwCentr < Measure
-	%EdgeBetwCentr is the edgebetweennesscentrality.
+	%EdgeBetwCentr is the edge betweenness centrality.
 	% It is a subclass of <a href="matlab:help Measure">Measure</a>.
 	%
 	% The edge betweenness centrality of a graph is the fraction of all shortest paths in the 
@@ -7,20 +7,21 @@ classdef EdgeBetwCentr < Measure
 	% of betweenness centrality participate in a large number of shortest paths.
 	%
 	% The list of EdgeBetwCentr properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the edgebetweennesscentrality.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the edgebetweennesscentrality.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the edgebetweennesscentrality.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the edgebetweennesscentrality.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the edgebetweennesscentrality.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the edgebetweennesscentrality.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.BINODAL.
-	%  <strong>9</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-	%  <strong>10</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-	%  <strong>11</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-	%  <strong>12</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-	%  <strong>13</strong> <strong>M</strong> 	M (result, cell) is the edgebetweennesscentrality.
-	%  <strong>14</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the edge betweenness centrality.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the edge betweenness centrality.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the edge betweenness centrality.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the edge betweenness centrality.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the edge betweenness centrality.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the edge betweenness centrality.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.BINODAL.
+	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
+	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
+	%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
+	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the edge betweenness centrality.
+	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 	%
 	% EdgeBetwCentr methods (constructor):
 	%  EdgeBetwCentr - constructor
@@ -40,33 +41,33 @@ classdef EdgeBetwCentr < Measure
 	%  unchecked - sets a property to NOT checked
 	%
 	% EdgeBetwCentr methods (display):
-	%  tostring - string with information about the edgebetweennesscentrality
-	%  disp - displays information about the edgebetweennesscentrality
-	%  tree - displays the tree of the edgebetweennesscentrality
+	%  tostring - string with information about the edge betweenness centrality
+	%  disp - displays information about the edge betweenness centrality
+	%  tree - displays the tree of the edge betweenness centrality
 	%
 	% EdgeBetwCentr methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two edgebetweennesscentrality are equal (values, locked)
+	%  isequal - determines whether two edge betweenness centrality are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the edgebetweennesscentrality
+	%  copy - copies the edge betweenness centrality
 	%
 	% EdgeBetwCentr methods (save/load, Static):
-	%  save - saves BRAPH2 edgebetweennesscentrality as b2 file
-	%  load - loads a BRAPH2 edgebetweennesscentrality from a b2 file
+	%  save - saves BRAPH2 edge betweenness centrality as b2 file
+	%  load - loads a BRAPH2 edge betweenness centrality from a b2 file
 	%
 	% EdgeBetwCentr method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the edgebetweennesscentrality
+	%  encodeJSON - returns a JSON string encoding the edge betweenness centrality
 	%
 	% EdgeBetwCentr method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the edgebetweennesscentrality
+	%   decodeJSON - returns a JSON string encoding the edge betweenness centrality
 	%
 	% EdgeBetwCentr methods (inspection, Static):
-	%  getClass - returns the class of the edgebetweennesscentrality
+	%  getClass - returns the class of the edge betweenness centrality
 	%  getSubclasses - returns all subclasses of EdgeBetwCentr
-	%  getProps - returns the property list of the edgebetweennesscentrality
-	%  getPropNumber - returns the property number of the edgebetweennesscentrality
+	%  getProps - returns the property list of the edge betweenness centrality
+	%  getPropNumber - returns the property number of the edge betweenness centrality
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -110,7 +111,7 @@ classdef EdgeBetwCentr < Measure
 	
 	methods % constructor
 		function m = EdgeBetwCentr(varargin)
-			%EdgeBetwCentr() creates a edgebetweennesscentrality.
+			%EdgeBetwCentr() creates a edge betweenness centrality.
 			%
 			% EdgeBetwCentr(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -120,20 +121,21 @@ classdef EdgeBetwCentr < Measure
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of EdgeBetwCentr properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the edgebetweennesscentrality.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the edgebetweennesscentrality.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the edgebetweennesscentrality.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the edgebetweennesscentrality.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the edgebetweennesscentrality.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the edgebetweennesscentrality.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.BINODAL.
-			%  <strong>9</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-			%  <strong>10</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-			%  <strong>11</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-			%  <strong>12</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-			%  <strong>13</strong> <strong>M</strong> 	M (result, cell) is the edgebetweennesscentrality.
-			%  <strong>14</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the edge betweenness centrality.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the edge betweenness centrality.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the edge betweenness centrality.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the edge betweenness centrality.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the edge betweenness centrality.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the edge betweenness centrality.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.BINODAL.
+			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
+			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
+			%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
+			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the edge betweenness centrality.
+			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 			%
 			% See also Category, Format.
 			
@@ -142,12 +144,12 @@ classdef EdgeBetwCentr < Measure
 	end
 	methods (Static) % inspection
 		function m_class = getClass()
-			%GETCLASS returns the class of the edgebetweennesscentrality.
+			%GETCLASS returns the class of the edge betweenness centrality.
 			%
 			% CLASS = EdgeBetwCentr.GETCLASS() returns the class 'EdgeBetwCentr'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = M.GETCLASS() returns the class of the edgebetweennesscentrality M.
+			%  CLASS = M.GETCLASS() returns the class of the edge betweenness centrality M.
 			%  CLASS = Element.GETCLASS(M) returns the class of 'M'.
 			%  CLASS = Element.GETCLASS('EdgeBetwCentr') returns 'EdgeBetwCentr'.
 			%
@@ -157,12 +159,12 @@ classdef EdgeBetwCentr < Measure
 			m_class = 'EdgeBetwCentr';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the edgebetweennesscentrality.
+			%GETSUBCLASSES returns all subclasses of the edge betweenness centrality.
 			%
 			% LIST = EdgeBetwCentr.GETSUBCLASSES() returns all subclasses of 'EdgeBetwCentr'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = M.GETSUBCLASSES() returns all subclasses of the edgebetweennesscentrality M.
+			%  LIST = M.GETSUBCLASSES() returns all subclasses of the edge betweenness centrality M.
 			%  LIST = Element.GETSUBCLASSES(M) returns all subclasses of 'M'.
 			%  LIST = Element.GETSUBCLASSES('EdgeBetwCentr') returns all subclasses of 'EdgeBetwCentr'.
 			%
@@ -174,16 +176,16 @@ classdef EdgeBetwCentr < Measure
 			subclass_list = { 'EdgeBetwCentr' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of edgebetweennesscentrality.
+			%GETPROPS returns the property list of edge betweenness centrality.
 			%
-			% PROPS = EdgeBetwCentr.GETPROPS() returns the property list of edgebetweennesscentrality
+			% PROPS = EdgeBetwCentr.GETPROPS() returns the property list of edge betweenness centrality
 			%  as a row vector.
 			%
 			% PROPS = EdgeBetwCentr.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = M.GETPROPS([CATEGORY]) returns the property list of the edgebetweennesscentrality M.
+			%  PROPS = M.GETPROPS([CATEGORY]) returns the property list of the edge betweenness centrality M.
 			%  PROPS = Element.GETPROPS(M[, CATEGORY]) returns the property list of 'M'.
 			%  PROPS = Element.GETPROPS('EdgeBetwCentr'[, CATEGORY]) returns the property list of 'EdgeBetwCentr'.
 			%
@@ -195,39 +197,39 @@ classdef EdgeBetwCentr < Measure
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2 8 9 10 11];
+					prop_list = [1 2 3 9 10 11 12];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
+					prop_list = 4;
 				case 4 % Category.DATA
-					prop_list = [4 12];
+					prop_list = [5 13];
 				case 5 % Category.RESULT
-					prop_list = 13;
-				case 6 % Category.QUERY
-					prop_list = 7;
-				case 9 % Category.GUI
 					prop_list = 14;
+				case 6 % Category.QUERY
+					prop_list = 8;
+				case 9 % Category.GUI
+					prop_list = 15;
 				otherwise
 					prop_list = [];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of edgebetweennesscentrality.
+			%GETPROPNUMBER returns the property number of edge betweenness centrality.
 			%
-			% N = EdgeBetwCentr.GETPROPNUMBER() returns the property number of edgebetweennesscentrality.
+			% N = EdgeBetwCentr.GETPROPNUMBER() returns the property number of edge betweenness centrality.
 			%
-			% N = EdgeBetwCentr.GETPROPNUMBER(CATEGORY) returns the property number of edgebetweennesscentrality
+			% N = EdgeBetwCentr.GETPROPNUMBER(CATEGORY) returns the property number of edge betweenness centrality
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = M.GETPROPNUMBER([CATEGORY]) returns the property number of the edgebetweennesscentrality M.
+			%  N = M.GETPROPNUMBER([CATEGORY]) returns the property number of the edge betweenness centrality M.
 			%  N = Element.GETPROPNUMBER(M) returns the property number of 'M'.
 			%  N = Element.GETPROPNUMBER('EdgeBetwCentr') returns the property number of 'EdgeBetwCentr'.
 			%
@@ -239,13 +241,13 @@ classdef EdgeBetwCentr < Measure
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 14;
+				prop_number = 15;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 6;
+					prop_number = 7;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -263,7 +265,7 @@ classdef EdgeBetwCentr < Measure
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in edgebetweennesscentrality/error.
+			%EXISTSPROP checks whether property exists in edge betweenness centrality/error.
 			%
 			% CHECK = EdgeBetwCentr.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -288,7 +290,7 @@ classdef EdgeBetwCentr < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 14 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 15 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -301,7 +303,7 @@ classdef EdgeBetwCentr < Measure
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in edgebetweennesscentrality/error.
+			%EXISTSTAG checks whether tag exists in edge betweenness centrality/error.
 			%
 			% CHECK = EdgeBetwCentr.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -326,7 +328,7 @@ classdef EdgeBetwCentr < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -359,7 +361,7 @@ classdef EdgeBetwCentr < Measure
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -388,7 +390,7 @@ classdef EdgeBetwCentr < Measure
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				edgebetwcentr_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
+				edgebetwcentr_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
 				tag = edgebetwcentr_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -415,7 +417,7 @@ classdef EdgeBetwCentr < Measure
 			prop = EdgeBetwCentr.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			edgebetwcentr_category_list = { 1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
+			edgebetwcentr_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
 			prop_category = edgebetwcentr_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -441,7 +443,7 @@ classdef EdgeBetwCentr < Measure
 			prop = EdgeBetwCentr.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			edgebetwcentr_format_list = { 2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
+			edgebetwcentr_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
 			prop_format = edgebetwcentr_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -467,7 +469,7 @@ classdef EdgeBetwCentr < Measure
 			prop = EdgeBetwCentr.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			edgebetwcentr_description_list = { 'NAME (constant, string) is the name of the edgebetweennesscentrality.'  'DESCRIPTION (constant, string) is the description of the edgebetweennesscentrality.'  'TEMPLATE (parameter, item) is the template of the edgebetweennesscentrality.'  'ID (data, string) is a few-letter code of the edgebetweennesscentrality.'  'LABEL (metadata, string) is an extended label of the edgebetweennesscentrality.'  'NOTES (metadata, string) are some specific notes about the edgebetweennesscentrality.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.BINODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the edgebetweennesscentrality.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			edgebetwcentr_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the edge betweenness centrality.'  'DESCRIPTION (constant, string) is the description of the edge betweenness centrality.'  'TEMPLATE (parameter, item) is the template of the edge betweenness centrality.'  'ID (data, string) is a few-letter code of the edge betweenness centrality.'  'LABEL (metadata, string) is an extended label of the edge betweenness centrality.'  'NOTES (metadata, string) are some specific notes about the edge betweenness centrality.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.BINODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the edge betweenness centrality.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = edgebetwcentr_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -493,6 +495,8 @@ classdef EdgeBetwCentr < Measure
 			prop = EdgeBetwCentr.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
+				case 4 % EdgeBetwCentr.TEMPLATE
+					prop_settings = 'EdgeBetwCentr';
 				otherwise
 					prop_settings = getPropSettings@Measure(prop);
 			end
@@ -520,23 +524,27 @@ classdef EdgeBetwCentr < Measure
 			prop = EdgeBetwCentr.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 1 % EdgeBetwCentr.NAME
+				case 1 % EdgeBetwCentr.ELCLASS
 					prop_default = 'EdgeBetwCentr';
-				case 2 % EdgeBetwCentr.DESCRIPTION
+				case 2 % EdgeBetwCentr.NAME
+					prop_default = 'EdgeBetweennessCentrality';
+				case 3 % EdgeBetwCentr.DESCRIPTION
 					prop_default = 'The edge betweenness centrality of a graph is the fraction of all shortest paths in the graph that pass through a given edge within a layer. Edges with high values of betweenness centrality participate in a large number of shortest paths.';
-				case 4 % EdgeBetwCentr.ID
+				case 4 % EdgeBetwCentr.TEMPLATE
+					prop_default = Format.getFormatDefault(8, EdgeBetwCentr.getPropSettings(prop));
+				case 5 % EdgeBetwCentr.ID
 					prop_default = 'EdgeBetwCentr ID';
-				case 5 % EdgeBetwCentr.LABEL
-					prop_default = 'EdgeBetwCentr label';
-				case 6 % EdgeBetwCentr.NOTES
-					prop_default = 'EdgeBetwCentr notes';
-				case 8 % EdgeBetwCentr.SHAPE
+				case 6 % EdgeBetwCentr.LABEL
+					prop_default = 'EdgeBetweennessCentrality label';
+				case 7 % EdgeBetwCentr.NOTES
+					prop_default = 'EdgeBetweennessCentrality notes';
+				case 9 % EdgeBetwCentr.SHAPE
 					prop_default = 3;
-				case 9 % EdgeBetwCentr.SCOPE
+				case 10 % EdgeBetwCentr.SCOPE
 					prop_default = 2;
-				case 10 % EdgeBetwCentr.PARAMETRICITY
+				case 11 % EdgeBetwCentr.PARAMETRICITY
 					prop_default = 2;
-				case 11 % EdgeBetwCentr.COMPATIBLE_GRAPHS
+				case 12 % EdgeBetwCentr.COMPATIBLE_GRAPHS
 					prop_default = {'GraphBD' 'GraphBU' 'GraphWD' 'GraphWU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexBD' 'MultiplexBU' 'MultiplexWD' 'MultiplexWU' 'MultiplexBUD' 'MultiplexBUT'};;
 				otherwise
 					prop_default = getPropDefault@Measure(prop);
@@ -602,8 +610,10 @@ classdef EdgeBetwCentr < Measure
 			prop = EdgeBetwCentr.getPropProp(pointer);
 			
 			switch prop
+				case 4 % EdgeBetwCentr.TEMPLATE
+					check = Format.checkFormat(8, value, EdgeBetwCentr.getPropSettings(prop));
 				otherwise
-					if prop <= 14
+					if prop <= 15
 						check = checkProp@Measure(prop, value);
 					end
 			end
@@ -636,8 +646,8 @@ classdef EdgeBetwCentr < Measure
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 13 % EdgeBetwCentr.M
-					rng_settings_ = rng(); rng(m.getPropSeed(13), 'twister')
+				case 14 % EdgeBetwCentr.M
+					rng_settings_ = rng(); rng(m.getPropSeed(14), 'twister')
 					
 					g = m.get('G'); % graph from measure class
 					A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
@@ -662,7 +672,7 @@ classdef EdgeBetwCentr < Measure
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 14
+					if prop <= 15
 						value = calculateValue@Measure(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

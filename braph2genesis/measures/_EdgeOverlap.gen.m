@@ -52,6 +52,11 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'EdgeOverlap'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the edge overlap.
 %%%% ¡default!
 'EdgeOverlap'
@@ -99,7 +104,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUD' 'MultiplexBUT'};
+{'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'OrdMxWU' 'OrdMxBU' 'OrdMxBUD' 'OrdMxBUT' 'MultiplexBUD' 'MultiplexBUT' 'MultilayerBUT' 'MultilayerBU' 'MultilayerBUD' 'OrdMlWU' 'OrdMlBU' 'OrdMlBUT' 'OrdMlBUD'};
 
 %%% ¡prop!
 M (result, cell) is the edge overlap.
@@ -325,7 +330,7 @@ assert(isequal(m_inside_g.get('M'), known_edge_overlap), ...
 
 %%% ¡test!
 %%%% ¡name!
-MultiplexBUD
+MultilayerBUD
 %%%% ¡probability!
 .01
 %%%% ¡code!
@@ -344,7 +349,16 @@ B33 = [
     1   0   0
     0   0   0
     ];
-B = {B11 B22 B33};
+B12 = rand(size(B11,1),size(B22,2));
+B21 = B12';
+B13 = rand(size(B11,1),size(B33,2));
+B31 = B13';
+B23 = rand(size(B22,1),size(B33,2));
+B32 = B23';
+
+B = {B11 B12 B13;
+     B21 B22 B23;
+     B31 B32 B33};
 
 known_edge_overlap_1 = [
     0    1    1/3
@@ -356,7 +370,7 @@ known_edge_overlap = {
                       zeros(3)
                       };
 
-g = MultiplexBUD('B', B, 'DENSITIES', [90 10]);
+g = MultilayerBUD('B', B, 'DENSITIES', [90 10]);
 
 m_outside_g = EdgeOverlap('G', g);
 assert(isequal(m_outside_g.get('M'), known_edge_overlap), ...

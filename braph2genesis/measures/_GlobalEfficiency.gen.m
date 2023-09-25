@@ -8,6 +8,11 @@ It is inversely related to the characteristic path length.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'GlobalEfficiency'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the global efficiency.
 %%%% ¡default!
 'GlobalEfficiency'
@@ -19,6 +24,8 @@ DESCRIPTION (constant, string) is the description of the global efficiency.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the global efficiency.
+%%%% ¡settings!
+'GlobalEfficiency'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the degree.

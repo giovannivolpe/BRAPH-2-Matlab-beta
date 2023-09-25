@@ -53,6 +53,11 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'CommunityStructure'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the community structure.
 %%%% ¡default!
 'CommunityStructure'
@@ -100,7 +105,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphBU'};
+{'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT'} ;
 
 %%% ¡prop!
 M (result, cell) is the triangles.

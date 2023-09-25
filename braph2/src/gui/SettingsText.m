@@ -2,37 +2,38 @@ classdef SettingsText < Settings
 	%SettingsText contains the text settings.
 	% It is a subclass of <a href="matlab:help Settings">Settings</a>.
 	%
-	% SettingsText provides the settings for a text, 
+	% A Text Settings (SettingsText) provides the settings for a text, 
 	% including visibility, x, y, z, font color, font size, and interpreter.
 	% The handle can be a text.
 	%
 	% The list of SettingsText properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the text settings.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the text settings.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the text settings.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the text settings.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the text settings.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the text settings.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
-	%  <strong>9</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
-	%  <strong>10</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
-	%  <strong>11</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
-	%  <strong>12</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
-	%  <strong>13</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
-	%  <strong>14</strong> <strong>VISIBLE</strong> 	VISIBLE (figure, logical) determines whether the text is visible.
-	%  <strong>15</strong> <strong>X</strong> 	X (figure, scalar) is the x-coordinate.
-	%  <strong>16</strong> <strong>Y</strong> 	Y (figure, scalar) is the y-coordinate.
-	%  <strong>17</strong> <strong>Z</strong> 	Z (figure, scalar) is the z-coordinate.
-	%  <strong>18</strong> <strong>TXT</strong> 	TXT (figure, string) is the text.
-	%  <strong>19</strong> <strong>FONTSIZE</strong> 	FONTSIZE (figure, size) is the font size.
-	%  <strong>20</strong> <strong>FONTNAME</strong> 	FONTNAME (figure, string) is the font name.
-	%  <strong>21</strong> <strong>FONTCOLOR</strong> 	FONTCOLOR (figure, color) is the text color.
-	%  <strong>22</strong> <strong>FONTWEIGHT</strong> 	FONTWEIGHT (figure, option) is the font weight.
-	%  <strong>23</strong> <strong>INTERPRETER</strong> 	INTERPRETER (figure, option) is the text interpreter.
-	%  <strong>24</strong> <strong>HALIGN</strong> 	HALIGN (figure, option) is the text horizonthal alignment.
-	%  <strong>25</strong> <strong>VALIGN</strong> 	VALIGN (figure, option) is the text vertical alignment.
-	%  <strong>26</strong> <strong>ROTATION</strong> 	ROTATION (figure, scalar) is the text rotation.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the text settings.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the text settings.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the text settings.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the text settings.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the text settings.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the text settings.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the text settings.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
+	%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
+	%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
+	%  <strong>12</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
+	%  <strong>13</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
+	%  <strong>14</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
+	%  <strong>15</strong> <strong>VISIBLE</strong> 	VISIBLE (figure, logical) determines whether the text is visible.
+	%  <strong>16</strong> <strong>X</strong> 	X (figure, scalar) is the x-coordinate.
+	%  <strong>17</strong> <strong>Y</strong> 	Y (figure, scalar) is the y-coordinate.
+	%  <strong>18</strong> <strong>Z</strong> 	Z (figure, scalar) is the z-coordinate.
+	%  <strong>19</strong> <strong>TXT</strong> 	TXT (figure, string) is the text.
+	%  <strong>20</strong> <strong>FONTSIZE</strong> 	FONTSIZE (figure, size) is the font size.
+	%  <strong>21</strong> <strong>FONTNAME</strong> 	FONTNAME (figure, string) is the font name.
+	%  <strong>22</strong> <strong>FONTCOLOR</strong> 	FONTCOLOR (figure, color) is the text color.
+	%  <strong>23</strong> <strong>FONTWEIGHT</strong> 	FONTWEIGHT (figure, option) is the font weight.
+	%  <strong>24</strong> <strong>INTERPRETER</strong> 	INTERPRETER (figure, option) is the text interpreter.
+	%  <strong>25</strong> <strong>HALIGN</strong> 	HALIGN (figure, option) is the text horizonthal alignment.
+	%  <strong>26</strong> <strong>VALIGN</strong> 	VALIGN (figure, option) is the text vertical alignment.
+	%  <strong>27</strong> <strong>ROTATION</strong> 	ROTATION (figure, scalar) is the text rotation.
 	%
 	% SettingsText methods (constructor):
 	%  SettingsText - constructor
@@ -123,67 +124,67 @@ classdef SettingsText < Settings
 	% See also text, PanelFig, GUIFig, check_graphics.
 	
 	properties (Constant) % properties
-		VISIBLE = 14; %CET: Computational Efficiency Trick
+		VISIBLE = 15; %CET: Computational Efficiency Trick
 		VISIBLE_TAG = 'VISIBLE';
 		VISIBLE_CATEGORY = 8;
 		VISIBLE_FORMAT = 4;
 		
-		X = 15; %CET: Computational Efficiency Trick
+		X = 16; %CET: Computational Efficiency Trick
 		X_TAG = 'X';
 		X_CATEGORY = 8;
 		X_FORMAT = 11;
 		
-		Y = 16; %CET: Computational Efficiency Trick
+		Y = 17; %CET: Computational Efficiency Trick
 		Y_TAG = 'Y';
 		Y_CATEGORY = 8;
 		Y_FORMAT = 11;
 		
-		Z = 17; %CET: Computational Efficiency Trick
+		Z = 18; %CET: Computational Efficiency Trick
 		Z_TAG = 'Z';
 		Z_CATEGORY = 8;
 		Z_FORMAT = 11;
 		
-		TXT = 18; %CET: Computational Efficiency Trick
+		TXT = 19; %CET: Computational Efficiency Trick
 		TXT_TAG = 'TXT';
 		TXT_CATEGORY = 8;
 		TXT_FORMAT = 2;
 		
-		FONTSIZE = 19; %CET: Computational Efficiency Trick
+		FONTSIZE = 20; %CET: Computational Efficiency Trick
 		FONTSIZE_TAG = 'FONTSIZE';
 		FONTSIZE_CATEGORY = 8;
 		FONTSIZE_FORMAT = 22;
 		
-		FONTNAME = 20; %CET: Computational Efficiency Trick
+		FONTNAME = 21; %CET: Computational Efficiency Trick
 		FONTNAME_TAG = 'FONTNAME';
 		FONTNAME_CATEGORY = 8;
 		FONTNAME_FORMAT = 2;
 		
-		FONTCOLOR = 21; %CET: Computational Efficiency Trick
+		FONTCOLOR = 22; %CET: Computational Efficiency Trick
 		FONTCOLOR_TAG = 'FONTCOLOR';
 		FONTCOLOR_CATEGORY = 8;
 		FONTCOLOR_FORMAT = 20;
 		
-		FONTWEIGHT = 22; %CET: Computational Efficiency Trick
+		FONTWEIGHT = 23; %CET: Computational Efficiency Trick
 		FONTWEIGHT_TAG = 'FONTWEIGHT';
 		FONTWEIGHT_CATEGORY = 8;
 		FONTWEIGHT_FORMAT = 5;
 		
-		INTERPRETER = 23; %CET: Computational Efficiency Trick
+		INTERPRETER = 24; %CET: Computational Efficiency Trick
 		INTERPRETER_TAG = 'INTERPRETER';
 		INTERPRETER_CATEGORY = 8;
 		INTERPRETER_FORMAT = 5;
 		
-		HALIGN = 24; %CET: Computational Efficiency Trick
+		HALIGN = 25; %CET: Computational Efficiency Trick
 		HALIGN_TAG = 'HALIGN';
 		HALIGN_CATEGORY = 8;
 		HALIGN_FORMAT = 5;
 		
-		VALIGN = 25; %CET: Computational Efficiency Trick
+		VALIGN = 26; %CET: Computational Efficiency Trick
 		VALIGN_TAG = 'VALIGN';
 		VALIGN_CATEGORY = 8;
 		VALIGN_FORMAT = 5;
 		
-		ROTATION = 26; %CET: Computational Efficiency Trick
+		ROTATION = 27; %CET: Computational Efficiency Trick
 		ROTATION_TAG = 'ROTATION';
 		ROTATION_CATEGORY = 8;
 		ROTATION_FORMAT = 11;
@@ -200,32 +201,33 @@ classdef SettingsText < Settings
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of SettingsText properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the text settings.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the text settings.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the text settings.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the text settings.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the text settings.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the text settings.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
-			%  <strong>9</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
-			%  <strong>10</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
-			%  <strong>11</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
-			%  <strong>12</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
-			%  <strong>13</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
-			%  <strong>14</strong> <strong>VISIBLE</strong> 	VISIBLE (figure, logical) determines whether the text is visible.
-			%  <strong>15</strong> <strong>X</strong> 	X (figure, scalar) is the x-coordinate.
-			%  <strong>16</strong> <strong>Y</strong> 	Y (figure, scalar) is the y-coordinate.
-			%  <strong>17</strong> <strong>Z</strong> 	Z (figure, scalar) is the z-coordinate.
-			%  <strong>18</strong> <strong>TXT</strong> 	TXT (figure, string) is the text.
-			%  <strong>19</strong> <strong>FONTSIZE</strong> 	FONTSIZE (figure, size) is the font size.
-			%  <strong>20</strong> <strong>FONTNAME</strong> 	FONTNAME (figure, string) is the font name.
-			%  <strong>21</strong> <strong>FONTCOLOR</strong> 	FONTCOLOR (figure, color) is the text color.
-			%  <strong>22</strong> <strong>FONTWEIGHT</strong> 	FONTWEIGHT (figure, option) is the font weight.
-			%  <strong>23</strong> <strong>INTERPRETER</strong> 	INTERPRETER (figure, option) is the text interpreter.
-			%  <strong>24</strong> <strong>HALIGN</strong> 	HALIGN (figure, option) is the text horizonthal alignment.
-			%  <strong>25</strong> <strong>VALIGN</strong> 	VALIGN (figure, option) is the text vertical alignment.
-			%  <strong>26</strong> <strong>ROTATION</strong> 	ROTATION (figure, scalar) is the text rotation.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the text settings.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the text settings.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the text settings.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the text settings.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the text settings.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the text settings.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the text settings.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
+			%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
+			%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
+			%  <strong>12</strong> <strong>I</strong> 	I (gui, scalar) is the index of the handle, used only by handlelists.
+			%  <strong>13</strong> <strong>H</strong> 	H (query, handle) is the graphics object handle.
+			%  <strong>14</strong> <strong>SETUP</strong> 	SETUP (query, scalar) sets all figure props.
+			%  <strong>15</strong> <strong>VISIBLE</strong> 	VISIBLE (figure, logical) determines whether the text is visible.
+			%  <strong>16</strong> <strong>X</strong> 	X (figure, scalar) is the x-coordinate.
+			%  <strong>17</strong> <strong>Y</strong> 	Y (figure, scalar) is the y-coordinate.
+			%  <strong>18</strong> <strong>Z</strong> 	Z (figure, scalar) is the z-coordinate.
+			%  <strong>19</strong> <strong>TXT</strong> 	TXT (figure, string) is the text.
+			%  <strong>20</strong> <strong>FONTSIZE</strong> 	FONTSIZE (figure, size) is the font size.
+			%  <strong>21</strong> <strong>FONTNAME</strong> 	FONTNAME (figure, string) is the font name.
+			%  <strong>22</strong> <strong>FONTCOLOR</strong> 	FONTCOLOR (figure, color) is the text color.
+			%  <strong>23</strong> <strong>FONTWEIGHT</strong> 	FONTWEIGHT (figure, option) is the font weight.
+			%  <strong>24</strong> <strong>INTERPRETER</strong> 	INTERPRETER (figure, option) is the text interpreter.
+			%  <strong>25</strong> <strong>HALIGN</strong> 	HALIGN (figure, option) is the text horizonthal alignment.
+			%  <strong>26</strong> <strong>VALIGN</strong> 	VALIGN (figure, option) is the text vertical alignment.
+			%  <strong>27</strong> <strong>ROTATION</strong> 	ROTATION (figure, scalar) is the text rotation.
 			%
 			% See also Category, Format.
 			
@@ -287,25 +289,25 @@ classdef SettingsText < Settings
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2];
+					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
-				case 4 % Category.DATA
 					prop_list = 4;
+				case 4 % Category.DATA
+					prop_list = 5;
 				case 6 % Category.QUERY
-					prop_list = [7 12 13];
+					prop_list = [8 13 14];
 				case 8 % Category.FIGURE
-					prop_list = [14 15 16 17 18 19 20 21 22 23 24 25 26];
+					prop_list = [15 16 17 18 19 20 21 22 23 24 25 26 27];
 				case 9 % Category.GUI
-					prop_list = [8 9 10 11];
+					prop_list = [9 10 11 12];
 				otherwise
 					prop_list = [];
 			end
@@ -331,13 +333,13 @@ classdef SettingsText < Settings
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 26;
+				prop_number = 27;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 2;
+					prop_number = 3;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -380,7 +382,7 @@ classdef SettingsText < Settings
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 26 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 27 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -418,7 +420,7 @@ classdef SettingsText < Settings
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'VISIBLE'  'X'  'Y'  'Z'  'TXT'  'FONTSIZE'  'FONTNAME'  'FONTCOLOR'  'FONTWEIGHT'  'INTERPRETER'  'HALIGN'  'VALIGN'  'ROTATION' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'VISIBLE'  'X'  'Y'  'Z'  'TXT'  'FONTSIZE'  'FONTNAME'  'FONTCOLOR'  'FONTWEIGHT'  'INTERPRETER'  'HALIGN'  'VALIGN'  'ROTATION' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -451,7 +453,7 @@ classdef SettingsText < Settings
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'VISIBLE'  'X'  'Y'  'Z'  'TXT'  'FONTSIZE'  'FONTNAME'  'FONTCOLOR'  'FONTWEIGHT'  'INTERPRETER'  'HALIGN'  'VALIGN'  'ROTATION' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'VISIBLE'  'X'  'Y'  'Z'  'TXT'  'FONTSIZE'  'FONTNAME'  'FONTCOLOR'  'FONTWEIGHT'  'INTERPRETER'  'HALIGN'  'VALIGN'  'ROTATION' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -480,7 +482,7 @@ classdef SettingsText < Settings
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				settingstext_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'VISIBLE'  'X'  'Y'  'Z'  'TXT'  'FONTSIZE'  'FONTNAME'  'FONTCOLOR'  'FONTWEIGHT'  'INTERPRETER'  'HALIGN'  'VALIGN'  'ROTATION' };
+				settingstext_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'PANEL'  'PROP'  'TAG'  'I'  'H'  'SETUP'  'VISIBLE'  'X'  'Y'  'Z'  'TXT'  'FONTSIZE'  'FONTNAME'  'FONTCOLOR'  'FONTWEIGHT'  'INTERPRETER'  'HALIGN'  'VALIGN'  'ROTATION' };
 				tag = settingstext_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -507,7 +509,7 @@ classdef SettingsText < Settings
 			prop = SettingsText.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingstext_category_list = { 1  1  3  4  2  2  6  9  9  9  9  6  6  8  8  8  8  8  8  8  8  8  8  8  8  8 };
+			settingstext_category_list = { 1  1  1  3  4  2  2  6  9  9  9  9  6  6  8  8  8  8  8  8  8  8  8  8  8  8  8 };
 			prop_category = settingstext_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -533,7 +535,7 @@ classdef SettingsText < Settings
 			prop = SettingsText.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingstext_format_list = { 2  2  8  2  2  2  2  8  11  2  11  18  11  4  11  11  11  2  22  2  20  5  5  5  5  11 };
+			settingstext_format_list = { 2  2  2  8  2  2  2  2  8  11  2  11  18  11  4  11  11  11  2  22  2  20  5  5  5  5  11 };
 			prop_format = settingstext_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -559,7 +561,7 @@ classdef SettingsText < Settings
 			prop = SettingsText.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingstext_description_list = { 'NAME (constant, string) is the name of the text settings.'  'DESCRIPTION (constant, string) is the description of the text settings.'  'TEMPLATE (parameter, item) is the template of the text settings.'  'ID (data, string) is a few-letter code for the text settings.'  'LABEL (metadata, string) is an extended label of the text settings.'  'NOTES (metadata, string) are some specific notes about the text settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.'  'VISIBLE (figure, logical) determines whether the text is visible.'  'X (figure, scalar) is the x-coordinate.'  'Y (figure, scalar) is the y-coordinate.'  'Z (figure, scalar) is the z-coordinate.'  'TXT (figure, string) is the text.'  'FONTSIZE (figure, size) is the font size.'  'FONTNAME (figure, string) is the font name.'  'FONTCOLOR (figure, color) is the text color.'  'FONTWEIGHT (figure, option) is the font weight.'  'INTERPRETER (figure, option) is the text interpreter.'  'HALIGN (figure, option) is the text horizonthal alignment.'  'VALIGN (figure, option) is the text vertical alignment.'  'ROTATION (figure, scalar) is the text rotation.' };
+			settingstext_description_list = { 'ELCLASS (constant, string) is the class of the text settings.'  'NAME (constant, string) is the name of the text settings.'  'DESCRIPTION (constant, string) is the description of the text settings.'  'TEMPLATE (parameter, item) is the template of the text settings.'  'ID (data, string) is a few-letter code for the text settings.'  'LABEL (metadata, string) is an extended label of the text settings.'  'NOTES (metadata, string) are some specific notes about the text settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.'  'VISIBLE (figure, logical) determines whether the text is visible.'  'X (figure, scalar) is the x-coordinate.'  'Y (figure, scalar) is the y-coordinate.'  'Z (figure, scalar) is the z-coordinate.'  'TXT (figure, string) is the text.'  'FONTSIZE (figure, size) is the font size.'  'FONTNAME (figure, string) is the font name.'  'FONTCOLOR (figure, color) is the text color.'  'FONTWEIGHT (figure, option) is the font weight.'  'INTERPRETER (figure, option) is the text interpreter.'  'HALIGN (figure, option) is the text horizonthal alignment.'  'VALIGN (figure, option) is the text vertical alignment.'  'ROTATION (figure, scalar) is the text rotation.' };
 			prop_description = settingstext_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -585,33 +587,33 @@ classdef SettingsText < Settings
 			prop = SettingsText.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 14 % SettingsText.VISIBLE
+				case 15 % SettingsText.VISIBLE
 					prop_settings = Format.getFormatSettings(4);
-				case 15 % SettingsText.X
+				case 16 % SettingsText.X
 					prop_settings = Format.getFormatSettings(11);
-				case 16 % SettingsText.Y
+				case 17 % SettingsText.Y
 					prop_settings = Format.getFormatSettings(11);
-				case 17 % SettingsText.Z
+				case 18 % SettingsText.Z
 					prop_settings = Format.getFormatSettings(11);
-				case 18 % SettingsText.TXT
+				case 19 % SettingsText.TXT
 					prop_settings = Format.getFormatSettings(2);
-				case 19 % SettingsText.FONTSIZE
+				case 20 % SettingsText.FONTSIZE
 					prop_settings = Format.getFormatSettings(22);
-				case 20 % SettingsText.FONTNAME
+				case 21 % SettingsText.FONTNAME
 					prop_settings = Format.getFormatSettings(2);
-				case 21 % SettingsText.FONTCOLOR
+				case 22 % SettingsText.FONTCOLOR
 					prop_settings = Format.getFormatSettings(20);
-				case 22 % SettingsText.FONTWEIGHT
+				case 23 % SettingsText.FONTWEIGHT
 					prop_settings = {'normal' 'bold'};
-				case 23 % SettingsText.INTERPRETER
+				case 24 % SettingsText.INTERPRETER
 					prop_settings = {'none', 'TeX', 'LaTeX'};
-				case 24 % SettingsText.HALIGN
+				case 25 % SettingsText.HALIGN
 					prop_settings = {'left', 'center', 'right'};
-				case 25 % SettingsText.VALIGN
+				case 26 % SettingsText.VALIGN
 					prop_settings = {'middle', 'top', 'bottom', 'baseline', 'cap'};
-				case 26 % SettingsText.ROTATION
+				case 27 % SettingsText.ROTATION
 					prop_settings = Format.getFormatSettings(11);
-				case 3 % SettingsText.TEMPLATE
+				case 4 % SettingsText.TEMPLATE
 					prop_settings = 'SettingsText';
 				otherwise
 					prop_settings = getPropSettings@Settings(prop);
@@ -640,43 +642,45 @@ classdef SettingsText < Settings
 			prop = SettingsText.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 14 % SettingsText.VISIBLE
+				case 15 % SettingsText.VISIBLE
 					prop_default = Format.getFormatDefault(4, SettingsText.getPropSettings(prop));
-				case 15 % SettingsText.X
+				case 16 % SettingsText.X
 					prop_default = Format.getFormatDefault(11, SettingsText.getPropSettings(prop));
-				case 16 % SettingsText.Y
+				case 17 % SettingsText.Y
 					prop_default = Format.getFormatDefault(11, SettingsText.getPropSettings(prop));
-				case 17 % SettingsText.Z
+				case 18 % SettingsText.Z
 					prop_default = Format.getFormatDefault(11, SettingsText.getPropSettings(prop));
-				case 18 % SettingsText.TXT
+				case 19 % SettingsText.TXT
 					prop_default = Format.getFormatDefault(2, SettingsText.getPropSettings(prop));
-				case 19 % SettingsText.FONTSIZE
+				case 20 % SettingsText.FONTSIZE
 					prop_default = 12;
-				case 20 % SettingsText.FONTNAME
+				case 21 % SettingsText.FONTNAME
 					prop_default = 'Helvetica';
-				case 21 % SettingsText.FONTCOLOR
+				case 22 % SettingsText.FONTCOLOR
 					prop_default = [0 0 0];
-				case 22 % SettingsText.FONTWEIGHT
+				case 23 % SettingsText.FONTWEIGHT
 					prop_default = 'normal';
-				case 23 % SettingsText.INTERPRETER
+				case 24 % SettingsText.INTERPRETER
 					prop_default = 'none';
-				case 24 % SettingsText.HALIGN
+				case 25 % SettingsText.HALIGN
 					prop_default = Format.getFormatDefault(5, SettingsText.getPropSettings(prop));
-				case 25 % SettingsText.VALIGN
+				case 26 % SettingsText.VALIGN
 					prop_default = Format.getFormatDefault(5, SettingsText.getPropSettings(prop));
-				case 26 % SettingsText.ROTATION
+				case 27 % SettingsText.ROTATION
 					prop_default = Format.getFormatDefault(11, SettingsText.getPropSettings(prop));
-				case 1 % SettingsText.NAME
+				case 1 % SettingsText.ELCLASS
 					prop_default = 'SettingsText';
-				case 2 % SettingsText.DESCRIPTION
-					prop_default = 'SettingsText provides the settings for a text, including visibility, x, y, z, font color, font size, and interpreter.';
-				case 3 % SettingsText.TEMPLATE
+				case 2 % SettingsText.NAME
+					prop_default = 'Text Settings';
+				case 3 % SettingsText.DESCRIPTION
+					prop_default = 'A Text Settings (SettingsText) provides the settings for a text, including visibility, x, y, z, font color, font size, and interpreter.';
+				case 4 % SettingsText.TEMPLATE
 					prop_default = Format.getFormatDefault(8, SettingsText.getPropSettings(prop));
-				case 4 % SettingsText.ID
+				case 5 % SettingsText.ID
 					prop_default = 'SettingsText ID';
-				case 5 % SettingsText.LABEL
+				case 6 % SettingsText.LABEL
 					prop_default = 'SettingsText label';
-				case 6 % SettingsText.NOTES
+				case 7 % SettingsText.NOTES
 					prop_default = 'SettingsText notes';
 				otherwise
 					prop_default = getPropDefault@Settings(prop);
@@ -742,36 +746,36 @@ classdef SettingsText < Settings
 			prop = SettingsText.getPropProp(pointer);
 			
 			switch prop
-				case 14 % SettingsText.VISIBLE
+				case 15 % SettingsText.VISIBLE
 					check = Format.checkFormat(4, value, SettingsText.getPropSettings(prop));
-				case 15 % SettingsText.X
+				case 16 % SettingsText.X
 					check = Format.checkFormat(11, value, SettingsText.getPropSettings(prop));
-				case 16 % SettingsText.Y
+				case 17 % SettingsText.Y
 					check = Format.checkFormat(11, value, SettingsText.getPropSettings(prop));
-				case 17 % SettingsText.Z
+				case 18 % SettingsText.Z
 					check = Format.checkFormat(11, value, SettingsText.getPropSettings(prop));
-				case 18 % SettingsText.TXT
+				case 19 % SettingsText.TXT
 					check = Format.checkFormat(2, value, SettingsText.getPropSettings(prop));
-				case 19 % SettingsText.FONTSIZE
+				case 20 % SettingsText.FONTSIZE
 					check = Format.checkFormat(22, value, SettingsText.getPropSettings(prop));
-				case 20 % SettingsText.FONTNAME
+				case 21 % SettingsText.FONTNAME
 					check = Format.checkFormat(2, value, SettingsText.getPropSettings(prop));
-				case 21 % SettingsText.FONTCOLOR
+				case 22 % SettingsText.FONTCOLOR
 					check = Format.checkFormat(20, value, SettingsText.getPropSettings(prop));
-				case 22 % SettingsText.FONTWEIGHT
+				case 23 % SettingsText.FONTWEIGHT
 					check = Format.checkFormat(5, value, SettingsText.getPropSettings(prop));
-				case 23 % SettingsText.INTERPRETER
+				case 24 % SettingsText.INTERPRETER
 					check = Format.checkFormat(5, value, SettingsText.getPropSettings(prop));
-				case 24 % SettingsText.HALIGN
+				case 25 % SettingsText.HALIGN
 					check = Format.checkFormat(5, value, SettingsText.getPropSettings(prop));
-				case 25 % SettingsText.VALIGN
+				case 26 % SettingsText.VALIGN
 					check = Format.checkFormat(5, value, SettingsText.getPropSettings(prop));
-				case 26 % SettingsText.ROTATION
+				case 27 % SettingsText.ROTATION
 					check = Format.checkFormat(11, value, SettingsText.getPropSettings(prop));
-				case 3 % SettingsText.TEMPLATE
+				case 4 % SettingsText.TEMPLATE
 					check = Format.checkFormat(8, value, SettingsText.getPropSettings(prop));
 				otherwise
-					if prop <= 13
+					if prop <= 14
 						check = checkProp@Settings(prop, value);
 					end
 			end
@@ -801,7 +805,7 @@ classdef SettingsText < Settings
 			%  checkValue.
 			
 			switch prop
-				case 14 % SettingsText.VISIBLE
+				case 15 % SettingsText.VISIBLE
 					h = st.get('H');
 					if check_graphics(h, 'text') && ( ...
 					        get(h, 'Visible') ~= st.get('VISIBLE') || ...
@@ -836,7 +840,7 @@ classdef SettingsText < Settings
 					end
 					
 				otherwise
-					if prop <= 13
+					if prop <= 14
 						postprocessing@Settings(st, prop);
 					end
 			end

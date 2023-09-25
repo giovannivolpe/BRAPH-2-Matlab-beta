@@ -2,54 +2,56 @@ classdef SettingsLinePP < SettingsPP
 	%SettingsLinePP is the panel with line settings.
 	% It is a subclass of <a href="matlab:help SettingsPP">SettingsPP</a>.
 	%
-	% SettingsLinePP plots the panel for line settings,
-	% including visibility, line style, size and color, and symbol style, size, edge color, and face color.
+	% A Prop Panel for Line Settings (SettingsLinePP) plots the panel for 
+	%  line settings, including visibility, line style, size and color, 
+	%  and symbol style, size, edge color, and face color.
 	% It works for all categories.
 	%
 	% The list of SettingsLinePP properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the settings line panel.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the settings line panel.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the settings line panel.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the settings line panel.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the settings line panel.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the settings line panel.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-	%  <strong>9</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-	%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
-	%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
-	%  <strong>12</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
-	%  <strong>13</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
-	%  <strong>14</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
-	%  <strong>15</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
-	%  <strong>16</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
-	%  <strong>17</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
-	%  <strong>18</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
-	%  <strong>19</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
-	%  <strong>20</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.
-	%  <strong>21</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
-	%  <strong>22</strong> <strong>EL</strong> 	EL (data, item) is the element.
-	%  <strong>23</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-	%  <strong>24</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the settings position panel.
-	%  <strong>25</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
-	%  <strong>26</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
-	%  <strong>27</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
-	%  <strong>28</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
-	%  <strong>29</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
-	%  <strong>30</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
-	%  <strong>31</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
-	%  <strong>32</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
-	%  <strong>33</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
-	%  <strong>34</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-	%  <strong>35</strong> <strong>ENABLE</strong> 	ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.
-	%  <strong>36</strong> <strong>CHECKBOX_VISIBLE</strong> 	CHECKBOX_VISIBLE (evanescent, handle) determines whether the line is visible.
-	%  <strong>37</strong> <strong>DROPDOWN_LINESTYLE</strong> 	DROPDOWN_LINESTYLE (evanescent, handle) is the line style dropdown.
-	%  <strong>38</strong> <strong>EDITFIELD_LINEWIDTH</strong> 	EDITFIELD_LINEWIDTH (evanescent, handle) is the line width edit field.
-	%  <strong>39</strong> <strong>BUTTON_LINECOLOR</strong> 	BUTTON_LINECOLOR (evanescent, handle) is the line color button.
-	%  <strong>40</strong> <strong>DROPDOWN_SYMBOL</strong> 	DROPDOWN_SYMBOL (evanescent, handle) is the marker value dropdown.
-	%  <strong>41</strong> <strong>EDITFIELD_SYMBOLSIZE</strong> 	EDITFIELD_SYMBOLSIZE (evanescent, handle) is the symbol size edit field.
-	%  <strong>42</strong> <strong>BUTTON_FACECOLOR</strong> 	BUTTON_FACECOLOR (evanescent, handle) is the marker face color button.
-	%  <strong>43</strong> <strong>BUTTON_EDGECOLOR</strong> 	BUTTON_EDGECOLOR (evanescent, handle) is the marker edge color button.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the prop panel for line settings.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the prop panel for line settings.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the prop panel for line settings.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the prop panel for line settings.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the prop panel for line settings.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the prop panel for line settings.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the prop panel for line settings.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
+	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
+	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+	%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
+	%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
+	%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
+	%  <strong>15</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
+	%  <strong>16</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
+	%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
+	%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
+	%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
+	%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
+	%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.
+	%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
+	%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
+	%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
+	%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the settings position panel.
+	%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
+	%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
+	%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
+	%  <strong>29</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
+	%  <strong>30</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
+	%  <strong>31</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
+	%  <strong>32</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
+	%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
+	%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
+	%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
+	%  <strong>36</strong> <strong>ENABLE</strong> 	ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.
+	%  <strong>37</strong> <strong>CHECKBOX_VISIBLE</strong> 	CHECKBOX_VISIBLE (evanescent, handle) determines whether the line is visible.
+	%  <strong>38</strong> <strong>DROPDOWN_LINESTYLE</strong> 	DROPDOWN_LINESTYLE (evanescent, handle) is the line style dropdown.
+	%  <strong>39</strong> <strong>EDITFIELD_LINEWIDTH</strong> 	EDITFIELD_LINEWIDTH (evanescent, handle) is the line width edit field.
+	%  <strong>40</strong> <strong>BUTTON_LINECOLOR</strong> 	BUTTON_LINECOLOR (evanescent, handle) is the line color button.
+	%  <strong>41</strong> <strong>DROPDOWN_SYMBOL</strong> 	DROPDOWN_SYMBOL (evanescent, handle) is the marker value dropdown.
+	%  <strong>42</strong> <strong>EDITFIELD_SYMBOLSIZE</strong> 	EDITFIELD_SYMBOLSIZE (evanescent, handle) is the symbol size edit field.
+	%  <strong>43</strong> <strong>BUTTON_FACECOLOR</strong> 	BUTTON_FACECOLOR (evanescent, handle) is the marker face color button.
+	%  <strong>44</strong> <strong>BUTTON_EDGECOLOR</strong> 	BUTTON_EDGECOLOR (evanescent, handle) is the marker edge color button.
 	%
 	% SettingsLinePP methods (constructor):
 	%  SettingsLinePP - constructor
@@ -69,33 +71,33 @@ classdef SettingsLinePP < SettingsPP
 	%  unchecked - sets a property to NOT checked
 	%
 	% SettingsLinePP methods (display):
-	%  tostring - string with information about the settings line panel
-	%  disp - displays information about the settings line panel
-	%  tree - displays the tree of the settings line panel
+	%  tostring - string with information about the prop panel for line settings
+	%  disp - displays information about the prop panel for line settings
+	%  tree - displays the tree of the prop panel for line settings
 	%
 	% SettingsLinePP methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two settings line panel are equal (values, locked)
+	%  isequal - determines whether two prop panel for line settings are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the settings line panel
+	%  copy - copies the prop panel for line settings
 	%
 	% SettingsLinePP methods (save/load, Static):
-	%  save - saves BRAPH2 settings line panel as b2 file
-	%  load - loads a BRAPH2 settings line panel from a b2 file
+	%  save - saves BRAPH2 prop panel for line settings as b2 file
+	%  load - loads a BRAPH2 prop panel for line settings from a b2 file
 	%
 	% SettingsLinePP method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the settings line panel
+	%  encodeJSON - returns a JSON string encoding the prop panel for line settings
 	%
 	% SettingsLinePP method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the settings line panel
+	%   decodeJSON - returns a JSON string encoding the prop panel for line settings
 	%
 	% SettingsLinePP methods (inspection, Static):
-	%  getClass - returns the class of the settings line panel
+	%  getClass - returns the class of the prop panel for line settings
 	%  getSubclasses - returns all subclasses of SettingsLinePP
-	%  getProps - returns the property list of the settings line panel
-	%  getPropNumber - returns the property number of the settings line panel
+	%  getProps - returns the property list of the prop panel for line settings
+	%  getPropNumber - returns the property number of the prop panel for line settings
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -140,54 +142,54 @@ classdef SettingsLinePP < SettingsPP
 	% See also SettingsLine, uicheckbox, uidropdown, uieditfield, uipushbutton.
 	
 	properties (Constant) % properties
-		ENABLE = 35; %CET: Computational Efficiency Trick
+		ENABLE = 36; %CET: Computational Efficiency Trick
 		ENABLE_TAG = 'ENABLE';
 		ENABLE_CATEGORY = 9;
 		ENABLE_FORMAT = 4;
 		
-		CHECKBOX_VISIBLE = 36; %CET: Computational Efficiency Trick
+		CHECKBOX_VISIBLE = 37; %CET: Computational Efficiency Trick
 		CHECKBOX_VISIBLE_TAG = 'CHECKBOX_VISIBLE';
 		CHECKBOX_VISIBLE_CATEGORY = 7;
 		CHECKBOX_VISIBLE_FORMAT = 18;
 		
-		DROPDOWN_LINESTYLE = 37; %CET: Computational Efficiency Trick
+		DROPDOWN_LINESTYLE = 38; %CET: Computational Efficiency Trick
 		DROPDOWN_LINESTYLE_TAG = 'DROPDOWN_LINESTYLE';
 		DROPDOWN_LINESTYLE_CATEGORY = 7;
 		DROPDOWN_LINESTYLE_FORMAT = 18;
 		
-		EDITFIELD_LINEWIDTH = 38; %CET: Computational Efficiency Trick
+		EDITFIELD_LINEWIDTH = 39; %CET: Computational Efficiency Trick
 		EDITFIELD_LINEWIDTH_TAG = 'EDITFIELD_LINEWIDTH';
 		EDITFIELD_LINEWIDTH_CATEGORY = 7;
 		EDITFIELD_LINEWIDTH_FORMAT = 18;
 		
-		BUTTON_LINECOLOR = 39; %CET: Computational Efficiency Trick
+		BUTTON_LINECOLOR = 40; %CET: Computational Efficiency Trick
 		BUTTON_LINECOLOR_TAG = 'BUTTON_LINECOLOR';
 		BUTTON_LINECOLOR_CATEGORY = 7;
 		BUTTON_LINECOLOR_FORMAT = 18;
 		
-		DROPDOWN_SYMBOL = 40; %CET: Computational Efficiency Trick
+		DROPDOWN_SYMBOL = 41; %CET: Computational Efficiency Trick
 		DROPDOWN_SYMBOL_TAG = 'DROPDOWN_SYMBOL';
 		DROPDOWN_SYMBOL_CATEGORY = 7;
 		DROPDOWN_SYMBOL_FORMAT = 18;
 		
-		EDITFIELD_SYMBOLSIZE = 41; %CET: Computational Efficiency Trick
+		EDITFIELD_SYMBOLSIZE = 42; %CET: Computational Efficiency Trick
 		EDITFIELD_SYMBOLSIZE_TAG = 'EDITFIELD_SYMBOLSIZE';
 		EDITFIELD_SYMBOLSIZE_CATEGORY = 7;
 		EDITFIELD_SYMBOLSIZE_FORMAT = 18;
 		
-		BUTTON_FACECOLOR = 42; %CET: Computational Efficiency Trick
+		BUTTON_FACECOLOR = 43; %CET: Computational Efficiency Trick
 		BUTTON_FACECOLOR_TAG = 'BUTTON_FACECOLOR';
 		BUTTON_FACECOLOR_CATEGORY = 7;
 		BUTTON_FACECOLOR_FORMAT = 18;
 		
-		BUTTON_EDGECOLOR = 43; %CET: Computational Efficiency Trick
+		BUTTON_EDGECOLOR = 44; %CET: Computational Efficiency Trick
 		BUTTON_EDGECOLOR_TAG = 'BUTTON_EDGECOLOR';
 		BUTTON_EDGECOLOR_CATEGORY = 7;
 		BUTTON_EDGECOLOR_FORMAT = 18;
 	end
 	methods % constructor
 		function pr = SettingsLinePP(varargin)
-			%SettingsLinePP() creates a settings line panel.
+			%SettingsLinePP() creates a prop panel for line settings.
 			%
 			% SettingsLinePP(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -197,49 +199,50 @@ classdef SettingsLinePP < SettingsPP
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of SettingsLinePP properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the settings line panel.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the settings line panel.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the settings line panel.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the settings line panel.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the settings line panel.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the settings line panel.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-			%  <strong>9</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-			%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
-			%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
-			%  <strong>12</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
-			%  <strong>13</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
-			%  <strong>14</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
-			%  <strong>15</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
-			%  <strong>16</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
-			%  <strong>17</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
-			%  <strong>18</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
-			%  <strong>19</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
-			%  <strong>20</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.
-			%  <strong>21</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
-			%  <strong>22</strong> <strong>EL</strong> 	EL (data, item) is the element.
-			%  <strong>23</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-			%  <strong>24</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the settings position panel.
-			%  <strong>25</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
-			%  <strong>26</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
-			%  <strong>27</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
-			%  <strong>28</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
-			%  <strong>29</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
-			%  <strong>30</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
-			%  <strong>31</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
-			%  <strong>32</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
-			%  <strong>33</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
-			%  <strong>34</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-			%  <strong>35</strong> <strong>ENABLE</strong> 	ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.
-			%  <strong>36</strong> <strong>CHECKBOX_VISIBLE</strong> 	CHECKBOX_VISIBLE (evanescent, handle) determines whether the line is visible.
-			%  <strong>37</strong> <strong>DROPDOWN_LINESTYLE</strong> 	DROPDOWN_LINESTYLE (evanescent, handle) is the line style dropdown.
-			%  <strong>38</strong> <strong>EDITFIELD_LINEWIDTH</strong> 	EDITFIELD_LINEWIDTH (evanescent, handle) is the line width edit field.
-			%  <strong>39</strong> <strong>BUTTON_LINECOLOR</strong> 	BUTTON_LINECOLOR (evanescent, handle) is the line color button.
-			%  <strong>40</strong> <strong>DROPDOWN_SYMBOL</strong> 	DROPDOWN_SYMBOL (evanescent, handle) is the marker value dropdown.
-			%  <strong>41</strong> <strong>EDITFIELD_SYMBOLSIZE</strong> 	EDITFIELD_SYMBOLSIZE (evanescent, handle) is the symbol size edit field.
-			%  <strong>42</strong> <strong>BUTTON_FACECOLOR</strong> 	BUTTON_FACECOLOR (evanescent, handle) is the marker face color button.
-			%  <strong>43</strong> <strong>BUTTON_EDGECOLOR</strong> 	BUTTON_EDGECOLOR (evanescent, handle) is the marker edge color button.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the prop panel for line settings.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the prop panel for line settings.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the prop panel for line settings.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the prop panel for line settings.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the prop panel for line settings.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the prop panel for line settings.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the prop panel for line settings.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
+			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
+			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+			%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
+			%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
+			%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
+			%  <strong>15</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
+			%  <strong>16</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.
+			%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.
+			%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
+			%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.
+			%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
+			%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.
+			%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
+			%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
+			%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
+			%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the settings position panel.
+			%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
+			%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
+			%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
+			%  <strong>29</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
+			%  <strong>30</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
+			%  <strong>31</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
+			%  <strong>32</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
+			%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
+			%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
+			%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
+			%  <strong>36</strong> <strong>ENABLE</strong> 	ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.
+			%  <strong>37</strong> <strong>CHECKBOX_VISIBLE</strong> 	CHECKBOX_VISIBLE (evanescent, handle) determines whether the line is visible.
+			%  <strong>38</strong> <strong>DROPDOWN_LINESTYLE</strong> 	DROPDOWN_LINESTYLE (evanescent, handle) is the line style dropdown.
+			%  <strong>39</strong> <strong>EDITFIELD_LINEWIDTH</strong> 	EDITFIELD_LINEWIDTH (evanescent, handle) is the line width edit field.
+			%  <strong>40</strong> <strong>BUTTON_LINECOLOR</strong> 	BUTTON_LINECOLOR (evanescent, handle) is the line color button.
+			%  <strong>41</strong> <strong>DROPDOWN_SYMBOL</strong> 	DROPDOWN_SYMBOL (evanescent, handle) is the marker value dropdown.
+			%  <strong>42</strong> <strong>EDITFIELD_SYMBOLSIZE</strong> 	EDITFIELD_SYMBOLSIZE (evanescent, handle) is the symbol size edit field.
+			%  <strong>43</strong> <strong>BUTTON_FACECOLOR</strong> 	BUTTON_FACECOLOR (evanescent, handle) is the marker face color button.
+			%  <strong>44</strong> <strong>BUTTON_EDGECOLOR</strong> 	BUTTON_EDGECOLOR (evanescent, handle) is the marker edge color button.
 			%
 			% See also Category, Format.
 			
@@ -248,12 +251,12 @@ classdef SettingsLinePP < SettingsPP
 	end
 	methods (Static) % inspection
 		function pr_class = getClass()
-			%GETCLASS returns the class of the settings line panel.
+			%GETCLASS returns the class of the prop panel for line settings.
 			%
 			% CLASS = SettingsLinePP.GETCLASS() returns the class 'SettingsLinePP'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = PR.GETCLASS() returns the class of the settings line panel PR.
+			%  CLASS = PR.GETCLASS() returns the class of the prop panel for line settings PR.
 			%  CLASS = Element.GETCLASS(PR) returns the class of 'PR'.
 			%  CLASS = Element.GETCLASS('SettingsLinePP') returns 'SettingsLinePP'.
 			%
@@ -263,12 +266,12 @@ classdef SettingsLinePP < SettingsPP
 			pr_class = 'SettingsLinePP';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the settings line panel.
+			%GETSUBCLASSES returns all subclasses of the prop panel for line settings.
 			%
 			% LIST = SettingsLinePP.GETSUBCLASSES() returns all subclasses of 'SettingsLinePP'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = PR.GETSUBCLASSES() returns all subclasses of the settings line panel PR.
+			%  LIST = PR.GETSUBCLASSES() returns all subclasses of the prop panel for line settings PR.
 			%  LIST = Element.GETSUBCLASSES(PR) returns all subclasses of 'PR'.
 			%  LIST = Element.GETSUBCLASSES('SettingsLinePP') returns all subclasses of 'SettingsLinePP'.
 			%
@@ -280,16 +283,16 @@ classdef SettingsLinePP < SettingsPP
 			subclass_list = { 'SettingsLinePP' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of settings line panel.
+			%GETPROPS returns the property list of prop panel for line settings.
 			%
-			% PROPS = SettingsLinePP.GETPROPS() returns the property list of settings line panel
+			% PROPS = SettingsLinePP.GETPROPS() returns the property list of prop panel for line settings
 			%  as a row vector.
 			%
 			% PROPS = SettingsLinePP.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = PR.GETPROPS([CATEGORY]) returns the property list of the settings line panel PR.
+			%  PROPS = PR.GETPROPS([CATEGORY]) returns the property list of the prop panel for line settings PR.
 			%  PROPS = Element.GETPROPS(PR[, CATEGORY]) returns the property list of 'PR'.
 			%  PROPS = Element.GETPROPS('SettingsLinePP'[, CATEGORY]) returns the property list of 'SettingsLinePP'.
 			%
@@ -301,41 +304,41 @@ classdef SettingsLinePP < SettingsPP
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2];
+					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
+					prop_list = 4;
 				case 4 % Category.DATA
-					prop_list = [4 22 23 28];
+					prop_list = [5 23 24 29];
 				case 6 % Category.QUERY
-					prop_list = [7 10 11 15 16 17 18 19 20 21];
+					prop_list = [8 11 12 16 17 18 19 20 21 22];
 				case 7 % Category.EVANESCENT
-					prop_list = [9 14 26 27 29 30 31 32 33 34 36 37 38 39 40 41 42 43];
+					prop_list = [10 15 27 28 30 31 32 33 34 35 37 38 39 40 41 42 43 44];
 				case 8 % Category.FIGURE
-					prop_list = 13;
+					prop_list = 14;
 				case 9 % Category.GUI
-					prop_list = [8 12 24 25 35];
+					prop_list = [9 13 25 26 36];
 				otherwise
 					prop_list = [];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of settings line panel.
+			%GETPROPNUMBER returns the property number of prop panel for line settings.
 			%
-			% N = SettingsLinePP.GETPROPNUMBER() returns the property number of settings line panel.
+			% N = SettingsLinePP.GETPROPNUMBER() returns the property number of prop panel for line settings.
 			%
-			% N = SettingsLinePP.GETPROPNUMBER(CATEGORY) returns the property number of settings line panel
+			% N = SettingsLinePP.GETPROPNUMBER(CATEGORY) returns the property number of prop panel for line settings
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = PR.GETPROPNUMBER([CATEGORY]) returns the property number of the settings line panel PR.
+			%  N = PR.GETPROPNUMBER([CATEGORY]) returns the property number of the prop panel for line settings PR.
 			%  N = Element.GETPROPNUMBER(PR) returns the property number of 'PR'.
 			%  N = Element.GETPROPNUMBER('SettingsLinePP') returns the property number of 'SettingsLinePP'.
 			%
@@ -347,13 +350,13 @@ classdef SettingsLinePP < SettingsPP
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 43;
+				prop_number = 44;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 2;
+					prop_number = 3;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -373,7 +376,7 @@ classdef SettingsLinePP < SettingsPP
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in settings line panel/error.
+			%EXISTSPROP checks whether property exists in prop panel for line settings/error.
 			%
 			% CHECK = SettingsLinePP.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -398,7 +401,7 @@ classdef SettingsLinePP < SettingsPP
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 43 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 44 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -411,7 +414,7 @@ classdef SettingsLinePP < SettingsPP
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in settings line panel/error.
+			%EXISTSTAG checks whether tag exists in prop panel for line settings/error.
 			%
 			% CHECK = SettingsLinePP.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -436,7 +439,7 @@ classdef SettingsLinePP < SettingsPP
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'CHECKBOX_VISIBLE'  'DROPDOWN_LINESTYLE'  'EDITFIELD_LINEWIDTH'  'BUTTON_LINECOLOR'  'DROPDOWN_SYMBOL'  'EDITFIELD_SYMBOLSIZE'  'BUTTON_FACECOLOR'  'BUTTON_EDGECOLOR' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'CHECKBOX_VISIBLE'  'DROPDOWN_LINESTYLE'  'EDITFIELD_LINEWIDTH'  'BUTTON_LINECOLOR'  'DROPDOWN_SYMBOL'  'EDITFIELD_SYMBOLSIZE'  'BUTTON_FACECOLOR'  'BUTTON_EDGECOLOR' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -469,7 +472,7 @@ classdef SettingsLinePP < SettingsPP
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'CHECKBOX_VISIBLE'  'DROPDOWN_LINESTYLE'  'EDITFIELD_LINEWIDTH'  'BUTTON_LINECOLOR'  'DROPDOWN_SYMBOL'  'EDITFIELD_SYMBOLSIZE'  'BUTTON_FACECOLOR'  'BUTTON_EDGECOLOR' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'CHECKBOX_VISIBLE'  'DROPDOWN_LINESTYLE'  'EDITFIELD_LINEWIDTH'  'BUTTON_LINECOLOR'  'DROPDOWN_SYMBOL'  'EDITFIELD_SYMBOLSIZE'  'BUTTON_FACECOLOR'  'BUTTON_EDGECOLOR' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -498,7 +501,7 @@ classdef SettingsLinePP < SettingsPP
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				settingslinepp_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'CHECKBOX_VISIBLE'  'DROPDOWN_LINESTYLE'  'EDITFIELD_LINEWIDTH'  'BUTTON_LINECOLOR'  'DROPDOWN_SYMBOL'  'EDITFIELD_SYMBOLSIZE'  'BUTTON_FACECOLOR'  'BUTTON_EDGECOLOR' };
+				settingslinepp_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'ENABLE'  'CHECKBOX_VISIBLE'  'DROPDOWN_LINESTYLE'  'EDITFIELD_LINEWIDTH'  'BUTTON_LINECOLOR'  'DROPDOWN_SYMBOL'  'EDITFIELD_SYMBOLSIZE'  'BUTTON_FACECOLOR'  'BUTTON_EDGECOLOR' };
 				tag = settingslinepp_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -525,7 +528,7 @@ classdef SettingsLinePP < SettingsPP
 			prop = SettingsLinePP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingslinepp_category_list = { 1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  6  6  6  4  4  9  9  7  7  4  7  7  7  7  7  7  9  7  7  7  7  7  7  7  7 };
+			settingslinepp_category_list = { 1  1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  6  6  6  4  4  9  9  7  7  4  7  7  7  7  7  7  9  7  7  7  7  7  7  7  7 };
 			prop_category = settingslinepp_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -551,7 +554,7 @@ classdef SettingsLinePP < SettingsPP
 			prop = SettingsLinePP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingslinepp_format_list = { 2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  4  4  4  8  11  22  2  18  18  8  18  18  18  19  19  19  4  18  18  18  18  18  18  18  18 };
+			settingslinepp_format_list = { 2  2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  4  4  4  8  11  22  2  18  18  8  18  18  18  19  19  19  4  18  18  18  18  18  18  18  18 };
 			prop_format = settingslinepp_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -577,7 +580,7 @@ classdef SettingsLinePP < SettingsPP
 			prop = SettingsLinePP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingslinepp_description_list = { 'NAME (constant, string) is the name of the settings line panel.'  'DESCRIPTION (constant, string) is the description of the settings line panel.'  'TEMPLATE (parameter, item) is the template of the settings line panel.'  'ID (data, string) is a few-letter code for the settings line panel.'  'LABEL (metadata, string) is an extended label of the settings line panel.'  'NOTES (metadata, string) are some specific notes about the settings line panel.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the property panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the settings position panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.'  'CHECKBOX_VISIBLE (evanescent, handle) determines whether the line is visible.'  'DROPDOWN_LINESTYLE (evanescent, handle) is the line style dropdown.'  'EDITFIELD_LINEWIDTH (evanescent, handle) is the line width edit field.'  'BUTTON_LINECOLOR (evanescent, handle) is the line color button.'  'DROPDOWN_SYMBOL (evanescent, handle) is the marker value dropdown.'  'EDITFIELD_SYMBOLSIZE (evanescent, handle) is the symbol size edit field.'  'BUTTON_FACECOLOR (evanescent, handle) is the marker face color button.'  'BUTTON_EDGECOLOR (evanescent, handle) is the marker edge color button.' };
+			settingslinepp_description_list = { 'ELCLASS (constant, string) is the class of the prop panel for line settings.'  'NAME (constant, string) is the name of the prop panel for line settings.'  'DESCRIPTION (constant, string) is the description of the prop panel for line settings.'  'TEMPLATE (parameter, item) is the template of the prop panel for line settings.'  'ID (data, string) is a few-letter code for the prop panel for line settings.'  'LABEL (metadata, string) is an extended label of the prop panel for line settings.'  'NOTES (metadata, string) are some specific notes about the prop panel for line settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the prop panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the settings position panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.'  'CHECKBOX_VISIBLE (evanescent, handle) determines whether the line is visible.'  'DROPDOWN_LINESTYLE (evanescent, handle) is the line style dropdown.'  'EDITFIELD_LINEWIDTH (evanescent, handle) is the line width edit field.'  'BUTTON_LINECOLOR (evanescent, handle) is the line color button.'  'DROPDOWN_SYMBOL (evanescent, handle) is the marker value dropdown.'  'EDITFIELD_SYMBOLSIZE (evanescent, handle) is the symbol size edit field.'  'BUTTON_FACECOLOR (evanescent, handle) is the marker face color button.'  'BUTTON_EDGECOLOR (evanescent, handle) is the marker edge color button.' };
 			prop_description = settingslinepp_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -603,25 +606,25 @@ classdef SettingsLinePP < SettingsPP
 			prop = SettingsLinePP.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 35 % SettingsLinePP.ENABLE
+				case 36 % SettingsLinePP.ENABLE
 					prop_settings = Format.getFormatSettings(4);
-				case 36 % SettingsLinePP.CHECKBOX_VISIBLE
+				case 37 % SettingsLinePP.CHECKBOX_VISIBLE
 					prop_settings = Format.getFormatSettings(18);
-				case 37 % SettingsLinePP.DROPDOWN_LINESTYLE
+				case 38 % SettingsLinePP.DROPDOWN_LINESTYLE
 					prop_settings = Format.getFormatSettings(18);
-				case 38 % SettingsLinePP.EDITFIELD_LINEWIDTH
+				case 39 % SettingsLinePP.EDITFIELD_LINEWIDTH
 					prop_settings = Format.getFormatSettings(18);
-				case 39 % SettingsLinePP.BUTTON_LINECOLOR
+				case 40 % SettingsLinePP.BUTTON_LINECOLOR
 					prop_settings = Format.getFormatSettings(18);
-				case 40 % SettingsLinePP.DROPDOWN_SYMBOL
+				case 41 % SettingsLinePP.DROPDOWN_SYMBOL
 					prop_settings = Format.getFormatSettings(18);
-				case 41 % SettingsLinePP.EDITFIELD_SYMBOLSIZE
+				case 42 % SettingsLinePP.EDITFIELD_SYMBOLSIZE
 					prop_settings = Format.getFormatSettings(18);
-				case 42 % SettingsLinePP.BUTTON_FACECOLOR
+				case 43 % SettingsLinePP.BUTTON_FACECOLOR
 					prop_settings = Format.getFormatSettings(18);
-				case 43 % SettingsLinePP.BUTTON_EDGECOLOR
+				case 44 % SettingsLinePP.BUTTON_EDGECOLOR
 					prop_settings = Format.getFormatSettings(18);
-				case 3 % SettingsLinePP.TEMPLATE
+				case 4 % SettingsLinePP.TEMPLATE
 					prop_settings = 'SettingsLinePP';
 				otherwise
 					prop_settings = getPropSettings@SettingsPP(prop);
@@ -650,41 +653,43 @@ classdef SettingsLinePP < SettingsPP
 			prop = SettingsLinePP.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 35 % SettingsLinePP.ENABLE
+				case 36 % SettingsLinePP.ENABLE
 					prop_default = true;
-				case 36 % SettingsLinePP.CHECKBOX_VISIBLE
+				case 37 % SettingsLinePP.CHECKBOX_VISIBLE
 					prop_default = Format.getFormatDefault(18, SettingsLinePP.getPropSettings(prop));
-				case 37 % SettingsLinePP.DROPDOWN_LINESTYLE
+				case 38 % SettingsLinePP.DROPDOWN_LINESTYLE
 					prop_default = Format.getFormatDefault(18, SettingsLinePP.getPropSettings(prop));
-				case 38 % SettingsLinePP.EDITFIELD_LINEWIDTH
+				case 39 % SettingsLinePP.EDITFIELD_LINEWIDTH
 					prop_default = Format.getFormatDefault(18, SettingsLinePP.getPropSettings(prop));
-				case 39 % SettingsLinePP.BUTTON_LINECOLOR
+				case 40 % SettingsLinePP.BUTTON_LINECOLOR
 					prop_default = Format.getFormatDefault(18, SettingsLinePP.getPropSettings(prop));
-				case 40 % SettingsLinePP.DROPDOWN_SYMBOL
+				case 41 % SettingsLinePP.DROPDOWN_SYMBOL
 					prop_default = Format.getFormatDefault(18, SettingsLinePP.getPropSettings(prop));
-				case 41 % SettingsLinePP.EDITFIELD_SYMBOLSIZE
+				case 42 % SettingsLinePP.EDITFIELD_SYMBOLSIZE
 					prop_default = Format.getFormatDefault(18, SettingsLinePP.getPropSettings(prop));
-				case 42 % SettingsLinePP.BUTTON_FACECOLOR
+				case 43 % SettingsLinePP.BUTTON_FACECOLOR
 					prop_default = Format.getFormatDefault(18, SettingsLinePP.getPropSettings(prop));
-				case 43 % SettingsLinePP.BUTTON_EDGECOLOR
+				case 44 % SettingsLinePP.BUTTON_EDGECOLOR
 					prop_default = Format.getFormatDefault(18, SettingsLinePP.getPropSettings(prop));
-				case 1 % SettingsLinePP.NAME
+				case 1 % SettingsLinePP.ELCLASS
 					prop_default = 'SettingsLinePP';
-				case 2 % SettingsLinePP.DESCRIPTION
-					prop_default = 'SettingsLinePP plots the panel for line settings, including visibility, line style, size and color, and symbol style, size, edge color, and face color.';
-				case 3 % SettingsLinePP.TEMPLATE
+				case 2 % SettingsLinePP.NAME
+					prop_default = 'Prop Panel for Line Settings';
+				case 3 % SettingsLinePP.DESCRIPTION
+					prop_default = 'A Prop Panel for Line Settings (SettingsLinePP) plots the panel for line settings, including visibility, line style, size and color, and symbol style, size, edge color, and face color. It works for all categories.';
+				case 4 % SettingsLinePP.TEMPLATE
 					prop_default = Format.getFormatDefault(8, SettingsLinePP.getPropSettings(prop));
-				case 4 % SettingsLinePP.ID
+				case 5 % SettingsLinePP.ID
 					prop_default = 'SettingsLinePP ID';
-				case 5 % SettingsLinePP.LABEL
+				case 6 % SettingsLinePP.LABEL
 					prop_default = 'SettingsLinePP label';
-				case 6 % SettingsLinePP.NOTES
+				case 7 % SettingsLinePP.NOTES
 					prop_default = 'SettingsLinePP notes';
-				case 22 % SettingsLinePP.EL
+				case 23 % SettingsLinePP.EL
 					prop_default = GraphHistPF();
-				case 23 % SettingsLinePP.PROP
-					prop_default = 35;
-				case 24 % SettingsLinePP.HEIGHT
+				case 24 % SettingsLinePP.PROP
+					prop_default = 36;
+				case 25 % SettingsLinePP.HEIGHT
 					prop_default = 111;
 				otherwise
 					prop_default = getPropDefault@SettingsPP(prop);
@@ -750,28 +755,28 @@ classdef SettingsLinePP < SettingsPP
 			prop = SettingsLinePP.getPropProp(pointer);
 			
 			switch prop
-				case 35 % SettingsLinePP.ENABLE
+				case 36 % SettingsLinePP.ENABLE
 					check = Format.checkFormat(4, value, SettingsLinePP.getPropSettings(prop));
-				case 36 % SettingsLinePP.CHECKBOX_VISIBLE
+				case 37 % SettingsLinePP.CHECKBOX_VISIBLE
 					check = Format.checkFormat(18, value, SettingsLinePP.getPropSettings(prop));
-				case 37 % SettingsLinePP.DROPDOWN_LINESTYLE
+				case 38 % SettingsLinePP.DROPDOWN_LINESTYLE
 					check = Format.checkFormat(18, value, SettingsLinePP.getPropSettings(prop));
-				case 38 % SettingsLinePP.EDITFIELD_LINEWIDTH
+				case 39 % SettingsLinePP.EDITFIELD_LINEWIDTH
 					check = Format.checkFormat(18, value, SettingsLinePP.getPropSettings(prop));
-				case 39 % SettingsLinePP.BUTTON_LINECOLOR
+				case 40 % SettingsLinePP.BUTTON_LINECOLOR
 					check = Format.checkFormat(18, value, SettingsLinePP.getPropSettings(prop));
-				case 40 % SettingsLinePP.DROPDOWN_SYMBOL
+				case 41 % SettingsLinePP.DROPDOWN_SYMBOL
 					check = Format.checkFormat(18, value, SettingsLinePP.getPropSettings(prop));
-				case 41 % SettingsLinePP.EDITFIELD_SYMBOLSIZE
+				case 42 % SettingsLinePP.EDITFIELD_SYMBOLSIZE
 					check = Format.checkFormat(18, value, SettingsLinePP.getPropSettings(prop));
-				case 42 % SettingsLinePP.BUTTON_FACECOLOR
+				case 43 % SettingsLinePP.BUTTON_FACECOLOR
 					check = Format.checkFormat(18, value, SettingsLinePP.getPropSettings(prop));
-				case 43 % SettingsLinePP.BUTTON_EDGECOLOR
+				case 44 % SettingsLinePP.BUTTON_EDGECOLOR
 					check = Format.checkFormat(18, value, SettingsLinePP.getPropSettings(prop));
-				case 3 % SettingsLinePP.TEMPLATE
+				case 4 % SettingsLinePP.TEMPLATE
 					check = Format.checkFormat(8, value, SettingsLinePP.getPropSettings(prop));
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						check = checkProp@SettingsPP(prop, value);
 					end
 			end
@@ -804,7 +809,7 @@ classdef SettingsLinePP < SettingsPP
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 36 % SettingsLinePP.CHECKBOX_VISIBLE
+				case 37 % SettingsLinePP.CHECKBOX_VISIBLE
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					checkbox_visible = uicheckbox( ...
@@ -817,7 +822,7 @@ classdef SettingsLinePP < SettingsPP
 					    );
 					value = checkbox_visible;
 					
-				case 37 % SettingsLinePP.DROPDOWN_LINESTYLE
+				case 38 % SettingsLinePP.DROPDOWN_LINESTYLE
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					dropdown_linestyle = uidropdown( ...
@@ -831,7 +836,7 @@ classdef SettingsLinePP < SettingsPP
 					
 					value = dropdown_linestyle;
 					
-				case 38 % SettingsLinePP.EDITFIELD_LINEWIDTH
+				case 39 % SettingsLinePP.EDITFIELD_LINEWIDTH
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					editfield_linewidth = uieditfield('numeric', ...
@@ -846,7 +851,7 @@ classdef SettingsLinePP < SettingsPP
 					
 					value = editfield_linewidth;
 					
-				case 39 % SettingsLinePP.BUTTON_LINECOLOR
+				case 40 % SettingsLinePP.BUTTON_LINECOLOR
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					button_linecolor = uibutton( ...
@@ -860,7 +865,7 @@ classdef SettingsLinePP < SettingsPP
 					    );
 					value = button_linecolor;
 					
-				case 40 % SettingsLinePP.DROPDOWN_SYMBOL
+				case 41 % SettingsLinePP.DROPDOWN_SYMBOL
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					dropdown_symbol = uidropdown( ...
@@ -874,7 +879,7 @@ classdef SettingsLinePP < SettingsPP
 					
 					value = dropdown_symbol;
 					
-				case 41 % SettingsLinePP.EDITFIELD_SYMBOLSIZE
+				case 42 % SettingsLinePP.EDITFIELD_SYMBOLSIZE
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					
@@ -890,7 +895,7 @@ classdef SettingsLinePP < SettingsPP
 					
 					value = editfield_symbolsize;
 					
-				case 42 % SettingsLinePP.BUTTON_FACECOLOR
+				case 43 % SettingsLinePP.BUTTON_FACECOLOR
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					button_facecolor = uibutton( ...
@@ -904,7 +909,7 @@ classdef SettingsLinePP < SettingsPP
 					    );
 					value = button_facecolor;
 					
-				case 43 % SettingsLinePP.BUTTON_EDGECOLOR
+				case 44 % SettingsLinePP.BUTTON_EDGECOLOR
 					el = pr.get('EL');
 					prop = pr.get('PROP');
 					button_edgecolor = uibutton( ...
@@ -918,8 +923,8 @@ classdef SettingsLinePP < SettingsPP
 					    );
 					value = button_edgecolor;
 					
-				case 19 % SettingsLinePP.X_DRAW
-					value = calculateValue@PanelProp(pr, 19, varargin{:}); % also warning
+				case 20 % SettingsLinePP.X_DRAW
+					value = calculateValue@PanelProp(pr, 20, varargin{:}); % also warning
 					if value
 					    pr.memorize('CHECKBOX_VISIBLE')
 					
@@ -933,8 +938,8 @@ classdef SettingsLinePP < SettingsPP
 					    pr.memorize('BUTTON_EDGECOLOR')
 					end
 					
-				case 20 % SettingsLinePP.UPDATE
-					value = calculateValue@PanelProp(pr, 20, varargin{:}); % also warning
+				case 21 % SettingsLinePP.UPDATE
+					value = calculateValue@PanelProp(pr, 21, varargin{:}); % also warning
 					if value
 					    el = pr.get('EL');
 					    prop = pr.get('PROP');
@@ -1097,8 +1102,8 @@ classdef SettingsLinePP < SettingsPP
 					    end
 					end
 					
-				case 21 % SettingsLinePP.REDRAW
-					value = calculateValue@PanelProp(pr, 21, varargin{:}); % also warning
+				case 22 % SettingsLinePP.REDRAW
+					value = calculateValue@PanelProp(pr, 22, varargin{:}); % also warning
 					if value
 					    w_p = get_from_varargin(w(pr.get('H'), 'pixels'), 'Width', varargin);
 					    
@@ -1114,8 +1119,8 @@ classdef SettingsLinePP < SettingsPP
 					    set(pr.get('BUTTON_EDGECOLOR'),     'Position', [4+.65*w_p  9 .20*w_p 21])
 					end
 					
-				case 17 % SettingsLinePP.DELETE
-					value = calculateValue@PanelProp(pr, 17, varargin{:}); % also warning
+				case 18 % SettingsLinePP.DELETE
+					value = calculateValue@PanelProp(pr, 18, varargin{:}); % also warning
 					if value
 						pr.set('CHECKBOX_VISIBLE', Element.getNoValue())
 					    
@@ -1130,7 +1135,7 @@ classdef SettingsLinePP < SettingsPP
 					end
 					
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						value = calculateValue@SettingsPP(pr, prop, varargin{:});
 					else
 						value = calculateValue@Element(pr, prop, varargin{:});

@@ -1,5 +1,5 @@
 %% ¡header!
-OverlappingS < Strength (m, ovrlapstr) is the graph overlapping strength.
+OverlappingS < Strength (m, overlapping strength) is the graph overlapping strength.
 
 %%% ¡description!
 The overlapping strength of a graph is the sum of the strengths of a node in 
@@ -50,6 +50,11 @@ OverlappingS.COMPATIBLE_GRAPHS
 Compatible Graphs
 
 %% ¡props_update!
+
+%%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'OverlappingS'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the overlapping strength.

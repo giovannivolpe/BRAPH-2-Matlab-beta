@@ -8,6 +8,11 @@ the path lengths within each layer.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'PathLengthAv'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the average path length.
 %%%% ¡default!
 'PathLengthAv'
@@ -19,6 +24,8 @@ DESCRIPTION (constant, string) is the description of the average path length.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the average path length.
+%%%% ¡settings!
+'PathLengthAv'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the average path length.

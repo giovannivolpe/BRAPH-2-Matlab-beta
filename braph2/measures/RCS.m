@@ -1,5 +1,5 @@
 classdef RCS < Strength
-	%RCS is the graph richclubstrength.
+	%RCS is the graph rich-club strength.
 	% It is a subclass of <a href="matlab:help Strength">Strength</a>.
 	%
 	% The rich-club strength of a node at level s is the sum of the weighted edges 
@@ -8,21 +8,22 @@ classdef RCS < Strength
 	%   the default value is equal to 1.
 	%
 	% The list of RCS properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the richclubstrength.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the richclubstrength.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the richclubstrength.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the richclubstrength.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the richclubstrength.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the richclubstrength.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
-	%  <strong>9</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-	%  <strong>10</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-	%  <strong>11</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-	%  <strong>12</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-	%  <strong>13</strong> <strong>M</strong> 	M (result, cell) is the richclubstrength.
-	%  <strong>14</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>15</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, RVECTOR) 
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the rich-club strength.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the rich-club strength.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the rich-club strength.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the rich-club strength.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the rich-club strength.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the rich-club strength.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
+	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
+	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
+	%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
+	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the rich-club strength.
+	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+	%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, RVECTOR) 
 	%
 	% RCS methods (constructor):
 	%  RCS - constructor
@@ -42,33 +43,33 @@ classdef RCS < Strength
 	%  unchecked - sets a property to NOT checked
 	%
 	% RCS methods (display):
-	%  tostring - string with information about the richclubstrength
-	%  disp - displays information about the richclubstrength
-	%  tree - displays the tree of the richclubstrength
+	%  tostring - string with information about the rich-club strength
+	%  disp - displays information about the rich-club strength
+	%  tree - displays the tree of the rich-club strength
 	%
 	% RCS methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two richclubstrength are equal (values, locked)
+	%  isequal - determines whether two rich-club strength are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the richclubstrength
+	%  copy - copies the rich-club strength
 	%
 	% RCS methods (save/load, Static):
-	%  save - saves BRAPH2 richclubstrength as b2 file
-	%  load - loads a BRAPH2 richclubstrength from a b2 file
+	%  save - saves BRAPH2 rich-club strength as b2 file
+	%  load - loads a BRAPH2 rich-club strength from a b2 file
 	%
 	% RCS method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the richclubstrength
+	%  encodeJSON - returns a JSON string encoding the rich-club strength
 	%
 	% RCS method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the richclubstrength
+	%   decodeJSON - returns a JSON string encoding the rich-club strength
 	%
 	% RCS methods (inspection, Static):
-	%  getClass - returns the class of the richclubstrength
+	%  getClass - returns the class of the rich-club strength
 	%  getSubclasses - returns all subclasses of RCS
-	%  getProps - returns the property list of the richclubstrength
-	%  getPropNumber - returns the property number of the richclubstrength
+	%  getProps - returns the property list of the rich-club strength
+	%  getPropNumber - returns the property number of the rich-club strength
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -111,14 +112,14 @@ classdef RCS < Strength
 	%
 	
 	properties (Constant) % properties
-		PARAMETRIC_VALUE = 15; %CET: Computational Efficiency Trick
+		PARAMETRIC_VALUE = 16; %CET: Computational Efficiency Trick
 		PARAMETRIC_VALUE_TAG = 'PARAMETRIC_VALUE';
 		PARAMETRIC_VALUE_CATEGORY = 3;
 		PARAMETRIC_VALUE_FORMAT = 12;
 	end
 	methods % constructor
 		function m = RCS(varargin)
-			%RCS() creates a richclubstrength.
+			%RCS() creates a rich-club strength.
 			%
 			% RCS(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -128,21 +129,22 @@ classdef RCS < Strength
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of RCS properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the richclubstrength.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the richclubstrength.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the richclubstrength.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the richclubstrength.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the richclubstrength.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the richclubstrength.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
-			%  <strong>9</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-			%  <strong>10</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-			%  <strong>11</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-			%  <strong>12</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-			%  <strong>13</strong> <strong>M</strong> 	M (result, cell) is the richclubstrength.
-			%  <strong>14</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>15</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, RVECTOR) 
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the rich-club strength.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the rich-club strength.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the rich-club strength.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the rich-club strength.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the rich-club strength.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the rich-club strength.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
+			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
+			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
+			%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
+			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the rich-club strength.
+			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+			%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, RVECTOR) 
 			%
 			% See also Category, Format.
 			
@@ -151,12 +153,12 @@ classdef RCS < Strength
 	end
 	methods (Static) % inspection
 		function m_class = getClass()
-			%GETCLASS returns the class of the richclubstrength.
+			%GETCLASS returns the class of the rich-club strength.
 			%
 			% CLASS = RCS.GETCLASS() returns the class 'RCS'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = M.GETCLASS() returns the class of the richclubstrength M.
+			%  CLASS = M.GETCLASS() returns the class of the rich-club strength M.
 			%  CLASS = Element.GETCLASS(M) returns the class of 'M'.
 			%  CLASS = Element.GETCLASS('RCS') returns 'RCS'.
 			%
@@ -166,12 +168,12 @@ classdef RCS < Strength
 			m_class = 'RCS';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the richclubstrength.
+			%GETSUBCLASSES returns all subclasses of the rich-club strength.
 			%
 			% LIST = RCS.GETSUBCLASSES() returns all subclasses of 'RCS'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = M.GETSUBCLASSES() returns all subclasses of the richclubstrength M.
+			%  LIST = M.GETSUBCLASSES() returns all subclasses of the rich-club strength M.
 			%  LIST = Element.GETSUBCLASSES(M) returns all subclasses of 'M'.
 			%  LIST = Element.GETSUBCLASSES('RCS') returns all subclasses of 'RCS'.
 			%
@@ -183,16 +185,16 @@ classdef RCS < Strength
 			subclass_list = { 'RCS'  'MultiplexRCS' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of richclubstrength.
+			%GETPROPS returns the property list of rich-club strength.
 			%
-			% PROPS = RCS.GETPROPS() returns the property list of richclubstrength
+			% PROPS = RCS.GETPROPS() returns the property list of rich-club strength
 			%  as a row vector.
 			%
 			% PROPS = RCS.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = M.GETPROPS([CATEGORY]) returns the property list of the richclubstrength M.
+			%  PROPS = M.GETPROPS([CATEGORY]) returns the property list of the rich-club strength M.
 			%  PROPS = Element.GETPROPS(M[, CATEGORY]) returns the property list of 'M'.
 			%  PROPS = Element.GETPROPS('RCS'[, CATEGORY]) returns the property list of 'RCS'.
 			%
@@ -204,39 +206,39 @@ classdef RCS < Strength
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2 8 9 10 11];
+					prop_list = [1 2 3 9 10 11 12];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = [3 15];
+					prop_list = [4 16];
 				case 4 % Category.DATA
-					prop_list = [4 12];
+					prop_list = [5 13];
 				case 5 % Category.RESULT
-					prop_list = 13;
-				case 6 % Category.QUERY
-					prop_list = 7;
-				case 9 % Category.GUI
 					prop_list = 14;
+				case 6 % Category.QUERY
+					prop_list = 8;
+				case 9 % Category.GUI
+					prop_list = 15;
 				otherwise
 					prop_list = [];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of richclubstrength.
+			%GETPROPNUMBER returns the property number of rich-club strength.
 			%
-			% N = RCS.GETPROPNUMBER() returns the property number of richclubstrength.
+			% N = RCS.GETPROPNUMBER() returns the property number of rich-club strength.
 			%
-			% N = RCS.GETPROPNUMBER(CATEGORY) returns the property number of richclubstrength
+			% N = RCS.GETPROPNUMBER(CATEGORY) returns the property number of rich-club strength
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = M.GETPROPNUMBER([CATEGORY]) returns the property number of the richclubstrength M.
+			%  N = M.GETPROPNUMBER([CATEGORY]) returns the property number of the rich-club strength M.
 			%  N = Element.GETPROPNUMBER(M) returns the property number of 'M'.
 			%  N = Element.GETPROPNUMBER('RCS') returns the property number of 'RCS'.
 			%
@@ -248,13 +250,13 @@ classdef RCS < Strength
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 15;
+				prop_number = 16;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 6;
+					prop_number = 7;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -272,7 +274,7 @@ classdef RCS < Strength
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in richclubstrength/error.
+			%EXISTSPROP checks whether property exists in rich-club strength/error.
 			%
 			% CHECK = RCS.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -297,7 +299,7 @@ classdef RCS < Strength
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 15 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 16 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -310,7 +312,7 @@ classdef RCS < Strength
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in richclubstrength/error.
+			%EXISTSTAG checks whether tag exists in rich-club strength/error.
 			%
 			% CHECK = RCS.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -335,7 +337,7 @@ classdef RCS < Strength
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -368,7 +370,7 @@ classdef RCS < Strength
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -397,7 +399,7 @@ classdef RCS < Strength
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				rcs_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' };
+				rcs_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' };
 				tag = rcs_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -424,7 +426,7 @@ classdef RCS < Strength
 			prop = RCS.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			rcs_category_list = { 1  1  3  4  2  2  6  1  1  1  1  4  5  9  3 };
+			rcs_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  3 };
 			prop_category = rcs_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -450,7 +452,7 @@ classdef RCS < Strength
 			prop = RCS.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			rcs_format_list = { 2  2  8  2  2  2  2  11  11  11  7  8  16  8  12 };
+			rcs_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  12 };
 			prop_format = rcs_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -476,7 +478,7 @@ classdef RCS < Strength
 			prop = RCS.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			rcs_description_list = { 'NAME (constant, string) is the name of the richclubstrength.'  'DESCRIPTION (constant, string) is the description of the richclubstrength.'  'TEMPLATE (parameter, item) is the template of the richclubstrength.'  'ID (data, string) is a few-letter code of the richclubstrength.'  'LABEL (metadata, string) is an extended label of the richclubstrength.'  'NOTES (metadata, string) are some specific notes about the richclubstrength.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the richclubstrength.'  'PFM (gui, item) contains the panel figure of the measure.'  'PARAMETRIC_VALUE (parameter, RVECTOR) ' };
+			rcs_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the rich-club strength.'  'DESCRIPTION (constant, string) is the description of the rich-club strength.'  'TEMPLATE (parameter, item) is the template of the rich-club strength.'  'ID (data, string) is a few-letter code of the rich-club strength.'  'LABEL (metadata, string) is an extended label of the rich-club strength.'  'NOTES (metadata, string) are some specific notes about the rich-club strength.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the rich-club strength.'  'PFM (gui, item) contains the panel figure of the measure.'  'PARAMETRIC_VALUE (parameter, RVECTOR) ' };
 			prop_description = rcs_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -502,9 +504,9 @@ classdef RCS < Strength
 			prop = RCS.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 15 % RCS.PARAMETRIC_VALUE
+				case 16 % RCS.PARAMETRIC_VALUE
 					prop_settings = Format.getFormatSettings(12);
-				case 3 % RCS.TEMPLATE
+				case 4 % RCS.TEMPLATE
 					prop_settings = 'RCS';
 				otherwise
 					prop_settings = getPropSettings@Strength(prop);
@@ -533,27 +535,29 @@ classdef RCS < Strength
 			prop = RCS.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 15 % RCS.PARAMETRIC_VALUE
+				case 16 % RCS.PARAMETRIC_VALUE
 					prop_default = 1;
-				case 1 % RCS.NAME
+				case 1 % RCS.ELCLASS
 					prop_default = 'RCS';
-				case 2 % RCS.DESCRIPTION
+				case 2 % RCS.NAME
+					prop_default = 'RCS';
+				case 3 % RCS.DESCRIPTION
 					prop_default = 'The rich-club strength of a node at level s is the sum of the weighted edges that connect nodes of strength s or higher within a layer. s is set by the user and it can be a vector containting all the strength thresholds the default value is equal to 1.';
-				case 3 % RCS.TEMPLATE
+				case 4 % RCS.TEMPLATE
 					prop_default = Format.getFormatDefault(8, RCS.getPropSettings(prop));
-				case 4 % RCS.ID
+				case 5 % RCS.ID
 					prop_default = 'RCS ID';
-				case 5 % RCS.LABEL
+				case 6 % RCS.LABEL
 					prop_default = 'RCS label';
-				case 6 % RCS.NOTES
+				case 7 % RCS.NOTES
 					prop_default = 'RCS notes';
-				case 8 % RCS.SHAPE
+				case 9 % RCS.SHAPE
 					prop_default = 2;
-				case 9 % RCS.SCOPE
+				case 10 % RCS.SCOPE
 					prop_default = 2;
-				case 10 % RCS.PARAMETRICITY
+				case 11 % RCS.PARAMETRICITY
 					prop_default = 1;
-				case 11 % RCS.COMPATIBLE_GRAPHS
+				case 12 % RCS.COMPATIBLE_GRAPHS
 					prop_default = {'GraphWU' 'GraphWD' 'MultiplexWU' 'MultiplexWD'};;
 				otherwise
 					prop_default = getPropDefault@Strength(prop);
@@ -619,12 +623,12 @@ classdef RCS < Strength
 			prop = RCS.getPropProp(pointer);
 			
 			switch prop
-				case 15 % RCS.PARAMETRIC_VALUE
+				case 16 % RCS.PARAMETRIC_VALUE
 					check = Format.checkFormat(12, value, RCS.getPropSettings(prop));
-				case 3 % RCS.TEMPLATE
+				case 4 % RCS.TEMPLATE
 					check = Format.checkFormat(8, value, RCS.getPropSettings(prop));
 				otherwise
-					if prop <= 14
+					if prop <= 15
 						check = checkProp@Strength(prop, value);
 					end
 			end
@@ -657,8 +661,8 @@ classdef RCS < Strength
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 13 % RCS.M
-					rng_settings_ = rng(); rng(m.getPropSeed(13), 'twister')
+				case 14 % RCS.M
+					rng_settings_ = rng(); rng(m.getPropSeed(14), 'twister')
 					
 					g = m.get('G'); % graph from measure class
 					A = g.get('A'); % adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
@@ -715,7 +719,7 @@ classdef RCS < Strength
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 14
+					if prop <= 15
 						value = calculateValue@Strength(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

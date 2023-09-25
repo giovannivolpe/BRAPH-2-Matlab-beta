@@ -1,25 +1,26 @@
 classdef OverlappingSIn < StrengthIn
-	%OverlappingSIn is the graph overlapping strength.
+	%OverlappingSIn is the graph overlapping in-strength.
 	% It is a subclass of <a href="matlab:help StrengthIn">StrengthIn</a>.
 	%
 	% The overlapping in-strength of a graph is the sum of the in-strengths of a 
 	% node in all layers.
 	%
 	% The list of OverlappingSIn properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the overlapping strength.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the overlapping strength.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the overlapping strength.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the overlapping strength.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the overlapping strength.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the overlapping strength.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
-	%  <strong>9</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-	%  <strong>10</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-	%  <strong>11</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-	%  <strong>12</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-	%  <strong>13</strong> <strong>M</strong> 	M (result, cell) is the overlapping strength.
-	%  <strong>14</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the overlapping in-strength.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the overlapping in-strength.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the overlapping in-strength.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the overlapping in-strength.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the overlapping in-strength.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the overlapping in-strength.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
+	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
+	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
+	%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
+	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the overlapping in-strength.
+	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 	%
 	% OverlappingSIn methods (constructor):
 	%  OverlappingSIn - constructor
@@ -39,33 +40,33 @@ classdef OverlappingSIn < StrengthIn
 	%  unchecked - sets a property to NOT checked
 	%
 	% OverlappingSIn methods (display):
-	%  tostring - string with information about the ovrlapstrin
-	%  disp - displays information about the ovrlapstrin
-	%  tree - displays the tree of the ovrlapstrin
+	%  tostring - string with information about the overlapping in-strength
+	%  disp - displays information about the overlapping in-strength
+	%  tree - displays the tree of the overlapping in-strength
 	%
 	% OverlappingSIn methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two ovrlapstrin are equal (values, locked)
+	%  isequal - determines whether two overlapping in-strength are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the ovrlapstrin
+	%  copy - copies the overlapping in-strength
 	%
 	% OverlappingSIn methods (save/load, Static):
-	%  save - saves BRAPH2 ovrlapstrin as b2 file
-	%  load - loads a BRAPH2 ovrlapstrin from a b2 file
+	%  save - saves BRAPH2 overlapping in-strength as b2 file
+	%  load - loads a BRAPH2 overlapping in-strength from a b2 file
 	%
 	% OverlappingSIn method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the ovrlapstrin
+	%  encodeJSON - returns a JSON string encoding the overlapping in-strength
 	%
 	% OverlappingSIn method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the ovrlapstrin
+	%   decodeJSON - returns a JSON string encoding the overlapping in-strength
 	%
 	% OverlappingSIn methods (inspection, Static):
-	%  getClass - returns the class of the ovrlapstrin
+	%  getClass - returns the class of the overlapping in-strength
 	%  getSubclasses - returns all subclasses of OverlappingSIn
-	%  getProps - returns the property list of the ovrlapstrin
-	%  getPropNumber - returns the property number of the ovrlapstrin
+	%  getProps - returns the property list of the overlapping in-strength
+	%  getPropNumber - returns the property number of the overlapping in-strength
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -109,7 +110,7 @@ classdef OverlappingSIn < StrengthIn
 	
 	methods % constructor
 		function m = OverlappingSIn(varargin)
-			%OverlappingSIn() creates a ovrlapstrin.
+			%OverlappingSIn() creates a overlapping in-strength.
 			%
 			% OverlappingSIn(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -119,20 +120,21 @@ classdef OverlappingSIn < StrengthIn
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of OverlappingSIn properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the overlapping strength.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the overlapping strength.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the overlapping strength.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the overlapping strength.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the overlapping strength.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the overlapping strength.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
-			%  <strong>9</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-			%  <strong>10</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
-			%  <strong>11</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
-			%  <strong>12</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-			%  <strong>13</strong> <strong>M</strong> 	M (result, cell) is the overlapping strength.
-			%  <strong>14</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the overlapping in-strength.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the overlapping in-strength.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the overlapping in-strength.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the overlapping in-strength.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the overlapping in-strength.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the overlapping in-strength.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
+			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
+			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
+			%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
+			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the overlapping in-strength.
+			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 			%
 			% See also Category, Format.
 			
@@ -141,12 +143,12 @@ classdef OverlappingSIn < StrengthIn
 	end
 	methods (Static) % inspection
 		function m_class = getClass()
-			%GETCLASS returns the class of the ovrlapstrin.
+			%GETCLASS returns the class of the overlapping in-strength.
 			%
 			% CLASS = OverlappingSIn.GETCLASS() returns the class 'OverlappingSIn'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = M.GETCLASS() returns the class of the ovrlapstrin M.
+			%  CLASS = M.GETCLASS() returns the class of the overlapping in-strength M.
 			%  CLASS = Element.GETCLASS(M) returns the class of 'M'.
 			%  CLASS = Element.GETCLASS('OverlappingSIn') returns 'OverlappingSIn'.
 			%
@@ -156,12 +158,12 @@ classdef OverlappingSIn < StrengthIn
 			m_class = 'OverlappingSIn';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the ovrlapstrin.
+			%GETSUBCLASSES returns all subclasses of the overlapping in-strength.
 			%
 			% LIST = OverlappingSIn.GETSUBCLASSES() returns all subclasses of 'OverlappingSIn'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = M.GETSUBCLASSES() returns all subclasses of the ovrlapstrin M.
+			%  LIST = M.GETSUBCLASSES() returns all subclasses of the overlapping in-strength M.
 			%  LIST = Element.GETSUBCLASSES(M) returns all subclasses of 'M'.
 			%  LIST = Element.GETSUBCLASSES('OverlappingSIn') returns all subclasses of 'OverlappingSIn'.
 			%
@@ -173,16 +175,16 @@ classdef OverlappingSIn < StrengthIn
 			subclass_list = { 'OverlappingSIn'  'OverlappingSInAv' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of ovrlapstrin.
+			%GETPROPS returns the property list of overlapping in-strength.
 			%
-			% PROPS = OverlappingSIn.GETPROPS() returns the property list of ovrlapstrin
+			% PROPS = OverlappingSIn.GETPROPS() returns the property list of overlapping in-strength
 			%  as a row vector.
 			%
 			% PROPS = OverlappingSIn.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = M.GETPROPS([CATEGORY]) returns the property list of the ovrlapstrin M.
+			%  PROPS = M.GETPROPS([CATEGORY]) returns the property list of the overlapping in-strength M.
 			%  PROPS = Element.GETPROPS(M[, CATEGORY]) returns the property list of 'M'.
 			%  PROPS = Element.GETPROPS('OverlappingSIn'[, CATEGORY]) returns the property list of 'OverlappingSIn'.
 			%
@@ -194,39 +196,39 @@ classdef OverlappingSIn < StrengthIn
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2 8 9 10 11];
+					prop_list = [1 2 3 9 10 11 12];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
+					prop_list = 4;
 				case 4 % Category.DATA
-					prop_list = [4 12];
+					prop_list = [5 13];
 				case 5 % Category.RESULT
-					prop_list = 13;
-				case 6 % Category.QUERY
-					prop_list = 7;
-				case 9 % Category.GUI
 					prop_list = 14;
+				case 6 % Category.QUERY
+					prop_list = 8;
+				case 9 % Category.GUI
+					prop_list = 15;
 				otherwise
 					prop_list = [];
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of ovrlapstrin.
+			%GETPROPNUMBER returns the property number of overlapping in-strength.
 			%
-			% N = OverlappingSIn.GETPROPNUMBER() returns the property number of ovrlapstrin.
+			% N = OverlappingSIn.GETPROPNUMBER() returns the property number of overlapping in-strength.
 			%
-			% N = OverlappingSIn.GETPROPNUMBER(CATEGORY) returns the property number of ovrlapstrin
+			% N = OverlappingSIn.GETPROPNUMBER(CATEGORY) returns the property number of overlapping in-strength
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = M.GETPROPNUMBER([CATEGORY]) returns the property number of the ovrlapstrin M.
+			%  N = M.GETPROPNUMBER([CATEGORY]) returns the property number of the overlapping in-strength M.
 			%  N = Element.GETPROPNUMBER(M) returns the property number of 'M'.
 			%  N = Element.GETPROPNUMBER('OverlappingSIn') returns the property number of 'OverlappingSIn'.
 			%
@@ -238,13 +240,13 @@ classdef OverlappingSIn < StrengthIn
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 14;
+				prop_number = 15;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 6;
+					prop_number = 7;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -262,7 +264,7 @@ classdef OverlappingSIn < StrengthIn
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in ovrlapstrin/error.
+			%EXISTSPROP checks whether property exists in overlapping in-strength/error.
 			%
 			% CHECK = OverlappingSIn.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -287,7 +289,7 @@ classdef OverlappingSIn < StrengthIn
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 14 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 15 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -300,7 +302,7 @@ classdef OverlappingSIn < StrengthIn
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in ovrlapstrin/error.
+			%EXISTSTAG checks whether tag exists in overlapping in-strength/error.
 			%
 			% CHECK = OverlappingSIn.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -325,7 +327,7 @@ classdef OverlappingSIn < StrengthIn
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -358,7 +360,7 @@ classdef OverlappingSIn < StrengthIn
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -387,7 +389,7 @@ classdef OverlappingSIn < StrengthIn
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				overlappingsin_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
+				overlappingsin_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
 				tag = overlappingsin_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -414,7 +416,7 @@ classdef OverlappingSIn < StrengthIn
 			prop = OverlappingSIn.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			overlappingsin_category_list = { 1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
+			overlappingsin_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
 			prop_category = overlappingsin_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -440,7 +442,7 @@ classdef OverlappingSIn < StrengthIn
 			prop = OverlappingSIn.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			overlappingsin_format_list = { 2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
+			overlappingsin_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
 			prop_format = overlappingsin_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -466,7 +468,7 @@ classdef OverlappingSIn < StrengthIn
 			prop = OverlappingSIn.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			overlappingsin_description_list = { 'NAME (constant, string) is the name of the overlapping strength.'  'DESCRIPTION (constant, string) is the description of the overlapping strength.'  'TEMPLATE (parameter, item) is the template of the overlapping strength.'  'ID (data, string) is a few-letter code of the overlapping strength.'  'LABEL (metadata, string) is an extended label of the overlapping strength.'  'NOTES (metadata, string) are some specific notes about the overlapping strength.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the overlapping strength.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			overlappingsin_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the overlapping in-strength.'  'DESCRIPTION (constant, string) is the description of the overlapping in-strength.'  'TEMPLATE (parameter, item) is the template of the overlapping in-strength.'  'ID (data, string) is a few-letter code of the overlapping in-strength.'  'LABEL (metadata, string) is an extended label of the overlapping in-strength.'  'NOTES (metadata, string) are some specific notes about the overlapping in-strength.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the overlapping in-strength.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = overlappingsin_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -492,7 +494,7 @@ classdef OverlappingSIn < StrengthIn
 			prop = OverlappingSIn.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 3 % OverlappingSIn.TEMPLATE
+				case 4 % OverlappingSIn.TEMPLATE
 					prop_settings = 'OverlappingSIn';
 				otherwise
 					prop_settings = getPropSettings@StrengthIn(prop);
@@ -521,25 +523,27 @@ classdef OverlappingSIn < StrengthIn
 			prop = OverlappingSIn.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 1 % OverlappingSIn.NAME
+				case 1 % OverlappingSIn.ELCLASS
 					prop_default = 'OverlappingSIn';
-				case 2 % OverlappingSIn.DESCRIPTION
+				case 2 % OverlappingSIn.NAME
+					prop_default = 'OverlappingSIn';
+				case 3 % OverlappingSIn.DESCRIPTION
 					prop_default = 'The overlapping in-strength of a graph is the sum of the in-strengths of a node in all layers.';
-				case 3 % OverlappingSIn.TEMPLATE
+				case 4 % OverlappingSIn.TEMPLATE
 					prop_default = Format.getFormatDefault(8, OverlappingSIn.getPropSettings(prop));
-				case 4 % OverlappingSIn.ID
+				case 5 % OverlappingSIn.ID
 					prop_default = 'OverlappingSIn ID';
-				case 5 % OverlappingSIn.LABEL
+				case 6 % OverlappingSIn.LABEL
 					prop_default = 'OverlappingSIn label';
-				case 6 % OverlappingSIn.NOTES
+				case 7 % OverlappingSIn.NOTES
 					prop_default = 'OverlappingSIn notes';
-				case 8 % OverlappingSIn.SHAPE
+				case 9 % OverlappingSIn.SHAPE
 					prop_default = 2;
-				case 9 % OverlappingSIn.SCOPE
+				case 10 % OverlappingSIn.SCOPE
 					prop_default = 1;
-				case 10 % OverlappingSIn.PARAMETRICITY
+				case 11 % OverlappingSIn.PARAMETRICITY
 					prop_default = 2;
-				case 11 % OverlappingSIn.COMPATIBLE_GRAPHS
+				case 12 % OverlappingSIn.COMPATIBLE_GRAPHS
 					prop_default = {'MultiplexWD' 'OrdMxWD' 'MultilayerWD' 'OrdMlWD'};;
 				otherwise
 					prop_default = getPropDefault@StrengthIn(prop);
@@ -605,10 +609,10 @@ classdef OverlappingSIn < StrengthIn
 			prop = OverlappingSIn.getPropProp(pointer);
 			
 			switch prop
-				case 3 % OverlappingSIn.TEMPLATE
+				case 4 % OverlappingSIn.TEMPLATE
 					check = Format.checkFormat(8, value, OverlappingSIn.getPropSettings(prop));
 				otherwise
-					if prop <= 14
+					if prop <= 15
 						check = checkProp@StrengthIn(prop, value);
 					end
 			end
@@ -641,8 +645,8 @@ classdef OverlappingSIn < StrengthIn
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 13 % OverlappingSIn.M
-					rng_settings_ = rng(); rng(m.getPropSeed(13), 'twister')
+				case 14 % OverlappingSIn.M
+					rng_settings_ = rng(); rng(m.getPropSeed(14), 'twister')
 					
 					g = m.get('G'); % graph from measure class
 					A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
@@ -663,7 +667,7 @@ classdef OverlappingSIn < StrengthIn
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 14
+					if prop <= 15
 						value = calculateValue@StrengthIn(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

@@ -8,6 +8,11 @@ but not to the (k+1)-core.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'KCorenessCentrality'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the kcorenesscentrality.
 %%%% ¡default!
 'KCorenessCentrality'
@@ -19,6 +24,8 @@ DESCRIPTION (constant, string) is the description of the kcorenesscentrality.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the kcorenesscentrality.
+%%%% ¡settings!
+'KCorenessCentrality'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the kcorenesscentrality.

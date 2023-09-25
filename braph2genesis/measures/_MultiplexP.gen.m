@@ -57,9 +57,14 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
-NAME (constant, string) is the name of the multiplex participation.
+ELCLASS (constant, string) is the class of the % % % .
 %%%% ¡default!
 'MultiplexP'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the multiplex participation.
+%%%% ¡default!
+'MultiplexParticipation'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex participation.
@@ -79,12 +84,12 @@ ID (data, string) is a few-letter code of the multiplex participation.
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the multiplex participation.
 %%%% ¡default!
-'MultiplexP label'
+'MultiplexParticipation label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the multiplex participation.
 %%%% ¡default!
-'MultiplexP notes'
+'MultiplexParticipation notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.

@@ -8,6 +8,11 @@ of higher degree within a layer.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'Richness'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the richness.
 %%%% ¡default!
 'Richness'
@@ -19,6 +24,8 @@ DESCRIPTION (constant, string) is the description of the richness.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the richness.
+%%%% ¡settings!
+'Richness'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the richness.

@@ -8,6 +8,11 @@ other nodes within a layer.
 %% ¡props_update!
 
 %%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'PathLength'
+
+%%% ¡prop!
 NAME (constant, string) is the name of the pathlength.
 %%%% ¡default!
 'PathLength'
@@ -19,6 +24,8 @@ DESCRIPTION (constant, string) is the description of the pathlength.
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the pathlength.
+%%%% ¡settings!
+'PathLength'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code of the pathlength.

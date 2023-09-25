@@ -2,54 +2,55 @@ classdef PipelinePP_PSDict < PanelProp
 	%PipelinePP_PSDict plots the panel for a pipeline.
 	% It is a subclass of <a href="matlab:help PanelProp">PanelProp</a>.
 	%
-	% PipelinePP_PSDict plots a pipeline allowing the user to execute it in the correct order.
+	% A Pipeline Plot (PipelinePP_PSDict) plots a pipeline allowing the user to execute it in the correct order.
 	% It opens PanelFig elements using GUIFig, and all other elements using GUIElement.
 	%
 	% The list of PipelinePP_PSDict properties is:
-	%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the pipeline plot.
-	%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the pipeline plot.
-	%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the pipeline plot.
-	%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the pipeline plot.
-	%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the pipeline plot.
-	%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the pipeline plot.
-	%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>8</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-	%  <strong>9</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-	%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
-	%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
-	%  <strong>12</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
-	%  <strong>13</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
-	%  <strong>14</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
-	%  <strong>15</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figures of the elements/buttons.
-	%  <strong>16</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figures of the elements/buttons.
-	%  <strong>17</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
-	%  <strong>18</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the item figures.
-	%  <strong>19</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
-	%  <strong>20</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the table.
-	%  <strong>21</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
-	%  <strong>22</strong> <strong>EL</strong> 	EL (data, item) is the element.
-	%  <strong>23</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-	%  <strong>24</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the property panel.
-	%  <strong>25</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
-	%  <strong>26</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
-	%  <strong>27</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
-	%  <strong>28</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
-	%  <strong>29</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
-	%  <strong>30</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
-	%  <strong>31</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
-	%  <strong>32</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
-	%  <strong>33</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
-	%  <strong>34</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-	%  <strong>35</strong> <strong>HEIGHT_MIN</strong> 	HEIGHT_MIN (gui, scalar) is the default (minumum) height.
-	%  <strong>36</strong> <strong>HEIGHT_PS_HEADER</strong> 	HEIGHT_PS_HEADER (gui, scalar) is the height section header.
-	%  <strong>37</strong> <strong>HEIGHT_PC</strong> 	HEIGHT_PC (gui, scalar) is the height code button.
-	%  <strong>38</strong> <strong>HEIGHT_PS_FOOTER</strong> 	HEIGHT_PS_FOOTER (gui, scalar) is the height section footer.
-	%  <strong>39</strong> <strong>HEIGHT_PS_MARGIN</strong> 	HEIGHT_PS_MARGIN (gui, scalar) is the height section margin.
-	%  <strong>40</strong> <strong>HANDLES</strong> 	HANDLES (evanescent, handlelist) is the list of section panels and buttons.
-	%  <strong>41</strong> <strong>PS_PANEL</strong> 	PS_PANEL (query, handle) returns graphics handle of a section panel.
-	%  <strong>42</strong> <strong>PC_BTN</strong> 	PC_BTN (query, handle) returns graphics handle of a button.
-	%  <strong>43</strong> <strong>PC_CLEAR_BTN</strong> 	PC_CLEAR_BTN (query, handle) returns graphics handle of a clear button.
-	%  <strong>44</strong> <strong>GUI_PC_DICT</strong> 	GUI_PC_DICT (gui, idict) contains the GUIs for the element/buttons.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the pipeline plot.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the pipeline plot.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the pipeline plot.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the pipeline plot.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the pipeline plot.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the pipeline plot.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the pipeline plot.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
+	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
+	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+	%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
+	%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
+	%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
+	%  <strong>15</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
+	%  <strong>16</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figures of the elements/buttons.
+	%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figures of the elements/buttons.
+	%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
+	%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the item figures.
+	%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
+	%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the table.
+	%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
+	%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
+	%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
+	%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the prop panel.
+	%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
+	%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
+	%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
+	%  <strong>29</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
+	%  <strong>30</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
+	%  <strong>31</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
+	%  <strong>32</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
+	%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
+	%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
+	%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
+	%  <strong>36</strong> <strong>HEIGHT_MIN</strong> 	HEIGHT_MIN (gui, scalar) is the default (minumum) height.
+	%  <strong>37</strong> <strong>HEIGHT_PS_HEADER</strong> 	HEIGHT_PS_HEADER (gui, scalar) is the height section header.
+	%  <strong>38</strong> <strong>HEIGHT_PC</strong> 	HEIGHT_PC (gui, scalar) is the height code button.
+	%  <strong>39</strong> <strong>HEIGHT_PS_FOOTER</strong> 	HEIGHT_PS_FOOTER (gui, scalar) is the height section footer.
+	%  <strong>40</strong> <strong>HEIGHT_PS_MARGIN</strong> 	HEIGHT_PS_MARGIN (gui, scalar) is the height section margin.
+	%  <strong>41</strong> <strong>HANDLES</strong> 	HANDLES (evanescent, handlelist) is the list of section panels and buttons.
+	%  <strong>42</strong> <strong>PS_PANEL</strong> 	PS_PANEL (query, handle) returns graphics handle of a section panel.
+	%  <strong>43</strong> <strong>PC_BTN</strong> 	PC_BTN (query, handle) returns graphics handle of a button.
+	%  <strong>44</strong> <strong>PC_CLEAR_BTN</strong> 	PC_CLEAR_BTN (query, handle) returns graphics handle of a clear button.
+	%  <strong>45</strong> <strong>GUI_PC_DICT</strong> 	GUI_PC_DICT (gui, idict) contains the GUIs for the element/buttons.
 	%
 	% PipelinePP_PSDict methods (constructor):
 	%  PipelinePP_PSDict - constructor
@@ -140,52 +141,52 @@ classdef PipelinePP_PSDict < PanelProp
 	% See also Pipeline.
 	
 	properties (Constant) % properties
-		HEIGHT_MIN = 35; %CET: Computational Efficiency Trick
+		HEIGHT_MIN = 36; %CET: Computational Efficiency Trick
 		HEIGHT_MIN_TAG = 'HEIGHT_MIN';
 		HEIGHT_MIN_CATEGORY = 9;
 		HEIGHT_MIN_FORMAT = 11;
 		
-		HEIGHT_PS_HEADER = 36; %CET: Computational Efficiency Trick
+		HEIGHT_PS_HEADER = 37; %CET: Computational Efficiency Trick
 		HEIGHT_PS_HEADER_TAG = 'HEIGHT_PS_HEADER';
 		HEIGHT_PS_HEADER_CATEGORY = 9;
 		HEIGHT_PS_HEADER_FORMAT = 11;
 		
-		HEIGHT_PC = 37; %CET: Computational Efficiency Trick
+		HEIGHT_PC = 38; %CET: Computational Efficiency Trick
 		HEIGHT_PC_TAG = 'HEIGHT_PC';
 		HEIGHT_PC_CATEGORY = 9;
 		HEIGHT_PC_FORMAT = 11;
 		
-		HEIGHT_PS_FOOTER = 38; %CET: Computational Efficiency Trick
+		HEIGHT_PS_FOOTER = 39; %CET: Computational Efficiency Trick
 		HEIGHT_PS_FOOTER_TAG = 'HEIGHT_PS_FOOTER';
 		HEIGHT_PS_FOOTER_CATEGORY = 9;
 		HEIGHT_PS_FOOTER_FORMAT = 11;
 		
-		HEIGHT_PS_MARGIN = 39; %CET: Computational Efficiency Trick
+		HEIGHT_PS_MARGIN = 40; %CET: Computational Efficiency Trick
 		HEIGHT_PS_MARGIN_TAG = 'HEIGHT_PS_MARGIN';
 		HEIGHT_PS_MARGIN_CATEGORY = 9;
 		HEIGHT_PS_MARGIN_FORMAT = 11;
 		
-		HANDLES = 40; %CET: Computational Efficiency Trick
+		HANDLES = 41; %CET: Computational Efficiency Trick
 		HANDLES_TAG = 'HANDLES';
 		HANDLES_CATEGORY = 7;
 		HANDLES_FORMAT = 19;
 		
-		PS_PANEL = 41; %CET: Computational Efficiency Trick
+		PS_PANEL = 42; %CET: Computational Efficiency Trick
 		PS_PANEL_TAG = 'PS_PANEL';
 		PS_PANEL_CATEGORY = 6;
 		PS_PANEL_FORMAT = 18;
 		
-		PC_BTN = 42; %CET: Computational Efficiency Trick
+		PC_BTN = 43; %CET: Computational Efficiency Trick
 		PC_BTN_TAG = 'PC_BTN';
 		PC_BTN_CATEGORY = 6;
 		PC_BTN_FORMAT = 18;
 		
-		PC_CLEAR_BTN = 43; %CET: Computational Efficiency Trick
+		PC_CLEAR_BTN = 44; %CET: Computational Efficiency Trick
 		PC_CLEAR_BTN_TAG = 'PC_CLEAR_BTN';
 		PC_CLEAR_BTN_CATEGORY = 6;
 		PC_CLEAR_BTN_FORMAT = 18;
 		
-		GUI_PC_DICT = 44; %CET: Computational Efficiency Trick
+		GUI_PC_DICT = 45; %CET: Computational Efficiency Trick
 		GUI_PC_DICT_TAG = 'GUI_PC_DICT';
 		GUI_PC_DICT_CATEGORY = 9;
 		GUI_PC_DICT_FORMAT = 10;
@@ -202,50 +203,51 @@ classdef PipelinePP_PSDict < PanelProp
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of PipelinePP_PSDict properties is:
-			%  <strong>1</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the pipeline plot.
-			%  <strong>2</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the pipeline plot.
-			%  <strong>3</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the pipeline plot.
-			%  <strong>4</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the pipeline plot.
-			%  <strong>5</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the pipeline plot.
-			%  <strong>6</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the pipeline plot.
-			%  <strong>7</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>8</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
-			%  <strong>9</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-			%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
-			%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
-			%  <strong>12</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
-			%  <strong>13</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
-			%  <strong>14</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
-			%  <strong>15</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figures of the elements/buttons.
-			%  <strong>16</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figures of the elements/buttons.
-			%  <strong>17</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
-			%  <strong>18</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the item figures.
-			%  <strong>19</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
-			%  <strong>20</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the table.
-			%  <strong>21</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
-			%  <strong>22</strong> <strong>EL</strong> 	EL (data, item) is the element.
-			%  <strong>23</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-			%  <strong>24</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the property panel.
-			%  <strong>25</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
-			%  <strong>26</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
-			%  <strong>27</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
-			%  <strong>28</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
-			%  <strong>29</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
-			%  <strong>30</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
-			%  <strong>31</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
-			%  <strong>32</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
-			%  <strong>33</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
-			%  <strong>34</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-			%  <strong>35</strong> <strong>HEIGHT_MIN</strong> 	HEIGHT_MIN (gui, scalar) is the default (minumum) height.
-			%  <strong>36</strong> <strong>HEIGHT_PS_HEADER</strong> 	HEIGHT_PS_HEADER (gui, scalar) is the height section header.
-			%  <strong>37</strong> <strong>HEIGHT_PC</strong> 	HEIGHT_PC (gui, scalar) is the height code button.
-			%  <strong>38</strong> <strong>HEIGHT_PS_FOOTER</strong> 	HEIGHT_PS_FOOTER (gui, scalar) is the height section footer.
-			%  <strong>39</strong> <strong>HEIGHT_PS_MARGIN</strong> 	HEIGHT_PS_MARGIN (gui, scalar) is the height section margin.
-			%  <strong>40</strong> <strong>HANDLES</strong> 	HANDLES (evanescent, handlelist) is the list of section panels and buttons.
-			%  <strong>41</strong> <strong>PS_PANEL</strong> 	PS_PANEL (query, handle) returns graphics handle of a section panel.
-			%  <strong>42</strong> <strong>PC_BTN</strong> 	PC_BTN (query, handle) returns graphics handle of a button.
-			%  <strong>43</strong> <strong>PC_CLEAR_BTN</strong> 	PC_CLEAR_BTN (query, handle) returns graphics handle of a clear button.
-			%  <strong>44</strong> <strong>GUI_PC_DICT</strong> 	GUI_PC_DICT (gui, idict) contains the GUIs for the element/buttons.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the pipeline plot.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the pipeline plot.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the pipeline plot.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the pipeline plot.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the pipeline plot.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the pipeline plot.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the pipeline plot.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
+			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
+			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+			%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
+			%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
+			%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
+			%  <strong>15</strong> <strong>H</strong> 	H (evanescent, handle) is the panel handle.
+			%  <strong>16</strong> <strong>SHOW</strong> 	SHOW (query, logical) shows the figures of the elements/buttons.
+			%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figures of the elements/buttons.
+			%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
+			%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the item figures.
+			%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
+			%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the table.
+			%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
+			%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
+			%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
+			%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the prop panel.
+			%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
+			%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
+			%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
+			%  <strong>29</strong> <strong>GUI_CB</strong> 	GUI_CB (data, item) is the handle to the item figure.
+			%  <strong>30</strong> <strong>LISTENER_CB</strong> 	LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.
+			%  <strong>31</strong> <strong>BUTTON_CALC</strong> 	BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].
+			%  <strong>32</strong> <strong>BUTTON_DEL</strong> 	BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].
+			%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
+			%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
+			%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
+			%  <strong>36</strong> <strong>HEIGHT_MIN</strong> 	HEIGHT_MIN (gui, scalar) is the default (minumum) height.
+			%  <strong>37</strong> <strong>HEIGHT_PS_HEADER</strong> 	HEIGHT_PS_HEADER (gui, scalar) is the height section header.
+			%  <strong>38</strong> <strong>HEIGHT_PC</strong> 	HEIGHT_PC (gui, scalar) is the height code button.
+			%  <strong>39</strong> <strong>HEIGHT_PS_FOOTER</strong> 	HEIGHT_PS_FOOTER (gui, scalar) is the height section footer.
+			%  <strong>40</strong> <strong>HEIGHT_PS_MARGIN</strong> 	HEIGHT_PS_MARGIN (gui, scalar) is the height section margin.
+			%  <strong>41</strong> <strong>HANDLES</strong> 	HANDLES (evanescent, handlelist) is the list of section panels and buttons.
+			%  <strong>42</strong> <strong>PS_PANEL</strong> 	PS_PANEL (query, handle) returns graphics handle of a section panel.
+			%  <strong>43</strong> <strong>PC_BTN</strong> 	PC_BTN (query, handle) returns graphics handle of a button.
+			%  <strong>44</strong> <strong>PC_CLEAR_BTN</strong> 	PC_CLEAR_BTN (query, handle) returns graphics handle of a clear button.
+			%  <strong>45</strong> <strong>GUI_PC_DICT</strong> 	GUI_PC_DICT (gui, idict) contains the GUIs for the element/buttons.
 			%
 			% See also Category, Format.
 			
@@ -307,27 +309,27 @@ classdef PipelinePP_PSDict < PanelProp
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45];
 				return
 			end
 			
 			switch category
 				case 1 % Category.CONSTANT
-					prop_list = [1 2];
+					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [5 6];
+					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = 3;
+					prop_list = 4;
 				case 4 % Category.DATA
-					prop_list = [4 22 23 28];
+					prop_list = [5 23 24 29];
 				case 6 % Category.QUERY
-					prop_list = [7 10 11 15 16 17 18 19 20 21 41 42 43];
+					prop_list = [8 11 12 16 17 18 19 20 21 22 42 43 44];
 				case 7 % Category.EVANESCENT
-					prop_list = [9 14 26 27 29 30 31 32 33 34 40];
+					prop_list = [10 15 27 28 30 31 32 33 34 35 41];
 				case 8 % Category.FIGURE
-					prop_list = 13;
+					prop_list = 14;
 				case 9 % Category.GUI
-					prop_list = [8 12 24 25 35 36 37 38 39 44];
+					prop_list = [9 13 25 26 36 37 38 39 40 45];
 				otherwise
 					prop_list = [];
 			end
@@ -353,13 +355,13 @@ classdef PipelinePP_PSDict < PanelProp
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 44;
+				prop_number = 45;
 				return
 			end
 			
 			switch varargin{1} % category = varargin{1}
 				case 1 % Category.CONSTANT
-					prop_number = 2;
+					prop_number = 3;
 				case 2 % Category.METADATA
 					prop_number = 2;
 				case 3 % Category.PARAMETER
@@ -404,7 +406,7 @@ classdef PipelinePP_PSDict < PanelProp
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 44 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 45 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -442,7 +444,7 @@ classdef PipelinePP_PSDict < PanelProp
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'HEIGHT_MIN'  'HEIGHT_PS_HEADER'  'HEIGHT_PC'  'HEIGHT_PS_FOOTER'  'HEIGHT_PS_MARGIN'  'HANDLES'  'PS_PANEL'  'PC_BTN'  'PC_CLEAR_BTN'  'GUI_PC_DICT' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'HEIGHT_MIN'  'HEIGHT_PS_HEADER'  'HEIGHT_PC'  'HEIGHT_PS_FOOTER'  'HEIGHT_PS_MARGIN'  'HANDLES'  'PS_PANEL'  'PC_BTN'  'PC_CLEAR_BTN'  'GUI_PC_DICT' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -475,7 +477,7 @@ classdef PipelinePP_PSDict < PanelProp
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'HEIGHT_MIN'  'HEIGHT_PS_HEADER'  'HEIGHT_PC'  'HEIGHT_PS_FOOTER'  'HEIGHT_PS_MARGIN'  'HANDLES'  'PS_PANEL'  'PC_BTN'  'PC_CLEAR_BTN'  'GUI_PC_DICT' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'HEIGHT_MIN'  'HEIGHT_PS_HEADER'  'HEIGHT_PC'  'HEIGHT_PS_FOOTER'  'HEIGHT_PS_MARGIN'  'HANDLES'  'PS_PANEL'  'PC_BTN'  'PC_CLEAR_BTN'  'GUI_PC_DICT' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -504,7 +506,7 @@ classdef PipelinePP_PSDict < PanelProp
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				pipelinepp_psdict_tag_list = { 'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'HEIGHT_MIN'  'HEIGHT_PS_HEADER'  'HEIGHT_PC'  'HEIGHT_PS_FOOTER'  'HEIGHT_PS_MARGIN'  'HANDLES'  'PS_PANEL'  'PC_BTN'  'PC_CLEAR_BTN'  'GUI_PC_DICT' };
+				pipelinepp_psdict_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'X_DRAW'  'UPDATE'  'REDRAW'  'EL'  'PROP'  'HEIGHT'  'TITLE'  'LABEL_TITLE'  'BUTTON_CB'  'GUI_CB'  'LISTENER_CB'  'BUTTON_CALC'  'BUTTON_DEL'  'LISTENER_SET'  'LISTENER_MEMORIZED'  'LISTENER_LOCKED'  'HEIGHT_MIN'  'HEIGHT_PS_HEADER'  'HEIGHT_PC'  'HEIGHT_PS_FOOTER'  'HEIGHT_PS_MARGIN'  'HANDLES'  'PS_PANEL'  'PC_BTN'  'PC_CLEAR_BTN'  'GUI_PC_DICT' };
 				tag = pipelinepp_psdict_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -531,7 +533,7 @@ classdef PipelinePP_PSDict < PanelProp
 			prop = PipelinePP_PSDict.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			pipelinepp_psdict_category_list = { 1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  6  6  6  4  4  9  9  7  7  4  7  7  7  7  7  7  9  9  9  9  9  7  6  6  6  9 };
+			pipelinepp_psdict_category_list = { 1  1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  6  6  6  4  4  9  9  7  7  4  7  7  7  7  7  7  9  9  9  9  9  7  6  6  6  9 };
 			prop_category = pipelinepp_psdict_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -557,7 +559,7 @@ classdef PipelinePP_PSDict < PanelProp
 			prop = PipelinePP_PSDict.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			pipelinepp_psdict_format_list = { 2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  4  4  4  8  11  22  2  18  18  8  18  18  18  19  19  19  11  11  11  11  11  19  18  18  18  10 };
+			pipelinepp_psdict_format_list = { 2  2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  4  4  4  8  11  22  2  18  18  8  18  18  18  19  19  19  11  11  11  11  11  19  18  18  18  10 };
 			prop_format = pipelinepp_psdict_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -583,7 +585,7 @@ classdef PipelinePP_PSDict < PanelProp
 			prop = PipelinePP_PSDict.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			pipelinepp_psdict_description_list = { 'NAME (constant, string) is the name of the pipeline plot.'  'DESCRIPTION (constant, string) is the description of the pipeline plot.'  'TEMPLATE (parameter, item) is the template of the pipeline plot.'  'ID (data, string) is a few-letter code for the pipeline plot.'  'LABEL (metadata, string) is an extended label of the pipeline plot.'  'NOTES (metadata, string) are some specific notes about the pipeline plot.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the property panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figures of the elements/buttons.'  'HIDE (query, logical) hides the figures of the elements/buttons.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the item figures.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the table.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the property panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'HEIGHT_MIN (gui, scalar) is the default (minumum) height.'  'HEIGHT_PS_HEADER (gui, scalar) is the height section header.'  'HEIGHT_PC (gui, scalar) is the height code button.'  'HEIGHT_PS_FOOTER (gui, scalar) is the height section footer.'  'HEIGHT_PS_MARGIN (gui, scalar) is the height section margin.'  'HANDLES (evanescent, handlelist) is the list of section panels and buttons.'  'PS_PANEL (query, handle) returns graphics handle of a section panel.'  'PC_BTN (query, handle) returns graphics handle of a button.'  'PC_CLEAR_BTN (query, handle) returns graphics handle of a clear button.'  'GUI_PC_DICT (gui, idict) contains the GUIs for the element/buttons.' };
+			pipelinepp_psdict_description_list = { 'ELCLASS (constant, string) is the class of the pipeline plot.'  'NAME (constant, string) is the name of the pipeline plot.'  'DESCRIPTION (constant, string) is the description of the pipeline plot.'  'TEMPLATE (parameter, item) is the template of the pipeline plot.'  'ID (data, string) is a few-letter code for the pipeline plot.'  'LABEL (metadata, string) is an extended label of the pipeline plot.'  'NOTES (metadata, string) are some specific notes about the pipeline plot.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the prop panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figures of the elements/buttons.'  'HIDE (query, logical) hides the figures of the elements/buttons.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the item figures.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the table.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the prop panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'HEIGHT_MIN (gui, scalar) is the default (minumum) height.'  'HEIGHT_PS_HEADER (gui, scalar) is the height section header.'  'HEIGHT_PC (gui, scalar) is the height code button.'  'HEIGHT_PS_FOOTER (gui, scalar) is the height section footer.'  'HEIGHT_PS_MARGIN (gui, scalar) is the height section margin.'  'HANDLES (evanescent, handlelist) is the list of section panels and buttons.'  'PS_PANEL (query, handle) returns graphics handle of a section panel.'  'PC_BTN (query, handle) returns graphics handle of a button.'  'PC_CLEAR_BTN (query, handle) returns graphics handle of a clear button.'  'GUI_PC_DICT (gui, idict) contains the GUIs for the element/buttons.' };
 			prop_description = pipelinepp_psdict_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -609,29 +611,29 @@ classdef PipelinePP_PSDict < PanelProp
 			prop = PipelinePP_PSDict.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 35 % PipelinePP_PSDict.HEIGHT_MIN
+				case 36 % PipelinePP_PSDict.HEIGHT_MIN
 					prop_settings = Format.getFormatSettings(11);
-				case 36 % PipelinePP_PSDict.HEIGHT_PS_HEADER
+				case 37 % PipelinePP_PSDict.HEIGHT_PS_HEADER
 					prop_settings = Format.getFormatSettings(11);
-				case 37 % PipelinePP_PSDict.HEIGHT_PC
+				case 38 % PipelinePP_PSDict.HEIGHT_PC
 					prop_settings = Format.getFormatSettings(11);
-				case 38 % PipelinePP_PSDict.HEIGHT_PS_FOOTER
+				case 39 % PipelinePP_PSDict.HEIGHT_PS_FOOTER
 					prop_settings = Format.getFormatSettings(11);
-				case 39 % PipelinePP_PSDict.HEIGHT_PS_MARGIN
+				case 40 % PipelinePP_PSDict.HEIGHT_PS_MARGIN
 					prop_settings = Format.getFormatSettings(11);
-				case 40 % PipelinePP_PSDict.HANDLES
+				case 41 % PipelinePP_PSDict.HANDLES
 					prop_settings = Format.getFormatSettings(19);
-				case 41 % PipelinePP_PSDict.PS_PANEL
+				case 42 % PipelinePP_PSDict.PS_PANEL
 					prop_settings = Format.getFormatSettings(18);
-				case 42 % PipelinePP_PSDict.PC_BTN
+				case 43 % PipelinePP_PSDict.PC_BTN
 					prop_settings = Format.getFormatSettings(18);
-				case 43 % PipelinePP_PSDict.PC_CLEAR_BTN
+				case 44 % PipelinePP_PSDict.PC_CLEAR_BTN
 					prop_settings = Format.getFormatSettings(18);
-				case 44 % PipelinePP_PSDict.GUI_PC_DICT
+				case 45 % PipelinePP_PSDict.GUI_PC_DICT
 					prop_settings = 'GUI';
-				case 3 % PipelinePP_PSDict.TEMPLATE
+				case 4 % PipelinePP_PSDict.TEMPLATE
 					prop_settings = 'PipelinePP_PSDict';
-				case 22 % PipelinePP_PSDict.EL
+				case 23 % PipelinePP_PSDict.EL
 					prop_settings = 'Pipeline';
 				otherwise
 					prop_settings = getPropSettings@PanelProp(prop);
@@ -660,42 +662,44 @@ classdef PipelinePP_PSDict < PanelProp
 			prop = PipelinePP_PSDict.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 35 % PipelinePP_PSDict.HEIGHT_MIN
+				case 36 % PipelinePP_PSDict.HEIGHT_MIN
 					prop_default = 24;
-				case 36 % PipelinePP_PSDict.HEIGHT_PS_HEADER
+				case 37 % PipelinePP_PSDict.HEIGHT_PS_HEADER
 					prop_default = 24;
-				case 37 % PipelinePP_PSDict.HEIGHT_PC
+				case 38 % PipelinePP_PSDict.HEIGHT_PC
 					prop_default = 30;
-				case 38 % PipelinePP_PSDict.HEIGHT_PS_FOOTER
+				case 39 % PipelinePP_PSDict.HEIGHT_PS_FOOTER
 					prop_default = 6;
-				case 39 % PipelinePP_PSDict.HEIGHT_PS_MARGIN
+				case 40 % PipelinePP_PSDict.HEIGHT_PS_MARGIN
 					prop_default = 6;
-				case 40 % PipelinePP_PSDict.HANDLES
+				case 41 % PipelinePP_PSDict.HANDLES
 					prop_default = Format.getFormatDefault(19, PipelinePP_PSDict.getPropSettings(prop));
-				case 41 % PipelinePP_PSDict.PS_PANEL
+				case 42 % PipelinePP_PSDict.PS_PANEL
 					prop_default = Format.getFormatDefault(18, PipelinePP_PSDict.getPropSettings(prop));
-				case 42 % PipelinePP_PSDict.PC_BTN
+				case 43 % PipelinePP_PSDict.PC_BTN
 					prop_default = Format.getFormatDefault(18, PipelinePP_PSDict.getPropSettings(prop));
-				case 43 % PipelinePP_PSDict.PC_CLEAR_BTN
+				case 44 % PipelinePP_PSDict.PC_CLEAR_BTN
 					prop_default = Format.getFormatDefault(18, PipelinePP_PSDict.getPropSettings(prop));
-				case 44 % PipelinePP_PSDict.GUI_PC_DICT
+				case 45 % PipelinePP_PSDict.GUI_PC_DICT
 					prop_default = Format.getFormatDefault(10, PipelinePP_PSDict.getPropSettings(prop));
-				case 1 % PipelinePP_PSDict.NAME
+				case 1 % PipelinePP_PSDict.ELCLASS
 					prop_default = 'PipelinePP_PSDict';
-				case 2 % PipelinePP_PSDict.DESCRIPTION
-					prop_default = 'PipelinePP_PSDict plots a pipeline allowing the user to execute it in the correct order.';
-				case 3 % PipelinePP_PSDict.TEMPLATE
+				case 2 % PipelinePP_PSDict.NAME
+					prop_default = 'Pipeline Plot';
+				case 3 % PipelinePP_PSDict.DESCRIPTION
+					prop_default = 'A Pipeline Plot (PipelinePP_PSDict) plots a pipeline allowing the user to execute it in the correct order. It opens PanelFig elements using GUIFig, and all other elements using GUIElement.';
+				case 4 % PipelinePP_PSDict.TEMPLATE
 					prop_default = Format.getFormatDefault(8, PipelinePP_PSDict.getPropSettings(prop));
-				case 4 % PipelinePP_PSDict.ID
+				case 5 % PipelinePP_PSDict.ID
 					prop_default = 'PipelinePP_PSDict ID';
-				case 5 % PipelinePP_PSDict.LABEL
+				case 6 % PipelinePP_PSDict.LABEL
 					prop_default = 'PipelinePP_PSDict label';
-				case 6 % PipelinePP_PSDict.NOTES
+				case 7 % PipelinePP_PSDict.NOTES
 					prop_default = 'PipelinePP_PSDict notes';
-				case 22 % PipelinePP_PSDict.EL
+				case 23 % PipelinePP_PSDict.EL
 					prop_default = Format.getFormatDefault(8, PipelinePP_PSDict.getPropSettings(prop));
-				case 23 % PipelinePP_PSDict.PROP
-					prop_default = 8;
+				case 24 % PipelinePP_PSDict.PROP
+					prop_default = 9;
 				otherwise
 					prop_default = getPropDefault@PanelProp(prop);
 			end
@@ -760,32 +764,32 @@ classdef PipelinePP_PSDict < PanelProp
 			prop = PipelinePP_PSDict.getPropProp(pointer);
 			
 			switch prop
-				case 35 % PipelinePP_PSDict.HEIGHT_MIN
+				case 36 % PipelinePP_PSDict.HEIGHT_MIN
 					check = Format.checkFormat(11, value, PipelinePP_PSDict.getPropSettings(prop));
-				case 36 % PipelinePP_PSDict.HEIGHT_PS_HEADER
+				case 37 % PipelinePP_PSDict.HEIGHT_PS_HEADER
 					check = Format.checkFormat(11, value, PipelinePP_PSDict.getPropSettings(prop));
-				case 37 % PipelinePP_PSDict.HEIGHT_PC
+				case 38 % PipelinePP_PSDict.HEIGHT_PC
 					check = Format.checkFormat(11, value, PipelinePP_PSDict.getPropSettings(prop));
-				case 38 % PipelinePP_PSDict.HEIGHT_PS_FOOTER
+				case 39 % PipelinePP_PSDict.HEIGHT_PS_FOOTER
 					check = Format.checkFormat(11, value, PipelinePP_PSDict.getPropSettings(prop));
-				case 39 % PipelinePP_PSDict.HEIGHT_PS_MARGIN
+				case 40 % PipelinePP_PSDict.HEIGHT_PS_MARGIN
 					check = Format.checkFormat(11, value, PipelinePP_PSDict.getPropSettings(prop));
-				case 40 % PipelinePP_PSDict.HANDLES
+				case 41 % PipelinePP_PSDict.HANDLES
 					check = Format.checkFormat(19, value, PipelinePP_PSDict.getPropSettings(prop));
-				case 41 % PipelinePP_PSDict.PS_PANEL
+				case 42 % PipelinePP_PSDict.PS_PANEL
 					check = Format.checkFormat(18, value, PipelinePP_PSDict.getPropSettings(prop));
-				case 42 % PipelinePP_PSDict.PC_BTN
+				case 43 % PipelinePP_PSDict.PC_BTN
 					check = Format.checkFormat(18, value, PipelinePP_PSDict.getPropSettings(prop));
-				case 43 % PipelinePP_PSDict.PC_CLEAR_BTN
+				case 44 % PipelinePP_PSDict.PC_CLEAR_BTN
 					check = Format.checkFormat(18, value, PipelinePP_PSDict.getPropSettings(prop));
-				case 44 % PipelinePP_PSDict.GUI_PC_DICT
+				case 45 % PipelinePP_PSDict.GUI_PC_DICT
 					check = Format.checkFormat(10, value, PipelinePP_PSDict.getPropSettings(prop));
-				case 3 % PipelinePP_PSDict.TEMPLATE
+				case 4 % PipelinePP_PSDict.TEMPLATE
 					check = Format.checkFormat(8, value, PipelinePP_PSDict.getPropSettings(prop));
-				case 22 % PipelinePP_PSDict.EL
+				case 23 % PipelinePP_PSDict.EL
 					check = Format.checkFormat(8, value, PipelinePP_PSDict.getPropSettings(prop));
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						check = checkProp@PanelProp(prop, value);
 					end
 			end
@@ -818,7 +822,7 @@ classdef PipelinePP_PSDict < PanelProp
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 40 % PipelinePP_PSDict.HANDLES
+				case 41 % PipelinePP_PSDict.HANDLES
 					pip = pr.get('EL');
 					
 					ps_dict = pip.get('PS_DICT');
@@ -878,7 +882,7 @@ classdef PipelinePP_PSDict < PanelProp
 					end
 					value = handles;
 					
-				case 41 % PipelinePP_PSDict.PS_PANEL
+				case 42 % PipelinePP_PSDict.PS_PANEL
 					% H = pr.get('PS_PANEL', SEC) returns the hande H of the section SEC panel.
 					value = gobjects(); % default output
 					if isempty(varargin)
@@ -895,7 +899,7 @@ classdef PipelinePP_PSDict < PanelProp
 					    end
 					end
 					
-				case 42 % PipelinePP_PSDict.PC_BTN
+				case 43 % PipelinePP_PSDict.PC_BTN
 					% H = pr.get('PC_BTN', SEC, CL) returns the hande H of the button of code 
 					% line CL of section SEC panel.
 					value = gobjects(); % default output
@@ -914,7 +918,7 @@ classdef PipelinePP_PSDict < PanelProp
 					    end
 					end
 					
-				case 43 % PipelinePP_PSDict.PC_CLEAR_BTN
+				case 44 % PipelinePP_PSDict.PC_CLEAR_BTN
 					% H = pr.get('PC_BTN', SEC, CL) returns the hande H of the button of code 
 					% line CL of section SEC panel.
 					value = gobjects(); % default output
@@ -933,14 +937,14 @@ classdef PipelinePP_PSDict < PanelProp
 					    end
 					end
 					
-				case 19 % PipelinePP_PSDict.X_DRAW
-					value = calculateValue@PanelProp(pr, 19, varargin{:}); % also warning
+				case 20 % PipelinePP_PSDict.X_DRAW
+					value = calculateValue@PanelProp(pr, 20, varargin{:}); % also warning
 					if value
 					    pr.memorize('HANDLES')
 					end
 					
-				case 20 % PipelinePP_PSDict.UPDATE
-					value = calculateValue@PanelProp(pr, 20, varargin{:}); % also warning
+				case 21 % PipelinePP_PSDict.UPDATE
+					value = calculateValue@PanelProp(pr, 21, varargin{:}); % also warning
 					if value
 					    pip = pr.get('EL');
 					
@@ -1096,8 +1100,8 @@ classdef PipelinePP_PSDict < PanelProp
 					    end
 					end
 					
-				case 21 % PipelinePP_PSDict.REDRAW
-					value = calculateValue@PanelProp(pr, 21, varargin{:}); % also warning
+				case 22 % PipelinePP_PSDict.REDRAW
+					value = calculateValue@PanelProp(pr, 22, varargin{:}); % also warning
 					if value
 					    w_p = get_from_varargin(w(pr.get('H'), 'pixels'), 'Width', varargin);
 					    
@@ -1126,8 +1130,8 @@ classdef PipelinePP_PSDict < PanelProp
 					    end
 					end
 					
-				case 15 % PipelinePP_PSDict.SHOW
-					value = calculateValue@PanelProp(pr, 15, varargin{:}); % also warning
+				case 16 % PipelinePP_PSDict.SHOW
+					value = calculateValue@PanelProp(pr, 16, varargin{:}); % also warning
 					if value
 					    % % figures for elements/buttons, currently not in use
 					    % gui_pc_dict = pr.get('GUI_PC_DICT');
@@ -1139,8 +1143,8 @@ classdef PipelinePP_PSDict < PanelProp
 					    % end
 					end
 					
-				case 16 % PipelinePP_PSDict.HIDE
-					value = calculateValue@PanelProp(pr, 16, varargin{:}); % also warning
+				case 17 % PipelinePP_PSDict.HIDE
+					value = calculateValue@PanelProp(pr, 17, varargin{:}); % also warning
 					if value
 					    % figures for items
 					    gui_pc_dict = pr.get('GUI_PC_DICT');
@@ -1152,14 +1156,14 @@ classdef PipelinePP_PSDict < PanelProp
 					    end
 					end
 					
-				case 17 % PipelinePP_PSDict.DELETE
-					value = calculateValue@PanelProp(pr, 17, varargin{:}); % also warning
+				case 18 % PipelinePP_PSDict.DELETE
+					value = calculateValue@PanelProp(pr, 18, varargin{:}); % also warning
 					if value
 					    pr.set('HANDLES', Element.getNoValue())
 					end
 					
-				case 18 % PipelinePP_PSDict.CLOSE
-					value = calculateValue@PanelProp(pr, 18, varargin{:}); % also warning
+				case 19 % PipelinePP_PSDict.CLOSE
+					value = calculateValue@PanelProp(pr, 19, varargin{:}); % also warning
 					if value
 					    % figures for items
 					    gui_pc_dict = pr.get('GUI_PC_DICT');
@@ -1172,7 +1176,7 @@ classdef PipelinePP_PSDict < PanelProp
 					end
 					
 				otherwise
-					if prop <= 34
+					if prop <= 35
 						value = calculateValue@PanelProp(pr, prop, varargin{:});
 					else
 						value = calculateValue@Element(pr, prop, varargin{:});
