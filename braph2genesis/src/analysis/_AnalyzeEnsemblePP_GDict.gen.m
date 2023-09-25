@@ -228,7 +228,6 @@ menu_open_g_pl = uimenu( ...
 	'Text', 'Plot Selected Graph Figure', ...
 	'MenuSelectedFcn', {@cb_open_g_pl} ...
 	);
-
 menu_hide_g_pl = uimenu( ...
     'Parent', contextmenu, ...
     'Tag', 'MENU_HIDE_G_PL', ...
@@ -283,11 +282,11 @@ function cb_open_g_pl(~, ~)
     
     for s = 1:1:length(selected)
         i = selected(s);
-        g = glist{i}; % key
+        g = glist{i}; % key for graph
         if ~gui_g_dict.get('CONTAINS_KEY', g)
-            g_el = g_dict.get('IT', g); % real graph
+            g_el = g_dict.get('IT', g); % actual graph
             gui = GUIElement( ...
-                'ID', g, ... % this is the dictionary key
+                'ID', g, ... % this is the dictionary key for graph
                 'PE', g_el, ...
                 'POSITION', [ ...
                 x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ... % x = (f_gr_x + f_gr_w) / screen_w + mod(selected_it - 1, N) * (screen_w - f_gr_x - 2 * f_gr_w) / N / screen_w;
@@ -324,12 +323,12 @@ function cb_open_g_el(~, ~)
     for s = 1:1:length(selected)
         i = selected(s);
     
-        g = glist{i}; % key
+        g = glist{i}; % key for graph
     
         if ~gui_g_dict.get('CONTAINS_KEY', g)
-            g_el = g_dict.get('IT', g); % real g element
+            g_el = g_dict.get('IT', g); % actural graph
             gui = GUIElement( ...
-                'ID', g, ... % this is the dictionary key
+                'ID', g, ... % this is the dictionary key for graph
                 'PE', g_el, ... 
                 'POSITION', [ ...
                     x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ... % x = (f_gr_x + f_gr_w) / screen_w + mod(selected_it - 1, N) * (screen_w - f_gr_x - 2 * f_gr_w) / N / screen_w;
@@ -359,7 +358,7 @@ function cb_hide_g_el(~, ~)
     for s = 1:1:length(selected)
         i = selected(s);
         
-        g = glist{i}; % also key
+        g = glist{i}; % key for graph
         
         if gui_g_dict.get('CONTAINS_KEY', g)
             gui = gui_g_dict.get('IT', g);

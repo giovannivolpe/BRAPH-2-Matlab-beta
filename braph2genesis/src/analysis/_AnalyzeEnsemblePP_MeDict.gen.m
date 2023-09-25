@@ -84,20 +84,20 @@ if value
 end
 %%%% ¡calculate_callbacks!
 function set_table()
-a = pr.get('EL');
-prop = pr.get('PROP');
-if isa(a.getr('GRAPH_TEMPLATE'), 'NoValue')
-    g = a.getPropDefaultConditioned('GRAPH_TEMPLATE'); % default graph
-else
-    g = a.get('GRAPH_TEMPLATE'); % actual graph
-end
-
-    m_list = g.get('COMPATIBLE_MEASURES');
-
-    if isa(g.getr('M_DICT'), 'NoValue')
-        mlist_already_calculated = {};
+    a = pr.get('EL');
+    prop = pr.get('PROP');
+    if isa(a.getr('GRAPH_TEMPLATE'), 'NoValue')
+        g = a.getPropDefaultConditioned('GRAPH_TEMPLATE'); % default graph
     else
-        mlist_already_calculated = cellfun(@(x) x.get('ELCLASS'), g.get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
+        g = a.get('GRAPH_TEMPLATE'); % actual graph
+    end
+    
+    m_list = g.get('COMPATIBLE_MEASURES');
+    
+    if isempty(a.getr(prop).get('IT_LIST'))
+        m_list_already_calculated = {};
+    else
+        m_list_already_calculated = cellfun(@(x) x.get('ELCLASS'), g.get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
     end
     
     rowname = cell(length(m_list), 1);
@@ -394,7 +394,7 @@ function cb_clear_selection(~, ~)
 end
 function cb_invert_selection(~, ~) 
     g = pr.get('EL').get('GRAPH_TEMPLATE'); % default graph
-    mlist = g.get('COMPATIBLE_MEASURES');
+    m_list = g.get('COMPATIBLE_MEASURES');
 
     selected_tmp = [1:1:length(m_list)];
     selected_tmp(pr.get('SELECTED')) = [];
@@ -405,14 +405,14 @@ end
 function cb_calculate(~, ~) 
     a = pr.get('EL');
     g = a.get('GRAPH_TEMPLATE'); 
-    mlist = g.get('COMPATIBLE_MEASURES');
+    m_list = g.get('COMPATIBLE_MEASURES');
     selected = pr.get('SELECTED');
     
     wb = braph2waitbar(pr.get('WAITBAR'), 0, ['Calculating ' num2str(length(selected))  ' measures ...']);
 
     for i = 1:1:length(m_list)
         if ismember(i, selected)
-            measure = mlist{i};
+            measure = m_list{i};
             me = a.get('MEASUREENSEMBLE', measure);
 
             braph2waitbar(wb, .1 + .9 * i / length(selected), ['Calculating measure ' int2str(i) ' (' measure ') of ' int2str(length(selected)) ' ...'])
@@ -430,7 +430,7 @@ end
 function cb_open_plots(~, ~)
     a = pr.get('EL');   
     g = a.get('GRAPH_TEMPLATE'); 
-    mlist = g.get('COMPATIBLE_MEASURES');
+    m_list = g.get('COMPATIBLE_MEASURES');
     
     f = ancestor(pr.get('H'), 'figure'); % parent GUI 
     N = ceil(sqrt(length(m_list))); % number of row and columns of figures
@@ -491,7 +491,7 @@ end
 function cb_open_elements(~, ~)
     a = pr.get('EL');    
     g = a.get('GRAPH_TEMPLATE'); % actual graph
-    mlist = g.get('COMPATIBLE_MEASURES');
+    m_list = g.get('COMPATIBLE_MEASURES');
     
     f = ancestor(pr.get('H'), 'figure'); % parent GUI 
     N = ceil(sqrt(length(m_list))); % number of row and columns of figures
