@@ -21,7 +21,7 @@ MeasureEnsemble.LABEL
 %%%% ¡title!
 Measure Ensemble NAME
 
-%%% ¡prop!
+%%% ¡_prop! % % % %TBE
 %%%% ¡id!
 MeasureEnsemble.MEASURE_TEMPLATE
 %%%% ¡title!
@@ -95,7 +95,7 @@ MEASURE (data, class) is the measure class.
 %%%% ¡settings!
 'Measure'
 
-%%% ¡prop!
+%%% ¡_prop! % % % %TBE
 MEASURE_TEMPLATE (parameter, item) provides the measure parameters. 
 %%%% ¡settings!
 'Measure'
