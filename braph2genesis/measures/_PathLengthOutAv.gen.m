@@ -1,45 +1,45 @@
 %% ¡header!
-PathLengthOutAv < PathLengthOut (m, average out-path length) is the graph average out-path length.
+PathLengthOutAv < PathLengthOut (m, average out-path length) is the graph Average Out-Path Length.
 
 %%% ¡description!
-The out-path length is the average shortest out-path lengths of one node to all other nodes without a layer.
+The Average Out-Path Length (PathLengthOutAv) is the average shortest out-path lengths of one node to all other nodes without a layer.
 
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the Average Out-Path Length.
 %%%% ¡default!
 'PathLengthOutAv'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the PathLengthOutAv.
+NAME (constant, string) is the name of the Average Out-Path Length.
 %%%% ¡default!
-'PathLengthOutAv'
+'Average Out-Path Length'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the PathLengthOutAv.
+DESCRIPTION (constant, string) is the description of the Average Out-Path Length.
 %%%% ¡default!
-'The PathLengthOutAv is the average shortest PathLengthOutAv of one node to all other nodes within a layer.'
+'The Average Out-Path Length (PathLengthOutAv) is the average shortest PathLengthOutAv of one node to all other nodes within a layer.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the PathLengthOutAv.
+TEMPLATE (parameter, item) is the template of the Average Out-Path Length.
 %%%% ¡settings!
 'PathLengthOutAv'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the PathLengthOutAv.
+ID (data, string) is a few-letter code of the Average Out-Path Length.
 %%%% ¡default!
 'PathLengthOutAv ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the PathLengthOutAv.
+LABEL (metadata, string) is an extended label of the Average Out-Path Length.
 %%%% ¡default!
-'PathLengthOutAv label'
+'Average Out-Path Length label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the PathLengthOutAv.
+NOTES (metadata, string) are some specific notes about the Average Out-Path Length.
 %%%% ¡default!
-'PathLengthOutAv notes'
+'Average Out-Path Length notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -62,7 +62,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphBD' 'GraphWD' 'MultiplexBD' 'MultiplexWD' 'MultilayerBD' 'OrdMlBD'}
 
 %%% ¡prop!
-M (result, cell) is the cell containing the PathLengthOutAv.
+M (result, cell) is the cell containing the Average Out-Path Length.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
 A = g.get('A');  % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)

@@ -1,45 +1,45 @@
 %% ¡header!
-PathLengthOut < Measure (m, out-path length) is the graph out-path length.
+PathLengthOut < Measure (m, out-path length) is the graph Out-Path Length.
 
 %%% ¡description!
-The out-path length is the average shortest out-path lengths of one node to all other nodes without a layer.
+The Out-Path Length (PathLengthOut) is the average shortest out-path lengths of one node to all other nodes without a layer.
 
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the Out-Path Length.
 %%%% ¡default!
 'PathLengthOut'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the out-path length.
+NAME (constant, string) is the name of the Out-Path Length.
 %%%% ¡default!
-'PathLengthOut'
+'Out-Path Length'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the out-path length.
+DESCRIPTION (constant, string) is the description of the Out-Path Length.
 %%%% ¡default!
-'The out-path length is the average shortest out-path length of one node to all other nodes within a layer.'
+'The Out-Path Length (PathLengthOut) is the average shortest out-path length of one node to all other nodes within a layer.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the out-path length.
+TEMPLATE (parameter, item) is the template of the Out-Path Length.
 %%%% ¡settings!
 'PathLengthOut'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the out-path length.
+ID (data, string) is a few-letter code of the Out-Path Length.
 %%%% ¡default!
 'PathLengthOut ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the out-path length.
+LABEL (metadata, string) is an extended label of the Out-Path Length.
 %%%% ¡default!
-'PathLengthOut label'
+'Out-Path Length label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the out-path length.
+NOTES (metadata, string) are some specific notes about the Out-Path Length.
 %%%% ¡default!
-'PathLengthOut notes'
+'Out-Path Length notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -62,7 +62,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphBD' 'GraphWD' 'MultiplexBD' 'MultiplexWD' 'MultilayerBD' 'OrdMxBD'}
 
 %%% ¡prop!
-M (result, cell) is the cell containing the out-path length.
+M (result, cell) is the cell containing the Out-Path Length.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
 A = g.get('A');  % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)

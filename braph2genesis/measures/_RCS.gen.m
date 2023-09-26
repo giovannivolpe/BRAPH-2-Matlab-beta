@@ -1,47 +1,48 @@
 %% ¡header!
-RCS < Strength (m, rich-club strength) is the graph rich-club strength.
+RCS < Strength (m, rich-club strength) is the graph Rich-Club Strength.
 
 %%% ¡description!
-The rich-club strength of a node at level s is the sum of the weighted edges 
+The Rich-Club Strength (RCS) of a node at level s is the sum of the weighted edges 
   that connect nodes of strength s or higher within a layer. 
   s is set by the user and it can be a vector containting all the strength thresholds 
   the default value is equal to 1.
+  
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the Rich-Club Strength.
 %%%% ¡default!
 'RCS'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the rich-club strength.
+NAME (constant, string) is the name of the Rich-Club Strength.
 %%%% ¡default!
-'RCS'
+'Rich-Club Strength'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the rich-club strength.
+DESCRIPTION (constant, string) is the description of the Rich-Club Strength.
 %%%% ¡default!
-'The rich-club strength of a node at level s is the sum of the weighted edges that connect nodes of strength s or higher within a layer. s is set by the user and it can be a vector containting all the strength thresholds the default value is equal to 1.'
+'The Rich-Club Strength (RCS) of a node at level s is the sum of the weighted edges that connect nodes of strength s or higher within a layer. s is set by the user and it can be a vector containting all the strength thresholds the default value is equal to 1.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the rich-club strength.
+TEMPLATE (parameter, item) is the template of the Rich-Club Strength.
 %%%% ¡settings!
 'RCS'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the rich-club strength.
+ID (data, string) is a few-letter code of the Rich-Club Strength.
 %%%% ¡default!
 'RCS ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the rich-club strength.
+LABEL (metadata, string) is an extended label of the Rich-Club Strength.
 %%%% ¡default!
-'RCS label'
+'Rich-Club Strength label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the rich-club strength.
+NOTES (metadata, string) are some specific notes about the Rich-Club Strength.
 %%%% ¡default!
-'RCS notes'
+'Rich-Club Strength notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -64,7 +65,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphWU' 'GraphWD' 'MultiplexWU' 'MultiplexWD'};
 
 %%% ¡prop!
-M (result, cell) is the rich-club strength.
+M (result, cell) is the Rich-Club Strength.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)

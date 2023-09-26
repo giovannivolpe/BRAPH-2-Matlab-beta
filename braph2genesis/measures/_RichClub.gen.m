@@ -1,8 +1,8 @@
 %% ¡header!
-RichClub < Degree (m, richclub) is the graph richclub.
+RichClub < Degree (m, rich-club) is the graph Rich-Club.
 
 %%% ¡description!
-The rich-club coefficient of a node at level k is the fraction of 
+The Rich-Club coefficient (RichClub) of a node at level k is the fraction of 
  the edges that connect nodes of degree k or higher out of the 
  maxium number of edges that such nodes might share within a 
  layer. k is set by the user, the default value is equal to 1.
@@ -10,39 +10,39 @@ The rich-club coefficient of a node at level k is the fraction of
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the Rich-Club.
 %%%% ¡default!
 'RichClub'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the richclub.
+NAME (constant, string) is the name of the Rich-Club.
 %%%% ¡default!
-'RichClub'
+'Rich-Club'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the richclub.
+DESCRIPTION (constant, string) is the description of the Rich-Club.
 %%%% ¡default!
-'The rich-club coefficient of a node at level k is the fraction of the edges that connect nodes of degree k or higher out of the maxium number of edges that such nodes might share within a layer. k is set by the user, the default value is equal to 1.'
+'The Rich-Club coefficient (RichClub) of a node at level k is the fraction of the edges that connect nodes of degree k or higher out of the maxium number of edges that such nodes might share within a layer. k is set by the user, the default value is equal to 1.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the richclub.
+TEMPLATE (parameter, item) is the template of the Rich-Club.
 %%%% ¡settings!
 'RichClub'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the richclub.
+ID (data, string) is a few-letter code of the Rich-Club.
 %%%% ¡default!
 'RichClub ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the richclub.
+LABEL (metadata, string) is an extended label of the Rich-Club.
 %%%% ¡default!
-'RichClub label'
+'Rich-Club label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the richclub.
+NOTES (metadata, string) are some specific notes about the Rich-Club.
 %%%% ¡default!
-'RichClub notes'
+'Rich-Club notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.GLOBAL__.
@@ -65,7 +65,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUD' 'MultiplexBUT'}
 
 %%% ¡prop!
-M (result, cell) is the richclub.
+M (result, cell) is the Rich-Club.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)

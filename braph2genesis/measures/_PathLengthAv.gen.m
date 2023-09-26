@@ -1,26 +1,26 @@
 %% ¡header!
-PathLengthAv < PathLength (m, average path length) is the graph average path length.
+PathLengthAv < PathLength (m, average path length) is the graph Average Path Length.
 
 %%% ¡description!
-The average path length of a graph is the average of the sum of 
+The Average Path Length (PathLengthAv) of a graph is the average of the sum of 
 the path lengths within each layer.
 
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the Average Path Length.
 %%%% ¡default!
 'PathLengthAv'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the average path length.
+NAME (constant, string) is the name of the Average Path Length.
 %%%% ¡default!
-'PathLengthAv'
+'Average Path Length'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the average path length.
+DESCRIPTION (constant, string) is the description of the Average Path Length.
 %%%% ¡default!
-'The average path length of a graph is the average of the sum of the path lengths within each layer.'
+'The Average Path Length (PathLengthAv) of a graph is the average of the sum of the path lengths within each layer.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the average path length.

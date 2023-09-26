@@ -1,44 +1,44 @@
 %% ¡header!
-Richness < Degree (m, richness) is the graph richness.
+Richness < Degree (m, richness) is the graph Richness.
 
 %%% ¡description!
-The richness of a node is the sum of the edges that connect nodes 
+The Richness of a node is the sum of the edges that connect nodes 
 of higher degree within a layer.
 
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the Richness.
 %%%% ¡default!
 'Richness'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the richness.
+NAME (constant, string) is the name of the Richness.
 %%%% ¡default!
 'Richness'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the richness.
+DESCRIPTION (constant, string) is the description of the Richness.
 %%%% ¡default!
-'The richness of a node is the sum of the edges that connect nodes of higher degree within a layer.'
+'The Richness of a node is the sum of the edges that connect nodes of higher degree within a layer.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the richness.
+TEMPLATE (parameter, item) is the template of the Richness.
 %%%% ¡settings!
 'Richness'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the richness.
+ID (data, string) is a few-letter code of the Richness.
 %%%% ¡default!
 'Richness ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the richness.
+LABEL (metadata, string) is an extended label of the Richness.
 %%%% ¡default!
 'Richness label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the richness.
+NOTES (metadata, string) are some specific notes about the Richness.
 %%%% ¡default!
 'Richness notes'
 
@@ -63,7 +63,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUD' 'MultiplexBUT'} ;
 
 %%% ¡prop!
-M (result, cell) is the richness.
+M (result, cell) is the Richness.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)

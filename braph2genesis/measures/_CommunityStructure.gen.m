@@ -1,8 +1,8 @@
 %% ¡header!
-CommunityStructure < Measure (m, community structure) is the graph community structure.
+CommunityStructure < Measure (m, community structure) is the graph Community Structure.
 
 %%% ¡description!
-The community structure of a graph is a subdivision of the network into 
+The Community Structure (CommunityStructure) of a graph is a subdivision of the network into 
 non-overlapping groups of nodes which maximizes the number of whitin group 
 edges, and minimizes the number of between group edges.
 
@@ -53,39 +53,39 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the Community Structure.
 %%%% ¡default!
-'CommunityStructure'
+'Community Structure'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the community structure.
+NAME (constant, string) is the name of the Community Structure.
 %%%% ¡default!
-'CommunityStructure'
+'Community Structure'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the community structure.
+DESCRIPTION (constant, string) is the description of the Community Structure.
 %%%% ¡default!
-'The community structure of a graph is a subdivision of the network into non-overlapping groups of nodes which maximizes the number of whitin group edges, and minimizes the number of between group edges.'
+'The Community Structure (CommunityStructure) of a graph is a subdivision of the network into non-overlapping groups of nodes which maximizes the number of whitin group edges, and minimizes the number of between group edges.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the community structure.
+TEMPLATE (parameter, item) is the template of the Community Structure.
 %%%% ¡settings!
 'CommunityStructure'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the community structure.
+ID (data, string) is a few-letter code of the Community Structure.
 %%%% ¡default!
 'CommunityStructure ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the community structure.
 %%%% ¡default!
-'CommunityStructure label'
+'Community Structure label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the community structure.
+NOTES (metadata, string) are some specific notes about the Community Structure.
 %%%% ¡default!
-'CommunityStructure notes'
+'Community Structure notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -108,7 +108,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT'} ;
 
 %%% ¡prop!
-M (result, cell) is the triangles.
+M (result, cell) is the Community Structure.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
 A = g.get('A');

@@ -1,45 +1,45 @@
 %% ¡header!
-PathLengthInAv < PathLengthIn (m, average in-path length) is the graph average in-path length.
+PathLengthInAv < PathLengthIn (m, average in-path length) is the graph Average In-Path Length.
 
 %%% ¡description!
-The average in-path length of a graph is the average of the sum of the in-path lengths within each layer. 
+The Average In-Path Length (PathLengthInAv) of a graph is the average of the sum of the in-path lengths within each layer. 
 
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the Average In-Path Length.
 %%%% ¡default!
 'PathLengthInAv'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the average in-path length.
+NAME (constant, string) is the name of the Average In-Path Length.
 %%%% ¡default!
-'PathLengthInAv'
+'Average In-Path Length'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the average in-path length.
+DESCRIPTION (constant, string) is the description of the Average In-Path Length.
 %%%% ¡default!
-'The average in-path length is the average shortest in-path length of one node to all other nodes within a layer.'
+'The Average In-Path Length (PathLengthInAv) is the average shortest in-path length of one node to all other nodes within a layer.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the average in-path length.
+TEMPLATE (parameter, item) is the template of the Average In-Path Length.
 %%%% ¡settings!
 'PathLengthInAv'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the average in-path length.
+ID (data, string) is a few-letter code of the Average In-Path Length.
 %%%% ¡default!
 'PathLengthInAv ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the average in-path length.
+LABEL (metadata, string) is an extended label of the Average In-Path Length.
 %%%% ¡default!
-'PathLengthInAv label'
+'Average In-Path Length label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the average in-path length.
+NOTES (metadata, string) are some specific notes about the Average In-Path Length.
 %%%% ¡default!
-'PathLengthInAv notes'
+'Average In-Path Length notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -62,7 +62,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphBD' 'GraphWD' 'MultiplexBD' 'MultiplexWD' 'MultilayerBD' 'OrdMlBD'}
 
 %%% ¡prop!
-M (result, cell) is the cell containing the average in-path length.
+M (result, cell) is the cell containing the Average In-Path Length.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
 A = g.get('A');  % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)

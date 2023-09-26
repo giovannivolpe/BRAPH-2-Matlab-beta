@@ -539,17 +539,17 @@ classdef RCDeg < Degree
 				case 1 % RCDeg.ELCLASS
 					prop_default = 'RCDeg';
 				case 2 % RCDeg.NAME
-					prop_default = 'RCDeg';
+					prop_default = 'Rich-Club Degree';
 				case 3 % RCDeg.DESCRIPTION
-					prop_default = 'The rich-club degree of a node at level k is the sum of the edges that connect nodes of degree k or higher within a layer. k is set by the user; the default value is equal to 1.';
+					prop_default = 'The Rich-Club Degree of a node at level k is the sum of the edges that connect nodes of degree k or higher within a layer. k is set by the user; the default value is equal to 1.';
 				case 4 % RCDeg.TEMPLATE
 					prop_default = Format.getFormatDefault(8, RCDeg.getPropSettings(prop));
 				case 5 % RCDeg.ID
 					prop_default = 'RCDeg ID';
 				case 6 % RCDeg.LABEL
-					prop_default = 'RCDeg label';
+					prop_default = 'Rich-Club Degree label';
 				case 7 % RCDeg.NOTES
-					prop_default = 'RCDeg notes';
+					prop_default = 'Rich-Club Degree notes';
 				case 9 % RCDeg.SHAPE
 					prop_default = 2;
 				case 10 % RCDeg.SCOPE

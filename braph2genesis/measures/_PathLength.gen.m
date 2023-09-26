@@ -1,46 +1,46 @@
 %% ¡header!
-PathLength < Measure (m, pathlength) is the graph pathlength.
+PathLength < Measure (m, pathlength) is the graph Path Length.
 
 %%% ¡description!
-The pathlength is the average shortest pathlength of one node to all 
+The Path Length is the average shortest pathlength of one node to all 
 other nodes within a layer.
 
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the Path Length.
 %%%% ¡default!
 'PathLength'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the pathlength.
+NAME (constant, string) is the name of the Path Length.
 %%%% ¡default!
-'PathLength'
+'Path Length'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the pathlength.
+DESCRIPTION (constant, string) is the description of the Path Length.
 %%%% ¡default!
-'The pathlength is the average shortest pathlength of one node to all other nodes within a layer.'
+'The Path Length is the average shortest path length of one node to all other nodes within a layer.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the pathlength.
+TEMPLATE (parameter, item) is the template of the Path Length.
 %%%% ¡settings!
 'PathLength'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the pathlength.
+ID (data, string) is a few-letter code of the Path Length.
 %%%% ¡default!
 'PathLength ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the pathlength.
+LABEL (metadata, string) is an extended label of the Path Length.
 %%%% ¡default!
-'PathLength label'
+'Path Length label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the pathlength.
+NOTES (metadata, string) are some specific notes about the Path Length.
 %%%% ¡default!
-'PathLength notes'
+'Path Length notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -63,7 +63,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphWU' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'MultilayerWU' 'OrdMlWU'}
 
 %%% ¡prop!
-M (result, cell) is the cell containing the pathlength.
+M (result, cell) is the cell containing the Path Length.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
 A = g.get('A');  % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)

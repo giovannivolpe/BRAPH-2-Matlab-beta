@@ -1,43 +1,43 @@
 %% ¡header!
-Eccentricity < Measure (m, eccentricity) is the graph eccentricity.
+Eccentricity < Measure (m, eccentricity) is the graph Eccentricity.
 
 %%% ¡description!
-The eccentricity of a node is the maximal shortest path length between a node and any other node within a layer.
+The Eccentricity of a node is the maximal shortest path length between a node and any other node within a layer.
 
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the Eccentricity.
 %%%% ¡default!
 'Eccentricity'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the eccentricity.
+NAME (constant, string) is the name of the Eccentricity.
 %%%% ¡default!
 'Eccentricity'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the eccentricity.
+DESCRIPTION (constant, string) is the description of the Eccentricity.
 %%%% ¡default!
-'The eccentricity of a node is the number of edges connected to the node within a layer. Connection weights are ignored in calculations.'
+'The Eccentricity of a node is the number of edges connected to the node within a layer. Connection weights are ignored in calculations.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the eccentricity.
+TEMPLATE (parameter, item) is the template of the Eccentricity.
 %%%% ¡settings!
 'Eccentricity'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the eccentricity.
+ID (data, string) is a few-letter code of the Eccentricity.
 %%%% ¡default!
 'Eccentricity ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the eccentricity.
+LABEL (metadata, string) is an extended label of the Eccentricity.
 %%%% ¡default!
 'Eccentricity label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the eccentricity.
+NOTES (metadata, string) are some specific notes about the Eccentricity.
 %%%% ¡default!
 'Eccentricity notes'
 
@@ -62,7 +62,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'GraphWU' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU'};
 
 %%% ¡prop!
-M (result, cell) is the eccentricity.
+M (result, cell) is the Eccentricity.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)

@@ -1,8 +1,8 @@
 %% ¡header!
-MultilayerCommunity < Measure (m, multilayer community structure) is the graph multilayer community structure.
+MultilayerCommunity < Measure (m, multilayer community structure) is the graph Multilayer Community Structure.
 
 %%% ¡description!
-The multilayer community structure of a multilayer graph is a subdivision of 
+The Multilayer Community Structure (MultilayerCommunity) of a multilayer graph is a subdivision of 
  the network into non-overlapping groups of nodes which maximizes the number 
  of within group edges, and minimizes the number of between group edges.
 
@@ -53,39 +53,39 @@ Compatible Graphs
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the Multilayer Community Structure.
 %%%% ¡default!
 'MultilayerCommunity'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the multilayer community structure.
+NAME (constant, string) is the name of the Multilayer Community Structure.
 %%%% ¡default!
-'MultilayerCommunityStructure'
+'Multilayer Community Structure'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the multilayer community structure.
+DESCRIPTION (constant, string) is the description of the Multilayer Community Structure.
 %%%% ¡default!
-'The multilayer community structure of a multilayer graph is a subdivision of the network into non-overlapping groups of nodes which maximizes the number of within group edges, and minimizes the number of between group edges.'
+'The Multilayer Community Structure (MultilayerCommunity) of a multilayer graph is a subdivision of the network into non-overlapping groups of nodes which maximizes the number of within group edges, and minimizes the number of between group edges.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the multilayer community structure.
+TEMPLATE (parameter, item) is the template of the Multilayer Community Structure.
 %%%% ¡settings!
 'MultilayerCommunity'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code of the multilayer community structure.
+ID (data, string) is a few-letter code of the Multilayer Community Structure.
 %%%% ¡default!
 'MultilayerCommunity ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the multilayer community structure.
+LABEL (metadata, string) is an extended label of the Multilayer Community Structure.
 %%%% ¡default!
-'MultilayerCommunityStructure label'
+'Multilayer Community Structure label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the multilayer community structure.
+NOTES (metadata, string) are some specific notes about the Multilayer Community Structure.
 %%%% ¡default!
-'MultilayerCommunityStructure notes'
+'Multilayer Community Structure notes'
 
 %%% ¡prop!
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
@@ -108,7 +108,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 {'MultiplexWU' 'OrdMxWU' 'MultiplexBU' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};
 
 %%% ¡prop!
-M (result, cell) is the triangles.
+M (result, cell) is the Multilayer Community Structure.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
 L = g.get('LAYERNUMBER');
