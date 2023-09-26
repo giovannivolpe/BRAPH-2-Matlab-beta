@@ -1,32 +1,31 @@
-classdef DegreeAv < Degree
-	%DegreeAv is the graph Average Degree.
-	% It is a subclass of <a href="matlab:help Degree">Degree</a>.
+classdef Degree < Measure
+	%Degree is the graph Degree.
+	% It is a subclass of <a href="matlab:help Measure">Measure</a>.
 	%
-	% The Average Degree (DegreeAv) of a graph is the average of all number of edges 
-	% connected to a node within a layer. 
-	% Connection weights are ignored in calculations.
+	% The Degree of a node is the number of edges connected to the node within a layer. 
+	%  Connection weights are ignored in calculations.
 	%
-	% The list of DegreeAv properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the Average Degree.
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the Average Degree.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the Average Degree.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the Average Degree.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Average Degree.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Average Degree.
-	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Average Degree.
+	% The list of Degree properties is:
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the Degree.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the Degree.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the Degree.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the Degree.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Degree.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Degree.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Degree.
 	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
+	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
 	%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the Average Degree.
+	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the Degree.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 	%
-	% DegreeAv methods (constructor):
-	%  DegreeAv - constructor
+	% Degree methods (constructor):
+	%  Degree - constructor
 	%
-	% DegreeAv methods:
+	% Degree methods:
 	%  set - sets values of a property
 	%  check - checks the values of all properties
 	%  getr - returns the raw value of a property
@@ -40,34 +39,34 @@ classdef DegreeAv < Degree
 	%  checked - sets a property to checked
 	%  unchecked - sets a property to NOT checked
 	%
-	% DegreeAv methods (display):
-	%  tostring - string with information about the average degree
-	%  disp - displays information about the average degree
-	%  tree - displays the tree of the average degree
+	% Degree methods (display):
+	%  tostring - string with information about the degree
+	%  disp - displays information about the degree
+	%  tree - displays the tree of the degree
 	%
-	% DegreeAv methods (miscellanea):
+	% Degree methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two average degree are equal (values, locked)
+	%  isequal - determines whether two degree are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the average degree
+	%  copy - copies the degree
 	%
-	% DegreeAv methods (save/load, Static):
-	%  save - saves BRAPH2 average degree as b2 file
-	%  load - loads a BRAPH2 average degree from a b2 file
+	% Degree methods (save/load, Static):
+	%  save - saves BRAPH2 degree as b2 file
+	%  load - loads a BRAPH2 degree from a b2 file
 	%
-	% DegreeAv method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the average degree
+	% Degree method (JSON encode):
+	%  encodeJSON - returns a JSON string encoding the degree
 	%
-	% DegreeAv method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the average degree
+	% Degree method (JSON decode, Static):
+	%   decodeJSON - returns a JSON string encoding the degree
 	%
-	% DegreeAv methods (inspection, Static):
-	%  getClass - returns the class of the average degree
-	%  getSubclasses - returns all subclasses of DegreeAv
-	%  getProps - returns the property list of the average degree
-	%  getPropNumber - returns the property number of the average degree
+	% Degree methods (inspection, Static):
+	%  getClass - returns the class of the degree
+	%  getSubclasses - returns all subclasses of Degree
+	%  getProps - returns the property list of the degree
+	%  getPropNumber - returns the property number of the degree
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -80,14 +79,14 @@ classdef DegreeAv < Degree
 	%  getPropDefaultConditioned - returns the conditioned default value of a property
 	%  checkProp - checks whether a value has the correct format/error
 	%
-	% DegreeAv methods (GUI):
+	% Degree methods (GUI):
 	%  getPanelProp - returns a prop panel
 	%
-	% DegreeAv methods (GUI, Static):
+	% Degree methods (GUI, Static):
 	%  getGUIMenuImport - returns the importer menu
 	%  getGUIMenuExport - returns the exporter menu
 	%
-	% DegreeAv methods (category, Static):
+	% Degree methods (category, Static):
 	%  getCategories - returns the list of categories
 	%  getCategoryNumber - returns the number of categories
 	%  existsCategory - returns whether a category exists/error
@@ -95,7 +94,7 @@ classdef DegreeAv < Degree
 	%  getCategoryName - returns the name of a category
 	%  getCategoryDescription - returns the description of a category
 	%
-	% DegreeAv methods (format, Static):
+	% Degree methods (format, Static):
 	%  getFormats - returns the list of formats
 	%  getFormatNumber - returns the number of formats
 	%  existsFormat - returns whether a format exists/error
@@ -106,90 +105,90 @@ classdef DegreeAv < Degree
 	%  getFormatDefault - returns the default value for a format
 	%  checkFormat - returns whether a value format is correct/error
 	%
-	% To print full list of constants, click here <a href="matlab:metaclass = ?DegreeAv; properties = metaclass.PropertyList;for i = 1:1:length(properties), if properties(i).Constant, disp([properties(i).Name newline() tostring(properties(i).DefaultValue) newline()]), end, end">DegreeAv constants</a>.
+	% To print full list of constants, click here <a href="matlab:metaclass = ?Degree; properties = metaclass.PropertyList;for i = 1:1:length(properties), if properties(i).Constant, disp([properties(i).Name newline() tostring(properties(i).DefaultValue) newline()]), end, end">Degree constants</a>.
 	%
 	
 	methods % constructor
-		function m = DegreeAv(varargin)
-			%DegreeAv() creates a average degree.
+		function m = Degree(varargin)
+			%Degree() creates a degree.
 			%
-			% DegreeAv(PROP, VALUE, ...) with property PROP initialized to VALUE.
+			% Degree(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
-			% DegreeAv(TAG, VALUE, ...) with property TAG set to VALUE.
+			% Degree(TAG, VALUE, ...) with property TAG set to VALUE.
 			%
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of DegreeAv properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the Average Degree.
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the Average Degree.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the Average Degree.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the Average Degree.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Average Degree.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Average Degree.
-			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Average Degree.
+			% The list of Degree properties is:
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the Degree.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the Degree.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the Degree.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the Degree.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Degree.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Degree.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Degree.
 			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
-			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
+			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
 			%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the Average Degree.
+			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the Degree.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 			%
 			% See also Category, Format.
 			
-			m = m@Degree(varargin{:});
+			m = m@Measure(varargin{:});
 		end
 	end
 	methods (Static) % inspection
 		function m_class = getClass()
-			%GETCLASS returns the class of the average degree.
+			%GETCLASS returns the class of the degree.
 			%
-			% CLASS = DegreeAv.GETCLASS() returns the class 'DegreeAv'.
+			% CLASS = Degree.GETCLASS() returns the class 'Degree'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = M.GETCLASS() returns the class of the average degree M.
+			%  CLASS = M.GETCLASS() returns the class of the degree M.
 			%  CLASS = Element.GETCLASS(M) returns the class of 'M'.
-			%  CLASS = Element.GETCLASS('DegreeAv') returns 'DegreeAv'.
+			%  CLASS = Element.GETCLASS('Degree') returns 'Degree'.
 			%
-			% Note that the Element.GETCLASS(M) and Element.GETCLASS('DegreeAv')
+			% Note that the Element.GETCLASS(M) and Element.GETCLASS('Degree')
 			%  are less computationally efficient.
 			
-			m_class = 'DegreeAv';
+			m_class = 'Degree';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the average degree.
+			%GETSUBCLASSES returns all subclasses of the degree.
 			%
-			% LIST = DegreeAv.GETSUBCLASSES() returns all subclasses of 'DegreeAv'.
+			% LIST = Degree.GETSUBCLASSES() returns all subclasses of 'Degree'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = M.GETSUBCLASSES() returns all subclasses of the average degree M.
+			%  LIST = M.GETSUBCLASSES() returns all subclasses of the degree M.
 			%  LIST = Element.GETSUBCLASSES(M) returns all subclasses of 'M'.
-			%  LIST = Element.GETSUBCLASSES('DegreeAv') returns all subclasses of 'DegreeAv'.
+			%  LIST = Element.GETSUBCLASSES('Degree') returns all subclasses of 'Degree'.
 			%
-			% Note that the Element.GETSUBCLASSES(M) and Element.GETSUBCLASSES('DegreeAv')
+			% Note that the Element.GETSUBCLASSES(M) and Element.GETSUBCLASSES('Degree')
 			%  are less computationally efficient.
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'DegreeAv' }; %CET: Computational Efficiency Trick
+			subclass_list = { 'Degree'  'CorePeriphery'  'DegreeAv'  'MultiRC'  'MultiplexCP'  'MultiplexRCDeg'  'OverlappingDeg'  'OverlappingDegAv'  'RCDeg'  'RichClub'  'Richness' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of average degree.
+			%GETPROPS returns the property list of degree.
 			%
-			% PROPS = DegreeAv.GETPROPS() returns the property list of average degree
+			% PROPS = Degree.GETPROPS() returns the property list of degree
 			%  as a row vector.
 			%
-			% PROPS = DegreeAv.GETPROPS(CATEGORY) returns the property list 
+			% PROPS = Degree.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = M.GETPROPS([CATEGORY]) returns the property list of the average degree M.
+			%  PROPS = M.GETPROPS([CATEGORY]) returns the property list of the degree M.
 			%  PROPS = Element.GETPROPS(M[, CATEGORY]) returns the property list of 'M'.
-			%  PROPS = Element.GETPROPS('DegreeAv'[, CATEGORY]) returns the property list of 'DegreeAv'.
+			%  PROPS = Element.GETPROPS('Degree'[, CATEGORY]) returns the property list of 'Degree'.
 			%
-			% Note that the Element.GETPROPS(M) and Element.GETPROPS('DegreeAv')
+			% Note that the Element.GETPROPS(M) and Element.GETPROPS('Degree')
 			%  are less computationally efficient.
 			%
 			% See also getPropNumber, Category.
@@ -221,19 +220,19 @@ classdef DegreeAv < Degree
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of average degree.
+			%GETPROPNUMBER returns the property number of degree.
 			%
-			% N = DegreeAv.GETPROPNUMBER() returns the property number of average degree.
+			% N = Degree.GETPROPNUMBER() returns the property number of degree.
 			%
-			% N = DegreeAv.GETPROPNUMBER(CATEGORY) returns the property number of average degree
+			% N = Degree.GETPROPNUMBER(CATEGORY) returns the property number of degree
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = M.GETPROPNUMBER([CATEGORY]) returns the property number of the average degree M.
+			%  N = M.GETPROPNUMBER([CATEGORY]) returns the property number of the degree M.
 			%  N = Element.GETPROPNUMBER(M) returns the property number of 'M'.
-			%  N = Element.GETPROPNUMBER('DegreeAv') returns the property number of 'DegreeAv'.
+			%  N = Element.GETPROPNUMBER('Degree') returns the property number of 'Degree'.
 			%
-			% Note that the Element.GETPROPNUMBER(M) and Element.GETPROPNUMBER('DegreeAv')
+			% Note that the Element.GETPROPNUMBER(M) and Element.GETPROPNUMBER('Degree')
 			%  are less computationally efficient.
 			%
 			% See also getProps, Category.
@@ -265,27 +264,27 @@ classdef DegreeAv < Degree
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in average degree/error.
+			%EXISTSPROP checks whether property exists in degree/error.
 			%
-			% CHECK = DegreeAv.EXISTSPROP(PROP) checks whether the property PROP exists.
+			% CHECK = Degree.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
 			% Alternative forms to call this method are:
 			%  CHECK = M.EXISTSPROP(PROP) checks whether PROP exists for M.
 			%  CHECK = Element.EXISTSPROP(M, PROP) checks whether PROP exists for M.
-			%  CHECK = Element.EXISTSPROP(DegreeAv, PROP) checks whether PROP exists for DegreeAv.
+			%  CHECK = Element.EXISTSPROP(Degree, PROP) checks whether PROP exists for Degree.
 			%
 			% Element.EXISTSPROP(PROP) throws an error if the PROP does NOT exist.
-			%  Error id: [BRAPH2:DegreeAv:WrongInput]
+			%  Error id: [BRAPH2:Degree:WrongInput]
 			%
 			% Alternative forms to call this method are:
 			%  M.EXISTSPROP(PROP) throws error if PROP does NOT exist for M.
-			%   Error id: [BRAPH2:DegreeAv:WrongInput]
+			%   Error id: [BRAPH2:Degree:WrongInput]
 			%  Element.EXISTSPROP(M, PROP) throws error if PROP does NOT exist for M.
-			%   Error id: [BRAPH2:DegreeAv:WrongInput]
-			%  Element.EXISTSPROP(DegreeAv, PROP) throws error if PROP does NOT exist for DegreeAv.
-			%   Error id: [BRAPH2:DegreeAv:WrongInput]
+			%   Error id: [BRAPH2:Degree:WrongInput]
+			%  Element.EXISTSPROP(Degree, PROP) throws error if PROP does NOT exist for Degree.
+			%   Error id: [BRAPH2:Degree:WrongInput]
 			%
-			% Note that the Element.EXISTSPROP(M) and Element.EXISTSPROP('DegreeAv')
+			% Note that the Element.EXISTSPROP(M) and Element.EXISTSPROP('Degree')
 			%  are less computationally efficient.
 			%
 			% See also getProps, existsTag.
@@ -296,34 +295,34 @@ classdef DegreeAv < Degree
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':DegreeAv:' 'WrongInput'], ...
-					['BRAPH2' ':DegreeAv:' 'WrongInput' '\n' ...
-					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for DegreeAv.'] ...
+					['BRAPH2' ':Degree:' 'WrongInput'], ...
+					['BRAPH2' ':Degree:' 'WrongInput' '\n' ...
+					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for Degree.'] ...
 					)
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in average degree/error.
+			%EXISTSTAG checks whether tag exists in degree/error.
 			%
-			% CHECK = DegreeAv.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
+			% CHECK = Degree.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
 			% Alternative forms to call this method are:
 			%  CHECK = M.EXISTSTAG(TAG) checks whether TAG exists for M.
 			%  CHECK = Element.EXISTSTAG(M, TAG) checks whether TAG exists for M.
-			%  CHECK = Element.EXISTSTAG(DegreeAv, TAG) checks whether TAG exists for DegreeAv.
+			%  CHECK = Element.EXISTSTAG(Degree, TAG) checks whether TAG exists for Degree.
 			%
 			% Element.EXISTSTAG(TAG) throws an error if the TAG does NOT exist.
-			%  Error id: [BRAPH2:DegreeAv:WrongInput]
+			%  Error id: [BRAPH2:Degree:WrongInput]
 			%
 			% Alternative forms to call this method are:
 			%  M.EXISTSTAG(TAG) throws error if TAG does NOT exist for M.
-			%   Error id: [BRAPH2:DegreeAv:WrongInput]
+			%   Error id: [BRAPH2:Degree:WrongInput]
 			%  Element.EXISTSTAG(M, TAG) throws error if TAG does NOT exist for M.
-			%   Error id: [BRAPH2:DegreeAv:WrongInput]
-			%  Element.EXISTSTAG(DegreeAv, TAG) throws error if TAG does NOT exist for DegreeAv.
-			%   Error id: [BRAPH2:DegreeAv:WrongInput]
+			%   Error id: [BRAPH2:Degree:WrongInput]
+			%  Element.EXISTSTAG(Degree, TAG) throws error if TAG does NOT exist for Degree.
+			%   Error id: [BRAPH2:Degree:WrongInput]
 			%
-			% Note that the Element.EXISTSTAG(M) and Element.EXISTSTAG('DegreeAv')
+			% Note that the Element.EXISTSTAG(M) and Element.EXISTSTAG('Degree')
 			%  are less computationally efficient.
 			%
 			% See also getProps, existsTag.
@@ -334,9 +333,9 @@ classdef DegreeAv < Degree
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':DegreeAv:' 'WrongInput'], ...
-					['BRAPH2' ':DegreeAv:' 'WrongInput' '\n' ...
-					'The value ' tag ' is not a valid tag for DegreeAv.'] ...
+					['BRAPH2' ':Degree:' 'WrongInput'], ...
+					['BRAPH2' ':Degree:' 'WrongInput' '\n' ...
+					'The value ' tag ' is not a valid tag for Degree.'] ...
 					)
 			end
 		end
@@ -351,10 +350,10 @@ classdef DegreeAv < Degree
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  PROPERTY = M.GETPROPPROP(POINTER) returns property number of POINTER of M.
-			%  PROPERTY = Element.GETPROPPROP(DegreeAv, POINTER) returns property number of POINTER of DegreeAv.
-			%  PROPERTY = M.GETPROPPROP(DegreeAv, POINTER) returns property number of POINTER of DegreeAv.
+			%  PROPERTY = Element.GETPROPPROP(Degree, POINTER) returns property number of POINTER of Degree.
+			%  PROPERTY = M.GETPROPPROP(Degree, POINTER) returns property number of POINTER of Degree.
 			%
-			% Note that the Element.GETPROPPROP(M) and Element.GETPROPPROP('DegreeAv')
+			% Note that the Element.GETPROPPROP(M) and Element.GETPROPPROP('Degree')
 			%  are less computationally efficient.
 			%
 			% See also getPropFormat, getPropTag, getPropCategory, getPropDescription,
@@ -377,10 +376,10 @@ classdef DegreeAv < Degree
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  TAG = M.GETPROPTAG(POINTER) returns tag of POINTER of M.
-			%  TAG = Element.GETPROPTAG(DegreeAv, POINTER) returns tag of POINTER of DegreeAv.
-			%  TAG = M.GETPROPTAG(DegreeAv, POINTER) returns tag of POINTER of DegreeAv.
+			%  TAG = Element.GETPROPTAG(Degree, POINTER) returns tag of POINTER of Degree.
+			%  TAG = M.GETPROPTAG(Degree, POINTER) returns tag of POINTER of Degree.
 			%
-			% Note that the Element.GETPROPTAG(M) and Element.GETPROPTAG('DegreeAv')
+			% Note that the Element.GETPROPTAG(M) and Element.GETPROPTAG('Degree')
 			%  are less computationally efficient.
 			%
 			% See also getPropProp, getPropSettings, getPropCategory, getPropFormat,
@@ -390,8 +389,8 @@ classdef DegreeAv < Degree
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				degreeav_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
-				tag = degreeav_tag_list{pointer}; % prop = pointer
+				degree_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
+				tag = degree_tag_list{pointer}; % prop = pointer
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -405,20 +404,20 @@ classdef DegreeAv < Degree
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  CATEGORY = M.GETPROPCATEGORY(POINTER) returns category of POINTER of M.
-			%  CATEGORY = Element.GETPROPCATEGORY(DegreeAv, POINTER) returns category of POINTER of DegreeAv.
-			%  CATEGORY = M.GETPROPCATEGORY(DegreeAv, POINTER) returns category of POINTER of DegreeAv.
+			%  CATEGORY = Element.GETPROPCATEGORY(Degree, POINTER) returns category of POINTER of Degree.
+			%  CATEGORY = M.GETPROPCATEGORY(Degree, POINTER) returns category of POINTER of Degree.
 			%
-			% Note that the Element.GETPROPCATEGORY(M) and Element.GETPROPCATEGORY('DegreeAv')
+			% Note that the Element.GETPROPCATEGORY(M) and Element.GETPROPCATEGORY('Degree')
 			%  are less computationally efficient.
 			%
 			% See also Category, getPropProp, getPropTag, getPropSettings,
 			%  getPropFormat, getPropDescription, getPropDefault, checkProp.
 			
-			prop = DegreeAv.getPropProp(pointer);
+			prop = Degree.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			degreeav_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
-			prop_category = degreeav_category_list{prop};
+			degree_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
+			prop_category = degree_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -431,20 +430,20 @@ classdef DegreeAv < Degree
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  FORMAT = M.GETPROPFORMAT(POINTER) returns format of POINTER of M.
-			%  FORMAT = Element.GETPROPFORMAT(DegreeAv, POINTER) returns format of POINTER of DegreeAv.
-			%  FORMAT = M.GETPROPFORMAT(DegreeAv, POINTER) returns format of POINTER of DegreeAv.
+			%  FORMAT = Element.GETPROPFORMAT(Degree, POINTER) returns format of POINTER of Degree.
+			%  FORMAT = M.GETPROPFORMAT(Degree, POINTER) returns format of POINTER of Degree.
 			%
-			% Note that the Element.GETPROPFORMAT(M) and Element.GETPROPFORMAT('DegreeAv')
+			% Note that the Element.GETPROPFORMAT(M) and Element.GETPROPFORMAT('Degree')
 			%  are less computationally efficient.
 			%
 			% See also Format, getPropProp, getPropTag, getPropCategory,
 			%  getPropDescription, getPropSettings, getPropDefault, checkProp.
 			
-			prop = DegreeAv.getPropProp(pointer);
+			prop = Degree.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			degreeav_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
-			prop_format = degreeav_format_list{prop};
+			degree_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
+			prop_format = degree_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -457,20 +456,20 @@ classdef DegreeAv < Degree
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  DESCRIPTION = M.GETPROPDESCRIPTION(POINTER) returns description of POINTER of M.
-			%  DESCRIPTION = Element.GETPROPDESCRIPTION(DegreeAv, POINTER) returns description of POINTER of DegreeAv.
-			%  DESCRIPTION = M.GETPROPDESCRIPTION(DegreeAv, POINTER) returns description of POINTER of DegreeAv.
+			%  DESCRIPTION = Element.GETPROPDESCRIPTION(Degree, POINTER) returns description of POINTER of Degree.
+			%  DESCRIPTION = M.GETPROPDESCRIPTION(Degree, POINTER) returns description of POINTER of Degree.
 			%
-			% Note that the Element.GETPROPDESCRIPTION(M) and Element.GETPROPDESCRIPTION('DegreeAv')
+			% Note that the Element.GETPROPDESCRIPTION(M) and Element.GETPROPDESCRIPTION('Degree')
 			%  are less computationally efficient.
 			%
 			% See also getPropProp, getPropTag, getPropCategory,
 			%  getPropFormat, getPropSettings, getPropDefault, checkProp.
 			
-			prop = DegreeAv.getPropProp(pointer);
+			prop = Degree.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			degreeav_description_list = { 'ELCLASS (constant, string) is the class of the Average Degree.'  'NAME (constant, string) is the name of the Average Degree.'  'DESCRIPTION (constant, string) is the description of the Average Degree.'  'TEMPLATE (parameter, item) is the template of the Average Degree.'  'ID (data, string) is a few-letter code of the Average Degree.'  'LABEL (metadata, string) is an extended label of the Average Degree.'  'NOTES (metadata, string) are some specific notes about the Average Degree.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Average Degree.'  'PFM (gui, item) contains the panel figure of the measure.' };
-			prop_description = degreeav_description_list{prop};
+			degree_description_list = { 'ELCLASS (constant, string) is the class of the Degree.'  'NAME (constant, string) is the name of the Degree.'  'DESCRIPTION (constant, string) is the description of the Degree.'  'TEMPLATE (parameter, item) is the template of the Degree.'  'ID (data, string) is a few-letter code of the Degree.'  'LABEL (metadata, string) is an extended label of the Degree.'  'NOTES (metadata, string) are some specific notes about the Degree.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Degree.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			prop_description = degree_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -483,95 +482,97 @@ classdef DegreeAv < Degree
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  SETTINGS = M.GETPROPSETTINGS(POINTER) returns settings of POINTER of M.
-			%  SETTINGS = Element.GETPROPSETTINGS(DegreeAv, POINTER) returns settings of POINTER of DegreeAv.
-			%  SETTINGS = M.GETPROPSETTINGS(DegreeAv, POINTER) returns settings of POINTER of DegreeAv.
+			%  SETTINGS = Element.GETPROPSETTINGS(Degree, POINTER) returns settings of POINTER of Degree.
+			%  SETTINGS = M.GETPROPSETTINGS(Degree, POINTER) returns settings of POINTER of Degree.
 			%
-			% Note that the Element.GETPROPSETTINGS(M) and Element.GETPROPSETTINGS('DegreeAv')
+			% Note that the Element.GETPROPSETTINGS(M) and Element.GETPROPSETTINGS('Degree')
 			%  are less computationally efficient.
 			%
 			% See also getPropProp, getPropTag, getPropCategory, getPropFormat,
 			%  getPropDescription, getPropDefault, checkProp.
 			
-			prop = DegreeAv.getPropProp(pointer);
+			prop = Degree.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 4 % DegreeAv.TEMPLATE
-					prop_settings = 'DegreeAv';
+				case 4 % Degree.TEMPLATE
+					prop_settings = 'Degree';
 				otherwise
-					prop_settings = getPropSettings@Degree(prop);
+					prop_settings = getPropSettings@Measure(prop);
 			end
 		end
 		function prop_default = getPropDefault(pointer)
 			%GETPROPDEFAULT returns the default value of a property.
 			%
-			% DEFAULT = DegreeAv.GETPROPDEFAULT(PROP) returns the default 
+			% DEFAULT = Degree.GETPROPDEFAULT(PROP) returns the default 
 			%  value of the property PROP.
 			%
-			% DEFAULT = DegreeAv.GETPROPDEFAULT(TAG) returns the default 
+			% DEFAULT = Degree.GETPROPDEFAULT(TAG) returns the default 
 			%  value of the property with tag TAG.
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  DEFAULT = M.GETPROPDEFAULT(POINTER) returns the default value of POINTER of M.
-			%  DEFAULT = Element.GETPROPDEFAULT(DegreeAv, POINTER) returns the default value of POINTER of DegreeAv.
-			%  DEFAULT = M.GETPROPDEFAULT(DegreeAv, POINTER) returns the default value of POINTER of DegreeAv.
+			%  DEFAULT = Element.GETPROPDEFAULT(Degree, POINTER) returns the default value of POINTER of Degree.
+			%  DEFAULT = M.GETPROPDEFAULT(Degree, POINTER) returns the default value of POINTER of Degree.
 			%
-			% Note that the Element.GETPROPDEFAULT(M) and Element.GETPROPDEFAULT('DegreeAv')
+			% Note that the Element.GETPROPDEFAULT(M) and Element.GETPROPDEFAULT('Degree')
 			%  are less computationally efficient.
 			%
 			% See also getPropDefaultConditioned, getPropProp, getPropTag, getPropSettings, 
 			%  getPropCategory, getPropFormat, getPropDescription, checkProp.
 			
-			prop = DegreeAv.getPropProp(pointer);
+			prop = Degree.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 1 % DegreeAv.ELCLASS
-					prop_default = 'DegreeAv';
-				case 2 % DegreeAv.NAME
-					prop_default = 'DegreeAv';
-				case 3 % DegreeAv.DESCRIPTION
-					prop_default = 'The Average Degree (DegreeAv) of a graph is the average of all number of edges connected to a node within a layer. Connection weights are ignored in calculations.';
-				case 4 % DegreeAv.TEMPLATE
-					prop_default = Format.getFormatDefault(8, DegreeAv.getPropSettings(prop));
-				case 5 % DegreeAv.ID
-					prop_default = 'DegreeAv ID';
-				case 6 % DegreeAv.LABEL
-					prop_default = 'Average Degree label';
-				case 7 % DegreeAv.NOTES
-					prop_default = 'Average Degree notes';
-				case 9 % DegreeAv.SHAPE
-					prop_default = 1;
-				case 10 % DegreeAv.SCOPE
+				case 1 % Degree.ELCLASS
+					prop_default = 'Degree';
+				case 2 % Degree.NAME
+					prop_default = 'Degree';
+				case 3 % Degree.DESCRIPTION
+					prop_default = 'The Degree of a node is the number of edges connected to the node within a layer. Connection weights are ignored in calculations.';
+				case 4 % Degree.TEMPLATE
+					prop_default = Format.getFormatDefault(8, Degree.getPropSettings(prop));
+				case 5 % Degree.ID
+					prop_default = 'Degree ID';
+				case 6 % Degree.LABEL
+					prop_default = 'Degree label';
+				case 7 % Degree.NOTES
+					prop_default = 'Degree notes';
+				case 9 % Degree.SHAPE
 					prop_default = 2;
-				case 11 % DegreeAv.PARAMETRICITY
+				case 10 % Degree.SCOPE
 					prop_default = 2;
+				case 11 % Degree.PARAMETRICITY
+					prop_default = 2;
+				case 12 % Degree.COMPATIBLE_GRAPHS
+					prop_default = {'GraphWU' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU' 'OrdMxBU' 'OrdMxBUT' 'OrdMxBUD' 'MultilayerWU' 'OrdMlWU' 'MultilayerBUT' 'MultilayerBU' 'MultilayerBUD' 'OrdMlBU' 'OrdMlBUD' 'OrdMlBUT'};;
 				otherwise
-					prop_default = getPropDefault@Degree(prop);
+					prop_default = getPropDefault@Measure(prop);
 			end
 		end
 		function prop_default = getPropDefaultConditioned(pointer)
 			%GETPROPDEFAULTCONDITIONED returns the conditioned default value of a property.
 			%
-			% DEFAULT = DegreeAv.GETPROPDEFAULTCONDITIONED(PROP) returns the conditioned default 
+			% DEFAULT = Degree.GETPROPDEFAULTCONDITIONED(PROP) returns the conditioned default 
 			%  value of the property PROP.
 			%
-			% DEFAULT = DegreeAv.GETPROPDEFAULTCONDITIONED(TAG) returns the conditioned default 
+			% DEFAULT = Degree.GETPROPDEFAULTCONDITIONED(TAG) returns the conditioned default 
 			%  value of the property with tag TAG.
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  DEFAULT = M.GETPROPDEFAULTCONDITIONED(POINTER) returns the conditioned default value of POINTER of M.
-			%  DEFAULT = Element.GETPROPDEFAULTCONDITIONED(DegreeAv, POINTER) returns the conditioned default value of POINTER of DegreeAv.
-			%  DEFAULT = M.GETPROPDEFAULTCONDITIONED(DegreeAv, POINTER) returns the conditioned default value of POINTER of DegreeAv.
+			%  DEFAULT = Element.GETPROPDEFAULTCONDITIONED(Degree, POINTER) returns the conditioned default value of POINTER of Degree.
+			%  DEFAULT = M.GETPROPDEFAULTCONDITIONED(Degree, POINTER) returns the conditioned default value of POINTER of Degree.
 			%
-			% Note that the Element.GETPROPDEFAULTCONDITIONED(M) and Element.GETPROPDEFAULTCONDITIONED('DegreeAv')
+			% Note that the Element.GETPROPDEFAULTCONDITIONED(M) and Element.GETPROPDEFAULTCONDITIONED('Degree')
 			%  are less computationally efficient.
 			%
 			% See also conditioning, getPropDefault, getPropProp, getPropTag, 
 			%  getPropSettings, getPropCategory, getPropFormat, getPropDescription, 
 			%  checkProp.
 			
-			prop = DegreeAv.getPropProp(pointer);
+			prop = Degree.getPropProp(pointer);
 			
-			prop_default = DegreeAv.conditioning(prop, DegreeAv.getPropDefault(prop));
+			prop_default = Degree.conditioning(prop, Degree.getPropDefault(prop));
 		end
 	end
 	methods (Static) % checkProp
@@ -584,35 +585,35 @@ classdef DegreeAv < Degree
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  CHECK = M.CHECKPROP(POINTER, VALUE) checks VALUE format for PROP of M.
-			%  CHECK = Element.CHECKPROP(DegreeAv, PROP, VALUE) checks VALUE format for PROP of DegreeAv.
-			%  CHECK = M.CHECKPROP(DegreeAv, PROP, VALUE) checks VALUE format for PROP of DegreeAv.
+			%  CHECK = Element.CHECKPROP(Degree, PROP, VALUE) checks VALUE format for PROP of Degree.
+			%  CHECK = M.CHECKPROP(Degree, PROP, VALUE) checks VALUE format for PROP of Degree.
 			% 
 			% M.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:DegreeAv:WrongInput
+			%  Error id: BRAPH2:Degree:WrongInput
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  M.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of M.
-			%   Error id: BRAPH2:DegreeAv:WrongInput
-			%  Element.CHECKPROP(DegreeAv, PROP, VALUE) throws error if VALUE has not a valid format for PROP of DegreeAv.
-			%   Error id: BRAPH2:DegreeAv:WrongInput
-			%  M.CHECKPROP(DegreeAv, PROP, VALUE) throws error if VALUE has not a valid format for PROP of DegreeAv.
-			%   Error id: BRAPH2:DegreeAv:WrongInput]
+			%   Error id: BRAPH2:Degree:WrongInput
+			%  Element.CHECKPROP(Degree, PROP, VALUE) throws error if VALUE has not a valid format for PROP of Degree.
+			%   Error id: BRAPH2:Degree:WrongInput
+			%  M.CHECKPROP(Degree, PROP, VALUE) throws error if VALUE has not a valid format for PROP of Degree.
+			%   Error id: BRAPH2:Degree:WrongInput]
 			% 
-			% Note that the Element.CHECKPROP(M) and Element.CHECKPROP('DegreeAv')
+			% Note that the Element.CHECKPROP(M) and Element.CHECKPROP('Degree')
 			%  are less computationally efficient.
 			%
 			% See also Format, getPropProp, getPropTag, getPropSettings,
 			% getPropCategory, getPropFormat, getPropDescription, getPropDefault.
 			
-			prop = DegreeAv.getPropProp(pointer);
+			prop = Degree.getPropProp(pointer);
 			
 			switch prop
-				case 4 % DegreeAv.TEMPLATE
-					check = Format.checkFormat(8, value, DegreeAv.getPropSettings(prop));
+				case 4 % Degree.TEMPLATE
+					check = Format.checkFormat(8, value, Degree.getPropSettings(prop));
 				otherwise
 					if prop <= 15
-						check = checkProp@Degree(prop, value);
+						check = checkProp@Measure(prop, value);
 					end
 			end
 			
@@ -620,9 +621,9 @@ classdef DegreeAv < Degree
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':DegreeAv:' 'WrongInput'], ...
-					['BRAPH2' ':DegreeAv:' 'WrongInput' '\n' ...
-					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' DegreeAv.getPropTag(prop) ' (' DegreeAv.getFormatTag(DegreeAv.getPropFormat(prop)) ').'] ...
+					['BRAPH2' ':Degree:' 'WrongInput'], ...
+					['BRAPH2' ':Degree:' 'WrongInput' '\n' ...
+					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' Degree.getPropTag(prop) ' (' Degree.getFormatTag(Degree.getPropFormat(prop)) ').'] ...
 					)
 			end
 		end
@@ -644,25 +645,27 @@ classdef DegreeAv < Degree
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 14 % DegreeAv.M
+				case 14 % Degree.M
 					rng_settings_ = rng(); rng(m.getPropSeed(14), 'twister')
 					
-					degree = calculateValue@Degree(m, prop);
+					g = m.get('G'); % graph from measure class
+					A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 					
-					g = m.get('G');  % graph from measure class
+					degree = cell(g.get('LAYERNUMBER'), 1);
 					
-					degree_av = cell(g.get('LAYERNUMBER'), 1);
 					parfor li = 1:1:g.get('LAYERNUMBER')
-					    degree_av(li) = {mean(degree{li})};
+					    Aii = A{li, li};
+					    Aii = binarize(Aii);  % binarizes the adjacency matrix (removing diagonal)
+					    degree(li) = {sum(Aii, 2)};  % calculates the degree of a node for layer li
 					end
 					
-					value = degree_av;
+					value = degree;
 					
 					rng(rng_settings_)
 					
 				otherwise
 					if prop <= 15
-						value = calculateValue@Degree(m, prop, varargin{:});
+						value = calculateValue@Measure(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});
 					end

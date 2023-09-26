@@ -21,7 +21,7 @@ classdef MultiplexKCor < Measure
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the Multiplex K-Core.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>MULTIPLEXKCORETHRESHOLD</strong> 	MULTIPLEXKCORETHRESHOLD (parameter, scalar) is the multiplex k-core threshold
+	%  <strong>16</strong> <strong>MULTIPLEXKCORETHRESHOLD</strong> 	MULTIPLEXKCORETHRESHOLD (parameter, scalar) is the multiplex k-core threshold.
 	%
 	% MultiplexKCor methods (constructor):
 	%  MultiplexKCor - constructor
@@ -142,7 +142,7 @@ classdef MultiplexKCor < Measure
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the Multiplex K-Core.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>MULTIPLEXKCORETHRESHOLD</strong> 	MULTIPLEXKCORETHRESHOLD (parameter, scalar) is the multiplex k-core threshold
+			%  <strong>16</strong> <strong>MULTIPLEXKCORETHRESHOLD</strong> 	MULTIPLEXKCORETHRESHOLD (parameter, scalar) is the multiplex k-core threshold.
 			%
 			% See also Category, Format.
 			
@@ -476,7 +476,7 @@ classdef MultiplexKCor < Measure
 			prop = MultiplexKCor.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			multiplexkcor_description_list = { 'ELCLASS (constant, string) is the class of the Multiplex K-Core.'  'NAME (constant, string) is the name of the Multiplex K-Core.'  'DESCRIPTION (constant, string) is the description of the Multiplex K-Core.'  'TEMPLATE (parameter, item) is the template of the Multiplex K-Core.'  'ID (data, string) is a few-letter code of the Multiplex K-Core.'  'LABEL (metadata, string) is an extended label of the Multiplex K-Core.'  'NOTES (metadata, string) are some specific notes about the Multiplex K-Core.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Multiplex K-Core.'  'PFM (gui, item) contains the panel figure of the measure.'  'MULTIPLEXKCORETHRESHOLD (parameter, scalar) is the multiplex k-core threshold' };
+			multiplexkcor_description_list = { 'ELCLASS (constant, string) is the class of the Multiplex K-Core.'  'NAME (constant, string) is the name of the Multiplex K-Core.'  'DESCRIPTION (constant, string) is the description of the Multiplex K-Core.'  'TEMPLATE (parameter, item) is the template of the Multiplex K-Core.'  'ID (data, string) is a few-letter code of the Multiplex K-Core.'  'LABEL (metadata, string) is an extended label of the Multiplex K-Core.'  'NOTES (metadata, string) are some specific notes about the Multiplex K-Core.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Multiplex K-Core.'  'PFM (gui, item) contains the panel figure of the measure.'  'MULTIPLEXKCORETHRESHOLD (parameter, scalar) is the multiplex k-core threshold.' };
 			prop_description = multiplexkcor_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
