@@ -11,7 +11,7 @@ Measure ID
 Measure NAME
 2
 Measure NOTES
-6
+7
 TOSTRING
 NaN
 SHAPE
@@ -21,22 +21,12 @@ NaN
 PARAMETRICITY
 NaN
 Compatible Graphs
-7
+8
 Graph
-3
-CommunityStructure
 4
-Measure Plot
+In-Eccentricity
 5
-RULE
-NaN
-GAMMA
-NaN
-M0
-NaN
-LOUVAIN_OM
-NaN
-OM_TYPE
-NaN
-QUALITY_FUNCTION
-NaN
+Measure Plot
+6
+In-Eccentricity rule for calculation in a graph or its subgraph
+3
