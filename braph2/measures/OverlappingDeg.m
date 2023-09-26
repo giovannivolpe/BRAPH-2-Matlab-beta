@@ -2,11 +2,11 @@ classdef OverlappingDeg < Degree
 	%OverlappingDeg is the graph overlapping degree.
 	% It is a subclass of <a href="matlab:help Degree">Degree</a>.
 	%
-	% The overlapping degree of a graph is the sum of the degrees of a node in 
-	% all layers.
+	% The Overlapping Degree (OverlappingDeg) of a graph is the sum of the 
+	%  degrees of a node in all layers.
 	%
 	% The list of OverlappingDeg properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the overlapping degree.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the overlapping degree.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the overlapping degree.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the overlapping degree.
@@ -21,6 +21,7 @@ classdef OverlappingDeg < Degree
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the overlapping degree.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+	%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
 	%
 	% OverlappingDeg methods (constructor):
 	%  OverlappingDeg - constructor
@@ -120,7 +121,7 @@ classdef OverlappingDeg < Degree
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of OverlappingDeg properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the overlapping degree.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the overlapping degree.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the overlapping degree.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the overlapping degree.
@@ -135,6 +136,7 @@ classdef OverlappingDeg < Degree
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the overlapping degree.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+			%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
 			%
 			% See also Category, Format.
 			
@@ -196,7 +198,7 @@ classdef OverlappingDeg < Degree
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
 				return
 			end
 			
@@ -214,7 +216,7 @@ classdef OverlappingDeg < Degree
 				case 6 % Category.QUERY
 					prop_list = 8;
 				case 9 % Category.GUI
-					prop_list = 15;
+					prop_list = [15 16];
 				otherwise
 					prop_list = [];
 			end
@@ -240,7 +242,7 @@ classdef OverlappingDeg < Degree
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 15;
+				prop_number = 16;
 				return
 			end
 			
@@ -258,7 +260,7 @@ classdef OverlappingDeg < Degree
 				case 6 % Category.QUERY
 					prop_number = 1;
 				case 9 % Category.GUI
-					prop_number = 1;
+					prop_number = 2;
 				otherwise
 					prop_number = 0;
 			end
@@ -289,7 +291,7 @@ classdef OverlappingDeg < Degree
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 15 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 16 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -327,7 +329,7 @@ classdef OverlappingDeg < Degree
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -360,7 +362,7 @@ classdef OverlappingDeg < Degree
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -389,7 +391,7 @@ classdef OverlappingDeg < Degree
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				overlappingdeg_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
+				overlappingdeg_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB' };
 				tag = overlappingdeg_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -416,7 +418,7 @@ classdef OverlappingDeg < Degree
 			prop = OverlappingDeg.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			overlappingdeg_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
+			overlappingdeg_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  9 };
 			prop_category = overlappingdeg_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -442,7 +444,7 @@ classdef OverlappingDeg < Degree
 			prop = OverlappingDeg.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			overlappingdeg_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
+			overlappingdeg_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  8 };
 			prop_format = overlappingdeg_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -468,7 +470,7 @@ classdef OverlappingDeg < Degree
 			prop = OverlappingDeg.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			overlappingdeg_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the overlapping degree.'  'DESCRIPTION (constant, string) is the description of the overlapping degree.'  'TEMPLATE (parameter, item) is the template of the overlapping degree.'  'ID (data, string) is a few-letter code of the overlapping degree.'  'LABEL (metadata, string) is an extended label of the overlapping degree.'  'NOTES (metadata, string) are some specific notes about the overlapping degree.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the overlapping degree.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			overlappingdeg_description_list = { 'ELCLASS (constant, string) is the class of the overlapping degree.'  'NAME (constant, string) is the name of the overlapping degree.'  'DESCRIPTION (constant, string) is the description of the overlapping degree.'  'TEMPLATE (parameter, item) is the template of the overlapping degree.'  'ID (data, string) is a few-letter code of the overlapping degree.'  'LABEL (metadata, string) is an extended label of the overlapping degree.'  'NOTES (metadata, string) are some specific notes about the overlapping degree.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the overlapping degree.'  'PFM (gui, item) contains the panel figure of the measure.'  'PFB (gui, item) contains the panel figure of the brain measure.' };
 			prop_description = overlappingdeg_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -526,9 +528,9 @@ classdef OverlappingDeg < Degree
 				case 1 % OverlappingDeg.ELCLASS
 					prop_default = 'OverlappingDeg';
 				case 2 % OverlappingDeg.NAME
-					prop_default = 'OverlappingDegree';
+					prop_default = 'Overlapping Degree';
 				case 3 % OverlappingDeg.DESCRIPTION
-					prop_default = 'The overlapping degree of a graph is the sum of the degrees of a node in all layers.';
+					prop_default = 'The Overlapping Degree (OverlappingDeg) of a graph is the sum of the degrees of a node in all layers.';
 				case 4 % OverlappingDeg.TEMPLATE
 					prop_default = Format.getFormatDefault(8, OverlappingDeg.getPropSettings(prop));
 				case 5 % OverlappingDeg.ID
@@ -612,7 +614,7 @@ classdef OverlappingDeg < Degree
 				case 4 % OverlappingDeg.TEMPLATE
 					check = Format.checkFormat(8, value, OverlappingDeg.getPropSettings(prop));
 				otherwise
-					if prop <= 15
+					if prop <= 16
 						check = checkProp@Degree(prop, value);
 					end
 			end
@@ -679,7 +681,7 @@ classdef OverlappingDeg < Degree
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 15
+					if prop <= 16
 						value = calculateValue@Degree(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

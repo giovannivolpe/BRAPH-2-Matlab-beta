@@ -21,14 +21,15 @@ classdef FlexibilityAv < Flexibility
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the average flexibility.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>LIMIT</strong> 	LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.
-	%  <strong>17</strong> <strong>RANDORD</strong> 	RANDORD (parameter, LOGICAL) is used to set randperm.
-	%  <strong>18</strong> <strong>RANDMOVE</strong> 	RANDMOVE (parameter, LOGICAL) is the move function.
-	%  <strong>19</strong> <strong>GAMMA</strong> 	GAMMA (parameter, SCALAR) is the resolution parameter.
-	%  <strong>20</strong> <strong>OMEGA</strong> 	OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.
-	%  <strong>21</strong> <strong>S0</strong> 	S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.
-	%  <strong>22</strong> <strong>OM</strong> 	OM (data, MATRIX) is the multilayer modularity matrix.
-	%  <strong>23</strong> <strong>QUALITY_FUNCTION</strong> 	QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.
+	%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
+	%  <strong>17</strong> <strong>LIMIT</strong> 	LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.
+	%  <strong>18</strong> <strong>RANDORD</strong> 	RANDORD (parameter, LOGICAL) is used to set randperm.
+	%  <strong>19</strong> <strong>RANDMOVE</strong> 	RANDMOVE (parameter, LOGICAL) is the move function.
+	%  <strong>20</strong> <strong>GAMMA</strong> 	GAMMA (parameter, SCALAR) is the resolution parameter.
+	%  <strong>21</strong> <strong>OMEGA</strong> 	OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.
+	%  <strong>22</strong> <strong>S0</strong> 	S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.
+	%  <strong>23</strong> <strong>OM</strong> 	OM (data, MATRIX) is the multilayer modularity matrix.
+	%  <strong>24</strong> <strong>QUALITY_FUNCTION</strong> 	QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.
 	%
 	% FlexibilityAv methods (constructor):
 	%  FlexibilityAv - constructor
@@ -143,14 +144,15 @@ classdef FlexibilityAv < Flexibility
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the average flexibility.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>LIMIT</strong> 	LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.
-			%  <strong>17</strong> <strong>RANDORD</strong> 	RANDORD (parameter, LOGICAL) is used to set randperm.
-			%  <strong>18</strong> <strong>RANDMOVE</strong> 	RANDMOVE (parameter, LOGICAL) is the move function.
-			%  <strong>19</strong> <strong>GAMMA</strong> 	GAMMA (parameter, SCALAR) is the resolution parameter.
-			%  <strong>20</strong> <strong>OMEGA</strong> 	OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.
-			%  <strong>21</strong> <strong>S0</strong> 	S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.
-			%  <strong>22</strong> <strong>OM</strong> 	OM (data, MATRIX) is the multilayer modularity matrix.
-			%  <strong>23</strong> <strong>QUALITY_FUNCTION</strong> 	QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.
+			%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
+			%  <strong>17</strong> <strong>LIMIT</strong> 	LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.
+			%  <strong>18</strong> <strong>RANDORD</strong> 	RANDORD (parameter, LOGICAL) is used to set randperm.
+			%  <strong>19</strong> <strong>RANDMOVE</strong> 	RANDMOVE (parameter, LOGICAL) is the move function.
+			%  <strong>20</strong> <strong>GAMMA</strong> 	GAMMA (parameter, SCALAR) is the resolution parameter.
+			%  <strong>21</strong> <strong>OMEGA</strong> 	OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.
+			%  <strong>22</strong> <strong>S0</strong> 	S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.
+			%  <strong>23</strong> <strong>OM</strong> 	OM (data, MATRIX) is the multilayer modularity matrix.
+			%  <strong>24</strong> <strong>QUALITY_FUNCTION</strong> 	QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.
 			%
 			% See also Category, Format.
 			
@@ -212,7 +214,7 @@ classdef FlexibilityAv < Flexibility
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24];
 				return
 			end
 			
@@ -222,15 +224,15 @@ classdef FlexibilityAv < Flexibility
 				case 2 % Category.METADATA
 					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = [4 16 17 18 19 20];
+					prop_list = [4 17 18 19 20 21];
 				case 4 % Category.DATA
-					prop_list = [5 13 21 22 23];
+					prop_list = [5 13 22 23 24];
 				case 5 % Category.RESULT
 					prop_list = 14;
 				case 6 % Category.QUERY
 					prop_list = 8;
 				case 9 % Category.GUI
-					prop_list = 15;
+					prop_list = [15 16];
 				otherwise
 					prop_list = [];
 			end
@@ -256,7 +258,7 @@ classdef FlexibilityAv < Flexibility
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 23;
+				prop_number = 24;
 				return
 			end
 			
@@ -274,7 +276,7 @@ classdef FlexibilityAv < Flexibility
 				case 6 % Category.QUERY
 					prop_number = 1;
 				case 9 % Category.GUI
-					prop_number = 1;
+					prop_number = 2;
 				otherwise
 					prop_number = 0;
 			end
@@ -305,7 +307,7 @@ classdef FlexibilityAv < Flexibility
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 23 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 24 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -343,7 +345,7 @@ classdef FlexibilityAv < Flexibility
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'LIMIT'  'RANDORD'  'RANDMOVE'  'GAMMA'  'OMEGA'  'S0'  'OM'  'QUALITY_FUNCTION' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'LIMIT'  'RANDORD'  'RANDMOVE'  'GAMMA'  'OMEGA'  'S0'  'OM'  'QUALITY_FUNCTION' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -376,7 +378,7 @@ classdef FlexibilityAv < Flexibility
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'LIMIT'  'RANDORD'  'RANDMOVE'  'GAMMA'  'OMEGA'  'S0'  'OM'  'QUALITY_FUNCTION' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'LIMIT'  'RANDORD'  'RANDMOVE'  'GAMMA'  'OMEGA'  'S0'  'OM'  'QUALITY_FUNCTION' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -405,7 +407,7 @@ classdef FlexibilityAv < Flexibility
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				flexibilityav_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'LIMIT'  'RANDORD'  'RANDMOVE'  'GAMMA'  'OMEGA'  'S0'  'OM'  'QUALITY_FUNCTION' };
+				flexibilityav_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'LIMIT'  'RANDORD'  'RANDMOVE'  'GAMMA'  'OMEGA'  'S0'  'OM'  'QUALITY_FUNCTION' };
 				tag = flexibilityav_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -432,7 +434,7 @@ classdef FlexibilityAv < Flexibility
 			prop = FlexibilityAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			flexibilityav_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  3  3  3  3  3  4  4  4 };
+			flexibilityav_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  9  3  3  3  3  3  4  4  4 };
 			prop_category = flexibilityav_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -458,7 +460,7 @@ classdef FlexibilityAv < Flexibility
 			prop = FlexibilityAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			flexibilityav_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  11  4  4  11  11  13  14  14 };
+			flexibilityav_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  8  11  4  4  11  11  13  14  14 };
 			prop_format = flexibilityav_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -484,7 +486,7 @@ classdef FlexibilityAv < Flexibility
 			prop = FlexibilityAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			flexibilityav_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the average flexibility.'  'DESCRIPTION (constant, string) is the description of the average flexibility.'  'TEMPLATE (parameter, item) is the template of the average flexibility.'  'ID (data, string) is a few-letter code of the average flexibility.'  'LABEL (metadata, string) is an extended label of the average flexibility.'  'NOTES (metadata, string) are some specific notes about the average flexibility.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.SUPERGLOBAL.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the average flexibility.'  'PFM (gui, item) contains the panel figure of the measure.'  'LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.'  'RANDORD (parameter, LOGICAL) is used to set randperm.'  'RANDMOVE (parameter, LOGICAL) is the move function.'  'GAMMA (parameter, SCALAR) is the resolution parameter.'  'OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.'  'S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.'  'OM (data, MATRIX) is the multilayer modularity matrix.'  'QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.' };
+			flexibilityav_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the average flexibility.'  'DESCRIPTION (constant, string) is the description of the average flexibility.'  'TEMPLATE (parameter, item) is the template of the average flexibility.'  'ID (data, string) is a few-letter code of the average flexibility.'  'LABEL (metadata, string) is an extended label of the average flexibility.'  'NOTES (metadata, string) are some specific notes about the average flexibility.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.SUPERGLOBAL.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the average flexibility.'  'PFM (gui, item) contains the panel figure of the measure.'  'PFB (gui, item) contains the panel figure of the brain measure.'  'LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.'  'RANDORD (parameter, LOGICAL) is used to set randperm.'  'RANDMOVE (parameter, LOGICAL) is the move function.'  'GAMMA (parameter, SCALAR) is the resolution parameter.'  'OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.'  'S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.'  'OM (data, MATRIX) is the multilayer modularity matrix.'  'QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.' };
 			prop_description = flexibilityav_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -628,7 +630,7 @@ classdef FlexibilityAv < Flexibility
 				case 4 % FlexibilityAv.TEMPLATE
 					check = Format.checkFormat(8, value, FlexibilityAv.getPropSettings(prop));
 				otherwise
-					if prop <= 23
+					if prop <= 24
 						check = checkProp@Flexibility(prop, value);
 					end
 			end
@@ -672,7 +674,7 @@ classdef FlexibilityAv < Flexibility
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 23
+					if prop <= 24
 						value = calculateValue@Flexibility(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

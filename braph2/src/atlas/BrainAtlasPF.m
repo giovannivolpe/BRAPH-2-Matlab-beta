@@ -302,7 +302,7 @@ classdef BrainAtlasPF < BrainSurfacePF
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'BrainAtlasPF' }; %CET: Computational Efficiency Trick
+			subclass_list = { 'BrainAtlasPF'  'MeasureGroupBrainPF'  'MeasureGroupBrainPF_BB'  'MeasureGroupBrainPF_BS'  'MeasureGroupBrainPF_BU'  'MeasureGroupBrainPF_GB'  'MeasureGroupBrainPF_GS'  'MeasureGroupBrainPF_GU'  'MeasureGroupBrainPF_NB'  'MeasureGroupBrainPF_NS'  'MeasureGroupBrainPF_NU' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of panel figure for brain atlas.
