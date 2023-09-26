@@ -6,6 +6,50 @@ The Betweenness Centrality of a graph is the fraction of all shortest paths in t
 graph that pass through a given node. Nodes with high values of betweenness 
 centrality participate in a large number of shortest paths.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.M
+%%%% ¡title!
+Betweenness Centrality
+
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

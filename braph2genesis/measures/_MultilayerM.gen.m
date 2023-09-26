@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 MultilayerM.M
 %%%% ¡title!
-MultilayerM
+Multilayer Modularity
 
 %%% ¡prop!
 %%%% ¡id!

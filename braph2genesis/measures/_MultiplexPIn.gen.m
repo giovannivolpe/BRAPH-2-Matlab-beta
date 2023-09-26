@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 MultiplexPIn.M
 %%%% ¡title!
-MultiplexPIn
+Multiplex In-Participation
 
 %%% ¡prop!
 %%%% ¡id!

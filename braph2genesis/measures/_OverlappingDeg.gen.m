@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 OverlappingDeg.M
 %%%% ¡title!
-OverlappingDeg
+Overlapping Degree
 
 %%% ¡prop!
 %%%% ¡id!

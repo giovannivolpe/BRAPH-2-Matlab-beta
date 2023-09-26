@@ -6,6 +6,56 @@ The Rich-Club Strength (RCS) of a node at level s is the sum of the weighted edg
   that connect nodes of strength s or higher within a layer. 
   s is set by the user and it can be a vector containting all the strength thresholds 
   the default value is equal to 1.
+
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+RCS.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+RCS.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+RCS.PARAMETRIC_VALUE
+%%%% ¡title!
+Rich-Club Strength parameter (strength level)
+
+%%% ¡prop!
+%%%% ¡id!
+RCS.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+RCS.M
+%%%% ¡title!
+Rich-Club Strength
+
+%%% ¡prop!
+%%%% ¡id!
+RCS.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+RCS.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+RCS.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
   
 %% ¡props_update!
 
@@ -55,7 +105,7 @@ SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
 Measure.UNILAYER
 
 %%% ¡prop!
-PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
+PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.PARAMETRIC__.
 %%%% ¡default!
 Measure.PARAMETRIC
 

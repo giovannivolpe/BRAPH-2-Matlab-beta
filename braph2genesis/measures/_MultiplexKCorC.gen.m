@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 MultiplexKCorC.M
 %%%% ¡title!
-MultiplexKCorC
+Multiplex K-Coreness Centrality
 
 %%% ¡prop!
 %%%% ¡id!

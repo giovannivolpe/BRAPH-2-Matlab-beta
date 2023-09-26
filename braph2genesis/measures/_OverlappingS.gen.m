@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 OverlappingS.M
 %%%% ¡title!
-OverlappingS
+Overlapping Strength
 
 %%% ¡prop!
 %%%% ¡id!

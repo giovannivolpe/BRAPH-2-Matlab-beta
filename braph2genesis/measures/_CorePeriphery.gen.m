@@ -6,6 +6,50 @@ The Core-Periphery (CorePeriphery) of a node is the value of the rank correspond
 to the maximum richness nodes. It returns 1 for a node belonging to the 
 core and zero otherwise. 
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+CorePeriphery.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+CorePeriphery.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+CorePeriphery.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+CorePeriphery.M
+%%%% ¡title!
+Core-Periphery
+
+%%% ¡prop!
+%%%% ¡id!
+CorePeriphery.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+CorePeriphery.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+CorePeriphery.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

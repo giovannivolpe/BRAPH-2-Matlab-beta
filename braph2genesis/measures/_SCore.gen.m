@@ -5,6 +5,50 @@ SCore < Measure (m, score) is the S-Core.
 The S-Core (SCore) of a graph is the largest subnetwork comprising nodes of strength 
   s or higher. s is set by the user; the default value is equal to 1.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+SCore.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+SCore.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+SCore.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+SCore.M
+%%%% ¡title!
+S-Core
+
+%%% ¡prop!
+%%%% ¡id!
+SCore.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+SCore.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+SCore.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

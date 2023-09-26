@@ -3,8 +3,52 @@ StrengthIn < Measure (m, in-strength) is the graph In-Strength.
 
 %%% ¡description!
 The In-Strength (StrengthIn) of a graph is the sum of all weights of the inward edges 
-connected to a node within a layer, i.e., it is the sum of the columns of 
-the adjacency matrix. 
+ connected to a node within a layer, i.e., it is the sum of the columns of 
+ the adjacency matrix. 
+
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthIn.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthIn.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthIn.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthIn.M
+%%%% ¡title!
+In-Strength
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthIn.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthIn.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthIn.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
 
 %% ¡props_update!
 

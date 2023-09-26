@@ -30,7 +30,7 @@ Graph
 %%%% ¡id!
 MultiplexCl.M
 %%%% ¡title!
-MultiplexCl
+Multiplex Clustering
 
 %%% ¡prop!
 %%%% ¡id!

@@ -6,6 +6,56 @@ The Small-Worldness (SmallWorldness) coefficient is the fraction of the clusteri
   and average path length of each layer and the clustering coefficient and 
   average path length of 100 random graphs.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+SmallWorldness.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+SmallWorldness.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+SmallWorldness.RULE
+%%%% ¡title!
+PathLength rule
+
+%%% ¡prop!
+%%%% ¡id!
+SmallWorldness.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+SmallWorldness.M
+%%%% ¡title!
+Small-Worldness
+
+%%% ¡prop!
+%%%% ¡id!
+SmallWorldness.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+SmallWorldness.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+SmallWorldness.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

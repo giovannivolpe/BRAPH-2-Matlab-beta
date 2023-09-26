@@ -32,7 +32,7 @@ Graph
 %%%% ¡id!
 WeightedRC.M
 %%%% ¡title!
-WeightedRC
+Weighted Rich-Club
 
 %%% ¡prop!
 %%%% ¡id!

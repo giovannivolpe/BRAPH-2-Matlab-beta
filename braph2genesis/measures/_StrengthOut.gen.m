@@ -6,6 +6,50 @@ The Out-Strength (StrengthOut) of a graph is the sum of all weights of the outwa
 connected to a node within a layer, i.e., it is the sum of the rows of 
 the adjacency matrix. 
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthOut.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthOut.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthOut.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthOut.M
+%%%% ¡title!
+Out-Strength
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthOut.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthOut.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthOut.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

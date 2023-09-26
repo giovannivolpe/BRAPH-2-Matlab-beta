@@ -31,7 +31,7 @@ Graph
 %%%% ¡id!
 MultiplexT.M
 %%%% ¡title!
-MultiplexT
+Multiplex Triangles
 
 %%% ¡prop!
 %%%% ¡id!

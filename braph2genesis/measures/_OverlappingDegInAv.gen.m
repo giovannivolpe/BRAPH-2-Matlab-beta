@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 OverlappingDegInAv.M
 %%%% ¡title!
-OverlappingDegInAv
+Average Overlapping In-Degree
 
 %%% ¡prop!
 %%%% ¡id!

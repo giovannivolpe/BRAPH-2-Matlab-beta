@@ -53,6 +53,50 @@ Measure NOTES
 Persistence.COMPATIBLE_GRAPHS
 %%%% ¡title!
 Compatible Graphs
+  
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+Persistence.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+Persistence.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+Persistence.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+Persistence.M
+%%%% ¡title!
+Persistence
+
+%%% ¡prop!
+%%%% ¡id!
+Persistence.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+Persistence.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+Persistence.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
 
 %% ¡props_update!
 

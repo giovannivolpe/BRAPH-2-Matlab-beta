@@ -22,7 +22,7 @@ Measure NAME
 %%%% ¡id!
 PathLengthOut.RULE
 %%%% ¡title!
-PathLength rule
+Out-Path Length rule
 
 %%% ¡prop!
 %%%% ¡id!
@@ -34,7 +34,7 @@ Graph
 %%%% ¡id!
 PathLengthOut.M
 %%%% ¡title!
-PathLengthOut
+Out-Path Length
 
 %%% ¡prop!
 %%%% ¡id!

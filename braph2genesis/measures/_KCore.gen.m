@@ -5,6 +5,56 @@ KCore < Measure (m, kcore) is the graph K-Core.
 The K-Core (KCore) of a graph is the largest subnetwork comprising nodes of degree k or higher. 
   k is set by the user; the default value is equal to 1.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+MultiplexKCor.KCORETHRESHOLD
+%%%% ¡title!
+K-core threshold
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.M
+%%%% ¡title!
+K-Core
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

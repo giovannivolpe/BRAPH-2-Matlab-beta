@@ -22,6 +22,36 @@ Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
+CommunityStructure.RULE
+%%%% ¡title!
+Community Structure algorithm (louvain, newman, fixed)
+
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.GAMMA
+%%%% ¡title!
+Gamma (resolution) parameter
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.M0
+%%%% ¡title!
+Initial community affiliation vector (optional).
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.LOUVAIN_OM
+%%%% ¡title!
+Custom objective matrix (Louvain, optional)
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.OM_TYPE
+%%%% ¡title!
+The objective-function type algorithm (Louvain)
+
+%%% ¡prop!
+%%%% ¡id!
 CommunityStructure.G
 %%%% ¡title!
 Graph

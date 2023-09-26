@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 WeightedMxPIn.M
 %%%% ¡title!
-WeightedMxPIn
+Weighted Multiplex In-Participation
 
 %%% ¡prop!
 %%%% ¡id!

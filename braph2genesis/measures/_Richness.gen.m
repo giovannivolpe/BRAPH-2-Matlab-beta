@@ -5,6 +5,50 @@ Richness < Degree (m, richness) is the graph Richness.
 The Richness of a node is the sum of the edges that connect nodes 
 of higher degree within a layer.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+Richness.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+Richness.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+Richness.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+Richness.M
+%%%% ¡title!
+Richness
+
+%%% ¡prop!
+%%%% ¡id!
+Richness.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+Richness.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+Richness.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

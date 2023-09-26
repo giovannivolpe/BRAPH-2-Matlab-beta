@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 WeightedEdgeOvlp.M
 %%%% ¡title!
-WeightedEdgeOvlp
+Weighted Edge Overlap
 
 %%% ¡prop!
 %%%% ¡id!

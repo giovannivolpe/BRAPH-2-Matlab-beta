@@ -6,6 +6,56 @@ The Rich-Club Degree (RCDeg) of a node at level k is the sum of
  the edges that connect nodes of degree k or higher within a layer. 
  k is set by the user; the default value is equal to 1. 
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+RCDeg.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+RCDeg.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+RCDeg.PARAMETRIC_VALUE
+%%%% ¡title!
+Rich-Club Degree parameter (degree level)
+
+%%% ¡prop!
+%%%% ¡id!
+RCDeg.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+RCDeg.M
+%%%% ¡title!
+Rich-Club Degree
+
+%%% ¡prop!
+%%%% ¡id!
+RCDeg.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+RCDeg.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+RCDeg.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+  
 %% ¡props_update!
 
 %%% ¡prop!
@@ -54,7 +104,7 @@ SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
 Measure.UNILAYER
 
 %%% ¡prop!
-PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
+PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.PARAMETRIC__.
 %%%% ¡default!
 Measure.PARAMETRIC
 

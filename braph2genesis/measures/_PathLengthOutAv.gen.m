@@ -22,7 +22,7 @@ Measure NAME
 %%%% ¡id!
 PathLengthOutAv.RULE
 %%%% ¡title!
-PathLength rule
+Out-Path Length rule
 
 %%% ¡prop!
 %%%% ¡id!
@@ -34,7 +34,7 @@ Graph
 %%%% ¡id!
 PathLengthOutAv.M
 %%%% ¡title!
-PathLengthOutAv
+Average Out-Path Length
 
 %%% ¡prop!
 %%%% ¡id!

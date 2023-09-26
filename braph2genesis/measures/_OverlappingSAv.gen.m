@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 OverlappingSAv.M
 %%%% ¡title!
-OverlappingSAv
+Average Overlapping Strength
 
 %%% ¡prop!
 %%%% ¡id!

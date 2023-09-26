@@ -4,6 +4,50 @@ GlobalEfficiencyInAv < GlobalEfficiencyIn (m, average in-global efficiency) is t
 %%% ¡description!
 The Average In-Global Efficiency (GlobalEfficiencyInAv) is the average inverse shortest in-path length within each layer. 
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiencyInAv.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiencyInAv.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiencyInAv.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiencyInAv.M
+%%%% ¡title!
+Average In-Global Efficiency
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiencyInAv.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiencyInAv.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiencyInAv.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

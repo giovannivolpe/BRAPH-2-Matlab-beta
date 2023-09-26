@@ -23,6 +23,12 @@ Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
+MultiplexRCS.WEIGHTED_MULTIRICHCLUB_COEFFICIENTS
+%%%% ¡title!
+Multiplex Rich-Club Strength coefficients
+
+%%% ¡prop!
+%%%% ¡id!
 MultiplexRCS.G
 %%%% ¡title!
 Graph
@@ -31,7 +37,7 @@ Graph
 %%%% ¡id!
 MultiplexRCS.M
 %%%% ¡title!
-MultiplexRCS
+Multiplex Rich-Club Strength
 
 %%% ¡prop!
 %%%% ¡id!

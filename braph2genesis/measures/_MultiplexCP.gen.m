@@ -24,6 +24,12 @@ Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
+MultiplexCP.MULTIRICHNESS_COEFFICIENTS
+%%%% ¡title!
+Multirichness coefficients
+
+%%% ¡prop!
+%%%% ¡id!
 MultiplexCP.G
 %%%% ¡title!
 Graph
@@ -32,7 +38,7 @@ Graph
 %%%% ¡id!
 MultiplexCP.M
 %%%% ¡title!
-MultiplexCP
+Multiplex Core-Periphery
 
 %%% ¡prop!
 %%%% ¡id!

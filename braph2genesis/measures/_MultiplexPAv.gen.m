@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 MultiplexPAv.M
 %%%% ¡title!
-MultiplexPAv
+Average Multiplex Participation
 
 %%% ¡prop!
 %%%% ¡id!

@@ -21,6 +21,12 @@ Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
+MultiplexKCor.MULTIPLEXKCORETHRESHOLD
+%%%% ¡title!
+Multiplex k-core threshold
+
+%%% ¡prop!
+%%%% ¡id!
 MultiplexKCor.G
 %%%% ¡title!
 Graph
@@ -29,7 +35,7 @@ Graph
 %%%% ¡id!
 MultiplexKCor.M
 %%%% ¡title!
-MultiplexKCor
+Multiplex K-Core
 
 %%% ¡prop!
 %%%% ¡id!

@@ -6,6 +6,50 @@ The Edge Betweenness Centrality (EdgeBetwCentr) of a graph is the fraction of al
 graph that pass through a given edge within a layer. Edges with high values 
 of betweenness centrality participate in a large number of shortest paths.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+EdgeBetwCentr.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+EdgeBetwCentr.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+EdgeBetwCentr.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+EdgeBetwCentr.M
+%%%% ¡title!
+Edge Betweenness Centrality
+
+%%% ¡prop!
+%%%% ¡id!
+EdgeBetwCentr.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+EdgeBetwCentr.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+EdgeBetwCentr.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

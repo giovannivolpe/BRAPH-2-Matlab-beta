@@ -7,6 +7,56 @@ The Rich-Club coefficient (RichClub) of a node at level k is the fraction of
  maxium number of edges that such nodes might share within a 
  layer. k is set by the user, the default value is equal to 1.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+RichClub.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+RichClub.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+RichClub.PARAMETRIC_VALUE
+%%%% ¡title!
+Rich-Club parameter (degree level)
+
+%%% ¡prop!
+%%%% ¡id!
+RichClub.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+RichClub.M
+%%%% ¡title!
+Rich-Club
+
+%%% ¡prop!
+%%%% ¡id!
+RichClub.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+RichClub.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+RichClub.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -55,7 +105,7 @@ SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
 Measure.UNILAYER
 
 %%% ¡prop!
-PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
+PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.PARAMETRIC__.
 %%%% ¡default!
 Measure.PARAMETRIC
 

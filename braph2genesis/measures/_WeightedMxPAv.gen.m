@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 WeightedMxPAv.M
 %%%% ¡title!
-WeightedMxPAv
+Average Weighted Multiplex Participation
 
 %%% ¡prop!
 %%%% ¡id!

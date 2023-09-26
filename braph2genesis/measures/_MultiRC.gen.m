@@ -23,6 +23,12 @@ Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
+MultiRC.MULTIRICHNESS_COEFFICIENTS
+%%%% ¡title!
+Multirichness coefficients
+
+%%% ¡prop!
+%%%% ¡id!
 MultiRC.G
 %%%% ¡title!
 Graph
@@ -31,7 +37,7 @@ Graph
 %%%% ¡id!
 MultiRC.M
 %%%% ¡title!
-MultiRC
+Multirichness
 
 %%% ¡prop!
 %%%% ¡id!

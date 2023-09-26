@@ -5,6 +5,50 @@ KCorenessCentrality < Measure (m, k-coreness centrality) is the graph K-Coreness
 The K-Coreness Centrality (KCorenessCentrality) of a node is k if the node belongs to the k-core 
 but not to the (k+1)-core.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+KCorenessCentrality.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+LocalEfficiency.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+KCorenessCentrality.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+KCorenessCentrality.M
+%%%% ¡title!
+K-Coreness Centrality
+
+%%% ¡prop!
+%%%% ¡id!
+KCorenessCentrality.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+KCorenessCentrality.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+KCorenessCentrality.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

@@ -5,6 +5,50 @@ GlobalEfficiency < Distance (m, global efficiency) is the graph Global Efficienc
 The Global Efficiency (GlobalEfficiency) is the average inverse shortest path length within each layer. 
 It is inversely related to the characteristic path length.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiency.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiency.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiency.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiency.M
+%%%% ¡title!
+Global Efficiency
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiency.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiency.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+GlobalEfficiency.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

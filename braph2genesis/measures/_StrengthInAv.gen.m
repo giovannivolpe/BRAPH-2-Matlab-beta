@@ -6,6 +6,50 @@ The Average In-Strength (StrengthIn) of a graph is the mean of the sum of all we
 connected to a node within a layer, i.e., it is the sum of the columns of 
 the adjacency matrix. 
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthInAv.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthInAv.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthInAv.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthInAv.M
+%%%% ¡title!
+Average In-Strength
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthInAv.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthInAv.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+StrengthInAv.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

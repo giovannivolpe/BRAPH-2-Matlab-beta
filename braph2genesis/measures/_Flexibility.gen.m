@@ -9,6 +9,50 @@ multilayer networks (e.g. temporal, changes are possible only between
 adjacent layers, whereas in categorical multilayer networks, 
 community assignment changes are possible between any pairs of layers.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+Flexibility.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+Flexibility.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+Flexibility.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+Flexibility.M
+%%%% ¡title!
+Flexibility
+
+%%% ¡prop!
+%%%% ¡id!
+Flexibility.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+Flexibility.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+Flexibility.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

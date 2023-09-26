@@ -4,6 +4,56 @@ Radius < Measure (m, radius) is the graph Radius.
 %%% ¡description!
 The Radius is the minimum eccentricity among the vertice within a layer.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+Radius.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+Radius.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+Radius.RULE
+%%%% ¡title!
+Eccentricity rule for calculation in a graph or its subgraph
+
+%%% ¡prop!
+%%%% ¡id!
+Radius.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+Radius.M
+%%%% ¡title!
+Radius
+
+%%% ¡prop!
+%%%% ¡id!
+Radius.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+Radius.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+Radius.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+  
 %% ¡props_update!
 
 %%% ¡prop!

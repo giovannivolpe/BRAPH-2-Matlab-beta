@@ -7,6 +7,50 @@ The Out-Out-Assortativity coefficient (AssortOutOut) of a graph is the correlati
 The corresponding coefficient for directed and weighted networks is calculated by using 
   the weighted and directed variants of out-degree/out-strength.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+AssortOutOut.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+AssortOutOut.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+AssortOutOut.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+AssortOutOut.M
+%%%% ¡title!
+Out-Out-Assortativity
+
+%%% ¡prop!
+%%%% ¡id!
+AssortOutOut.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+AssortOutOut.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+AssortOutOut.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

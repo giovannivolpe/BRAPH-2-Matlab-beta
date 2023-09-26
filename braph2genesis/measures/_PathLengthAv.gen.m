@@ -3,7 +3,57 @@ PathLengthAv < PathLength (m, average path length) is the graph Average Path Len
 
 %%% ¡description!
 The Average Path Length (PathLengthAv) of a graph is the average of the sum of 
-the path lengths within each layer.
+ the path lengths within each layer.
+
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthAv.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthAv.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthAv.RULE
+%%%% ¡title!
+Path Length rule
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthAv.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthAv.M
+%%%% ¡title!
+Average Path Length
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthAv.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthAv.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthAv.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graph
 
 %% ¡props_update!
 

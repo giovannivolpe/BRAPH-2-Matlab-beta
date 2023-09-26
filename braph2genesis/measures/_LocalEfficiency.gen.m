@@ -5,6 +5,50 @@ LocalEfficiency < Measure (m, local efficiency) is the graph Local Efficiency.
 The Local Efficiency (LocalEfficiency) is the average inverse shortest path length with 
   local nodes within each layer.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+LocalEfficiency.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+LocalEfficiency.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+LocalEfficiency.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+LocalEfficiency.M
+%%%% ¡title!
+Local Efficiency
+
+%%% ¡prop!
+%%%% ¡id!
+LocalEfficiency.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+LocalEfficiency.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+LocalEfficiency.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

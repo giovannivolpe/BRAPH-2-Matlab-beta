@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 EdgeOverlap.M
 %%%% ¡title!
-EdgeOverlap
+Edge Overlap
 
 %%% ¡prop!
 %%%% ¡id!

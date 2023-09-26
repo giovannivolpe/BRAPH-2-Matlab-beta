@@ -4,6 +4,56 @@ Eccentricity < Measure (m, eccentricity) is the graph Eccentricity.
 %%% ¡description!
 The Eccentricity of a node is the maximal shortest path length between a node and any other node within a layer.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+Eccentricity.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+Eccentricity.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+Eccentricity.RULE
+%%%% ¡title!
+Eccentricity rule for calculation in a graph or its subgraph
+
+%%% ¡prop!
+%%%% ¡id!
+Eccentricity.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+Eccentricity.M
+%%%% ¡title!
+Eccentricity
+
+%%% ¡prop!
+%%%% ¡id!
+Eccentricity.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+Eccentricity.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+Eccentricity.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+  
 %% ¡props_update!
 
 %%% ¡prop!

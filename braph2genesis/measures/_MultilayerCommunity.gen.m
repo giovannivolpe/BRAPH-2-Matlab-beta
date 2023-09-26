@@ -22,6 +22,36 @@ Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
+MultilayerCommunity.GAMMA
+%%%% ¡title!
+Gamma (resolution) parameter
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.OMEGA
+%%%% ¡title!
+Omega (inter-layer coupling) parameter
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.S0
+%%%% ¡title!
+Initial partition for the multilayer modularity matrix (optional).
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.OM
+%%%% ¡title!
+Multilayer modularity matrix (optional).
+
+%%% ¡prop!
+%%%% ¡id!
+MultilayerCommunity.LIMIT
+%%%% ¡title!
+Maximum size of multilayer modularity matrix.
+
+%%% ¡prop!
+%%%% ¡id!
 MultilayerCommunity.G
 %%%% ¡title!
 Graph

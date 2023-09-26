@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 MultiplexPOut.M
 %%%% ¡title!
-MultiplexPOut
+Multiplex Out-Participation
 
 %%% ¡prop!
 %%%% ¡id!

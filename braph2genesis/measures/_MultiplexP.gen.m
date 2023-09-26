@@ -34,7 +34,7 @@ Graph
 %%%% ¡id!
 MultiplexP.M
 %%%% ¡title!
-MultiplexP
+Multiplex Participation
 
 %%% ¡prop!
 %%%% ¡id!

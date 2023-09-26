@@ -4,6 +4,50 @@ Diameter < Measure (m, diameter) is the graph Diameter.
 %%% ¡description!
 The diameter is the maximum eccentricity among the vertice within a layer.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+Diameter.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+Diameter.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+Diameter.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+Diameter.M
+%%%% ¡title!
+Diameter
+
+%%% ¡prop!
+%%%% ¡id!
+Diameter.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+Diameter.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+Diameter.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

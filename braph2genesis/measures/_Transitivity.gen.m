@@ -5,6 +5,50 @@ Transitivity < Triangles (m, transitivity) is the graph Transitivity.
 The Transitivity of a graph is the fraction of triangles to the number 
  of (unordered) triplets within a layer.
 
+ %% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+Transitivity.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+Transitivity.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+Transitivity.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+Transitivity.M
+%%%% ¡title!
+Transitivity
+
+%%% ¡prop!
+%%%% ¡id!
+Transitivity.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+Transitivity.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+Transitivity.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
+
 %% ¡props_update!
 
 %%% ¡prop!

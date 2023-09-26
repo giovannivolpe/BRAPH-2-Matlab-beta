@@ -3,7 +3,7 @@ OverlappingSOutAv < OverlappingSOut (m, average overlapping out-strength) is the
 
 %%% ¡description!
 The Average Overlapping Out-Strength of a graph is the average of the sum of the out-strengths of a 
-node in all layers. 
+ node in all layers. 
 
 %% ¡layout!
 
@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 OverlappingSOutAv.M
 %%%% ¡title!
-OverlappingSOutAv
+Average Overlapping Out-Strength
 
 %%% ¡prop!
 %%%% ¡id!

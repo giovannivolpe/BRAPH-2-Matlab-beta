@@ -23,6 +23,12 @@ Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
+MultiplexRCDeg.MULTIRICHCLUB_COEFFICIENTS
+%%%% ¡title!
+Multiplex Rich-Club Degree coefficients
+
+%%% ¡prop!
+%%%% ¡id!
 MultiplexRCDeg.G
 %%%% ¡title!
 Graph
@@ -31,7 +37,7 @@ Graph
 %%%% ¡id!
 MultiplexRCDeg.M
 %%%% ¡title!
-MultiplexRCDeg
+Multiplex Rich-Club Degree
 
 %%% ¡prop!
 %%%% ¡id!

@@ -29,7 +29,7 @@ Graph
 %%%% ¡id!
 MultiplexClAv.M
 %%%% ¡title!
-MultiplexClAv
+Average Multiplex Clustering
 
 %%% ¡prop!
 %%%% ¡id!
