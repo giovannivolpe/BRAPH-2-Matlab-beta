@@ -65,7 +65,7 @@ classdef BRAPH2
     
     properties (Constant) % BRAPH2 ID Card
         NAME = 'BRAPH 2.0' % BRAPH2 full name
-        VERSION = '2.0.0.0' % BRAPH2 version
+        VERSION = '2.0.0.b1' % BRAPH2 version % % % ON RELEASE: Ensure correct VERSION
         STR = 'BRAPH2' % BRAPH2 short string
         BUILD = 5 % BRAPH2 build number % % % ON RELEASE: Ensure correct BUILD
         AUTHORS = 'Giovanni Volpe, Emiliano Gomez Ruiz, Anna Canal Garcia, Yu-Wei Chang, Mite Mijalkov, Joana Braga Pereira, Ehsan Kakaei, Eric Westman, et al.'
