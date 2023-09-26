@@ -124,7 +124,6 @@ h_button_el = uibutton( ...
 % % %             tmp = load(filename, '-mat', 'el');
 % % %             set(ui_checkbox_bottom_animation, 'Value', false)
 % % %             GUIElement('PE', tmp.el, 'FILE', filename).draw();
-% % %             
 % % %         end
 disp('cb_button_el')
     end
