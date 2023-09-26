@@ -102,10 +102,12 @@ end
 %%% ¡prop!
 H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.
 %%%% ¡calculate!
-value = calculateValue@BrainAtlasPF(pf, BrainAtlasPF.H_TOOLS, varargin{:}); % also warning
-if value
-     tool_separator_2 = uipushtool(toolbar, 'Separator', 'on', 'Visible', 'off');
-    
+toolbar = pf.memorize(21);
+if  check_graphics(toolbar, 'uitoolbar')
+    value = calculateValue@BrainAtlasPF(pf, BrainAtlasPF.H_TOOLS, varargin{:}); % also warning
+
+    tool_separator_2 = uipushtool(toolbar, 'Separator', 'on', 'Visible', 'off');
+
     % SHOW MEASURE
     tool_show_measure = uitoggletool(toolbar, ...
         'Tag', 'TOOL.SHOWMEASURE', ...
@@ -136,6 +138,11 @@ false
 M (metadata, item) is the measure.
 %%%% ¡settings!
 'Measure'
+
+%%% ¡prop!
+SETUP (query, empty) calculates the group on measure brain surface value and stores it to be implemented in the subelements.
+%%%% ¡calculate!
+value = [];
 
 %% ¡tests!
 

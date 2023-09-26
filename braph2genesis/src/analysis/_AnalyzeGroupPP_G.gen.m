@@ -536,7 +536,7 @@ function cb_calculate(~, ~)
 	pr.get('UPDATE');
 end
 function cb_open_mbrain(~, ~)
-    g = pr.gt('EL').get(pr.get('PROP'));
+    g = pr.get('EL').get(pr.get('PROP'));
     m_list = g.get('COMPATIBLE_MEASURES');
     
     f = ancestor(pr.get('H'), 'figure'); % parent GUI
@@ -551,10 +551,45 @@ function cb_open_mbrain(~, ~)
     
         m = g.get('MEASURE', measure);
     
-        if ~gui_f_dict.get('CONTAINS_KEY', measure)
+        if ~gui_b_dict.get('CONTAINS_KEY', measure)
+            
+            group = pr.get('EL').get('GR');
+            sub_list = group.get('SUB_DICT').get('IT_LIST');
+            sub = sub_list{1};
+            brain_atlas = sub.get('BA');
+            switch m.get('SHAPE')
+                case Measure.GLOBAL % __Measure.GLOBAL__
+                    switch m.get('SCOPE')
+                        case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
+                            mGBPF = MeasureGroupBrainPF_GS('M', m, 'BA', brain_atlas);
+                        case Measure.UNILAYER % __Measure.UNILAYER__
+                            mGBPF = MeasureGroupBrainPF_GU('M', m, 'BA', brain_atlas);
+                        case Measure.BILAYER % __Measure.BILAYER__
+                            mGBPF = MeasureGroupBrainPF_GB('M', m, 'BA', brain_atlas);
+                    end
+                case Measure.NODAL % __Measure.NODAL__
+                    switch m.get('SCOPE')
+                        case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
+                            mGBPF = MeasureGroupBrainPF_NS('M', m, 'BA', brain_atlas);
+                        case Measure.UNILAYER % __Measure.UNILAYER__
+                            mGBPF = MeasureGroupBrainPF_NU('M', m, 'BA', brain_atlas);
+                        case Measure.BILAYER % __Measure.BILAYER__
+                            mGBPF = MeasureGroupBrainPF_NB('M', m, 'BA', brain_atlas);
+                    end
+                case Measure.BINODAL % __Measure.BINODAL__
+                    switch m.get('SCOPE')
+                        case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
+                            mGBPF = MeasureGroupBrainPF_BS('M', m, 'BA', brain_atlas);
+                        case Measure.UNILAYER % __Measure.UNILAYER__
+                            mGBPF = MeasureGroupBrainPF_BU('M', m, 'BA', brain_atlas);
+                        case Measure.BILAYER % __Measure.BILAYER__
+                            mGBPF =  MeasureGroupBrainPF_BB('M', m, 'BA', brain_atlas);
+                    end
+            end
+
             gui = GUIFig( ...
                 'ID', measure, ... % this is the dictionary key
-                'PF', m.get('PFB'), ... % check with yuwei
+                'PF', mGBPF, ... % check with yuwei
                 'POSITION', [ ...
                 x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ...
                 y0(f, 'normalized') ...
@@ -564,7 +599,7 @@ function cb_open_mbrain(~, ~)
                 'WAITBAR', pr.getCallback('WAITBAR'), ...
                 'CLOSEREQ', false ...
                 );
-            gui_f_dict.get('ADD', gui)
+            gui_b_dict.get('ADD', gui)
         end
     
         gui = gui_b_dict.get('IT', measure);
@@ -738,8 +773,8 @@ GUI_M_DICT (gui, idict) contains the GUIs for the measures.
 %%% ¡prop!
 GUI_B_DICT (gui, idict) contains the GUIs for the brain measures.
 %%%% ¡settings!
-'GUIElement'
- 
+'GUIFig'
+
 %% ¡tests!
 
 %%% ¡excluded_props!

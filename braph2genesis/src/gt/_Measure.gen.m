@@ -281,48 +281,6 @@ pr = PanelPropItem('EL', m, 'PROP', Measure.PFM, ...
 	'BUTTON_TEXT', ['Plot ' m.get('LABEL')], ...
     varargin{:});
 
-%%% ¡prop!
-PFB (gui, item) contains the panel figure of the brain measure.
-%%%% ¡settings!
-'MeasureGroupBrainPF'
-%%%% ¡postprocessing!
-if isa(m.getr('PFB'), 'NoValue')
-    switch m.get('SHAPE')
-        case Measure.GLOBAL % __Measure.GLOBAL__
-            switch m.get('SCOPE')
-                case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
-                    m.set('PFB', MeasureGroupBrainPF_GS('M', m))
-                case Measure.UNILAYER % __Measure.UNILAYER__
-                    m.set('PFB', MeasureGroupBrainPF_GU('M', m))
-                case Measure.BILAYER % __Measure.BILAYER__
-                    m.set('PFB', MeasureGroupBrainPF_GB('M', m))
-            end
-        case Measure.NODAL % __Measure.NODAL__
-            switch m.get('SCOPE')
-                case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
-                    m.set('PFB', MeasureGroupBrainPF_NS('M', m))
-                case Measure.UNILAYER % __Measure.UNILAYER__
-                    m.set('PFB', MeasureGroupBrainPF_NU('M', m))
-                case Measure.BILAYER % __Measure.BILAYER__
-                    m.set('PFB', MeasureGroupBrainPF_NB('M', m))
-            end
-        case Measure.BINODAL % __Measure.BINODAL__
-            switch m.get('SCOPE')
-                case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
-                    m.set('PFB', MeasureGroupBrainPF_BS('M', m))
-                case Measure.UNILAYER % __Measure.UNILAYER__
-                    m.set('PFB', MeasureGroupBrainPF_BU('M', m))
-                case Measure.BILAYER % __Measure.BILAYER__
-                    m.set('PFB', MeasureGroupBrainPF_BB('M', m))
-            end
-    end
-end
-%%%% ¡gui!
-pr = PanelPropItem('EL', m, 'PROP', Measure.PFB, ...
-    'GUICLASS', 'GUIFig', ...
-	'BUTTON_TEXT', ['Plot ' m.get('LABEL')], ...
-    varargin{:});
-
 %% ¡tests!
 
 %%% ¡excluded_props!
