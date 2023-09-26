@@ -34,19 +34,19 @@ Gamma (resolution) parameter
 
 %%% ¡prop!
 %%%% ¡id!
-MultilayerCommunity.M0
+CommunityStructure.M0
 %%%% ¡title!
 Initial community affiliation vector (optional).
 
 %%% ¡prop!
 %%%% ¡id!
-MultilayerCommunity.LOUVAIN_OM
+CommunityStructure.LOUVAIN_OM
 %%%% ¡title!
 Custom objective matrix (Louvain, optional)
 
 %%% ¡prop!
 %%%% ¡id!
-MultilayerCommunity.OM_TYPE
+CommunityStructure.OM_TYPE
 %%%% ¡title!
 The objective-function type algorithm (Louvain)
 
@@ -85,7 +85,7 @@ Compatible Graphs
 %%% ¡prop!
 ELCLASS (constant, string) is the class of the Community Structure.
 %%%% ¡default!
-'Community Structure'
+'CommunityStructure'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the Community Structure.

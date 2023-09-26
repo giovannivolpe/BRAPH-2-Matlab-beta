@@ -21,7 +21,7 @@ Measure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-MultiplexKCor.KCORETHRESHOLD
+KCore.KCORETHRESHOLD
 %%%% ¡title!
 K-core threshold
 
