@@ -4,6 +4,56 @@ PathLengthOutAv < PathLengthOut (m, average out-path length) is the graph Averag
 %%% ¡description!
 The Average Out-Path Length (PathLengthOutAv) is the average shortest out-path lengths of one node to all other nodes without a layer.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthOutAv.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthOutAv.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthOutAv.RULE
+%%%% ¡title!
+PathLength rule
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthOutAv.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthOutAv.M
+%%%% ¡title!
+PathLengthOutAv
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthOutAv.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthOutAv.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthOutAv.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graph
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -65,14 +115,21 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 M (result, cell) is the cell containing the Average Out-Path Length.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
-A = g.get('A');  % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
-N = g.get('NODENUMBER');
 L = g.get('LAYERNUMBER');
 
 out_path_length = calculateValue@PathLengthOut(m, prop);
 out_path_length_av = cell(L, 1);
+path_length_rule = m.get('RULE');
 parfor li = 1:1:length(out_path_length_av)
-    out_path_length_av(li) = {mean(out_path_length{li})};
+    switch lower(path_length_rule)
+        case {'subgraphs'}
+            player = out_path_length{li};
+            out_path_length_av(li) = {mean(player(player~=Inf))};
+        case {'mean'}
+            out_path_length_av(li) = {mean(out_path_length{li})};
+        otherwise  % 'harmonic' 'default'
+            out_path_length_av(li) = {harmmean(out_path_length{li})};
+    end
 end
 value = out_path_length_av;
 

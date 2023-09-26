@@ -4,6 +4,56 @@ PathLengthInAv < PathLengthIn (m, average in-path length) is the graph Average I
 %%% ¡description!
 The Average In-Path Length (PathLengthInAv) of a graph is the average of the sum of the in-path lengths within each layer. 
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthInAv.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthInAv.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthInAv.RULE
+%%%% ¡title!
+PathLength rule
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthInAv.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthInAv.M
+%%%% ¡title!
+PathLengthInAv
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthInAv.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthInAv.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthInAv.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graph
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -65,14 +115,21 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 M (result, cell) is the cell containing the Average In-Path Length.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
-A = g.get('A');  % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
-N = g.get('NODENUMBER');
 L = g.get('LAYERNUMBER');
 
 in_path_length = calculateValue@PathLengthIn(m, prop);
 in_path_length_av = cell(L, 1);
+path_length_rule = m.get('RULE');
 parfor li = 1:1:length(in_path_length_av)
-    in_path_length_av(li) = {mean(in_path_length{li})};
+    switch lower(path_length_rule)
+        case {'subgraphs'}
+            player = in_path_length{li};
+            in_path_length_av(li) = {mean(player(player~=Inf))};
+        case {'mean'}
+            in_path_length_av(li) = {mean(in_path_length{li})};
+        otherwise  % 'harmonic' 'default'
+            in_path_length_av(li) = {harmmean(in_path_length{li})};
+    end
 end
 value = in_path_length_av;
 

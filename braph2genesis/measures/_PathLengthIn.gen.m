@@ -4,6 +4,56 @@ PathLengthIn < Measure (m, in-path length) is the graph In-Path Length.
 %%% ¡description!
 The In-Path Length (PathLengthIn) is the average shortest in-path length of one node to all other nodes within a layer.
 
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthIn.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthIn.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthIn.RULE
+%%%% ¡title!
+PathLength rule
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthIn.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthIn.M
+%%%% ¡title!
+PathLengthIn
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthIn.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthIn.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+PathLengthIn.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graph
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -85,15 +135,15 @@ parfor li = 1:1:L
                 in_path_length_layer(u) = mean(Du(Du~=Inf & Du~=0));
             end
             in_path_length_layer(isnan(in_path_length_layer)) = 0;  % node Nan corresponds to isolated nodes, pathlength is 0
-        case {'harmonic'}
-            for u = 1:1:N
-                Du = distance_layer(:, u);
-                in_path_length_layer(u) = harmmean(Du(Du~=0));
-            end
-        otherwise 
+        case {'mean'}
             for u = 1:1:N
                 Du = distance_layer(:, u);
                 in_path_length_layer(u) = mean(Du(Du~=0));
+            end
+        otherwise  % 'harmonic' 'default'
+            for u = 1:1:N
+                Du = distance_layer(:, u);
+                in_path_length_layer(u) = harmmean(Du(Du~=0));
             end
     end
     in_path_length(li) = {in_path_length_layer};
