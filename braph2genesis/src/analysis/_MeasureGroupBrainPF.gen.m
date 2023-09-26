@@ -114,7 +114,7 @@ if  check_graphics(toolbar, 'uitoolbar')
         'Separator', 'on', ...
         'State', pf.get('SHOWMEASURE'), ...
         'Tooltip', 'Show Measure', ...
-        'CData', imread('braph2icon16px.png'), ...
+        'CData', imread('braph2icon_16px.png'), ...
         'OnCallback', {@cb_show_measure, true}, ...
         'OffCallback', {@cb_show_measure, false});
 
@@ -140,9 +140,14 @@ M (metadata, item) is the measure.
 'Measure'
 
 %%% ¡prop!
-SETUP (query, empty) calculates the group on measure brain surface value and stores it to be implemented in the subelements.
-%%%% ¡calculate!
-value = [];
+SELECTEDLAYER (metadata, string) is an the choosen selected layer.
+%%%% ¡default!
+'1'
+
+%%% ¡prop!
+SELECTEDDT (metadata, string) is an the choosen selected layer.
+%%%% ¡default!
+'1'
 
 %% ¡tests!
 
