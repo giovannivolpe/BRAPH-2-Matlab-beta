@@ -23,7 +23,8 @@ classdef RCS < Strength
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the rich-club strength.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, RVECTOR) 
+	%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
+	%  <strong>17</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, RVECTOR) 
 	%
 	% RCS methods (constructor):
 	%  RCS - constructor
@@ -112,7 +113,7 @@ classdef RCS < Strength
 	%
 	
 	properties (Constant) % properties
-		PARAMETRIC_VALUE = 16; %CET: Computational Efficiency Trick
+		PARAMETRIC_VALUE = 17; %CET: Computational Efficiency Trick
 		PARAMETRIC_VALUE_TAG = 'PARAMETRIC_VALUE';
 		PARAMETRIC_VALUE_CATEGORY = 3;
 		PARAMETRIC_VALUE_FORMAT = 12;
@@ -144,7 +145,8 @@ classdef RCS < Strength
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the rich-club strength.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, RVECTOR) 
+			%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
+			%  <strong>17</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, RVECTOR) 
 			%
 			% See also Category, Format.
 			
@@ -206,7 +208,7 @@ classdef RCS < Strength
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17];
 				return
 			end
 			
@@ -216,7 +218,7 @@ classdef RCS < Strength
 				case 2 % Category.METADATA
 					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = [4 16];
+					prop_list = [4 17];
 				case 4 % Category.DATA
 					prop_list = [5 13];
 				case 5 % Category.RESULT
@@ -224,7 +226,7 @@ classdef RCS < Strength
 				case 6 % Category.QUERY
 					prop_list = 8;
 				case 9 % Category.GUI
-					prop_list = 15;
+					prop_list = [15 16];
 				otherwise
 					prop_list = [];
 			end
@@ -250,7 +252,7 @@ classdef RCS < Strength
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 16;
+				prop_number = 17;
 				return
 			end
 			
@@ -268,7 +270,7 @@ classdef RCS < Strength
 				case 6 % Category.QUERY
 					prop_number = 1;
 				case 9 % Category.GUI
-					prop_number = 1;
+					prop_number = 2;
 				otherwise
 					prop_number = 0;
 			end
@@ -299,7 +301,7 @@ classdef RCS < Strength
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 16 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 17 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -337,7 +339,7 @@ classdef RCS < Strength
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'PARAMETRIC_VALUE' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -370,7 +372,7 @@ classdef RCS < Strength
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'PARAMETRIC_VALUE' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -399,7 +401,7 @@ classdef RCS < Strength
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				rcs_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' };
+				rcs_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'PARAMETRIC_VALUE' };
 				tag = rcs_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -426,7 +428,7 @@ classdef RCS < Strength
 			prop = RCS.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			rcs_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  3 };
+			rcs_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  9  3 };
 			prop_category = rcs_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -452,7 +454,7 @@ classdef RCS < Strength
 			prop = RCS.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			rcs_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  12 };
+			rcs_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  8  12 };
 			prop_format = rcs_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -478,7 +480,7 @@ classdef RCS < Strength
 			prop = RCS.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			rcs_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the rich-club strength.'  'DESCRIPTION (constant, string) is the description of the rich-club strength.'  'TEMPLATE (parameter, item) is the template of the rich-club strength.'  'ID (data, string) is a few-letter code of the rich-club strength.'  'LABEL (metadata, string) is an extended label of the rich-club strength.'  'NOTES (metadata, string) are some specific notes about the rich-club strength.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the rich-club strength.'  'PFM (gui, item) contains the panel figure of the measure.'  'PARAMETRIC_VALUE (parameter, RVECTOR) ' };
+			rcs_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the rich-club strength.'  'DESCRIPTION (constant, string) is the description of the rich-club strength.'  'TEMPLATE (parameter, item) is the template of the rich-club strength.'  'ID (data, string) is a few-letter code of the rich-club strength.'  'LABEL (metadata, string) is an extended label of the rich-club strength.'  'NOTES (metadata, string) are some specific notes about the rich-club strength.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the rich-club strength.'  'PFM (gui, item) contains the panel figure of the measure.'  'PFB (gui, item) contains the panel figure of the brain measure.'  'PARAMETRIC_VALUE (parameter, RVECTOR) ' };
 			prop_description = rcs_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -504,7 +506,7 @@ classdef RCS < Strength
 			prop = RCS.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 16 % RCS.PARAMETRIC_VALUE
+				case 17 % RCS.PARAMETRIC_VALUE
 					prop_settings = Format.getFormatSettings(12);
 				case 4 % RCS.TEMPLATE
 					prop_settings = 'RCS';
@@ -535,7 +537,7 @@ classdef RCS < Strength
 			prop = RCS.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 16 % RCS.PARAMETRIC_VALUE
+				case 17 % RCS.PARAMETRIC_VALUE
 					prop_default = 1;
 				case 1 % RCS.ELCLASS
 					prop_default = 'RCS';
@@ -623,12 +625,12 @@ classdef RCS < Strength
 			prop = RCS.getPropProp(pointer);
 			
 			switch prop
-				case 16 % RCS.PARAMETRIC_VALUE
+				case 17 % RCS.PARAMETRIC_VALUE
 					check = Format.checkFormat(12, value, RCS.getPropSettings(prop));
 				case 4 % RCS.TEMPLATE
 					check = Format.checkFormat(8, value, RCS.getPropSettings(prop));
 				otherwise
-					if prop <= 15
+					if prop <= 16
 						check = checkProp@Strength(prop, value);
 					end
 			end
@@ -719,7 +721,7 @@ classdef RCS < Strength
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 15
+					if prop <= 16
 						value = calculateValue@Strength(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

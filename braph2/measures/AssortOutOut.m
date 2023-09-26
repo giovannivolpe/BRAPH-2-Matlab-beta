@@ -23,6 +23,7 @@ classdef AssortOutOut < Measure
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the out-out-assortativity.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+	%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
 	%
 	% AssortOutOut methods (constructor):
 	%  AssortOutOut - constructor
@@ -137,6 +138,7 @@ classdef AssortOutOut < Measure
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the out-out-assortativity.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
+			%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
 			%
 			% See also Category, Format.
 			
@@ -198,7 +200,7 @@ classdef AssortOutOut < Measure
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
 				return
 			end
 			
@@ -216,7 +218,7 @@ classdef AssortOutOut < Measure
 				case 6 % Category.QUERY
 					prop_list = 8;
 				case 9 % Category.GUI
-					prop_list = 15;
+					prop_list = [15 16];
 				otherwise
 					prop_list = [];
 			end
@@ -242,7 +244,7 @@ classdef AssortOutOut < Measure
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 15;
+				prop_number = 16;
 				return
 			end
 			
@@ -260,7 +262,7 @@ classdef AssortOutOut < Measure
 				case 6 % Category.QUERY
 					prop_number = 1;
 				case 9 % Category.GUI
-					prop_number = 1;
+					prop_number = 2;
 				otherwise
 					prop_number = 0;
 			end
@@ -291,7 +293,7 @@ classdef AssortOutOut < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 15 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 16 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -329,7 +331,7 @@ classdef AssortOutOut < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -362,7 +364,7 @@ classdef AssortOutOut < Measure
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -391,7 +393,7 @@ classdef AssortOutOut < Measure
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				assortoutout_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
+				assortoutout_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB' };
 				tag = assortoutout_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -418,7 +420,7 @@ classdef AssortOutOut < Measure
 			prop = AssortOutOut.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			assortoutout_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
+			assortoutout_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  9 };
 			prop_category = assortoutout_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -444,7 +446,7 @@ classdef AssortOutOut < Measure
 			prop = AssortOutOut.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			assortoutout_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
+			assortoutout_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  8 };
 			prop_format = assortoutout_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -470,7 +472,7 @@ classdef AssortOutOut < Measure
 			prop = AssortOutOut.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			assortoutout_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the out-out-assortativity.'  'DESCRIPTION (constant, string) is the description of the out-out-assortativity.'  'TEMPLATE (parameter, item) is the template of the out-out-assortativity.'  'ID (data, string) is a few-letter code of the out-out-assortativity.'  'LABEL (metadata, string) is an extended label of the out-out-assortativity.'  'NOTES (metadata, string) are some specific notes about the out-out-assortativity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the out-out-assortativity.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			assortoutout_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the out-out-assortativity.'  'DESCRIPTION (constant, string) is the description of the out-out-assortativity.'  'TEMPLATE (parameter, item) is the template of the out-out-assortativity.'  'ID (data, string) is a few-letter code of the out-out-assortativity.'  'LABEL (metadata, string) is an extended label of the out-out-assortativity.'  'NOTES (metadata, string) are some specific notes about the out-out-assortativity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the out-out-assortativity.'  'PFM (gui, item) contains the panel figure of the measure.'  'PFB (gui, item) contains the panel figure of the brain measure.' };
 			prop_description = assortoutout_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -614,7 +616,7 @@ classdef AssortOutOut < Measure
 				case 4 % AssortOutOut.TEMPLATE
 					check = Format.checkFormat(8, value, AssortOutOut.getPropSettings(prop));
 				otherwise
-					if prop <= 15
+					if prop <= 16
 						check = checkProp@Measure(prop, value);
 					end
 			end
@@ -686,7 +688,7 @@ classdef AssortOutOut < Measure
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 15
+					if prop <= 16
 						value = calculateValue@Measure(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});
