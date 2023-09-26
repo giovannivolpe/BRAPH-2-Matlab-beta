@@ -149,7 +149,7 @@ function set_table()
             addStyle(pr.get('TABLE'), uistyle('FontWeight', 'bold'), 'row', pr.get('SELECTED'))
         end
     end
-
+end
 %%% ¡prop!
 REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
 %%%% ¡calculate!
