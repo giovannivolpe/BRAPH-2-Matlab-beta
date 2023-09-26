@@ -37,7 +37,7 @@ Measure Ensemble
 %%%% ¡id!
 MeasureEnsemble.M
 %%%% ¡title!
-Measure VALUE
+Measure Ensemble VALUE
 
 %%% ¡prop!
 %%%% ¡id!

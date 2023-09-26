@@ -93,19 +93,19 @@ function set_table()
     end
     
     g_dict = a.get(prop);
-    glist = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false);
+    g_key_list = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false);
     
-    rowname = cell(length(glist), 1);
-    data = cell(length(glist), 4);
-    for gi = 1:1:length(glist)
+    rowname = cell(length(g_key_list), 1);
+    data = cell(length(g_key_list), 3);
+    for gi = 1:1:length(g_key_list)
         if any(pr.get('SELECTED') == gi)
             data{gi, 1} = true;
         else
             data{gi, 1} = false;
         end
     
-        data{gi, 2} = glist{gi};
-        data{gi, 3} = g_dict.get('IT', gi).get('DESCRIPTION');
+        data{gi, 2} = g_key_list{gi};
+        data{gi, 3} = g_dict.get('IT', gi).get('NOTES');
     end
 
     set(pr.get('TABLE'), ...
@@ -198,9 +198,9 @@ table = uitable( ...
     'FontSize', BRAPH2.FONTSIZE, ...
     'ColumnSortable', true, ...
     'ColumnName', {'', 'Subject', 'Notes'}, ...
-    'ColumnFormat', {'logical',  'char', 'char', 'char', 'char'}, ...
-    'ColumnWidth', {30, 'auto', 'auto', 'auto', 'auto'}, ...
-    'ColumnEditable', [true false false false false], ...
+    'ColumnFormat', {'logical',  'char', 'char'}, ...
+    'ColumnWidth', {30, 'auto', 'auto'}, ...
+    'ColumnEditable', [true false false], ...
     'CellEditCallback', {@cb_table} ...
     );
 value = table;
@@ -227,17 +227,29 @@ contextmenu = uicontextmenu( ...
     'Parent', ancestor(pr.get('H'), 'figure'), ...
     'Tag', 'CONTEXTMENU' ...
     );
-menu_open_g_pl = uimenu( ... % yw add graph hist
+menu_open_g_pl = uimenu( ...
 	'Parent', contextmenu, ...
 	'Tag', 'MENU_OPEN_G_PL', ...
-	'Text', 'Plot Selected Graph Figure', ...
+	'Text', 'Plot Selected Adjacency Matrices', ...
 	'MenuSelectedFcn', {@cb_open_g_pl} ...
 	);
 menu_hide_g_pl = uimenu( ...
     'Parent', contextmenu, ...
     'Tag', 'MENU_HIDE_G_PL', ...
-    'Text', 'Hide Selected Graph Figure', ...
-    'MenuSelectedFcn', {@cb_hide_g_el} ...
+    'Text', 'Hide Selected Adjacency Matrices', ...
+    'MenuSelectedFcn', {@cb_hide_g_pl} ...
+	);
+menu_open_g_h = uimenu( ...
+	'Parent', contextmenu, ...
+	'Tag', 'MENU_OPEN_G_H', ...
+	'Text', 'Plot Selected Histograms', ...
+	'MenuSelectedFcn', {@cb_open_g_h} ...
+	);
+menu_hide_g_pl = uimenu( ...
+    'Parent', contextmenu, ...
+    'Tag', 'MENU_HIDE_G_H', ...
+    'Text', 'Hide Selected Histograms', ...
+    'MenuSelectedFcn', {@cb_hide_g_h} ...
 	);
 menu_open_g_el = uimenu( ...
 	'Separator', 'on', ...
@@ -279,19 +291,22 @@ value = contextmenu;
 function cb_open_g_pl(~, ~)
     a = pr.get('EL');
     g_dict = a.get(pr.get('PROP')); 
-    glist = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false); % key
+    g_key_list = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false); % The graph ID is the key
+
+    f = ancestor(pr.get('H'), 'figure'); % parent GUI
+    N = ceil(sqrt(length(g_key_list))); % number of row and columns of figures
 
     selected = pr.get('SELECTED');
     gui_g_dict = pr.memorize('GUI_G_DICT');
     
     for s = 1:1:length(selected)
         i = selected(s);
-        g = glist{i}; % key for graph
-        if ~gui_g_dict.get('CONTAINS_KEY', g)
-            g_el = g_dict.get('IT', g); % actual graph
+        g_key = g_key_list{i}; % key for graph
+        if ~gui_g_dict.get('CONTAINS_KEY', g_key)
+            g = g_dict.get('IT', g_key); % actual graph
             gui = GUIElement( ...
-                'ID', g, ... % this is the dictionary key for graph
-                'PE', g_el, ...
+                'ID', g_key, ... % this is the dictionary key for graph
+                'PE', g, ...
                 'POSITION', [ ...
                 x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ... % x = (f_gr_x + f_gr_w) / screen_w + mod(selected_it - 1, N) * (screen_w - f_gr_x - 2 * f_gr_w) / N / screen_w;
                 y0(f, 'normalized') ... % y = f_gr_y / screen_h;
@@ -304,22 +319,114 @@ function cb_open_g_pl(~, ~)
             gui_g_dict.get('ADD', gui)
         end
 
-        gui_item = gui_g_dict.get('IT', g).get('PE').get('PR_DICT').get('IT', 15).memorize('GUI_ITEM'); % get PFGA PR % yw use smarter way
-    
-        if ~gui_item.get('DRAWN')
-            gui_item.get('DRAW')
+        gui = gui_g_dict.get('IT', g_key);
+        if ~gui.get('DRAWN')
+            gui.get('DRAW')
         end
 
-        gui_item.get('SHOW')
+        gui_pfga = gui.get('PE').get('PR_DICT').get('IT', 'PFGA').memorize('GUI_ITEM');
+    
+        if ~gui_pfga.get('DRAWN')
+            gui_pfga.get('DRAW')
+        end
+
+        gui_pfga.get('SHOW')
+    end
+end
+function cb_hide_g_pl(~, ~)
+    g_dict = pr.get('EL').get(pr.get('PROP'));
+    g_key_list =  cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false); % The graph ID is the key
+    
+    gui_g_dict = pr.memorize('GUI_G_DICT');
+
+    selected = pr.get('SELECTED');
+    for s = 1:1:length(selected)
+        i = selected(s);
+        
+        g_key = g_key_list{i}; % key for graph
+        
+        if gui_g_dict.get('CONTAINS_KEY', g_key)
+            gui = gui_g_dict.get('IT', g_key);
+            gui_pfga = gui.get('PE').get('PR_DICT').get('IT', 'PFGA').memorize('GUI_ITEM');
+            if gui.get('DRAWN')
+                gui_pfga.get('HIDE')
+            end
+        end
+    end
+end
+function cb_open_g_h(~, ~)
+    a = pr.get('EL');
+    g_dict = a.get(pr.get('PROP')); 
+    g_key_list = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false); % The graph ID is the key
+
+    f = ancestor(pr.get('H'), 'figure'); % parent GUI
+    N = ceil(sqrt(length(g_key_list))); % number of row and columns of figures
+
+    selected = pr.get('SELECTED');
+    gui_g_dict = pr.memorize('GUI_G_DICT');
+    
+    for s = 1:1:length(selected)
+        i = selected(s);
+        g_key = g_key_list{i}; % key for graph
+        if ~gui_g_dict.get('CONTAINS_KEY', g_key)
+            g = g_dict.get('IT', g_key); % actual graph
+            gui = GUIElement( ...
+                'ID', g_key, ... % this is the dictionary key for graph
+                'PE', g, ...
+                'POSITION', [ ...
+                x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ... % x = (f_gr_x + f_gr_w) / screen_w + mod(selected_it - 1, N) * (screen_w - f_gr_x - 2 * f_gr_w) / N / screen_w;
+                y0(f, 'normalized') ... % y = f_gr_y / screen_h;
+                w(f, 'normalized') ... % w = f_gr_w / screen_w;
+                .5 * h(f, 'normalized') + .5 * h(f, 'normalized') * (N - floor((i - .5) / N )) / N ... % h = .5 * f_gr_h / screen_h + .5 * f_gr_h * (N - floor((selected_it - .5) / N)) / N / screen_h;
+                ], ...
+                'WAITBAR', pr.getCallback('WAITBAR'), ...
+                'CLOSEREQ', false ...
+                );
+            gui_g_dict.get('ADD', gui)
+        end
+
+        gui = gui_g_dict.get('IT', g_key);
+        if ~gui.get('DRAWN')
+            gui.get('DRAW')
+        end
+
+        gui_pfgh = gui.get('PE').get('PR_DICT').get('IT', 'PFGH').memorize('GUI_ITEM');
+    
+        if ~gui_pfgh.get('DRAWN')
+            gui_pfgh.get('DRAW')
+        end
+
+        gui_pfgh.get('SHOW')
+    end
+end
+function cb_hide_g_h(~, ~)
+    g_dict = pr.get('EL').get(pr.get('PROP'));
+    g_key_list =  cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false); % The graph ID is the key
+    
+    gui_g_dict = pr.memorize('GUI_G_DICT');
+
+    selected = pr.get('SELECTED');
+    for s = 1:1:length(selected)
+        i = selected(s);
+        
+        g_key = g_key_list{i}; % key for graph
+        
+        if gui_g_dict.get('CONTAINS_KEY', g_key)
+            gui = gui_g_dict.get('IT', g_key);
+            gui_pfgh = gui.get('PE').get('PR_DICT').get('IT', 'PFGH').memorize('GUI_ITEM');
+            if gui.get('DRAWN')
+                gui_pfgh.get('HIDE')
+            end
+        end
     end
 end
 function cb_open_g_el(~, ~)
     a = pr.get('EL');
     g_dict = a.get(pr.get('PROP'));
-    glist = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false);
+    g_key_list = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false); % The graph ID is the key
     
     f = ancestor(pr.get('H'), 'figure'); % parent GUI
-    N = ceil(sqrt(length(glist))); % number of row and columns of figures
+    N = ceil(sqrt(length(g_key_list))); % number of row and columns of figures
     
     gui_g_dict = pr.memorize('GUI_G_DICT');
     
@@ -327,13 +434,13 @@ function cb_open_g_el(~, ~)
     for s = 1:1:length(selected)
         i = selected(s);
     
-        g = glist{i}; % key for graph
+        g_key = g_key_list{i}; % key for graph
     
-        if ~gui_g_dict.get('CONTAINS_KEY', g)
-            g_el = g_dict.get('IT', g); % actural graph
+        if ~gui_g_dict.get('CONTAINS_KEY', g_key)
+            g_key = g_dict.get('IT', g_key); % actural graph
             gui = GUIElement( ...
-                'ID', g, ... % this is the dictionary key for graph
-                'PE', g_el, ... 
+                'ID', g_key, ... % this is the dictionary key for graph
+                'PE', g, ... 
                 'POSITION', [ ...
                     x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ... % x = (f_gr_x + f_gr_w) / screen_w + mod(selected_it - 1, N) * (screen_w - f_gr_x - 2 * f_gr_w) / N / screen_w;
                     y0(f, 'normalized') ... % y = f_gr_y / screen_h;
@@ -345,7 +452,7 @@ function cb_open_g_el(~, ~)
                 );
             gui_g_dict.get('ADD', gui)
         end
-        gui = gui_g_dict.get('IT', g);
+        gui = gui_g_dict.get('IT', g_key);
         if ~gui.get('DRAWN')
             gui.get('DRAW')
         end
@@ -354,7 +461,7 @@ function cb_open_g_el(~, ~)
 end
 function cb_hide_g_el(~, ~)
     g_dict = pr.get('EL').get(pr.get('PROP'));
-    glist =  cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false);
+    g_key_list =  cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false); % The graph ID is the key
     
     gui_g_dict = pr.memorize('GUI_G_DICT');
 
@@ -362,10 +469,10 @@ function cb_hide_g_el(~, ~)
     for s = 1:1:length(selected)
         i = selected(s);
         
-        g = glist{i}; % key for graph
+        g_key = g_key_list{i}; % key for graph
         
-        if gui_g_dict.get('CONTAINS_KEY', g)
-            gui = gui_g_dict.get('IT', g);
+        if gui_g_dict.get('CONTAINS_KEY', g_key)
+            gui = gui_g_dict.get('IT', g_key);
             if gui.get('DRAWN')
                 gui.get('HIDE')
             end
@@ -374,9 +481,9 @@ function cb_hide_g_el(~, ~)
 end
 function cb_select_all(~, ~) 
     g_dict = pr.get('EL').get(pr.get('PROP'));
-    glist = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false);
+    g_key_list = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false);
 
-    pr.set('SELECTED', [1:1:length(glist)])
+    pr.set('SELECTED', [1:1:length(g_key_list)])
 
     pr.get('UPDATE')
 end
@@ -387,9 +494,9 @@ function cb_clear_selection(~, ~)
 end
 function cb_invert_selection(~, ~) 
     g_dict = pr.get('EL').get(pr.get('PROP'));
-    glist = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false);
+    g_key_list = cellfun(@(g) g.get('ID'), g_dict.get('IT_LIST'), 'UniformOutput', false);
 
-    selected_tmp = [1:1:length(glist)];
+    selected_tmp = [1:1:length(g_key_list)];
     selected_tmp(pr.get('SELECTED')) = [];
     pr.set('SELECTED', selected_tmp);
 
