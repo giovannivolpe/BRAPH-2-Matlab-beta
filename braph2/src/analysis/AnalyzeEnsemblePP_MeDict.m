@@ -1241,42 +1241,41 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 			    else
 			        m_list_already_calculated = cellfun(@(x) x.get('ELCLASS'), g.get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
 			    end
-			        
-			        rowname = cell(length(m_list), 1);
-			        data = cell(length(m_list), 5);
-			        for mi = 1:1:length(m_list)
-			            if any(cellfun(@(y) isequal(m_list{mi}, y), m_list_already_calculated)) && ~isa(a.get('MEASUREENSEMBLE', m_list{mi}).getr('M'), 'NoValue')
-			                rowname{mi} = 'C';
-			            else
-			                rowname{mi} = '';
-			            end                
 			    
-			            if any(pr.get('SELECTED') == mi)
-			                data{mi, 1} = true;
-			            else
-			                data{mi, 1} = false;
-			            end
-			    
-			            data{mi, 2} = eval([m_list{mi} '.getPropDefault(''NAME'')']);
-			    
-			            if Element.getPropDefault(m_list{mi}, 'SHAPE') == 2
-			                data{mi, 3} = 'NODAL';
-			            elseif Element.getPropDefault(m_list{mi}, 'SHAPE') == 1
-			                data{mi, 3} = 'GLOBAL';
-			            elseif Element.getPropDefault(m_list{mi}, 'SHAPE') == 3
-			                data{mi, 3} = 'BINODAL';
-			            end
-			    
-			            if Element.getPropDefault(m_list{mi}, 'SCOPE') == 1
-			                data{mi, 4} = 'SUPERGLOBAL';
-			            elseif Element.getPropDefault(m_list{mi}, 'SCOPE') == 2
-			                data{mi, 4} = 'UNILAYER';
-			            elseif Element.getPropDefault(m_list{mi}, 'SCOPE') == 3
-			                data{mi, 4} = 'BILAYER';
-			            end
-			            
-			            data{mi, 5} = eval([m_list{mi} '.getPropDefault(''DESCRIPTION'')']);
+			    rowname = cell(length(m_list), 1);
+			    data = cell(length(m_list), 5);
+			    for mi = 1:1:length(m_list)
+			        if any(cellfun(@(y) isequal(m_list{mi}, y), m_list_already_calculated)) && ~isa(g.get('MEASURE', m_list{mi}).getr('M'), 'NoValue')
+			            rowname{mi} = 'C';
+			        else
+			            rowname{mi} = '';
+			        end                
+			
+			        if any(pr.get('SELECTED') == mi)
+			            data{mi, 1} = true;
+			        else
+			            data{mi, 1} = false;
 			        end
+			
+			        data{mi, 2} = eval([m_list{mi} '.getPropDefault(''NAME'')']);
+			
+			        if Element.getPropDefault(m_list{mi}, 'SHAPE') == 2
+			            data{mi, 3} = 'NODAL';
+			        elseif Element.getPropDefault(m_list{mi}, 'SHAPE') == 1
+			            data{mi, 3} = 'GLOBAL';
+			        elseif Element.getPropDefault(m_list{mi}, 'SHAPE') == 3
+			            data{mi, 3} = 'BINODAL';
+			        end
+			
+			        if Element.getPropDefault(m_list{mi}, 'SCOPE') == 1
+			            data{mi, 4} = 'SUPERGLOBAL';
+			        elseif Element.getPropDefault(m_list{mi}, 'SCOPE') == 2
+			            data{mi, 4} = 'UNILAYER';
+			        elseif Element.getPropDefault(m_list{mi}, 'SCOPE') == 3
+			            data{mi, 4} = 'BILAYER';
+			        end
+			        
+			        data{mi, 5} = eval([m_list{mi} '.getPropDefault(''DESCRIPTION'')']);
 			    
 			        set(pr.get('TABLE'), ...
 			            'RowName', rowname, ...
@@ -1292,6 +1291,7 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 			            addStyle(pr.get('TABLE'), uistyle('FontWeight', 'bold'), 'row', pr.get('SELECTED'))
 			        end
 			    end
+			end
 		end
 	end
 end
