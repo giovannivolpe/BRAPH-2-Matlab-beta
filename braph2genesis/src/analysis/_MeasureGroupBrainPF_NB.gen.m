@@ -78,7 +78,10 @@ DRAW (query, logical) draws the figure brain atlas.
 value = calculateValue@MeasureGroupBrainPF(pf, MeasureGroupBrainPF.DRAW, varargin{:}); % also warning
 if value
     % reset the ambient lighting
-    pf.get('ST_AMBIENT').get('SETUP')
+    pf.get('ST_AMBIENT').get('SETUP');
+
+    % call setup
+    pf.get('SETUP');
 end
 
 %%% ¡prop!
@@ -121,3 +124,8 @@ toolbar = pf.get('H_TOOLBAR');
 if check_graphics(toolbar, 'uitoolbar')
     set(findobj(toolbar, 'Tag', 'TOOL.SHOWMEASURE'), 'State', pf.get('SHOWMEASURE'))
 end
+
+%%% ¡prop!
+SETUP (query, empty) calculates the group comparison on brain surface figure value and stores it.
+%%%% ¡calculate!
+value = [];
