@@ -708,25 +708,43 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			switch prop
 				case 46 % MeasureGroupBrainPF_NU.SHOWMEASURE
 					m = pf.get('M');
+                    g = m.get('G');
 					% update spheres
 					if ~pf.get('SHOWMEASURE')  % false
-					    if pf.get('SPHS') % spheres
-					        h_sphs = pf.get('H_SPHS');
-					        for i = 1:1:length(h_sphs)
-					            set(h_sphs{i}, 'SPHERESIZE', SettingsSphere.getPropDefault(23))
-					        end     
-					    end
-					else % true
+                        if pf.get('SPHS') % spheres
+                            sphs = pf.get('SPH_DICT').get('IT_LIST');
+                            for i = 1:1:length(sphs)
+                                set(sphs{i}, 'SPHERESIZE', SettingsSphere.getPropDefault(23))
+                            end
+                        end
+                        if pf.get('SYMS') % spheres
+                            syms = pf.get('SYM_DICT').get('IT_LIST');
+                            for i = 1:1:length(syms)
+                                set(syms{i}, 'SYMBOLSIZE', SettingsSymbol.getPropDefault(20))
+                            end
+                        end
+                    else % true
 					    % spheres
 					    if pf.get('SPHS') % spheres
-					        m_val = m.get('M');
-					        h_sphs = pf.get('H_SPHS');
-					        for i = 1:1:length(h_sphs)
-					            set(h_sphs{i}, 'SPHERESIZE', m_val{i});
+					        m_val = cell2mat(m.get('M'));
+					        sphs = pf.get('SPH_DICT').get('IT_LIST');
+					        for i = 1:1:length(sphs)
+					            set(sphs{i}, 'SPHERESIZE', m_val(i)*0.1);
 					        end     
 					    end
 					    % triggers the update of SPH_DICT
 					    pf.set('SPH_DICT', pf.get('SPH_DICT'))
+
+                        % symbols
+                        if pf.get('SYMS') % spheres
+                            m_val = cell2mat(m.get('M'));
+                            syms = pf.get('SYM_DICT').get('IT_LIST');
+                            for i = 1:1:length(syms)
+                                set(syms{i}, 'SYMBOLSIZE', m_val(i)*0.2)
+                            end
+                        end
+                        % triggers the update of SPH_DICT
+					    pf.set('SYM_DICT', pf.get('SYM_DICT'))
 					end
 					
 					% update state of toggle tool
