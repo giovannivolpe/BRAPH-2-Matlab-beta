@@ -35,6 +35,12 @@ Brain Atlas NOTES
 
 %%% ¡prop!
 %%%% ¡id!
+MeasureEnsembleBrainPF.SHOWMEASURE
+%%%% ¡title!
+Ensemble-based Brain SHOWMEASURE
+
+%%% ¡prop!
+%%%% ¡id!
 MeasureEnsembleBrainPF.BKGCOLOR
 %%%% ¡title!
 BACKGROUND COLOR
@@ -226,38 +232,21 @@ if check_graphics(toolbar, 'uitoolbar')
 
     tool_separator_2 = uipushtool(toolbar, 'Separator', 'on', 'Visible', 'off');
 
-    % Difference Line
-    tool_line_diff = uitoggletool(toolbar, ...
-        'Tag', 'TOOL.Line_Diff', ...
-        'State', pf.get('ST_LINE_DIFF').get('VISIBLE'), ...
-        'Tooltip', 'Show difference line', ...
-        'CData', imresize(imread('icon_line.png'), [24 24]), ... % % % make icon 16x16
-        'OnCallback', {@cb_line_diff, true}, ...
-        'OffCallback', {@cb_line_diff, false});
-
-    % Difference Line
-    tool_line_ci = uitoggletool(toolbar, ...
-        'Tag', 'TOOL.Line_CI', ...
-        'State', pf.get('ST_LINE_DIFF').get('VISIBLE'), ...
-        'Tooltip', 'Show confidence lines (95%)', ...
-        'CData', imresize(imread('icon_line.png'), [24 24]), ... % % % imread('icon_lines_two.png'), ...
-        'OnCallback', {@cb_line_ci, true}, ...
-        'OffCallback', {@cb_line_ci, false});
-
-    % Confidence Area
-    tool_area = uitoggletool(toolbar, ...
-        'Tag', 'TOOL.Area', ...
-        'State', pf.get('ST_AREA').get('VISIBLE'), ...
-        'Tooltip', 'Show confidence area (95%)', ...
-        'CData', imresize(imread('icon_area.png'), [24 24]), ... % % % make icon 16x16
-        'OnCallback', {@cb_area, true}, ...
-        'OffCallback', {@cb_area, false});
+    % SHOW MEASURE
+    tool_show_measure = uitoggletool(toolbar, ...
+        'Tag', 'TOOL.SHOWMEASURE', ...
+        'Separator', 'on', ...
+        'State', pf.get('SHOWMEASURE'), ...
+        'Tooltip', 'Show Measure', ...
+        'CData', imread('braph2icon_16px.png'), ...
+        'OnCallback', {@cb_show_measure, true}, ...
+        'OffCallback', {@cb_show_measure, false});
 
     value = {value{:}, ...
         tool_separator_1, ...
         tool_axis, tool_grid, ... 
         tool_separator_2, ... 
-        tool_line_diff, tool_line_ci, tool_area ...
+        tool_show_measure...
         };
 else
     value = {};
@@ -275,41 +264,19 @@ function cb_grid(~, ~, grid) % (src, event)
     % triggers the update of ST_AXIS
     pf.set('ST_AXIS', pf.get('ST_AXIS'))
 end
-function cb_line_diff(~, ~, visible) % (src, event)
-	pf.get('ST_LINE_DIFF').set('VISIBLE', visible)
-
-    % triggers the update of ST_LINE_DIFF
-    pf.set('ST_LINE_DIFF', pf.get('ST_LINE_DIFF'))
-end
-function cb_line_ci(~, ~, visible) % (src, event)
-	pf.get('ST_LINE_CIL').set('VISIBLE', visible)
-	pf.get('ST_LINE_CIU').set('VISIBLE', visible)
-
-    % triggers the update of ST_LINE_CIL and ST_LINE_CIU
-    pf.set('ST_LINE_CIL', pf.get('ST_LINE_CIL'))
-    pf.set('ST_LINE_CIU', pf.get('ST_LINE_CIU'))
-end
-function cb_area(~, ~, visible) % (src, event)
-    pf.get('ST_AREA').set('VISIBLE', visible)
-
-    % triggers the update of ST_AREA
-    pf.set('ST_AREA', pf.get('ST_AREA'))
+function cb_show_measure(~, ~, show) % (src, event)
+    pf.set('SHOWMEASURE', show)
 end
 
 %% ¡props!
 
+%%% ¡prop!
+SHOWMEASURE (figure, logical) resets the handles when the panel figure brain surface is deleted.
+%%%% ¡default!
+false
+
 %%%% ¡gui!
 pr = SettingsAxisPP('EL', pf, 'PROP', MeasureEnsembleBrainPF.ST_AXIS, varargin{:});
-
-%%% ¡prop!
-CP (metadata, item) is the group comparison on brain surface.
-%%%% ¡settings!
-'ComparisonGroup'
-
-%%% ¡prop!
-SETUP (query, empty) calculates the group comparison on brain surface value and stores it to be implemented in the subelements.
-%%%% ¡calculate!
-value = [];
 
 %%% ¡prop!
 H_AREA (evanescent, handle) is the handle for the group comparison on brain surface confidence area.
@@ -500,7 +467,7 @@ pr = SettingsTextPP('EL', pf, 'PROP', MeasureEnsembleBrainPF.ST_YLABEL, varargin
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsembleBrainPF.PARENT MeasureEnsembleBrainPF.H MeasureEnsembleBrainPF.ST_POSITION MeasureEnsembleBrainPF.ST_AXIS MeasureEnsembleBrainPF.ST_AREA MeasureEnsembleBrainPF.ST_LINE_DIFF MeasureEnsembleBrainPF.ST_LINE_CIL MeasureEnsembleBrainPF.ST_LINE_CIU MeasureEnsembleBrainPF.ST_TITLE MeasureEnsembleBrainPF.ST_XLABEL MeasureEnsembleBrainPF.ST_YLABEL] 
+[MeasureEnsembleBrainPF.PARENT MeasureEnsembleBrainPF.H MeasureEnsembleBrainPF.ST_POSITION MeasureEnsembleBrainPF.ST_AXIS MeasureEnsembleBrainPF.SHOWMEASURE MeasureEnsembleBrainPF.ST_AREA MeasureEnsembleBrainPF.ST_LINE_DIFF MeasureEnsembleBrainPF.ST_LINE_CIL MeasureEnsembleBrainPF.ST_LINE_CIU MeasureEnsembleBrainPF.ST_TITLE MeasureEnsembleBrainPF.ST_XLABEL MeasureEnsembleBrainPF.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

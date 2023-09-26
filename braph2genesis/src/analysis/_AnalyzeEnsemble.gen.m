@@ -95,7 +95,6 @@ value = IndexedDictionary('IT_CLASS', 'MeasureEnsemble', 'IT_KEY', MeasureEnsemb
 pr = AnalyzeEnsemblePP_MeDict('EL', a, 'PROP', AnalyzeEnsemble.ME_DICT, ...
     'WAITBAR', a.getCallback('WAITBAR'), ...
     varargin{:});
-for hang, add on AnalyzeEnsemble:
 
 %%% ¡prop!
 PFB (gui, item) contains the panel figure of the comparison.
