@@ -1,34 +1,33 @@
-classdef Assortativity < Measure
-	%Assortativity is the graph assortativity.
+classdef AssortInIn < Measure
+	%AssortInIn is the graph in-in-assortativity.
 	% It is a subclass of <a href="matlab:help Measure">Measure</a>.
 	%
-	% The Assortativity coefficient of a graph is the correlation coefficient 
-	%  between the degrees/strengths of all nodes on two opposite ends of an edge 
-	%  within a layer.
-	% The corresponding coefficient for directed and weighted networks is 
-	%  calculated by using the weighted and directed variants of degree/strength.
+	% The in-in-assortativity coefficient of a graph is the correlation coefficient between 
+	%   the degrees/strengths of all nodes on two opposite ends of an edge within a layer. 
+	% The corresponding coefficient for directed and weighted networks is calculated by 
+	%   using the weighted and directed variants of in-degree/in-strength.
 	%
-	% The list of Assortativity properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the assortativity.
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the assortativity.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the assortativity.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the assortativity.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the assortativity.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the assortativity.
-	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the assortativity.
+	% The list of AssortInIn properties is:
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the in-in-assortativity.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the in-in-assortativity.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the in-in-assortativity.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the in-in-assortativity.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the in-in-assortativity.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the in-in-assortativity.
 	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
 	%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the cell containing the assortativity value.
+	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the in-in-assortativity.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 	%
-	% Assortativity methods (constructor):
-	%  Assortativity - constructor
+	% AssortInIn methods (constructor):
+	%  AssortInIn - constructor
 	%
-	% Assortativity methods:
+	% AssortInIn methods:
 	%  set - sets values of a property
 	%  check - checks the values of all properties
 	%  getr - returns the raw value of a property
@@ -42,34 +41,34 @@ classdef Assortativity < Measure
 	%  checked - sets a property to checked
 	%  unchecked - sets a property to NOT checked
 	%
-	% Assortativity methods (display):
-	%  tostring - string with information about the assortativity
-	%  disp - displays information about the assortativity
-	%  tree - displays the tree of the assortativity
+	% AssortInIn methods (display):
+	%  tostring - string with information about the in-in-assortativity
+	%  disp - displays information about the in-in-assortativity
+	%  tree - displays the tree of the in-in-assortativity
 	%
-	% Assortativity methods (miscellanea):
+	% AssortInIn methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two assortativity are equal (values, locked)
+	%  isequal - determines whether two in-in-assortativity are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the assortativity
+	%  copy - copies the in-in-assortativity
 	%
-	% Assortativity methods (save/load, Static):
-	%  save - saves BRAPH2 assortativity as b2 file
-	%  load - loads a BRAPH2 assortativity from a b2 file
+	% AssortInIn methods (save/load, Static):
+	%  save - saves BRAPH2 in-in-assortativity as b2 file
+	%  load - loads a BRAPH2 in-in-assortativity from a b2 file
 	%
-	% Assortativity method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the assortativity
+	% AssortInIn method (JSON encode):
+	%  encodeJSON - returns a JSON string encoding the in-in-assortativity
 	%
-	% Assortativity method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the assortativity
+	% AssortInIn method (JSON decode, Static):
+	%   decodeJSON - returns a JSON string encoding the in-in-assortativity
 	%
-	% Assortativity methods (inspection, Static):
-	%  getClass - returns the class of the assortativity
-	%  getSubclasses - returns all subclasses of Assortativity
-	%  getProps - returns the property list of the assortativity
-	%  getPropNumber - returns the property number of the assortativity
+	% AssortInIn methods (inspection, Static):
+	%  getClass - returns the class of the in-in-assortativity
+	%  getSubclasses - returns all subclasses of AssortInIn
+	%  getProps - returns the property list of the in-in-assortativity
+	%  getPropNumber - returns the property number of the in-in-assortativity
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -82,14 +81,14 @@ classdef Assortativity < Measure
 	%  getPropDefaultConditioned - returns the conditioned default value of a property
 	%  checkProp - checks whether a value has the correct format/error
 	%
-	% Assortativity methods (GUI):
+	% AssortInIn methods (GUI):
 	%  getPanelProp - returns a prop panel
 	%
-	% Assortativity methods (GUI, Static):
+	% AssortInIn methods (GUI, Static):
 	%  getGUIMenuImport - returns the importer menu
 	%  getGUIMenuExport - returns the exporter menu
 	%
-	% Assortativity methods (category, Static):
+	% AssortInIn methods (category, Static):
 	%  getCategories - returns the list of categories
 	%  getCategoryNumber - returns the number of categories
 	%  existsCategory - returns whether a category exists/error
@@ -97,7 +96,7 @@ classdef Assortativity < Measure
 	%  getCategoryName - returns the name of a category
 	%  getCategoryDescription - returns the description of a category
 	%
-	% Assortativity methods (format, Static):
+	% AssortInIn methods (format, Static):
 	%  getFormats - returns the list of formats
 	%  getFormatNumber - returns the number of formats
 	%  existsFormat - returns whether a format exists/error
@@ -108,35 +107,35 @@ classdef Assortativity < Measure
 	%  getFormatDefault - returns the default value for a format
 	%  checkFormat - returns whether a value format is correct/error
 	%
-	% To print full list of constants, click here <a href="matlab:metaclass = ?Assortativity; properties = metaclass.PropertyList;for i = 1:1:length(properties), if properties(i).Constant, disp([properties(i).Name newline() tostring(properties(i).DefaultValue) newline()]), end, end">Assortativity constants</a>.
+	% To print full list of constants, click here <a href="matlab:metaclass = ?AssortInIn; properties = metaclass.PropertyList;for i = 1:1:length(properties), if properties(i).Constant, disp([properties(i).Name newline() tostring(properties(i).DefaultValue) newline()]), end, end">AssortInIn constants</a>.
 	%
 	
 	methods % constructor
-		function m = Assortativity(varargin)
-			%Assortativity() creates a assortativity.
+		function m = AssortInIn(varargin)
+			%AssortInIn() creates a in-in-assortativity.
 			%
-			% Assortativity(PROP, VALUE, ...) with property PROP initialized to VALUE.
+			% AssortInIn(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
-			% Assortativity(TAG, VALUE, ...) with property TAG set to VALUE.
+			% AssortInIn(TAG, VALUE, ...) with property TAG set to VALUE.
 			%
 			% Multiple properties can be initialized at once identifying
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
-			% The list of Assortativity properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the assortativity.
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the assortativity.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the assortativity.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the assortativity.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the assortativity.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the assortativity.
-			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the assortativity.
+			% The list of AssortInIn properties is:
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the in-in-assortativity.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the in-in-assortativity.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the in-in-assortativity.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the in-in-assortativity.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the in-in-assortativity.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the in-in-assortativity.
 			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
 			%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
-			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the cell containing the assortativity value.
+			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the in-in-assortativity.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
 			%
 			% See also Category, Format.
@@ -146,52 +145,52 @@ classdef Assortativity < Measure
 	end
 	methods (Static) % inspection
 		function m_class = getClass()
-			%GETCLASS returns the class of the assortativity.
+			%GETCLASS returns the class of the in-in-assortativity.
 			%
-			% CLASS = Assortativity.GETCLASS() returns the class 'Assortativity'.
+			% CLASS = AssortInIn.GETCLASS() returns the class 'AssortInIn'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = M.GETCLASS() returns the class of the assortativity M.
+			%  CLASS = M.GETCLASS() returns the class of the in-in-assortativity M.
 			%  CLASS = Element.GETCLASS(M) returns the class of 'M'.
-			%  CLASS = Element.GETCLASS('Assortativity') returns 'Assortativity'.
+			%  CLASS = Element.GETCLASS('AssortInIn') returns 'AssortInIn'.
 			%
-			% Note that the Element.GETCLASS(M) and Element.GETCLASS('Assortativity')
+			% Note that the Element.GETCLASS(M) and Element.GETCLASS('AssortInIn')
 			%  are less computationally efficient.
 			
-			m_class = 'Assortativity';
+			m_class = 'AssortInIn';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the assortativity.
+			%GETSUBCLASSES returns all subclasses of the in-in-assortativity.
 			%
-			% LIST = Assortativity.GETSUBCLASSES() returns all subclasses of 'Assortativity'.
+			% LIST = AssortInIn.GETSUBCLASSES() returns all subclasses of 'AssortInIn'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = M.GETSUBCLASSES() returns all subclasses of the assortativity M.
+			%  LIST = M.GETSUBCLASSES() returns all subclasses of the in-in-assortativity M.
 			%  LIST = Element.GETSUBCLASSES(M) returns all subclasses of 'M'.
-			%  LIST = Element.GETSUBCLASSES('Assortativity') returns all subclasses of 'Assortativity'.
+			%  LIST = Element.GETSUBCLASSES('AssortInIn') returns all subclasses of 'AssortInIn'.
 			%
-			% Note that the Element.GETSUBCLASSES(M) and Element.GETSUBCLASSES('Assortativity')
+			% Note that the Element.GETSUBCLASSES(M) and Element.GETSUBCLASSES('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'Assortativity' }; %CET: Computational Efficiency Trick
+			subclass_list = { 'AssortInIn' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of assortativity.
+			%GETPROPS returns the property list of in-in-assortativity.
 			%
-			% PROPS = Assortativity.GETPROPS() returns the property list of assortativity
+			% PROPS = AssortInIn.GETPROPS() returns the property list of in-in-assortativity
 			%  as a row vector.
 			%
-			% PROPS = Assortativity.GETPROPS(CATEGORY) returns the property list 
+			% PROPS = AssortInIn.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = M.GETPROPS([CATEGORY]) returns the property list of the assortativity M.
+			%  PROPS = M.GETPROPS([CATEGORY]) returns the property list of the in-in-assortativity M.
 			%  PROPS = Element.GETPROPS(M[, CATEGORY]) returns the property list of 'M'.
-			%  PROPS = Element.GETPROPS('Assortativity'[, CATEGORY]) returns the property list of 'Assortativity'.
+			%  PROPS = Element.GETPROPS('AssortInIn'[, CATEGORY]) returns the property list of 'AssortInIn'.
 			%
-			% Note that the Element.GETPROPS(M) and Element.GETPROPS('Assortativity')
+			% Note that the Element.GETPROPS(M) and Element.GETPROPS('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also getPropNumber, Category.
@@ -223,19 +222,19 @@ classdef Assortativity < Measure
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of assortativity.
+			%GETPROPNUMBER returns the property number of in-in-assortativity.
 			%
-			% N = Assortativity.GETPROPNUMBER() returns the property number of assortativity.
+			% N = AssortInIn.GETPROPNUMBER() returns the property number of in-in-assortativity.
 			%
-			% N = Assortativity.GETPROPNUMBER(CATEGORY) returns the property number of assortativity
+			% N = AssortInIn.GETPROPNUMBER(CATEGORY) returns the property number of in-in-assortativity
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = M.GETPROPNUMBER([CATEGORY]) returns the property number of the assortativity M.
+			%  N = M.GETPROPNUMBER([CATEGORY]) returns the property number of the in-in-assortativity M.
 			%  N = Element.GETPROPNUMBER(M) returns the property number of 'M'.
-			%  N = Element.GETPROPNUMBER('Assortativity') returns the property number of 'Assortativity'.
+			%  N = Element.GETPROPNUMBER('AssortInIn') returns the property number of 'AssortInIn'.
 			%
-			% Note that the Element.GETPROPNUMBER(M) and Element.GETPROPNUMBER('Assortativity')
+			% Note that the Element.GETPROPNUMBER(M) and Element.GETPROPNUMBER('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also getProps, Category.
@@ -267,27 +266,27 @@ classdef Assortativity < Measure
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in assortativity/error.
+			%EXISTSPROP checks whether property exists in in-in-assortativity/error.
 			%
-			% CHECK = Assortativity.EXISTSPROP(PROP) checks whether the property PROP exists.
+			% CHECK = AssortInIn.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
 			% Alternative forms to call this method are:
 			%  CHECK = M.EXISTSPROP(PROP) checks whether PROP exists for M.
 			%  CHECK = Element.EXISTSPROP(M, PROP) checks whether PROP exists for M.
-			%  CHECK = Element.EXISTSPROP(Assortativity, PROP) checks whether PROP exists for Assortativity.
+			%  CHECK = Element.EXISTSPROP(AssortInIn, PROP) checks whether PROP exists for AssortInIn.
 			%
 			% Element.EXISTSPROP(PROP) throws an error if the PROP does NOT exist.
-			%  Error id: [BRAPH2:Assortativity:WrongInput]
+			%  Error id: [BRAPH2:AssortInIn:WrongInput]
 			%
 			% Alternative forms to call this method are:
 			%  M.EXISTSPROP(PROP) throws error if PROP does NOT exist for M.
-			%   Error id: [BRAPH2:Assortativity:WrongInput]
+			%   Error id: [BRAPH2:AssortInIn:WrongInput]
 			%  Element.EXISTSPROP(M, PROP) throws error if PROP does NOT exist for M.
-			%   Error id: [BRAPH2:Assortativity:WrongInput]
-			%  Element.EXISTSPROP(Assortativity, PROP) throws error if PROP does NOT exist for Assortativity.
-			%   Error id: [BRAPH2:Assortativity:WrongInput]
+			%   Error id: [BRAPH2:AssortInIn:WrongInput]
+			%  Element.EXISTSPROP(AssortInIn, PROP) throws error if PROP does NOT exist for AssortInIn.
+			%   Error id: [BRAPH2:AssortInIn:WrongInput]
 			%
-			% Note that the Element.EXISTSPROP(M) and Element.EXISTSPROP('Assortativity')
+			% Note that the Element.EXISTSPROP(M) and Element.EXISTSPROP('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also getProps, existsTag.
@@ -298,34 +297,34 @@ classdef Assortativity < Measure
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':Assortativity:' 'WrongInput'], ...
-					['BRAPH2' ':Assortativity:' 'WrongInput' '\n' ...
-					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for Assortativity.'] ...
+					['BRAPH2' ':AssortInIn:' 'WrongInput'], ...
+					['BRAPH2' ':AssortInIn:' 'WrongInput' '\n' ...
+					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for AssortInIn.'] ...
 					)
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in assortativity/error.
+			%EXISTSTAG checks whether tag exists in in-in-assortativity/error.
 			%
-			% CHECK = Assortativity.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
+			% CHECK = AssortInIn.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
 			% Alternative forms to call this method are:
 			%  CHECK = M.EXISTSTAG(TAG) checks whether TAG exists for M.
 			%  CHECK = Element.EXISTSTAG(M, TAG) checks whether TAG exists for M.
-			%  CHECK = Element.EXISTSTAG(Assortativity, TAG) checks whether TAG exists for Assortativity.
+			%  CHECK = Element.EXISTSTAG(AssortInIn, TAG) checks whether TAG exists for AssortInIn.
 			%
 			% Element.EXISTSTAG(TAG) throws an error if the TAG does NOT exist.
-			%  Error id: [BRAPH2:Assortativity:WrongInput]
+			%  Error id: [BRAPH2:AssortInIn:WrongInput]
 			%
 			% Alternative forms to call this method are:
 			%  M.EXISTSTAG(TAG) throws error if TAG does NOT exist for M.
-			%   Error id: [BRAPH2:Assortativity:WrongInput]
+			%   Error id: [BRAPH2:AssortInIn:WrongInput]
 			%  Element.EXISTSTAG(M, TAG) throws error if TAG does NOT exist for M.
-			%   Error id: [BRAPH2:Assortativity:WrongInput]
-			%  Element.EXISTSTAG(Assortativity, TAG) throws error if TAG does NOT exist for Assortativity.
-			%   Error id: [BRAPH2:Assortativity:WrongInput]
+			%   Error id: [BRAPH2:AssortInIn:WrongInput]
+			%  Element.EXISTSTAG(AssortInIn, TAG) throws error if TAG does NOT exist for AssortInIn.
+			%   Error id: [BRAPH2:AssortInIn:WrongInput]
 			%
-			% Note that the Element.EXISTSTAG(M) and Element.EXISTSTAG('Assortativity')
+			% Note that the Element.EXISTSTAG(M) and Element.EXISTSTAG('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also getProps, existsTag.
@@ -336,9 +335,9 @@ classdef Assortativity < Measure
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':Assortativity:' 'WrongInput'], ...
-					['BRAPH2' ':Assortativity:' 'WrongInput' '\n' ...
-					'The value ' tag ' is not a valid tag for Assortativity.'] ...
+					['BRAPH2' ':AssortInIn:' 'WrongInput'], ...
+					['BRAPH2' ':AssortInIn:' 'WrongInput' '\n' ...
+					'The value ' tag ' is not a valid tag for AssortInIn.'] ...
 					)
 			end
 		end
@@ -353,10 +352,10 @@ classdef Assortativity < Measure
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  PROPERTY = M.GETPROPPROP(POINTER) returns property number of POINTER of M.
-			%  PROPERTY = Element.GETPROPPROP(Assortativity, POINTER) returns property number of POINTER of Assortativity.
-			%  PROPERTY = M.GETPROPPROP(Assortativity, POINTER) returns property number of POINTER of Assortativity.
+			%  PROPERTY = Element.GETPROPPROP(AssortInIn, POINTER) returns property number of POINTER of AssortInIn.
+			%  PROPERTY = M.GETPROPPROP(AssortInIn, POINTER) returns property number of POINTER of AssortInIn.
 			%
-			% Note that the Element.GETPROPPROP(M) and Element.GETPROPPROP('Assortativity')
+			% Note that the Element.GETPROPPROP(M) and Element.GETPROPPROP('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also getPropFormat, getPropTag, getPropCategory, getPropDescription,
@@ -379,10 +378,10 @@ classdef Assortativity < Measure
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  TAG = M.GETPROPTAG(POINTER) returns tag of POINTER of M.
-			%  TAG = Element.GETPROPTAG(Assortativity, POINTER) returns tag of POINTER of Assortativity.
-			%  TAG = M.GETPROPTAG(Assortativity, POINTER) returns tag of POINTER of Assortativity.
+			%  TAG = Element.GETPROPTAG(AssortInIn, POINTER) returns tag of POINTER of AssortInIn.
+			%  TAG = M.GETPROPTAG(AssortInIn, POINTER) returns tag of POINTER of AssortInIn.
 			%
-			% Note that the Element.GETPROPTAG(M) and Element.GETPROPTAG('Assortativity')
+			% Note that the Element.GETPROPTAG(M) and Element.GETPROPTAG('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also getPropProp, getPropSettings, getPropCategory, getPropFormat,
@@ -392,8 +391,8 @@ classdef Assortativity < Measure
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				assortativity_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
-				tag = assortativity_tag_list{pointer}; % prop = pointer
+				assortinin_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
+				tag = assortinin_tag_list{pointer}; % prop = pointer
 			end
 		end
 		function prop_category = getPropCategory(pointer)
@@ -407,20 +406,20 @@ classdef Assortativity < Measure
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  CATEGORY = M.GETPROPCATEGORY(POINTER) returns category of POINTER of M.
-			%  CATEGORY = Element.GETPROPCATEGORY(Assortativity, POINTER) returns category of POINTER of Assortativity.
-			%  CATEGORY = M.GETPROPCATEGORY(Assortativity, POINTER) returns category of POINTER of Assortativity.
+			%  CATEGORY = Element.GETPROPCATEGORY(AssortInIn, POINTER) returns category of POINTER of AssortInIn.
+			%  CATEGORY = M.GETPROPCATEGORY(AssortInIn, POINTER) returns category of POINTER of AssortInIn.
 			%
-			% Note that the Element.GETPROPCATEGORY(M) and Element.GETPROPCATEGORY('Assortativity')
+			% Note that the Element.GETPROPCATEGORY(M) and Element.GETPROPCATEGORY('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also Category, getPropProp, getPropTag, getPropSettings,
 			%  getPropFormat, getPropDescription, getPropDefault, checkProp.
 			
-			prop = Assortativity.getPropProp(pointer);
+			prop = AssortInIn.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			assortativity_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
-			prop_category = assortativity_category_list{prop};
+			assortinin_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
+			prop_category = assortinin_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
 			%GETPROPFORMAT returns the format of a property.
@@ -433,20 +432,20 @@ classdef Assortativity < Measure
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  FORMAT = M.GETPROPFORMAT(POINTER) returns format of POINTER of M.
-			%  FORMAT = Element.GETPROPFORMAT(Assortativity, POINTER) returns format of POINTER of Assortativity.
-			%  FORMAT = M.GETPROPFORMAT(Assortativity, POINTER) returns format of POINTER of Assortativity.
+			%  FORMAT = Element.GETPROPFORMAT(AssortInIn, POINTER) returns format of POINTER of AssortInIn.
+			%  FORMAT = M.GETPROPFORMAT(AssortInIn, POINTER) returns format of POINTER of AssortInIn.
 			%
-			% Note that the Element.GETPROPFORMAT(M) and Element.GETPROPFORMAT('Assortativity')
+			% Note that the Element.GETPROPFORMAT(M) and Element.GETPROPFORMAT('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also Format, getPropProp, getPropTag, getPropCategory,
 			%  getPropDescription, getPropSettings, getPropDefault, checkProp.
 			
-			prop = Assortativity.getPropProp(pointer);
+			prop = AssortInIn.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			assortativity_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
-			prop_format = assortativity_format_list{prop};
+			assortinin_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
+			prop_format = assortinin_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
 			%GETPROPDESCRIPTION returns the description of a property.
@@ -459,20 +458,20 @@ classdef Assortativity < Measure
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  DESCRIPTION = M.GETPROPDESCRIPTION(POINTER) returns description of POINTER of M.
-			%  DESCRIPTION = Element.GETPROPDESCRIPTION(Assortativity, POINTER) returns description of POINTER of Assortativity.
-			%  DESCRIPTION = M.GETPROPDESCRIPTION(Assortativity, POINTER) returns description of POINTER of Assortativity.
+			%  DESCRIPTION = Element.GETPROPDESCRIPTION(AssortInIn, POINTER) returns description of POINTER of AssortInIn.
+			%  DESCRIPTION = M.GETPROPDESCRIPTION(AssortInIn, POINTER) returns description of POINTER of AssortInIn.
 			%
-			% Note that the Element.GETPROPDESCRIPTION(M) and Element.GETPROPDESCRIPTION('Assortativity')
+			% Note that the Element.GETPROPDESCRIPTION(M) and Element.GETPROPDESCRIPTION('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also getPropProp, getPropTag, getPropCategory,
 			%  getPropFormat, getPropSettings, getPropDefault, checkProp.
 			
-			prop = Assortativity.getPropProp(pointer);
+			prop = AssortInIn.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			assortativity_description_list = { 'ELCLASS (constant, string) is the class of the assortativity.'  'NAME (constant, string) is the name of the assortativity.'  'DESCRIPTION (constant, string) is the description of the assortativity.'  'TEMPLATE (parameter, item) is the template of the assortativity.'  'ID (data, string) is a few-letter code of the assortativity.'  'LABEL (metadata, string) is an extended label of the assortativity.'  'NOTES (metadata, string) are some specific notes about the assortativity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the cell containing the assortativity value.'  'PFM (gui, item) contains the panel figure of the measure.' };
-			prop_description = assortativity_description_list{prop};
+			assortinin_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the in-in-assortativity.'  'DESCRIPTION (constant, string) is the description of the in-in-assortativity.'  'TEMPLATE (parameter, item) is the template of the in-in-assortativity.'  'ID (data, string) is a few-letter code of the in-in-assortativity.'  'LABEL (metadata, string) is an extended label of the in-in-assortativity.'  'NOTES (metadata, string) are some specific notes about the in-in-assortativity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the in-in-assortativity.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			prop_description = assortinin_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
 			%GETPROPSETTINGS returns the settings of a property.
@@ -485,20 +484,20 @@ classdef Assortativity < Measure
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  SETTINGS = M.GETPROPSETTINGS(POINTER) returns settings of POINTER of M.
-			%  SETTINGS = Element.GETPROPSETTINGS(Assortativity, POINTER) returns settings of POINTER of Assortativity.
-			%  SETTINGS = M.GETPROPSETTINGS(Assortativity, POINTER) returns settings of POINTER of Assortativity.
+			%  SETTINGS = Element.GETPROPSETTINGS(AssortInIn, POINTER) returns settings of POINTER of AssortInIn.
+			%  SETTINGS = M.GETPROPSETTINGS(AssortInIn, POINTER) returns settings of POINTER of AssortInIn.
 			%
-			% Note that the Element.GETPROPSETTINGS(M) and Element.GETPROPSETTINGS('Assortativity')
+			% Note that the Element.GETPROPSETTINGS(M) and Element.GETPROPSETTINGS('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also getPropProp, getPropTag, getPropCategory, getPropFormat,
 			%  getPropDescription, getPropDefault, checkProp.
 			
-			prop = Assortativity.getPropProp(pointer);
+			prop = AssortInIn.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 4 % Assortativity.TEMPLATE
-					prop_settings = 'Assortativity';
+				case 4 % AssortInIn.TEMPLATE
+					prop_settings = 'AssortInIn';
 				otherwise
 					prop_settings = getPropSettings@Measure(prop);
 			end
@@ -506,48 +505,48 @@ classdef Assortativity < Measure
 		function prop_default = getPropDefault(pointer)
 			%GETPROPDEFAULT returns the default value of a property.
 			%
-			% DEFAULT = Assortativity.GETPROPDEFAULT(PROP) returns the default 
+			% DEFAULT = AssortInIn.GETPROPDEFAULT(PROP) returns the default 
 			%  value of the property PROP.
 			%
-			% DEFAULT = Assortativity.GETPROPDEFAULT(TAG) returns the default 
+			% DEFAULT = AssortInIn.GETPROPDEFAULT(TAG) returns the default 
 			%  value of the property with tag TAG.
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  DEFAULT = M.GETPROPDEFAULT(POINTER) returns the default value of POINTER of M.
-			%  DEFAULT = Element.GETPROPDEFAULT(Assortativity, POINTER) returns the default value of POINTER of Assortativity.
-			%  DEFAULT = M.GETPROPDEFAULT(Assortativity, POINTER) returns the default value of POINTER of Assortativity.
+			%  DEFAULT = Element.GETPROPDEFAULT(AssortInIn, POINTER) returns the default value of POINTER of AssortInIn.
+			%  DEFAULT = M.GETPROPDEFAULT(AssortInIn, POINTER) returns the default value of POINTER of AssortInIn.
 			%
-			% Note that the Element.GETPROPDEFAULT(M) and Element.GETPROPDEFAULT('Assortativity')
+			% Note that the Element.GETPROPDEFAULT(M) and Element.GETPROPDEFAULT('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also getPropDefaultConditioned, getPropProp, getPropTag, getPropSettings, 
 			%  getPropCategory, getPropFormat, getPropDescription, checkProp.
 			
-			prop = Assortativity.getPropProp(pointer);
+			prop = AssortInIn.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 1 % Assortativity.ELCLASS
-					prop_default = 'Assortativity';
-				case 2 % Assortativity.NAME
-					prop_default = 'Assortativity';
-				case 3 % Assortativity.DESCRIPTION
-					prop_default = 'The Assortativity of a graph is the shortest path between all pairs of nodes within a layer of the graph. For weighted graphs, the assortativity is calculated with the Dijkstra algorithm using the inverse weight as the assortativity associated to the edge.';
-				case 4 % Assortativity.TEMPLATE
-					prop_default = Format.getFormatDefault(8, Assortativity.getPropSettings(prop));
-				case 5 % Assortativity.ID
-					prop_default = 'Assortativity ID';
-				case 6 % Assortativity.LABEL
-					prop_default = 'Assortativity label';
-				case 7 % Assortativity.NOTES
-					prop_default = 'Assortativity notes';
-				case 9 % Assortativity.SHAPE
+				case 1 % AssortInIn.ELCLASS
+					prop_default = 'AssortInIn';
+				case 2 % AssortInIn.NAME
+					prop_default = 'InInAssortativity';
+				case 3 % AssortInIn.DESCRIPTION
+					prop_default = 'The in-in-assortativity coefficient of a graph is the correlation coefficient between the degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of in-degree/in-strength.';
+				case 4 % AssortInIn.TEMPLATE
+					prop_default = Format.getFormatDefault(8, AssortInIn.getPropSettings(prop));
+				case 5 % AssortInIn.ID
+					prop_default = 'AssortInIn ID';
+				case 6 % AssortInIn.LABEL
+					prop_default = 'InInAssortativity label';
+				case 7 % AssortInIn.NOTES
+					prop_default = 'InInAssortativity notes';
+				case 9 % AssortInIn.SHAPE
 					prop_default = 1;
-				case 10 % Assortativity.SCOPE
+				case 10 % AssortInIn.SCOPE
 					prop_default = 2;
-				case 11 % Assortativity.PARAMETRICITY
+				case 11 % AssortInIn.PARAMETRICITY
 					prop_default = 2;
-				case 12 % Assortativity.COMPATIBLE_GRAPHS
-					prop_default = {'GraphBU' 'GraphWU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexBU' 'MultiplexWU' 'MultiplexBUD' 'MultiplexBUT' 'MultilayerWU'};
+				case 12 % AssortInIn.COMPATIBLE_GRAPHS
+					prop_default = {'GraphBD' 'GraphWD' 'MultiplexWD' 'MultiplexBD' 'MultilayerWD' 'OrdMlWD'};;
 				otherwise
 					prop_default = getPropDefault@Measure(prop);
 			end
@@ -555,27 +554,27 @@ classdef Assortativity < Measure
 		function prop_default = getPropDefaultConditioned(pointer)
 			%GETPROPDEFAULTCONDITIONED returns the conditioned default value of a property.
 			%
-			% DEFAULT = Assortativity.GETPROPDEFAULTCONDITIONED(PROP) returns the conditioned default 
+			% DEFAULT = AssortInIn.GETPROPDEFAULTCONDITIONED(PROP) returns the conditioned default 
 			%  value of the property PROP.
 			%
-			% DEFAULT = Assortativity.GETPROPDEFAULTCONDITIONED(TAG) returns the conditioned default 
+			% DEFAULT = AssortInIn.GETPROPDEFAULTCONDITIONED(TAG) returns the conditioned default 
 			%  value of the property with tag TAG.
 			%
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  DEFAULT = M.GETPROPDEFAULTCONDITIONED(POINTER) returns the conditioned default value of POINTER of M.
-			%  DEFAULT = Element.GETPROPDEFAULTCONDITIONED(Assortativity, POINTER) returns the conditioned default value of POINTER of Assortativity.
-			%  DEFAULT = M.GETPROPDEFAULTCONDITIONED(Assortativity, POINTER) returns the conditioned default value of POINTER of Assortativity.
+			%  DEFAULT = Element.GETPROPDEFAULTCONDITIONED(AssortInIn, POINTER) returns the conditioned default value of POINTER of AssortInIn.
+			%  DEFAULT = M.GETPROPDEFAULTCONDITIONED(AssortInIn, POINTER) returns the conditioned default value of POINTER of AssortInIn.
 			%
-			% Note that the Element.GETPROPDEFAULTCONDITIONED(M) and Element.GETPROPDEFAULTCONDITIONED('Assortativity')
+			% Note that the Element.GETPROPDEFAULTCONDITIONED(M) and Element.GETPROPDEFAULTCONDITIONED('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also conditioning, getPropDefault, getPropProp, getPropTag, 
 			%  getPropSettings, getPropCategory, getPropFormat, getPropDescription, 
 			%  checkProp.
 			
-			prop = Assortativity.getPropProp(pointer);
+			prop = AssortInIn.getPropProp(pointer);
 			
-			prop_default = Assortativity.conditioning(prop, Assortativity.getPropDefault(prop));
+			prop_default = AssortInIn.conditioning(prop, AssortInIn.getPropDefault(prop));
 		end
 	end
 	methods (Static) % checkProp
@@ -588,32 +587,32 @@ classdef Assortativity < Measure
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  CHECK = M.CHECKPROP(POINTER, VALUE) checks VALUE format for PROP of M.
-			%  CHECK = Element.CHECKPROP(Assortativity, PROP, VALUE) checks VALUE format for PROP of Assortativity.
-			%  CHECK = M.CHECKPROP(Assortativity, PROP, VALUE) checks VALUE format for PROP of Assortativity.
+			%  CHECK = Element.CHECKPROP(AssortInIn, PROP, VALUE) checks VALUE format for PROP of AssortInIn.
+			%  CHECK = M.CHECKPROP(AssortInIn, PROP, VALUE) checks VALUE format for PROP of AssortInIn.
 			% 
 			% M.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:Assortativity:WrongInput
+			%  Error id: BRAPH2:AssortInIn:WrongInput
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  M.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of M.
-			%   Error id: BRAPH2:Assortativity:WrongInput
-			%  Element.CHECKPROP(Assortativity, PROP, VALUE) throws error if VALUE has not a valid format for PROP of Assortativity.
-			%   Error id: BRAPH2:Assortativity:WrongInput
-			%  M.CHECKPROP(Assortativity, PROP, VALUE) throws error if VALUE has not a valid format for PROP of Assortativity.
-			%   Error id: BRAPH2:Assortativity:WrongInput]
+			%   Error id: BRAPH2:AssortInIn:WrongInput
+			%  Element.CHECKPROP(AssortInIn, PROP, VALUE) throws error if VALUE has not a valid format for PROP of AssortInIn.
+			%   Error id: BRAPH2:AssortInIn:WrongInput
+			%  M.CHECKPROP(AssortInIn, PROP, VALUE) throws error if VALUE has not a valid format for PROP of AssortInIn.
+			%   Error id: BRAPH2:AssortInIn:WrongInput]
 			% 
-			% Note that the Element.CHECKPROP(M) and Element.CHECKPROP('Assortativity')
+			% Note that the Element.CHECKPROP(M) and Element.CHECKPROP('AssortInIn')
 			%  are less computationally efficient.
 			%
 			% See also Format, getPropProp, getPropTag, getPropSettings,
 			% getPropCategory, getPropFormat, getPropDescription, getPropDefault.
 			
-			prop = Assortativity.getPropProp(pointer);
+			prop = AssortInIn.getPropProp(pointer);
 			
 			switch prop
-				case 4 % Assortativity.TEMPLATE
-					check = Format.checkFormat(8, value, Assortativity.getPropSettings(prop));
+				case 4 % AssortInIn.TEMPLATE
+					check = Format.checkFormat(8, value, AssortInIn.getPropSettings(prop));
 				otherwise
 					if prop <= 15
 						check = checkProp@Measure(prop, value);
@@ -624,9 +623,9 @@ classdef Assortativity < Measure
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':Assortativity:' 'WrongInput'], ...
-					['BRAPH2' ':Assortativity:' 'WrongInput' '\n' ...
-					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' Assortativity.getPropTag(prop) ' (' Assortativity.getFormatTag(Assortativity.getPropFormat(prop)) ').'] ...
+					['BRAPH2' ':AssortInIn:' 'WrongInput'], ...
+					['BRAPH2' ':AssortInIn:' 'WrongInput' '\n' ...
+					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' AssortInIn.getPropTag(prop) ' (' AssortInIn.getFormatTag(AssortInIn.getPropFormat(prop)) ').'] ...
 					)
 			end
 		end
@@ -648,42 +647,42 @@ classdef Assortativity < Measure
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 14 % Assortativity.M
+				case 14 % AssortInIn.M
 					rng_settings_ = rng(); rng(m.getPropSeed(14), 'twister')
 					
 					g = m.get('G'); % graph from measure class
-					A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
+					A = g.get('A'); % adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
 					L = g.get('LAYERNUMBER');
-					
-					assortativity = cell(L, 1);
-					connectivity_layer =  g.get('CONNECTIVITY_TYPE', g.get('LAYERNUMBER'));
-					for li = 1:1:L
+					N = g.get('NODENUMBER');
+					in_in_assortativity = cell(L, 1);
+					connectivity_types = g.get('CONNECTIVITY_TYPE', L);  
+					parfor li = 1:L
 					    Aii = A{li, li};
-					    [i, j] = find(triu(Aii) ~= 0);  % nodes [i, j]
+					    connectivity_type = connectivity_types(li, li);
+					    [i, j] = find(Aii ~= 0);  % nodes [i, j]
 					    M = length(i);  % Number of edges
 					    k_i = zeros(M, L);
 					    k_j = zeros(length(j), L);
 					    
-					    if connectivity_layer == 2 
-					        
-					        degree = Degree('G', g).get('M');        
-					        d = degree{li};
-					        
-					    elseif connectivity_layer == 1 
-					        
-					        strength = Strength('G', g).get('M');        
-					        d = strength{li};
+					    if connectivity_type == 1  % weighted graphs
+					        in_strength = StrengthIn('G', g).get('M');
+					        d = in_strength{li};
+					    else  % binary graphs
+					        in_degree = DegreeIn('G', g).get('M');
+					        d= in_degree{li};
 					    end
-					    k_i(:, li) = d(i);  % degree/strength node i
-					    k_j(:, li) = d(j);  % degree/strength node j
+					    
+					    k_i(:, li) = d(i);  % in-degree/in-strength node i
+					    k_j(:, li) = d(j);  % in-degree/in-strength node j
 					    % compute assortativity
 					    assortativity_layer = (sum(k_i(:, li) .* k_j(:, li)) / M - (sum(0.5 * (k_i(:, li) + k_j(:, li))) / M)^2)...
 					        / (sum(0.5 * (k_i(:, li).^2 + k_j(:, li).^2)) / M - (sum(0.5 * (k_i(:, li) + k_j(:, li))) / M)^2);
 					    assortativity_layer(isnan(assortativity_layer)) = 0;  % Should return zeros, not NaN
-					    assortativity(li) = {assortativity_layer};
+					    
+					    in_in_assortativity(li) = {assortativity_layer};
 					end
 					
-					value = assortativity;
+					value = in_in_assortativity;
 					
 					rng(rng_settings_)
 					
