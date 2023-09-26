@@ -592,7 +592,7 @@ classdef CommunityStructure < Measure
 				case 21 % CommunityStructure.QUALITY_FUNCTION
 					prop_default = Format.getFormatDefault(16, CommunityStructure.getPropSettings(prop));
 				case 1 % CommunityStructure.ELCLASS
-					prop_default = 'Community Structure';
+					prop_default = 'CommunityStructure';
 				case 2 % CommunityStructure.NAME
 					prop_default = 'Community Structure';
 				case 3 % CommunityStructure.DESCRIPTION

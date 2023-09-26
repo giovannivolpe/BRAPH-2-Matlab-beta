@@ -178,7 +178,7 @@ B = [
     0  0  0  0  0
     ];
 
-known_out_path_length = {[1.3333 1.3333 2 1.6000 Inf]'};
+known_out_path_length = {[1.3333 2 1.3333 1.6000 Inf]'};
 known_out_path_length = cellfun(@(x) round(x, 3), known_out_path_length, 'UniformOutput', false);
 g = GraphBD('B', B);
 
