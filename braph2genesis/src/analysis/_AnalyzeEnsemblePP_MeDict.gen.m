@@ -86,24 +86,24 @@ end
 function set_table()
     a = pr.get('EL');
     prop = pr.get('PROP');
-    if isa(a.getr('GRAPH_TEMPLATE'), 'NoValue')
-        g = a.getPropDefaultConditioned('GRAPH_TEMPLATE'); % default graph
+    if isa(a.getr(prop), 'NoValue')
+        g = a.getPropDefaultConditioned(prop); % default graph
     else
-        g = a.get('GRAPH_TEMPLATE'); % actual graph
+        g = a.get(prop); % actual graph
     end
-    
+
     m_list = g.get('COMPATIBLE_MEASURES');
-    
-    if isempty(a.getr(prop).get('IT_LIST'))
-        m_list_already_calculated = {};
+
+    if isa(g.getr('M_DICT'), 'NoValue')
+        mlist_already_calculated = {};
     else
-        m_list_already_calculated = cellfun(@(x) x.get('ELCLASS'), g.get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
+        mlist_already_calculated = cellfun(@(x) x.get('ELCLASS'), g.get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
     end
     
     rowname = cell(length(m_list), 1);
     data = cell(length(m_list), 5);
     for mi = 1:1:length(m_list)
-        if any(cellfun(@(y) isequal(m_list{mi}, y), m_list_already_calculated)) && ~isa(g.get('MEASURE', m_list{mi}).getr('M'), 'NoValue')
+        if any(cellfun(@(y) isequal(m_list{mi}, y), mlist_already_calculated)) && ~isa(g.get('MEASURE', m_list{mi}).getr('M'), 'NoValue')
             rowname{mi} = 'C';
         else
             rowname{mi} = '';
@@ -134,22 +134,23 @@ function set_table()
         end
         
         data{mi, 5} = eval([m_list{mi} '.getPropDefault(''DESCRIPTION'')']);
-    
-        set(pr.get('TABLE'), ...
-            'RowName', rowname, ...
-            'Data', data ...
-            )
-    
-        % style SELECTED
-        styles_row = find(pr.get('TABLE').StyleConfigurations.Target == 'row');
-        if ~isempty(styles_row)
-            removeStyle(pr.get('TABLE'), styles_row)
-        end
-        if ~isempty(pr.get('SELECTED'))
-            addStyle(pr.get('TABLE'), uistyle('FontWeight', 'bold'), 'row', pr.get('SELECTED'))
-        end
+    end
+
+    set(pr.get('TABLE'), ...
+        'RowName', rowname, ...
+        'Data', data ...
+        )
+
+    % style SELECTED
+    styles_row = find(pr.get('TABLE').StyleConfigurations.Target == 'row');
+    if ~isempty(styles_row)
+        removeStyle(pr.get('TABLE'), styles_row)
+    end
+    if ~isempty(pr.get('SELECTED'))
+        addStyle(pr.get('TABLE'), uistyle('FontWeight', 'bold'), 'row', pr.get('SELECTED'))
     end
 end
+
 %%% ¡prop!
 REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
 %%%% ¡calculate!
@@ -183,7 +184,16 @@ if value
             gui.get('SHOW')
         end
     end
-    
+
+    % figures for measure figures
+    gui_b_dict = pr.get('GUI_B_DICT');
+    for i = 1:1:gui_b_dict.get('LENGTH')
+        gui = gui_b_dict.get('IT', i);
+        if gui.get('DRAWN')
+            gui.get('SHOW')
+        end
+    end
+
     % figures for measure data
     gui_m_dict = pr.get('GUI_M_DICT');
     for i = 1:1:gui_m_dict.get('LENGTH')
@@ -213,6 +223,15 @@ if value
     gui_f_dict = pr.get('GUI_F_DICT');
     for i = 1:1:gui_f_dict.get('LENGTH')
         gui = gui_f_dict.get('IT', i);
+        if gui.get('DRAWN')
+            gui.get('HIDE')
+        end
+    end
+
+    % figures for measure figures
+    gui_b_dict = pr.get('GUI_B_DICT');
+    for i = 1:1:gui_b_dict.get('LENGTH')
+        gui = gui_b_dict.get('IT', i);
         if gui.get('DRAWN')
             gui.get('HIDE')
         end
@@ -323,6 +342,32 @@ contextmenu = uicontextmenu( ...
     'Parent', ancestor(pr.get('H'), 'figure'), ...
     'Tag', 'CONTEXTMENU' ...
     );
+menu_open_g_pl = uimenu( ...
+	'Parent', contextmenu, ...
+	'Tag', 'MENU_OPEN_G_PL', ...
+	'Text', 'Plot Graph Plot ...', ...
+	'MenuSelectedFcn', {@cb_open_g_pl} ...
+	);
+
+menu_hide_g_pl = uimenu( ...
+    'Parent', contextmenu, ...
+    'Tag', 'MENU_HIDE_G_PL', ...
+    'Text', 'Hide Graph Plot', ...
+    'MenuSelectedFcn', {@cb_hide_g_pl} ...
+	);
+menu_open_g_el = uimenu( ...
+	'Separator', 'on', ...
+    'Parent', contextmenu, ...
+    'Tag', 'MENU_OPEN_G_EL', ...
+    'Text', 'Data Graph ...', ...
+    'MenuSelectedFcn', {@cb_open_g_el} ...
+    );
+menu_hide_g_el = uimenu( ...
+    'Parent', contextmenu, ...
+    'Tag', 'MENU_HIDE_G_EL', ...
+    'Text', 'Hide Graph Data', ...
+	'MenuSelectedFcn', {@cb_hide_g_el} ...
+    );
 menu_select_all = uimenu( ...
 	'Separator', 'on', ...
     'Parent', contextmenu, ...
@@ -349,7 +394,20 @@ menu_calculate = uimenu( ...
     'Text', 'Calculate Selected Measures', ...
 	'MenuSelectedFcn', {@cb_calculate} ...
     );
-menu_open_plots = uimenu( ... 
+menu_open_mbrain = uimenu( ...
+	'Separator', 'on', ...
+	'Parent', contextmenu, ...
+	'Tag', 'MENU_OPEN_MBRAIN', ...
+	'Text', 'Plot Selected Comparisons on Brain ...', ...
+	'MenuSelectedFcn', {@cb_open_mbrain} ... % % %
+	);
+menu_hide_mbrain = uimenu( ...
+    'Parent', contextmenu, ...
+    'Tag', 'MENU_HIDE_MBRAIN', ...
+    'Text', 'Hide Selected Brain-Plots', ...
+    'MenuSelectedFcn', {@cb_hide_mbrain} ... % % %
+	);
+menu_open_plots = uimenu( ...
 	'Separator', 'on', ...
 	'Parent', contextmenu, ...
 	'Tag', 'MENU_OPEN_PLOTS', ...
@@ -380,6 +438,76 @@ set(pr.get('TABLE'), 'ContextMenu', contextmenu)
 
 value = contextmenu;
 %%%% ¡calculate_callbacks!
+function cb_open_g_pl(~, ~)
+    if isa(pr.getr('GUI_G_PL'), 'NoValue')
+        f = ancestor(pr.get('H'), 'figure');
+
+        el = pr.get('EL'); % AnalyzeEnsemble
+        prop = pr.get('PROP'); % G
+
+        gui = GUIFig( ...
+            'PF', el.memorize(prop).get('PFGA'), ... % ensure that the property is stored -- this is the graph G
+            'POSITION', [ ...
+                x0(f, 'normalized')+w(f, 'normalized') ...
+                y0(f, 'normalized') ...
+                w(0,'normalized')-x0(f, 'normalized')-w(f, 'normalized') ...
+                h(f, 'normalized') ...
+                ], ...
+            'WAITBAR', pr.getCallback('WAITBAR'), ...
+            'CLOSEREQ', false ...
+            );
+        
+        pr.set('GUI_G_PL', gui)
+    else
+        gui = pr.get('GUI_G_PL');
+    end
+
+    if ~gui.get('DRAWN')
+        gui.get('DRAW')
+    end
+    gui.get('SHOW')
+end
+function cb_hide_g_pl(~, ~)
+    gui = pr.getr('GUI_G_PL');
+    if isa(gui, 'GUIFig') && gui.get('DRAWN')
+        gui.get('HIDE')
+    end
+end
+function cb_open_g_el(~, ~)
+    if isa(pr.getr('GUI_G_EL'), 'NoValue')
+        f = ancestor(pr.get('H'), 'figure');
+
+        el = pr.get('EL'); % AnalyzeEnsemble
+        prop = pr.get('PROP'); % G
+
+        gui = GUIElement( ...
+            'PE', el.memorize(prop), ... % ensure that the property is stored -- this is the graph G
+            'POSITION', [ ...
+                x0(f, 'normalized')+w(f, 'normalized') ...
+                y0(f, 'normalized') ...
+                w(f, 'normalized') ...
+                h(f, 'normalized') ...
+                ], ...
+            'WAITBAR', pr.getCallback('WAITBAR'), ...
+            'CLOSEREQ', false ...
+            );
+        
+        pr.set('GUI_G_EL', gui)
+    else
+        gui = pr.get('GUI_G_EL');
+    end
+
+    if ~gui.get('DRAWN')
+        gui.get('DRAW')
+    end
+    gui.get('SHOW')
+end
+function cb_hide_g_el(~, ~)
+    gui = pr.getr('GUI_G_EL');
+    if isa(gui, 'GUIElement') && gui.get('DRAWN')
+        gui.get('HIDE')
+    end
+end
 function cb_select_all(~, ~) 
     g = pr.get('EL').getPropDefaultConditioned(pr.get('PROP'));
     m_list = g.get('COMPATIBLE_MEASURES');
@@ -394,7 +522,7 @@ function cb_clear_selection(~, ~)
     pr.get('UPDATE')
 end
 function cb_invert_selection(~, ~) 
-    g = pr.get('EL').get('GRAPH_TEMPLATE'); % default graph
+    g = pr.get('EL').getPropDefaultConditioned(pr.get('PROP')); % default graph
     m_list = g.get('COMPATIBLE_MEASURES');
 
     selected_tmp = [1:1:length(m_list)];
@@ -404,8 +532,7 @@ function cb_invert_selection(~, ~)
     pr.get('UPDATE')
 end
 function cb_calculate(~, ~) 
-    a = pr.get('EL');
-    g = a.get('GRAPH_TEMPLATE'); 
+    g = pr.get('EL').get(pr.get('PROP')); % actual graph
     m_list = g.get('COMPATIBLE_MEASURES');
     selected = pr.get('SELECTED');
     
@@ -414,12 +541,11 @@ function cb_calculate(~, ~)
     for i = 1:1:length(m_list)
         if ismember(i, selected)
             measure = m_list{i};
-            me = a.get('MEASUREENSEMBLE', measure);
 
             braph2waitbar(wb, .1 + .9 * i / length(selected), ['Calculating measure ' int2str(i) ' (' measure ') of ' int2str(length(selected)) ' ...'])
 
-            if isa(me.getr('M'), 'NoValue')
-                a.get('MEASUREENSEMBLE', measure).memorize('M');
+            if isa(g.get('MEASURE', measure).getr('M'), 'NoValue')
+                g.get('MEASURE', measure).memorize('M');
             end
         end
     end
@@ -428,9 +554,69 @@ function cb_calculate(~, ~)
 
 	pr.get('UPDATE');
 end
+function cb_open_mbrain(~, ~)
+    c = pr.get('EL');
+    g = c.get('A1').get('G');
+    m_list = g.get('COMPATIBLE_MEASURES');
+
+    f = ancestor(pr.get('H'), 'figure'); % parent GUI 
+    N = ceil(sqrt(length(m_list))); % number of row and columns of figures
+
+    gui_b_dict = pr.memorize('GUI_B_DICT');
+
+    selected = pr.get('SELECTED');
+	for s = 1:1:length(selected)
+        i = selected(s);
+
+        measure = m_list{i}; % also key
+
+        cp = c.get('COMPARISON', measure);
+
+        if ~gui_b_dict.get('CONTAINS_KEY', measure)
+            gui = GUIFig( ...
+                'ID', measure, ... % this is the dictionary key
+                'PF', cp.get('PFB'), ...
+                'POSITION', [ ...
+                    x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ...
+                    y0(f, 'normalized') ...
+                    w(f, 'normalized') * 3 ...
+                    .5 * h(f, 'normalized') + .5 * h(f, 'normalized') * (N - floor((i - .5) / N )) / N ...
+                    ], ...
+                'WAITBAR', pr.getCallback('WAITBAR'), ...
+                'CLOSEREQ', false ...
+                );
+            gui_b_dict.get('ADD', gui)
+        end
+
+        gui = gui_b_dict.get('IT', measure);
+        if ~gui.get('DRAWN')
+            gui.get('DRAW')
+        end
+        gui.get('SHOW')
+    end
+end
+function cb_hide_mbrain(~, ~)
+    c = pr.get('EL');
+    g = c.get('A1').get('G');
+    m_list = g.get('COMPATIBLE_MEASURES');
+    
+    gui_b_dict = pr.memorize('GUI_B_DICT');
+    selected = pr.get('SELECTED');
+    for s = 1:1:length(selected)
+        i = selected(s);
+        
+        measure = m_list{i}; % also key
+        
+        if gui_b_dict.get('CONTAINS_KEY', measure)
+            gui = gui_b_dict.get('IT', measure);
+            if gui.get('DRAWN')
+                gui.get('HIDE')
+            end
+        end
+    end
+end
 function cb_open_plots(~, ~)
-    a = pr.get('EL');   
-    g = a.get('GRAPH_TEMPLATE'); 
+    g = pr.get('EL').get(pr.get('PROP')); % actual graph
     m_list = g.get('COMPATIBLE_MEASURES');
     
     f = ancestor(pr.get('H'), 'figure'); % parent GUI 
@@ -444,12 +630,12 @@ function cb_open_plots(~, ~)
         
         measure = m_list{i}; % also key
 
-        me = a.get('MEASUREENSEMBLE', measure);
+        m = g.get('MEASURE', measure);
         
         if ~gui_f_dict.get('CONTAINS_KEY', measure)
             gui = GUIFig( ...
                 'ID', measure, ... % this is the dictionary key
-                'PF', me.get('PFME'), ...
+                'PF', m.get('PFM'), ...
                 'POSITION', [ ...
                     x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ...
                     y0(f, 'normalized') ...
@@ -470,7 +656,7 @@ function cb_open_plots(~, ~)
     end
 end
 function cb_hide_plots(~, ~)
-    g = pr.get('EL').get('GRAPH_TEMPLATE'); % default graph
+    g = pr.get('EL').getPropDefaultConditioned(pr.get('PROP')); % default graph
     m_list = g.get('COMPATIBLE_MEASURES');
     
     gui_f_dict = pr.memorize('GUI_F_DICT');
@@ -490,8 +676,7 @@ function cb_hide_plots(~, ~)
     end
 end
 function cb_open_elements(~, ~)
-    a = pr.get('EL');    
-    g = a.get('GRAPH_TEMPLATE'); % actual graph
+    g = pr.get('EL').get(pr.get('PROP')); % actual graph
     m_list = g.get('COMPATIBLE_MEASURES');
     
     f = ancestor(pr.get('H'), 'figure'); % parent GUI 
@@ -505,12 +690,12 @@ function cb_open_elements(~, ~)
         
         measure = m_list{i}; % also key
 
-        me = a.get('MEASUREENSEMBLE', measure);
+        m = g.get('MEASURE', measure);
         
         if ~gui_m_dict.get('CONTAINS_KEY', measure)
             gui = GUIElement( ...
                 'ID', measure, ... % this is the dictionary key
-                'PE', me, ... 
+                'PE', m, ... 
                 'POSITION', [ ...
                     x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ... % x = (f_gr_x + f_gr_w) / screen_w + mod(selected_it - 1, N) * (screen_w - f_gr_x - 2 * f_gr_w) / N / screen_w;
                     y0(f, 'normalized') ... % y = f_gr_y / screen_h;
@@ -531,7 +716,7 @@ function cb_open_elements(~, ~)
 	end
 end
 function cb_hide_elements(~, ~)
-    g = pr.get('EL').get('GRAPH_TEMPLATE'); % default graph
+    g = pr.get('EL').getPropDefaultConditioned(pr.get('PROP')); % default graph
     m_list = g.get('COMPATIBLE_MEASURES');
     
     gui_m_dict = pr.memorize('GUI_M_DICT');
@@ -560,6 +745,11 @@ GUI_G_PL (gui, item) contains the GUI for the graph figure.
 GUI_G_EL (gui, item) contains the GUI for the graph.
 %%%% ¡settings!
 'GUIElement'
+
+%%% ¡prop!
+GUI_B_DICT (gui, idict) contains the GUIs for the brain measures comparison figures.
+%%%% ¡settings!
+'GUIFig'
 
 %%% ¡prop!
 GUI_F_DICT (gui, idict) contains the GUIs for the measure figures.

@@ -95,6 +95,52 @@ value = IndexedDictionary('IT_CLASS', 'MeasureEnsemble', 'IT_KEY', MeasureEnsemb
 pr = AnalyzeEnsemblePP_MeDict('EL', a, 'PROP', AnalyzeEnsemble.ME_DICT, ...
     'WAITBAR', a.getCallback('WAITBAR'), ...
     varargin{:});
+for hang, add on AnalyzeEnsemble:
+
+%%% ¡prop!
+PFB (gui, item) contains the panel figure of the comparison.
+%%%% ¡settings!
+'MeasureEnsembleBrainPF'
+%%%% ¡postprocessing!
+if isa(cp.getr('PFB'), 'NoValue')
+
+    measure = cp.get('MEASURE');
+
+    switch Element.getPropDefault(measure, 'SHAPE')
+        case Measure.GLOBAL % _Measure.GLOBAL_
+            switch Element.getPropDefault(measure, 'SCOPE')
+                case Measure.SUPERGLOBAL % _Measure.SUPERGLOBAL_
+                    cp.set('PFB', MeasureEnsembleBrainPF_GS('AnalyzeEnsemble', a))
+                case Measure.UNILAYER % _Measure.UNILAYER_
+                    cp.set('PFB', MeasureEnsembleBrainPF_GU('AnalyzeEnsemble', a))
+                case Measure.BILAYER % _Measure.BILAYER_
+                    cp.set('PFB', MeasureEnsembleBrainPF_GB('AnalyzeEnsemble', a))
+            end
+        case Measure.NODAL % _Measure.NODAL_
+            switch Element.getPropDefault(measure, 'SCOPE')
+                case Measure.SUPERGLOBAL % _Measure.SUPERGLOBAL_
+                    cp.set('PFB', MeasureEnsembleBrainPF_NS('AnalyzeEnsemble', a))
+                case Measure.UNILAYER % _Measure.UNILAYER_
+                    cp.set('PFB', MeasureEnsembleBrainPF_NU('AnalyzeEnsemble', a))
+                case Measure.BILAYER % _Measure.BILAYER_
+                    cp.set('PFB', MeasureEnsembleBrainPF_NB('AnalyzeEnsemble', a))
+            end
+        case Measure.BINODAL % _Measure.BINODAL_
+            switch Element.getPropDefault(measure, 'SCOPE')
+                case Measure.SUPERGLOBAL % _Measure.SUPERGLOBAL_
+                    cp.set('PFB', MeasureEnsembleBrainPF_BS('AnalyzeEnsemble', a))
+                case Measure.UNILAYER % _Measure.UNILAYER_
+                    cp.set('PFB', MeasureEnsembleBrainPF_BU('AnalyzeEnsemble', a))
+                case Measure.BILAYER % _Measure.BILAYER_
+                    cp.set('PFB', MeasureEnsembleBrainPF_BB('AnalyzeEnsemble', a))
+            end
+    end
+end
+%%%% ¡gui!
+pr = PanelPropItem('EL', cp, 'PROP', MeasureEnsembleBrainPF.PFB, ...
+    'GUICLASS', 'GUIFig', ...
+	'BUTTON_TEXT', ['Plot ' cp.get('MEASURE') ' Comparison'], ...
+    varargin{:});
 
 %%% ¡prop!
 MEASUREENSEMBLE (query, item) returns an ensemble-based measure.
