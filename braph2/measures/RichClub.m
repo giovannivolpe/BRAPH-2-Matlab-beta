@@ -23,8 +23,7 @@ classdef RichClub < Degree
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the richclub.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
-	%  <strong>17</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, scalar) 
+	%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, scalar) 
 	%
 	% RichClub methods (constructor):
 	%  RichClub - constructor
@@ -113,7 +112,7 @@ classdef RichClub < Degree
 	%
 	
 	properties (Constant) % properties
-		PARAMETRIC_VALUE = 17; %CET: Computational Efficiency Trick
+		PARAMETRIC_VALUE = 16; %CET: Computational Efficiency Trick
 		PARAMETRIC_VALUE_TAG = 'PARAMETRIC_VALUE';
 		PARAMETRIC_VALUE_CATEGORY = 3;
 		PARAMETRIC_VALUE_FORMAT = 11;
@@ -145,8 +144,7 @@ classdef RichClub < Degree
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the richclub.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
-			%  <strong>17</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, scalar) 
+			%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, scalar) 
 			%
 			% See also Category, Format.
 			
@@ -208,7 +206,7 @@ classdef RichClub < Degree
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
 				return
 			end
 			
@@ -218,7 +216,7 @@ classdef RichClub < Degree
 				case 2 % Category.METADATA
 					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = [4 17];
+					prop_list = [4 16];
 				case 4 % Category.DATA
 					prop_list = [5 13];
 				case 5 % Category.RESULT
@@ -226,7 +224,7 @@ classdef RichClub < Degree
 				case 6 % Category.QUERY
 					prop_list = 8;
 				case 9 % Category.GUI
-					prop_list = [15 16];
+					prop_list = 15;
 				otherwise
 					prop_list = [];
 			end
@@ -252,7 +250,7 @@ classdef RichClub < Degree
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 17;
+				prop_number = 16;
 				return
 			end
 			
@@ -270,7 +268,7 @@ classdef RichClub < Degree
 				case 6 % Category.QUERY
 					prop_number = 1;
 				case 9 % Category.GUI
-					prop_number = 2;
+					prop_number = 1;
 				otherwise
 					prop_number = 0;
 			end
@@ -301,7 +299,7 @@ classdef RichClub < Degree
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 17 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 16 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -339,7 +337,7 @@ classdef RichClub < Degree
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'PARAMETRIC_VALUE' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -372,7 +370,7 @@ classdef RichClub < Degree
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'PARAMETRIC_VALUE' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -401,7 +399,7 @@ classdef RichClub < Degree
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				richclub_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'PARAMETRIC_VALUE' };
+				richclub_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' };
 				tag = richclub_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -428,7 +426,7 @@ classdef RichClub < Degree
 			prop = RichClub.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			richclub_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  9  3 };
+			richclub_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  3 };
 			prop_category = richclub_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -454,7 +452,7 @@ classdef RichClub < Degree
 			prop = RichClub.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			richclub_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  8  11 };
+			richclub_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  11 };
 			prop_format = richclub_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -480,7 +478,7 @@ classdef RichClub < Degree
 			prop = RichClub.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			richclub_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the richclub.'  'DESCRIPTION (constant, string) is the description of the richclub.'  'TEMPLATE (parameter, item) is the template of the richclub.'  'ID (data, string) is a few-letter code of the richclub.'  'LABEL (metadata, string) is an extended label of the richclub.'  'NOTES (metadata, string) are some specific notes about the richclub.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the richclub.'  'PFM (gui, item) contains the panel figure of the measure.'  'PFB (gui, item) contains the panel figure of the brain measure.'  'PARAMETRIC_VALUE (parameter, scalar) ' };
+			richclub_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the richclub.'  'DESCRIPTION (constant, string) is the description of the richclub.'  'TEMPLATE (parameter, item) is the template of the richclub.'  'ID (data, string) is a few-letter code of the richclub.'  'LABEL (metadata, string) is an extended label of the richclub.'  'NOTES (metadata, string) are some specific notes about the richclub.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the richclub.'  'PFM (gui, item) contains the panel figure of the measure.'  'PARAMETRIC_VALUE (parameter, scalar) ' };
 			prop_description = richclub_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -506,7 +504,7 @@ classdef RichClub < Degree
 			prop = RichClub.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 17 % RichClub.PARAMETRIC_VALUE
+				case 16 % RichClub.PARAMETRIC_VALUE
 					prop_settings = Format.getFormatSettings(11);
 				case 4 % RichClub.TEMPLATE
 					prop_settings = 'RichClub';
@@ -537,7 +535,7 @@ classdef RichClub < Degree
 			prop = RichClub.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 17 % RichClub.PARAMETRIC_VALUE
+				case 16 % RichClub.PARAMETRIC_VALUE
 					prop_default = 1;
 				case 1 % RichClub.ELCLASS
 					prop_default = 'RichClub';
@@ -625,12 +623,12 @@ classdef RichClub < Degree
 			prop = RichClub.getPropProp(pointer);
 			
 			switch prop
-				case 17 % RichClub.PARAMETRIC_VALUE
+				case 16 % RichClub.PARAMETRIC_VALUE
 					check = Format.checkFormat(11, value, RichClub.getPropSettings(prop));
 				case 4 % RichClub.TEMPLATE
 					check = Format.checkFormat(8, value, RichClub.getPropSettings(prop));
 				otherwise
-					if prop <= 16
+					if prop <= 15
 						check = checkProp@Degree(prop, value);
 					end
 			end
@@ -718,7 +716,7 @@ classdef RichClub < Degree
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 16
+					if prop <= 15
 						value = calculateValue@Degree(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

@@ -20,8 +20,7 @@ classdef Eccentricity < Measure
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the eccentricity.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
-	%  <strong>17</strong> <strong>RULE</strong> 	RULE (parameter, OPTION)  % calculation in a graph or its subgraph
+	%  <strong>16</strong> <strong>RULE</strong> 	RULE (parameter, OPTION)  % calculation in a graph or its subgraph
 	%
 	% Eccentricity methods (constructor):
 	%  Eccentricity - constructor
@@ -110,7 +109,7 @@ classdef Eccentricity < Measure
 	%
 	
 	properties (Constant) % properties
-		RULE = 17; %CET: Computational Efficiency Trick
+		RULE = 16; %CET: Computational Efficiency Trick
 		RULE_TAG = 'RULE';
 		RULE_CATEGORY = 3;
 		RULE_FORMAT = 5;
@@ -142,8 +141,7 @@ classdef Eccentricity < Measure
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the eccentricity.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
-			%  <strong>17</strong> <strong>RULE</strong> 	RULE (parameter, OPTION)  % calculation in a graph or its subgraph
+			%  <strong>16</strong> <strong>RULE</strong> 	RULE (parameter, OPTION)  % calculation in a graph or its subgraph
 			%
 			% See also Category, Format.
 			
@@ -205,7 +203,7 @@ classdef Eccentricity < Measure
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
 				return
 			end
 			
@@ -215,7 +213,7 @@ classdef Eccentricity < Measure
 				case 2 % Category.METADATA
 					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = [4 17];
+					prop_list = [4 16];
 				case 4 % Category.DATA
 					prop_list = [5 13];
 				case 5 % Category.RESULT
@@ -223,7 +221,7 @@ classdef Eccentricity < Measure
 				case 6 % Category.QUERY
 					prop_list = 8;
 				case 9 % Category.GUI
-					prop_list = [15 16];
+					prop_list = 15;
 				otherwise
 					prop_list = [];
 			end
@@ -249,7 +247,7 @@ classdef Eccentricity < Measure
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 17;
+				prop_number = 16;
 				return
 			end
 			
@@ -267,7 +265,7 @@ classdef Eccentricity < Measure
 				case 6 % Category.QUERY
 					prop_number = 1;
 				case 9 % Category.GUI
-					prop_number = 2;
+					prop_number = 1;
 				otherwise
 					prop_number = 0;
 			end
@@ -298,7 +296,7 @@ classdef Eccentricity < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 17 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 16 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -336,7 +334,7 @@ classdef Eccentricity < Measure
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'RULE' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'RULE' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -369,7 +367,7 @@ classdef Eccentricity < Measure
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'RULE' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'RULE' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -398,7 +396,7 @@ classdef Eccentricity < Measure
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				eccentricity_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'RULE' };
+				eccentricity_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'RULE' };
 				tag = eccentricity_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -425,7 +423,7 @@ classdef Eccentricity < Measure
 			prop = Eccentricity.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			eccentricity_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  9  3 };
+			eccentricity_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  3 };
 			prop_category = eccentricity_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -451,7 +449,7 @@ classdef Eccentricity < Measure
 			prop = Eccentricity.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			eccentricity_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  8  5 };
+			eccentricity_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  5 };
 			prop_format = eccentricity_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -477,7 +475,7 @@ classdef Eccentricity < Measure
 			prop = Eccentricity.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			eccentricity_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the eccentricity.'  'DESCRIPTION (constant, string) is the description of the eccentricity.'  'TEMPLATE (parameter, item) is the template of the eccentricity.'  'ID (data, string) is a few-letter code of the eccentricity.'  'LABEL (metadata, string) is an extended label of the eccentricity.'  'NOTES (metadata, string) are some specific notes about the eccentricity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the eccentricity.'  'PFM (gui, item) contains the panel figure of the measure.'  'PFB (gui, item) contains the panel figure of the brain measure.'  'RULE (parameter, OPTION)  % calculation in a graph or its subgraph' };
+			eccentricity_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the eccentricity.'  'DESCRIPTION (constant, string) is the description of the eccentricity.'  'TEMPLATE (parameter, item) is the template of the eccentricity.'  'ID (data, string) is a few-letter code of the eccentricity.'  'LABEL (metadata, string) is an extended label of the eccentricity.'  'NOTES (metadata, string) are some specific notes about the eccentricity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the eccentricity.'  'PFM (gui, item) contains the panel figure of the measure.'  'RULE (parameter, OPTION)  % calculation in a graph or its subgraph' };
 			prop_description = eccentricity_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -503,7 +501,7 @@ classdef Eccentricity < Measure
 			prop = Eccentricity.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 17 % Eccentricity.RULE
+				case 16 % Eccentricity.RULE
 					prop_settings = {'all', 'subgraphs'};
 				case 4 % Eccentricity.TEMPLATE
 					prop_settings = 'Eccentricity';
@@ -534,7 +532,7 @@ classdef Eccentricity < Measure
 			prop = Eccentricity.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 17 % Eccentricity.RULE
+				case 16 % Eccentricity.RULE
 					prop_default = 'all';
 				case 1 % Eccentricity.ELCLASS
 					prop_default = 'Eccentricity';
@@ -622,12 +620,12 @@ classdef Eccentricity < Measure
 			prop = Eccentricity.getPropProp(pointer);
 			
 			switch prop
-				case 17 % Eccentricity.RULE
+				case 16 % Eccentricity.RULE
 					check = Format.checkFormat(5, value, Eccentricity.getPropSettings(prop));
 				case 4 % Eccentricity.TEMPLATE
 					check = Format.checkFormat(8, value, Eccentricity.getPropSettings(prop));
 				otherwise
-					if prop <= 16
+					if prop <= 15
 						check = checkProp@Measure(prop, value);
 					end
 			end
@@ -685,7 +683,7 @@ classdef Eccentricity < Measure
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 16
+					if prop <= 15
 						value = calculateValue@Measure(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

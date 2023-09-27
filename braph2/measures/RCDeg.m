@@ -22,8 +22,7 @@ classdef RCDeg < Degree
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the rich-club degree.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
-	%  <strong>17</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, SCALAR) 
+	%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, SCALAR) 
 	%
 	% RCDeg methods (constructor):
 	%  RCDeg - constructor
@@ -112,7 +111,7 @@ classdef RCDeg < Degree
 	%
 	
 	properties (Constant) % properties
-		PARAMETRIC_VALUE = 17; %CET: Computational Efficiency Trick
+		PARAMETRIC_VALUE = 16; %CET: Computational Efficiency Trick
 		PARAMETRIC_VALUE_TAG = 'PARAMETRIC_VALUE';
 		PARAMETRIC_VALUE_CATEGORY = 3;
 		PARAMETRIC_VALUE_FORMAT = 11;
@@ -144,8 +143,7 @@ classdef RCDeg < Degree
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the rich-club degree.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
-			%  <strong>17</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, SCALAR) 
+			%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, SCALAR) 
 			%
 			% See also Category, Format.
 			
@@ -207,7 +205,7 @@ classdef RCDeg < Degree
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
 				return
 			end
 			
@@ -217,7 +215,7 @@ classdef RCDeg < Degree
 				case 2 % Category.METADATA
 					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = [4 17];
+					prop_list = [4 16];
 				case 4 % Category.DATA
 					prop_list = [5 13];
 				case 5 % Category.RESULT
@@ -225,7 +223,7 @@ classdef RCDeg < Degree
 				case 6 % Category.QUERY
 					prop_list = 8;
 				case 9 % Category.GUI
-					prop_list = [15 16];
+					prop_list = 15;
 				otherwise
 					prop_list = [];
 			end
@@ -251,7 +249,7 @@ classdef RCDeg < Degree
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 17;
+				prop_number = 16;
 				return
 			end
 			
@@ -269,7 +267,7 @@ classdef RCDeg < Degree
 				case 6 % Category.QUERY
 					prop_number = 1;
 				case 9 % Category.GUI
-					prop_number = 2;
+					prop_number = 1;
 				otherwise
 					prop_number = 0;
 			end
@@ -300,7 +298,7 @@ classdef RCDeg < Degree
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 17 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 16 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -338,7 +336,7 @@ classdef RCDeg < Degree
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'PARAMETRIC_VALUE' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -371,7 +369,7 @@ classdef RCDeg < Degree
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'PARAMETRIC_VALUE' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -400,7 +398,7 @@ classdef RCDeg < Degree
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				rcdeg_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'PARAMETRIC_VALUE' };
+				rcdeg_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' };
 				tag = rcdeg_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -427,7 +425,7 @@ classdef RCDeg < Degree
 			prop = RCDeg.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			rcdeg_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  9  3 };
+			rcdeg_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  3 };
 			prop_category = rcdeg_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -453,7 +451,7 @@ classdef RCDeg < Degree
 			prop = RCDeg.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			rcdeg_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  8  11 };
+			rcdeg_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  11 };
 			prop_format = rcdeg_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -479,7 +477,7 @@ classdef RCDeg < Degree
 			prop = RCDeg.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			rcdeg_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the rich-club degree.'  'DESCRIPTION (constant, string) is the description of the rich-club degree.'  'TEMPLATE (parameter, item) is the template of the rich-club degree.'  'ID (data, string) is a few-letter code of the rich-club degree.'  'LABEL (metadata, string) is an extended label of the rich-club degree.'  'NOTES (metadata, string) are some specific notes about the rich-club degree.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the rich-club degree.'  'PFM (gui, item) contains the panel figure of the measure.'  'PFB (gui, item) contains the panel figure of the brain measure.'  'PARAMETRIC_VALUE (parameter, SCALAR) ' };
+			rcdeg_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the rich-club degree.'  'DESCRIPTION (constant, string) is the description of the rich-club degree.'  'TEMPLATE (parameter, item) is the template of the rich-club degree.'  'ID (data, string) is a few-letter code of the rich-club degree.'  'LABEL (metadata, string) is an extended label of the rich-club degree.'  'NOTES (metadata, string) are some specific notes about the rich-club degree.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the rich-club degree.'  'PFM (gui, item) contains the panel figure of the measure.'  'PARAMETRIC_VALUE (parameter, SCALAR) ' };
 			prop_description = rcdeg_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -505,7 +503,7 @@ classdef RCDeg < Degree
 			prop = RCDeg.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 17 % RCDeg.PARAMETRIC_VALUE
+				case 16 % RCDeg.PARAMETRIC_VALUE
 					prop_settings = Format.getFormatSettings(11);
 				case 4 % RCDeg.TEMPLATE
 					prop_settings = 'RCDeg';
@@ -536,7 +534,7 @@ classdef RCDeg < Degree
 			prop = RCDeg.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 17 % RCDeg.PARAMETRIC_VALUE
+				case 16 % RCDeg.PARAMETRIC_VALUE
 					prop_default = 1;
 				case 1 % RCDeg.ELCLASS
 					prop_default = 'RCDeg';
@@ -624,12 +622,12 @@ classdef RCDeg < Degree
 			prop = RCDeg.getPropProp(pointer);
 			
 			switch prop
-				case 17 % RCDeg.PARAMETRIC_VALUE
+				case 16 % RCDeg.PARAMETRIC_VALUE
 					check = Format.checkFormat(11, value, RCDeg.getPropSettings(prop));
 				case 4 % RCDeg.TEMPLATE
 					check = Format.checkFormat(8, value, RCDeg.getPropSettings(prop));
 				otherwise
-					if prop <= 16
+					if prop <= 15
 						check = checkProp@Degree(prop, value);
 					end
 			end
@@ -720,7 +718,7 @@ classdef RCDeg < Degree
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 16
+					if prop <= 15
 						value = calculateValue@Degree(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

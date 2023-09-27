@@ -621,7 +621,7 @@ classdef AnalyzeGroupPP_G < PanelProp
 				case 43 % AnalyzeGroupPP_G.GUI_M_DICT
 					prop_settings = 'GUIElement';
 				case 44 % AnalyzeGroupPP_G.GUI_B_DICT
-					prop_settings = 'GUIElement';
+					prop_settings = 'GUIFig';
 				case 4 % AnalyzeGroupPP_G.TEMPLATE
 					prop_settings = 'AnalyzeGroupPP_G';
 				otherwise
@@ -1223,7 +1223,7 @@ classdef AnalyzeGroupPP_G < PanelProp
 				pr.get('UPDATE');
 			end
 			function cb_open_mbrain(~, ~)
-			    g = pr.gt('EL').get(pr.get('PROP'));
+			    g = pr.get('EL').get(pr.get('PROP'));
 			    m_list = g.get('COMPATIBLE_MEASURES');
 			    
 			    f = ancestor(pr.get('H'), 'figure'); % parent GUI
@@ -1238,10 +1238,45 @@ classdef AnalyzeGroupPP_G < PanelProp
 			    
 			        m = g.get('MEASURE', measure);
 			    
-			        if ~gui_f_dict.get('CONTAINS_KEY', measure)
+			        if ~gui_b_dict.get('CONTAINS_KEY', measure)
+			            
+			            group = pr.get('EL').get('GR');
+			            sub_list = group.get('SUB_DICT').get('IT_LIST');
+			            sub = sub_list{1};
+			            brain_atlas = sub.get('BA');
+			            switch m.get('SHAPE')
+			                case 1 % Measure.GLOBAL
+			                    switch m.get('SCOPE')
+			                        case 1 % Measure.SUPERGLOBAL
+			                            mGBPF = MeasureGroupBrainPF_GS('M', m, 'BA', brain_atlas);
+			                        case 2 % Measure.UNILAYER
+			                            mGBPF = MeasureGroupBrainPF_GU('M', m, 'BA', brain_atlas);
+			                        case 3 % Measure.BILAYER
+			                            mGBPF = MeasureGroupBrainPF_GB('M', m, 'BA', brain_atlas);
+			                    end
+			                case 2 % Measure.NODAL
+			                    switch m.get('SCOPE')
+			                        case 1 % Measure.SUPERGLOBAL
+			                            mGBPF = MeasureGroupBrainPF_NS('M', m, 'BA', brain_atlas);
+			                        case 2 % Measure.UNILAYER
+			                            mGBPF = MeasureGroupBrainPF_NU('M', m, 'BA', brain_atlas);
+			                        case 3 % Measure.BILAYER
+			                            mGBPF = MeasureGroupBrainPF_NB('M', m, 'BA', brain_atlas);
+			                    end
+			                case 3 % Measure.BINODAL
+			                    switch m.get('SCOPE')
+			                        case 1 % Measure.SUPERGLOBAL
+			                            mGBPF = MeasureGroupBrainPF_BS('M', m, 'BA', brain_atlas);
+			                        case 2 % Measure.UNILAYER
+			                            mGBPF = MeasureGroupBrainPF_BU('M', m, 'BA', brain_atlas);
+			                        case 3 % Measure.BILAYER
+			                            mGBPF =  MeasureGroupBrainPF_BB('M', m, 'BA', brain_atlas);
+			                    end
+			            end
+			
 			            gui = GUIFig( ...
 			                'ID', measure, ... % this is the dictionary key
-			                'PF', m.get('PFB'), ... % check with yuwei
+			                'PF', mGBPF, ... % check with yuwei
 			                'POSITION', [ ...
 			                x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ...
 			                y0(f, 'normalized') ...
@@ -1251,7 +1286,7 @@ classdef AnalyzeGroupPP_G < PanelProp
 			                'WAITBAR', pr.getCallback('WAITBAR'), ...
 			                'CLOSEREQ', false ...
 			                );
-			            gui_f_dict.get('ADD', gui)
+			            gui_b_dict.get('ADD', gui)
 			        end
 			    
 			        gui = gui_b_dict.get('IT', measure);

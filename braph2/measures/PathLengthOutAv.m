@@ -20,8 +20,7 @@ classdef PathLengthOutAv < PathLengthOut
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the cell containing the PathLengthOutAv.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
-	%  <strong>17</strong> <strong>RULE</strong> 	RULE (parameter, option) is the PathLengthOut algorithm
+	%  <strong>16</strong> <strong>RULE</strong> 	RULE (parameter, option) is the PathLengthOut algorithm
 	%
 	% PathLengthOutAv methods (constructor):
 	%  PathLengthOutAv - constructor
@@ -136,8 +135,7 @@ classdef PathLengthOutAv < PathLengthOut
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the cell containing the PathLengthOutAv.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
-			%  <strong>17</strong> <strong>RULE</strong> 	RULE (parameter, option) is the PathLengthOut algorithm
+			%  <strong>16</strong> <strong>RULE</strong> 	RULE (parameter, option) is the PathLengthOut algorithm
 			%
 			% See also Category, Format.
 			
@@ -199,7 +197,7 @@ classdef PathLengthOutAv < PathLengthOut
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
 				return
 			end
 			
@@ -209,7 +207,7 @@ classdef PathLengthOutAv < PathLengthOut
 				case 2 % Category.METADATA
 					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = [4 17];
+					prop_list = [4 16];
 				case 4 % Category.DATA
 					prop_list = [5 13];
 				case 5 % Category.RESULT
@@ -217,7 +215,7 @@ classdef PathLengthOutAv < PathLengthOut
 				case 6 % Category.QUERY
 					prop_list = 8;
 				case 9 % Category.GUI
-					prop_list = [15 16];
+					prop_list = 15;
 				otherwise
 					prop_list = [];
 			end
@@ -243,7 +241,7 @@ classdef PathLengthOutAv < PathLengthOut
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 17;
+				prop_number = 16;
 				return
 			end
 			
@@ -261,7 +259,7 @@ classdef PathLengthOutAv < PathLengthOut
 				case 6 % Category.QUERY
 					prop_number = 1;
 				case 9 % Category.GUI
-					prop_number = 2;
+					prop_number = 1;
 				otherwise
 					prop_number = 0;
 			end
@@ -292,7 +290,7 @@ classdef PathLengthOutAv < PathLengthOut
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 17 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 16 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -330,7 +328,7 @@ classdef PathLengthOutAv < PathLengthOut
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'RULE' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'RULE' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -363,7 +361,7 @@ classdef PathLengthOutAv < PathLengthOut
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'RULE' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'RULE' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -392,7 +390,7 @@ classdef PathLengthOutAv < PathLengthOut
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				pathlengthoutav_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'RULE' };
+				pathlengthoutav_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'RULE' };
 				tag = pathlengthoutav_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -419,7 +417,7 @@ classdef PathLengthOutAv < PathLengthOut
 			prop = PathLengthOutAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			pathlengthoutav_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  9  3 };
+			pathlengthoutav_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  3 };
 			prop_category = pathlengthoutav_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -445,7 +443,7 @@ classdef PathLengthOutAv < PathLengthOut
 			prop = PathLengthOutAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			pathlengthoutav_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  8  5 };
+			pathlengthoutav_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  5 };
 			prop_format = pathlengthoutav_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -471,7 +469,7 @@ classdef PathLengthOutAv < PathLengthOut
 			prop = PathLengthOutAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			pathlengthoutav_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the PathLengthOutAv.'  'DESCRIPTION (constant, string) is the description of the PathLengthOutAv.'  'TEMPLATE (parameter, item) is the template of the PathLengthOutAv.'  'ID (data, string) is a few-letter code of the PathLengthOutAv.'  'LABEL (metadata, string) is an extended label of the PathLengthOutAv.'  'NOTES (metadata, string) are some specific notes about the PathLengthOutAv.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the cell containing the PathLengthOutAv.'  'PFM (gui, item) contains the panel figure of the measure.'  'PFB (gui, item) contains the panel figure of the brain measure.'  'RULE (parameter, option) is the PathLengthOut algorithm' };
+			pathlengthoutav_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the PathLengthOutAv.'  'DESCRIPTION (constant, string) is the description of the PathLengthOutAv.'  'TEMPLATE (parameter, item) is the template of the PathLengthOutAv.'  'ID (data, string) is a few-letter code of the PathLengthOutAv.'  'LABEL (metadata, string) is an extended label of the PathLengthOutAv.'  'NOTES (metadata, string) are some specific notes about the PathLengthOutAv.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the cell containing the PathLengthOutAv.'  'PFM (gui, item) contains the panel figure of the measure.'  'RULE (parameter, option) is the PathLengthOut algorithm' };
 			prop_description = pathlengthoutav_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -615,7 +613,7 @@ classdef PathLengthOutAv < PathLengthOut
 				case 4 % PathLengthOutAv.TEMPLATE
 					check = Format.checkFormat(8, value, PathLengthOutAv.getPropSettings(prop));
 				otherwise
-					if prop <= 17
+					if prop <= 16
 						check = checkProp@PathLengthOut(prop, value);
 					end
 			end
@@ -666,7 +664,7 @@ classdef PathLengthOutAv < PathLengthOut
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 17
+					if prop <= 16
 						value = calculateValue@PathLengthOut(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

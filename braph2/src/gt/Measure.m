@@ -38,7 +38,6 @@ classdef Measure < ConcreteElement
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the measure result.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
 	%
 	% Measure methods (constructor):
 	%  Measure - constructor
@@ -249,11 +248,6 @@ classdef Measure < ConcreteElement
 		PFM_TAG = 'PFM';
 		PFM_CATEGORY = 9;
 		PFM_FORMAT = 8;
-		
-		PFB = 16; %CET: Computational Efficiency Trick
-		PFB_TAG = 'PFB';
-		PFB_CATEGORY = 9;
-		PFB_FORMAT = 8;
 	end
 	methods % constructor
 		function m = Measure(varargin)
@@ -282,7 +276,6 @@ classdef Measure < ConcreteElement
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the measure result.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
 			%
 			% See also Category, Format.
 			
@@ -344,7 +337,7 @@ classdef Measure < ConcreteElement
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
 				return
 			end
 			
@@ -362,7 +355,7 @@ classdef Measure < ConcreteElement
 				case 6 % Category.QUERY
 					prop_list = 8;
 				case 9 % Category.GUI
-					prop_list = [15 16];
+					prop_list = 15;
 				otherwise
 					prop_list = [];
 			end
@@ -388,7 +381,7 @@ classdef Measure < ConcreteElement
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 16;
+				prop_number = 15;
 				return
 			end
 			
@@ -406,7 +399,7 @@ classdef Measure < ConcreteElement
 				case 6 % Category.QUERY
 					prop_number = 1;
 				case 9 % Category.GUI
-					prop_number = 2;
+					prop_number = 1;
 				otherwise
 					prop_number = 0;
 			end
@@ -437,7 +430,7 @@ classdef Measure < ConcreteElement
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 16 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 15 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -475,7 +468,7 @@ classdef Measure < ConcreteElement
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -508,7 +501,7 @@ classdef Measure < ConcreteElement
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -537,7 +530,7 @@ classdef Measure < ConcreteElement
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				measure_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB' };
+				measure_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
 				tag = measure_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -564,7 +557,7 @@ classdef Measure < ConcreteElement
 			prop = Measure.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			measure_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  9 };
+			measure_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
 			prop_category = measure_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -590,7 +583,7 @@ classdef Measure < ConcreteElement
 			prop = Measure.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			measure_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  8 };
+			measure_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
 			prop_format = measure_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -616,7 +609,7 @@ classdef Measure < ConcreteElement
 			prop = Measure.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			measure_description_list = { 'ELCLASS (constant, string) is the class of the graph measure.'  'NAME (constant, string) is the name of the graph measure.'  'DESCRIPTION (constant, string) is the description of the graph measure.'  'TEMPLATE (parameter, item) is the template of the graph measure.'  'ID (data, string) is a few-letter code for the graph measure.'  'LABEL (metadata, string) is an extended label of the graph measure.'  'NOTES (metadata, string) are some specific notes about the graph measure.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape.'  'SCOPE (constant, scalar) is the measure scope.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the measure result.'  'PFM (gui, item) contains the panel figure of the measure.'  'PFB (gui, item) contains the panel figure of the brain measure.' };
+			measure_description_list = { 'ELCLASS (constant, string) is the class of the graph measure.'  'NAME (constant, string) is the name of the graph measure.'  'DESCRIPTION (constant, string) is the description of the graph measure.'  'TEMPLATE (parameter, item) is the template of the graph measure.'  'ID (data, string) is a few-letter code for the graph measure.'  'LABEL (metadata, string) is an extended label of the graph measure.'  'NOTES (metadata, string) are some specific notes about the graph measure.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape.'  'SCOPE (constant, scalar) is the measure scope.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the measure result.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = measure_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -656,8 +649,6 @@ classdef Measure < ConcreteElement
 					prop_settings = Format.getFormatSettings(16);
 				case 15 % Measure.PFM
 					prop_settings = 'MeasurePF';
-				case 16 % Measure.PFB
-					prop_settings = 'MeasureGroupBrainPF';
 				case 4 % Measure.TEMPLATE
 					prop_settings = 'Measure';
 				otherwise
@@ -700,8 +691,6 @@ classdef Measure < ConcreteElement
 				case 14 % Measure.M
 					prop_default = Format.getFormatDefault(16, Measure.getPropSettings(prop));
 				case 15 % Measure.PFM
-					prop_default = Format.getFormatDefault(8, Measure.getPropSettings(prop));
-				case 16 % Measure.PFB
 					prop_default = Format.getFormatDefault(8, Measure.getPropSettings(prop));
 				case 1 % Measure.ELCLASS
 					prop_default = 'Measure';
@@ -795,8 +784,6 @@ classdef Measure < ConcreteElement
 					check = Format.checkFormat(16, value, Measure.getPropSettings(prop));
 				case 15 % Measure.PFM
 					check = Format.checkFormat(8, value, Measure.getPropSettings(prop));
-				case 16 % Measure.PFB
-					check = Format.checkFormat(8, value, Measure.getPropSettings(prop));
 				case 4 % Measure.TEMPLATE
 					check = Format.checkFormat(8, value, Measure.getPropSettings(prop));
 				otherwise
@@ -859,39 +846,6 @@ classdef Measure < ConcreteElement
 					                    m.set('PFM', MeasurePF_BU('M', m))
 					                case 3 % Measure.BILAYER
 					                    m.set('PFM', MeasurePF_BB('M', m))
-					            end
-					    end
-					end
-					
-				case 16 % Measure.PFB
-					if isa(m.getr('PFB'), 'NoValue')
-					    switch m.get('SHAPE')
-					        case 1 % Measure.GLOBAL
-					            switch m.get('SCOPE')
-					                case 1 % Measure.SUPERGLOBAL
-					                    m.set('PFB', MeasureGroupBrainPF_GS('M', m))
-					                case 2 % Measure.UNILAYER
-					                    m.set('PFB', MeasureGroupBrainPF_GU('M', m))
-					                case 3 % Measure.BILAYER
-					                    m.set('PFB', MeasureGroupBrainPF_GB('M', m))
-					            end
-					        case 2 % Measure.NODAL
-					            switch m.get('SCOPE')
-					                case 1 % Measure.SUPERGLOBAL
-					                    m.set('PFB', MeasureGroupBrainPF_NS('M', m))
-					                case 2 % Measure.UNILAYER
-					                    m.set('PFB', MeasureGroupBrainPF_NU('M', m))
-					                case 3 % Measure.BILAYER
-					                    m.set('PFB', MeasureGroupBrainPF_NB('M', m))
-					            end
-					        case 3 % Measure.BINODAL
-					            switch m.get('SCOPE')
-					                case 1 % Measure.SUPERGLOBAL
-					                    m.set('PFB', MeasureGroupBrainPF_BS('M', m))
-					                case 2 % Measure.UNILAYER
-					                    m.set('PFB', MeasureGroupBrainPF_BU('M', m))
-					                case 3 % Measure.BILAYER
-					                    m.set('PFB', MeasureGroupBrainPF_BB('M', m))
 					            end
 					    end
 					end
@@ -1016,12 +970,6 @@ classdef Measure < ConcreteElement
 					
 				case 15 % Measure.PFM
 					pr = PanelPropItem('EL', m, 'PROP', 15, ...
-					    'GUICLASS', 'GUIFig', ...
-						'BUTTON_TEXT', ['Plot ' m.get('LABEL')], ...
-					    varargin{:});
-					
-				case 16 % Measure.PFB
-					pr = PanelPropItem('EL', m, 'PROP', 16, ...
 					    'GUICLASS', 'GUIFig', ...
 						'BUTTON_TEXT', ['Plot ' m.get('LABEL')], ...
 					    varargin{:});

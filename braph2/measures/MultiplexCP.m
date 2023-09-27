@@ -24,8 +24,7 @@ classdef MultiplexCP < MultiRC
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the multiplex core-periphery.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
-	%  <strong>17</strong> <strong>MULTIRICHNESS_COEFFICIENTS</strong> 	MULTIRICHNESS_COEFFICIENTS (parameter, RVECTOR)
+	%  <strong>16</strong> <strong>MULTIRICHNESS_COEFFICIENTS</strong> 	MULTIRICHNESS_COEFFICIENTS (parameter, RVECTOR)
 	%
 	% MultiplexCP methods (constructor):
 	%  MultiplexCP - constructor
@@ -140,8 +139,7 @@ classdef MultiplexCP < MultiRC
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the multiplex core-periphery.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
-			%  <strong>17</strong> <strong>MULTIRICHNESS_COEFFICIENTS</strong> 	MULTIRICHNESS_COEFFICIENTS (parameter, RVECTOR)
+			%  <strong>16</strong> <strong>MULTIRICHNESS_COEFFICIENTS</strong> 	MULTIRICHNESS_COEFFICIENTS (parameter, RVECTOR)
 			%
 			% See also Category, Format.
 			
@@ -203,7 +201,7 @@ classdef MultiplexCP < MultiRC
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
 				return
 			end
 			
@@ -213,7 +211,7 @@ classdef MultiplexCP < MultiRC
 				case 2 % Category.METADATA
 					prop_list = [6 7];
 				case 3 % Category.PARAMETER
-					prop_list = [4 17];
+					prop_list = [4 16];
 				case 4 % Category.DATA
 					prop_list = [5 13];
 				case 5 % Category.RESULT
@@ -221,7 +219,7 @@ classdef MultiplexCP < MultiRC
 				case 6 % Category.QUERY
 					prop_list = 8;
 				case 9 % Category.GUI
-					prop_list = [15 16];
+					prop_list = 15;
 				otherwise
 					prop_list = [];
 			end
@@ -247,7 +245,7 @@ classdef MultiplexCP < MultiRC
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 17;
+				prop_number = 16;
 				return
 			end
 			
@@ -265,7 +263,7 @@ classdef MultiplexCP < MultiRC
 				case 6 % Category.QUERY
 					prop_number = 1;
 				case 9 % Category.GUI
-					prop_number = 2;
+					prop_number = 1;
 				otherwise
 					prop_number = 0;
 			end
@@ -296,7 +294,7 @@ classdef MultiplexCP < MultiRC
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 17 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 16 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -334,7 +332,7 @@ classdef MultiplexCP < MultiRC
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'MULTIRICHNESS_COEFFICIENTS' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'MULTIRICHNESS_COEFFICIENTS' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -367,7 +365,7 @@ classdef MultiplexCP < MultiRC
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'MULTIRICHNESS_COEFFICIENTS' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'MULTIRICHNESS_COEFFICIENTS' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -396,7 +394,7 @@ classdef MultiplexCP < MultiRC
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				multiplexcp_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB'  'MULTIRICHNESS_COEFFICIENTS' };
+				multiplexcp_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'MULTIRICHNESS_COEFFICIENTS' };
 				tag = multiplexcp_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -423,7 +421,7 @@ classdef MultiplexCP < MultiRC
 			prop = MultiplexCP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			multiplexcp_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  9  3 };
+			multiplexcp_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  3 };
 			prop_category = multiplexcp_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -449,7 +447,7 @@ classdef MultiplexCP < MultiRC
 			prop = MultiplexCP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			multiplexcp_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  8  12 };
+			multiplexcp_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  12 };
 			prop_format = multiplexcp_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -475,7 +473,7 @@ classdef MultiplexCP < MultiRC
 			prop = MultiplexCP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			multiplexcp_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the multiplex core-periphery.'  'DESCRIPTION (constant, string) is the description of the multiplex core-periphery.'  'TEMPLATE (parameter, item) is the template of the multiplex core-periphery.'  'ID (data, string) is a few-letter code of the multiplex core-periphery.'  'LABEL (metadata, string) is an extended label of the multiplex core-periphery.'  'NOTES (metadata, string) are some specific notes about the multiplex core-periphery.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the multiplex core-periphery.'  'PFM (gui, item) contains the panel figure of the measure.'  'PFB (gui, item) contains the panel figure of the brain measure.'  'MULTIRICHNESS_COEFFICIENTS (parameter, RVECTOR)' };
+			multiplexcp_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the multiplex core-periphery.'  'DESCRIPTION (constant, string) is the description of the multiplex core-periphery.'  'TEMPLATE (parameter, item) is the template of the multiplex core-periphery.'  'ID (data, string) is a few-letter code of the multiplex core-periphery.'  'LABEL (metadata, string) is an extended label of the multiplex core-periphery.'  'NOTES (metadata, string) are some specific notes about the multiplex core-periphery.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the multiplex core-periphery.'  'PFM (gui, item) contains the panel figure of the measure.'  'MULTIRICHNESS_COEFFICIENTS (parameter, RVECTOR)' };
 			prop_description = multiplexcp_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -619,7 +617,7 @@ classdef MultiplexCP < MultiRC
 				case 4 % MultiplexCP.TEMPLATE
 					check = Format.checkFormat(8, value, MultiplexCP.getPropSettings(prop));
 				otherwise
-					if prop <= 17
+					if prop <= 16
 						check = checkProp@MultiRC(prop, value);
 					end
 			end
@@ -732,7 +730,7 @@ classdef MultiplexCP < MultiRC
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 17
+					if prop <= 16
 						value = calculateValue@MultiRC(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});

@@ -20,7 +20,6 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the average out-global efficiency.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
 	%
 	% GlobalEfficiencyOutAv methods (constructor):
 	%  GlobalEfficiencyOutAv - constructor
@@ -135,7 +134,6 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the average out-global efficiency.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>PFB</strong> 	PFB (gui, item) contains the panel figure of the brain measure.
 			%
 			% See also Category, Format.
 			
@@ -197,7 +195,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
 				return
 			end
 			
@@ -215,7 +213,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 				case 6 % Category.QUERY
 					prop_list = 8;
 				case 9 % Category.GUI
-					prop_list = [15 16];
+					prop_list = 15;
 				otherwise
 					prop_list = [];
 			end
@@ -241,7 +239,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 16;
+				prop_number = 15;
 				return
 			end
 			
@@ -259,7 +257,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 				case 6 % Category.QUERY
 					prop_number = 1;
 				case 9 % Category.GUI
-					prop_number = 2;
+					prop_number = 1;
 				otherwise
 					prop_number = 0;
 			end
@@ -290,7 +288,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 16 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 15 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -328,7 +326,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -361,7 +359,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -390,7 +388,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				globalefficiencyoutav_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PFB' };
+				globalefficiencyoutav_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM' };
 				tag = globalefficiencyoutav_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -417,7 +415,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 			prop = GlobalEfficiencyOutAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			globalefficiencyoutav_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9  9 };
+			globalefficiencyoutav_category_list = { 1  1  1  3  4  2  2  6  1  1  1  1  4  5  9 };
 			prop_category = globalefficiencyoutav_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -443,7 +441,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 			prop = GlobalEfficiencyOutAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			globalefficiencyoutav_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8  8 };
+			globalefficiencyoutav_format_list = { 2  2  2  8  2  2  2  2  11  11  11  7  8  16  8 };
 			prop_format = globalefficiencyoutav_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -469,7 +467,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 			prop = GlobalEfficiencyOutAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			globalefficiencyoutav_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the average out-global efficiency.'  'DESCRIPTION (constant, string) is the description of the average out-global efficiency.'  'TEMPLATE (parameter, item) is the template of the average out-global efficiency.'  'ID (data, string) is a few-letter code of the average out-global efficiency.'  'LABEL (metadata, string) is an extended label of the average out-global efficiency.'  'NOTES (metadata, string) are some specific notes about the average out-global efficiency.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the average out-global efficiency.'  'PFM (gui, item) contains the panel figure of the measure.'  'PFB (gui, item) contains the panel figure of the brain measure.' };
+			globalefficiencyoutav_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the average out-global efficiency.'  'DESCRIPTION (constant, string) is the description of the average out-global efficiency.'  'TEMPLATE (parameter, item) is the template of the average out-global efficiency.'  'ID (data, string) is a few-letter code of the average out-global efficiency.'  'LABEL (metadata, string) is an extended label of the average out-global efficiency.'  'NOTES (metadata, string) are some specific notes about the average out-global efficiency.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the average out-global efficiency.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = globalefficiencyoutav_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -613,7 +611,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 				case 4 % GlobalEfficiencyOutAv.TEMPLATE
 					check = Format.checkFormat(8, value, GlobalEfficiencyOutAv.getPropSettings(prop));
 				otherwise
-					if prop <= 16
+					if prop <= 15
 						check = checkProp@GlobalEfficiencyOut(prop, value);
 					end
 			end
@@ -663,7 +661,7 @@ classdef GlobalEfficiencyOutAv < GlobalEfficiencyOut
 					rng(rng_settings_)
 					
 				otherwise
-					if prop <= 16
+					if prop <= 15
 						value = calculateValue@GlobalEfficiencyOut(m, prop, varargin{:});
 					else
 						value = calculateValue@Element(m, prop, varargin{:});
