@@ -10,8 +10,8 @@ Neural Networks ID
 1
 Neural Networks LABEL
 2
-NOTES
-NaN
+Neural Networks NOTES
+13
 TOSTRING
 NaN
 DATASET
@@ -27,8 +27,6 @@ Training SHUFFLE
 Training SOLVER
 9
 Neural Network REGRESSOR
-
-E%% ¡prop!
 12
 INPUTS
 NaN

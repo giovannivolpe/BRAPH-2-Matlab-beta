@@ -841,32 +841,6 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 					    'Parent', ancestor(pr.get('H'), 'figure'), ...
 					    'Tag', 'CONTEXTMENU' ...
 					    );
-					menu_open_g_pl = uimenu( ...
-						'Parent', contextmenu, ...
-						'Tag', 'MENU_OPEN_G_PL', ...
-						'Text', 'Plot Graph Plot ...', ...
-						'MenuSelectedFcn', {@cb_open_g_pl} ...
-						);
-					
-					menu_hide_g_pl = uimenu( ...
-					    'Parent', contextmenu, ...
-					    'Tag', 'MENU_HIDE_G_PL', ...
-					    'Text', 'Hide Graph Plot', ...
-					    'MenuSelectedFcn', {@cb_hide_g_pl} ...
-						);
-					menu_open_g_el = uimenu( ...
-						'Separator', 'on', ...
-					    'Parent', contextmenu, ...
-					    'Tag', 'MENU_OPEN_G_EL', ...
-					    'Text', 'Data Graph ...', ...
-					    'MenuSelectedFcn', {@cb_open_g_el} ...
-					    );
-					menu_hide_g_el = uimenu( ...
-					    'Parent', contextmenu, ...
-					    'Tag', 'MENU_HIDE_G_EL', ...
-					    'Text', 'Hide Graph Data', ...
-						'MenuSelectedFcn', {@cb_hide_g_el} ...
-					    );
 					menu_select_all = uimenu( ...
 						'Separator', 'on', ...
 					    'Parent', contextmenu, ...
@@ -893,7 +867,7 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 					    'Text', 'Calculate Selected Measures', ...
 						'MenuSelectedFcn', {@cb_calculate} ...
 					    );
-					menu_open_plots = uimenu( ...
+					menu_open_plots = uimenu( ... 
 						'Separator', 'on', ...
 						'Parent', contextmenu, ...
 						'Tag', 'MENU_OPEN_PLOTS', ...
@@ -1081,76 +1055,6 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 			        
 			        pr.get('UPDATE')    
 			end
-			function cb_open_g_pl(~, ~)
-			    if isa(pr.getr('GUI_G_PL'), 'NoValue')
-			        f = ancestor(pr.get('H'), 'figure');
-			
-			        el = pr.get('EL'); % AnalyzeEnsemble
-			        prop = pr.get('PROP'); % G
-			
-			        gui = GUIFig( ...
-			            'PF', el.memorize(prop).get('PFGA'), ... % ensure that the property is stored -- this is the graph G
-			            'POSITION', [ ...
-			                x0(f, 'normalized')+w(f, 'normalized') ...
-			                y0(f, 'normalized') ...
-			                w(0,'normalized')-x0(f, 'normalized')-w(f, 'normalized') ...
-			                h(f, 'normalized') ...
-			                ], ...
-			            'WAITBAR', pr.getCallback('WAITBAR'), ...
-			            'CLOSEREQ', false ...
-			            );
-			        
-			        pr.set('GUI_G_PL', gui)
-			    else
-			        gui = pr.get('GUI_G_PL');
-			    end
-			
-			    if ~gui.get('DRAWN')
-			        gui.get('DRAW')
-			    end
-			    gui.get('SHOW')
-			end
-			function cb_hide_g_pl(~, ~)
-			    gui = pr.getr('GUI_G_PL');
-			    if isa(gui, 'GUIFig') && gui.get('DRAWN')
-			        gui.get('HIDE')
-			    end
-			end
-			function cb_open_g_el(~, ~)
-			    if isa(pr.getr('GUI_G_EL'), 'NoValue')
-			        f = ancestor(pr.get('H'), 'figure');
-			
-			        el = pr.get('EL'); % AnalyzeEnsemble
-			        prop = pr.get('PROP'); % G
-			
-			        gui = GUIElement( ...
-			            'PE', el.memorize(prop), ... % ensure that the property is stored -- this is the graph G
-			            'POSITION', [ ...
-			                x0(f, 'normalized')+w(f, 'normalized') ...
-			                y0(f, 'normalized') ...
-			                w(f, 'normalized') ...
-			                h(f, 'normalized') ...
-			                ], ...
-			            'WAITBAR', pr.getCallback('WAITBAR'), ...
-			            'CLOSEREQ', false ...
-			            );
-			        
-			        pr.set('GUI_G_EL', gui)
-			    else
-			        gui = pr.get('GUI_G_EL');
-			    end
-			
-			    if ~gui.get('DRAWN')
-			        gui.get('DRAW')
-			    end
-			    gui.get('SHOW')
-			end
-			function cb_hide_g_el(~, ~)
-			    gui = pr.getr('GUI_G_EL');
-			    if isa(gui, 'GUIElement') && gui.get('DRAWN')
-			        gui.get('HIDE')
-			    end
-			end
 			function cb_select_all(~, ~) 
 			    g = pr.get('EL').getPropDefaultConditioned(pr.get('PROP'));
 			    m_list = g.get('COMPATIBLE_MEASURES');
@@ -1165,7 +1069,7 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 			    pr.get('UPDATE')
 			end
 			function cb_invert_selection(~, ~) 
-			    g = pr.get('EL').getPropDefaultConditioned(pr.get('PROP')); % default graph
+			    g = pr.get('EL').get('GRAPH_TEMPLATE'); % default graph
 			    m_list = g.get('COMPATIBLE_MEASURES');
 			
 			    selected_tmp = [1:1:length(m_list)];
@@ -1175,7 +1079,8 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 			    pr.get('UPDATE')
 			end
 			function cb_calculate(~, ~) 
-			    g = pr.get('EL').get(pr.get('PROP')); % actual graph
+			    a = pr.get('EL');
+			    g = a.get('GRAPH_TEMPLATE'); 
 			    m_list = g.get('COMPATIBLE_MEASURES');
 			    selected = pr.get('SELECTED');
 			    
@@ -1184,11 +1089,12 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 			    for i = 1:1:length(m_list)
 			        if ismember(i, selected)
 			            measure = m_list{i};
+			            me = a.get('MEASUREENSEMBLE', measure);
 			
 			            braph2waitbar(wb, .1 + .9 * i / length(selected), ['Calculating measure ' int2str(i) ' (' measure ') of ' int2str(length(selected)) ' ...'])
 			
-			            if isa(g.get('MEASURE', measure).getr('M'), 'NoValue')
-			                g.get('MEASURE', measure).memorize('M');
+			            if isa(me.getr('M'), 'NoValue')
+			                a.get('MEASUREENSEMBLE', measure).memorize('M');
 			            end
 			        end
 			    end
@@ -1198,7 +1104,8 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 				pr.get('UPDATE');
 			end
 			function cb_open_plots(~, ~)
-			    g = pr.get('EL').get(pr.get('PROP')); % actual graph
+			    a = pr.get('EL');   
+			    g = a.get('GRAPH_TEMPLATE'); 
 			    m_list = g.get('COMPATIBLE_MEASURES');
 			    
 			    f = ancestor(pr.get('H'), 'figure'); % parent GUI 
@@ -1212,12 +1119,12 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 			        
 			        measure = m_list{i}; % also key
 			
-			        m = g.get('MEASURE', measure);
+			        me = a.get('MEASUREENSEMBLE', measure);
 			        
 			        if ~gui_f_dict.get('CONTAINS_KEY', measure)
 			            gui = GUIFig( ...
 			                'ID', measure, ... % this is the dictionary key
-			                'PF', m.get('PFM'), ...
+			                'PF', me.get('PFME'), ...
 			                'POSITION', [ ...
 			                    x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ...
 			                    y0(f, 'normalized') ...
@@ -1238,7 +1145,7 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 			    end
 			end
 			function cb_hide_plots(~, ~)
-			    g = pr.get('EL').getPropDefaultConditioned(pr.get('PROP')); % default graph
+			    g = pr.get('EL').get('GRAPH_TEMPLATE'); % default graph
 			    m_list = g.get('COMPATIBLE_MEASURES');
 			    
 			    gui_f_dict = pr.memorize('GUI_F_DICT');
@@ -1258,7 +1165,8 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 			    end
 			end
 			function cb_open_elements(~, ~)
-			    g = pr.get('EL').get(pr.get('PROP')); % actual graph
+			    a = pr.get('EL');    
+			    g = a.get('GRAPH_TEMPLATE'); % actual graph
 			    m_list = g.get('COMPATIBLE_MEASURES');
 			    
 			    f = ancestor(pr.get('H'), 'figure'); % parent GUI 
@@ -1272,12 +1180,12 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 			        
 			        measure = m_list{i}; % also key
 			
-			        m = g.get('MEASURE', measure);
+			        me = a.get('MEASUREENSEMBLE', measure);
 			        
 			        if ~gui_m_dict.get('CONTAINS_KEY', measure)
 			            gui = GUIElement( ...
 			                'ID', measure, ... % this is the dictionary key
-			                'PE', m, ... 
+			                'PE', me, ... 
 			                'POSITION', [ ...
 			                    x0(f, 'normalized') + w(f, 'normalized') + mod(i - 1, N) * (1 - x0(f, 'normalized') - 2 * w(f, 'normalized')) / N ... % x = (f_gr_x + f_gr_w) / screen_w + mod(selected_it - 1, N) * (screen_w - f_gr_x - 2 * f_gr_w) / N / screen_w;
 			                    y0(f, 'normalized') ... % y = f_gr_y / screen_h;
@@ -1298,7 +1206,7 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 				end
 			end
 			function cb_hide_elements(~, ~)
-			    g = pr.get('EL').getPropDefaultConditioned(pr.get('PROP')); % default graph
+			    g = pr.get('EL').get('GRAPH_TEMPLATE'); % default graph
 			    m_list = g.get('COMPATIBLE_MEASURES');
 			    
 			    gui_m_dict = pr.memorize('GUI_M_DICT');
@@ -1320,24 +1228,24 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 			function set_table()
 			    a = pr.get('EL');
 			    prop = pr.get('PROP');
-			    if isa(a.getr(prop), 'NoValue')
-			        g = a.getPropDefaultConditioned(prop); % default graph
+			    if isa(a.getr('GRAPH_TEMPLATE'), 'NoValue')
+			        g = a.getPropDefaultConditioned('GRAPH_TEMPLATE'); % default graph
 			    else
-			        g = a.get(prop); % actual graph
+			        g = a.get('GRAPH_TEMPLATE'); % actual graph
 			    end
-			
+			    
 			    m_list = g.get('COMPATIBLE_MEASURES');
-			
-			    if isa(g.getr('M_DICT'), 'NoValue')
-			        mlist_already_calculated = {};
+			    
+			    if isempty(a.getr(prop).get('IT_LIST'))
+			        m_list_already_calculated = {};
 			    else
-			        mlist_already_calculated = cellfun(@(x) x.get('ELCLASS'), g.get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
+			        m_list_already_calculated = cellfun(@(x) x.get('ELCLASS'), g.get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
 			    end
 			    
 			    rowname = cell(length(m_list), 1);
 			    data = cell(length(m_list), 5);
 			    for mi = 1:1:length(m_list)
-			        if any(cellfun(@(y) isequal(m_list{mi}, y), mlist_already_calculated)) && ~isa(g.get('MEASURE', m_list{mi}).getr('M'), 'NoValue')
+			        if any(cellfun(@(y) isequal(m_list{mi}, y), m_list_already_calculated)) && ~isa(g.get('MEASURE', m_list{mi}).getr('M'), 'NoValue')
 			            rowname{mi} = 'C';
 			        else
 			            rowname{mi} = '';
@@ -1368,20 +1276,20 @@ classdef AnalyzeEnsemblePP_MeDict < PanelProp
 			        end
 			        
 			        data{mi, 5} = eval([m_list{mi} '.getPropDefault(''DESCRIPTION'')']);
-			    end
-			
-			    set(pr.get('TABLE'), ...
-			        'RowName', rowname, ...
-			        'Data', data ...
-			        )
-			
-			    % style SELECTED
-			    styles_row = find(pr.get('TABLE').StyleConfigurations.Target == 'row');
-			    if ~isempty(styles_row)
-			        removeStyle(pr.get('TABLE'), styles_row)
-			    end
-			    if ~isempty(pr.get('SELECTED'))
-			        addStyle(pr.get('TABLE'), uistyle('FontWeight', 'bold'), 'row', pr.get('SELECTED'))
+			    
+			        set(pr.get('TABLE'), ...
+			            'RowName', rowname, ...
+			            'Data', data ...
+			            )
+			    
+			        % style SELECTED
+			        styles_row = find(pr.get('TABLE').StyleConfigurations.Target == 'row');
+			        if ~isempty(styles_row)
+			            removeStyle(pr.get('TABLE'), styles_row)
+			        end
+			        if ~isempty(pr.get('SELECTED'))
+			            addStyle(pr.get('TABLE'), uistyle('FontWeight', 'bold'), 'row', pr.get('SELECTED'))
+			        end
 			    end
 			end
 		end
