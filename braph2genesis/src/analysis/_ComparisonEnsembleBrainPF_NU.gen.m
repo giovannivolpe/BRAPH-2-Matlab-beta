@@ -137,24 +137,94 @@ NOTES (metadata, string) are some specific notes about the panel figure nodal un
 'ComparisonEnsembleBrainPF_NU notes'
 
 %%% ¡prop!
-SETUP (query, empty) calculates the group comparison figure value and stores it.
-%%%% ¡calculate!
-%%%__WARN_TBI__
-value = [];
+SHOWMEASURE (figure, logical) resets the handles when the panel figure brain surface is deleted.
+%%%% ¡default!
+false
+%%%% ¡postset!
+cp = pf.get('CP');
+diff = cp.get('DIFF');
+% update spheres
+if ~pf.get('SHOWMEASURE')  % false
+    if pf.get('SPHS') % spheres
+        sphs = pf.get('SPH_DICT').get('IT_LIST');
+        for i = 1:1:length(sphs)
+            set(sphs{i}, 'SPHERESIZE', SettingsSphere.getPropDefault(23))
+            set(sphs{i}, 'FACECOLOR', BRAPH2.COL);
+        end
+    end
+    if pf.get('SYMS') % spheres
+        syms = pf.get('SYM_DICT').get('IT_LIST');
+        for i = 1:1:length(syms)
+            set(syms{i}, 'SYMBOLSIZE', SettingsSymbol.getPropDefault(20))
+            set(syms{i}, 'FACECOLOR', BRAPH2.COL);
+        end
+    end
+else % true
+    % size
+    g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
+    dt_ticks = g.get('LAYERLABELS');
+    if isempty(dt_ticks)
+        DT_total = 1;
+    else
+        DT_total = length(dt_ticks);
+    end
+    M_total = length(diff);
+    L_total = M_total/DT_total;
 
-%% ¡props!
+    selected_layer1 = str2num(pf.get('SELECTEDLAYER'));
+    selected_layer2 = str2num(pf.get('SELECTEDDT'));
+    g = m.get('G');
+    temp_val = diff;
+    final_selection = (selected_layer2*L_total) - (L_total-selected_layer1);
+    m_val = temp_val{final_selection};
 
-%%% ¡prop!
-NODES (figure, rvector) are the node numbers of the nodal group comparison figure on brain surface.
-%%%% ¡_gui!
-% % % bas = pf.get('M').get('G').get('BAS');
-% % % ba = bas{1};
-% % % 
-% % % pr = PP_BrainRegion('EL', pf, 'PROP', PFMeasureNU.BR1_ID, ...
-% % %     'BA', ba, ...
-% % %     varargin{:});
+    % colors
+    % Make colorbar
+    lim_min = min(m_val);  % minimum of measure result
+    lim_max = max(m_val);  % maximum of measure result
+    if lim_min == lim_max
+        caxis auto
+        cmap_temp = colormap(jet);
+        rgb_meas = zeros(size(cmap_temp));
+        meas_val = m_val./m_val;
+        meas_val(isnan(meas_val)) = 0.1;
+    else
+        caxis([lim_min lim_max]);
+        cmap_temp = colormap(jet);
+        rgb_meas = interp1(linspace(lim_min, lim_max, size(cmap_temp, 1)), ...
+            cmap_temp, m_val); % colorbar from minimum to maximum value of the measure result
+        meas_val = (m_val - lim_min)./(lim_max - lim_min) + 1;  % size normalized by minimum and maximum value of the measure result
+        meas_val(isnan(meas_val)) = 0.1;
+        meas_val(meas_val <= 0) = 0.1;
+    end
 
-%% ¡tests!superglobal
+    % spheres
+    if pf.get('SPHS') % spheres        
+        sphs = pf.get('SPH_DICT').get('IT_LIST');
+        for i = 1:1:length(sphs)
+            set(sphs{i}, 'SPHERESIZE', meas_val(i)*0.1);
+            set(sphs{i}, 'FACECOLOR', rgb_meas(i, :));
+        end
+    end
+    % triggers the update of SPH_DICT
+    pf.set('SPH_DICT', pf.get('SPH_DICT'))
+
+    % symbols
+    if pf.get('SYMS') % spheres
+        syms = pf.get('SYM_DICT').get('IT_LIST');
+        for i = 1:1:length(syms)
+            set(syms{i}, 'SYMBOLSIZE', m_val(i)*0.2)
+            set(syms{i}, 'FACECOLOR', rgb_meas(i, :));
+        end
+    end
+    % triggers the update of SYM_DICT
+    pf.set('SYM_DICT', pf.get('SYM_DICT'))
+end
+% update state of toggle tool
+toolbar = pf.get('H_TOOLBAR');
+if check_graphics(toolbar, 'uitoolbar')
+    set(findobj(toolbar, 'Tag', 'TOOL.SHOWMEASURE'), 'State', pf.get('SHOWMEASURE'))
+end
 
 %%% ¡excluded_props!
 [ComparisonEnsembleBrainPF_NU.PARENT ComparisonEnsembleBrainPF_NU.H ComparisonEnsembleBrainPF_NU.ST_POSITION ComparisonEnsembleBrainPF_NU.ST_AXIS ComparisonEnsembleBrainPF_NU.ST_AREA ComparisonEnsembleBrainPF_NU.ST_LINE_DIFF ComparisonEnsembleBrainPF_NU.ST_LINE_CIL ComparisonEnsembleBrainPF_NU.ST_LINE_CIU ComparisonEnsembleBrainPF_NU.ST_TITLE ComparisonEnsembleBrainPF_NU.ST_XLABEL ComparisonEnsembleBrainPF_NU.ST_YLABEL] 

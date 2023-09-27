@@ -522,34 +522,35 @@ PFB (gui, item) contains the panel figure of the comparison.
 if isa(cp.getr('PFB'), 'NoValue')
 
     measure = cp.get('MEASURE');
+    brain_atlas = cp.get('C').get('A1').get('GR').get('SUB_DICT').get('IT', 1).get('BA');
 
     switch Element.getPropDefault(measure, 'SHAPE')
         case Measure.GLOBAL % __Measure.GLOBAL__
             switch Element.getPropDefault(measure, 'SCOPE')
                 case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
-                    cp.set('PFB', ComparisonEnsembleBrainPF_GS('CP', cp))
+                    cp.set('PFB', ComparisonEnsembleBrainPF_GS('CP', cp, 'BA', brain_atlas))
                 case Measure.UNILAYER % __Measure.UNILAYER__
-                    cp.set('PFB', ComparisonEnsembleBrainPF_GU('CP', cp))
+                    cp.set('PFB', ComparisonEnsembleBrainPF_GU('CP', cp, 'BA', brain_atlas))
                 case Measure.BILAYER % __Measure.BILAYER__
-                    cp.set('PFB', ComparisonEnsembleBrainPF_GB('CP', cp))
+                    cp.set('PFB', ComparisonEnsembleBrainPF_GB('CP', cp, 'BA', brain_atlas))
             end
         case Measure.NODAL % __Measure.NODAL__
             switch Element.getPropDefault(measure, 'SCOPE')
                 case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
-                    cp.set('PFB', ComparisonEnsembleBrainPF_NS('CP', cp))
+                    cp.set('PFB', ComparisonEnsembleBrainPF_NS('CP', cp, 'BA', brain_atlas))
                 case Measure.UNILAYER % __Measure.UNILAYER__
-                    cp.set('PFB', ComparisonEnsembleBrainPF_NU('CP', cp))
+                    cp.set('PFB', ComparisonEnsembleBrainPF_NU('CP', cp, 'BA', brain_atlas))
                 case Measure.BILAYER % __Measure.BILAYER__
-                    cp.set('PFB', ComparisonEnsembleBrainPF_NB('CP', cp))
+                    cp.set('PFB', ComparisonEnsembleBrainPF_NB('CP', cp, 'BA', brain_atlas))
             end
         case Measure.BINODAL % __Measure.BINODAL__
             switch Element.getPropDefault(measure, 'SCOPE')
                 case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
-                    cp.set('PFB', ComparisonEnsembleBrainPF_BS('CP', cp))
+                    cp.set('PFB', ComparisonEnsembleBrainPF_BS('CP', cp, 'BA', brain_atlas))
                 case Measure.UNILAYER % __Measure.UNILAYER__
-                    cp.set('PFB', ComparisonEnsembleBrainPF_BU('CP', cp))
+                    cp.set('PFB', ComparisonEnsembleBrainPF_BU('CP', cp, 'BA', brain_atlas))
                 case Measure.BILAYER % __Measure.BILAYER__
-                    cp.set('PFB',ComparisonEnsembleBrainPF_BB('CP', cp))
+                    cp.set('PFB',ComparisonEnsembleBrainPF_BB('CP', cp, 'BA', brain_atlas))
             end
     end
 end
