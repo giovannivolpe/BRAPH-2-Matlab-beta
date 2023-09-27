@@ -51,52 +51,10 @@ ComparisonGroupBrainPF_GU.ST_AXIS
 %%%% ¡title!
 AXIS
 
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_GU.ST_LINE_DIFF
-%%%% ¡title!
-DIFFERENCE
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_GU.ST_AREA
-%%%% ¡title!
-CONFIDENCE AREA (95%)
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_GU.ST_LINE_CIL
-%%%% ¡title!
-LOWER CONFIDENCE LINE
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_GU.ST_LINE_CIU
-%%%% ¡title!
-UPPER CONFIDENCE LINE
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_GU.ST_TITLE
-%%%% ¡title!
-TITLE
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_GU.ST_XLABEL
-%%%% ¡title!
-X-LABEL
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_GU.ST_YLABEL
-%%%% ¡title!
-Y-LABEL
-
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the panel figure global unilayer group comparison on brain surface figure.
 %%%% ¡default!
 'ComparisonGroupBrainPF_GU'
 
@@ -131,56 +89,35 @@ NOTES (metadata, string) are some specific notes about the panel figure global u
 'ComparisonGroupBrainPF_GU notes'
 
 %%% ¡prop!
-SETUP (query, empty) calculates the group comparison on brain surface figure value and stores it.
+DRAW (query, logical) draws the figure brain atlas.
 %%%% ¡calculate!
-cp = pf.get('CP');
-g = cp.get('C').get('A1').get('G');
+value = calculateValue@ComparisonGroupBrainPF(pf, ComparisonGroupBrainPF.DRAW, varargin{:}); % also warning
+if value
+    % reset the ambient lighting
+    pf.get('ST_AMBIENT').get('SETUP')
 
-x = g.get('ALAYERTICKS');
-
-diff = cell2mat(cp.get('DIFF'))';
-cil = cell2mat(cp.get('CIL'))';
-ciu = cell2mat(cp.get('CIU'))';
-
-pf.memorize('ST_LINE_DIFF').set('X', x, 'Y', diff)
-pf.memorize('ST_LINE_CIL').set('X', x, 'Y', cil)
-pf.memorize('ST_LINE_CIU').set('X', x, 'Y', ciu)
-
-if ~isempty(cil) && ~isempty(ciu)
-    if isempty(x) 
-        pf.memorize('ST_AREA').set('X', [1:1:length(diff) length(diff):-1:1], 'Y', [cil ciu(end:-1:1)])
-    else
-        pf.memorize('ST_AREA').set('X', [x x(end:-1:1)], 'Y', [cil ciu(end:-1:1)])
-    end
+    % call setup
+    pf.get('SETUP');
 end
 
-xlim = pf.get('H_AXES').get('XLim');
-ylim = pf.get('H_AXES').get('YLim');
-pf.get('ST_TITLE').set( ...
-    'TXT', cp.get('LABEL'), ...
-    'X', .5 * (xlim(2) + xlim(1)), ...
-    'Y', ylim(2) + .07 * (ylim(2) - ylim(1)), ...
-    'Z', 0 ...
-    )
-pf.get('ST_XLABEL').set( ...
-    'TXT', 'Layer', ...
-    'X', .5 * (xlim(2) + xlim(1)), ...
-    'Y', ylim(1) - .07 * (ylim(2) - ylim(1)), ...
-    'Z', 0 ...
-    )
-pf.get('ST_YLABEL').set( ...
-	'TXT', 'Measure Value', ...
-    'X', xlim(1) - .14 * (xlim(2) - xlim(1)), ...
-    'Y', .5 * (ylim(2) + ylim(1)), ...
-    'Z', 0 ...
-    )
+%%% ¡prop!
+DELETE (query, logical) resets the handles when the panel figure brain surface is deleted.
+%%%% ¡calculate!
+value = calculateValue@ComparisonGroupBrainPF(pf, ComparisonGroupBrainPF.DELETE, varargin{:}); % also warning
+if value
 
+end
+
+%%% ¡prop!
+SETUP (query, empty) calculates the group comparison on brain surface figure value and stores it.
+%%%% ¡calculate!
+%%%__WARN_TBI__
 value = [];
 
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonGroupBrainPF_GU.PARENT ComparisonGroupBrainPF_GU.H ComparisonGroupBrainPF_GU.ST_POSITION ComparisonGroupBrainPF_GU.ST_AXIS ComparisonGroupBrainPF_GU.CP ComparisonGroupBrainPF_GU.ST_AREA ComparisonGroupBrainPF_GU.ST_LINE_DIFF ComparisonGroupBrainPF_GU.ST_LINE_CIL ComparisonGroupBrainPF_GU.ST_LINE_CIU ComparisonGroupBrainPF_GU.ST_TITLE ComparisonGroupBrainPF_GU.ST_XLABEL ComparisonGroupBrainPF_GU.ST_YLABEL] 
+[ComparisonGroupBrainPF_GU.PARENT ComparisonGroupBrainPF_GU.H ComparisonGroupBrainPF_GU.ST_POSITION ComparisonGroupBrainPF_GU.ST_AXIS ComparisonGroupBrainPF_GU.CP] 
 
 %%% ¡warning_off!
 true

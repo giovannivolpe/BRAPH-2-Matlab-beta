@@ -57,52 +57,10 @@ ComparisonGroupBrainPF_NB.ST_AXIS
 %%%% ¡title!
 AXIS
 
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_NB.ST_LINE_DIFF
-%%%% ¡title!
-DIFFERENCE
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_NB.ST_AREA
-%%%% ¡title!
-CONFIDENCE AREA (95%)
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_NB.ST_LINE_CIL
-%%%% ¡title!
-LOWER CONFIDENCE LINE
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_NB.ST_LINE_CIU
-%%%% ¡title!
-UPPER CONFIDENCE LINE
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_NB.ST_TITLE
-%%%% ¡title!
-TITLE
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_NB.ST_XLABEL
-%%%% ¡title!
-X-LABEL
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonGroupBrainPF_NB.ST_YLABEL
-%%%% ¡title!
-Y-LABEL
-
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the panel figure nodal bilayer group comparison on brain surface figure..
 %%%% ¡default!
 'ComparisonGroupBrainPF_NB'
 
@@ -137,6 +95,26 @@ NOTES (metadata, string) are some specific notes about the panel figure nodal bi
 'ComparisonGroupBrainPF_NB notes'
 
 %%% ¡prop!
+DRAW (query, logical) draws the figure brain atlas.
+%%%% ¡calculate!
+value = calculateValue@ComparisonGroupBrainPF(pf, ComparisonGroupBrainPF.DRAW, varargin{:}); % also warning
+if value
+    % reset the ambient lighting
+    pf.get('ST_AMBIENT').get('SETUP')
+
+    % call setup
+    pf.get('SETUP');
+end
+
+%%% ¡prop!
+DELETE (query, logical) resets the handles when the panel figure brain surface is deleted.
+%%%% ¡calculate!
+value = calculateValue@ComparisonGroupBrainPF(pf, ComparisonGroupBrainPF.DELETE, varargin{:}); % also warning
+if value
+
+end
+
+%%% ¡prop!
 SETUP (query, empty) calculates the group comparison on brain surface figure value and stores it.
 %%%% ¡calculate!
 %%%__WARN_TBI__
@@ -152,7 +130,7 @@ pr = ComparisonGroupPF_NxPP_Node('EL', pf, 'PROP', ComparisonGroupBrainPF_NB.NOD
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonGroupBrainPF_NB.PARENT ComparisonGroupBrainPF_NB.H ComparisonGroupBrainPF_NB.ST_POSITION ComparisonGroupBrainPF_NB.ST_AXIS ComparisonGroupBrainPF_NB.ST_AREA ComparisonGroupBrainPF_NB.ST_LINE_DIFF ComparisonGroupBrainPF_NB.ST_LINE_CIL ComparisonGroupBrainPF_NB.ST_LINE_CIU ComparisonGroupBrainPF_NB.ST_TITLE ComparisonGroupBrainPF_NB.ST_XLABEL ComparisonGroupBrainPF_NB.ST_YLABEL] 
+[ComparisonGroupBrainPF_NB.PARENT ComparisonGroupBrainPF_NB.H ComparisonGroupBrainPF_NB.ST_POSITION ComparisonGroupBrainPF_NB.ST_AXIS] 
 
 %%% ¡warning_off!
 true
