@@ -141,11 +141,12 @@ SETUP (query, empty) calculates the diff value and stores it to be implemented i
 %%%% ¡calculate!
 cp = pf.get('CP');
 g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
+sphs_list = pf.get('SPH_DICT').get('IT_LIST');
+layer = pf.get('LAYER')
 diff = cp.get('DIFF');
 p2 = cp.get('P2');
-sphs_list = pf.get('SPH_DICT').get('IT_LIST');
-diff = diff{1};
-p2 = p2{1};
+diff = diff{layer};
+p2 = p2{layer};
 
 size_diff = pf.get('SIZE_DIFF');
 switch size_diff
@@ -154,7 +155,8 @@ switch size_diff
         % value
         diff(isnan(diff)) = 0.1;
         diff(diff == 0) = 0.01;
-        size_value = abs(diff) * 10;
+        size_scale = pf.get('SIZE_SCALE')
+        size_value = abs(diff) * size_scale;
 
         % set size to sphs
         for i = 1:1:length(sphs_list)
