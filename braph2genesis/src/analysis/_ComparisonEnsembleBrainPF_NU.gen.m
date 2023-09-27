@@ -327,14 +327,14 @@ value = {};
 %% ¡props!
 
 %%% ¡prop!
-LAYER (figure, scalar) is the node number of the nodal measure.
+LAYER (figure, scalar) is the layer number of the nodal measure.
 %%%% ¡default!
 1
 %%%% ¡postset!
 pf.get('SETUP');
 
 %%% ¡prop!
-SIZE_DIFF (figure, option) is the node number of the nodal measure.
+SIZE_DIFF (figure, option) determines whether the difference is shown with size effect.
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
@@ -343,14 +343,14 @@ SIZE_DIFF (figure, option) is the node number of the nodal measure.
 pf.get('SETUP');
 
 %%% ¡prop!
-SIZE_SCALE (figure, scalar) is the node number of the nodal measure.
+SIZE_SCALE (figure, scalar) determines the scale of size effect.
 %%%% ¡default!
 10
 %%%% ¡postset!
 pf.get('SETUP');
 
 %%% ¡prop!
-COLOR_DIFF (figure, option) is the node number of the nodal measure.
+COLOR_DIFF (figure, option) determines whether the difference is shown with color effect.
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
@@ -359,7 +359,7 @@ COLOR_DIFF (figure, option) is the node number of the nodal measure.
 pf.get('SETUP');
 
 %%% ¡prop!
-FDR (figure, option) is the node number of the nodal measure.
+FDR (figure, option) determines whether the difference is shown with FDR correction.
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
@@ -368,7 +368,7 @@ FDR (figure, option) is the node number of the nodal measure.
 pf.get('SETUP');
 
 %%% ¡prop!
-QVALUE (figure, scalar) is the node number of the nodal measure.
+QVALUE (figure, scalar) determines the QVALUE for FDR correction.
 %%%% ¡default!
 0.05
 %%%% ¡postprocessing!
@@ -380,7 +380,7 @@ pf.get('CP').set('QVALUE', pf.get('QVALUE'));
 pf.get('SETUP');
 
 %%% ¡excluded_props!
-[ComparisonEnsembleBrainPF_NU.PARENT ComparisonEnsembleBrainPF_NU.H ComparisonEnsembleBrainPF_NU.ST_POSITION ComparisonEnsembleBrainPF_NU.ST_AXIS ComparisonEnsembleBrainPF_NU.ST_AREA ComparisonEnsembleBrainPF_NU.ST_LINE_DIFF ComparisonEnsembleBrainPF_NU.ST_LINE_CIL ComparisonEnsembleBrainPF_NU.ST_LINE_CIU ComparisonEnsembleBrainPF_NU.ST_TITLE ComparisonEnsembleBrainPF_NU.ST_XLABEL ComparisonEnsembleBrainPF_NU.ST_YLABEL] 
+[ComparisonEnsembleBrainPF_NU.PARENT ComparisonEnsembleBrainPF_NU.H ComparisonEnsembleBrainPF_NU.ST_POSITION ComparisonEnsembleBrainPF_NU.ST_AXIS ComparisonEnsembleBrainPF_NU.ST_SURFACE ComparisonEnsembleBrainPF_NU.ST_AMBIENT ComparisonEnsembleBrainPF_NU.CP]
 
 %%% ¡warning_off!
 true

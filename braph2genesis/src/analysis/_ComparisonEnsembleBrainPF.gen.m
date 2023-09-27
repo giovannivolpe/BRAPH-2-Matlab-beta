@@ -197,7 +197,7 @@ value = [];
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonEnsembleBrainPF.PARENT ComparisonEnsembleBrainPF.H ComparisonEnsembleBrainPF.ST_POSITION ComparisonEnsembleBrainPF.ST_AXIS ComparisonEnsembleBrainPF.ST_SURFACE ComparisonEnsembleBrainPF.ST_AMBIENT]
+[ComparisonEnsembleBrainPF.PARENT ComparisonEnsembleBrainPF.H ComparisonEnsembleBrainPF.ST_POSITION ComparisonEnsembleBrainPF.ST_AXIS ComparisonEnsembleBrainPF.ST_SURFACE ComparisonEnsembleBrainPF.ST_AMBIENT ComparisonEnsembleBrainPF.CP]
 
 %%% ¡warning_off!
 true

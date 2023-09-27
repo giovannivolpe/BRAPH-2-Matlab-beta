@@ -522,8 +522,11 @@ PFB (gui, item) contains the panel figure of the comparison.
 if isa(cp.getr('PFB'), 'NoValue')
 
     measure = cp.get('MEASURE');
-    brain_atlas = cp.get('C').get('A1').get('GR').get('SUB_DICT').get('IT', 1).get('BA');
-
+    if isempty(cp.get('C').get('A1').get('GR').get('SUB_DICT').get('IT_LIST'))
+        brain_atlas = BrainAtlas();
+    else
+        brain_atlas = cp.get('C').get('A1').get('GR').get('SUB_DICT').get('IT', 1).get('BA');
+    end
     switch Element.getPropDefault(measure, 'SHAPE')
         case Measure.GLOBAL % __Measure.GLOBAL__
             switch Element.getPropDefault(measure, 'SCOPE')
