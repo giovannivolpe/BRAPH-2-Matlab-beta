@@ -266,7 +266,7 @@ size_diff = pf.get('SIZE_DIFF');
 switch size_diff
     case 'on'
         % transfrom diff value to appropriate size
-        % value
+        % value ranching from 0.01 to 1
         diff(isnan(diff)) = 0.1;
         size_value = abs(diff);
         min_bound = 0.01;
