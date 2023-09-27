@@ -179,7 +179,10 @@ DELETE (query, logical) resets the handles when the panel figure brain surface i
 %%%% ¡calculate!
 value = calculateValue@BrainAtlasPF(pf, ComparisonEnsembleBrainPF.DELETE, varargin{:}); % also warning
 if value
-    % do nothing
+    pf.set('H_SPHS', Element.getNoValue())
+    pf.set('H_SYMS', Element.getNoValue())
+    pf.set('H_IDS', Element.getNoValue())
+    pf.set('H_LABS', Element.getNoValue())
 end
 
 %% ¡props!
@@ -207,6 +210,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':ComparisonEnsembleBrainPF'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':ComparisonEnsembleBrainPF'])

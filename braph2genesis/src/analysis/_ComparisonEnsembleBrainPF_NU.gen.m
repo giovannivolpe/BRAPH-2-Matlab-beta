@@ -379,6 +379,8 @@ end
 pf.get('CP').set('QVALUE', pf.get('QVALUE'));
 pf.get('SETUP');
 
+%% ¡tests!
+
 %%% ¡excluded_props!
 [ComparisonEnsembleBrainPF_NU.PARENT ComparisonEnsembleBrainPF_NU.H ComparisonEnsembleBrainPF_NU.ST_POSITION ComparisonEnsembleBrainPF_NU.ST_AXIS ComparisonEnsembleBrainPF_NU.ST_SURFACE ComparisonEnsembleBrainPF_NU.ST_AMBIENT ComparisonEnsembleBrainPF_NU.CP]
 
@@ -390,6 +392,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':ComparisonEnsembleBrainPF_NU'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':ComparisonEnsembleBrainPF_NU'])
