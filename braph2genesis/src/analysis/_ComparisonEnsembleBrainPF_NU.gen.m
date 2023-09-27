@@ -11,6 +11,42 @@ ComparisonEnsemble
 
 %%% ¡prop!
 %%%% ¡id!
+ComparisonEnsembleBrainPF_NU.LAYER
+%%%% ¡title!
+Graph LAYER
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF_NU.SIZE_DIFF
+%%%% ¡title!
+Show Comparison Difference with SIZE EFFECT
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF_NU.SIZE_SCALE
+%%%% ¡title!
+Size SCALE
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF_NU.COLOR_DIFF
+%%%% ¡title!
+Show Comparison Difference with COLOR EFFECT
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF_NU.FDR
+%%%% ¡title!
+Apply FDR CORRECTION
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF_NU.QVALUE
+%%%% ¡title!
+QVALUE for FDR CORRECTION
+
+%%% ¡prop!
+%%%% ¡id!
 ComparisonEnsembleBrainPF_NU.ID
 %%%% ¡title!
 Brain Atlas Figure ID
@@ -47,57 +83,87 @@ PANEL POSITION
 
 %%% ¡prop!
 %%%% ¡id!
+ComparisonEnsembleBrainPF_NU.VIEW
+%%%% ¡title!
+3D VIEW
+
+%%% ¡prop!
+%%%% ¡id!
 ComparisonEnsembleBrainPF_NU.ST_AXIS
 %%%% ¡title!
 AXIS
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF_NU.NODES
+ComparisonEnsembleBrainPF_NU.BRAIN
 %%%% ¡title!
-NODES SELECTION
+BRAIN ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF_NU.ST_LINE_DIFF
+ComparisonEnsembleBrainPF_NU.SURFFILE
 %%%% ¡title!
-DIFFERENCE
+BRAIN SURFACE
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF_NU.ST_AREA
+ComparisonEnsembleBrainPF_NU.ST_SURFACE
 %%%% ¡title!
-CONFIDENCE AREA (95%)
+BRAIN COLOR
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF_NU.ST_LINE_CIL
+ComparisonEnsembleBrainPF_NU.ST_AMBIENT
 %%%% ¡title!
-LOWER CONFIDENCE LINE
+MATERIAL & LIGHTNING
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF_NU.ST_LINE_CIU
+ComparisonEnsembleBrainPF_NU.SPHS
 %%%% ¡title!
-UPPER CONFIDENCE LINE
+Brain Region SPHERES ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF_NU.ST_TITLE
+ComparisonEnsembleBrainPF_NU.SPH_DICT
 %%%% ¡title!
-TITLE
+Brain Region SPHERES PROPERTIES
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF_NU.ST_XLABEL
+ComparisonEnsembleBrainPF_NU.SYMS
 %%%% ¡title!
-X-LABEL
+Brain Region SYMBOLS ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF_NU.ST_YLABEL
+ComparisonEnsembleBrainPF_NU.SYM_DICT
 %%%% ¡title!
-Y-LABEL
+Brain Region SYMBOLS PROPERTIES
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF_NU.IDS
+%%%% ¡title!
+Brain Region IDs ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF_NU.ID_DICT
+%%%% ¡title!
+Brain Region IDs PROPERTIES
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF_NU.LABS
+%%%% ¡title!
+Brain Region LABELS ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF_NU.LAB_DICT
+%%%% ¡title!
+Brain Region LABELS PROPERTIES
 
 %% ¡props_update!
 
@@ -256,6 +322,8 @@ pf.get('SETUP');
 
 %%% ¡prop!
 QVALUE (figure, scalar) is the node number of the nodal measure.
+%%%% ¡default!
+0.05
 %%%% ¡postprocessing!
 if isempty(pf.get('QVALUE'))
     pf.set('QVALUE', pf.get('CP').get('QVALUE'));

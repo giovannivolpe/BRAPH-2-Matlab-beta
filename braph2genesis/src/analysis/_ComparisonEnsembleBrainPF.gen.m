@@ -47,51 +47,87 @@ PANEL POSITION
 
 %%% ¡prop!
 %%%% ¡id!
+ComparisonEnsembleBrainPF.VIEW
+%%%% ¡title!
+3D VIEW
+
+%%% ¡prop!
+%%%% ¡id!
 ComparisonEnsembleBrainPF.ST_AXIS
 %%%% ¡title!
 AXIS
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF.ST_LINE_DIFF
+ComparisonEnsembleBrainPF.BRAIN
 %%%% ¡title!
-DIFFERENCE
+BRAIN ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF.ST_AREA
+ComparisonEnsembleBrainPF.SURFFILE
 %%%% ¡title!
-CONFIDENCE AREA (95%)
+BRAIN SURFACE
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF.ST_LINE_CIL
+ComparisonEnsembleBrainPF.ST_SURFACE
 %%%% ¡title!
-LOWER CONFIDENCE LINE
+BRAIN COLOR
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF.ST_LINE_CIU
+ComparisonEnsembleBrainPF.ST_AMBIENT
 %%%% ¡title!
-UPPER CONFIDENCE LINE
+MATERIAL & LIGHTNING
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF.ST_TITLE
+ComparisonEnsembleBrainPF.SPHS
 %%%% ¡title!
-TITLE
+Brain Region SPHERES ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF.ST_XLABEL
+ComparisonEnsembleBrainPF.SPH_DICT
 %%%% ¡title!
-X-LABEL
+Brain Region SPHERES PROPERTIES
 
 %%% ¡prop!
 %%%% ¡id!
-ComparisonEnsembleBrainPF.ST_YLABEL
+ComparisonEnsembleBrainPF.SYMS
 %%%% ¡title!
-Y-LABEL
+Brain Region SYMBOLS ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF.SYM_DICT
+%%%% ¡title!
+Brain Region SYMBOLS PROPERTIES
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF.IDS
+%%%% ¡title!
+Brain Region IDs ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF.ID_DICT
+%%%% ¡title!
+Brain Region IDs PROPERTIES
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF.LABS
+%%%% ¡title!
+Brain Region LABELS ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF.LAB_DICT
+%%%% ¡title!
+Brain Region LABELS PROPERTIES
 
 %% ¡props_update!
 
@@ -133,7 +169,7 @@ NOTES (metadata, string) are some specific notes about the panel ensemble-based 
 %%% ¡prop!
 DRAW (query, logical) draws the figure brain atlas.
 %%%% ¡calculate!
-value = calculateValue@BrainAtlasPF(pf, BrainAtlasPF.DRAW, varargin{:}); % also warning
+value = calculateValue@BrainAtlasPF(pf, ComparisonEnsembleBrainPF.DRAW, varargin{:}); % also warning
 if value
     pf.get('SETUP')
 end
@@ -141,7 +177,7 @@ end
 %%% ¡prop!
 DELETE (query, logical) resets the handles when the panel figure brain surface is deleted.
 %%%% ¡calculate!
-value = calculateValue@BrainAtlasPF(pf, BrainAtlasPF.DELETE, varargin{:}); % also warning
+value = calculateValue@BrainAtlasPF(pf, ComparisonEnsembleBrainPF.DELETE, varargin{:}); % also warning
 if value
     % do nothing
 end
