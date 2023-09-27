@@ -142,20 +142,23 @@ SETUP (query, empty) calculates the diff value and stores it to be implemented i
 cp = pf.get('CP');
 g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 diff = cp.get('DIFF');
+p2 = cp.get('P2');
 sphs_list = pf.get('SPH_DICT').get('IT_LIST');
 diff = diff{1};
+p2 = p2{1};
 
 size_diff = pf.get('SIZE_DIFF');
 switch size_diff
     case 'on'
-        % transfrom diff value
+        % transfrom diff value to appropriate size
+        % value
         diff(isnan(diff)) = 0.1;
         diff(diff == 0) = 0.01;
-        diff_transformed = abs(diff) * 10;
+        size_value = abs(diff) * 10;
 
         % set size to sphs
         for i = 1:1:length(sphs_list)
-            set(sphs_list{i}, 'SPHERESIZE', diff_transformed(i));
+            set(sphs_list{i}, 'SPHERESIZE', size_value(i));
         end
     case 'off'
         for i = 1:1:length(sphs_list)
@@ -167,14 +170,40 @@ end
 color_diff = pf.get('COLOR_DIFF');
 switch color_diff
     case 'on'
+        % transfrom diff value to appropriate color
+        % code
+        color_code_list = cell(size(diff));
+
+        for i = 1:numel(color_code_list)
+            if diff(i) > 0
+                color_code_list{i} = [1 0 0]; % Red
+            elseif diff(i) < 0
+                color_code_list{i} = [0 0 1]; % Blue
+            else
+                color_code_list{i} = [0 0 0]; % Black (or any other color for zero)
+            end
+        end
+
+        % set color to sphs
+        cellfun(@(sph, color_code) set(sph, 'FACECOLOR', color_code), sphs_list, color_code_list', 'UniformOutput', false);
     case 'off'
+        for i = 1:1:length(sphs_list)
+            set(sphs_list{i}, 'FACECOLOR', SettingsSphere.getPropDefault(17));
+        end
     case 'disable'
 end
 
-fdr = pf.get('FDR');
-switch color_diff
+fdr_diff = pf.get('FDR');
+switch fdr_diff
     case 'on'
+        [~, mask] = fdr(p2', pf.get('QVALUE'));
+        for i = 1:1:length(sphs_list)
+            set(sphs_list{i}, 'VISIBLE', mask(i));
+        end
     case 'off'
+        for i = 1:1:length(sphs_list)
+            set(sphs_list{i}, 'VISIBLE', true);
+        end
     case 'disable'
 end
 
@@ -183,11 +212,25 @@ value = {};
 %% ¡props!
 
 %%% ¡prop!
+LAYER (figure, scalar) is the node number of the nodal measure.
+%%%% ¡default!
+1
+%%%% ¡postset!
+pf.get('SETUP');
+
+%%% ¡prop!
 SIZE_DIFF (figure, option) is the node number of the nodal measure.
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
 'on'
+%%%% ¡postset!
+pf.get('SETUP');
+
+%%% ¡prop!
+SIZE_SCALE (figure, scalar) is the node number of the nodal measure.
+%%%% ¡default!
+5
 %%%% ¡postset!
 pf.get('SETUP');
 
@@ -207,6 +250,16 @@ FDR (figure, option) is the node number of the nodal measure.
 %%%% ¡default!
 'on'
 %%%% ¡postset!
+pf.get('SETUP');
+
+%%% ¡prop!
+QVALUE (figure, scalar) is the node number of the nodal measure.
+%%%% ¡postprocessing!
+if isempty(pf.get('QVALUE'))
+    pf.set('QVALUE', pf.get('CP').get('QVALUE'));
+end
+%%%% ¡postset!
+pf.get('CP').set('QVALUE', pf.get('QVALUE'));
 pf.get('SETUP');
 
 %%% ¡excluded_props!
