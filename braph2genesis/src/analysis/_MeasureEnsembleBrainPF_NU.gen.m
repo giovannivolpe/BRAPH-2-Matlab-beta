@@ -135,6 +135,7 @@ LABEL (metadata, string) is an extended label of the panel figure nodal unilayer
 NOTES (metadata, string) are some specific notes about the panel figure nodal unilayer group comparison on brain surface figure.
 %%%% ¡default!
 'MeasureEnsembleBrainPF_NU notes'
+
 %%% ¡prop!
 DRAW (query, logical) draws the figure brain atlas.
 %%%% ¡calculate!

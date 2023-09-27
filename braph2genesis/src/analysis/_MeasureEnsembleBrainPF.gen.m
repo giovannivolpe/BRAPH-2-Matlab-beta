@@ -202,6 +202,7 @@ if value
     pf.set('H_YLABEL', Element.getNoValue())
 end
 
+
 %%% ¡prop!
 H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.
 %%%% ¡calculate!
@@ -269,6 +270,11 @@ function cb_show_measure(~, ~, show) % (src, event)
 end
 
 %% ¡props!
+
+%%% ¡prop!
+SETUP (query, empty) calculates the group comparison on brain surface figure value and stores it.
+%%%% ¡calculate!
+value = [];
 
 %%% ¡prop!
 SHOWMEASURE (figure, logical) resets the handles when the panel figure brain surface is deleted.
