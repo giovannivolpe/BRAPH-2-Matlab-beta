@@ -140,66 +140,45 @@ NOTES (metadata, string) are some specific notes about the panel figure nodal un
 SETUP (query, empty) calculates the diff value and stores it to be implemented in the subelements.
 %%%% ¡calculate!
 cp = pf.get('CP');
-diff = cp.get('DIFF');
-
 g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
-dt_ticks = g.get('LAYERLABELS');
-if isempty(dt_ticks)
-    DT_total = 1;
-else
-    DT_total = length(dt_ticks);
-end
-M_total = length(diff);
-L_total = M_total/DT_total;
+diff = cp.get('DIFF');
+sphs_list = pf.get('SPH_DICT').get('IT_LIST');
+diff = diff{1};
 
-selected_layer1 = str2num(pf.get('SELECTEDLAYER'));
-selected_layer2 = str2num(pf.get('SELECTEDDT'));
-g = m.get('G');
-temp_val = diff;
-final_selection = (selected_layer2*L_total) - (L_total-selected_layer1);
-m_val = temp_val{final_selection};
+size_diff = pf.get('SIZE_DIFF');
+switch size_diff
+    case 'on'
+        % transfrom diff value
+        diff(isnan(diff)) = 0.1;
+        diff(diff == 0) = 0.01;
+        diff_transformed = abs(diff) * 10;
 
-% colors
-% Make colorbar
-lim_min = min(m_val);  % minimum of measure result
-lim_max = max(m_val);  % maximum of measure result
-if lim_min == lim_max
-    caxis auto
-    cmap_temp = colormap(jet);
-    rgb_meas = zeros(size(cmap_temp));
-    meas_val = m_val./m_val;
-    meas_val(isnan(meas_val)) = 0.1;
-else
-    caxis([lim_min lim_max]);
-    cmap_temp = colormap(jet);
-    rgb_meas = interp1(linspace(lim_min, lim_max, size(cmap_temp, 1)), ...
-        cmap_temp, m_val); % colorbar from minimum to maximum value of the measure result
-    meas_val = (m_val - lim_min)./(lim_max - lim_min) + 1;  % size normalized by minimum and maximum value of the measure result
-    meas_val(isnan(meas_val)) = 0.1;
-    meas_val(meas_val <= 0) = 0.1;
+        % set size to sphs
+        for i = 1:1:length(sphs_list)
+            set(sphs_list{i}, 'SPHERESIZE', diff_transformed(i));
+        end
+    case 'off'
+        for i = 1:1:length(sphs_list)
+            set(sphs_list{i}, 'SPHERESIZE', SettingsSphere.getPropDefault(23));
+        end
+    case 'disable'
 end
 
-% spheres
-if pf.get('SPHS') % spheres
-    sphs = pf.get('SPH_DICT').get('IT_LIST');
-    for i = 1:1:length(sphs)
-        set(sphs{i}, 'SPHERESIZE', meas_val(i)*0.1);
-        set(sphs{i}, 'FACECOLOR', rgb_meas(i, :));
-    end
+color_diff = pf.get('COLOR_DIFF');
+switch color_diff
+    case 'on'
+    case 'off'
+    case 'disable'
 end
-% triggers the update of SPH_DICT
-pf.set('SPH_DICT', pf.get('SPH_DICT'))
 
-% symbols
-if pf.get('SYMS') % spheres
-    syms = pf.get('SYM_DICT').get('IT_LIST');
-    for i = 1:1:length(syms)
-        set(syms{i}, 'SYMBOLSIZE', m_val(i)*0.2)
-        set(syms{i}, 'FACECOLOR', rgb_meas(i, :));
-    end
+fdr = pf.get('FDR');
+switch color_diff
+    case 'on'
+    case 'off'
+    case 'disable'
 end
-% triggers the update of SYM_DICT
-pf.set('SYM_DICT', pf.get('SYM_DICT'))
+
+value = {};
 
 %% ¡props!
 
