@@ -19,7 +19,7 @@ Graph LAYER
 %%%% ¡id!
 ComparisonEnsembleBrainPF_NU.SIZE_DIFF
 %%%% ¡title!
-Show Comparison Difference with SIZE EFFECT
+Show Difference with SIZE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -31,19 +31,19 @@ Size SCALE
 %%%% ¡id!
 ComparisonEnsembleBrainPF_NU.COLOR_DIFF
 %%%% ¡title!
-Show Comparison Difference with COLOR EFFECT
+Show Difference with COLOR
 
 %%% ¡prop!
 %%%% ¡id!
 ComparisonEnsembleBrainPF_NU.FDR
 %%%% ¡title!
-Apply FDR CORRECTION
+FDR CORRECTION
 
 %%% ¡prop!
 %%%% ¡id!
 ComparisonEnsembleBrainPF_NU.QVALUE
 %%%% ¡title!
-QVALUE for FDR CORRECTION
+QVALUE 
 
 %%% ¡prop!
 %%%% ¡id!
