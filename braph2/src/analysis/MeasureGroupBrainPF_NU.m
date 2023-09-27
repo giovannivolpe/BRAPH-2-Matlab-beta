@@ -730,6 +730,7 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 					    end
 					else % true
 					    % size
+                        ax_ = pf.get('H_AXES');
 					    g = m.get('G');
 					    dt_ticks = g.get('LAYERLABELS');
 					    if isempty(dt_ticks)
@@ -740,8 +741,8 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 					    M_total = length(m.get('M'));
 					    L_total = M_total/DT_total;
 					
-					    selected_layer1 = str2num(pf.get('SELECTEDLAYER'));
-					    selected_layer2 = str2num(pf.get('SELECTEDDT'));
+					    selected_layer1 = str2double(pf.get('SELECTEDLAYER'));
+					    selected_layer2 = str2double(pf.get('SELECTEDDT'));
 					    g = m.get('G');
 					    temp_val = m.get('M');
 					    final_selection = (selected_layer2*L_total) - (L_total-selected_layer1);
@@ -752,26 +753,22 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 					    lim_min = min(m_val);  % minimum of measure result
 					    lim_max = max(m_val);  % maximum of measure result
 					    if lim_min == lim_max
-					        caxis auto
-					        cmap_temp = colormap(jet);
+					        clim(ax_, 'auto')
+					        cmap_temp = colormap(ax_, jet);
 					        rgb_meas = zeros(size(cmap_temp));
-					        meas_val = m_val./m_val;
-					        meas_val(isnan(meas_val)) = 0.1;
 					    else
-					        caxis([lim_min lim_max]);
-					        cmap_temp = colormap(jet);
+					        clim(ax_, [lim_min lim_max]);
+					        cmap_temp = colormap(ax_, jet);
 					        rgb_meas = interp1(linspace(lim_min, lim_max, size(cmap_temp, 1)), ...
 					            cmap_temp, m_val); % colorbar from minimum to maximum value of the measure result
 					        meas_val = (m_val - lim_min)./(lim_max - lim_min) + 1;  % size normalized by minimum and maximum value of the measure result
-					        meas_val(isnan(meas_val)) = 0.1;
-					        meas_val(meas_val <= 0) = 0.1;
 					    end
 					
 					    % spheres
 					    if pf.get('SPHS') % spheres        
 					        sphs = pf.get('SPH_DICT').get('IT_LIST');
 					        for i = 1:1:length(sphs)
-					            set(sphs{i}, 'SPHERESIZE', meas_val(i)*0.1);
+					            set(sphs{i}, 'SPHERESIZE', m_val(i)*0.2);
 					            set(sphs{i}, 'FACECOLOR', rgb_meas(i, :));
 					        end
 					    end
