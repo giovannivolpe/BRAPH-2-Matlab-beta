@@ -71,22 +71,3 @@ LABEL (metadata, string) is an extended label of the panel figure for measure gr
 NOTES (metadata, string) are some specific notes about the panel figure for measure group brain.
 %%%% ¡default!
 'MeasureGroupBrainPF_BB  notes'
-
-%%% ¡prop!
-DRAW (query, logical) draws the figure brain atlas.
-%%%% ¡calculate!
-value = calculateValue@MeasureGroupBrainPF(pf, MeasureGroupBrainPF_BB.DRAW, varargin{:}); % also warning
-if value
-    % reset the ambient lighting
-    pf.get('ST_AMBIENT').get('SETUP')
-end
-
-
-%%% ¡prop!
-DELETE (query, logical) resets the handles when the panel figure brain surface is deleted.
-%%%% ¡calculate!
-value = calculateValue@MeasureGroupBrainPF(pf, MeasureGroupBrainPF_BB.DELETE, varargin{:}); % also warning
-if value
-
-end
-

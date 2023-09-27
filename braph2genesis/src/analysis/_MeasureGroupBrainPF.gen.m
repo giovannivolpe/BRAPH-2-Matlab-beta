@@ -44,6 +44,12 @@ Meaure Group Brain COLORLIST
 
 %%% ¡prop!
 %%%% ¡id!
+MeasureGroupBrainPF.SIZELIST
+%%%% ¡title!
+Meaure Group Brain SIZELIST
+
+%%% ¡prop!
+%%%% ¡id!
 MeasureGroupBrainPF.SELECTEDLAYER
 %%%% ¡title!
 Meaure Group Brain SELECTEDLAYER
@@ -93,11 +99,8 @@ NOTES (metadata, string) are some specific notes about the panel figure for meas
 %%% ¡prop!
 DRAW (query, logical) draws the figure brain atlas.
 %%%% ¡calculate!
-value = calculateValue@BrainAtlasPF(pf, BrainAtlasPF.DRAW, varargin{:}); % also warning
-if value
-    % reset the ambient lighting
-    pf.get('ST_AMBIENT').get('SETUP');
-
+value = calculateValue@BrainAtlasPF(pf, MeasureGroupBrainPF.DRAW, varargin{:}); % also warning
+if value    
     % trigger setup
     pf.get('SETUP');
 end
@@ -105,7 +108,7 @@ end
 %%% ¡prop!
 DELETE (query, logical) resets the handles when the panel figure brain surface is deleted.
 %%%% ¡calculate!
-value = calculateValue@BrainAtlasPF(pf, BrainAtlasPF.DELETE, varargin{:}); % also warning
+value = calculateValue@BrainAtlasPF(pf, MeasureGroupBrainPF.DELETE, varargin{:}); % also warning
 if value
     % do nothing
 end
@@ -115,6 +118,15 @@ end
 
 %%% ¡prop!
 COLORLIST (figure, option) is the color list value.
+%%%% ¡settings!
+{'on' 'off' 'enable'}
+%%%% ¡default!
+'on'
+%%%% ¡postset!
+pf.get('SETUP')
+
+%%% ¡prop!
+SIZELIST (figure, option) is the size list value.
 %%%% ¡settings!
 {'on' 'off' 'enable'}
 %%%% ¡default!

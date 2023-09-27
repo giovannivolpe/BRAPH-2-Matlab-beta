@@ -44,6 +44,12 @@ Meaure Group Brain COLORLIST
 
 %%% ¡prop!
 %%%% ¡id!
+MeasureGroupBrainPF_NS.SIZELIST
+%%%% ¡title!
+Meaure Group Brain SIZELIST
+
+%%% ¡prop!
+%%%% ¡id!
 MeasureGroupBrainPF_NS.SELECTEDLAYER
 %%%% ¡title!
 Meaure Group Brain SELECTEDLAYER
@@ -93,7 +99,7 @@ NOTES (metadata, string) are some specific notes about the panel figure for meas
 
 %%% ¡prop!
 SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.
-%%%% ¡postset!
+%%%% ¡calculate!
 m = pf.get('M');
 % update spheres
 % size

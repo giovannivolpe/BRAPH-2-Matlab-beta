@@ -53,10 +53,12 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 	%  <strong>43</strong> <strong>H_LABS</strong> 	H_LABS (evanescent, handlelist) is the set of handles for the labels.
 	%  <strong>44</strong> <strong>LABS</strong> 	LABS (figure, logical) determines whether the labels are shown.
 	%  <strong>45</strong> <strong>LAB_DICT</strong> 	LAB_DICT (figure, idict) contains the labels of the brain regions.
-	%  <strong>46</strong> <strong>SHOWMEASURE</strong> 	SHOWMEASURE (figure, logical) resets the handles when the panel figure brain surface is deleted.
-	%  <strong>47</strong> <strong>M</strong> 	M (metadata, item) is the measure.
-	%  <strong>48</strong> <strong>SELECTEDLAYER</strong> 	SELECTEDLAYER (metadata, string) is an the choosen selected layer.
-	%  <strong>49</strong> <strong>SELECTEDDT</strong> 	SELECTEDDT (metadata, string) is an the choosen selected layer.
+	%  <strong>46</strong> <strong>COLORLIST</strong> 	COLORLIST (figure, option) is the color list value.
+	%  <strong>47</strong> <strong>SIZELIST</strong> 	SIZELIST (figure, option) is the size list value.
+	%  <strong>48</strong> <strong>M</strong> 	M (metadata, item) is the measure.
+	%  <strong>49</strong> <strong>SELECTEDLAYER</strong> 	SELECTEDLAYER (figure, string) is an the choosen selected layer.
+	%  <strong>50</strong> <strong>SELECTEDDT</strong> 	SELECTEDDT (figure, string) is an the choosen selected layer.
+	%  <strong>51</strong> <strong>SETUP</strong> 	SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.
 	%
 	% MeasureGroupBrainPF_NS methods (constructor):
 	%  MeasureGroupBrainPF_NS - constructor
@@ -203,10 +205,12 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 			%  <strong>43</strong> <strong>H_LABS</strong> 	H_LABS (evanescent, handlelist) is the set of handles for the labels.
 			%  <strong>44</strong> <strong>LABS</strong> 	LABS (figure, logical) determines whether the labels are shown.
 			%  <strong>45</strong> <strong>LAB_DICT</strong> 	LAB_DICT (figure, idict) contains the labels of the brain regions.
-			%  <strong>46</strong> <strong>SHOWMEASURE</strong> 	SHOWMEASURE (figure, logical) resets the handles when the panel figure brain surface is deleted.
-			%  <strong>47</strong> <strong>M</strong> 	M (metadata, item) is the measure.
-			%  <strong>48</strong> <strong>SELECTEDLAYER</strong> 	SELECTEDLAYER (metadata, string) is an the choosen selected layer.
-			%  <strong>49</strong> <strong>SELECTEDDT</strong> 	SELECTEDDT (metadata, string) is an the choosen selected layer.
+			%  <strong>46</strong> <strong>COLORLIST</strong> 	COLORLIST (figure, option) is the color list value.
+			%  <strong>47</strong> <strong>SIZELIST</strong> 	SIZELIST (figure, option) is the size list value.
+			%  <strong>48</strong> <strong>M</strong> 	M (metadata, item) is the measure.
+			%  <strong>49</strong> <strong>SELECTEDLAYER</strong> 	SELECTEDLAYER (figure, string) is an the choosen selected layer.
+			%  <strong>50</strong> <strong>SELECTEDDT</strong> 	SELECTEDDT (figure, string) is an the choosen selected layer.
+			%  <strong>51</strong> <strong>SETUP</strong> 	SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.
 			%
 			% See also Category, Format.
 			
@@ -268,7 +272,7 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51];
 				return
 			end
 			
@@ -276,17 +280,17 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 				case 1 % Category.CONSTANT
 					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [6 7 28 33 47 48 49];
+					prop_list = [6 7 28 33 48];
 				case 3 % Category.PARAMETER
 					prop_list = 4;
 				case 4 % Category.DATA
 					prop_list = 5;
 				case 6 % Category.QUERY
-					prop_list = [8 11 12 16 17 18 19];
+					prop_list = [8 11 12 16 17 18 19 51];
 				case 7 % Category.EVANESCENT
 					prop_list = [10 15 21 22 23 26 29 34 37 40 43];
 				case 8 % Category.FIGURE
-					prop_list = [14 20 24 25 27 30 31 32 35 36 38 39 41 42 44 45 46];
+					prop_list = [14 20 24 25 27 30 31 32 35 36 38 39 41 42 44 45 46 47 49 50];
 				case 9 % Category.GUI
 					prop_list = [9 13];
 				otherwise
@@ -314,7 +318,7 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 49;
+				prop_number = 51;
 				return
 			end
 			
@@ -322,17 +326,17 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 				case 1 % Category.CONSTANT
 					prop_number = 3;
 				case 2 % Category.METADATA
-					prop_number = 7;
+					prop_number = 5;
 				case 3 % Category.PARAMETER
 					prop_number = 1;
 				case 4 % Category.DATA
 					prop_number = 1;
 				case 6 % Category.QUERY
-					prop_number = 7;
+					prop_number = 8;
 				case 7 % Category.EVANESCENT
 					prop_number = 11;
 				case 8 % Category.FIGURE
-					prop_number = 17;
+					prop_number = 20;
 				case 9 % Category.GUI
 					prop_number = 2;
 				otherwise
@@ -365,7 +369,7 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 49 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 51 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -403,7 +407,7 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'ST_POSITION'  'H_TOOLBAR'  'H_TOOLS'  'H_AXES'  'VIEW'  'ST_AXIS'  'LISTENER_ST_AXIS'  'SURFFILE'  'SURF'  'H_BRAIN'  'BRAIN'  'ST_SURFACE'  'ST_AMBIENT'  'BA'  'H_SPHS'  'SPHS'  'SPH_DICT'  'H_SYMS'  'SYMS'  'SYM_DICT'  'H_IDS'  'IDS'  'ID_DICT'  'H_LABS'  'LABS'  'LAB_DICT'  'SHOWMEASURE'  'M'  'SELECTEDLAYER'  'SELECTEDDT' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'ST_POSITION'  'H_TOOLBAR'  'H_TOOLS'  'H_AXES'  'VIEW'  'ST_AXIS'  'LISTENER_ST_AXIS'  'SURFFILE'  'SURF'  'H_BRAIN'  'BRAIN'  'ST_SURFACE'  'ST_AMBIENT'  'BA'  'H_SPHS'  'SPHS'  'SPH_DICT'  'H_SYMS'  'SYMS'  'SYM_DICT'  'H_IDS'  'IDS'  'ID_DICT'  'H_LABS'  'LABS'  'LAB_DICT'  'COLORLIST'  'SIZELIST'  'M'  'SELECTEDLAYER'  'SELECTEDDT'  'SETUP' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -436,7 +440,7 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'ST_POSITION'  'H_TOOLBAR'  'H_TOOLS'  'H_AXES'  'VIEW'  'ST_AXIS'  'LISTENER_ST_AXIS'  'SURFFILE'  'SURF'  'H_BRAIN'  'BRAIN'  'ST_SURFACE'  'ST_AMBIENT'  'BA'  'H_SPHS'  'SPHS'  'SPH_DICT'  'H_SYMS'  'SYMS'  'SYM_DICT'  'H_IDS'  'IDS'  'ID_DICT'  'H_LABS'  'LABS'  'LAB_DICT'  'SHOWMEASURE'  'M'  'SELECTEDLAYER'  'SELECTEDDT' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'ST_POSITION'  'H_TOOLBAR'  'H_TOOLS'  'H_AXES'  'VIEW'  'ST_AXIS'  'LISTENER_ST_AXIS'  'SURFFILE'  'SURF'  'H_BRAIN'  'BRAIN'  'ST_SURFACE'  'ST_AMBIENT'  'BA'  'H_SPHS'  'SPHS'  'SPH_DICT'  'H_SYMS'  'SYMS'  'SYM_DICT'  'H_IDS'  'IDS'  'ID_DICT'  'H_LABS'  'LABS'  'LAB_DICT'  'COLORLIST'  'SIZELIST'  'M'  'SELECTEDLAYER'  'SELECTEDDT'  'SETUP' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -465,7 +469,7 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				measuregroupbrainpf_ns_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'ST_POSITION'  'H_TOOLBAR'  'H_TOOLS'  'H_AXES'  'VIEW'  'ST_AXIS'  'LISTENER_ST_AXIS'  'SURFFILE'  'SURF'  'H_BRAIN'  'BRAIN'  'ST_SURFACE'  'ST_AMBIENT'  'BA'  'H_SPHS'  'SPHS'  'SPH_DICT'  'H_SYMS'  'SYMS'  'SYM_DICT'  'H_IDS'  'IDS'  'ID_DICT'  'H_LABS'  'LABS'  'LAB_DICT'  'SHOWMEASURE'  'M'  'SELECTEDLAYER'  'SELECTEDDT' };
+				measuregroupbrainpf_ns_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'ST_POSITION'  'H_TOOLBAR'  'H_TOOLS'  'H_AXES'  'VIEW'  'ST_AXIS'  'LISTENER_ST_AXIS'  'SURFFILE'  'SURF'  'H_BRAIN'  'BRAIN'  'ST_SURFACE'  'ST_AMBIENT'  'BA'  'H_SPHS'  'SPHS'  'SPH_DICT'  'H_SYMS'  'SYMS'  'SYM_DICT'  'H_IDS'  'IDS'  'ID_DICT'  'H_LABS'  'LABS'  'LAB_DICT'  'COLORLIST'  'SIZELIST'  'M'  'SELECTEDLAYER'  'SELECTEDDT'  'SETUP' };
 				tag = measuregroupbrainpf_ns_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -492,7 +496,7 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 			prop = MeasureGroupBrainPF_NS.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			measuregroupbrainpf_ns_category_list = { 1  1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  8  7  7  7  8  8  7  8  2  7  8  8  8  2  7  8  8  7  8  8  7  8  8  7  8  8  8  2  2  2 };
+			measuregroupbrainpf_ns_category_list = { 1  1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  8  7  7  7  8  8  7  8  2  7  8  8  8  2  7  8  8  7  8  8  7  8  8  7  8  8  8  8  2  8  8  6 };
 			prop_category = measuregroupbrainpf_ns_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -518,7 +522,7 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 			prop = MeasureGroupBrainPF_NS.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			measuregroupbrainpf_ns_format_list = { 2  2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  8  18  19  18  12  8  18  5  8  18  4  8  8  8  19  4  10  19  4  10  19  4  10  19  4  10  4  8  2  2 };
+			measuregroupbrainpf_ns_format_list = { 2  2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  8  18  19  18  12  8  18  5  8  18  4  8  8  8  19  4  10  19  4  10  19  4  10  19  4  10  5  5  8  2  2  1 };
 			prop_format = measuregroupbrainpf_ns_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -544,7 +548,7 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 			prop = MeasureGroupBrainPF_NS.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			measuregroupbrainpf_ns_description_list = { 'ELCLASS (constant, string) is the class of the panel figure for measure group brain.'  'NAME (constant, string) is the name of the panel figure for measure group brain.'  'DESCRIPTION (constant, string) is the description of the panel figure for measure group brain.'  'TEMPLATE (parameter, item) is the template of the panel figure for measure group brain.'  'ID (data, string) is a few-letter code for the panel figure for measure group brain.'  'LABEL (metadata, string) is an extended label of the panel figure for measure group brain.'  'NOTES (metadata, string) are some specific notes about the panel figure for measure group brain.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the figure brain atlas.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel.'  'HIDE (query, logical) hides the figure containing the panel.'  'DELETE (query, logical) resets the handles when the panel figure brain surface is deleted.'  'CLOSE (query, logical) closes the figure containing the panel.'  'ST_POSITION (figure, item) determines the panel position.'  'H_TOOLBAR (evanescent, handle) returns the handle of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.'  'H_AXES (evanescent, handle) is the handle for the axes.'  'VIEW (figure, rvector) sets the desired view as the line-of-sight azimuth and elevation angles.'  'ST_AXIS (figure, item) determines the axis settings.'  'LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.'  'SURFFILE (figure, option) is the name of the file of the brain surface to be plotted.'  'SURF (metadata, item) is the brain surface to be plotted.'  'H_BRAIN (evanescent, handle) is the handle for brain surface.'  'BRAIN (figure, logical) determines whether the brain surface is shown.'  'ST_SURFACE (figure, item) determines the surface settings.'  'ST_AMBIENT (figure, item) determines the ambient settings.'  'BA (metadata, item) is the brain atlas with the brain regions.'  'H_SPHS (evanescent, handlelist) is the set of handles for the spheres.'  'SPHS (figure, logical) determines whether the spheres are shown.'  'SPH_DICT (figure, idict) contains the spheres of the brain regions.'  'H_SYMS (evanescent, handlelist) is the set of handles for the symbols.'  'SYMS (figure, logical) determines whether the symbols are shown.'  'SYM_DICT (figure, idict) contains the symbols of the brain regions.'  'H_IDS (evanescent, handlelist) is the set of handles for the ids.'  'IDS (figure, logical) determines whether the ids are shown.'  'ID_DICT (figure, idict) contains the ids of the brain regions.'  'H_LABS (evanescent, handlelist) is the set of handles for the labels.'  'LABS (figure, logical) determines whether the labels are shown.'  'LAB_DICT (figure, idict) contains the labels of the brain regions.'  'SHOWMEASURE (figure, logical) resets the handles when the panel figure brain surface is deleted.'  'M (metadata, item) is the measure.'  'SELECTEDLAYER (metadata, string) is an the choosen selected layer.'  'SELECTEDDT (metadata, string) is an the choosen selected layer.' };
+			measuregroupbrainpf_ns_description_list = { 'ELCLASS (constant, string) is the class of the panel figure for measure group brain.'  'NAME (constant, string) is the name of the panel figure for measure group brain.'  'DESCRIPTION (constant, string) is the description of the panel figure for measure group brain.'  'TEMPLATE (parameter, item) is the template of the panel figure for measure group brain.'  'ID (data, string) is a few-letter code for the panel figure for measure group brain.'  'LABEL (metadata, string) is an extended label of the panel figure for measure group brain.'  'NOTES (metadata, string) are some specific notes about the panel figure for measure group brain.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the figure brain atlas.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel.'  'HIDE (query, logical) hides the figure containing the panel.'  'DELETE (query, logical) resets the handles when the panel figure brain surface is deleted.'  'CLOSE (query, logical) closes the figure containing the panel.'  'ST_POSITION (figure, item) determines the panel position.'  'H_TOOLBAR (evanescent, handle) returns the handle of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.'  'H_AXES (evanescent, handle) is the handle for the axes.'  'VIEW (figure, rvector) sets the desired view as the line-of-sight azimuth and elevation angles.'  'ST_AXIS (figure, item) determines the axis settings.'  'LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.'  'SURFFILE (figure, option) is the name of the file of the brain surface to be plotted.'  'SURF (metadata, item) is the brain surface to be plotted.'  'H_BRAIN (evanescent, handle) is the handle for brain surface.'  'BRAIN (figure, logical) determines whether the brain surface is shown.'  'ST_SURFACE (figure, item) determines the surface settings.'  'ST_AMBIENT (figure, item) determines the ambient settings.'  'BA (metadata, item) is the brain atlas with the brain regions.'  'H_SPHS (evanescent, handlelist) is the set of handles for the spheres.'  'SPHS (figure, logical) determines whether the spheres are shown.'  'SPH_DICT (figure, idict) contains the spheres of the brain regions.'  'H_SYMS (evanescent, handlelist) is the set of handles for the symbols.'  'SYMS (figure, logical) determines whether the symbols are shown.'  'SYM_DICT (figure, idict) contains the symbols of the brain regions.'  'H_IDS (evanescent, handlelist) is the set of handles for the ids.'  'IDS (figure, logical) determines whether the ids are shown.'  'ID_DICT (figure, idict) contains the ids of the brain regions.'  'H_LABS (evanescent, handlelist) is the set of handles for the labels.'  'LABS (figure, logical) determines whether the labels are shown.'  'LAB_DICT (figure, idict) contains the labels of the brain regions.'  'COLORLIST (figure, option) is the color list value.'  'SIZELIST (figure, option) is the size list value.'  'M (metadata, item) is the measure.'  'SELECTEDLAYER (figure, string) is an the choosen selected layer.'  'SELECTEDDT (figure, string) is an the choosen selected layer.'  'SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.' };
 			prop_description = measuregroupbrainpf_ns_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -611,8 +615,6 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 					prop_default = 'MeasureGroupBrainPF_NS  label';
 				case 7 % MeasureGroupBrainPF_NS.NOTES
 					prop_default = 'MeasureGroupBrainPF_NS  notes';
-				case 46 % MeasureGroupBrainPF_NS.SHOWMEASURE
-					prop_default = false;
 				otherwise
 					prop_default = getPropDefault@MeasureGroupBrainPF(prop);
 			end
@@ -680,7 +682,7 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 				case 4 % MeasureGroupBrainPF_NS.TEMPLATE
 					check = Format.checkFormat(8, value, MeasureGroupBrainPF_NS.getPropSettings(prop));
 				otherwise
-					if prop <= 49
+					if prop <= 51
 						check = checkProp@MeasureGroupBrainPF(prop, value);
 					end
 			end
@@ -693,113 +695,6 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 					['BRAPH2' ':MeasureGroupBrainPF_NS:' 'WrongInput' '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' MeasureGroupBrainPF_NS.getPropTag(prop) ' (' MeasureGroupBrainPF_NS.getFormatTag(MeasureGroupBrainPF_NS.getPropFormat(prop)) ').'] ...
 					)
-			end
-		end
-	end
-	methods (Access=protected) % postset
-		function postset(pf, prop)
-			%POSTSET postprocessing after a prop has been set.
-			%
-			% POSTPROCESSING(EL, PROP) postprocessesing after PROP has been set. By
-			%  default, this function does not do anything, so it should be implemented
-			%  in the subclasses of Element when needed.
-			%
-			% This postprocessing occurs only when PROP is set.
-			%
-			% See also conditioning, preset, checkProp, postprocessing, calculateValue,
-			%  checkValue.
-			
-			switch prop
-				case 46 % MeasureGroupBrainPF_NS.SHOWMEASURE
-					m = pf.get('M');
-					% update spheres
-					if ~pf.get('SHOWMEASURE')  % false
-					    if pf.get('SPHS') % spheres
-					        sphs = pf.get('SPH_DICT').get('IT_LIST');
-					        for i = 1:1:length(sphs)
-					            set(sphs{i}, 'SPHERESIZE', SettingsSphere.getPropDefault(23))
-					            set(sphs{i}, 'FACECOLOR', [0.9 0.4 0.1]);
-					        end
-					    end
-					    if pf.get('SYMS') % spheres
-					        syms = pf.get('SYM_DICT').get('IT_LIST');
-					        for i = 1:1:length(syms)
-					            set(syms{i}, 'SYMBOLSIZE', SettingsSymbol.getPropDefault(20))
-					            set(syms{i}, 'FACECOLOR', [0.9 0.4 0.1]);
-					        end
-					    end
-					else % true
-					    % size
-					    g = m.get('G');
-					    dt_ticks = g.get('LAYERLABELS');
-					    if isempty(dt_ticks)
-					        DT_total = 1;
-					    else
-					        DT_total = length(dt_ticks);
-					    end
-					    M_total = length(m.get('M'));
-					    L_total = M_total/DT_total;
-					
-					    selected_layer1 = str2num(pf.get('SELECTEDLAYER'));
-					    selected_layer2 = str2num(pf.get('SELECTEDDT'));
-					    g = m.get('G');
-					    temp_val = m.get('M');
-					    final_selection = (selected_layer2*L_total) - (L_total-selected_layer1);
-					    m_val = temp_val{final_selection};
-					
-					    % colors
-					    % Make colorbar
-					    lim_min = min(m_val);  % minimum of measure result
-					    lim_max = max(m_val);  % maximum of measure result
-					    if lim_min == lim_max
-					        caxis auto
-					        cmap_temp = colormap(jet);
-					        rgb_meas = zeros(size(cmap_temp));
-					        meas_val = m_val./m_val;
-					        meas_val(isnan(meas_val)) = 0.1;
-					    else
-					        caxis([lim_min lim_max]);
-					        cmap_temp = colormap(jet);
-					        rgb_meas = interp1(linspace(lim_min, lim_max, size(cmap_temp, 1)), ...
-					            cmap_temp, m_val); % colorbar from minimum to maximum value of the measure result
-					        meas_val = (m_val - lim_min)./(lim_max - lim_min) + 1;  % size normalized by minimum and maximum value of the measure result
-					        meas_val(isnan(meas_val)) = 0.1;
-					        meas_val(meas_val <= 0) = 0.1;
-					    end
-					
-					    % spheres
-					    if pf.get('SPHS') % spheres        
-					        sphs = pf.get('SPH_DICT').get('IT_LIST');
-					        for i = 1:1:length(sphs)
-					            set(sphs{i}, 'SPHERESIZE', meas_val(i)*0.1);
-					            set(sphs{i}, 'FACECOLOR', rgb_meas(i, :));
-					        end
-					    end
-					    % triggers the update of SPH_DICT
-					    pf.set('SPH_DICT', pf.get('SPH_DICT'))
-					
-					    % symbols
-					    if pf.get('SYMS') % spheres
-					        syms = pf.get('SYM_DICT').get('IT_LIST');
-					        for i = 1:1:length(syms)
-					            set(syms{i}, 'SYMBOLSIZE', m_val(i)*0.2)
-					            set(syms{i}, 'FACECOLOR', rgb_meas(i, :));
-					        end
-					    end
-					    % triggers the update of SYM_DICT
-					    pf.set('SYM_DICT', pf.get('SYM_DICT'))
-					end
-					
-					% update state of toggle tool
-					toolbar = pf.get('H_TOOLBAR');
-					if check_graphics(toolbar, 'uitoolbar')
-					    set(findobj(toolbar, 'Tag', 'TOOL.SHOWMEASURE'), 'State', pf.get('SHOWMEASURE'))
-					end
-					
-				otherwise
-					if prop <= 49
-						postset@MeasureGroupBrainPF(pf, prop);
-					end
 			end
 		end
 	end
@@ -820,24 +715,73 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 			%  postset, postprocessing, checkValue.
 			
 			switch prop
-				case 11 % MeasureGroupBrainPF_NS.DRAW
-					value = calculateValue@MeasureGroupBrainPF(pf, 11, varargin{:}); % also warning
-					if value
-					    % reset the ambient lighting
-					    pf.get('ST_AMBIENT').get('SETUP')
+				case 51 % MeasureGroupBrainPF_NS.SETUP
+					m = pf.get('M');
+					% update spheres
+					% size
+					ax_ = pf.get('H_AXES');
+					g = m.get('G');
+					dt_ticks = g.get('LAYERLABELS');
+					if isempty(dt_ticks)
+					    DT_total = 1;
+					else
+					    DT_total = length(dt_ticks);
+					end
+					M_total = length(m.get('M'));
+					L_total = M_total/DT_total;
 					
-					    % call setup
-					    pf.get('SETUP');
+					selected_layer1 = str2double(pf.get('SELECTEDLAYER'));
+					selected_layer2 = str2double(pf.get('SELECTEDDT'));
+					g = m.get('G');
+					temp_val = m.get('M');
+					final_selection = (selected_layer2*L_total) - (L_total-selected_layer1);
+					m_val = temp_val{final_selection};
+					color_selection = pf.get('COLORLIST');
+					
+					% colors
+					% Make colorbar
+					if strcmp(color_selection, 'on')
+					    lim_min = min(m_val);  % minimum of measure result
+					    lim_max = max(m_val);  % maximum of measure result
+					    if lim_min == lim_max
+					        clim(ax_, 'auto')
+					        cmap_temp = colormap(ax_, jet);
+					        rgb_meas = zeros(size(cmap_temp));
+					    else
+					        clim(ax_, [lim_min lim_max]);
+					        cmap_temp = colormap(ax_, jet);
+					        rgb_meas = interp1(linspace(lim_min, lim_max, size(cmap_temp, 1)), ...
+					            cmap_temp, m_val); % colorbar from minimum to maximum value of the measure result
+					        meas_val = (m_val - lim_min)./(lim_max - lim_min) + 1;  % size normalized by minimum and maximum value of the measure result
+					    end
+					else
+					    rgb_meas = [0.9 0.4 0.1];
 					end
 					
-				case 18 % MeasureGroupBrainPF_NS.DELETE
-					value = calculateValue@MeasureGroupBrainPF(pf, 18, varargin{:}); % also warning
-					if value
-					
+					% spheres
+					if pf.get('SPHS') % spheres
+					    sphs = pf.get('SPH_DICT').get('IT_LIST');
+					    for i = 1:1:length(sphs)
+					        set(sphs{i}, 'SPHERESIZE', m_val(i)*0.2);
+					        set(sphs{i}, 'FACECOLOR', rgb_meas(i, :));
+					    end
 					end
+					% triggers the update of SPH_DICT
+					pf.set('SPH_DICT', pf.get('SPH_DICT'))
+					
+					% symbols
+					if pf.get('SYMS') % spheres
+					    syms = pf.get('SYM_DICT').get('IT_LIST');
+					    for i = 1:1:length(syms)
+					        set(syms{i}, 'SYMBOLSIZE', m_val(i)*0.2)
+					        set(syms{i}, 'FACECOLOR', rgb_meas(i, :));
+					    end
+					end
+					% triggers the update of SYM_DICT
+					pf.set('SYM_DICT', pf.get('SYM_DICT'))
 					
 				otherwise
-					if prop <= 49
+					if prop <= 51
 						value = calculateValue@MeasureGroupBrainPF(pf, prop, varargin{:});
 					else
 						value = calculateValue@Element(pf, prop, varargin{:});

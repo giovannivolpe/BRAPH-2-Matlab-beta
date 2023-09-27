@@ -11,6 +11,29 @@ MeasureGroupBrainPF_NU  utilizes the surface created from BrainAtlasPF to integr
 BrainAtlas, BrainSurface, BrainAtlasPF
 
 %% ¡layout!
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.SELECTEDLAYER
+%%%% ¡title!
+Meaure Group Brain SELECTEDLAYER
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.SELECTEDDT
+%%%% ¡title!
+Meaure Group Brain SELECTEDDT
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.COLORLIST
+%%%% ¡title!
+Meaure Group Brain COLORLIST
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.SIZELIST
+%%%% ¡title!
+Meaure Group Brain SIZELIST
 
 %%% ¡prop!
 %%%% ¡id!
@@ -35,24 +58,6 @@ WAITBAR ON/OFF
 MeasureGroupBrainPF_NU .NOTES
 %%%% ¡title!
 Brain Atlas NOTES
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureGroupBrainPF_NU.COLORLIST
-%%%% ¡title!
-Meaure Group Brain COLORLIST
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureGroupBrainPF_NU.SELECTEDLAYER
-%%%% ¡title!
-Meaure Group Brain SELECTEDLAYER
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureGroupBrainPF_NU.SELECTEDDT
-%%%% ¡title!
-Meaure Group Brain SELECTEDDT
 
 %% ¡props_update!
 
@@ -92,7 +97,7 @@ NOTES (metadata, string) are some specific notes about the panel figure for meas
 
 %%% ¡prop!
 SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.
-%%%% ¡postset!
+%%%% ¡calculate!
 m = pf.get('M');
 % update spheres
 % size
@@ -132,7 +137,9 @@ if strcmp(color_selection, 'on')
         meas_val = (m_val - lim_min)./(lim_max - lim_min) + 1;  % size normalized by minimum and maximum value of the measure result
     end
 else
-    rgb_meas = BRAPH2.COL;
+    for i = 1:length(m_val{1})
+        rgb_meas(i, :) = BRAPH2.COL;
+    end
 end
 
 % spheres
@@ -140,6 +147,7 @@ if pf.get('SPHS') % spheres
     sphs = pf.get('SPH_DICT').get('IT_LIST');
     for i = 1:1:length(sphs)
         set(sphs{i}, 'SPHERESIZE', m_val(i)*0.2);
+        % control disable
         set(sphs{i}, 'FACECOLOR', rgb_meas(i, :));
     end
 end
@@ -156,3 +164,5 @@ if pf.get('SYMS') % spheres
 end
 % triggers the update of SYM_DICT
 pf.set('SYM_DICT', pf.get('SYM_DICT'))
+
+value = {};

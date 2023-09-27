@@ -88,11 +88,15 @@ LABS
 NaN
 LAB_DICT
 NaN
-Meaure Group Brain SHOWMEASURE
+Meaure Group Brain COLORLIST
 5
+Meaure Group Brain SIZELIST
+6
 M
 NaN
-SELECTEDLAYER
-NaN
-SELECTEDDT
+Meaure Group Brain SELECTEDLAYER
+7
+Meaure Group Brain SELECTEDDT
+8
+SETUP
 NaN
