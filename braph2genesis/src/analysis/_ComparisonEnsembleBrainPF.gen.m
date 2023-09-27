@@ -96,7 +96,7 @@ Y-LABEL
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the panel ensemble-based comparison figure on brain surface.
 %%%% ¡default!
 'ComparisonEnsembleBrainPF'
 
@@ -129,17 +129,13 @@ LABEL (metadata, string) is an extended label of the panel ensemble-based compar
 NOTES (metadata, string) are some specific notes about the panel ensemble-based comparison figure on brain surface.
 %%%% ¡default!
 'ComparisonEnsembleBrainPF notes'
+
 %%% ¡prop!
 DRAW (query, logical) draws the figure brain atlas.
 %%%% ¡calculate!
 value = calculateValue@BrainAtlasPF(pf, BrainAtlasPF.DRAW, varargin{:}); % also warning
 if value
-    % reset the ambient lighting
-    pf.get('ST_AMBIENT').get('SETUP')
-end
-%%%% ¡calculate_callbacks!
-function cb_show_measure(~, ~, show) % (src, event)
-    pf.set('SHOWMEASURE', show)
+    pf.get('SETUP')
 end
 
 %%% ¡prop!
@@ -150,40 +146,7 @@ if value
     % do nothing
 end
 
-%%% ¡prop!
-H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.
-%%%% ¡calculate!
-toolbar = pf.memorize(21);
-if  check_graphics(toolbar, 'uitoolbar')
-    value = calculateValue@BrainAtlasPF(pf, BrainAtlasPF.H_TOOLS, varargin{:}); % also warning
-
-    tool_separator_2 = uipushtool(toolbar, 'Separator', 'on', 'Visible', 'off');
-
-    % SHOW MEASURE
-    tool_show_measure = uitoggletool(toolbar, ...
-        'Tag', 'TOOL.SHOWMEASURE', ...
-        'Separator', 'on', ...
-        'State', pf.get('SHOWMEASURE'), ...
-        'Tooltip', 'Show Measure', ...
-        'CData', imread('braph2icon_16px.png'), ...
-        'OnCallback', {@cb_show_measure, true}, ...
-        'OffCallback', {@cb_show_measure, false});
-
-     value = {value{:}, ...
-         tool_separator_2, ...
-         tool_show_measure ...
-         };
-
-else
-    value = {};
-end
-
 %% ¡props!
-
-%%% ¡prop!
-SHOWMEASURE (figure, logical) resets the handles when the panel figure brain surface is deleted.
-%%%% ¡default!
-false
 
 %%% ¡prop!
 CP (metadata, item) is the measure.
@@ -191,14 +154,9 @@ CP (metadata, item) is the measure.
 'ComparisonEnsemble'
 
 %%% ¡prop!
-SELECTEDLAYER (metadata, string) is an the choosen selected layer.
-%%%% ¡default!
-'1'
-
-%%% ¡prop!
-SELECTEDDT (metadata, string) is an the choosen selected layer.
-%%%% ¡default!
-'1'
+SETUP (query, empty) calculates the diff value and stores it to be implemented in the subelements.
+%%%% ¡calculate!
+value = [];
 
 %% ¡tests!
 
