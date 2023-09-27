@@ -10,60 +10,11 @@ MeasureGroupBrainPF utilizes the surface created from BrainAtlasPF to integrate
 %%% ¡seealso!
 BrainAtlas, BrainSurface, BrainAtlasPF
 
-%% ¡layout!
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureGroupBrainPF.ID
-%%%% ¡title!
-Meaure Group Brain FigureID
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureGroupBrainPF.LABEL
-%%%% ¡title!
-Meaure Group Brain FigureNAME
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureGroupBrainPF.WAITBAR
-%%%% ¡title!
-WAITBAR ON/OFF
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureGroupBrainPF.NOTES
-%%%% ¡title!
-Meaure Group Brain NOTES
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureGroupBrainPF.COLORLIST
-%%%% ¡title!
-Meaure Group Brain COLORLIST
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureGroupBrainPF.SIZELIST
-%%%% ¡title!
-Meaure Group Brain SIZELIST
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureGroupBrainPF.SELECTEDLAYER
-%%%% ¡title!
-Meaure Group Brain SELECTEDLAYER
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureGroupBrainPF.SELECTEDDT
-%%%% ¡title!
-Meaure Group Brain SELECTEDDT
-
 %% ¡props_update!
 
 %%% ¡prop!
 ELCLASS (constant, string) is the class of the panel figure for measure group brain.
+%%%% ¡default!
 'MeasureGroupBrainPF'
 
 %%% ¡prop!
@@ -113,45 +64,12 @@ if value
     % do nothing
 end
 
-
 %% ¡props!
-
-%%% ¡prop!
-COLORLIST (figure, option) is the color list value.
-%%%% ¡settings!
-{'on' 'off' 'enable'}
-%%%% ¡default!
-'on'
-%%%% ¡postset!
-pf.get('SETUP')
-
-%%% ¡prop!
-SIZELIST (figure, option) is the size list value.
-%%%% ¡settings!
-{'on' 'off' 'enable'}
-%%%% ¡default!
-'on'
-%%%% ¡postset!
-pf.get('SETUP')
 
 %%% ¡prop!
 M (metadata, item) is the measure.
 %%%% ¡settings!
 'Measure'
-
-%%% ¡prop!
-SELECTEDLAYER (figure, string) is an the choosen selected layer.
-%%%% ¡default!
-'1'
-%%%% ¡postset!
-pf.get('SETUP')
-
-%%% ¡prop!
-SELECTEDDT (figure, string) is an the choosen selected layer.
-%%%% ¡default!
-'1'
-%%%% ¡postset!
-pf.get('SETUP')
 
 %%% ¡prop!
 SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.
@@ -161,7 +79,7 @@ value = [];
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureGroupBrainPF.PARENT MeasureGroupBrainPF.H MeasureGroupBrainPF.ST_POSITION MeasureGroupBrainPF.ST_AXIS MeasureGroupBrainPF.ST_SURFACE MeasureGroupBrainPF.ST_AMBIENT]
+[MeasureGroupBrainPF.PARENT MeasureGroupBrainPF.H MeasureGroupBrainPF.ST_POSITION MeasureGroupBrainPF.ST_AXIS MeasureGroupBrainPF.ST_SURFACE MeasureGroupBrainPF.ST_AMBIENT MeasureGroupBrainPF.M]
 
 %%% ¡warning_off!
 true
@@ -174,39 +92,3 @@ warning('off', [BRAPH2.STR ':MeasureGroupBrainPF'])
 assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':MeasureGroupBrainPF'])
-
-%%% ¡test!
-%%%% ¡name!
-Basics 1
-%%%% ¡probability!
-.01
-%%%% ¡code!
-br1 = BrainRegion('ID', 'id1', 'LABEL', 'label1', 'NOTES', 'notes1', 'X', 1, 'Y', 1, 'Z', 1);
-br2 = BrainRegion('ID', 'id2', 'LABEL', 'label2', 'NOTES', 'notes2', 'X', 2, 'Y', 2, 'Z', 2);
-br3 = BrainRegion('ID', 'id3', 'LABEL', 'label3', 'NOTES', 'notes3', 'X', 3, 'Y', 3, 'Z', 3);
-br4 = BrainRegion('ID', 'id4', 'LABEL', 'label4', 'NOTES', 'notes4', 'X', 4, 'Y', 4, 'Z', 4);
-br5 = BrainRegion('ID', 'id5', 'LABEL', 'label5', 'NOTES', 'notes5', 'X', 5, 'Y', 5, 'Z', 5);
-br6 = BrainRegion('ID', 'id6', 'LABEL', 'label6', 'NOTES', 'notes6', 'X', 6, 'Y', 6, 'Z', 6);
-items = {br1, br2, br3, br4, br5, br6};
-idict = IndexedDictionary( ...
-    'ID', 'idict', ...
-    'IT_CLASS', 'BrainRegion', ...
-    'IT_KEY', IndexedDictionary.getPropDefault(IndexedDictionary.IT_KEY), ...
-    'IT_LIST', items ...
-    );
-ba0 = BrainAtlas('ID', 'BA1', 'LABEL', 'brain atlas', 'NOTES', 'Notes on brain atlas.', 'BR_DICT', idict);
-pf0 = MeasureGroupBrainPF(...
-    'SURF', ImporterBrainSurfaceNV('FILE', 'human_ICBM152.nv').get('SURF'), ...
-    'BA', ba0 ...
-    );
-gui0 = GUIFig('PF', pf0, 'FILE', 'xxx sss', 'POSITION', [.1 .1 .4 .8], 'WAITBAR', true, 'CLOSEREQ', false);
-gui0.get('DRAW')
-gui0.get('SHOW')
-
-gui0_settings = gui0.memorize('GUI_SETTINGS');
-gui0_settings.set('POSITION', [0 0 .3 .5])
-gui0_settings.get('DRAW')
-gui0_settings.get('SHOW')
-
-gui0.get('CLOSE')
-
