@@ -166,7 +166,7 @@ close all; delete(findall(0, 'type', 'figure')); clear all
 %     eval(['test_' el_class])
 % end
 % 
-% el_class_list = {'RichClub'}; % MultiplexKCor
+% el_class_list = {'RichClub'}; {'MultiplexKCor' 'RichClub'}
 % %el_class_list = Measure.getSubclasses();
 % for i = 1:1:length(el_class_list)
 %     el_class = el_class_list{i};
