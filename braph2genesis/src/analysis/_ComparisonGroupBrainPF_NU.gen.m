@@ -243,6 +243,10 @@ lab_list = pf.get('LAB_DICT').get('IT_LIST');
 % get the value to show on the surface
 layer = pf.get('LAYER');
 diffs = cp.get('DIFF');
+if isempty(diffs)
+    value = {};
+    return
+end
 diff = diffs{layer};
 p2s = cp.get('P2');
 p2 = p2s{layer};
@@ -362,14 +366,14 @@ pf.get('SETUP')
 pr = ComparisonGroupPF_NxPP_Node('EL', pf, 'PROP', ComparisonGroupBrainPF_NU.NODE);
 
 %%% ¡prop!
-LAYER (figure, scalar) is the node number of the nodal measure.
+LAYER (figure, scalar) is the layer number of the nodal measure.
 %%%% ¡default!
 1
 %%%% ¡postset!
 pf.get('SETUP');
 
 %%% ¡prop!
-SIZE_DIFF (figure, option) is the node number of the nodal measure.
+SIZE_DIFF (figure, option) determines whether the difference is shown with size effect.
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
@@ -378,14 +382,14 @@ SIZE_DIFF (figure, option) is the node number of the nodal measure.
 pf.get('SETUP');
 
 %%% ¡prop!
-SIZE_SCALE (figure, scalar) is the node number of the nodal measure.
+SIZE_SCALE (figure, scalar) determines the scale of size effect.
 %%%% ¡default!
 5
 %%%% ¡postset!
 pf.get('SETUP');
 
 %%% ¡prop!
-COLOR_DIFF (figure, option) is the node number of the nodal measure.
+COLOR_DIFF (figure, option) determines whether the difference is shown with color effect.
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
@@ -394,7 +398,7 @@ COLOR_DIFF (figure, option) is the node number of the nodal measure.
 pf.get('SETUP');
 
 %%% ¡prop!
-FDR (figure, option) is the node number of the nodal measure.
+FDR (figure, option) determines whether the difference is shown with FDR correction.
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
@@ -403,7 +407,7 @@ FDR (figure, option) is the node number of the nodal measure.
 pf.get('SETUP');
 
 %%% ¡prop!
-QVALUE (figure, scalar) is the node number of the nodal measure.
+QVALUE (figure, scalar) determines the QVALUE for FDR correction.
 %%%% ¡default!
 0.05
 %%%% ¡postprocessing!
@@ -417,7 +421,7 @@ pf.get('SETUP');
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonGroupBrainPF_NU.PARENT ComparisonGroupBrainPF_NU.H ComparisonGroupBrainPF_NU.ST_POSITION ComparisonGroupBrainPF_NU.ST_AXIS ComparisonGroupBrainPF_NU.CP] 
+[ComparisonGroupBrainPF_NU.PARENT ComparisonGroupBrainPF_NU.H ComparisonGroupBrainPF_NU.ST_POSITION ComparisonGroupBrainPF_NU.ST_AXIS ComparisonGroupBrainPF_NU.CP ComparisonGroupBrainPF_NU.ST_SURFACE ComparisonGroupBrainPF_NU.ST_AMBIENT ComparisonGroupBrainPF_NU.CP] 
 
 %%% ¡warning_off!
 true
@@ -427,6 +431,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':ComparisonGroupBrainPF_NU'])
-assert(length(findall(0, 'type', 'figure')) == 5)
+assert(length(findall(0, 'type', 'figure')) == 7)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':ComparisonGroupBrainPF_NU'])

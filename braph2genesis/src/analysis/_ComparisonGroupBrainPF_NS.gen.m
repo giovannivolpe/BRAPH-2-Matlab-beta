@@ -23,6 +23,12 @@ QVALUE
 
 %%% ¡prop!
 %%%% ¡id!
+ComparisonGroupBrainPF_NS.LAYER
+%%%% ¡title!
+Graph LAYER
+
+%%% ¡prop!
+%%%% ¡id!
 ComparisonGroupBrainPF_NS.SPHS
 %%%% ¡title!
 Brain Region SPHERES ON/OFF
@@ -234,10 +240,15 @@ id_list = pf.get('ID_DICT').get('IT_LIST');
 lab_list = pf.get('LAB_DICT').get('IT_LIST');
 
 % get the value to show on the surface
+layer = pf.get('LAYER');
 diffs = cp.get('DIFF');
-diff = diffs{1};
+if isempty(diffs)
+    value = {};
+    return
+end
+diff = diffs{layer};
 p2s = cp.get('P2');
-p2 = p2s{1};
+p2 = p2s{layer};
 
 % apply FDR to spheres, symbols, ids, and labels
 fdr_diff = pf.get('FDR');
@@ -349,8 +360,14 @@ NODE (figure, scalar) is the node number of the nodal group comparison on brain 
 %%%% ¡gui!
 pr = ComparisonGroupPF_NxPP_Node('EL', pf, 'PROP', ComparisonGroupBrainPF_NS.NODE);
 
+LAYER (figure, scalar) is the layer number of the nodal measure.
+%%%% ¡default!
+1
+%%%% ¡postset!
+pf.get('SETUP');
+
 %%% ¡prop!
-SIZE_DIFF (figure, option) is the node number of the nodal measure.
+SIZE_DIFF (figure, option) determines whether the difference is shown with size effect.
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
@@ -359,14 +376,14 @@ SIZE_DIFF (figure, option) is the node number of the nodal measure.
 pf.get('SETUP');
 
 %%% ¡prop!
-SIZE_SCALE (figure, scalar) is the node number of the nodal measure.
+SIZE_SCALE (figure, scalar) determines the scale of size effect.
 %%%% ¡default!
 5
 %%%% ¡postset!
 pf.get('SETUP');
 
 %%% ¡prop!
-COLOR_DIFF (figure, option) is the node number of the nodal measure.
+COLOR_DIFF (figure, option) determines whether the difference is shown with color effect.
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
@@ -375,7 +392,7 @@ COLOR_DIFF (figure, option) is the node number of the nodal measure.
 pf.get('SETUP');
 
 %%% ¡prop!
-FDR (figure, option) is the node number of the nodal measure.
+FDR (figure, option) determines whether the difference is shown with FDR correction.
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
@@ -384,7 +401,7 @@ FDR (figure, option) is the node number of the nodal measure.
 pf.get('SETUP');
 
 %%% ¡prop!
-QVALUE (figure, scalar) is the node number of the nodal measure.
+QVALUE (figure, scalar) determines the QVALUE for FDR correction.
 %%%% ¡default!
 0.05
 %%%% ¡postprocessing!
@@ -409,6 +426,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':ComparisonGroupBrainPF_NS'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':ComparisonGroupBrainPF_NS'])
