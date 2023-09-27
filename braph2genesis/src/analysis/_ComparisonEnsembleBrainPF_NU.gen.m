@@ -217,6 +217,10 @@ lab_list = pf.get('LAB_DICT').get('IT_LIST');
 % get the value to show on the surface
 layer = pf.get('LAYER');
 diffs = cp.get('DIFF');
+if isempty(diffs)
+    value = {};
+    return
+end
 diff = diffs{layer};
 p2s = cp.get('P2');
 p2 = p2s{layer};
