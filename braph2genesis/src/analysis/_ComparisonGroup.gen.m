@@ -507,6 +507,7 @@ pr = PanelPropItem('EL', cp, 'PROP', ComparisonGroup.PFC, ...
 	'BUTTON_TEXT', ['Plot ' cp.get('MEASURE') ' Comparison'], ...
     varargin{:});
 
+
 %%% ¡prop!
 PFBG (gui, item) contains the panel figure of the brain graph.
 %%%% ¡_settings!
