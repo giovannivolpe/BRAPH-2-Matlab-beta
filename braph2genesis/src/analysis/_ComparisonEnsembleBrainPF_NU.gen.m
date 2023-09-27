@@ -11,15 +11,39 @@ ComparisonEnsemble
 
 %%% ¡prop!
 %%%% ¡id!
+ComparisonEnsembleBrainPF_NU.FDR
+%%%% ¡title!
+FDR CORRECTION
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF_NU.QVALUE
+%%%% ¡title!
+QVALUE 
+
+%%% ¡prop!
+%%%% ¡id!
 ComparisonEnsembleBrainPF_NU.LAYER
 %%%% ¡title!
 Graph LAYER
 
 %%% ¡prop!
 %%%% ¡id!
+ComparisonEnsembleBrainPF_NU.SPHS
+%%%% ¡title!
+Brain Region SPHERES ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+ComparisonEnsembleBrainPF_NU.SPH_DICT
+%%%% ¡title!
+Brain Region SPHERES PROPERTIES
+
+%%% ¡prop!
+%%%% ¡id!
 ComparisonEnsembleBrainPF_NU.SIZE_DIFF
 %%%% ¡title!
-Show Difference with SIZE
+Show Difference with SPHERES SIZE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -31,19 +55,7 @@ Size SCALE
 %%%% ¡id!
 ComparisonEnsembleBrainPF_NU.COLOR_DIFF
 %%%% ¡title!
-Show Difference with COLOR
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonEnsembleBrainPF_NU.FDR
-%%%% ¡title!
-FDR CORRECTION
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonEnsembleBrainPF_NU.QVALUE
-%%%% ¡title!
-QVALUE 
+Show Difference with SPHERES COLOR
 
 %%% ¡prop!
 %%%% ¡id!
@@ -116,18 +128,6 @@ BRAIN COLOR
 ComparisonEnsembleBrainPF_NU.ST_AMBIENT
 %%%% ¡title!
 MATERIAL & LIGHTNING
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonEnsembleBrainPF_NU.SPHS
-%%%% ¡title!
-Brain Region SPHERES ON/OFF
-
-%%% ¡prop!
-%%%% ¡id!
-ComparisonEnsembleBrainPF_NU.SPH_DICT
-%%%% ¡title!
-Brain Region SPHERES PROPERTIES
 
 %%% ¡prop!
 %%%% ¡id!
@@ -207,12 +207,60 @@ SETUP (query, empty) calculates the diff value and stores it to be implemented i
 %%%% ¡calculate!
 cp = pf.get('CP');
 g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
-sphs_list = pf.get('SPH_DICT').get('IT_LIST');
-layer = pf.get('LAYER')
-diff = cp.get('DIFF');
-p2 = cp.get('P2');
-diff = diff{layer};
-p2 = p2{layer};
+
+% get brain region related list
+sph_list = pf.get('SPH_DICT').get('IT_LIST');
+sym_list = pf.get('SYM_DICT').get('IT_LIST');
+id_list = pf.get('ID_DICT').get('IT_LIST');
+lab_list = pf.get('LAB_DICT').get('IT_LIST');
+
+% get the value to show on the surface
+layer = pf.get('LAYER');
+diffs = cp.get('DIFF');
+diff = diffs{layer};
+p2s = cp.get('P2');
+p2 = p2s{layer};
+
+% apply FDR to spheres, symbols, ids, and labels
+fdr_diff = pf.get('FDR');
+switch fdr_diff
+    case 'on'
+        [~, mask] = fdr(p2', pf.get('QVALUE'));
+        for i = 1:1:length(sph_list)
+            set(sph_list{i}, 'VISIBLE', mask(i));
+        end
+        for i = 1:1:length(sym_list)
+            set(sym_list{i}, 'VISIBLE', mask(i));
+        end
+        for i = 1:1:length(id_list)
+            set(id_list{i}, 'VISIBLE', mask(i));
+        end
+        for i = 1:1:length(lab_list)
+            set(lab_list{i}, 'VISIBLE', mask(i));
+        end
+    case 'off'
+        if pf.get('SPHS')
+            for i = 1:1:length(sph_list)
+                set(sph_list{i}, 'VISIBLE', true);
+            end
+        end
+        if pf.get('SYMS')
+            for i = 1:1:length(sym_list)
+                set(sym_list{i}, 'VISIBLE', true);
+            end
+        end
+        if pf.get('IDS')
+            for i = 1:1:length(id_list)
+                set(id_list{i}, 'VISIBLE', true);
+            end
+        end
+        if pf.get('LABS')
+            for i = 1:1:length(lab_list)
+                set(lab_list{i}, 'VISIBLE', true);
+            end
+        end
+    case 'disable'
+end
 
 size_diff = pf.get('SIZE_DIFF');
 switch size_diff
@@ -220,17 +268,28 @@ switch size_diff
         % transfrom diff value to appropriate size
         % value
         diff(isnan(diff)) = 0.1;
-        diff(diff == 0) = 0.01;
-        size_scale = pf.get('SIZE_SCALE')
-        size_value = abs(diff) * size_scale;
+        size_value = abs(diff);
+        min_bound = 0.01;
+        max_bound = 1.0;
+        min_size_value = min(size_value);
+        max_size_value = max(size_value);
+        if max_size_value == min_size_value
+            normalized_size_value = max_bound;
+        else
+            normalized_size_value = min_bound + (max_bound - min_bound) * (size_value - min_size_value) / (max_size_value - min_size_value);
+        end
+        size_scale = pf.get('SIZE_SCALE');
+        scaled_size_value = normalized_size_value * size_scale;
 
         % set size to sphs
-        for i = 1:1:length(sphs_list)
-            set(sphs_list{i}, 'SPHERESIZE', size_value(i));
+        for i = 1:1:length(sph_list)
+            set(sph_list{i}, 'SPHERESIZE', scaled_size_value(i));
         end
     case 'off'
-        for i = 1:1:length(sphs_list)
-            set(sphs_list{i}, 'SPHERESIZE', SettingsSphere.getPropDefault(23));
+        if pf.get('SPHS')
+            for i = 1:1:length(sph_list)
+                set(sph_list{i}, 'SPHERESIZE', SettingsSphere.getPropDefault('SPHERESIZE'));
+            end
         end
     case 'disable'
 end
@@ -253,24 +312,12 @@ switch color_diff
         end
 
         % set color to sphs
-        cellfun(@(sph, color_code) set(sph, 'FACECOLOR', color_code), sphs_list, color_code_list', 'UniformOutput', false);
+        cellfun(@(sph, color_code) set(sph, 'FACECOLOR', color_code), sph_list, color_code_list', 'UniformOutput', false);
     case 'off'
-        for i = 1:1:length(sphs_list)
-            set(sphs_list{i}, 'FACECOLOR', SettingsSphere.getPropDefault(17));
-        end
-    case 'disable'
-end
-
-fdr_diff = pf.get('FDR');
-switch fdr_diff
-    case 'on'
-        [~, mask] = fdr(p2', pf.get('QVALUE'));
-        for i = 1:1:length(sphs_list)
-            set(sphs_list{i}, 'VISIBLE', mask(i));
-        end
-    case 'off'
-        for i = 1:1:length(sphs_list)
-            set(sphs_list{i}, 'VISIBLE', true);
+        if pf.get('SPHS')
+            for i = 1:1:length(sph_list)
+                set(sph_list{i}, 'FACECOLOR', SettingsSphere.getPropDefault('FACECOLOR'));
+            end
         end
     case 'disable'
 end
@@ -298,7 +345,7 @@ pf.get('SETUP');
 %%% ¡prop!
 SIZE_SCALE (figure, scalar) is the node number of the nodal measure.
 %%%% ¡default!
-5
+2
 %%%% ¡postset!
 pf.get('SETUP');
 
@@ -316,7 +363,7 @@ FDR (figure, option) is the node number of the nodal measure.
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
-'on'
+'off'
 %%%% ¡postset!
 pf.get('SETUP');
 
