@@ -59,6 +59,102 @@ MeasureGroupBrainPF_NU .NOTES
 %%%% ¡title!
 Brain Atlas NOTES
 
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.BKGCOLOR
+%%%% ¡title!
+BACKGROUND COLOR
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.ST_POSITION
+%%%% ¡title!
+PANEL POSITION
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.VIEW
+%%%% ¡title!
+3D VIEW
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.ST_AXIS
+%%%% ¡title!
+AXIS
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.BRAIN
+%%%% ¡title!
+BRAIN ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.SURFFILE
+%%%% ¡title!
+BRAIN SURFACE
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.ST_SURFACE
+%%%% ¡title!
+BRAIN COLOR
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.ST_AMBIENT
+%%%% ¡title!
+MATERIAL & LIGHTNING
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.SPHS
+%%%% ¡title!
+Brain Region SPHERES ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.SPH_DICT
+%%%% ¡title!
+Brain Region SPHERES PROPERTIES
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.SYMS
+%%%% ¡title!
+Brain Region SYMBOLS ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.SYM_DICT
+%%%% ¡title!
+Brain Region SYMBOLS PROPERTIES
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.IDS
+%%%% ¡title!
+Brain Region IDs ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.ID_DICT
+%%%% ¡title!
+Brain Region IDs PROPERTIES
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.LABS
+%%%% ¡title!
+Brain Region LABELS ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.LAB_DICT
+%%%% ¡title!
+Brain Region LABELS PROPERTIES
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -99,8 +195,6 @@ NOTES (metadata, string) are some specific notes about the panel figure for meas
 SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.
 %%%% ¡calculate!
 m = pf.get('M');
-% update spheres
-% size
 ax_ = pf.get('H_AXES');
 g = m.get('G');
 dt_ticks = g.get('LAYERLABELS');
@@ -119,36 +213,46 @@ temp_val = m.get('M');
 final_selection = (selected_layer2*L_total) - (L_total-selected_layer1);
 m_val = temp_val{final_selection};
 color_selection = pf.get('COLORLIST');
+size_selection = pf.get('SIZELIST');
 
 % colors
 % Make colorbar
-if strcmp(color_selection, 'on')
-    lim_min = min(m_val);  % minimum of measure result
-    lim_max = max(m_val);  % maximum of measure result
-    if lim_min == lim_max
-        clim(ax_, 'auto')
-        cmap_temp = colormap(ax_, jet);
-        rgb_meas = zeros(size(cmap_temp));
-    else
-        clim(ax_, [lim_min lim_max]);
-        cmap_temp = colormap(ax_, jet);
-        rgb_meas = interp1(linspace(lim_min, lim_max, size(cmap_temp, 1)), ...
-            cmap_temp, m_val); % colorbar from minimum to maximum value of the measure result
-        meas_val = (m_val - lim_min)./(lim_max - lim_min) + 1;  % size normalized by minimum and maximum value of the measure result
-    end
+
+lim_min = min(m_val);  % minimum of measure result
+lim_max = max(m_val);  % maximum of measure result
+if lim_min == lim_max
+    clim(ax_, 'auto')
+    cmap_temp = colormap(ax_, jet);
+    rgb_meas = zeros(size(cmap_temp));
 else
-    for i = 1:length(m_val{1})
-        rgb_meas(i, :) = BRAPH2.COL;
-    end
+    clim(ax_, [lim_min lim_max]);
+    cmap_temp = colormap(ax_, jet);
+    rgb_meas = interp1(linspace(lim_min, lim_max, size(cmap_temp, 1)), ...
+        cmap_temp, m_val); % colorbar from minimum to maximum value of the measure result
+    meas_val = (m_val - lim_min)./(lim_max - lim_min) + 1;  % size normalized by minimum and maximum value of the measure result
 end
+
 
 % spheres
 if pf.get('SPHS') % spheres
     sphs = pf.get('SPH_DICT').get('IT_LIST');
     for i = 1:1:length(sphs)
-        set(sphs{i}, 'SPHERESIZE', m_val(i)*0.2);
+        if strcmp(size_selection, 'on')
+            set(sphs{i}, 'SPHERESIZE', m_val(i)*0.2);
+        elseif strcmp(size_selection, 'off')
+            set(sphs{i}, 'SPHERESIZE', SettingsSphere.getPropDefault(23));
+        else
+            % nothing
+        end
+
         % control disable
-        set(sphs{i}, 'FACECOLOR', rgb_meas(i, :));
+        if strcmp(color_selection, 'on')
+            set(sphs{i}, 'FACECOLOR', rgb_meas(i, :));
+        elseif strcmp(color_selection, 'off')
+            set(sphs{i}, 'FACECOLOR', BRAPH2.COL);
+        else
+            % nothing
+        end
     end
 end
 % triggers the update of SPH_DICT
@@ -158,8 +262,21 @@ pf.set('SPH_DICT', pf.get('SPH_DICT'))
 if pf.get('SYMS') % spheres
     syms = pf.get('SYM_DICT').get('IT_LIST');
     for i = 1:1:length(syms)
-        set(syms{i}, 'SYMBOLSIZE', m_val(i)*0.2)
-        set(syms{i}, 'FACECOLOR', rgb_meas(i, :));
+        if strcmp(size_selection, 'on')
+            set(syms{i}, 'SYMBOLSIZE', m_val(i)*0.2);
+        elseif strcmp(size_selection, 'off')
+            set(syms{i}, 'SYMBOLSIZE', SettingsSymbol.getPropDefault(20));
+        else
+            % nothing
+        end
+
+        if strcmp(color_selection, 'on')
+            set(syms{i}, 'FACECOLOR', rgb_meas(i, :));
+        elseif strcmp(color_selection, 'off')
+            set(syms{i}, 'FACECOLOR', BRAPH2.COL);
+        else
+            % nothing
+        end
     end
 end
 % triggers the update of SYM_DICT
