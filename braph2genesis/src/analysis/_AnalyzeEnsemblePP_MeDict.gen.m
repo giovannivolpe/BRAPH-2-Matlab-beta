@@ -103,7 +103,7 @@ function set_table()
     rowname = cell(length(m_list), 1);
     data = cell(length(m_list), 5);
     for mi = 1:1:length(m_list)
-        if any(cellfun(@(y) isequal(m_list{mi}, y), mlist_already_calculated)) && ~isa(g.get('MEASURE', m_list{mi}).getr('M'), 'NoValue')
+        if any(cellfun(@(y) isequal(m_list{mi}, y), m_list_already_calculated)) && ~isa(g.get('MEASURE', m_list{mi}).getr('M'), 'NoValue')
             rowname{mi} = 'C';
         else
             rowname{mi} = '';

@@ -1,8 +1,9 @@
 close all; delete(findall(0, 'type', 'figure')); clear all
 
+
 %%
 %el_class_list = { 'MeasureEnsembleBrainPF_BB'} % {'AnalyzeGroup' 'CompareGroup' 'ComparisonGroup' 'AnalyzeGroupPP_G' 'CompareGroupPP_CpDict'}
-el_class_list = {'MeasureEnsembleBrainPF' 'MeasureEnsembleBrainPF_BB'} % {'ComparisonGroupPF' 'ComparisonGroupPF_BB' 'ComparisonGroupPF_BS' 'ComparisonGroupPF_BU' 'ComparisonGroupPF_GB' 'ComparisonGroupPF_GS' 'ComparisonGroupPF_GU' 'ComparisonGroupPF_NB' 'ComparisonGroupPF_NS' 'ComparisonGroupPF_NU' }
+el_class_list = {'AnalyzeEnsemblePP_MeDict'} % {'ComparisonGroupPF' 'ComparisonGroupPF_BB' 'ComparisonGroupPF_BS' 'ComparisonGroupPF_BU' 'ComparisonGroupPF_GB' 'ComparisonGroupPF_GS' 'ComparisonGroupPF_GU' 'ComparisonGroupPF_NB' 'ComparisonGroupPF_NS' 'ComparisonGroupPF_NU' }
 for i = 1:1:length(el_class_list)
     el_class = el_class_list{i};
     el_path = '/src/analysis';
@@ -13,7 +14,32 @@ for i = 1:1:length(el_class_list)
     create_test_Element([fileparts(which('braph2genesis')) el_path filesep() '_' el_class '.gen.m'], [fileparts(which('braph2')) el_path])
     %eval(['test_' el_class])
 end
+%%
+%%
+im_ba = ImporterBrainAtlasXLS('FILE', 'desikan_atlas.xlsx');
+ba = im_ba.get('BA');
 
+gr = Group('SUB_CLASS', 'SubjectCON', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectCON'));
+for i = 1:1:5
+    sub = SubjectCON( ...
+        'ID', ['SUB CON ' int2str(i)], ...
+        'LABEL', ['Subejct CON ' int2str(i)], ...
+        'NOTES', ['Notes on subject CON ' int2str(i)], ...
+        'BA', ba, ...
+        'CON', rand(ba.get('BR_DICT').get('LENGTH')) ...
+        );
+    sub.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 100 * rand()))
+    sub.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', randi(2, 1)))
+    gr.get('SUB_DICT').get('ADD', sub)
+end
+
+densities = 5:5:20;
+graph_template = MultigraphBUD('DENSITIES', densities, 'NODELABELS', ba.get('BR_DICT').get('KEYS'), 'LAYERLABELS', cellfun(@(x) [num2str(x) '%'], num2cell(densities), 'UniformOutput', false));
+a = AnalyzeEnsemble_CON_BUD('GR', gr, 'GRAPH_TEMPLATE', graph_template);
+
+gui = GUIElement('PE', a, 'CLOSEREQ', false);
+gui.get('DRAW')
+gui.get('SHOW')
 
 
 %% PanelProp Callback
