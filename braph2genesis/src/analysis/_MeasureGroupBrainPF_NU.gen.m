@@ -38,19 +38,19 @@ Brain Atlas NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF.COLORLIST
+MeasureGroupBrainPF_NU.COLORLIST
 %%%% ¡title!
 Meaure Group Brain COLORLIST
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF.SELECTEDLAYER
+MeasureGroupBrainPF_NU.SELECTEDLAYER
 %%%% ¡title!
 Meaure Group Brain SELECTEDLAYER
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF.SELECTEDDT
+MeasureGroupBrainPF_NU.SELECTEDDT
 %%%% ¡title!
 Meaure Group Brain SELECTEDDT
 
@@ -89,23 +89,6 @@ LABEL (metadata, string) is an extended label of the panel figure for measure gr
 NOTES (metadata, string) are some specific notes about the panel figure for measure group brain.
 %%%% ¡default!
 'MeasureGroupBrainPF_NU  notes'
-
-%%% ¡prop!
-DRAW (query, logical) draws the figure brain atlas.
-%%%% ¡calculate!
-value = calculateValue@MeasureGroupBrainPF(pf, MeasureGroupBrainPF.DRAW, varargin{:}); % also warning
-if value
-    % reset the ambient lighting
-    pf.get('ST_AMBIENT').get('SETUP')
-end
-
-%%% ¡prop!
-DELETE (query, logical) resets the handles when the panel figure brain surface is deleted.
-%%%% ¡calculate!
-value = calculateValue@MeasureGroupBrainPF(pf, MeasureGroupBrainPF.DELETE, varargin{:}); % also warning
-if value
-
-end
 
 %%% ¡prop!
 SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.
