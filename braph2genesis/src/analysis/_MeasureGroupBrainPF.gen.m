@@ -119,6 +119,8 @@ COLORLIST (figure, option) is the color list value.
 {'on' 'off' 'enable'}
 %%%% ¡default!
 'on'
+%%%% ¡postset!
+pf.get('SETUP')
 
 %%% ¡prop!
 M (metadata, item) is the measure.
@@ -129,11 +131,15 @@ M (metadata, item) is the measure.
 SELECTEDLAYER (figure, string) is an the choosen selected layer.
 %%%% ¡default!
 '1'
+%%%% ¡postset!
+pf.get('SETUP')
 
 %%% ¡prop!
 SELECTEDDT (figure, string) is an the choosen selected layer.
 %%%% ¡default!
 '1'
+%%%% ¡postset!
+pf.get('SETUP')
 
 %%% ¡prop!
 SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.
