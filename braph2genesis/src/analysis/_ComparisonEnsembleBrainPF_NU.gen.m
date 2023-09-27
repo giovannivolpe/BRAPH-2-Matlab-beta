@@ -345,7 +345,7 @@ pf.get('SETUP');
 %%% ¡prop!
 SIZE_SCALE (figure, scalar) is the node number of the nodal measure.
 %%%% ¡default!
-2
+10
 %%%% ¡postset!
 pf.get('SETUP');
 
