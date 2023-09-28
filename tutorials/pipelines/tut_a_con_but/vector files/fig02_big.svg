@@ -5,8 +5,8 @@
    version="1.1"
    id="svg2"
    width="177.8mm"
-   height="70mm"
-   viewBox="0 0 671.99998 264.56692"
+   height="65mm"
+   viewBox="0 0 671.99998 245.66928"
    sodipodi:docname="fig02_big.svg"
    inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -583,9 +583,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:pageshadow="0"
      showgrid="false"
-     inkscape:zoom="1.3737146"
-     inkscape:cx="227.84937"
-     inkscape:cy="200.55112"
+     inkscape:zoom="1.5871767"
+     inkscape:cx="272.18142"
+     inkscape:cy="190.59"
      inkscape:window-width="2458"
      inkscape:window-height="1269"
      inkscape:window-x="0"
@@ -601,8 +601,8 @@
      inkscape:label="ink_ext_XXXXXX"
      transform="matrix(1.3333333,0,0,-1.3333333,0,834.66667)">
     <path
-       d="M 0,626.00002 V 427.57483 H 504 V 626.00002 H 0"
-       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.0564236"
+       d="M 0,626.00002 V 441.74805 H 504 V 626.00002 H 0"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.0543711"
        id="path12"
        inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/pipelines/tut_a_con_but/vector files/fig02.png"
        inkscape:export-xdpi="300"
@@ -617,19 +617,22 @@
        transform="scale(1,-1)"
        ry="1.2647207" />
     <g
-       id="g5844"
-       transform="translate(-4.9959677e-7,-10.91582)"
+       id="g9472"
+       transform="translate(0,1.8366102)"
        inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/pipelines/tut_a_con_but/vector files/fig02.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300">
       <g
-         id="g5449"
-         transform="matrix(0.85348601,0,0,0.85348601,-62.706179,367.52049)">
-        <image
-           width="539.43158"
-           height="429.16104"
-           preserveAspectRatio="none"
-           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABxIAAAWgCAYAAAB6zwYNAAABXWlDQ1BJQ0MgUHJvZmlsZQAAKJF1
+         id="g9452"
+         transform="translate(0,1.5)">
+        <g
+           id="g5449"
+           transform="matrix(0.85348601,0,0,0.85348601,-62.706179,365.60467)">
+          <image
+             width="539.43158"
+             height="429.16104"
+             preserveAspectRatio="none"
+             xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABxIAAAWgCAYAAAB6zwYNAAABXWlDQ1BJQ0MgUHJvZmlsZQAAKJF1
 kL9LAmEYx7+WIdkNDtHk4NIgWdgp7WYRgsShRT+287zO4NSXu5OIINpa2opoaI6mVg0Kqr8gCAqa
 GiqHxuAgUq7n9Sy16Hn58nz48n1eHh6gT5AZ070AiiXLyMxNh5ZXVkO+OgYRhB9jCMuKyRKSlKYI
 vntv2ffw8H43zv/K1s7qR6nrl923xvnW3v7833xP+fOqqVBvkESFGRbgiRJLGxbjvEM8bNBSxAec
@@ -16817,16 +16820,16 @@ k2Tjhe5rESFUdY/3tbjPJz+7gcjzf2Uoy5/Z//YrNrin+N2Pv/v47QfeWOT/JdbywXVCE6gWsWHZ
 2HAsZLxmhL+k5/9VM47rr2rm09YHxAqoIYytjUYWN+2uN5Px1Lc+wb7XHCUJyeO+7YP7fwF8fiSF
 9FaqRQAAAABJRU5ErkJggg==
 "
-           id="image5216"
-           x="197.68602"
-           y="-294.54959"
-           transform="matrix(1,0,0,-1,-27.501556,0)"
-           clip-path="url(#clipPath5439)" />
-        <image
-           width="122.78774"
-           height="429.16104"
-           preserveAspectRatio="none"
-           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZwAAAWgCAYAAABqtvX8AAABXWlDQ1BJQ0MgUHJvZmlsZQAAKJF1
+             id="image5216"
+             x="197.68602"
+             y="-294.54959"
+             transform="matrix(1,0,0,-1,-27.501556,0)"
+             clip-path="url(#clipPath5439)" />
+          <image
+             width="122.78774"
+             height="429.16104"
+             preserveAspectRatio="none"
+             xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZwAAAWgCAYAAABqtvX8AAABXWlDQ1BJQ0MgUHJvZmlsZQAAKJF1
 kL9LAmEYx7+WIdkNDtHk4NIgWdgp7WYRgsShRT+287zO4NSXu5OIINpa2opoaI6mVg0Kqr8gCAqa
 GiqHxuAgUq7n9Sy16Hn58nz48n1eHh6gT5AZ070AiiXLyMxNh5ZXVkO+OgYRhB9jCMuKyRKSlKYI
 vntv2ffw8H43zv/K1s7qR6nrl923xvnW3v7833xP+fOqqVBvkESFGRbgiRJLGxbjvEM8bNBSxAec
@@ -21100,15 +21103,30 @@ jv/dsB3v4is5+eEmmBOgMa7mwpG/Rdb+7wKtvNl1vimHjNgSpJlmx+kvj/TKiHLBSEdX/uWEcTQ5
 I1zk1IHybKhaWs2w9kdOn6HJqG+jGuewTWq28gafTpc7Rou4YXqezc55EK0x58x4m7NGyldzyTEs
 KjefmDcVXKdG6kbM2N1OP9wWY84LGOvPB3fT79ei/wOmGxwPXxfYWwAAAABJRU5ErkJggg==
 "
-           id="image5240"
-           x="74.898331"
-           y="-294.54959"
-           transform="scale(1,-1)"
-           clip-path="url(#clipPath5443)" />
+             id="image5240"
+             x="74.898331"
+             y="-294.54959"
+             transform="scale(1,-1)"
+             clip-path="url(#clipPath5443)" />
+        </g>
+        <path
+           d="M 2.4493677,533.32386 H 73.33776 v -10.8192 H 2.4493677 Z"
+           style="font-variation-settings:normal;vector-effect:none;fill:none;fill-opacity:1;stroke:#f47216;stroke-width:1.60538;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:22.9256;stroke-dasharray:3.21077, 1.60538;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
+           id="path108"
+           inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/general/tut_gr_st/vector files/fig02.png"
+           inkscape:export-xdpi="300"
+           inkscape:export-ydpi="300" />
+        <path
+           d="M 162.96156,501.5723 H 295.27868 V 488.25808 H 162.96156 Z"
+           style="font-variation-settings:normal;vector-effect:none;fill:none;fill-opacity:1;stroke:#f47216;stroke-width:1.60538;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:22.9256;stroke-dasharray:3.21077, 1.60538;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
+           id="path4288"
+           inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/general/tut_gr_st/vector files/fig02.png"
+           inkscape:export-xdpi="300"
+           inkscape:export-ydpi="300" />
       </g>
       <g
          id="g19762"
-         transform="matrix(0.81021509,0,0,0.81021509,-289.21604,391.03676)"
+         transform="matrix(0.81021509,0,0,0.81021509,-289.21604,380.12094)"
          inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/general/tut_gr_st/vector files/fig02.png"
          inkscape:export-xdpi="300"
          inkscape:export-ydpi="300">
@@ -21131,7 +21149,7 @@ KjefmDcVXKdG6kbM2N1OP9wWY84LGOvPB3fT79ei/wOmGxwPXxfYWwAAAABJRU5ErkJggg==
       </g>
       <g
          id="g24929"
-         transform="matrix(0.81021509,0,0,0.81021509,-210.14853,153.06038)"
+         transform="matrix(0.81021509,0,0,0.81021509,-210.14853,142.14456)"
          inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/general/tut_gr_st/vector files/fig02.png"
          inkscape:export-xdpi="300"
          inkscape:export-ydpi="300">
@@ -21154,7 +21172,7 @@ KjefmDcVXKdG6kbM2N1OP9wWY84LGOvPB3fT79ei/wOmGxwPXxfYWwAAAABJRU5ErkJggg==
       </g>
       <g
          id="g19767"
-         transform="matrix(0.81021509,0,0,0.81021509,-372.00193,153.06038)"
+         transform="matrix(0.81021509,0,0,0.81021509,-372.00193,142.14456)"
          inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/general/tut_gr_st/vector files/fig02.png"
          inkscape:export-xdpi="300"
          inkscape:export-ydpi="300">
@@ -21175,20 +21193,6 @@ KjefmDcVXKdG6kbM2N1OP9wWY84LGOvPB3fT79ei/wOmGxwPXxfYWwAAAABJRU5ErkJggg==
              x="470.56808"
              y="-577.20105">a</tspan></text>
       </g>
-      <path
-         d="M 2.4493682,535.23968 H 73.33776 v -10.8192 H 2.4493682 Z"
-         style="font-variation-settings:normal;vector-effect:none;fill:none;fill-opacity:1;stroke:#f47216;stroke-width:1.60538;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:22.9256;stroke-dasharray:3.21077, 1.60538;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
-         id="path108"
-         inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/general/tut_gr_st/vector files/fig02.png"
-         inkscape:export-xdpi="300"
-         inkscape:export-ydpi="300" />
-      <path
-         d="M 162.96156,503.48812 H 295.27868 V 490.1739 H 162.96156 Z"
-         style="font-variation-settings:normal;vector-effect:none;fill:none;fill-opacity:1;stroke:#f47216;stroke-width:1.60538;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:22.9256;stroke-dasharray:3.21077, 1.60538;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
-         id="path4288"
-         inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/general/tut_gr_st/vector files/fig02.png"
-         inkscape:export-xdpi="300"
-         inkscape:export-ydpi="300" />
     </g>
     <image
        width="497.70764"
