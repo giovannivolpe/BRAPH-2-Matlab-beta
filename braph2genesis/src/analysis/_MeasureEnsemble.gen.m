@@ -129,6 +129,7 @@ if me.get('A').get('G_DICT').get('LENGTH')
 else
     g = me.get('A').get('GRAPH_TEMPLATE');
 end
+g.memorize('A');
 
 measure = me.get('MEASURE');
 

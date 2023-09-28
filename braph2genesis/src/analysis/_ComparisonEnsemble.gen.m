@@ -61,6 +61,12 @@ Upper value of 95% confidence interval
 
 %%% ¡prop!
 %%%% ¡id!
+ComparisonEnsemble.QVALUE
+%%%% ¡title!
+QVALUE
+
+%%% ¡prop!
+%%%% ¡id!
 ComparisonEnsemble.PFC
 %%%% ¡title!
 Measure Comparison Plot
@@ -136,6 +142,7 @@ if cp.get('C').get('A1').get('G_DICT').get('LENGTH')
 else
     g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 end
+g.memorize('A');
 measure = cp.get('MEASURE');
 
 pr = PanelPropCell('EL', cp, 'PROP', ComparisonEnsemble.DIFF, varargin{:});
@@ -206,6 +213,7 @@ if cp.get('C').get('A1').get('G_DICT').get('LENGTH')
 else
     g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 end
+g.memorize('A');
 measure = cp.get('MEASURE');
 
 pr = PanelPropCell('EL', cp, 'PROP', ComparisonEnsemble.P1, varargin{:});
@@ -276,6 +284,7 @@ if cp.get('C').get('A1').get('G_DICT').get('LENGTH')
 else
     g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 end
+g.memorize('A');
 measure = cp.get('MEASURE');
 
 pr = PanelPropCell('EL', cp, 'PROP', ComparisonEnsemble.P2, varargin{:});
@@ -346,6 +355,7 @@ if cp.get('C').get('A1').get('G_DICT').get('LENGTH')
 else
     g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 end
+g.memorize('A');
 measure = cp.get('MEASURE');
 
 pr = PanelPropCell('EL', cp, 'PROP', ComparisonEnsemble.CIL, varargin{:});
@@ -416,6 +426,7 @@ if cp.get('C').get('A1').get('G_DICT').get('LENGTH')
 else
     g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 end
+g.memorize('A');
 measure = cp.get('MEASURE');
 
 pr = PanelPropCell('EL', cp, 'PROP', ComparisonEnsemble.CIU, varargin{:});
