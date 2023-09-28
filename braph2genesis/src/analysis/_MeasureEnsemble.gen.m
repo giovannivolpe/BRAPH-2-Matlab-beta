@@ -124,10 +124,10 @@ end
 
 value = m_av;
 %%%% ¡gui!
-if isempty(me.get('A').get('G_DICT'))
-    g = me.get('A').get('GRAPH_TEMPLATE');
-else
+if me.get('A').get('G_DICT').get('LENGTH')
     g = me.get('A').get('G_DICT').get('IT', 1);
+else
+    g = me.get('A').get('GRAPH_TEMPLATE');
 end
 
 measure = me.get('MEASURE');
