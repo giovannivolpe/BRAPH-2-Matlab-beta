@@ -60,7 +60,7 @@ AXIS
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the panel figure binodal unilayer group comparison on brain surface figure .
+ELCLASS (constant, string) is the class of the % % % .
 %%%% ¡default!
 'ComparisonGroupBrainPF_BU'
 
@@ -112,56 +112,6 @@ DELETE (query, logical) resets the handles when the panel figure brain surface i
 value = calculateValue@ComparisonGroupBrainPF(pf, ComparisonGroupBrainPF.DELETE, varargin{:}); % also warning
 if value
 
-end
-
-%%% ¡prop!
-SHOWMEASURE (figure, logical) resets the handles when the panel figure brain surface is deleted.
-%%%% ¡default!
-false
-%%%% ¡postset!
-m = pf.get('CP');
-% update spheres
-if ~pf.get('SHOWMEASURE')  % false
-    if pf.get('SPHS') % spheres
-        sphs = pf.get('SPH_DICT').get('IT_LIST');
-        for i = 1:1:length(sphs)
-            set(sphs{i}, 'SPHERESIZE', SettingsSphere.getPropDefault(23))
-        end
-    end
-    if pf.get('SYMS') % spheres
-        syms = pf.get('SYM_DICT').get('IT_LIST');
-        for i = 1:1:length(syms)
-            set(syms{i}, 'SYMBOLSIZE', SettingsSymbol.getPropDefault(20))
-        end
-    end
-else % true
-    % spheres
-    if pf.get('SPHS') % spheres
-        m_val = cell2mat(m.get('CP'));
-        sphs = pf.get('SPH_DICT').get('IT_LIST');
-        for i = 1:1:length(sphs)
-            set(sphs{i}, 'SPHERESIZE', m_val(i)*0.1);
-        end
-    end
-    % triggers the update of SPH_DICT
-    pf.set('SPH_DICT', pf.get('SPH_DICT'))
-
-    % symbols
-    if pf.get('SYMS') % spheres
-        m_val = cell2mat(m.get('CP'));
-        syms = pf.get('SYM_DICT').get('IT_LIST');
-        for i = 1:1:length(syms)
-            set(syms{i}, 'SYMBOLSIZE', m_val(i)*0.2)
-        end
-    end
-    % triggers the update of SYM_DICT
-    pf.set('SYM_DICT', pf.get('SYM_DICT'))
-end
-
-% update state of toggle tool
-toolbar = pf.get('H_TOOLBAR');
-if check_graphics(toolbar, 'uitoolbar')
-    set(findobj(toolbar, 'Tag', 'TOOL.SHOWMEASURE'), 'State', pf.get('SHOWMEASURE'))
 end
 
 %%% ¡prop!

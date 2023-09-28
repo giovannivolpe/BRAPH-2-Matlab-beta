@@ -61,7 +61,7 @@ AXIS
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the panel figure binodal bilayer group comparison on brain surface figure.
+ELCLASS (constant, string) is the class of the  % % % .
 %%%% ¡default!
 'ComparisonGroupBrainPF_BB'
 
