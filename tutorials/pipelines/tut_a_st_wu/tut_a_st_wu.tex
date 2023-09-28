@@ -111,18 +111,17 @@ Importantly, the parameters you select for this analysis (graph and measures par
  Next, the measure window will appear, allowing you to choose the rules or parameters (\Figref{fig:05}b). In this instance, the rule applies to the calculation of triangles in directed graphs. However, since we're working with an undirected graph, we will keep the default option (\Figref{fig:05}b).
 After the rule is set, you can calculate the measure by pressing the "C" (\Figref{fig:05}c) and the results will appear in a new table within the same panel (\Figref{fig:05}d). Also notice that after the measure is calculated, the rule is blocked (\Figref{fig:05}d).
  
- If you want to visualize the results, select the measure and press \fn{Plot Selected Measures on Brain} in the analysis' GUI (\Figref{fig:06}a). In settings (\Figref{fig:06}b), you can change the visualization of the plots and save them. 
+ If you want to visualize the results, select the measure and press \fn{Plot Selected Measures on Brain} in the analysis' GUI (\Figref{fig:06}a). In settings (\Figref{fig:06}b-c), you can change the visualization of the plots and save them. 
  
-	\fig{figure}
+	\fig{figure*}
 	{fig:06}
 	{
 	\includegraphics{fig06.jpg}
 	}
-	{Visualize a connectivity measure in a brain plot (Figure TBD)}
+	{Visualize the measure's results in a brain plot}
 	{
-	{\bf a} Click on \fn{Plot Selected Measures on Brain} in the analysis' GUI.
-        {\bf b} In the new window, press the button settings to obtain further visualization options of the results.
-        {\bf c} Press on Measures to show the values of \fn{Clustering}. The size of the spheres and the color are proportional to the measure's value.   
+	{\bf a} Click on \fn{Plot Selected Measures on Brain} in the analysis' GUI and a brain surface with the results from the calculated measures will appear. The size of the spheres and the color are proportional to the measure's value.   
+        {\bf b} In the new window, press the button settings to obtain further visualization options of the results {\bf c}. 
 	}
  
  Finally, when you do right click, in the \fn{GRAPH $\&$ MEASURES} panel, there are other options you can explore such as \fn{Plot Graph Plot} (connectivity adjacency matrix) as well as Data Graph (labels of brain regions, values of the adjacency matrix, options to plot matrix and histogram), all of which can also be saved.
@@ -168,4 +167,16 @@ To obtain the results from the measure/s comparison, select the measures in the 
 	{\bf a} Click on \fn{Data Selected Comparisons} in the Comparisons panel.
 	{\bf b} In this new window, you can see the results from the comparison: the difference values between groups, the p-values (1-tailed and 2-tailed), as well as the confidence intervals.
 	}
+Finally, we can visualize the comparison results..
+  	\fig{figure*}
+	{fig:10}
+	{
+	\includegraphics{fig10.jpg}
+	}
+ 	{Visualize the comparison results in a brain plot}
+ 	{
+ 	{\bf a} Click on \fn{Plot Selected Comparisons on Brain} in the comparison's GUI and a brain surface with the results from the calculated measures comparison will appear. The size of the spheres is proportional to the measure value difference between groups and the colors indicate if it is a positive or negative difference.   
+        {\bf b} In the new window, press the button settings to obtain further visualization options of the results. 
+        {\bf c} In the settings, you can activate the FDR correction by setting the desired q value and changing from off to on the button.
+        }
 \end{document}
