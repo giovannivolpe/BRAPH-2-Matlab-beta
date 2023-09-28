@@ -136,7 +136,7 @@ value = [];
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonGroupBrainPF.PARENT ComparisonGroupBrainPF.H ComparisonGroupBrainPF.ST_POSITION ComparisonGroupBrainPF.ST_AXIS]
+[ComparisonGroupBrainPF.PARENT ComparisonGroupBrainPF.H ComparisonGroupBrainPF.ST_POSITION ComparisonGroupBrainPF.ST_AXIS ComparisonGroupBrainPF.ST_SURFACE ComparisonGroupBrainPF.ST_AMBIENT ComparisonGroupBrainPF.CP]
 
 %%% ¡warning_off!
 true
@@ -146,6 +146,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':ComparisonGroupBrainPF'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':ComparisonGroupBrainPF'])

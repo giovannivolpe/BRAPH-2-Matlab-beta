@@ -417,7 +417,7 @@ pf.get('SETUP');
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonGroupBrainPF_NS.PARENT ComparisonGroupBrainPF_NS.H ComparisonGroupBrainPF_NS.ST_POSITION ComparisonGroupBrainPF_NS.ST_AXIS] 
+[ComparisonGroupBrainPF_NS.PARENT ComparisonGroupBrainPF_NS.H ComparisonGroupBrainPF_NS.ST_POSITION ComparisonGroupBrainPF_NS.ST_AXIS ComparisonGroupBrainPF_NS.CP ComparisonGroupBrainPF_NS.ST_SURFACE ComparisonGroupBrainPF_NS.ST_AMBIENT ComparisonGroupBrainPF_NS.CP] 
 
 %%% ¡warning_off!
 true

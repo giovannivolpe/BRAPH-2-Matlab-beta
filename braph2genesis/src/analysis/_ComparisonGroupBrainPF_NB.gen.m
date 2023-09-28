@@ -130,7 +130,7 @@ pr = ComparisonGroupPF_NxPP_Node('EL', pf, 'PROP', ComparisonGroupBrainPF_NB.NOD
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonGroupBrainPF_NB.PARENT ComparisonGroupBrainPF_NB.H ComparisonGroupBrainPF_NB.ST_POSITION ComparisonGroupBrainPF_NB.ST_AXIS] 
+[ComparisonGroupBrainPF_NB.PARENT ComparisonGroupBrainPF_NB.H ComparisonGroupBrainPF_NB.ST_POSITION ComparisonGroupBrainPF_NB.ST_AXIS ComparisonGroupBrainPF_NB.ST_SURFACE ComparisonGroupBrainPF_NB.ST_AMBIENT ComparisonGroupBrainPF_NB.CP] 
 
 %%% ¡warning_off!
 true

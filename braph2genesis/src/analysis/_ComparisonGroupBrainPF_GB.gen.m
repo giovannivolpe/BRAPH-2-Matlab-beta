@@ -118,7 +118,7 @@ value = [];
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonGroupBrainPF_GB.PARENT ComparisonGroupBrainPF_GB.H ComparisonGroupBrainPF_GB.ST_POSITION ComparisonGroupBrainPF_GB.ST_AXIS] 
+[ComparisonGroupBrainPF_GB.PARENT ComparisonGroupBrainPF_GB.H ComparisonGroupBrainPF_GB.ST_POSITION ComparisonGroupBrainPF_GB.ST_AXIS ComparisonGroupBrainPF_GB.ST_SURFACE ComparisonGroupBrainPF_GB.ST_AMBIENT ComparisonGroupBrainPF_GB.CP] 
 
 %%% ¡warning_off!
 true

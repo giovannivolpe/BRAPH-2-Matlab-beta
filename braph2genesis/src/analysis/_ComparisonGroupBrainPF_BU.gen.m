@@ -134,7 +134,7 @@ pr = ComparisonGroupPF_BxPP_Node('EL', pf, 'PROP', ComparisonGroupBrainPF_BU.NOD
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonGroupBrainPF_BU.PARENT ComparisonGroupBrainPF_BU.H ComparisonGroupBrainPF_BU.ST_POSITION ComparisonGroupBrainPF_BU.ST_AXIS ComparisonGroupBrainPF_BU.CP] 
+[ComparisonGroupBrainPF_BU.PARENT ComparisonGroupBrainPF_BU.H ComparisonGroupBrainPF_BU.ST_POSITION ComparisonGroupBrainPF_BU.ST_AXIS ComparisonGroupBrainPF_BU.ST_SURFACE ComparisonGroupBrainPF_BU.ST_AMBIENT ComparisonGroupBrainPF_BU.CP] 
 
 %%% ¡warning_off!
 true

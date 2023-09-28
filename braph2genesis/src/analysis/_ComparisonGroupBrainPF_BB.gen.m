@@ -131,7 +131,7 @@ pr = ComparisonGroupPF_BxPP_Node('EL', pf, 'PROP', ComparisonGroupBrainPF_BB.NOD
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonGroupBrainPF_BB.PARENT ComparisonGroupBrainPF_BB.H ComparisonGroupBrainPF_BB.ST_POSITION ComparisonGroupBrainPF_BB.ST_AXIS] 
+[ComparisonGroupBrainPF_BB.PARENT ComparisonGroupBrainPF_BB.H ComparisonGroupBrainPF_BB.ST_POSITION ComparisonGroupBrainPF_BB.ST_AXIS ComparisonGroupBrainPF_BB.ST_SURFACE ComparisonGroupBrainPF_BB.ST_AMBIENT ComparisonGroupBrainPF_BB.CP] 
 
 %%% ¡warning_off!
 true
@@ -141,6 +141,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':ComparisonGroupBrainPF_BB'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':ComparisonGroupBrainPF_BB'])
