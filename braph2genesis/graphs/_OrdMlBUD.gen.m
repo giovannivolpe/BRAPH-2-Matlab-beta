@@ -282,7 +282,7 @@ value = ones(1, length(densities)) * l / length(densities);
 ALAYERLABELS (query, stringlist) returns the layer labels for A.
 %%%% ¡calculate!
 alayerlabels = g.get('LAYERLABELS');
-if ~isa(g.get('A'), 'NoValue') && length(alayerlabels) ~= g.get('LAYERNUMBER') % ensures that it's not unecessarily calculated
+if ~isa(g.getr('A'), 'NoValue') && length(alayerlabels) ~= g.get('LAYERNUMBER') % ensures that it's not unecessarily calculated
     densities = cellfun(@(x) [num2str(x) '%'], num2cell(g.get('DENSITIES')), 'uniformoutput', false);
 
     if length(alayerlabels) == length(g.get('B'))
