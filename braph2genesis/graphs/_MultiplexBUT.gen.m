@@ -247,7 +247,7 @@ value = ones(1, length(thresholds)) * l / length(thresholds);
 ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.
 %%%% ¡calculate!
 alayerlabels = g.get('LAYERLABELS');
-if ~isa(g.getr('A'), 'NoValue') && length(alayerlabels) ~= g.get('LAYERNUMBER') % ensures that it's not unecessarily calculated
+if ~isa(g.get('A'), 'NoValue') && length(alayerlabels) ~= g.get('LAYERNUMBER') % ensures that it's not unecessarily calculated
     thresholds = cellfun(@num2str, num2cell(g.get('THRESHOLDS')), 'uniformoutput', false);
 
     if length(alayerlabels) == length(g.get('B'))
