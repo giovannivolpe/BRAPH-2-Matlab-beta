@@ -514,6 +514,7 @@ end
 function cb_open_elements(~, ~)
     c = pr.get('EL');
     g = c.get('A1').get('G');
+    
     m_list = g.get('COMPATIBLE_MEASURES');
     
     f = ancestor(pr.get('H'), 'figure'); % parent GUI 
@@ -528,6 +529,7 @@ function cb_open_elements(~, ~)
         measure = m_list{i}; % also key
 
         cp = c.get('COMPARISON', measure);
+        cp.get('C').get('A1').memorize('G').memorize('A'); % memorizing A to get correct ALAYERLABELS
         
         if ~gui_cp_dict.get('CONTAINS_KEY', measure)
             gui = GUIElement( ...
