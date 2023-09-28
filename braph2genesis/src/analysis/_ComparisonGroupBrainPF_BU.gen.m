@@ -95,26 +95,6 @@ NOTES (metadata, string) are some specific notes about the panel figure binodal 
 'ComparisonGroupBrainPF_BU notes'
 
 %%% ¡prop!
-DRAW (query, logical) draws the figure brain atlas.
-%%%% ¡calculate!
-value = calculateValue@ComparisonGroupBrainPF(pf, ComparisonGroupBrainPF.DRAW, varargin{:}); % also warning
-if value
-    % reset the ambient lighting
-    pf.get('ST_AMBIENT').get('SETUP')
-
-    % call setup
-    pf.get('SETUP');
-end
-
-%%% ¡prop!
-DELETE (query, logical) resets the handles when the panel figure brain surface is deleted.
-%%%% ¡calculate!
-value = calculateValue@ComparisonGroupBrainPF(pf, ComparisonGroupBrainPF.DELETE, varargin{:}); % also warning
-if value
-
-end
-
-%%% ¡prop!
 SETUP (query, empty) calculates the group comparison on brain surface figure value and stores it.
 %%%% ¡calculate!
 %%%__WARN_TBI__

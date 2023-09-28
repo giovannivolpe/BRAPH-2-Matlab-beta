@@ -89,31 +89,22 @@ NOTES (metadata, string) are some specific notes about the panel figure global s
 'ComparisonGroupBrainPF_GS notes'
 
 %%% ¡prop!
-DRAW (query, logical) draws the figure brain atlas.
-%%%% ¡calculate!
-value = calculateValue@ComparisonGroupBrainPF(pf, ComparisonGroupBrainPF.DRAW, varargin{:}); % also warning
-if value
-    % reset the ambient lighting
-    pf.get('ST_AMBIENT').get('SETUP')
-
-    % call setup
-    pf.get('SETUP');
-end
-
-%%% ¡prop!
-DELETE (query, logical) resets the handles when the panel figure brain surface is deleted.
-%%%% ¡calculate!
-value = calculateValue@ComparisonGroupBrainPF(pf, ComparisonGroupBrainPF.DELETE, varargin{:}); % also warning
-if value
-
-end
-
-%%% ¡prop!
 SETUP (query, empty) calculates the group comparison on brain surface figure value and stores it.
 %%%% ¡calculate!
 %%%__WARN_TBI__
 value = [];
 
+%% ¡props!
+
+%%% ¡prop!
+NODES (figure, rvector) are the node numbers of the global group comparison figure on brain surface.
+%%%% ¡_gui!
+% % % bas = pf.get('M').get('G').get('BAS');
+% % % ba = bas{1};
+% % % 
+% % % pr = PP_BrainRegion('EL', pf, 'PROP', PFMeasureNU.BR1_ID, ...
+% % %     'BA', ba, ...
+% % %     varargin{:});
 
 %% ¡tests!
 
@@ -128,6 +119,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':ComparisonGroupBrainPF_GS'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':ComparisonGroupBrainPF_GS'])
