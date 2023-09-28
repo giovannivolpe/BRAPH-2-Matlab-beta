@@ -503,6 +503,7 @@ function cb_open_elements(~, ~)
     c = pr.get('EL');
     g = c.get('A1').get('GRAPH_TEMPLATE');
     g.memorize('A'); % memorizing A to get correct ALAYERLABELS
+    
     m_list = g.get('COMPATIBLE_MEASURES');
     
     f = ancestor(pr.get('H'), 'figure'); % parent GUI 
