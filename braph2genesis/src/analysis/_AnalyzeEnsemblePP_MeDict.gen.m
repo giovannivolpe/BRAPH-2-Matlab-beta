@@ -97,7 +97,7 @@ function set_table()
     if isempty(a.getr(prop).get('IT_LIST'))
         m_list_already_calculated = {};
     else
-        m_list_already_calculated = cellfun(@(x) x.get('ELCLASS'), g.get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
+        m_list_already_calculated = cellfun(@(x) x.get('ID'), g.get('M_DICT').get('IT_LIST'), 'UniformOutput', false);
     end
     
     rowname = cell(length(m_list), 1);
