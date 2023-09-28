@@ -159,7 +159,7 @@ Brain Region LABELS PROPERTIES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the panel figure for measure group brain.
+ELCLASS (constant, string) is the class of the % % %.
 %%%% ¡default!
 'MeasureGroupBrainPF_NS'
 
