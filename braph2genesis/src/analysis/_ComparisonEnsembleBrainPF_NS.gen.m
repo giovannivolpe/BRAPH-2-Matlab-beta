@@ -168,7 +168,7 @@ Brain Region LABELS PROPERTIES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the panel figure nodal superglobal ensemble-based comparison figure on brain surface.
+ELCLASS (constant, string) is the class of % % % .
 %%%% ¡default!
 'ComparisonEnsembleBrainPF_NS'
 
