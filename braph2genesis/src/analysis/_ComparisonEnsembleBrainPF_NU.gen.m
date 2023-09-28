@@ -222,6 +222,10 @@ if isempty(diffs)
     return
 end
 diff = diffs{layer};
+if isempty(diff)
+    value = {};
+    return
+end
 p2s = cp.get('P2');
 p2 = p2s{layer};
 
