@@ -44,7 +44,7 @@ gui.get('DRAW')¥\circled{3}\circlednote{3}{draws the GUI.}¥
 gui.get('SHOW') ¥\circled{4}\circlednote{4}{shows the GUI.}¥
 \end{lstlisting}
 
-Once the pipeline is uploaded, you can see a GUI that contains different steps: to upload a brain atlas, to upload the structural data of two groups, analyze them, and finally, to compare the groups (\Figref{fig:02}a). 
+Once the pipeline is uploaded, you can see a GUI that contains different steps: to upload a brain atlas, to upload the connectivity data of two groups, analyze them, and finally, to compare the groups (\Figref{fig:02}a). 
 
 \section{Step 1: Load the Brain Atlas}
 \Figref{fig:02} shows how to upload and plot the brain atlas that you used to extract the \emph{connectivity data} for your analysis. For more information on where to find different atlases or how to change plotting settings on the brain surface, check the \emph{Brain Atlas} tutorial.
@@ -72,13 +72,13 @@ After you loaded the brain atlas, you can upload the \emph{connectivity data} fo
 	}
 	{Loading the Groups Data}
 	{
-	{\bf a} From the pipeline GUI, click on \fn{Load Group ST 1 XLS} to load the data of group 1, and \fn{Load Group ST 2 XLS} to load the data of group 2.
+	{\bf a} From the pipeline GUI, click on \fn{Load Group CON 1 from XLS} to load the data of group 1, and \fn{Load Group CON 2 from XLS} to load the data of group 2.
 	{\bf b} Data for group 1 is uploaded. {\bf c} Data for group 2 is uploaded.
 	}
 
 \section{Step 3: Analysing the Data of Group 1}
  
-After you have loaded the data for both groups, you can analyze the data of your first group by clicking on \fn{Analyze Group 1} (\Figref{fig:04}a-b). A new interface will be shown that allows you to pre-calculate network measures for each group and explore them. First of all, you can specify the parameters for constructing the graph from the connectivity group data (\Figref{fig:04}c). Especially, in the thresholds section, you can specify the thresholds by filling “[0.4 0.6 0.8]” or “0.4:0.2:0.8”, in this tutorial we keep the default thresholds. Then, in order to visualize the list of measures you can press "C", in the panel \fn{Group-averaged Measures} (\Figref{fig:04}d), and a new table with all compatible measures will appear (\Figref{fig:04}e). 
+After you have loaded the data for both groups, you can analyze the data of your first group by clicking on \fn{Analyze Group 1} (\Figref{fig:04}a-b). A new interface will be shown that allows you to pre-calculate network measures for each group and explore them. First of all, you can specify the parameters for constructing the graph from the connectivity group data (\Figref{fig:04}c). Especially, in the thresholds section, you can specify the thresholds by filling in “[0.4 0.6 0.8]” or “0.4:0.2:0.8”, in this tutorial we keep the default thresholds. Then, in order to visualize the list of measures you can press "C", in the panel \fn{Group-averaged Measures} (\Figref{fig:04}d), and a new table with all compatible measures will appear (\Figref{fig:04}e). 
 
 Importantly, the parameters you select for this analysis (graph and measures parameters) will be fixed for the analysis of the second group and for the group comparisons.
 
@@ -90,7 +90,7 @@ Importantly, the parameters you select for this analysis (graph and measures par
 	{Analyze the Group Data}
 	{
 	{\bf a} Click on \fn{Analyze Group 1} in the pipeline's GUI.
-        {\bf b} After clicking on \fn{Analyze Group 1} in the pipeline's GUI, a new window will appear where first you can select the parameters for the graph construction {\bf c}. In this pipeline, you can select the statistical test to be used for the correlations {\bf d}, and what you want to do with the negative correlation weights {\bf e}.
+        {\bf b} After clicking on \fn{Analyze Group 1} in the pipeline's GUI, a new window will appear where first you can select the parameters for the graph construction {\bf c}, in this pipeline you should specify new or accept the default thresholds. Then, in order to visualize the list of measures you can press "C", in the panel \fn{Group-averaged Measures} {\bf d}, and a new table with all compatible measures will appear {\bf e}. 
 	}
 
 	\fig{figure}
