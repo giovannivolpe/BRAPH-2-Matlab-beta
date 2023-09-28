@@ -415,11 +415,10 @@ CIU (result, cell) is the upper value of the 95%% confidence interval.
 results = cp.memorize('CALCULATE_RESULTS');
 value = results{5}; % ci_upper
 %%%% ¡gui!
-%g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
-if isempty(cp.get('C').get('A1').get('G_DICT'))
-    g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
-else
+if cp.get('C').get('A1').get('G_DICT').get('LENGTH')
     g = cp.get('C').get('A1').get('G_DICT').get('IT', 1);
+else
+    g = cp.get('C').get('A1').get('GRAPH_TEMPLATE');
 end
 measure = cp.get('MEASURE');
 
