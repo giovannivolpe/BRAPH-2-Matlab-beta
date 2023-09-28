@@ -5,8 +5,8 @@
    version="1.1"
    id="svg2"
    width="177.8mm"
-   height="50mm"
-   viewBox="0 0 671.99998 188.97637"
+   height="70mm"
+   viewBox="0 0 671.99998 264.56692"
    sodipodi:docname="fig02_big.svg"
    inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -604,7 +604,7 @@
        d="M 0,626.00002 V 427.57483 H 504 V 626.00002 H 0"
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.0564236"
        id="path12"
-       inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/pipelines/tut_a_st/vector files/fig02.png"
+       inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/pipelines/tut_a_con_but/vector files/fig02.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <rect
@@ -618,7 +618,10 @@
        ry="1.2647207" />
     <g
        id="g5844"
-       transform="translate(-4.9959677e-7,-10.91582)">
+       transform="translate(-4.9959677e-7,-10.91582)"
+       inkscape:export-filename="/Users/anna.canal.garcia/Documents/GitHub/BRAPH-2-Matlab-beta/tutorials/pipelines/tut_a_con_but/vector files/fig02.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
       <g
          id="g5449"
          transform="matrix(0.85348601,0,0,0.85348601,-62.706179,367.52049)">
