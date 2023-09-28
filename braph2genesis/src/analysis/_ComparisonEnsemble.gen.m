@@ -71,12 +71,6 @@ ComparisonEnsemble.PFB
 %%%% ¡title!
 Measure Comparison Brain
 
-%%% ¡prop!
-%%%% ¡id!
-ComparisonEnsemble.PFBG
-%%%% ¡title!
-Measure Comparison Brain Graph
-
 %% ¡props_update!
 
 %%% ¡prop!
