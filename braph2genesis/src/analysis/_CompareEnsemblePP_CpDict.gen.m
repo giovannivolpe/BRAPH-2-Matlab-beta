@@ -1,8 +1,8 @@
 %% ¡header!
-CompareEnsemblePP_CpDict < PanelProp (pr, comparison plot) plots the panel to manage the comparisons of an ensemble analysis.
+CompareEnsemblePP_CpDict < PanelProp (pr, comparison plot for ensemble analysis) plots the panel to manage the comparisons of an ensemble analysis.
 
 %%% ¡description!
-CompareEnsemblePP_CpDict plots the panel to manage the comparisons of an ensemble analysis.
+A Comparison Plot for Ensemble Analysis (CompareEnsemblePP_CpDict) plots the panel to manage the comparisons of an ensemble analysis.
 It is intended to be used only with the property CP_DICT of CompareEnsemble.
 
 %%% ¡seealso!
@@ -11,37 +11,37 @@ uitable, CompareEnsemble, ComparisonEnsemble
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the comparison panel.
+ELCLASS (constant, string) is the class of the comparison panel for ensemble analysis.
 %%%% ¡default!
 'CompareEnsemblePP_CpDict'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the comparison panel.
+NAME (constant, string) is the name of the comparison panel for ensemble analysis.
 %%%% ¡default!
 'CompareEnsemblePP_CpDict'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the comparison panel.
+DESCRIPTION (constant, string) is the description of the comparison panel for ensemble analysis.
 %%%% ¡default!
-'CompareEnsemblePP_CpDict plots the panel to manage the comparisons of an ensemble analysis.'
+'A Comparison Plot for Ensemble Analysis (CompareEnsemblePP_CpDict) plots the panel to manage the comparisons of an ensemble analysis. It is intended to be used only with the property CP_DICT of CompareEnsemble.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the comparison panel.
+TEMPLATE (parameter, item) is the template of the comparison panel for ensemble analysis.
 %%%% ¡settings!
 'CompareEnsemblePP_CpDict'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the comparison panel.
+ID (data, string) is a few-letter code for the comparison panel for ensemble analysis.
 %%%% ¡default!
 'CompareEnsemblePP_CpDict'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the comparison panel.
+LABEL (metadata, string) is an extended label of the comparison panel for ensemble analysis.
 %%%% ¡default!
 'CompareEnsemblePP_CpDict label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the comparison panel.
+NOTES (metadata, string) are some specific notes about the comparison panel for ensemble analysis.
 %%%% ¡default!
 'CompareEnsemblePP_CpDict'
 
