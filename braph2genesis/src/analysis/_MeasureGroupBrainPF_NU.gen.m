@@ -213,6 +213,10 @@ if isempty(m_values)
     return
 end
 m_value = m_values{layer};
+if isempty(m_value)
+    value = {};
+    return
+end
 
 size_diff = pf.get('SIZE_DIFF');
 switch size_diff
