@@ -4,7 +4,7 @@ This section provides a comprehensive introduction to get started with BRAPH 2.0
 
 ## Getting Started
 
-The [Getting Started Tutorial](tut_braph2/tut_braph.pdf) provides a comprehensive introduction to help you get started with BRAPH 2.0. This tutorial covers the essential steps and features of the software, guiding you through the process of installing BRAPH 2.0 and familiarizing yourself with its functionalities and analysis pipelines. Whether you are new to BRAPH or upgrading from a previous version, this tutorial will provide you with the necessary knowledge to begin your analyses.
+The [Getting Started Tutorial](tut_braph2/tut_braph2.pdf) provides a comprehensive introduction to help you get started with BRAPH 2.0. This tutorial covers the essential steps and features of the software, guiding you through the process of installing BRAPH 2.0 and familiarizing yourself with its functionalities and analysis pipelines. Whether you are new to BRAPH or upgrading from a previous version, this tutorial will provide you with the necessary knowledge to begin your analyses.
 
 ## Tutorials to Prepare Your Data in BRAPH 2
 
