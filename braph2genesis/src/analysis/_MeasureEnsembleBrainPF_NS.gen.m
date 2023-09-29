@@ -325,7 +325,7 @@ pf.get('SETUP');
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsembleBrainPF_NS.PARENT MeasureEnsembleBrainPF_NS.H MeasureEnsembleBrainPF_NS.ST_POSITION MeasureEnsembleBrainPF_NS.ST_AXIS MeasureEnsembleBrainPF_NS.ST_SURFACE MeasureEnsembleBrainPF_NS.ST_AMBIENT MeasureEnsembleBrainPF_NS.M]
+[MeasureEnsembleBrainPF_NS.PARENT MeasureEnsembleBrainPF_NS.H MeasureEnsembleBrainPF_NS.ST_POSITION MeasureEnsembleBrainPF_NS.ST_AXIS MeasureEnsembleBrainPF_NS.ST_SURFACE MeasureEnsembleBrainPF_NS.ST_AMBIENT MeasureEnsembleBrainPF_NS.ME]
 
 %%% ¡warning_off!
 true

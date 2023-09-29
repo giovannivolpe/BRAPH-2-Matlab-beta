@@ -79,7 +79,7 @@ value = [];
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsembleBrainPF.PARENT MeasureEnsembleBrainPF.H MeasureEnsembleBrainPF.ST_POSITION MeasureEnsembleBrainPF.ST_AXIS MeasureEnsembleBrainPF.ST_SURFACE MeasureEnsembleBrainPF.ST_AMBIENT MeasureEnsembleBrainPF.M]
+[MeasureEnsembleBrainPF.PARENT MeasureEnsembleBrainPF.H MeasureEnsembleBrainPF.ST_POSITION MeasureEnsembleBrainPF.ST_AXIS MeasureEnsembleBrainPF.ST_SURFACE MeasureEnsembleBrainPF.ST_AMBIENT MeasureEnsembleBrainPF.ME]
 
 %%% ¡warning_off!
 true

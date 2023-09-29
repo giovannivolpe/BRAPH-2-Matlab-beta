@@ -56,7 +56,7 @@ value = [];
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsembleBrainPF_BU.PARENT MeasureEnsembleBrainPF_BU.H MeasureEnsembleBrainPF_BU.ST_POSITION MeasureEnsembleBrainPF_BU.ST_AXIS MeasureEnsembleBrainPF_BU.ST_SURFACE MeasureEnsembleBrainPF_BU.ST_AMBIENT MeasureEnsembleBrainPF_BU.M]
+[MeasureEnsembleBrainPF_BU.PARENT MeasureEnsembleBrainPF_BU.H MeasureEnsembleBrainPF_BU.ST_POSITION MeasureEnsembleBrainPF_BU.ST_AXIS MeasureEnsembleBrainPF_BU.ST_SURFACE MeasureEnsembleBrainPF_BU.ST_AMBIENT MeasureEnsembleBrainPF_BU.ME]
 
 %%% ¡warning_off!
 true
