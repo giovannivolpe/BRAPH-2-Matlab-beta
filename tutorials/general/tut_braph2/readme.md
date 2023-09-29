@@ -1,3 +1,3 @@
-# BRAPH 2.0 — Missing Tutorial
+# BRAPH 2.0 — Missing Page
 
-We are sorry, this tutorial is currently under construction.
+This page is currently under construction. Please return to [Tutorials](../../)
