@@ -597,29 +597,29 @@ function cb_open_mbrain(~, ~)
                 case Measure.GLOBAL % __Measure.GLOBAL__
                     switch Element.getPropDefault(measure, 'SCOPE')
                         case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
-                            mebpf = MeasureEnsembleBrainPF_GS('ME', me, 'BA', brain_atlas)
+                            mebpf = MeasureEnsembleBrainPF_GS('ME', me, 'BA', brain_atlas);
                         case Measure.UNILAYER % __Measure.UNILAYER__
-                            mebpf = MeasureEnsembleBrainPF_GU('ME', me, 'BA', brain_atlas)
+                            mebpf = MeasureEnsembleBrainPF_GU('ME', me, 'BA', brain_atlas);
                         case Measure.BILAYER % __Measure.BILAYER__
-                            mebpf = MeasureEnsembleBrainPF_GB('ME', me, 'BA', brain_atlas)
+                            mebpf = MeasureEnsembleBrainPF_GB('ME', me, 'BA', brain_atlas);
                     end
                 case Measure.NODAL % __Measure.NODAL__
                     switch Element.getPropDefault(measure, 'SCOPE')
                         case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
-                            mebpf = MeasureEnsembleBrainPF_NS('ME', me, 'BA', brain_atlas)
+                            mebpf = MeasureEnsembleBrainPF_NS('ME', me, 'BA', brain_atlas);
                         case Measure.UNILAYER % __Measure.UNILAYER__
-                            mebpf = MeasureEnsembleBrainPF_NU('ME', me, 'BA', brain_atlas)
+                            mebpf = MeasureEnsembleBrainPF_NU('ME', me, 'BA', brain_atlas);
                         case Measure.BILAYER % __Measure.BILAYER__
-                            mebpf = MeasureEnsembleBrainPF_NB('ME', me, 'BA', brain_atlas)
+                            mebpf = MeasureEnsembleBrainPF_NB('ME', me, 'BA', brain_atlas);
                     end
                 case Measure.BINODAL % __Measure.BINODAL__
                     switch Element.getPropDefault(measure, 'SCOPE')
                         case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
-                            mebpf = MeasureEnsembleBrainPF_BS('ME', me, 'BA', brain_atlas)
+                            mebpf = MeasureEnsembleBrainPF_BS('ME', me, 'BA', brain_atlas);
                         case Measure.UNILAYER % __Measure.UNILAYER__
-                            mebpf = MeasureEnsembleBrainPF_BU('ME', me, 'BA', brain_atlas)
+                            mebpf = MeasureEnsembleBrainPF_BU('ME', me, 'BA', brain_atlas);
                         case Measure.BILAYER % __Measure.BILAYER__
-                            mebpf = MeasureEnsembleBrainPF_BB('ME', me, 'BA', brain_atlas)
+                            mebpf = MeasureEnsembleBrainPF_BB('ME', me, 'BA', brain_atlas);
                     end
             end
 
@@ -690,7 +690,7 @@ GUI_M_DICT (gui, idict) contains the GUIs for the measures.
 %%% ¡prop!
 GUI_B_DICT (gui, idict) contains the GUIs for the brain surface.
 %%%% ¡settings!
-'GUIElement'
+'GUIFig'
  
 %% ¡tests!
 

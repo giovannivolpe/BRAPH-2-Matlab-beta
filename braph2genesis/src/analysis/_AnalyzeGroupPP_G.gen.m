@@ -593,29 +593,29 @@ function cb_open_mbrain(~, ~)
                 case Measure.GLOBAL % __Measure.GLOBAL__
                     switch Element.getPropDefault(measure, 'SCOPE')
                         case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
-                            mgbpf = MeasureGroupBrainPF_GS('M', m, 'BA', brain_atlas)
+                            mgbpf = MeasureGroupBrainPF_GS('M', m, 'BA', brain_atlas);
                         case Measure.UNILAYER % __Measure.UNILAYER__
-                            mgbpf = MeasureGroupBrainPF_GU('M', m, 'BA', brain_atlas)
+                            mgbpf = MeasureGroupBrainPF_GU('M', m, 'BA', brain_atlas);
                         case Measure.BILAYER % __Measure.BILAYER__
-                            mgbpf = MeasureGroupBrainPF_GB('M', m, 'BA', brain_atlas)
+                            mgbpf = MeasureGroupBrainPF_GB('M', m, 'BA', brain_atlas);
                     end
                 case Measure.NODAL % __Measure.NODAL__
                     switch Element.getPropDefault(measure, 'SCOPE')
                         case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
-                            mgbpf = MeasureGroupBrainPF_NS('M', m, 'BA', brain_atlas)
+                            mgbpf = MeasureGroupBrainPF_NS('M', m, 'BA', brain_atlas);
                         case Measure.UNILAYER % __Measure.UNILAYER__
-                            mgbpf = MeasureGroupBrainPF_NU('M', m, 'BA', brain_atlas)
+                            mgbpf = MeasureGroupBrainPF_NU('M', m, 'BA', brain_atlas);
                         case Measure.BILAYER % __Measure.BILAYER__
-                            mgbpf = MeasureGroupBrainPF_NB('M', m, 'BA', brain_atlas)
+                            mgbpf = MeasureGroupBrainPF_NB('M', m, 'BA', brain_atlas);
                     end
                 case Measure.BINODAL % __Measure.BINODAL__
                     switch Element.getPropDefault(measure, 'SCOPE')
                         case Measure.SUPERGLOBAL % __Measure.SUPERGLOBAL__
-                            mgbpf = MeasureGroupBrainPF_BS('M', m, 'BA', brain_atlas)
+                            mgbpf = MeasureGroupBrainPF_BS('M', m, 'BA', brain_atlas);
                         case Measure.UNILAYER % __Measure.UNILAYER__
-                            mgbpf = MeasureGroupBrainPF_BU('M', m, 'BA', brain_atlas)
+                            mgbpf = MeasureGroupBrainPF_BU('M', m, 'BA', brain_atlas);
                         case Measure.BILAYER % __Measure.BILAYER__
-                            mgbpf = MeasureGroupBrainPF_BB('M', m, 'BA', brain_atlas)
+                            mgbpf = MeasureGroupBrainPF_BB('M', m, 'BA', brain_atlas);
                     end
             end
     
