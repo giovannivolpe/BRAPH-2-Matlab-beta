@@ -1,11 +1,11 @@
 %% ¡header!
-MeasureGroupBrainPF_NS < MeasureGroupBrainPF (pf, panel figure for nodal superglobal measure group brain) is a plot of a nodal superglobal measure group brain.
+MeasureEnsembleBrainPF_NU < MeasureEnsembleBrainPF (pf, panel figure for nodal unilayer measure group brain) is a plot of a nodal unilayer measure group brain.
 
 %%% ¡description!
-A Panel Figure for a Brain Measure of Analyze Group (MeasureGroupBrainPF_NS) manages the plot of the nodal superglobal measure
+A Panel Figure for a Brain Measure of Analyze Group (MeasureEnsembleBrainPF_NU ) manages the plot of the nodal unilayer measure
  ploted over the brain.  
-MeasureGroupBrainPF_NS utilizes the surface created from BrainAtlasPF to integrate 
- the nodal superglobal meaure into the brain regions.
+MeasureEnsembleBrainPF_NU utilizes the surface created from BrainAtlasPF to integrate 
+ the nodal unilayer meaure into the brain regions.
 
 %%% ¡seealso!
 BrainAtlas, BrainSurface, BrainAtlasPF
@@ -14,145 +14,145 @@ BrainAtlas, BrainSurface, BrainAtlasPF
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.LAYER
+MeasureEnsembleBrainPF_NU.LAYER
 %%%% ¡title!
 Graph LAYER
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.SPHS
+MeasureEnsembleBrainPF_NU.SPHS
 %%%% ¡title!
 Brain Region SPHERES ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.SPH_DICT
+MeasureEnsembleBrainPF_NU.SPH_DICT
 %%%% ¡title!
 Brain Region SPHERES PROPERTIES
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.SIZE_DIFF
+MeasureEnsembleBrainPF_NU.SIZE_DIFF
 %%%% ¡title!
 Show Measure Value with SPHERES SIZE
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.SIZE_SCALE
+MeasureEnsembleBrainPF_NU.SIZE_SCALE
 %%%% ¡title!
 Size SCALE
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.COLOR_DIFF
+MeasureEnsembleBrainPF_NU.COLOR_DIFF
 %%%% ¡title!
 Show Measure Value with SPHERES COLOR
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.ID
+MeasureEnsembleBrainPF_NU.ID
 %%%% ¡title!
 Brain Atlas Figure ID
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.LABEL
+MeasureEnsembleBrainPF_NU.LABEL
 %%%% ¡title!
 Brain Atlas Figure NAME
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.WAITBAR
+MeasureEnsembleBrainPF_NU.WAITBAR
 %%%% ¡title!
 WAITBAR ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.NOTES
+MeasureEnsembleBrainPF_NU.NOTES
 %%%% ¡title!
 Brain Atlas NOTES
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.BKGCOLOR
+MeasureEnsembleBrainPF_NU.BKGCOLOR
 %%%% ¡title!
 BACKGROUND COLOR
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.ST_POSITION
+MeasureEnsembleBrainPF_NU.ST_POSITION
 %%%% ¡title!
 PANEL POSITION
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.VIEW
+MeasureEnsembleBrainPF_NU.VIEW
 %%%% ¡title!
 3D VIEW
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.ST_AXIS
+MeasureEnsembleBrainPF_NU.ST_AXIS
 %%%% ¡title!
 AXIS
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.BRAIN
+MeasureEnsembleBrainPF_NU.BRAIN
 %%%% ¡title!
 BRAIN ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.SURFFILE
+MeasureEnsembleBrainPF_NU.SURFFILE
 %%%% ¡title!
 BRAIN SURFACE
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.ST_SURFACE
+MeasureEnsembleBrainPF_NU.ST_SURFACE
 %%%% ¡title!
 BRAIN COLOR
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.ST_AMBIENT
+MeasureEnsembleBrainPF_NU.ST_AMBIENT
 %%%% ¡title!
 MATERIAL & LIGHTNING
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.SYMS
+MeasureEnsembleBrainPF_NU.SYMS
 %%%% ¡title!
 Brain Region SYMBOLS ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.SYM_DICT
+MeasureEnsembleBrainPF_NU.SYM_DICT
 %%%% ¡title!
 Brain Region SYMBOLS PROPERTIES
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.IDS
+MeasureEnsembleBrainPF_NU.IDS
 %%%% ¡title!
 Brain Region IDs ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.ID_DICT
+MeasureEnsembleBrainPF_NU.ID_DICT
 %%%% ¡title!
 Brain Region IDs PROPERTIES
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.LABS
+MeasureEnsembleBrainPF_NU.LABS
 %%%% ¡title!
 Brain Region LABELS ON/OFF
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NS.LAB_DICT
+MeasureEnsembleBrainPF_NU.LAB_DICT
 %%%% ¡title!
 Brain Region LABELS PROPERTIES
 
@@ -161,7 +161,7 @@ Brain Region LABELS PROPERTIES
 %%% ¡prop!
 ELCLASS (constant, string) is the class of the % % %.
 %%%% ¡default!
-'MeasureGroupBrainPF_NS'
+'MeasureEnsembleBrainPF_NU'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the panel figure for measure group brain.
@@ -171,32 +171,32 @@ NAME (constant, string) is the name of the panel figure for measure group brain.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the panel figure for measure group brain.
 %%%% ¡default!
-'A Panel Figure for a Brain Measure of Analyze Group (MeasureGroupBrainPF_NS ) manages the plot of the nodal superglobal measure ploted over the brain. MeasureGroupBrainPF_NS  utilizes the surface created from BrainAtlasPF to integrate the nodal superglobal meaure into the brain regions.'
+'A Panel Figure for a Brain Measure of Analyze Group (MeasureEnsembleBrainPF_NU) manages the plot of the nodal unilayer measure ploted over the brain. MeasureEnsembleBrainPF_NU  utilizes the surface created from BrainAtlasPF to integrate the nodal unilayer meaure into the brain regions.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the panel figure for measure group brain.
 %%%% ¡settings!
-'MeasureGroupBrainPF_NS'
+'MeasureEnsembleBrainPF_NU'
 
 %%% ¡prop!
 ID (data, string) is a few-letter code for the panel figure for measure group brain.
 %%%% ¡default!
-'MeasureGroupBrainPF_NS ID'
+'MeasureEnsembleBrainPF_NU ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the panel figure for measure group brain.
 %%%% ¡default!
-'MeasureGroupBrainPF_NS label'
+'MeasureEnsembleBrainPF_NU label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the panel figure for measure group brain.
 %%%% ¡default!
-'MeasureGroupBrainPF_NS notes'
+'MeasureEnsembleBrainPF_NU notes'
 
 %%% ¡prop!
 SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.
 %%%% ¡calculate!
-m = pf.get('M');
+me = pf.get('ME');
 g =  m.get('G');
 
 % get brain region related list
@@ -207,12 +207,16 @@ lab_list = pf.get('LAB_DICT').get('IT_LIST');
 
 % get the value to show on the surface
 layer = pf.get('LAYER');
-m_values = m.get('M');
+m_values = me.get('M');
 if isempty(m_values)
     value = {};
     return
 end
 m_value = m_values{layer};
+if isempty(m_value)
+    value = {};
+    return
+end
 
 size_diff = pf.get('SIZE_DIFF');
 switch size_diff
@@ -326,7 +330,7 @@ pf.get('SETUP');
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureGroupBrainPF_NS.PARENT MeasureGroupBrainPF_NS.H MeasureGroupBrainPF_NS.ST_POSITION MeasureGroupBrainPF_NS.ST_AXIS MeasureGroupBrainPF_NS.ST_SURFACE MeasureGroupBrainPF_NS.ST_AMBIENT MeasureGroupBrainPF_NS.M]
+[MeasureEnsembleBrainPF_NU.PARENT MeasureEnsembleBrainPF_NU.H MeasureEnsembleBrainPF_NU.ST_POSITION MeasureEnsembleBrainPF_NU.ST_AXIS MeasureEnsembleBrainPF_NU.ST_SURFACE MeasureEnsembleBrainPF_NU.ST_AMBIENT MeasureEnsembleBrainPF_NU.M]
 
 %%% ¡warning_off!
 true
@@ -335,7 +339,7 @@ true
 %%%% ¡name!
 Remove Figures
 %%%% ¡code!
-warning('off', [BRAPH2.STR ':MeasureGroupBrainPF_NS'])
+warning('off', [BRAPH2.STR ':MeasureEnsembleBrainPF_NU'])
 assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
-warning('on', [BRAPH2.STR ':MeasureGroupBrainPF_NS'])
+warning('on', [BRAPH2.STR ':MeasureEnsembleBrainPF_NU'])
