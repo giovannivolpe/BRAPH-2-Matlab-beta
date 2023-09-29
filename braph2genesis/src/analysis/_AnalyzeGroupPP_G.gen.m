@@ -167,7 +167,7 @@ SHOW (query, logical) shows the figure containing the panel and, possibly, the i
 value = calculateValue@PanelProp(pr, PanelProp.SHOW, varargin{:}); % also warning
 if value
     % figure for graph plot
-    if isa(pr.getr('GUI_G_PL'), 'GUIElement') && pr.get('GUI_G_PL').get('DRAWN')
+    if isa(pr.getr('GUI_G_PL'), 'GUIFig') && pr.get('GUI_G_PL').get('DRAWN')
         pr.get('GUI_G_PL').get('SHOW')
     end
 
