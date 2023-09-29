@@ -78,7 +78,7 @@ If the specific analysis you wish to perform is not currently supported by BRAPH
 
 1. **Further Development**: You can develop the necessary functionalities to implement your custom analysis pipeline by following the [Tutorial to Implement a New Analysis Pipeline](../developers/dev_pipeline/dev_pipeline.pdf). This tutorial provides guidance on extending BRAPH 2.0 to accommodate new analysis techniques, enabling you to seamlessly integrate your pipeline into the BRAPH framework.
 
-2. **Feature Request**: If you prefer not to develop the functionalities yourself, you can consider opening an issue on the BRAPH GitHub repository. Use the [Feature Request](../../issues/new?template=feature_request.md) template to describe your specific analysis requirements and the desired functionality. The BRAPH development team and community can review your request and potentially incorporate it into future updates of BRAPH.
+2. **Feature Request**: If you prefer not to develop the functionalities yourself, you can consider opening an issue on the BRAPH GitHub repository. Use the [Feature Request](../../../../issues/new/choose) template to describe your specific analysis requirements and the desired functionality. The BRAPH development team and community can review your request and potentially incorporate it into future updates of BRAPH.
 
 By offering the ability to create custom analysis pipelines, BRAPH 2.0 empowers users to explore innovative approaches and advance the field of brain connectivity analysis.
 
