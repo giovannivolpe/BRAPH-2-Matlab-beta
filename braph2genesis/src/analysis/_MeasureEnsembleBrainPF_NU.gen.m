@@ -197,7 +197,6 @@ NOTES (metadata, string) are some specific notes about the panel figure for meas
 SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.
 %%%% ¡calculate!
 me = pf.get('ME');
-g =  m.get('G');
 
 % get brain region related list
 sph_list = pf.get('SPH_DICT').get('IT_LIST');
