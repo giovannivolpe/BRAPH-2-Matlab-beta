@@ -54,9 +54,9 @@ These tutorials guide you through the analysis and comparison steps of multiplex
 ## Deep Learning Pipelines
 
 Explore the deep learning pipelines in BRAPH 2.0. These tutorials demonstrate the usage of neural networks for regression and classification tasks on different types of data:
-- Pipeline Neural Networks Regression Structural Data: Tutorial that applies neural networks for regression using structural data. [Tutorial Link](https://github.com/giovannivolpe/BRAPH-2-Matlab-beta/tree/develop/tutorials/pipelines/deep_learning/pipeline_neural_networks_regression_structural_data)
-- Pipeline Neural Networks Classification Connectivity WU: Tutorial that applies neural networks for classification using weighted undirected (WU) connectivity data. [Tutorial Link](https://github.com/giovannivolpe/BRAPH-2-Matlab-beta/tree/develop/tutorials/pipelines/deep_learning/pipeline_neural_networks_classification_connectivity_WU)
-- Pipeline Neural Networks Classification Cross Validation Functional WU: Tutorial that applies neural networks for classification with cross-validation using weighted undirected (WU) functional connectivity data. [Tutorial Link](https://github.com/giovannivolpe/BRAPH-2-Matlab-beta/tree/develop/tutorials/pipelines/deep_learning/pipeline_neural_networks_classification_connectivity_WU)
+- Pipeline Neural Networks Regression Structural Data: Tutorial that applies neural networks for regression using structural data. [Tutorial Link](tut_nn_reg_st/tut_nn_reg_st.pdf)
+- Pipeline Neural Networks Classification Connectivity WU: Tutorial that applies neural networks for classification using weighted undirected (WU) connectivity data. [Tutorial Link](tut_nn_clss_con_wu/tut_nn_clss_con_wu.pdf)
+- Pipeline Neural Networks Classification Cross Validation Functional WU: Tutorial that applies neural networks for classification with cross-validation using weighted undirected (WU) functional connectivity data. [Tutorial Link](tut_nn_clss_xval_fun_wu/tut_nn_clss_xval_fun_wu.pdf)
 
 > ![Advances in brain connectivity analysis](https://github.com/giovannivolpe/BRAPH-2-Matlab-beta/blob/develop/figures/pipeline-nn.png)
 > 
@@ -76,7 +76,7 @@ In addition to the existing analysis pipelines, BRAPH 2.0 allows users to develo
 
 If the specific analysis you wish to perform is not currently supported by BRAPH 2.0, you have two options:
 
-1. **Further Development**: You can develop the necessary functionalities to implement your custom analysis pipeline by following the [Tutorial to Implement a New Analysis Pipeline](../developers/devpipeline.pdf). This tutorial provides guidance on extending BRAPH 2.0 to accommodate new analysis techniques, enabling you to seamlessly integrate your pipeline into the BRAPH framework.
+1. **Further Development**: You can develop the necessary functionalities to implement your custom analysis pipeline by following the [Tutorial to Implement a New Analysis Pipeline](../developers/dev_pipeline/dev_pipeline.pdf). This tutorial provides guidance on extending BRAPH 2.0 to accommodate new analysis techniques, enabling you to seamlessly integrate your pipeline into the BRAPH framework.
 
 2. **Feature Request**: If you prefer not to develop the functionalities yourself, you can consider opening an issue on the BRAPH GitHub repository. Use the [Feature Request](../../issues/new?template=feature_request.md) template to describe your specific analysis requirements and the desired functionality. The BRAPH development team and community can review your request and potentially incorporate it into future updates of BRAPH.
 
