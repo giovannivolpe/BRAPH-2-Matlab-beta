@@ -332,9 +332,9 @@ for p = 1:1:length(pipelines_dir_list)
             pipelines{index}.index = index; %#ok<*AGROW>
             pipelines{index}.file_name = file_name;
             pipelines{index}.id = fileparts(file_name);
+            [~, folder_name] = fileparts(pipelines{index}.id) ;
            
             txt = fileread(file_name);
-            pipelines{index}.txt = txt;
             
             header_marks = regexp(txt, '%%', 'all');
             header_txt = txt(header_marks(1):header_marks(2));
@@ -342,7 +342,22 @@ for p = 1:1:length(pipelines_dir_list)
             
             pipelines{index}.label = strtrim(header_txt(3:header_newlines(1))); % eliminates %%
             
+            data_type = split(folder_name, ' ');
+            if data_type{1} == "connectivity"
+                data_example = ' (e.g. obtained from DTI).';
+            elseif data_type{1} == "functional"
+                data_example = ' (e.g. fMRI) ';
+            elseif data_type{1} == "connectivity-functional"
+                data_example = ' (e.g. obtained from DTI and fMRI).';
+            else
+                data_example = ' (e.g. obtained from T1W, PET, ASL...).';
+            end
+            
+            pipelines{index}.txt = [txt data_example];
+            
             notes = strtrim(header_txt(header_newlines(1) + 4:end - 1));
+            end_first_sentence = regexp(notes, newline(), 'all');
+            notes = [notes(1:end_first_sentence(1)-3) data_example newline() strtrim(notes(end_first_sentence(1) + 1:end))];
             notes_newlines = regexp(notes, newline(), 'all');
             for k = length(notes_newlines):-1:1
                 notes = [notes(1:notes_newlines(k)) strtrim(notes(notes_newlines(k) + 2:end))]; % eliminates % but not newline
